@@ -1,0 +1,1525 @@
+<title>บัญชีสาขาและการรวมธุรกิจ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans+Thai:wght@400;500;600;700&amp;family=Noto+Serif+Thai:wght@600;700&amp;display=swap">
+<style>
+:root{
+  --paper:#fbfcfa; --surface:#f2f5f1; --surface-2:#e8eee7; --sunk:#eaf0e9;
+  --ink:#16211c; --ink-2:#41514a; --ink-3:#6c7d75;
+  --rule:#cfdbd0; --rule-strong:#a9bcac;
+  --green:#1f6b4f; --green-soft:#dceade; --green-ink:#1f6b4f;
+  --red:#a3341f; --red-soft:#f5e2dc; --red-ink:#a3341f;
+  --amber:#8a6314; --amber-soft:#f6ecd6;
+  --accent:var(--green); --accent-soft:var(--green-soft);
+  --shadow:0 1px 2px rgba(22,33,28,.05), 0 10px 30px -18px rgba(22,33,28,.35);
+  --maxw:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101613; --surface:#161d19; --surface-2:#1e2721; --sunk:#131a16;
+    --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
+    --rule:#2b3630; --rule-strong:#3f4d45;
+    --green:#5cc397; --green-soft:#162b22; --green-ink:#7fd3ad;
+    --red:#e5906f; --red-soft:#2f1e18; --red-ink:#eda386;
+    --amber:#d9ab52; --amber-soft:#2b2413;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101613; --surface:#161d19; --surface-2:#1e2721; --sunk:#131a16;
+  --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
+  --rule:#2b3630; --rule-strong:#3f4d45;
+  --green:#5cc397; --green-soft:#162b22; --green-ink:#7fd3ad;
+  --red:#e5906f; --red-soft:#2f1e18; --red-ink:#eda386;
+  --amber:#d9ab52; --amber-soft:#2b2413;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans Thai","IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.72; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; text-wrap:balance; line-height:1.35; margin:0}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+.shell{max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace; font-variant-numeric:tabular-nums}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--rule); background:var(--surface)}
+.mast-in{display:flex; flex-wrap:wrap; gap:20px 32px; align-items:flex-end; justify-content:space-between; padding:34px 0 26px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
+h1{font-size:clamp(1.7rem,4vw,2.5rem); margin-top:6px; letter-spacing:-.01em}
+.mast-sub{color:var(--ink-2); font-size:.95rem; margin-top:8px; max-width:56ch}
+.mast-meta{font-size:.84rem; color:var(--ink-3); line-height:1.6}
+.mast-meta b{color:var(--ink-2); font-weight:600}
+
+/* ---------- tabs ---------- */
+.tabs{position:sticky; top:0; z-index:40; background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--rule)}
+.tabs-in{display:flex; gap:4px; overflow-x:auto; scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{appearance:none; background:none; border:0; border-bottom:2px solid transparent; cursor:pointer;
+  padding:14px 16px; font:inherit; font-weight:600; font-size:.93rem; color:var(--ink-3); white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent); border-bottom-color:var(--accent)}
+.tab[aria-controls="ch2"], #rail-ch2{--accent:var(--red); --accent-soft:var(--red-soft)}
+.tab .tnum{font-family:"IBM Plex Mono",monospace; font-size:.75rem; opacity:.65; margin-right:7px}
+
+/* ---------- layout ---------- */
+.layout{display:grid; grid-template-columns:1fr; gap:0}
+@media (min-width:1040px){ .layout{grid-template-columns:216px minmax(0,1fr); gap:48px} }
+.rail{display:none}
+@media (min-width:1040px){
+  .rail{display:block; position:sticky; top:53px; align-self:start; max-height:calc(100vh - 53px);
+    overflow-y:auto; padding:34px 0 60px; border-right:1px solid var(--rule)}
+}
+.rail-h{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:flex; gap:9px; padding:5px 12px 5px 9px; font-size:.845rem; color:var(--ink-2); text-decoration:none;
+  border-left:2px solid transparent; line-height:1.45}
+.rail a:hover{color:var(--ink); background:var(--surface)}
+.rail a.on{color:var(--accent); border-left-color:var(--accent); font-weight:600}
+.rail a i{font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:.72rem; opacity:.6; padding-top:2px}
+main{padding:34px 0 90px; min-width:0}
+
+/* ---------- sections ---------- */
+section.sec{scroll-margin-top:70px; padding:10px 0 30px}
+.sec + .sec{border-top:1px solid var(--rule); padding-top:34px}
+.sec-h{display:flex; gap:14px; align-items:baseline; margin-bottom:6px}
+.sec-n{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--accent); font-weight:600; padding-top:3px}
+h2{font-size:clamp(1.25rem,2.4vw,1.6rem)}
+h3{font-size:1.03rem; margin:26px 0 10px}
+h4{font-size:.93rem; margin:18px 0 8px; font-family:"IBM Plex Sans Thai",sans-serif; font-weight:700}
+.lede{color:var(--ink-2); max-width:68ch; margin-bottom:18px}
+.body p{max-width:68ch; margin-bottom:12px}
+ul.list{max-width:68ch; margin:0 0 14px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:7px}
+ul.list li{position:relative; padding-left:18px; color:var(--ink-2)}
+ul.list li::before{content:""; position:absolute; left:2px; top:.72em; width:5px; height:5px; border-radius:1px; background:var(--accent); opacity:.55}
+ul.list li b, .body b{color:var(--ink); font-weight:600}
+ul.sub{margin:6px 0 0 0; padding-left:16px; list-style:none; display:flex; flex-direction:column; gap:4px}
+ul.sub li{position:relative; padding-left:14px; font-size:.9rem}
+ul.sub li::before{content:"–"; position:absolute; left:0; color:var(--ink-3)}
+.en{color:var(--ink-3); font-size:.92em}
+
+/* ---------- journal entry ledger ---------- */
+.je{display:grid; grid-template-columns:1fr; border:1px solid var(--rule); border-radius:4px;
+  background:var(--surface); overflow:hidden; margin:14px 0 18px; box-shadow:var(--shadow)}
+@media (min-width:640px){ .je{grid-template-columns:1fr 1fr} }
+.je-side{min-width:0}
+@media (min-width:640px){ .je-side + .je-side{border-left:2px solid var(--red)} }
+@media (max-width:639px){ .je-side + .je-side{border-top:2px solid var(--red)} }
+.je-head{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.13em; text-transform:uppercase;
+  padding:8px 14px; border-bottom:1px solid var(--rule); color:var(--ink-3); background:var(--surface-2)}
+.je-body{padding:12px 14px 14px}
+.je-t{width:100%; border-collapse:collapse; font-family:"IBM Plex Mono",monospace; font-size:.83rem; font-variant-numeric:tabular-nums}
+.je-t td{padding:2px 0; vertical-align:top}
+.je-t td.amt{text-align:right; white-space:nowrap; padding-left:12px; width:1%}
+.je-t td.dr{color:var(--green-ink); font-weight:500}
+.je-t td.cr{color:var(--red-ink); padding-left:22px}
+.je-t tr.gap td{padding-top:9px}
+.je-note{font-size:.78rem; color:var(--ink-3); margin-top:9px; line-height:1.5}
+.je-none{font-family:"IBM Plex Mono",monospace; font-size:.83rem; color:var(--ink-3); font-style:italic}
+.je-cap{font-size:.88rem; font-weight:600; margin:20px 0 0; display:flex; gap:9px; align-items:baseline}
+.je-cap .k{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--accent); border:1px solid var(--rule-strong);
+  border-radius:3px; padding:1px 6px; flex:none}
+.je-solo{max-width:520px}
+.je-solo .je-side + .je-side{border:0}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto; margin:14px 0 18px; border:1px solid var(--rule); border-radius:4px; background:var(--surface)}
+table.tbl{width:100%; border-collapse:collapse; font-size:.83rem; font-variant-numeric:tabular-nums; min-width:420px}
+table.tbl th{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; text-align:right; padding:9px 12px; border-bottom:1px solid var(--rule-strong); background:var(--surface-2); white-space:nowrap}
+table.tbl th:first-child{text-align:left}
+table.tbl td{padding:5px 12px; text-align:right; white-space:nowrap; font-family:"IBM Plex Mono",monospace}
+table.tbl td:first-child{text-align:left; font-family:"IBM Plex Sans Thai",sans-serif; white-space:normal; min-width:170px}
+table.tbl tbody tr:nth-child(even){background:var(--sunk)}
+table.tbl tr.tot td{border-top:1px solid var(--rule-strong); font-weight:600}
+table.tbl tr.tot2 td{border-top:1px solid var(--rule-strong); border-bottom:3px double var(--rule-strong); font-weight:600}
+table.tbl tr.head-row td{font-weight:700; background:var(--surface-2); font-family:"IBM Plex Sans Thai",sans-serif}
+table.tbl td.el{color:var(--red-ink)}
+table.tbl td.hi{color:var(--accent); font-weight:600}
+.cap{font-size:.78rem; color:var(--ink-3); margin:-8px 0 20px; line-height:1.5}
+
+/* ---------- callouts ---------- */
+.note{border-left:3px solid var(--accent); background:var(--accent-soft); padding:12px 16px; border-radius:0 4px 4px 0;
+  margin:16px 0; font-size:.9rem; color:var(--ink-2); max-width:70ch}
+.note b{color:var(--ink)}
+.note.warn{border-left-color:var(--amber); background:var(--amber-soft)}
+.note.rule{border-left-color:var(--red); background:var(--red-soft)}
+.note .nh{display:block; font-weight:700; color:var(--ink); margin-bottom:4px; font-size:.87rem}
+
+/* ---------- cards / grids ---------- */
+.grid{display:grid; gap:12px; margin:14px 0 18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(158px,1fr))}
+.card{border:1px solid var(--rule); border-radius:4px; padding:14px 16px; background:var(--surface)}
+.card .ct{font-weight:700; font-size:.92rem; margin-bottom:5px}
+.card .cs{font-size:.85rem; color:var(--ink-2); line-height:1.6}
+.card .cn{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:7px}
+
+/* ---------- flow diagrams ---------- */
+.flow{display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:18px; border:1px solid var(--rule);
+  border-radius:4px; background:var(--surface); margin:14px 0 18px; justify-content:center}
+.box{border:1.5px solid var(--ink-2); border-radius:3px; padding:9px 18px; font-weight:700; background:var(--paper); font-size:.95rem}
+.box.acc{border-color:var(--accent); color:var(--accent)}
+.arw{color:var(--ink-3); font-family:"IBM Plex Mono",monospace; font-size:1.1rem}
+.plus{color:var(--ink-3); font-weight:600}
+.flow-lbl{width:100%; text-align:center; font-size:.8rem; color:var(--ink-3); margin-top:4px}
+
+/* PPA stack */
+.stack{display:flex; flex-direction:column; gap:3px; max-width:340px; margin:14px 0 8px}
+.stack div{padding:11px 14px; border-radius:3px; font-size:.85rem; font-weight:600; border:1px solid var(--rule)}
+.s-gw{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.s-fv{background:var(--amber-soft); border-color:var(--amber); color:var(--amber)}
+.s-bv{background:var(--surface-2); color:var(--ink-2)}
+
+/* ---------- interactive ---------- */
+.switch{display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 4px}
+.switch button{appearance:none; font:inherit; font-size:.83rem; font-weight:600; cursor:pointer; padding:7px 13px;
+  border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink-2); border-radius:3px}
+.switch button:hover{border-color:var(--accent); color:var(--ink)}
+.switch button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+:root[data-theme="dark"] .switch button[aria-pressed="true"],
+:root:not([data-theme="light"]) .switch button[aria-pressed="true"]{color:#0e1512}
+.case-desc{font-size:.88rem; color:var(--ink-2); margin:12px 0 0; min-height:1.7em}
+.hidden{display:none !important}
+
+.calc{border:1px solid var(--rule); border-radius:4px; background:var(--surface); padding:16px 18px; margin:16px 0 18px}
+.calc-h{font-weight:700; font-size:.93rem; margin-bottom:3px}
+.calc-s{font-size:.82rem; color:var(--ink-3); margin-bottom:14px}
+.fields{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px 14px}
+.field label{display:block; font-size:.76rem; color:var(--ink-3); margin-bottom:3px}
+.field input{width:100%; font-family:"IBM Plex Mono",monospace; font-size:.9rem; font-variant-numeric:tabular-nums;
+  padding:7px 9px; border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); color:var(--ink)}
+.field input:focus{outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent)}
+.out{margin-top:16px; border-top:1px solid var(--rule); padding-top:13px; display:flex; flex-direction:column; gap:5px}
+.out-row{display:flex; justify-content:space-between; gap:16px; font-family:"IBM Plex Mono",monospace; font-size:.85rem;
+  font-variant-numeric:tabular-nums; color:var(--ink-2)}
+.out-row.res{font-size:1rem; font-weight:600; border-top:1px solid var(--rule-strong); padding-top:9px; margin-top:5px; color:var(--ink)}
+.chip{display:inline-block; font-family:"IBM Plex Sans Thai",sans-serif; font-size:.76rem; font-weight:600;
+  padding:2px 9px; border-radius:99px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.neg{background:var(--red-soft); color:var(--red-ink)}
+
+.reveal{margin:14px 0 18px; border:1px solid var(--rule); border-radius:4px; background:var(--surface); overflow:hidden}
+.reveal > summary{cursor:pointer; padding:11px 15px; font-size:.88rem; font-weight:600; list-style:none;
+  display:flex; justify-content:space-between; gap:12px; align-items:center}
+.reveal > summary::-webkit-details-marker{display:none}
+.reveal > summary::after{content:"แสดงคำตอบ"; font-family:"IBM Plex Mono",monospace; font-size:.7rem;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--accent); flex:none}
+.reveal[open] > summary::after{content:"ซ่อน"}
+.reveal[open] > summary{border-bottom:1px solid var(--rule)}
+.reveal .rc{padding:4px 15px 14px}
+.reveal .rc .je{box-shadow:none; margin-top:12px}
+
+/* ---------- quiz ---------- */
+.q{border:1px solid var(--rule); border-radius:4px; background:var(--surface); padding:16px 18px; margin-bottom:12px}
+.q-n{font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.q-t{font-weight:600; margin:5px 0 12px; font-size:.95rem; line-height:1.6}
+.q-t .mono{font-size:.88em}
+.opts{display:flex; flex-direction:column; gap:6px}
+.opt{appearance:none; font:inherit; font-size:.87rem; text-align:left; cursor:pointer; padding:9px 13px;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); color:var(--ink-2); line-height:1.55}
+.opt:hover:not(:disabled){border-color:var(--accent); color:var(--ink)}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--green); background:var(--green-soft); color:var(--green-ink); font-weight:600}
+.opt.no{border-color:var(--red); background:var(--red-soft); color:var(--red-ink)}
+.expl{margin-top:11px; font-size:.85rem; color:var(--ink-2); border-left:3px solid var(--accent);
+  background:var(--accent-soft); padding:9px 13px; border-radius:0 3px 3px 0}
+.score{position:sticky; top:53px; z-index:20; background:var(--surface-2); border:1px solid var(--rule); border-radius:4px;
+  padding:11px 16px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap}
+.score .sv{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
+.score button{appearance:none; font:inherit; font-size:.8rem; font-weight:600; cursor:pointer; padding:5px 12px;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2); border-radius:3px}
+.score button:hover{border-color:var(--accent); color:var(--accent)}
+
+footer{border-top:1px solid var(--rule); background:var(--surface); padding:26px 0 40px; font-size:.82rem; color:var(--ink-3)}
+footer p{max-width:70ch; margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important; scroll-behavior:auto !important}}
+</style>
+
+<header class="mast">
+  <div class="shell mast-in">
+    <div>
+      <div class="eyebrow">2601-421 · Advanced Accounting 1 · 1/2569</div>
+      <h1>บัญชีสาขาและการรวมธุรกิจ</h1>
+      <p class="mast-sub">สื่อประกอบการเรียน บทที่ 1 การบัญชีสำนักงานใหญ่และสาขา และบทที่ 2 การรวมธุรกิจ พร้อมสมุดรายวันคู่ กระดาษทำการ เครื่องมือคำนวณ และแบบทดสอบ</p>
+    </div>
+    <div class="mast-meta">
+      <b>Section 1</b> · ผศ.ดร.พงศ์พรต ฉัตราภรณ์<br>
+      MO &amp; TU 13–16 · ห้อง 2/203<br>
+      pongprot@cbs.chula.ac.th
+    </div>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="shell tabs-in" role="tablist" aria-label="เลือกบท">
+    <button class="tab" role="tab" id="t-ch1" aria-controls="ch1" aria-selected="true"><span class="tnum">01</span>สำนักงานใหญ่และสาขา</button>
+    <button class="tab" role="tab" id="t-ch2" aria-controls="ch2" aria-selected="false"><span class="tnum">02</span>การรวมธุรกิจ</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false"><span class="tnum">Q</span>แบบทดสอบ</button>
+  </div>
+</div>
+
+<div class="shell layout">
+  <aside class="rail">
+    <nav id="rail-ch1" aria-label="หัวข้อบทที่ 1">
+      <div class="rail-h">บทที่ 1</div>
+      <ol>
+        <li><a href="#c1-1"><i>1</i>บัญชีระหว่างกัน</a></li>
+        <li><a href="#c1-2"><i>2</i>รายการค้าตัวอย่าง</a></li>
+        <li><a href="#c1-3"><i>3</i>อุปกรณ์ 4 กรณี</a></li>
+        <li><a href="#c1-4"><i>4</i>เก็บหนี้ข้ามหน่วยงาน</a></li>
+        <li><a href="#c1-5"><i>5</i>งบทดลอง &amp; งบกำไรขาดทุน</a></li>
+        <li><a href="#c1-6"><i>6</i>รายการปิดบัญชี</a></li>
+        <li><a href="#c1-7"><i>7</i>กระดาษทำการรวม</a></li>
+        <li><a href="#c1-8"><i>8</i>ราคาสินค้าส่งไปสาขา</a></li>
+        <li><a href="#c1-9"><i>9</i>ยอดไม่ตรงกัน</a></li>
+        <li><a href="#c1-10"><i>10</i>ค่าขนส่ง</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-ch2" class="hidden" aria-label="หัวข้อบทที่ 2">
+      <div class="rail-h">บทที่ 2</div>
+      <ol>
+        <li><a href="#c2-1"><i>1</i>รูปแบบการรวม 4 แบบ</a></li>
+        <li><a href="#c2-2"><i>2</i>สัดส่วนหุ้น → มาตรฐาน</a></li>
+        <li><a href="#c2-3"><i>3</i>พัฒนาการ TFRS 3</a></li>
+        <li><a href="#c2-4"><i>4</i>นิยาม “ธุรกิจ”</a></li>
+        <li><a href="#c2-5"><i>5</i>วิธีซื้อ 4 ขั้นตอน</a></li>
+        <li><a href="#c2-6"><i>6</i>รับรู้และวัดมูลค่า</a></li>
+        <li><a href="#c2-7"><i>7</i>ค่าความนิยม &amp; PPA</a></li>
+        <li><a href="#c2-8"><i>8</i>ตัวอย่าง A ซื้อ B</a></li>
+        <li><a href="#c2-9"><i>9</i>ต้นทุนที่เกี่ยวข้อง</a></li>
+        <li><a href="#c2-10"><i>10</i>สินทรัพย์ไม่มีตัวตน</a></li>
+        <li><a href="#c2-11"><i>11</i>กำไรเกินปกติ</a></li>
+        <li><a href="#c2-12"><i>12</i>Negative goodwill</a></li>
+        <li><a href="#c2-13"><i>13</i>ระยะเวลาวัดมูลค่า</a></li>
+        <li><a href="#c2-14"><i>14</i>BCUCC</a></li>
+        <li><a href="#c2-15"><i>15</i>US GAAP</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-quiz" class="hidden" aria-label="แบบทดสอบ">
+      <div class="rail-h">แบบทดสอบ</div>
+      <ol>
+        <li><a href="#quiz-top"><i>Q</i>14 ข้อ ทั้งสองบท</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <main>
+  <!-- ============ CHAPTER 1 ============ -->
+  <div id="ch1" role="tabpanel" aria-labelledby="t-ch1" data-ch="1">
+    <p class="lede">สาขาที่ใช้ระบบบัญชีแยก (decentralized) จะมีสมุดบัญชีของตนเอง สองหน่วยงานผูกกันด้วย <b>บัญชีระหว่างกัน (reciprocal accounts)</b> ซึ่งต้องมียอดตรงกันเสมอในทางกลับด้าน ทั้งคู่เป็นกิจการเดียวกันตามกฎหมาย จึงต้องนำมาจัดทำงบการเงินรวมเมื่อสิ้นงวด</p>
+
+    <section class="sec" id="c1-1">
+      <div class="sec-h"><span class="sec-n">1</span><h2>บัญชีระหว่างกัน (Interoffice Accounts)</h2></div>
+      <div class="body">
+        <p>มีบัญชีระหว่างกันสองคู่ที่ต้องจำให้ขึ้นใจ คู่แรกคือบัญชีเงินลงทุนระหว่างหน่วยงาน คู่ที่สองคือบัญชีที่ใช้บันทึกการส่งสินค้า</p>
+        <div class="grid g2">
+          <div class="card">
+            <span class="cn">คู่ที่ 1 · ฐานะการเงิน</span>
+            <div class="ct">Branch ↔ Home office</div>
+            <div class="cs">
+              <b>สมุดของสำนักงานใหญ่</b> — บัญชี “สาขา (Branch)” เป็น <b>สินทรัพย์</b> ยอดปกติด้าน <span class="mono">Dr.</span><br>
+              <b>สมุดของสาขา</b> — บัญชี “สำนักงานใหญ่ (Home office)” เป็น <b>หนี้สิน/ส่วนของเจ้าของ</b> ยอดปกติด้าน <span class="mono">Cr.</span>
+            </div>
+          </div>
+          <div class="card">
+            <span class="cn">คู่ที่ 2 · ผลการดำเนินงาน</span>
+            <div class="ct">Shipment to branch ↔ Shipment from HO</div>
+            <div class="cs">
+              <b>สมุดของสำนักงานใหญ่</b> — “สินค้าส่งไปสาขา” เป็น <b>บัญชีปรับมูลค่า (contra)</b> นำไปหักจากซื้อ ยอดปกติด้าน <span class="mono">Cr.</span><br>
+              <b>สมุดของสาขา</b> — “สินค้ารับจากสำนักงานใหญ่” มีลักษณะเหมือน <b>ซื้อ</b> (ซื้อจาก HO เท่านั้น) ยอดปกติด้าน <span class="mono">Dr.</span>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <span class="nh">หลักตรวจสอบ</span>
+          ทุกครั้งที่ฝ่ายหนึ่งเดบิตบัญชีระหว่างกัน อีกฝ่ายต้องเครดิตบัญชีคู่ของมันด้วยจำนวนเท่ากัน ถ้ายอดปลายงวดไม่ตรงกัน แปลว่ามีรายการที่ยังไม่ถูกบันทึกหรือบันทึกผิด (ดูหัวข้อ 9)
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-2">
+      <div class="sec-h"><span class="sec-n">2</span><h2>รายการค้าตัวอย่างตลอดปี</h2></div>
+      <div class="body">
+        <p class="lede">ตัวอย่างชุดเดียวที่จะใช้ต่อเนื่องไปจนถึงกระดาษทำการงบการเงินรวม สังเกตว่าทุกรายการที่กระทบทั้งสองหน่วยงานจะมีบัญชีระหว่างกันปรากฏอยู่เสมอหนึ่งข้าง</p>
+
+        <p class="je-cap"><span class="k">1</span>สำนักงานใหญ่ส่งเงินสด $1,000 ให้สาขา</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">1,000</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">1,000</td></tr></table>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Cash</td><td class="amt">1,000</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">1,000</td></tr></table>
+          </div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">2</span>ส่งสินค้าราคาทุน $60,000 ไปให้สาขา (นโยบายส่งด้วยราคาทุน)</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">60,000</td></tr><tr><td class="cr">Cr. Shipment to branch</td><td class="amt">60,000</td></tr></table>
+            <p class="je-note">Shipment to branch เป็น contra-purchases ไม่ใช่รายได้ — สำนักงานใหญ่ยังไม่รับรู้กำไรจากการส่งสินค้า</p>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Shipment from HO</td><td class="amt">60,000</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">60,000</td></tr></table>
+          </div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">4–6</span>สาขาขายเชื่อ $80,000 · เก็บหนี้ได้ $62,000 · จ่ายค่าใช้จ่าย $20,000</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body">
+            <p class="je-none">ไม่บันทึกบัญชี — เป็นรายการภายในสาขาทั้งหมด</p>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body">
+            <table class="je-t">
+              <tr><td class="dr">Dr. Accounts receivable</td><td class="amt">80,000</td></tr><tr><td class="cr">Cr. Sales</td><td class="amt">80,000</td></tr>
+              <tr class="gap"><td class="dr">Dr. Cash</td><td class="amt">62,000</td></tr><tr><td class="cr">Cr. Accounts receivable</td><td class="amt">62,000</td></tr>
+              <tr class="gap"><td class="dr">Dr. Expenses</td><td class="amt">20,000</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">20,000</td></tr>
+            </table>
+          </div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">7</span>สาขาส่งเงินสด $37,500 คืนสำนักงานใหญ่</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Cash</td><td class="amt">37,500</td></tr><tr><td class="cr">Cr. Branch</td><td class="amt">37,500</td></tr></table>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Home office</td><td class="amt">37,500</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">37,500</td></tr></table>
+          </div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">8</span>สำนักงานใหญ่จ่ายค่าใช้จ่ายแทนสาขา $3,000 แล้วโอนภาระให้สาขา</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">3,000</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">3,000</td></tr></table>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body">
+            <table class="je-t"><tr><td class="dr">Dr. Expenses</td><td class="amt">3,000</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">3,000</td></tr></table>
+            <p class="je-note">ค่าใช้จ่ายไปตกที่หน่วยงานที่ได้ประโยชน์ ไม่ใช่หน่วยงานที่จ่ายเงิน</p>
+          </div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">9</span>สินค้าคงเหลือปลายงวด — สำนักงานใหญ่ $45,000 · สาขา $20,000</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-3">
+      <div class="sec-h"><span class="sec-n">3</span><h2>อุปกรณ์ที่สาขาใช้ · 4 กรณี</h2></div>
+      <div class="body">
+        <p class="lede">อุปกรณ์ที่ซื้อมาใช้ที่สาขา จะบันทึกอย่างไรขึ้นกับสองคำถามที่แยกจากกัน คือ <b>ใครจ่ายเงิน</b> และ <b>สมุดของใครเป็นที่อยู่ของบัญชีสินทรัพย์</b> เลือกกรณีเพื่อดูรายการทั้งตอนซื้อและตอนคิดค่าเสื่อมราคาสิ้นปี</p>
+
+        <div class="switch" role="group" aria-label="เลือกกรณี">
+          <button type="button" data-case="A" aria-pressed="true">CASE A</button>
+          <button type="button" data-case="B" aria-pressed="false">CASE B</button>
+          <button type="button" data-case="C" aria-pressed="false">CASE C</button>
+          <button type="button" data-case="D" aria-pressed="false">CASE D</button>
+        </div>
+        <p class="case-desc" id="case-desc"></p>
+
+        <div class="case-panel" data-case-panel="A">
+          <p class="je-cap"><span class="k">ซื้อ</span>สาขาจ่ายเงินสด $500 · สินทรัพย์อยู่ในสมุดสำนักงานใหญ่</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Equipment</td><td class="amt">500</td></tr><tr><td class="cr">Cr. Branch</td><td class="amt">500</td></tr></table></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Home office</td><td class="amt">500</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">500</td></tr></table></div></div>
+          </div>
+          <p class="je-cap"><span class="k">สิ้นปี</span>ค่าเสื่อมราคาประจำปี</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accumulated depreciation</td><td class="amt">XX</td></tr></table></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Depreciation expense</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+        </div>
+
+        <div class="case-panel hidden" data-case-panel="B">
+          <p class="je-cap"><span class="k">ซื้อ</span>สาขาจ่ายเงินสด · สินทรัพย์อยู่ในสมุดสาขา</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><p class="je-none">ไม่บันทึกบัญชี</p></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Equipment</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+          <p class="je-cap"><span class="k">สิ้นปี</span>ค่าเสื่อมราคาประจำปี</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><p class="je-none">ไม่บันทึกบัญชี</p></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Depreciation expense</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accumulated depreciation</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+        </div>
+
+        <div class="case-panel hidden" data-case-panel="C">
+          <p class="je-cap"><span class="k">ซื้อ</span>สำนักงานใหญ่จ่ายเงินสด · สินทรัพย์อยู่ในสมุดสำนักงานใหญ่</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Equipment</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">XX</td></tr></table></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><p class="je-none">ไม่บันทึกบัญชี</p></div></div>
+          </div>
+          <p class="je-cap"><span class="k">สิ้นปี</span>ค่าเสื่อมราคาประจำปี</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accumulated depreciation</td><td class="amt">XX</td></tr></table></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Depreciation expense</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+        </div>
+
+        <div class="case-panel hidden" data-case-panel="D">
+          <p class="je-cap"><span class="k">ซื้อ</span>สำนักงานใหญ่จ่ายเงินสด · สินทรัพย์อยู่ในสมุดสาขา</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">XX</td></tr></table></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Equipment</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+          <p class="je-cap"><span class="k">สิ้นปี</span>ค่าเสื่อมราคาประจำปี</p>
+          <div class="je">
+            <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><p class="je-none">ไม่บันทึกบัญชี</p></div></div>
+            <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Depreciation expense</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accumulated depreciation</td><td class="amt">XX</td></tr></table></div></div>
+          </div>
+        </div>
+
+        <div class="note">
+          <span class="nh">กฎสองข้อที่อธิบายทั้ง 4 กรณี</span>
+          <b>1.</b> บัญชี Equipment และ Accumulated depreciation อยู่ในสมุดเดียวกันเสมอ — สมุดที่บันทึกสินทรัพย์ ก็บันทึกค่าเสื่อมราคาสะสม<br>
+          <b>2.</b> บัญชี Depreciation expense อยู่ที่ <b>สาขา</b> เสมอ เพราะสาขาเป็นผู้ใช้ประโยชน์ ถ้าสินทรัพย์ไม่ได้อยู่ที่สาขา ต้องผ่านบัญชีระหว่างกันเพื่อส่งค่าใช้จ่ายมาให้
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-4">
+      <div class="sec-h"><span class="sec-n">4</span><h2>เก็บหนี้ข้ามหน่วยงาน</h2></div>
+      <div class="body">
+        <p class="lede">เงินเข้าที่ใคร ฝ่ายนั้นเดบิตเงินสด ส่วนลูกหนี้ตัดออกจากสมุดของฝ่ายที่เป็นเจ้าของลูกหนี้ ที่เหลือให้บัญชีระหว่างกันรับไป</p>
+
+        <p class="je-cap"><span class="k">I</span>สำนักงานใหญ่เก็บเงินจากลูกหนี้ของสาขา</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Cash</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Branch</td><td class="amt">XX</td></tr></table></div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Home office</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accounts receivable</td><td class="amt">XX</td></tr></table></div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">II</span>สาขาเก็บเงินจากลูกหนี้ของสำนักงานใหญ่</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Branch</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Accounts receivable</td><td class="amt">XX</td></tr></table></div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t"><tr><td class="dr">Dr. Cash</td><td class="amt">XX</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">XX</td></tr></table></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-5">
+      <div class="sec-h"><span class="sec-n">5</span><h2>งบทดลองและงบกำไรขาดทุน</h2></div>
+      <div class="body">
+        <p class="lede">งบทดลองก่อนปิดบัญชี ณ 31 ธันวาคม สังเกตคู่บัญชีระหว่างกันที่ยอดตรงกันพอดี — Branch <span class="mono">26,000 Dr.</span> กับ Home office <span class="mono">26,000 Cr.</span> และ Shipment to branch กับ Shipment from HO อย่างละ <span class="mono">60,000</span></p>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th>บัญชี</th><th>HO Dr.</th><th>HO Cr.</th><th>Branch Dr.</th><th>Branch Cr.</th></tr></thead>
+            <tbody>
+              <tr><td>Cash</td><td>25,000</td><td></td><td>5,000</td><td></td></tr>
+              <tr><td>Accounts receivable</td><td>39,000</td><td></td><td>18,000</td><td></td></tr>
+              <tr><td>Inventory, Jan 1</td><td>80,000</td><td></td><td>–</td><td></td></tr>
+              <tr><td>Branch</td><td class="hi">26,000</td><td></td><td></td><td></td></tr>
+              <tr><td>Equipment</td><td>150,000</td><td></td><td></td><td></td></tr>
+              <tr><td>Accumulated depreciation</td><td></td><td>10,000</td><td></td><td></td></tr>
+              <tr><td>Accounts payable</td><td></td><td>20,000</td><td></td><td></td></tr>
+              <tr><td>Home office</td><td></td><td></td><td></td><td class="hi">26,000</td></tr>
+              <tr><td>Common stock</td><td></td><td>150,000</td><td></td><td></td></tr>
+              <tr><td>Retained earnings, Jan 1</td><td></td><td>70,000</td><td></td><td></td></tr>
+              <tr><td>Dividends paid</td><td>40,000</td><td></td><td></td><td></td></tr>
+              <tr><td>Sales</td><td></td><td>400,000</td><td></td><td>80,000</td></tr>
+              <tr><td>Purchases</td><td>260,000</td><td></td><td>–</td><td></td></tr>
+              <tr><td>Shipment to branch</td><td></td><td class="hi">60,000</td><td></td><td></td></tr>
+              <tr><td>Shipment from HO</td><td></td><td></td><td class="hi">60,000</td><td></td></tr>
+              <tr><td>Expenses</td><td>90,000</td><td></td><td>23,000</td><td></td></tr>
+              <tr class="tot2"><td>รวม</td><td>710,000</td><td>710,000</td><td>106,000</td><td>106,000</td></tr>
+              <tr><td>Inventory, Dec 31</td><td>45,000</td><td></td><td>20,000</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>งบกำไรขาดทุน · หน่วย: พันบาท</h3>
+        <div class="grid g2">
+          <div class="tw" style="margin:0">
+            <table class="tbl">
+              <thead><tr><th>Branch Income Statement</th><th></th><th></th></tr></thead>
+              <tbody>
+                <tr><td>Sales</td><td></td><td>80</td></tr>
+                <tr><td>Beginning inventory</td><td>0</td><td></td></tr>
+                <tr><td>Shipment from HO</td><td>60</td><td></td></tr>
+                <tr><td>Ending inventory</td><td>(20)</td><td>40</td></tr>
+                <tr class="tot"><td>Gross profit</td><td></td><td>40</td></tr>
+                <tr><td>Expenses</td><td></td><td>23</td></tr>
+                <tr class="tot2"><td>Branch net profit</td><td></td><td>17</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tw" style="margin:0">
+            <table class="tbl">
+              <thead><tr><th>HO Income Statement</th><th></th><th></th></tr></thead>
+              <tbody>
+                <tr><td>Sales</td><td></td><td>400</td></tr>
+                <tr><td>Beginning inventory</td><td>80</td><td></td></tr>
+                <tr><td>Purchases</td><td>260</td><td></td></tr>
+                <tr><td>Shipment to branch</td><td>(60)</td><td>200</td></tr>
+                <tr class="tot"><td>Cost of goods available for sale</td><td></td><td>280</td></tr>
+                <tr><td>Ending inventory</td><td></td><td>(45)</td></tr>
+                <tr class="tot"><td>Cost of goods sold</td><td></td><td>235</td></tr>
+                <tr class="tot"><td>Gross profit</td><td></td><td>165</td></tr>
+                <tr><td>Expenses</td><td></td><td>90</td></tr>
+                <tr class="tot"><td>HO net profit</td><td></td><td>75</td></tr>
+                <tr><td>Branch net profit</td><td></td><td>17</td></tr>
+                <tr class="tot2"><td>Net profit</td><td></td><td>92</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="cap">Shipment to branch $60 ถูกนำไปหักจาก Purchases ของสำนักงานใหญ่ เพราะสินค้าจำนวนนี้ถูกโอนไปคำนวณต้นทุนขายที่สาขาแล้ว หากไม่หักออกจะนับต้นทุนซ้ำสองครั้ง</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-6">
+      <div class="sec-h"><span class="sec-n">6</span><h2>รายการปิดบัญชี</h2></div>
+      <div class="body">
+        <p class="je-cap"><span class="k">6.1</span>ปิดบัญชีรายได้และค่าใช้จ่ายเข้าบัญชีสรุปผลกำไรขาดทุน <span class="en">(หน่วย: พันบาท)</span></p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Sales</td><td class="amt">400</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Ending inventory</td><td class="amt">45</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Shipment to branch</td><td class="amt">60</td></tr>
+            <tr><td class="cr">Cr. Purchases</td><td class="amt">260</td></tr>
+            <tr><td class="cr">Beginning inventory</td><td class="amt">80</td></tr>
+            <tr><td class="cr">Expenses</td><td class="amt">90</td></tr>
+            <tr><td class="cr">Income summary</td><td class="amt">75</td></tr>
+          </table></div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Sales</td><td class="amt">80</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Ending inventory</td><td class="amt">20</td></tr>
+            <tr><td class="cr">Cr. Shipment from HO</td><td class="amt">60</td></tr>
+            <tr><td class="cr">Expenses</td><td class="amt">23</td></tr>
+            <tr><td class="cr">Income summary</td><td class="amt">17</td></tr>
+          </table></div></div>
+        </div>
+
+        <p class="je-cap"><span class="k">6.2</span>โอนกำไรของสาขาไปยังสำนักงานใหญ่ แล้วปิดเข้ากำไรสะสม</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Branch</td><td class="amt">17</td></tr>
+            <tr><td class="cr">Cr. Branch income summary</td><td class="amt">17</td></tr>
+            <tr class="gap"><td class="dr">Dr. Income summary</td><td class="amt">92</td></tr>
+            <tr><td class="cr">Cr. Retained earnings</td><td class="amt">92</td></tr>
+          </table></div></div>
+          <div class="je-side"><div class="je-head">Branch</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Income summary</td><td class="amt">17</td></tr>
+            <tr><td class="cr">Cr. Home office</td><td class="amt">17</td></tr>
+          </table>
+          <p class="je-note">หลังปิดบัญชี ยอด Branch = 26 + 17 = 43 และ Home office = 26 + 17 = 43 ยังคงเท่ากัน</p>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-7">
+      <div class="sec-h"><span class="sec-n">7</span><h2>กระดาษทำการงบการเงินรวม</h2></div>
+      <div class="body">
+        <p class="lede">รายการตัดบัญชีมีเพียงสองคู่ คือ <span class="mono">1)</span> Branch กับ Home office $26,000 และ <span class="mono">2)</span> Shipment to branch กับ Shipment from HO $60,000 หลังตัดแล้วงบรวมจะเหลือแต่รายการที่เกิดกับบุคคลภายนอก</p>
+        <div class="tw">
+          <table class="tbl" style="min-width:640px">
+            <thead><tr><th>รายการ</th><th>HO</th><th>Branch</th><th>Elimination</th><th>Combined</th></tr></thead>
+            <tbody>
+              <tr class="head-row"><td>งบกำไรขาดทุน</td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Sales</td><td>400,000</td><td>80,000</td><td></td><td>480,000</td></tr>
+              <tr><td>Beginning inventory</td><td>80,000</td><td>–</td><td></td><td>80,000</td></tr>
+              <tr><td>Purchases</td><td>260,000</td><td>–</td><td></td><td>260,000</td></tr>
+              <tr><td>Shipment to branch</td><td>60,000</td><td></td><td class="el">2) 60,000 Dr.</td><td>–</td></tr>
+              <tr><td>Shipment from HO</td><td></td><td>60,000</td><td class="el">2) 60,000 Cr.</td><td>–</td></tr>
+              <tr><td>Ending inventory</td><td>45,000</td><td>20,000</td><td></td><td>65,000</td></tr>
+              <tr><td>Expenses</td><td>90,000</td><td>23,000</td><td></td><td>113,000</td></tr>
+              <tr class="tot"><td>Net income</td><td>75,000</td><td>17,000</td><td></td><td>92,000</td></tr>
+              <tr class="head-row"><td>งบกำไรสะสม</td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>R/E, Jan 1</td><td>70,000</td><td></td><td></td><td>70,000</td></tr>
+              <tr><td>Net income</td><td>75,000</td><td>17,000</td><td></td><td>92,000</td></tr>
+              <tr><td>Dividends declared</td><td>40,000</td><td></td><td></td><td>40,000</td></tr>
+              <tr class="tot"><td>R/E, Dec 31</td><td></td><td></td><td></td><td>122,000</td></tr>
+              <tr class="head-row"><td>งบแสดงฐานะการเงิน</td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Cash</td><td>25,000</td><td>5,000</td><td></td><td>30,000</td></tr>
+              <tr><td>Accounts receivable</td><td>39,000</td><td>18,000</td><td></td><td>57,000</td></tr>
+              <tr><td>Inventory, Dec 31</td><td>45,000</td><td>20,000</td><td></td><td>65,000</td></tr>
+              <tr><td>Branch</td><td>26,000</td><td></td><td class="el">1) 26,000 Cr.</td><td>–</td></tr>
+              <tr><td>Equipment</td><td>150,000</td><td></td><td></td><td>150,000</td></tr>
+              <tr><td>Accumulated depreciation</td><td>10,000</td><td></td><td></td><td>10,000</td></tr>
+              <tr><td>Accounts payable</td><td>20,000</td><td></td><td></td><td>20,000</td></tr>
+              <tr><td>Home office</td><td></td><td>26,000</td><td class="el">1) 26,000 Dr.</td><td>–</td></tr>
+              <tr><td>Common stock</td><td>150,000</td><td></td><td></td><td>150,000</td></tr>
+              <tr><td>R/E, Dec 31</td><td></td><td></td><td></td><td>122,000</td></tr>
+              <tr class="tot2"><td>รวม</td><td>325,000</td><td>43,000</td><td></td><td>302,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          <span class="nh">อย่าสับสน</span>
+          รายการตัดบัญชีทำเฉพาะบนกระดาษทำการ <b>ไม่ได้บันทึกลงสมุดบัญชี</b> ของทั้งสองหน่วยงาน ยอด Branch และ Home office ยังคงอยู่ในบัญชีตามปกติ
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-8">
+      <div class="sec-h"><span class="sec-n">8</span><h2>ราคาสินค้าที่ส่งไปสาขา</h2></div>
+      <div class="body">
+        <p class="lede">สำนักงานใหญ่เลือกตั้งราคาสินค้าที่ส่งไปสาขาได้ 3 แบบ คือ <b>ราคาทุน</b> · <b>ราคาทุนบวกกำไรส่วนเพิ่ม</b> · <b>ราคาตลาด</b> สองแบบหลังทำให้สินค้าคงเหลือของสาขามีกำไรที่ยังไม่เกิดขึ้นจริงแฝงอยู่ ซึ่งต้องตัดออกเมื่อทำงบรวม</p>
+        <p>ประเด็นที่ผิดกันบ่อยคือฐานของอัตรากำไร ถ้าโจทย์บอกว่าบวก 25% ของ <b>ราคาทุน</b> อัตรานั้นจะเท่ากับ 20% ของ <b>ราคาส่ง</b> ต้องดูให้ออกว่าตัวเลขที่ถืออยู่เป็นราคาทุนหรือราคาส่ง</p>
+        <div class="tw" style="max-width:420px">
+          <table class="tbl">
+            <thead><tr><th>ราคาทุน</th><th>กำไรส่วนเพิ่ม</th><th>ราคาส่ง</th></tr></thead>
+            <tbody><tr><td style="min-width:0">$100</td><td>100 × 25% = $25</td><td>100 + 25 = $125</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="calc">
+          <div class="calc-h">เครื่องแปลงอัตรากำไรส่วนเพิ่ม</div>
+          <div class="calc-s">ใส่ราคาทุนและอัตรากำไรที่บวกจากราคาทุน เพื่อดูราคาส่งและอัตราเดียวกันเมื่อคิดจากฐานราคาส่ง</div>
+          <div class="fields">
+            <div class="field"><label for="mk-cost">ราคาทุน</label><input type="number" id="mk-cost" value="100" min="0" step="any"></div>
+            <div class="field"><label for="mk-rate">กำไร % ของราคาทุน</label><input type="number" id="mk-rate" value="25" min="0" step="any"></div>
+          </div>
+          <div class="out">
+            <div class="out-row"><span>กำไรส่วนเพิ่ม</span><span id="mk-markup">25.00</span></div>
+            <div class="out-row"><span>ราคาส่ง (billed price)</span><span id="mk-billed">125.00</span></div>
+            <div class="out-row res"><span>อัตราเดียวกัน คิดจากราคาส่ง</span><span id="mk-onbilled">20.00%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-9">
+      <div class="sec-h"><span class="sec-n">9</span><h2>ยอด Branch กับ Home office ไม่ตรงกัน</h2></div>
+      <div class="body">
+        <p class="lede">เมื่อยอดสองบัญชีไม่ตรงกัน ให้ไล่หาสาเหตุจาก 4 กลุ่มนี้ แล้วจัดทำกระดาษกระทบยอดเพื่อหายอดที่ถูกต้อง</p>
+        <div class="grid g4">
+          <div class="card"><span class="cn">สาเหตุ 1</span><div class="ct">รายการระหว่างทาง</div><div class="cs">สินค้าหรือเงินสดที่ส่งไปแล้วแต่อีกฝ่ายยังไม่ได้รับ</div></div>
+          <div class="card"><span class="cn">สาเหตุ 2</span><div class="ct">อีกฝ่ายไม่ได้บันทึก</div><div class="cs">ฝ่ายหนึ่งบันทึกแล้วแต่ไม่ได้แจ้งอีกฝ่าย</div></div>
+          <div class="card"><span class="cn">สาเหตุ 3</span><div class="ct">บันทึกผิดบัญชี</div><div class="cs">ลงบัญชีคนละตัวกับที่ควรจะเป็น</div></div>
+          <div class="card"><span class="cn">สาเหตุ 4</span><div class="ct">บันทึกผิดจำนวนเงิน</div><div class="cs">ตัวเลขคลาดเคลื่อนจากที่อีกฝ่ายบันทึก</div></div>
+        </div>
+
+        <h3>ตัวอย่าง · 31 ธันวาคม 20X1</h3>
+        <p>ยอดตามบัญชี Branch = $6,500 Dr. แต่ยอดตามบัญชี Home office = $6,000 Cr. ต่างกัน $500 ข้อมูลเพิ่มเติมคือ สาขาจ่ายเงินสด $200 เป็นค่าใช้จ่ายของสำนักงานใหญ่แต่ไม่ได้แจ้ง และมีสินค้าระหว่างทางที่ต้องหาจำนวน</p>
+        <div class="je">
+          <div class="je-side"><div class="je-head">Home Office · ปรับปรุง</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Expenses</td><td class="amt">200</td></tr><tr><td class="cr">Cr. Branch</td><td class="amt">200</td></tr></table>
+            <p class="je-note">สาขาจ่ายค่าใช้จ่ายแทน ทำให้ยอด Branch ลดลงเหลือ 6,300</p>
+          </div></div>
+          <div class="je-side"><div class="je-head">Branch · ปรับปรุง</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Shipment from HO</td><td class="amt">300</td></tr><tr><td class="cr">Cr. Home office</td><td class="amt">300</td></tr></table>
+            <p class="je-note">รับรู้สินค้าระหว่างทาง $300 ทำให้ยอด Home office เพิ่มเป็น 6,300</p>
+          </div></div>
+        </div>
+
+        <div class="tw" style="max-width:520px">
+          <table class="tbl">
+            <thead><tr><th>กระดาษกระทบยอด</th><th>Branch A/C</th><th>HO A/C</th></tr></thead>
+            <tbody>
+              <tr><td>ยอดตามบัญชี</td><td>6,500 Dr.</td><td>6,000 Cr.</td></tr>
+              <tr><td>หัก ค่าใช้จ่ายที่สาขาจ่ายแทน</td><td class="el">(200)</td><td></td></tr>
+              <tr><td>บวก สินค้าระหว่างทาง</td><td></td><td class="el">300</td></tr>
+              <tr class="tot2"><td>ยอดที่ถูกต้อง</td><td>6,300 Dr.</td><td>6,300 Cr.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">เมื่อยอดตรงกันแล้วจึงนำไปตัดบัญชีในกระดาษทำการงบการเงินรวมได้ ในตัวอย่างนี้ตัดที่ $6,300</p>
+
+        <details class="reveal">
+          <summary>ตรวจสอบตัวเอง — ถ้าโจทย์ไม่บอกจำนวนสินค้าระหว่างทาง จะหาได้อย่างไร</summary>
+          <div class="rc">
+            <p>ตั้งสมการจากผลต่างที่เหลือหลังปรับรายการที่ทราบแล้ว ยอด Branch หลังปรับ = 6,500 − 200 = 6,300 ดังนั้นยอด Home office ต้องเป็น 6,300 เช่นกัน จึงต้องบวกเพิ่ม 6,300 − 6,000 = <b>$300</b> ซึ่งคือมูลค่าสินค้าระหว่างทางตามราคาทุน</p>
+            <p>หากใช้ระบบบันทึกสินค้าแบบต่อเนื่อง (perpetual) หาได้จากสมการต้นทุนขายของสาขาแทน คือ 400 + 1,200 + SFHO − 620 = 5,680 จะได้ SFHO = 4,700 เทียบกับ Shipment to branch ของสำนักงานใหญ่ที่ 5,000 ผลต่าง <b>$300</b> คือสินค้าระหว่างทาง</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="sec" id="c1-10">
+      <div class="sec-h"><span class="sec-n">10</span><h2>ค่าขนส่งระหว่างสาขา</h2></div>
+      <div class="body">
+        <p class="lede">ต้นทุนสินค้าที่สาขาปลายทางรับรู้ได้ ต้องไม่เกินค่าขนส่งที่ควรจะเป็นถ้าส่งตรงจากสำนักงานใหญ่ ส่วนเกินถือเป็นความผิดพลาดในการบริหาร ไม่ใช่ต้นทุนสินค้า</p>
+        <div class="flow">
+          <span class="box">HO</span><span class="arw">→ $200 →</span><span class="box">สาขา A</span><span class="arw">→ $150 →</span><span class="box">สาขา B</span>
+          <span class="flow-lbl">ค่าขนส่งที่จ่ายจริงรวม $350 · ถ้าส่งตรง HO → B จะเสียเพียง $300</span>
+        </div>
+        <ul class="list">
+          <li>สาขา B รับรู้ต้นทุนสินค้ารวมค่าขนส่งได้เพียง <b>$300</b> ตามเส้นทางที่ควรจะเป็น</li>
+          <li>ส่วนเกิน <b>$50</b> รับรู้เป็น <b>ขาดทุนจากค่าขนส่งส่วนเกิน</b> (loss on excessive freight charges) ถือเป็นค่าใช้จ่ายในการบริหารของสำนักงานใหญ่</li>
+        </ul>
+        <p>วิธีบันทึกทำได้สองขั้น คือ กลับรายการโอนสินค้าจาก HO ไป A ที่บันทึกไว้เดิม แล้วบันทึกใหม่เสมือนส่งตรงจาก HO ไป B พร้อมรับรู้ส่วนเกิน $50 เป็นขาดทุนของสำนักงานใหญ่</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CHAPTER 2 ============ -->
+  <div id="ch2" class="hidden" role="tabpanel" aria-labelledby="t-ch2" data-ch="2" style="--accent:var(--red); --accent-soft:var(--red-soft)">
+    <p class="lede">การรวมธุรกิจคือรายการหรือเหตุการณ์ที่ทำให้ <b>ผู้ซื้อได้มาซึ่งการควบคุมธุรกิจ</b> TFRS 3 บังคับให้ใช้วิธีซื้อ (acquisition method) วิธีเดียว หัวใจของบทนี้คือการวัดมูลค่ายุติธรรมของสิ่งที่ได้มา แล้วเทียบกับสิ่งตอบแทนที่จ่ายไป ผลต่างจะกลายเป็นค่าความนิยมหรือกำไรจากการต่อรองราคาซื้อ</p>
+
+    <section class="sec" id="c2-1">
+      <div class="sec-h"><span class="sec-n">1</span><h2>รูปแบบการรวมธุรกิจ 4 แบบ</h2></div>
+      <div class="body">
+        <div class="grid g2">
+          <div class="card">
+            <span class="cn">แบบที่ 1</span><div class="ct">Merger · การควบรวม</div>
+            <div class="cs">A รวมกับ B แล้วเหลือ A เพียงกิจการเดียว B สิ้นสภาพนิติบุคคล</div>
+            <div class="flow" style="margin:12px 0 0; padding:12px"><span class="box">A</span><span class="plus">+</span><span class="box">B</span><span class="arw">=</span><span class="box acc">A</span></div>
+          </div>
+          <div class="card">
+            <span class="cn">แบบที่ 2</span><div class="ct">Consolidation · การรวมกิจการ</div>
+            <div class="cs">A และ B รวมกันตั้งเป็น C ขึ้นใหม่ ทั้ง A และ B สิ้นสภาพ</div>
+            <div class="flow" style="margin:12px 0 0; padding:12px"><span class="box">A</span><span class="plus">+</span><span class="box">B</span><span class="arw">=</span><span class="box acc">C</span></div>
+          </div>
+          <div class="card">
+            <span class="cn">แบบที่ 3</span><div class="ct">Asset acquisition · ซื้อสินทรัพย์</div>
+            <div class="cs">ซื้อสินทรัพย์ทั้งหมดหรือเกือบทั้งหมด โดยจ่ายเป็นเงินสด หนี้ หุ้น หรือหลายอย่างผสมกัน กิจการผู้ขายอาจคงอยู่ต่อหรือเลิกกิจการก็ได้
+            <br><br><b>ข้อควรระวัง</b> การซื้อสินทรัพย์หรือกลุ่มสินทรัพย์ที่ไม่ก่อให้เกิดเป็นธุรกิจ ไม่ถือเป็นการรวมธุรกิจ</div>
+          </div>
+          <div class="card">
+            <span class="cn">แบบที่ 4</span><div class="ct">Stock acquisition · ซื้อหุ้น</div>
+            <div class="cs">ซื้อหุ้นทุนที่มีสิทธิออกเสียง ทั้งสองกิจการยังคงสภาพนิติบุคคลอยู่ ความสัมพันธ์ที่เกิดขึ้นขึ้นอยู่กับสัดส่วนที่ถือ (ดูหัวข้อถัดไป)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-2">
+      <div class="sec-h"><span class="sec-n">2</span><h2>สัดส่วนการถือหุ้นกำหนดมาตรฐานที่ใช้</h2></div>
+      <div class="body">
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th>สัดส่วนการถือหุ้น</th><th style="text-align:left">ความสัมพันธ์</th><th style="text-align:left">มาตรฐานที่ใช้</th></tr></thead>
+            <tbody>
+              <tr><td>น้อยกว่า 20%</td><td style="text-align:left; font-family:inherit">ไม่มีอิทธิพลต่อกิจการที่ถูกซื้อหุ้น</td><td style="text-align:left; font-family:inherit">TFRS 9 เครื่องมือทางการเงิน</td></tr>
+              <tr><td>20 – 50%</td><td style="text-align:left; font-family:inherit">มีอิทธิพลอย่างมีนัยสำคัญ</td><td style="text-align:left; font-family:inherit">TAS 28 เงินลงทุนในบริษัทร่วมและการร่วมค้า</td></tr>
+              <tr><td>มากกว่า 50%</td><td style="text-align:left; font-family:inherit">มีอำนาจควบคุม · บริษัทใหญ่และบริษัทย่อย</td><td style="text-align:left; font-family:inherit">TFRS 3 การรวมธุรกิจ · TFRS 10 งบการเงินรวม · TAS 27 งบการเงินเฉพาะกิจการ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          <span class="nh">สัดส่วนเป็นเพียงข้อบ่งชี้</span>
+          TFRS 10 นิยามการควบคุมด้วยสาระ ไม่ใช่ตัวเลข ผู้ลงทุนควบคุมผู้ได้รับการลงทุนเมื่อครบ 3 องค์ประกอบ คือ <b>มีอำนาจเหนือผู้ได้รับการลงทุน</b> · <b>มีฐานะเปิดต่อหรือมีสิทธิในผลตอบแทนที่ผันแปร</b> · <b>มีความสามารถใช้อำนาจนั้นเพื่อให้ได้ผลตอบแทน</b>
+        </div>
+        <p>วิธีการบัญชีสำหรับการรวมธุรกิจในอดีตมีสองวิธี คือ วิธีซื้อ (acquisition method หรือชื่อเดิม purchase method) และวิธีรวมส่วนได้เสีย (pooling-of-interests method) ปัจจุบัน TFRS 3 เหลือให้ใช้เพียงวิธีซื้อเท่านั้น</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-3">
+      <div class="sec-h"><span class="sec-n">3</span><h2>พัฒนาการของมาตรฐาน</h2></div>
+      <div class="body">
+        <p class="lede">มาตรฐานฉบับนี้ถูกปรับปรุงแทบทุกปีเพื่อให้ตรงกับ IFRS 3 ฉบับล่าสุด ประเด็นที่ออกสอบมักเป็นเหตุผลของการปรับปรุงในแต่ละรอบ</p>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th>ปี</th><th style="text-align:left">การเปลี่ยนแปลง</th></tr></thead>
+            <tbody>
+              <tr><td>2533</td><td style="text-align:left; font-family:inherit">มาตรฐานการบัญชีฉบับที่ 20 การบัญชีสำหรับการรวมกิจการ เริ่มใช้ปี 2534</td></tr>
+              <tr><td>2543</td><td style="text-align:left; font-family:inherit">มาตรฐานการบัญชีฉบับที่ 43 การรวมธุรกิจ</td></tr>
+              <tr><td>2552</td><td style="text-align:left; font-family:inherit">เปลี่ยนเป็น TFRS 3 เพื่อลดทางเลือกของวิธีการบัญชี เพิ่มความสามารถในการเปรียบเทียบและความน่าเชื่อถือ</td></tr>
+              <tr><td>2554</td><td style="text-align:left; font-family:inherit">อิงตาม IFRS 3 (2009) เพื่อปรับปรุงความเกี่ยวข้องกับการตัดสินใจของข้อมูล</td></tr>
+              <tr><td>2557</td><td style="text-align:left; font-family:inherit">อิงตาม IFRS 3 (2012) — อธิบายการวัดส่วนได้เสียที่ไม่มีอำนาจควบคุมให้รัดกุมขึ้น และการจ่ายโดยใช้หุ้นเป็นเกณฑ์</td></tr>
+              <tr><td>2558</td><td style="text-align:left; font-family:inherit">อิงตาม IFRS 3 (2013) ให้สอดคล้องกับ TFRS 10 และ TFRS 13</td></tr>
+              <tr><td>2559</td><td style="text-align:left; font-family:inherit">ยกเว้นไม่ใช้กับกิจการที่ดำเนินธุรกิจด้านการลงทุน และปรับปรุงคำนิยามสิ่งตอบแทนที่ต้องจ่าย</td></tr>
+              <tr><td>2562</td><td style="text-align:left; font-family:inherit">รับ TFRS 16 — ผู้ซื้อวัดสินทรัพย์สิทธิการใช้และหนี้สินตามสัญญาเช่าเสมือนเป็นสัญญาเช่าใหม่ ณ วันที่ซื้อ ยกเว้นสัญญาเช่าระยะสั้นหรือมูลค่าต่ำ</td></tr>
+              <tr><td>2563</td><td style="text-align:left; font-family:inherit">ปรับคำนิยามของ “ธุรกิจ” และอ้างอิงกรอบแนวคิดฉบับปรับปรุงใหม่ เริ่มใช้ 1 ม.ค. 2564</td></tr>
+              <tr><td>2566</td><td style="text-align:left; font-family:inherit">เพิ่ม TFRS 17 สัญญาประกันภัย</td></tr>
+              <tr><td>2567–2568</td><td style="text-align:left; font-family:inherit">แก้ไขเพิ่มเติมตาม IFRS 3 Bound Volume 2024 และ 2025</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-4">
+      <div class="sec-h"><span class="sec-n">4</span><h2>นิยามของ “ธุรกิจ”</h2></div>
+      <div class="body">
+        <p class="lede">ถ้าสิ่งที่ซื้อมาไม่ใช่ธุรกิจ ก็ไม่ใช่การรวมธุรกิจ และไม่ต้องใช้ TFRS 3 เลย คำถามนี้จึงต้องตอบก่อนเสมอ</p>
+        <p><b>ธุรกิจ</b> คือกลุ่มของกิจกรรมและสินทรัพย์ที่นำมาบริหารและดำเนินงานเพื่อประสงค์ผลตอบแทนในรูปเงินปันผล ต้นทุนที่ต่ำลง หรือผลประโยชน์เชิงเศรษฐกิจอื่นแก่ผู้ลงทุน เจ้าของ สมาชิก หรือผู้มีส่วนร่วม ประกอบด้วย <b>ปัจจัยนำเข้า</b> · <b>กระบวนการ</b> · <b>ผลผลิต</b></p>
+        <h3>การทดสอบการกระจุกตัวของมูลค่ายุติธรรม <span class="en">(ทางเลือก)</span></h3>
+        <ul class="list">
+          <li>ถือว่า <b>กระจุกตัว</b> เมื่อมูลค่ายุติธรรมของสินทรัพย์รวมที่ซื้อมาเกือบทั้งหมด (ประมาณ 90%) กระจุกอยู่ที่สินทรัพย์ที่ระบุได้เพียงชิ้นเดียว หรือกลุ่มสินทรัพย์ที่มีลักษณะคล้ายคลึงกัน</li>
+          <li><b>ผ่านการทดสอบ (กระจุกตัว) = ไม่ใช่ธุรกิจ</b> จบเลย ไม่ต้องประเมินต่อ</li>
+          <li><b>ไม่ผ่าน หรือเลือกไม่ทดสอบ</b> ต้องประเมินว่าเป็นธุรกิจหรือไม่ โดยต้องมีอย่างน้อย 2 องค์ประกอบสำคัญคือ ปัจจัยนำเข้า และกระบวนการ</li>
+        </ul>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th style="text-align:left">สถานการณ์</th><th style="text-align:left">ผลการทดสอบ</th></tr></thead>
+            <tbody>
+              <tr><td>ซื้อกิจการที่มีบ้านให้เช่า 50 หลัง จ่ายเท่ากับมูลค่ายุติธรรมของบ้านทั้งหมด</td><td style="text-align:left; font-family:inherit">กระจุกตัวในสินทรัพย์กลุ่มเดียวกัน → ไม่ใช่ธุรกิจ</td></tr>
+              <tr><td>ซื้อกิจการที่มีทั้งบ้านให้เช่าและอาคารสำนักงานให้เช่า</td><td style="text-align:left; font-family:inherit">ไม่ผ่านการกระจุกตัว → ต้องประเมินต่อ แต่ยังไม่มีกระบวนการ จึงไม่ใช่ธุรกิจ</td></tr>
+              <tr><td>เช่นเดียวกับข้างบน แต่มีพนักงานบริหารจัดการสัญญาเช่ากับผู้เช่าด้วย</td><td style="text-align:left; font-family:inherit">ไม่ผ่านการกระจุกตัว และมีทั้งปัจจัยนำเข้าและกระบวนการ → เป็นธุรกิจ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-5">
+      <div class="sec-h"><span class="sec-n">5</span><h2>วิธีซื้อ · 4 ขั้นตอน</h2></div>
+      <div class="body">
+        <p class="lede">TFRS 3 กำหนดให้กิจการบันทึกบัญชีการรวมธุรกิจโดยถือปฏิบัติตามวิธีซื้อ ตามลำดับ 4 ขั้นตอนนี้</p>
+        <div class="grid g4">
+          <div class="card"><span class="cn">ขั้นที่ 1</span><div class="ct">ระบุผู้ซื้อ</div><div class="cs">ผู้ซื้อคือกิจการที่ได้ควบคุมผู้ถูกซื้อ</div></div>
+          <div class="card"><span class="cn">ขั้นที่ 2</span><div class="ct">กำหนดวันที่ซื้อ</div><div class="cs">วันที่ผู้ซื้อได้อำนาจควบคุม</div></div>
+          <div class="card"><span class="cn">ขั้นที่ 3</span><div class="ct">รับรู้และวัดมูลค่า</div><div class="cs">สินทรัพย์ที่ระบุได้ หนี้สินที่รับมา และส่วนได้เสียที่ไม่มีอำนาจควบคุม</div></div>
+          <div class="card"><span class="cn">ขั้นที่ 4</span><div class="ct">รับรู้ค่าความนิยม</div><div class="cs">ค่าความนิยม หรือกำไรจากการต่อรองราคาซื้อ</div></div>
+        </div>
+
+        <h3>ข้อบ่งชี้ในการระบุผู้ซื้อ</h3>
+        <ul class="list">
+          <li>กิจการที่จ่ายเงินสด โอนสินทรัพย์อื่นให้ หรือเป็นผู้ก่อหนี้</li>
+          <li>กิจการที่ออกตราสารทุนใหม่ <span class="en">ยกเว้นกรณีการซื้อธุรกิจแบบย้อนกลับ (reverse acquisition)</span></li>
+          <li>กิจการที่มีขนาดใหญ่กว่าอย่างมีนัยสำคัญ</li>
+          <li>กิจการที่เป็นผู้ริเริ่มการรวมธุรกิจ</li>
+          <li>กิจการที่ตั้งขึ้นใหม่ อาจเป็นได้ทั้งผู้ซื้อหรือผู้ถูกซื้อ ต้องดูข้อเท็จจริงประกอบ</li>
+        </ul>
+
+        <h3>วันที่ซื้อ</h3>
+        <p>คือวันที่ผู้ซื้อได้อำนาจในการควบคุมผู้ถูกซื้อ โดยทั่วไปคือวันที่ผู้ซื้อโอนสิ่งตอบแทนตามกฎหมาย ได้รับสินทรัพย์มาและรับหนี้สินมา ซึ่งถือเป็นวันปิดการซื้อขายกิจการ ทั้งนี้ต้องพิจารณาข้อเท็จจริงและสถานการณ์แวดล้อมทั้งหมดประกอบด้วย</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-6">
+      <div class="sec-h"><span class="sec-n">6</span><h2>การรับรู้และการวัดมูลค่า</h2></div>
+      <div class="body">
+        <p class="lede">ณ วันที่ซื้อ ผู้ซื้อต้องรับรู้สินทรัพย์ที่ระบุได้ที่ได้มา หนี้สินที่รับมา และส่วนได้เสียที่ไม่มีอำนาจควบคุม <b>แยกต่างหากจากค่าความนิยม</b> โดยวัดด้วย <b>มูลค่ายุติธรรม ณ วันที่ซื้อ</b></p>
+        <h3>สินทรัพย์ที่ “ระบุได้”</h3>
+        <ul class="list">
+          <li><b>แยกเป็นเอกเทศได้</b> คือ สามารถแยกหรือแบ่งออกมาจากกิจการ แล้วขาย โอน ให้สิทธิ ให้เช่า หรือแลกเปลี่ยนได้อย่างเป็นเอกเทศ <b>หรือ</b></li>
+          <li><b>ได้มาจากการทำสัญญาหรือสิทธิทางกฎหมายอื่น</b> โดยไม่คำนึงว่าสิทธินั้นจะโอนหรือแบ่งแยกจากกิจการได้หรือไม่</li>
+        </ul>
+        <div class="note">
+          <span class="nh">ผลที่ตามมา</span>
+          การรับรู้ตามนิยามของกรอบแนวคิด อาจทำให้ผู้ซื้อต้องรับรู้ <b>สินทรัพย์และหนี้สินบางรายการที่ไม่เคยปรากฏในงบการเงินของผู้ถูกซื้อมาก่อน</b> เช่น เครื่องหมายการค้าที่พัฒนาขึ้นเอง หรือสิทธิบัตรที่ตัดจำหน่ายหมดแล้ว
+        </div>
+        <div class="grid g2">
+          <div class="card"><span class="cn">นิยาม</span><div class="ct">สินทรัพย์</div><div class="cs">ทรัพยากรเชิงเศรษฐกิจในปัจจุบันที่กิจการควบคุม ซึ่งเป็นผลของเหตุการณ์ในอดีต โดยทรัพยากรเชิงเศรษฐกิจคือสิทธิที่มีศักยภาพในการสร้างผลประโยชน์เชิงเศรษฐกิจ</div></div>
+          <div class="card"><span class="cn">นิยาม</span><div class="ct">หนี้สิน</div><div class="cs">ภาระผูกพันในปัจจุบันของกิจการให้โอนทรัพยากรเชิงเศรษฐกิจ ซึ่งเป็นผลของเหตุการณ์ในอดีต</div></div>
+        </div>
+
+        <h3>ข้อยกเว้นจากหลักทั่วไป</h3>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th style="text-align:left">รายการ</th><th style="text-align:left">ยกเว้นเรื่อง</th></tr></thead>
+            <tbody>
+              <tr><td>หนี้สินที่อาจเกิดขึ้น</td><td style="text-align:left; font-family:inherit">การรับรู้ — รับรู้ ณ วันที่ซื้อแม้ไม่มีความเป็นไปได้ค่อนข้างแน่ที่จะสูญเสียทรัพยากร</td></tr>
+              <tr><td>สินทรัพย์/หนี้สินภาษีเงินได้รอการตัดบัญชี</td><td style="text-align:left; font-family:inherit">การรับรู้และการวัดมูลค่า — ตาม TAS 12</td></tr>
+              <tr><td>หนี้สินผลประโยชน์พนักงาน</td><td style="text-align:left; font-family:inherit">การรับรู้และการวัดมูลค่า — ตาม TAS 19</td></tr>
+              <tr><td>สินทรัพย์ที่ได้มาจากการค้ำประกัน</td><td style="text-align:left; font-family:inherit">การรับรู้และการวัดมูลค่า</td></tr>
+              <tr><td>สัญญาเช่าที่ผู้ถูกซื้อเป็นผู้เช่า · สิทธิที่ได้รับคืน</td><td style="text-align:left; font-family:inherit">การวัดมูลค่า</td></tr>
+              <tr><td>รายการจ่ายโดยใช้หุ้นเป็นเกณฑ์</td><td style="text-align:left; font-family:inherit">การวัดมูลค่า — ตาม TFRS 2</td></tr>
+              <tr><td>สินทรัพย์ที่ถือไว้เพื่อขาย</td><td style="text-align:left; font-family:inherit">การวัดมูลค่า — ตาม TFRS 5 ด้วยมูลค่ายุติธรรมหักต้นทุนในการขาย</td></tr>
+              <tr><td>สัญญาประกันภัย</td><td style="text-align:left; font-family:inherit">การวัดมูลค่า — ตาม TFRS 17</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note warn">
+          <span class="nh">จุดที่มักตอบผิด</span>
+          เมื่อวัดลูกหนี้ด้วยมูลค่ายุติธรรมแล้ว <b>ไม่ต้องรับรู้ค่าเผื่อหนี้สงสัยจะสูญแยกต่างหาก</b> เพราะความเสี่ยงที่จะเก็บเงินไม่ได้ถูกสะท้อนอยู่ในมูลค่ายุติธรรมนั้นแล้ว
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-7">
+      <div class="sec-h"><span class="sec-n">7</span><h2>ค่าความนิยมและการปันส่วนราคาซื้อ</h2></div>
+      <div class="body">
+        <p class="lede">ค่าความนิยมไม่ได้ถูกวัดโดยตรง แต่เป็น <b>ผลต่างที่เหลือ</b> จากการเอาสิ่งตอบแทนที่โอนให้ ลบด้วยมูลค่ายุติธรรมสุทธิของสินทรัพย์ที่ระบุได้และหนี้สินที่รับมา</p>
+        <div class="stack">
+          <div class="s-gw">ค่าความนิยม — ส่วนที่ระบุไม่ได้</div>
+          <div class="s-fv">ปรับมูลค่าตามบัญชีเป็นมูลค่ายุติธรรม (+/−)</div>
+          <div class="s-bv">สินทรัพย์สุทธิตามมูลค่าตามบัญชีของผู้ถูกซื้อ</div>
+        </div>
+        <p class="cap">Purchase Price Allocation — ปันส่วนราคาซื้อลงสู่สินทรัพย์และหนี้สินที่ระบุได้ก่อน ส่วนที่เหลือจึงเป็นค่าความนิยม</p>
+        <ul class="list">
+          <li><b>ค่าความนิยม</b> คือสินทรัพย์ที่แสดงถึงผลประโยชน์เชิงเศรษฐกิจในอนาคตที่จะได้รับจากสินทรัพย์อื่นที่ได้มาจากการรวมธุรกิจ ซึ่งไม่สามารถระบุและรับรู้เป็นรายการแยกออกมาให้ชัดเจนได้</li>
+          <li>ผู้ซื้อรับรู้ค่าความนิยมเป็น <b>สินทรัพย์</b> และต้อง <b>ทดสอบการด้อยค่าทุกปีตาม TAS 36</b> โดยไม่ต้องคำนึงว่าจะมีข้อบ่งชี้ของการด้อยค่าหรือไม่ — ไม่มีการตัดจำหน่าย</li>
+          <li><b>สิ่งตอบแทนที่โอนให้</b> วัดด้วยมูลค่ายุติธรรม ณ วันที่ซื้อของสินทรัพย์ที่ผู้ซื้อโอนไป หนี้สินที่ผู้ซื้อก่อขึ้นเพื่อจ่ายชำระให้เจ้าของเดิม และส่วนได้เสียในส่วนของเจ้าของที่ออกโดยผู้ซื้อ</li>
+          <li>ถ้าสินทรัพย์ที่ผู้ซื้อโอนไปมีมูลค่าตามบัญชีต่างจากมูลค่ายุติธรรม ให้ <b>รับรู้ผลต่างเป็นกำไรหรือขาดทุนในงบกำไรขาดทุน</b></li>
+          <li>กรณีแลกเปลี่ยนเฉพาะส่วนได้เสียในส่วนของเจ้าของ หากมูลค่ายุติธรรมของส่วนได้เสียของ <b>ผู้ถูกซื้อ</b> วัดได้น่าเชื่อถือกว่า ให้ใช้มูลค่านั้นแทน</li>
+          <li>ถ้าไม่มีการโอนสิ่งตอบแทนให้เลย ผู้ซื้อปันส่วนมูลค่ายุติธรรมของสินทรัพย์สุทธิของผู้ถูกซื้อให้แก่เจ้าของเดิม ซึ่งกลายเป็นส่วนได้เสียที่ไม่มีอำนาจควบคุม</li>
+        </ul>
+        <div class="note rule">
+          <span class="nh">ค่าความนิยมเดิมของผู้ถูกซื้อ</span>
+          หากผู้ถูกซื้อมีค่าความนิยมอยู่ในงบแสดงฐานะการเงินแล้ว <b>ไม่ต้องนำมาพิจารณา</b> เพราะเป็นสินทรัพย์ที่ระบุไม่ได้ ผู้ซื้อต้องคำนวณค่าความนิยมของตนเองขึ้นใหม่ทั้งจำนวน
+        </div>
+
+        <div class="calc">
+          <div class="calc-h">เครื่องคำนวณค่าความนิยม</div>
+          <div class="calc-s">ใส่ตัวเลขเพื่อดูว่าเกิดค่าความนิยม หรือกำไรจากการต่อรองราคาซื้อ ค่าตั้งต้นคือตัวอย่างในหัวข้อถัดไป</div>
+          <div class="fields">
+            <div class="field"><label for="gw-cons">สิ่งตอบแทนที่โอนให้</label><input type="number" id="gw-cons" value="1400" step="any"></div>
+            <div class="field"><label for="gw-fva">FV สินทรัพย์ที่ระบุได้</label><input type="number" id="gw-fva" value="1390" step="any"></div>
+            <div class="field"><label for="gw-fvl">FV หนี้สินที่รับมา</label><input type="number" id="gw-fvl" value="240" step="any"></div>
+            <div class="field"><label for="gw-int">สินทรัพย์ที่ยังไม่เคยบันทึก</label><input type="number" id="gw-int" value="100" step="any"></div>
+          </div>
+          <div class="out">
+            <div class="out-row"><span>FV สินทรัพย์สุทธิที่ระบุได้</span><span id="gw-net">1,250.00</span></div>
+            <div class="out-row"><span>สิ่งตอบแทนที่โอนให้</span><span id="gw-c2">1,400.00</span></div>
+            <div class="out-row res"><span id="gw-label">ค่าความนิยม</span><span id="gw-result">150.00</span></div>
+          </div>
+          <p class="je-note" id="gw-note" style="margin-top:12px"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-8">
+      <div class="sec-h"><span class="sec-n">8</span><h2>ตัวอย่าง · A ซื้อ B วันที่ 1 มกราคม 20X1</h2></div>
+      <div class="body">
+        <div class="tw" style="max-width:560px">
+          <table class="tbl">
+            <thead><tr><th>งบแสดงฐานะการเงินของ B</th><th>BV</th><th>FV</th></tr></thead>
+            <tbody>
+              <tr><td>Cash</td><td>50</td><td>50</td></tr>
+              <tr><td>Accounts receivable</td><td>150</td><td>140</td></tr>
+              <tr><td>Inventories</td><td>200</td><td>250</td></tr>
+              <tr><td>Land</td><td>50</td><td>100</td></tr>
+              <tr><td>Building – net</td><td>300</td><td>500</td></tr>
+              <tr><td>Equipment – net</td><td>250</td><td>350</td></tr>
+              <tr class="tot"><td>Total assets</td><td>1,000</td><td>1,390</td></tr>
+              <tr><td>Accounts payable</td><td>60</td><td>60</td></tr>
+              <tr><td>Notes payable</td><td>190</td><td>180</td></tr>
+              <tr class="tot"><td>Total liabilities</td><td>250</td><td>240</td></tr>
+              <tr class="tot2"><td>Stockholders’ equity</td><td>750</td><td>1,150</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>กรณี 8.1 · จ่ายเงินสด 1,150 เท่ากับมูลค่ายุติธรรมสุทธิพอดี</h3>
+        <p>สิ่งตอบแทนที่โอนให้ 1,150 เทียบกับ FV สินทรัพย์สุทธิ 1,390 − 240 = 1,150 ผลต่างเป็นศูนย์ จึงไม่มีค่าความนิยม</p>
+        <div class="je je-solo">
+          <div class="je-side"><div class="je-head">สมุดของ A</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Investment in B</td><td class="amt">1,150</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">1,150</td></tr>
+            <tr class="gap"><td class="dr">Dr. Cash</td><td class="amt">50</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Accounts receivable</td><td class="amt">140</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Inventories</td><td class="amt">250</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Land</td><td class="amt">100</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Buildings</td><td class="amt">500</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Equipment</td><td class="amt">350</td></tr>
+            <tr><td class="cr">Cr. Accounts payable</td><td class="amt">60</td></tr>
+            <tr><td class="cr">Notes payable</td><td class="amt">180</td></tr>
+            <tr><td class="cr">Investment in B</td><td class="amt">1,150</td></tr>
+          </table></div></div>
+        </div>
+
+        <h3>กรณี 8.2 · จ่ายด้วยสินทรัพย์อื่นหรือหุ้นทุน</h3>
+        <div class="je">
+          <div class="je-side"><div class="je-head">โอนที่ดิน BV 1,000 · FV 1,150</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Investment in B</td><td class="amt">1,150</td></tr>
+            <tr><td class="cr">Cr. Land</td><td class="amt">1,000</td></tr>
+            <tr><td class="cr">Gain on transfer of land</td><td class="amt">150</td></tr>
+          </table>
+          <p class="je-note">ผลต่างระหว่าง BV กับ FV ของสินทรัพย์ที่โอนไป รับรู้เป็นกำไรในงบกำไรขาดทุน</p>
+          </div></div>
+          <div class="je-side"><div class="je-head">ออกหุ้นสามัญ par 900 · ราคาตลาด 1,150</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Investment in B</td><td class="amt">1,150</td></tr>
+            <tr><td class="cr">Cr. Common stock</td><td class="amt">900</td></tr>
+            <tr><td class="cr">Additional paid-in capital</td><td class="amt">250</td></tr>
+            <tr class="gap"><td class="dr">Dr. Additional paid-in capital</td><td class="amt">40</td></tr>
+            <tr><td class="cr">Cr. Cash</td><td class="amt">40</td></tr>
+          </table>
+          <p class="je-note">ค่าใช้จ่ายในการออกหุ้น 40 หักจากส่วนเกินมูลค่าหุ้น ไม่ใช่ค่าใช้จ่ายในงบกำไรขาดทุน</p>
+          </div></div>
+        </div>
+
+        <h3>กรณี 8.3 · จ่ายเงินสด 1,400 มีสิทธิบัตรที่ยังไม่เคยบันทึก 100 และค่าใช้จ่ายที่เกี่ยวข้อง 25</h3>
+        <div class="tw" style="max-width:420px">
+          <table class="tbl">
+            <tbody>
+              <tr><td>สิ่งตอบแทนที่โอนให้</td><td></td><td>1,400</td></tr>
+              <tr><td>FV สินทรัพย์</td><td>1,390</td><td></td></tr>
+              <tr><td>หัก FV หนี้สิน</td><td>(240)</td><td>1,150</td></tr>
+              <tr><td>บวก สิทธิบัตรที่ยังไม่เคยบันทึก</td><td></td><td>100</td></tr>
+              <tr class="tot"><td>FV สินทรัพย์สุทธิที่ระบุได้</td><td></td><td>1,250</td></tr>
+              <tr class="tot2"><td>ค่าความนิยม</td><td></td><td class="hi">150</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="je je-solo">
+          <div class="je-side"><div class="je-head">สมุดของ A</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. Investment in B</td><td class="amt">1,400</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">1,400</td></tr>
+            <tr class="gap"><td class="dr">Dr. Investment in B</td><td class="amt">25</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">25</td></tr>
+            <tr class="gap"><td class="dr">Dr. Cash</td><td class="amt">50</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Accounts receivable</td><td class="amt">140</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Inventories</td><td class="amt">250</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Land</td><td class="amt">100</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Buildings</td><td class="amt">500</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Equipment</td><td class="amt">350</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Patents</td><td class="amt">100</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Goodwill</td><td class="amt">150</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Expenses</td><td class="amt">25</td></tr>
+            <tr><td class="cr">Cr. Accounts payable</td><td class="amt">60</td></tr>
+            <tr><td class="cr">Notes payable</td><td class="amt">180</td></tr>
+            <tr><td class="cr">Investment in B</td><td class="amt">1,425</td></tr>
+          </table>
+          <p class="je-note">ค่าใช้จ่ายที่เกี่ยวข้องกับการซื้อ 25 ผ่านบัญชีเงินลงทุนไปก่อน แล้วออกเป็นค่าใช้จ่ายในงวด ไม่รวมเป็นต้นทุนของเงินลงทุนและไม่กระทบค่าความนิยม</p>
+          </div></div>
+        </div>
+
+        <h3>กรณี 8.4 · เมื่อต้องรับรู้หนี้สินภาษีเงินได้รอการตัดบัญชี</h3>
+        <p>ถ้าอัตราภาษี 20% และผลต่างชั่วคราวเกิดจากการปรับมูลค่าเป็นมูลค่ายุติธรรม ผลต่างสุทธิเท่ากับ 390 − (−10) = 400 ดังนั้น DTL = 400 × 20% = <b>80</b> ซึ่งทำให้สินทรัพย์สุทธิที่ระบุได้ลดลง และค่าความนิยมเพิ่มขึ้นจาก 150 เป็น <b>230</b></p>
+        <div class="je je-solo">
+          <div class="je-side"><div class="je-head">สมุดของ A · ปรับปรุงเมื่อมี DTL</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. สินทรัพย์ทั้งหมดตามข้างต้น</td><td class="amt">1,390</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Patents</td><td class="amt">100</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Goodwill</td><td class="amt">230</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Expenses</td><td class="amt">25</td></tr>
+            <tr><td class="cr">Cr. Accounts payable</td><td class="amt">60</td></tr>
+            <tr><td class="cr">Notes payable</td><td class="amt">180</td></tr>
+            <tr><td class="cr">Deferred tax liability</td><td class="amt">80</td></tr>
+            <tr><td class="cr">Investment in B</td><td class="amt">1,425</td></tr>
+          </table></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-9">
+      <div class="sec-h"><span class="sec-n">9</span><h2>ต้นทุนที่เกี่ยวข้องกับการซื้อ</h2></div>
+      <div class="body">
+        <p class="lede">ต้นทุนสามกลุ่มนี้ปฏิบัติต่างกันโดยสิ้นเชิง เป็นข้อสอบยอดนิยม</p>
+        <div class="grid g3">
+          <div class="card"><span class="cn">กลุ่มที่ 1</span><div class="ct">ค่าใช้จ่ายในการซื้อ</div><div class="cs">ค่าธรรมเนียมผู้จัดหา ค่าที่ปรึกษา นักกฎหมาย นักบัญชี ผู้ประเมินราคา ต้นทุนบริหารทั่วไป และต้นทุนของแผนกซื้อธุรกิจ<br><br><b>→ ค่าใช้จ่ายในงวดที่เกิดขึ้นและได้รับบริการ</b></div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 2</span><div class="ct">ต้นทุนออกตราสารทุน</div><div class="cs">ค่าจดทะเบียนและออกหุ้น<br><br><b>→ ลดส่วนเกินมูลค่าหุ้นสามัญ</b><br><span class="mono" style="font-size:.82rem">Dr. APIC / Cr. Cash</span></div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 3</span><div class="ct">ต้นทุนออกตราสารหนี้</div><div class="cs">ค่าจดทะเบียนและออกหุ้นกู้<br><br><b>→ ปรับกับส่วนเกินหรือส่วนลดมูลค่าหุ้นกู้</b><br><span class="mono" style="font-size:.82rem">Dr. Premium/Discount on B/P / Cr. Cash</span></div></div>
+        </div>
+        <div class="note rule">
+          <span class="nh">อย่าจำสลับ</span>
+          ไม่มีต้นทุนกลุ่มใดถูกรวมเป็นสิ่งตอบแทนที่โอนให้ ดังนั้น <b>ค่าใช้จ่ายที่เกี่ยวข้องกับการซื้อไม่ทำให้ค่าความนิยมเปลี่ยนแปลง</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-10">
+      <div class="sec-h"><span class="sec-n">10</span><h2>สินทรัพย์ไม่มีตัวตนที่ระบุได้</h2></div>
+      <div class="body">
+        <p class="lede">สินทรัพย์ไม่มีตัวตนคือสินทรัพย์ที่ไม่เป็นตัวเงิน ระบุได้ และไม่มีรูปร่าง ยิ่งระบุรายการเหล่านี้ออกมาได้มาก ค่าความนิยมยิ่งเหลือน้อย</p>
+        <div class="grid g2">
+          <div class="card"><span class="cn">กลุ่มที่ 1</span><div class="ct">เกี่ยวข้องกับการตลาด</div><div class="cs">เครื่องหมายการค้า ชื่อทางการค้า เครื่องหมายบริการ รูปลักษณ์ ชื่อหัวหนังสือพิมพ์ ชื่อโดเมนอินเทอร์เน็ต ข้อตกลงในการไม่แข่งขัน</div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 2</span><div class="ct">เกี่ยวข้องกับลูกค้า</div><div class="cs">รายชื่อลูกค้า คำสั่งซื้อหรือการผลิตที่คงค้างอยู่ สัญญาที่ทำกับลูกค้าและความสัมพันธ์ที่เกี่ยวข้อง ความสัมพันธ์กับลูกค้าที่ไม่ได้มาจากการทำสัญญา</div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 3</span><div class="ct">เกี่ยวข้องกับศิลปะ</div><div class="cs">ลิขสิทธิ์ในละคร หนังสือ นิตยสาร เพลง ภาพวาดและรูปถ่าย ภาพยนตร์และรายการโทรทัศน์</div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 4</span><div class="ct">อ้างอิงตามสัญญา</div><div class="cs">ใบอนุญาต ค่าสิทธิ ใบอนุญาตก่อสร้าง สัญญาโฆษณา ก่อสร้าง จัดการ สัญญาเช่า แฟรนไชส์ สิทธิในการออกอากาศ สิทธิในการใช้ประโยชน์</div></div>
+          <div class="card"><span class="cn">กลุ่มที่ 5</span><div class="ct">ผลมาจากเทคโนโลยี</div><div class="cs">เทคโนโลยีที่มีสิทธิบัตรและไม่มีสิทธิบัตร โปรแกรมคอมพิวเตอร์ ฐานข้อมูล ความลับทางการค้า เช่น สูตรการผลิต</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-11">
+      <div class="sec-h"><span class="sec-n">11</span><h2>ประเมินค่าความนิยมจากกำไรเกินปกติ</h2></div>
+      <div class="body">
+        <p class="lede">ในทางเศรษฐศาสตร์ ค่าความนิยมคือ <b>ความสามารถในการหากำไรที่สูงกว่าปกติ</b> วิธีนี้ใช้ประเมินราคาที่ควรจ่ายก่อนต่อรอง ไม่ใช่วิธีบันทึกบัญชีตาม TFRS 3</p>
+        <div class="tw" style="max-width:460px">
+          <table class="tbl">
+            <tbody>
+              <tr><td>กำไรจากการดำเนินงาน</td><td>160</td></tr>
+              <tr><td>มูลค่ายุติธรรมของสินทรัพย์</td><td>1,390</td></tr>
+              <tr><td>อัตราผลตอบแทนปกติของอุตสาหกรรม</td><td>10%</td></tr>
+              <tr><td>กำไรตามปกติ = 1,390 × 10%</td><td>139</td></tr>
+              <tr class="tot2"><td>กำไรเกินปกติ = 160 − 139</td><td class="hi">21</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid g2">
+          <div class="card"><span class="cn">สมมติฐานที่ 1</span><div class="ct">กำไรเกินปกติเกิดต่อไปไม่สิ้นสุด</div>
+            <div class="cs">ค่าความนิยม = กำไรเกินปกติ ÷ อัตราผลตอบแทนตามปกติ<br><span class="mono">= 21 ÷ 10% = <b>210</b></span><br><br>ที่ต้องหารด้วยอัตราเพราะเป็นการหามูลค่าปัจจุบันของกระแสเงินสดที่ไม่สิ้นสุด — เมื่อ n สูงมาก ค่า PV annuity จะลู่เข้าหา 1/r พอดี</div></div>
+          <div class="card"><span class="cn">สมมติฐานที่ 2</span><div class="ct">กำไรเกินปกติเกิดอีก 5 ปี</div>
+            <div class="cs">ค่าความนิยม = มูลค่าปัจจุบันของกำไรเกินปกติ<br><span class="mono">= 21 × PVA(10%, 5 ปี)<br>= 21 × 3.7908 = <b>79.61</b></span></div></div>
+        </div>
+        <div class="tw" style="max-width:340px">
+          <table class="tbl">
+            <thead><tr><th>จำนวนงวด n</th><th>PVA ที่ 10%</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>0.9091</td></tr>
+              <tr><td>10</td><td>6.1446</td></tr>
+              <tr><td>20</td><td>8.5136</td></tr>
+              <tr><td>40</td><td>9.7791</td></tr>
+              <tr><td>100</td><td>9.9993</td></tr>
+              <tr><td>130</td><td>10.0000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">ค่า PVA ลู่เข้าหา 10.0000 ซึ่งเท่ากับ 1 ÷ 10% พอดี จึงใช้การหารด้วยอัตราแทนได้เมื่อสมมติว่ากำไรเกิดตลอดไป</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-12">
+      <div class="sec-h"><span class="sec-n">12</span><h2>กำไรจากการต่อรองราคาซื้อ</h2></div>
+      <div class="body">
+        <p class="lede">เมื่อสิ่งตอบแทนที่โอนให้ <b>น้อยกว่า</b> มูลค่ายุติธรรมสุทธิของสินทรัพย์ที่ระบุได้ ผู้ซื้อรับรู้ <b>กำไรจากการซื้อในราคาต่ำกว่ามูลค่ายุติธรรม</b> ในงบกำไรขาดทุน ณ วันที่ซื้อ</p>
+        <h3>สาเหตุที่ทำให้เกิด</h3>
+        <ul class="list">
+          <li>ผู้ซื้อมีอำนาจในการต่อรองสูง</li>
+          <li>ผู้ถูกซื้อมีผลขาดทุนสะสมมาเป็นเวลานาน</li>
+          <li>เป็นการบังคับขายที่ผู้ขายต้องปฏิบัติตามคำสั่งบังคับขาย</li>
+        </ul>
+        <div class="note warn">
+          <span class="nh">ก่อนรับรู้กำไร ต้องทบทวนก่อน</span>
+          ผู้ซื้อต้องประเมินความถูกต้องของการระบุสินทรัพย์ที่ได้มาและหนี้สินที่รับมาทั้งหมดอีกครั้ง ซึ่งอาจต้องรับรู้สินทรัพย์และหนี้สินเพิ่มเติม แล้วทบทวนกระบวนการวัดมูลค่าของ <b>สินทรัพย์ที่ระบุได้และหนี้สินที่รับมา</b> · <b>ส่วนได้เสียที่ไม่มีอำนาจควบคุม</b> · <b>ส่วนได้เสียที่ถืออยู่ก่อนการรวมธุรกิจ</b> · <b>สิ่งตอบแทนที่โอนให้</b> เพื่อให้มั่นใจว่าพิจารณาข้อมูลที่มีอยู่ทั้งหมด ณ วันที่ซื้ออย่างเหมาะสมแล้ว
+        </div>
+        <h3>ตัวอย่าง · A จ่ายเงินสด 900 และจ่ายค่าใช้จ่ายที่เกี่ยวข้อง 100</h3>
+        <div class="tw" style="max-width:420px">
+          <table class="tbl">
+            <tbody>
+              <tr><td>สิ่งตอบแทนที่โอนให้</td><td>900</td></tr>
+              <tr><td>FV สินทรัพย์สุทธิที่ระบุได้ของ B</td><td>1,150</td></tr>
+              <tr class="tot2"><td>กำไรจากการต่อรองราคาซื้อ</td><td class="hi">250</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="je je-solo">
+          <div class="je-side"><div class="je-head">สมุดของ A</div><div class="je-body"><table class="je-t">
+            <tr><td class="dr">Dr. เงินลงทุนในบริษัท B</td><td class="amt">900</td></tr><tr><td class="cr">Cr. เงินสด</td><td class="amt">900</td></tr>
+            <tr class="gap"><td class="dr">Dr. เงินลงทุนในบริษัท B</td><td class="amt">100</td></tr><tr><td class="cr">Cr. เงินสด</td><td class="amt">100</td></tr>
+            <tr class="gap"><td class="dr">Dr. เงินสด</td><td class="amt">50</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;ลูกหนี้การค้า</td><td class="amt">140</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;สินค้าคงเหลือ</td><td class="amt">250</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;ที่ดิน</td><td class="amt">100</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;อาคาร</td><td class="amt">500</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;อุปกรณ์</td><td class="amt">350</td></tr>
+            <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;ค่าใช้จ่าย</td><td class="amt">100</td></tr>
+            <tr><td class="cr">Cr. เจ้าหนี้การค้า</td><td class="amt">60</td></tr>
+            <tr><td class="cr">ตั๋วเงินจ่าย</td><td class="amt">180</td></tr>
+            <tr><td class="cr">Gain from bargain purchase</td><td class="amt">250</td></tr>
+            <tr><td class="cr">เงินลงทุนในบริษัท B</td><td class="amt">1,000</td></tr>
+          </table></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-13">
+      <div class="sec-h"><span class="sec-n">13</span><h2>ระยะเวลาในการวัดมูลค่าและการเปิดเผยข้อมูล</h2></div>
+      <div class="body">
+        <p class="lede">ถ้าการบันทึกบัญชีเริ่มแรกยังไม่เสร็จสมบูรณ์ภายในปีที่มีการรวมธุรกิจ ให้ประมาณมูลค่าของรายการที่ยังไม่สมบูรณ์ไปก่อน แล้ว <b>ปรับย้อนหลัง</b> เมื่อได้ข้อมูลเพิ่มเติม</p>
+        <ul class="list">
+          <li>รายการที่ปรับย้อนหลังได้ ได้แก่ สินทรัพย์ที่ระบุได้ หนี้สินที่รับมา ส่วนได้เสียที่ไม่มีอำนาจควบคุม สิ่งตอบแทนที่โอนให้ ส่วนได้เสียที่ถืออยู่ก่อนหน้า และค่าความนิยมหรือกำไรจากการต่อรองราคาซื้อ</li>
+          <li>ระยะเวลาสิ้นสุดเมื่อได้รับข้อมูลครบแล้ว แต่ <b>ต้องไม่เกิน 1 ปีนับจากวันที่ซื้อ</b></li>
+        </ul>
+        <h3>การเปิดเผยข้อมูล</h3>
+        <p>ผู้ซื้อต้องเปิดเผยข้อมูลให้ผู้ใช้งบการเงินประเมินลักษณะและผลกระทบทางการเงินจากการรวมธุรกิจได้ ทั้งการรวมธุรกิจที่เกิดในระหว่างรอบระยะเวลาบัญชีปัจจุบัน และที่เกิดภายหลังวันสิ้นรอบระยะเวลารายงานแต่ก่อนวันที่อนุมัติให้ออกงบการเงิน รายละเอียดอยู่ในภาคผนวก ข ย่อหน้าที่ ข64 ถึง ข67</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-14">
+      <div class="sec-h"><span class="sec-n">14</span><h2>การรวมธุรกิจภายใต้การควบคุมเดียวกัน · BCUCC</h2></div>
+      <div class="body">
+        <p class="lede">การรวมธุรกิจซึ่งกิจการทั้งหมดที่นำมารวมกันอยู่ภายใต้การควบคุมสูงสุดโดยบุคคล กิจการ กลุ่มบุคคล หรือกลุ่มกิจการเดียวกัน ทั้งก่อนและหลังการรวมธุรกิจ และการควบคุมนั้นไม่เป็นการควบคุมชั่วคราว <b>ไม่อยู่ในขอบเขตของ TFRS 3</b> แต่ใช้แนวปฏิบัติทางการบัญชีสำหรับการรวมธุรกิจภายใต้การควบคุมเดียวกัน (ปรับปรุง 2566)</p>
+        <div class="note rule">
+          <span class="nh">เหตุผล</span>
+          ไม่มีการซื้อธุรกิจเกิดขึ้นจริง เพราะความเสี่ยงและประโยชน์ที่มีต่อผู้มีอำนาจควบคุมสูงสุดไม่เปลี่ยนแปลง จึงใช้ <b>วิธีมูลค่าตามบัญชี (Book Value Method)</b> — รับรู้สินทรัพย์และหนี้สินด้วยมูลค่าตามบัญชีของกิจการที่ถูกนำมารวม <b>ไม่รับรู้ค่าความนิยม</b> และค่าใช้จ่ายที่เกี่ยวข้องรับรู้เป็นค่าใช้จ่ายทันทีในงวดที่รวมธุรกิจ
+        </div>
+        <p>ส่วนต่างระหว่างต้นทุนการรวมธุรกิจกับส่วนได้เสียของผู้ซื้อในมูลค่าตามบัญชีของกิจการที่ถูกนำมารวม ให้ <b>รับรู้โดยตรงในส่วนของเจ้าของ</b> ไม่ผ่านงบกำไรขาดทุน</p>
+        <ul class="list">
+          <li>จ่ายมากกว่า BV → <b>ส่วนต่ำจาก BCUCC</b> ยอดด้าน <span class="mono">Dr.</span> แสดงติดลบในส่วนของเจ้าของ</li>
+          <li>จ่ายน้อยกว่า BV → <b>ส่วนเกินทุนจาก BCUCC</b> ยอดด้าน <span class="mono">Cr.</span></li>
+        </ul>
+        <p>ต้นทุนการรวมธุรกิจคือผลรวมของสินทรัพย์ที่ให้ไป หนี้สินที่เกิดขึ้นหรือรับมา และตราสารทุนที่ออกโดยผู้ซื้อ ณ วันที่แลกเปลี่ยน โดยเลือกวัดมูลค่าได้ 3 แบบ คือ ตามราคาของรายการ (เงินสดที่จ่าย FV ของสิ่งตอบแทน FV ของหุ้นที่ออก) · ตาม FV ของเงินลงทุนหรือธุรกิจตามสัดส่วนที่รับโอนมา · ตาม BV ของเงินลงทุนหรือสินทรัพย์สุทธิตามสัดส่วนที่รับโอนมา</p>
+
+        <h3>ข้อมูลตั้งต้น · 1 มกราคม 20X1</h3>
+        <div class="tw" style="max-width:520px">
+          <table class="tbl">
+            <thead><tr><th>งบแสดงฐานะการเงิน</th><th>A</th><th>B</th></tr></thead>
+            <tbody>
+              <tr><td>Current assets</td><td>2,000,000</td><td>400,000</td></tr>
+              <tr><td>Noncurrent assets</td><td>800,000</td><td>1,500,000</td></tr>
+              <tr class="tot"><td>Total assets</td><td>2,800,000</td><td>1,900,000</td></tr>
+              <tr><td>Liabilities</td><td>900,000</td><td>500,000</td></tr>
+              <tr><td>Common stock, $10 par</td><td>430,000</td><td>620,000</td></tr>
+              <tr><td>Additional paid-in capital</td><td>300,000</td><td>400,000</td></tr>
+              <tr><td>Retained earnings</td><td>1,170,000</td><td>380,000</td></tr>
+              <tr class="tot2"><td>Total liabilities and equity</td><td>2,800,000</td><td>1,900,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ทั้งสามตัวอย่างเป็น A + B = A และ <b>BV ของสินทรัพย์สุทธิของ B = 1.9M − 0.5M = 1.4M</b> เท่ากันทุกกรณี ต่างกันแค่ต้นทุนการรวมธุรกิจ</p>
+
+        <p class="je-cap"><span class="k">I</span>A จ่ายเงินสด 1,700,000 ให้ผู้ถือหุ้นของ B → ส่วนต่ำจาก BCUCC 300,000 Dr.</p>
+        <div class="je je-solo"><div class="je-side"><div class="je-head">สมุดของ A · หน่วยล้านบาท</div><div class="je-body"><table class="je-t">
+          <tr><td class="dr">Dr. Investment in B</td><td class="amt">1.7</td></tr><tr><td class="cr">Cr. Cash</td><td class="amt">1.7</td></tr>
+          <tr class="gap"><td class="dr">Dr. Current assets</td><td class="amt">0.4</td></tr>
+          <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Noncurrent assets</td><td class="amt">1.5</td></tr>
+          <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Excess of BCUCC</td><td class="amt">0.3</td></tr>
+          <tr><td class="cr">Cr. Liabilities</td><td class="amt">0.5</td></tr>
+          <tr><td class="cr">Investment in B</td><td class="amt">1.7</td></tr>
+        </table></div></div></div>
+
+        <p class="je-cap"><span class="k">II</span>A ออกหุ้น 50,000 หุ้น par $10 ราคาตลาด $40 → ต้นทุน 2,000,000 ส่วนต่ำ 600,000 Dr.</p>
+        <div class="je je-solo"><div class="je-side"><div class="je-head">สมุดของ A · หน่วยล้านบาท</div><div class="je-body"><table class="je-t">
+          <tr><td class="dr">Dr. Investment in B</td><td class="amt">2.0</td></tr>
+          <tr><td class="cr">Cr. Common stock</td><td class="amt">0.5</td></tr>
+          <tr><td class="cr">Additional paid-in capital</td><td class="amt">1.5</td></tr>
+          <tr class="gap"><td class="dr">Dr. Current assets</td><td class="amt">0.4</td></tr>
+          <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Noncurrent assets</td><td class="amt">1.5</td></tr>
+          <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Excess of BCUCC</td><td class="amt">0.6</td></tr>
+          <tr><td class="cr">Cr. Liabilities</td><td class="amt">0.5</td></tr>
+          <tr><td class="cr">Investment in B</td><td class="amt">2.0</td></tr>
+        </table></div></div></div>
+
+        <p class="je-cap"><span class="k">III</span>A ออกหุ้น 100,000 หุ้น par $10 ไม่มีราคาตลาด → ต้นทุน 1,000,000 ส่วนเกินทุน 400,000 Cr.</p>
+        <div class="je je-solo"><div class="je-side"><div class="je-head">สมุดของ A · หน่วยล้านบาท</div><div class="je-body"><table class="je-t">
+          <tr><td class="dr">Dr. Investment in B</td><td class="amt">1.0</td></tr><tr><td class="cr">Cr. Common stock</td><td class="amt">1.0</td></tr>
+          <tr class="gap"><td class="dr">Dr. Current assets</td><td class="amt">0.4</td></tr>
+          <tr><td class="dr">&nbsp;&nbsp;&nbsp;&nbsp;Noncurrent assets</td><td class="amt">1.5</td></tr>
+          <tr><td class="cr">Cr. Liabilities</td><td class="amt">0.5</td></tr>
+          <tr><td class="cr">Investment in B</td><td class="amt">1.0</td></tr>
+          <tr><td class="cr">Excess of BCUCC</td><td class="amt">0.4</td></tr>
+        </table></div></div></div>
+
+        <h3>งบแสดงฐานะการเงินของ A หลังการรวมธุรกิจ</h3>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th>รายการ</th><th>ก่อนรวม</th><th>ตัวอย่าง I</th><th>ตัวอย่าง II</th><th>ตัวอย่าง III</th></tr></thead>
+            <tbody>
+              <tr><td>Current assets</td><td>2,000,000</td><td>700,000</td><td>2,400,000</td><td>2,400,000</td></tr>
+              <tr><td>Noncurrent assets</td><td>800,000</td><td>2,300,000</td><td>2,300,000</td><td>2,300,000</td></tr>
+              <tr class="tot"><td>Total assets</td><td>2,800,000</td><td>3,000,000</td><td>4,700,000</td><td>4,700,000</td></tr>
+              <tr><td>Liabilities</td><td>900,000</td><td>1,400,000</td><td>1,400,000</td><td>1,400,000</td></tr>
+              <tr><td>Common stock, $10 par</td><td>430,000</td><td>430,000</td><td>930,000</td><td>1,430,000</td></tr>
+              <tr><td>Additional paid-in capital</td><td>300,000</td><td>300,000</td><td>1,800,000</td><td>300,000</td></tr>
+              <tr><td>Retained earnings</td><td>1,170,000</td><td>1,170,000</td><td>1,170,000</td><td>1,170,000</td></tr>
+              <tr><td>Excess of BCUCC</td><td>–</td><td class="el">(300,000)</td><td class="el">(600,000)</td><td class="hi">400,000</td></tr>
+              <tr class="tot2"><td>Total liabilities and equity</td><td>2,800,000</td><td>3,000,000</td><td>4,700,000</td><td>4,700,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">สังเกตว่ากำไรสะสมของ A ไม่เปลี่ยนแปลงในทุกกรณี เพราะส่วนต่างเข้าส่วนของเจ้าของโดยตรง ไม่ผ่านงบกำไรขาดทุน</p>
+      </div>
+    </section>
+
+    <section class="sec" id="c2-15">
+      <div class="sec-h"><span class="sec-n">15</span><h2>เปรียบเทียบกับ US GAAP</h2></div>
+      <div class="body">
+        <p class="lede">FASB 141 การรวมธุรกิจ (มีผลหลัง 30 มิ.ย. 2001 ปรับเป็น 141R หลัง 15 ธ.ค. 2008) และ FASB 142 ค่าความนิยมและสินทรัพย์ไม่มีตัวตนอื่น ปัจจุบันคือ <span class="mono">ASC 805</span> และ <span class="mono">ASC 350</span></p>
+        <div class="grid g3">
+          <div class="card"><div class="ct">ไม่อนุญาต pooling-of-interests</div><div class="cs">ต้องใช้วิธีซื้อเท่านั้น เช่นเดียวกับ TFRS 3</div></div>
+          <div class="card"><div class="ct">ไม่มี negative goodwill</div><div class="cs">ต่างจาก TFRS ที่รับรู้กำไรจากการต่อรองราคาซื้อ</div></div>
+          <div class="card"><div class="ct">ไม่ตัดจำหน่ายค่าความนิยม</div><div class="cs">แต่ต้องทดสอบการด้อยค่าอย่างน้อยปีละครั้ง ตรงกับ TFRS</div></div>
+        </div>
+        <div class="note">
+          <span class="nh">คำถามทิ้งท้าย</span>
+          ลองเปรียบเทียบผลกระทบของ <b>วิธีซื้อ (acquisition method)</b> กับ <b>วิธีมูลค่าตามบัญชี (book value method)</b> ที่มีต่องบกำไรขาดทุนและงบแสดงฐานะการเงิน — วิธีซื้อปรับสินทรัพย์เป็นมูลค่ายุติธรรม ทำให้ฐานสินทรัพย์สูงกว่า ค่าเสื่อมราคาและค่าตัดจำหน่ายในปีถัดไปจึงสูงกว่า และกำไรสุทธิต่ำกว่าวิธีมูลค่าตามบัญชี
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ QUIZ ============ -->
+  <div id="quiz" class="hidden" role="tabpanel" aria-labelledby="t-quiz">
+    <div id="quiz-top"></div>
+    <p class="lede">14 ข้อ ครอบคลุมทั้งสองบท เลือกคำตอบเพื่อดูเฉลยและคำอธิบายทันที</p>
+    <div class="score">
+      <span>ตอบถูก <span class="sv" id="sc-val">0</span> ข้อ · ตอบแล้ว <span class="sv" id="sc-of">0 จาก 14 ข้อ</span></span>
+      <button type="button" id="sc-reset">เริ่มใหม่</button>
+    </div>
+    <div id="quiz-list"></div>
+  </div>
+  </main>
+</div>
+
+<footer>
+  <div class="shell">
+    <p><b>2601-421 Advanced Accounting 1 · ภาคการศึกษาที่ 1/2569</b> — สื่อประกอบการเรียนสรุปจากเอกสารประกอบการสอนบทที่ 1 การบัญชีสำนักงานใหญ่และสาขา และบทที่ 2 การรวมธุรกิจ</p>
+    <p>ตัวเลขและตัวอย่างทั้งหมดอ้างอิงตามเอกสารประกอบการสอน ใช้เพื่อทบทวนประกอบชั้นเรียน ไม่ใช้แทนมาตรฐานการรายงานทางการเงินฉบับจริง</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- tabs ---- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var rails = {ch1:'rail-ch1', ch2:'rail-ch2', quiz:'rail-quiz'};
+  function showTab(id){
+    tabs.forEach(function(t){
+      var on = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).classList.toggle('hidden', !on);
+    });
+    Object.keys(rails).forEach(function(k){
+      document.getElementById(rails[k]).classList.toggle('hidden', k !== id);
+    });
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ showTab(t.getAttribute('aria-controls')); });
+  });
+
+  /* ---- equipment cases ---- */
+  var caseText = {
+    A:'สาขาเป็นผู้จ่ายเงิน แต่บัญชีสินทรัพย์อยู่ในสมุดของสำนักงานใหญ่',
+    B:'สาขาเป็นผู้จ่ายเงิน และบัญชีสินทรัพย์อยู่ในสมุดของสาขาเอง — ไม่กระทบบัญชีระหว่างกันเลย',
+    C:'สำนักงานใหญ่เป็นผู้จ่ายเงิน และบัญชีสินทรัพย์อยู่ในสมุดของสำนักงานใหญ่',
+    D:'สำนักงานใหญ่เป็นผู้จ่ายเงิน แต่บัญชีสินทรัพย์อยู่ในสมุดของสาขา'
+  };
+  var caseBtns = Array.prototype.slice.call(document.querySelectorAll('.switch button[data-case]'));
+  var caseDesc = document.getElementById('case-desc');
+  function showCase(c){
+    caseBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.case === c ? 'true' : 'false'); });
+    document.querySelectorAll('[data-case-panel]').forEach(function(p){
+      p.classList.toggle('hidden', p.dataset.casePanel !== c);
+    });
+    caseDesc.textContent = caseText[c];
+  }
+  caseBtns.forEach(function(b){ b.addEventListener('click', function(){ showCase(b.dataset.case); }); });
+  if (caseDesc) showCase('A');
+
+  /* ---- number helpers ---- */
+  function num(id){ var v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
+  function fmt(n){ return n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+  /* ---- markup converter ---- */
+  var mkIds = ['mk-cost','mk-rate'];
+  function markup(){
+    var cost = num('mk-cost'), rate = num('mk-rate');
+    var mu = cost * rate / 100, billed = cost + mu;
+    document.getElementById('mk-markup').textContent = fmt(mu);
+    document.getElementById('mk-billed').textContent = fmt(billed);
+    document.getElementById('mk-onbilled').textContent = billed ? fmt(mu / billed * 100) + '%' : '—';
+  }
+  mkIds.forEach(function(id){ var el = document.getElementById(id); if(el) el.addEventListener('input', markup); });
+  if (document.getElementById('mk-cost')) markup();
+
+  /* ---- goodwill calculator ---- */
+  var gwIds = ['gw-cons','gw-fva','gw-fvl','gw-int'];
+  function goodwill(){
+    var cons = num('gw-cons'), net = num('gw-fva') - num('gw-fvl') + num('gw-int');
+    var diff = cons - net;
+    document.getElementById('gw-net').textContent = fmt(net);
+    document.getElementById('gw-c2').textContent = fmt(cons);
+    var label = document.getElementById('gw-label'), res = document.getElementById('gw-result'), note = document.getElementById('gw-note');
+    if (diff > 0){
+      label.innerHTML = 'ค่าความนิยม <span class="chip">Goodwill</span>';
+      res.textContent = fmt(diff);
+      note.textContent = 'สิ่งตอบแทนสูงกว่ามูลค่ายุติธรรมสุทธิ รับรู้ผลต่างเป็นสินทรัพย์ และทดสอบการด้อยค่าทุกปีตาม TAS 36';
+    } else if (diff < 0){
+      label.innerHTML = 'กำไรจากการต่อรองราคาซื้อ <span class="chip neg">Bargain purchase</span>';
+      res.textContent = fmt(-diff);
+      note.textContent = 'สิ่งตอบแทนต่ำกว่ามูลค่ายุติธรรมสุทธิ ต้องทบทวนการระบุและวัดมูลค่าทุกรายการอีกครั้งก่อน แล้วจึงรับรู้เป็นกำไรในงบกำไรขาดทุน ณ วันที่ซื้อ';
+    } else {
+      label.textContent = 'ไม่มีค่าความนิยม';
+      res.textContent = fmt(0);
+      note.textContent = 'สิ่งตอบแทนเท่ากับมูลค่ายุติธรรมสุทธิของสินทรัพย์ที่ระบุได้พอดี';
+    }
+  }
+  gwIds.forEach(function(id){ var el = document.getElementById(id); if(el) el.addEventListener('input', goodwill); });
+  if (document.getElementById('gw-cons')) goodwill();
+
+  /* ---- quiz ---- */
+  var QS = [
+    {ch:1, q:'บัญชี “สาขา (Branch)” ในสมุดของสำนักงานใหญ่ จัดเป็นบัญชีประเภทใด และมียอดปกติด้านใด',
+     o:['สินทรัพย์ · ยอดปกติด้านเดบิต','หนี้สิน · ยอดปกติด้านเครดิต','ส่วนของเจ้าของ · ยอดปกติด้านเครดิต','บัญชีปรับมูลค่า · ยอดปกติด้านเครดิต'], a:0,
+     e:'บัญชีสาขาเป็นสินทรัพย์ในสมุดของสำนักงานใหญ่ ยอดปกติด้านเดบิต ส่วนบัญชีคู่ของมันคือ Home office ในสมุดสาขา เป็นหนี้สินหรือส่วนของเจ้าของ ยอดปกติด้านเครดิต'},
+    {ch:1, q:'บัญชี “สินค้าส่งไปสาขา (Shipment to branch)” ในสมุดของสำนักงานใหญ่ มีลักษณะอย่างไร',
+     o:['เป็นรายได้จากการขาย','เป็นบัญชีปรับมูลค่า นำไปหักจากซื้อ','เป็นสินค้าคงเหลือ','เป็นลูกหนี้การค้า'], a:1,
+     e:'เป็น contra account ที่นำไปหักจากซื้อของสำนักงานใหญ่ เพราะสินค้าจำนวนนั้นถูกโอนไปคำนวณต้นทุนขายที่สาขาแล้ว ถ้ารับรู้เป็นรายได้จะเป็นการรับรู้กำไรจากตัวเอง'},
+    {ch:1, q:'สาขาจ่ายเงินสด $500 ซื้ออุปกรณ์ โดยให้บัญชีสินทรัพย์อยู่ในสมุดของสำนักงานใหญ่ สาขาบันทึกอย่างไร',
+     o:['Dr. Equipment 500 / Cr. Cash 500','Dr. Home office 500 / Cr. Cash 500','Dr. Branch 500 / Cr. Cash 500','ไม่บันทึกบัญชี'], a:1,
+     e:'สาขาจ่ายเงินไปแต่ไม่ได้เป็นเจ้าของบัญชีสินทรัพย์ จึงเดบิตบัญชีระหว่างกันคือ Home office เพื่อลดภาระที่มีต่อสำนักงานใหญ่'},
+    {ch:1, q:'อุปกรณ์ที่สาขาใช้แต่บันทึกไว้ในสมุดของสำนักงานใหญ่ เมื่อสิ้นปีต้องคิดค่าเสื่อมราคา สาขาบันทึกอย่างไร',
+     o:['Dr. Depreciation expense / Cr. Accumulated depreciation','Dr. Depreciation expense / Cr. Home office','Dr. Home office / Cr. Accumulated depreciation','ไม่บันทึกบัญชี'], a:1,
+     e:'ค่าเสื่อมราคา (expense) อยู่ที่สาขาเสมอเพราะสาขาเป็นผู้ใช้ประโยชน์ ส่วนค่าเสื่อมราคาสะสมอยู่กับสมุดที่บันทึกตัวสินทรัพย์ คือสำนักงานใหญ่ จึงต้องเชื่อมด้วยบัญชีระหว่างกัน'},
+    {ch:1, q:'สำนักงานใหญ่เก็บเงินจากลูกหนี้ของสาขาได้ สาขาต้องบันทึกอย่างไร',
+     o:['Dr. Cash / Cr. Accounts receivable','Dr. Home office / Cr. Accounts receivable','Dr. Branch / Cr. Accounts receivable','Dr. Accounts receivable / Cr. Home office'], a:1,
+     e:'เงินเข้าที่สำนักงานใหญ่ สาขาจึงตัดลูกหนี้ของตนออกและลดยอดที่ค้างกับสำนักงานใหญ่ ด้าน HO บันทึก Dr. Cash / Cr. Branch'},
+    {ch:1, q:'สำนักงานใหญ่ส่งสินค้าไปสาขาโดยบวกกำไร 25% ของราคาทุน อัตรากำไรนี้คิดเป็นกี่เปอร์เซ็นต์ของราคาส่ง',
+     o:['25%','20%','30%','12.5%'], a:1,
+     e:'ราคาทุน 100 บวกกำไร 25 ได้ราคาส่ง 125 ดังนั้น 25 ÷ 125 = 20% ของราคาส่ง ต้องดูให้ออกว่าโจทย์ให้ฐานเป็นราคาทุนหรือราคาส่ง'},
+    {ch:1, q:'ในกระดาษทำการงบการเงินรวม รายการคู่ใดที่ต้องตัดบัญชี',
+     o:['Branch กับ Home office เท่านั้น','Shipment to branch กับ Shipment from HO เท่านั้น','ทั้งสองคู่','Sales ของสาขากับ Purchases ของสำนักงานใหญ่'], a:2,
+     e:'ต้องตัดทั้งคู่บัญชีในงบแสดงฐานะการเงิน (Branch/Home office) และคู่บัญชีในงบกำไรขาดทุน (Shipment to branch/Shipment from HO) จึงจะเหลือเฉพาะรายการกับบุคคลภายนอก'},
+    {ch:1, q:'ส่งสินค้าจากสำนักงานใหญ่ไปสาขา A เสียค่าขนส่ง $200 แล้วส่งต่อไปสาขา B อีก $150 หากส่งตรงจากสำนักงานใหญ่ไป B จะเสียเพียง $300 ส่วนเกิน $50 ปฏิบัติอย่างไร',
+     o:['รวมเป็นต้นทุนสินค้าของสาขา B','รวมเป็นต้นทุนสินค้าของสาขา A','รับรู้เป็นขาดทุนจากค่าขนส่งส่วนเกิน เป็นค่าใช้จ่ายในการบริหารของสำนักงานใหญ่','ปันส่วนให้สาขา A และ B ฝ่ายละครึ่ง'], a:2,
+     e:'สาขา B รับรู้ต้นทุนได้เพียง $300 ตามเส้นทางที่ควรจะเป็น ส่วนเกิน $50 เกิดจากการตัดสินใจบริหารที่ผิดพลาด จึงเป็นขาดทุนของสำนักงานใหญ่'},
+    {ch:2, q:'บริษัท A ถือหุ้นในบริษัท B 35% ต้องใช้มาตรฐานฉบับใด',
+     o:['TFRS 9 เครื่องมือทางการเงิน','TAS 28 เงินลงทุนในบริษัทร่วมและการร่วมค้า','TFRS 3 การรวมธุรกิจ','TFRS 10 งบการเงินรวม'], a:1,
+     e:'สัดส่วน 20–50% ถือว่ามีอิทธิพลอย่างมีนัยสำคัญ ใช้ TAS 28 ยังไม่ถึงขั้นมีอำนาจควบคุมที่จะเข้า TFRS 3 และ TFRS 10'},
+    {ch:2, q:'ผู้ซื้อจ่ายค่าที่ปรึกษาและค่าธรรมเนียมวิชาชีพที่เกี่ยวข้องกับการซื้อธุรกิจ 25 ล้านบาท ต้องปฏิบัติอย่างไร',
+     o:['รวมเป็นสิ่งตอบแทนที่โอนให้ ทำให้ค่าความนิยมเพิ่มขึ้น','รับรู้เป็นค่าใช้จ่ายในงวดที่เกิดขึ้นและได้รับบริการ','หักจากส่วนเกินมูลค่าหุ้นสามัญ','ปรับกับส่วนเกินหรือส่วนลดมูลค่าหุ้นกู้'], a:1,
+     e:'ต้นทุนที่เกี่ยวข้องกับการซื้อไม่ใช่สิ่งตอบแทนที่โอนให้ จึงไม่กระทบค่าความนิยม ต้องรับรู้เป็นค่าใช้จ่ายทันที ส่วนตัวเลือกที่ 3 และ 4 ใช้กับต้นทุนการออกตราสารทุนและตราสารหนี้ตามลำดับ'},
+    {ch:2, q:'A ออกหุ้นสามัญเพื่อซื้อกิจการ และจ่ายค่าใช้จ่ายในการออกหุ้น 40 ต้องบันทึกอย่างไร',
+     o:['Dr. Expenses 40 / Cr. Cash 40','Dr. Investment 40 / Cr. Cash 40','Dr. Additional paid-in capital 40 / Cr. Cash 40','Dr. Common stock 40 / Cr. Cash 40'], a:2,
+     e:'ต้นทุนในการจดทะเบียนและออกตราสารทุน นำไปลดส่วนเกินมูลค่าหุ้นสามัญ ไม่ใช่ค่าใช้จ่ายในงบกำไรขาดทุน'},
+    {ch:2, q:'A จ่ายเงินสด 900 ซื้อกิจการ B ที่มีมูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ 1,150 ต้องบันทึกอย่างไร',
+     o:['รับรู้ค่าความนิยม 250 เป็นสินทรัพย์','รับรู้กำไรจากการต่อรองราคาซื้อ 250 ในงบกำไรขาดทุน','รับรู้ส่วนเกินทุน 250 ในส่วนของเจ้าของ','ลดมูลค่าสินทรัพย์ที่ได้มาลง 250'], a:1,
+     e:'สิ่งตอบแทนต่ำกว่ามูลค่ายุติธรรมสุทธิ จึงเป็น negative goodwill รับรู้เป็นกำไรในงบกำไรขาดทุน ณ วันที่ซื้อ แต่ต้องทบทวนการระบุและวัดมูลค่าทุกรายการอีกครั้งก่อน'},
+    {ch:2, q:'ผู้ถูกซื้อมีค่าความนิยมอยู่ในงบแสดงฐานะการเงินของตนอยู่แล้ว 200 ผู้ซื้อต้องทำอย่างไร',
+     o:['นำมารวมเป็นสินทรัพย์ที่ระบุได้','ไม่นำมาพิจารณา เพราะเป็นสินทรัพย์ที่ระบุไม่ได้','นำมาหักออกจากค่าความนิยมที่คำนวณได้','รับรู้เป็นค่าใช้จ่ายทันที'], a:1,
+     e:'ค่าความนิยมเดิมของผู้ถูกซื้อไม่ใช่สินทรัพย์ที่ระบุได้ ผู้ซื้อต้องคำนวณค่าความนิยมของตนเองขึ้นใหม่ทั้งจำนวนจากผลต่างระหว่างสิ่งตอบแทนกับมูลค่ายุติธรรมสุทธิ'},
+    {ch:2, q:'การรวมธุรกิจภายใต้การควบคุมเดียวกัน (BCUCC) ต้องปฏิบัติอย่างไร',
+     o:['ใช้วิธีซื้อตาม TFRS 3 และรับรู้ค่าความนิยม','ใช้วิธีมูลค่าตามบัญชี ส่วนต่างรับรู้โดยตรงในส่วนของเจ้าของ','ใช้วิธีมูลค่าตามบัญชี ส่วนต่างรับรู้ในงบกำไรขาดทุน','ใช้วิธีรวมส่วนได้เสีย และรับรู้ค่าความนิยมติดลบ'], a:1,
+     e:'BCUCC ไม่อยู่ในขอบเขตของ TFRS 3 เพราะไม่มีการซื้อธุรกิจเกิดขึ้นจริง ใช้วิธีมูลค่าตามบัญชี ไม่รับรู้ค่าความนิยม และส่วนต่างเข้าส่วนของเจ้าของโดยตรง ไม่ผ่านงบกำไรขาดทุน'}
+  ];
+
+  var listEl = document.getElementById('quiz-list');
+  var scVal = document.getElementById('sc-val');
+  var answered = 0, correct = 0;
+
+  var scOf = document.getElementById('sc-of');
+  function updateScore(){
+    scVal.textContent = String(correct);
+    scOf.textContent = answered + ' จาก ' + QS.length + ' ข้อ';
+  }
+
+  function buildQuiz(){
+    listEl.innerHTML = '';
+    answered = 0; correct = 0; updateScore();
+    QS.forEach(function(item, i){
+      var wrap = document.createElement('div');
+      wrap.className = 'q';
+      var n = document.createElement('div');
+      n.className = 'q-n';
+      n.textContent = 'ข้อ ' + (i+1) + ' · บทที่ ' + item.ch;
+      var t = document.createElement('div');
+      t.className = 'q-t';
+      t.textContent = item.q;
+      var opts = document.createElement('div');
+      opts.className = 'opts';
+      var expl = document.createElement('div');
+      expl.className = 'expl hidden';
+      expl.textContent = item.e;
+      item.o.forEach(function(text, j){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.textContent = text;
+        b.addEventListener('click', function(){
+          var all = opts.querySelectorAll('.opt');
+          Array.prototype.forEach.call(all, function(x, k){
+            x.disabled = true;
+            if (k === item.a) x.classList.add('ok');
+            else if (k === j) x.classList.add('no');
+          });
+          expl.classList.remove('hidden');
+          answered++;
+          if (j === item.a) correct++;
+          updateScore();
+        });
+        opts.appendChild(b);
+      });
+      wrap.appendChild(n); wrap.appendChild(t); wrap.appendChild(opts); wrap.appendChild(expl);
+      listEl.appendChild(wrap);
+    });
+  }
+  if (listEl){
+    buildQuiz();
+    document.getElementById('sc-reset').addEventListener('click', buildQuiz);
+  }
+
+  /* ---- scrollspy ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a[href^="#"]'));
+  var map = {};
+  links.forEach(function(a){
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) map[a.getAttribute('href').slice(1)] = a;
+  });
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('on'); });
+          var a = map[en.target.id];
+          if (a) a.classList.add('on');
+        }
+      });
+    }, {rootMargin:'-70px 0px -70% 0px', threshold:0});
+    Object.keys(map).forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
