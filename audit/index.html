@@ -1,79 +1,629 @@
-<title>การสอบบัญชี</title>
+<title>การสอบบัญชี บทที่ 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans+Thai:wght@400;500;600;700&amp;family=Noto+Serif+Thai:wght@600;700&amp;display=swap">
 <style>
 :root{
-  --paper:#fbfcfa; --surface:#f2f5f1; --surface-2:#e8eee7;
-  --ink:#16211c; --ink-2:#41514a; --ink-3:#6c7d75;
-  --rule:#cfdbd0; --rule-strong:#a9bcac;
+  --paper:#fbfcfa; --surface:#f4f2f1; --surface-2:#ebe6e4; --sunk:#f0ebe9;
+  --ink:#1e1917; --ink-2:#4c4340; --ink-3:#7a6e6a;
+  --rule:#dcd2ce; --rule-strong:#bdaea9;
   --accent:#a3341f; --accent-soft:#f5e2dc;
+  --teal:#1f6b5e; --teal-soft:#dcebe7;
+  --amber:#8a6314; --amber-soft:#f6ecd6;
+  --shadow:0 1px 2px rgba(30,25,23,.05), 0 10px 30px -18px rgba(30,25,23,.35);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#101613; --surface:#161d19; --surface-2:#1e2721;
-    --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
-    --rule:#2b3630; --rule-strong:#3f4d45;
-    --accent:#e5906f; --accent-soft:#2f1e18;
+    --paper:#15110f; --surface:#1c1715; --surface-2:#26201d; --sunk:#191412;
+    --ink:#eee7e4; --ink-2:#bcafaa; --ink-3:#8d7f7a;
+    --rule:#352c29; --rule-strong:#4b3f3b;
+    --accent:#e5906f; --accent-soft:#33201a;
+    --teal:#68c2b0; --teal-soft:#152825;
+    --amber:#d9ab52; --amber-soft:#2b2413;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#101613; --surface:#161d19; --surface-2:#1e2721;
-  --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
-  --rule:#2b3630; --rule-strong:#3f4d45;
-  --accent:#e5906f; --accent-soft:#2f1e18;
+  --paper:#15110f; --surface:#1c1715; --surface-2:#26201d; --sunk:#191412;
+  --ink:#eee7e4; --ink-2:#bcafaa; --ink-3:#8d7f7a;
+  --rule:#352c29; --rule-strong:#4b3f3b;
+  --accent:#e5906f; --accent-soft:#33201a;
+  --teal:#68c2b0; --teal-soft:#152825;
+  --amber:#d9ab52; --amber-soft:#2b2413;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
 }
 *{box-sizing:border-box}
-body{margin:0; background:var(--paper); color:var(--ink); min-height:100vh;
+body{margin:0; background:var(--paper); color:var(--ink);
   font-family:"IBM Plex Sans Thai","IBM Plex Sans",system-ui,-apple-system,sans-serif;
   font-size:16px; line-height:1.72; -webkit-font-smoothing:antialiased}
-h1{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; text-wrap:balance;
-  line-height:1.35; margin:8px 0 0; font-size:clamp(1.6rem,4vw,2.2rem)}
+h1,h2,h3{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; text-wrap:balance; line-height:1.35; margin:0}
 p{margin:0}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
-.shell{max-width:660px; margin:0 auto; padding:clamp(40px,9vw,88px) clamp(16px,4vw,40px) 60px}
-.back{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.76rem;
-  letter-spacing:.1em; text-transform:uppercase; text-decoration:none; color:var(--ink-3); margin-bottom:30px}
+.shell{max-width:1180px; margin:0 auto; padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+.mast{border-bottom:1px solid var(--rule); background:var(--surface)}
+.mast-in{display:flex; flex-wrap:wrap; gap:18px 32px; align-items:flex-end; justify-content:space-between; padding:26px 0}
+.back{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.11em;
+  text-transform:uppercase; text-decoration:none; color:var(--ink-3); margin-bottom:14px}
 .back:hover{color:var(--accent)}
-.code{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--accent); font-weight:600}
-.en{font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--ink-3); margin-top:6px}
-.pill{display:inline-block; font-size:.75rem; font-weight:600; padding:3px 12px; border-radius:99px;
-  background:var(--accent-soft); color:var(--accent); margin:22px 0 0}
-.panel{border:1px solid var(--rule); border-radius:4px; background:var(--surface);
-  padding:20px 22px; margin-top:26px}
-.panel h2{font-family:"IBM Plex Sans Thai",sans-serif; font-size:.92rem; font-weight:700; margin:0 0 8px}
-.panel p{font-size:.9rem; color:var(--ink-2)}
-.panel + .panel{margin-top:12px}
-ul{margin:8px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
-li{position:relative; padding-left:18px; font-size:.89rem; color:var(--ink-2)}
-li::before{content:""; position:absolute; left:2px; top:.72em; width:5px; height:5px;
-  border-radius:1px; background:var(--accent); opacity:.55}
-code{font-family:"IBM Plex Mono",monospace; font-size:.85em; background:var(--surface-2);
-  padding:1px 5px; border-radius:3px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
+h1{font-size:clamp(1.7rem,4vw,2.4rem); margin-top:6px; letter-spacing:-.01em}
+.mast-sub{color:var(--ink-2); font-size:.95rem; margin-top:8px; max-width:58ch}
+.mast-meta{font-size:.84rem; color:var(--ink-3); line-height:1.6}
+.mast-meta b{color:var(--ink-2); font-weight:600}
+
+.tabs{position:sticky; top:0; z-index:40; background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--rule)}
+.tabs-in{display:flex; gap:4px; overflow-x:auto; scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{appearance:none; background:none; border:0; border-bottom:2px solid transparent; cursor:pointer;
+  padding:14px 16px; font:inherit; font-weight:600; font-size:.93rem; color:var(--ink-3); white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent); border-bottom-color:var(--accent)}
+.tab .tnum{font-family:"IBM Plex Mono",monospace; font-size:.75rem; opacity:.65; margin-right:7px}
+
+.layout{display:grid; grid-template-columns:1fr}
+@media (min-width:1040px){ .layout{grid-template-columns:216px minmax(0,1fr); gap:48px} }
+.rail{display:none}
+@media (min-width:1040px){
+  .rail{display:block; position:sticky; top:53px; align-self:start; max-height:calc(100vh - 53px);
+    overflow-y:auto; padding:34px 0 60px; border-right:1px solid var(--rule)}
+}
+.rail-h{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:flex; gap:9px; padding:5px 12px 5px 9px; font-size:.845rem; color:var(--ink-2);
+  text-decoration:none; border-left:2px solid transparent; line-height:1.45}
+.rail a:hover{color:var(--ink); background:var(--surface)}
+.rail a.on{color:var(--accent); border-left-color:var(--accent); font-weight:600}
+.rail a i{font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:.72rem; opacity:.6; padding-top:2px}
+main{padding:34px 0 90px; min-width:0}
+
+section.sec{scroll-margin-top:70px; padding:10px 0 30px}
+.sec + .sec{border-top:1px solid var(--rule); padding-top:34px}
+.sec-h{display:flex; gap:14px; align-items:baseline; margin-bottom:6px}
+.sec-n{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--accent); font-weight:600; padding-top:3px}
+h2{font-size:clamp(1.25rem,2.4vw,1.6rem)}
+h3{font-size:1.03rem; margin:26px 0 10px}
+.lede{color:var(--ink-2); max-width:68ch; margin-bottom:18px}
+.body p{max-width:68ch; margin-bottom:12px}
+ul.list{max-width:68ch; margin:0 0 14px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:7px}
+ul.list li{position:relative; padding-left:18px; color:var(--ink-2)}
+ul.list li::before{content:""; position:absolute; left:2px; top:.72em; width:5px; height:5px; border-radius:1px; background:var(--accent); opacity:.55}
+ul.list li b, .body b{color:var(--ink); font-weight:600}
+.en{color:var(--ink-3); font-size:.92em}
+
+.note{border-left:3px solid var(--accent); background:var(--accent-soft); padding:12px 16px;
+  border-radius:0 4px 4px 0; margin:16px 0; font-size:.9rem; color:var(--ink-2); max-width:70ch}
+.note b{color:var(--ink)}
+.note.src{border-left-color:var(--amber); background:var(--amber-soft)}
+.note.key{border-left-color:var(--teal); background:var(--teal-soft)}
+.note .nh{display:block; font-weight:700; color:var(--ink); margin-bottom:4px; font-size:.87rem}
+
+.grid{display:grid; gap:12px; margin:14px 0 18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+.card{border:1px solid var(--rule); border-radius:4px; padding:14px 16px; background:var(--surface)}
+.card .ct{font-weight:700; font-size:.92rem; margin-bottom:5px}
+.card .cs{font-size:.86rem; color:var(--ink-2); line-height:1.62}
+.card .cn{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:7px}
+
+/* assertion cards */
+.asrts{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(238px,1fr)); margin:14px 0 18px}
+.asrt{border:1px solid var(--rule); border-radius:4px; background:var(--surface); padding:13px 15px 15px}
+.asrt-en{font-family:"IBM Plex Mono",monospace; font-size:.86rem; font-weight:600; color:var(--accent); line-height:1.4}
+.asrt-th{font-weight:700; font-size:.92rem; margin-top:2px}
+.asrt-q{font-size:.82rem; color:var(--ink-3); font-style:italic; margin-top:7px; line-height:1.55}
+.asrt-d{font-size:.85rem; color:var(--ink-2); margin-top:7px; line-height:1.6}
+
+/* flow diagram */
+.flow{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  align-items:stretch; padding:18px; border:1px solid var(--rule); border-radius:4px;
+  background:var(--surface); margin:14px 0 6px}
+.fstep{border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); padding:12px 14px; position:relative}
+.fstep .fn{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:5px}
+.fstep .ft{font-weight:700; font-size:.9rem; line-height:1.4}
+.fstep .fd{font-size:.79rem; color:var(--ink-2); margin-top:4px; line-height:1.55}
+
+/* matrix */
+.tw{overflow-x:auto; margin:14px 0 8px; border:1px solid var(--rule); border-radius:4px; background:var(--surface)}
+table.tbl{width:100%; border-collapse:collapse; font-size:.84rem; min-width:620px}
+table.tbl th{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; text-align:left; padding:9px 12px;
+  border-bottom:1px solid var(--rule-strong); background:var(--surface-2); vertical-align:bottom}
+table.tbl td{padding:7px 12px; vertical-align:top; line-height:1.5; border-bottom:1px solid var(--rule)}
+table.tbl tbody tr:last-child td{border-bottom:0}
+table.tbl td.pc{font-family:"IBM Plex Mono",monospace; font-size:.8rem; font-weight:600; color:var(--accent); white-space:nowrap}
+table.tbl td.asb{font-family:"IBM Plex Mono",monospace; font-size:.79rem; color:var(--ink)}
+table.tbl td.q{color:var(--ink-2); font-size:.82rem; font-style:italic; min-width:200px}
+table.tbl tr.grp td{border-top:1px solid var(--rule-strong)}
+table.tbl tr.dim td{opacity:.28}
+table.tbl tr.hit{background:var(--accent-soft)}
+
+.switch{display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 4px}
+.switch button{appearance:none; font:inherit; font-size:.81rem; font-weight:600; cursor:pointer; padding:6px 12px;
+  border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink-2); border-radius:3px}
+.switch button:hover{border-color:var(--accent); color:var(--ink)}
+.switch button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+.cap{font-size:.78rem; color:var(--ink-3); margin:0 0 20px; line-height:1.5}
+
+.reveal{margin:14px 0 18px; border:1px solid var(--rule); border-radius:4px; background:var(--surface); overflow:hidden}
+.reveal > summary{cursor:pointer; padding:11px 15px; font-size:.88rem; font-weight:600; list-style:none;
+  display:flex; justify-content:space-between; gap:12px; align-items:center}
+.reveal > summary::-webkit-details-marker{display:none}
+.reveal > summary::after{content:"แสดงคำตอบ"; font-family:"IBM Plex Mono",monospace; font-size:.7rem;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--accent); flex:none}
+.reveal[open] > summary::after{content:"ซ่อน"}
+.reveal[open] > summary{border-bottom:1px solid var(--rule)}
+.reveal .rc{padding:12px 15px 15px; font-size:.88rem; color:var(--ink-2)}
+
+/* quiz */
+.q{border:1px solid var(--rule); border-radius:4px; background:var(--surface); padding:16px 18px; margin-bottom:12px}
+.q-n{font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.q-t{font-weight:600; margin:5px 0 12px; font-size:.95rem; line-height:1.6}
+.opts{display:flex; flex-direction:column; gap:6px}
+.opt{appearance:none; font:inherit; font-size:.87rem; text-align:left; cursor:pointer; padding:9px 13px;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); color:var(--ink-2); line-height:1.55}
+.opt:hover:not(:disabled){border-color:var(--accent); color:var(--ink)}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--teal); background:var(--teal-soft); color:var(--teal); font-weight:600}
+.opt.no{border-color:var(--accent); background:var(--accent-soft); color:var(--accent)}
+.expl{margin-top:11px; font-size:.85rem; color:var(--ink-2); border-left:3px solid var(--teal);
+  background:var(--teal-soft); padding:9px 13px; border-radius:0 3px 3px 0}
+.score{position:sticky; top:53px; z-index:20; background:var(--surface-2); border:1px solid var(--rule);
+  border-radius:4px; padding:11px 16px; margin-bottom:18px; display:flex; justify-content:space-between;
+  align-items:center; gap:14px; flex-wrap:wrap}
+.score .sv{font-family:"IBM Plex Mono",monospace; font-weight:600; font-variant-numeric:tabular-nums}
+.score button{appearance:none; font:inherit; font-size:.8rem; font-weight:600; cursor:pointer; padding:5px 12px;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2); border-radius:3px}
+.score button:hover{border-color:var(--accent); color:var(--accent)}
+
+.hidden{display:none !important}
+footer{border-top:1px solid var(--rule); background:var(--surface); padding:26px 0 40px; font-size:.82rem; color:var(--ink-3)}
+footer p{max-width:70ch; margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important; scroll-behavior:auto !important}}
 </style>
 
-<div class="shell">
-  <a class="back" href="../">← กลับไปหน้ารวมวิชา</a>
-  <div class="code">Audit</div>
-  <h1>การสอบบัญชี</h1>
-  <div class="en">Auditing</div>
-  <span class="pill">กำลังจัดทำ</span>
-
-  <div class="panel">
-    <h2>ยังไม่มีเนื้อหาในหน้านี้</h2>
-    <p>ส่งเอกสารประกอบการสอนของวิชานี้มาได้เลย ไม่ว่าจะเป็นไฟล์ PDF สไลด์ หรือเอกสาร Word เดี๋ยวจัดทำให้ในรูปแบบเดียวกับวิชาการบัญชีขั้นสูง 1 คือหน้าเว็บเดียวจบ มีสารบัญด้านข้าง เนื้อหาแยกเป็นหัวข้อ และแบบทดสอบพร้อมเฉลย</p>
+<header class="mast">
+  <div class="shell">
+    <a class="back" href="../">← กลับไปหน้ารวมวิชา</a>
   </div>
-
-  <div class="panel">
-    <h2>หัวข้อที่คาดว่าจะมี</h2>
-    <p>รายการนี้เป็นเพียงตัวอย่างโครงร่าง ยังไม่ได้อิงจากเอกสารจริงของวิชา</p>
-    <ul><li>หลักการและมาตรฐานการสอบบัญชี</li><li>ความเสี่ยงและการควบคุมภายใน</li><li>วิธีการตรวจสอบและหลักฐาน</li><li>รายงานของผู้สอบบัญชี</li></ul>
+  <div class="shell mast-in">
+    <div>
+      <div class="eyebrow">Auditing &amp; Assurance Services · Chapter 1</div>
+      <h1>การสอบบัญชีและข้อกำหนดของผู้บริหาร</h1>
+      <p class="mast-sub">ความต้องการข้อมูลที่เชื่อถือได้ · ข้อกำหนดของผู้บริหารตาม PCAOB และ ASB · การสังเกตและสงสัยเยี่ยงผู้ประกอบวิชาชีพ</p>
+    </div>
+    <div class="mast-meta">
+      <b>Louwers, Bagley, Blay,</b><br>
+      <b>Strawser &amp; Thibodeau</b><br>
+      Evergreen Release · McGraw Hill
+    </div>
   </div>
+</header>
 
-  <div class="panel">
-    <h2>แก้ไขหน้านี้</h2>
-    <p>ไฟล์อยู่ที่ <code>audit/index.html</code> เปลี่ยนชื่อวิชา รหัสวิชา หรือสีประจำวิชาได้ที่ส่วนบนของไฟล์ และแก้ชื่อที่แสดงในหน้ารวมได้ที่ <code>index.html</code> ที่โฟลเดอร์นอกสุด</p>
+<div class="tabs">
+  <div class="shell tabs-in" role="tablist" aria-label="เลือกส่วน">
+    <button class="tab" role="tab" id="t-ch1" aria-controls="ch1" aria-selected="true"><span class="tnum">01</span>บทที่ 1</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false"><span class="tnum">Q</span>แบบทดสอบ</button>
   </div>
 </div>
+
+<div class="shell layout">
+  <aside class="rail">
+    <nav id="rail-ch1" aria-label="หัวข้อบทที่ 1">
+      <div class="rail-h">บทที่ 1</div>
+      <ol>
+        <li><a href="#s1"><i>1</i>ทำไมต้องมีการสอบบัญชี</a></li>
+        <li><a href="#s2"><i>2</i>นิยามการสอบบัญชี</a></li>
+        <li><a href="#s3"><i>3</i>ภาพรวมกระบวนการ</a></li>
+        <li><a href="#s4"><i>4</i>ข้อกำหนดตาม PCAOB</a></li>
+        <li><a href="#s5"><i>5</i>ข้อกำหนดตาม ASB</a></li>
+        <li><a href="#s6"><i>6</i>ตารางเทียบข้อกำหนด</a></li>
+        <li><a href="#s7"><i>7</i>Professional skepticism</a></li>
+        <li><a href="#s8"><i>8</i>โครงสร้างสำนักงาน</a></li>
+        <li><a href="#s9"><i>9</i>เส้นทางสู่วิชาชีพ</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-quiz" class="hidden" aria-label="แบบทดสอบ">
+      <div class="rail-h">แบบทดสอบ</div>
+      <ol><li><a href="#quiz-top"><i>Q</i>12 ข้อ</a></li></ol>
+    </nav>
+  </aside>
+
+  <main>
+  <div id="ch1" role="tabpanel" aria-labelledby="t-ch1">
+    <p class="lede">บทนี้ตอบคำถามพื้นฐานที่สุดของวิชา คือ <b>ทำไมโลกถึงต้องการผู้สอบบัญชี</b> คำตอบอยู่ที่ช่องว่างระหว่างคนที่จัดทำข้อมูลกับคนที่ใช้ข้อมูล และเครื่องมือหลักที่ผู้สอบบัญชีใช้ปิดช่องว่างนั้นคือ <b>ข้อกำหนดของผู้บริหาร (management assertions)</b> ซึ่งเป็นแกนกลางของทั้งวิชา</p>
+
+    <section class="sec" id="s1">
+      <div class="sec-h"><span class="sec-n">1</span><h2>ทำไมต้องมีการสอบบัญชี</h2></div>
+      <div class="body">
+        <p class="lede">ต้องแยกความเสี่ยงสองตัวนี้ให้ออก เป็นคำถามที่ออกสอบบ่อยเพราะชื่อคล้ายกันแต่คนละเรื่องกันโดยสิ้นเชิง</p>
+        <div class="grid g2">
+          <div class="card">
+            <span class="cn">Business risk</span>
+            <div class="ct">ความเสี่ยงทางธุรกิจ</div>
+            <div class="cs">ความเสี่ยงที่กิจการ<b>จะไม่บรรลุวัตถุประสงค์ที่ตั้งไว้</b> เป็นความเสี่ยงของตัวธุรกิจเอง เช่น ขายไม่ได้ตามเป้า คู่แข่งแย่งส่วนแบ่งตลาด ต้นทุนสูงขึ้น</div>
+          </div>
+          <div class="card">
+            <span class="cn">Information risk</span>
+            <div class="ct">ความเสี่ยงของข้อมูล</div>
+            <div class="cs">ความน่าจะเป็นที่<b>ข้อมูลที่กิจการเผยแพร่ออกไปจะไม่ถูกต้องหรือทำให้เข้าใจผิด</b> นี่คือความเสี่ยงที่ผู้สอบบัญชีเข้ามาลด ไม่ใช่ business risk</div>
+          </div>
+        </div>
+        <h3>ทำไมความเสี่ยงของข้อมูลจึงสูงขึ้นในปัจจุบัน</h3>
+        <ul class="list">
+          <li><b>ข้อมูลซับซ้อนขึ้น</b> <span class="en">more complex</span> — รายการทางธุรกิจและมาตรฐานบัญชีซับซ้อนเกินกว่าผู้ใช้ทั่วไปจะประเมินเองได้</li>
+          <li><b>ผู้ใช้อยู่ห่างไกลจากกิจการ</b> <span class="en">demanded by remote users</span> — ผู้ถือหุ้นและเจ้าหนี้ไม่ได้อยู่ในกิจการ ไม่สามารถเข้าไปตรวจสอบเองได้</li>
+          <li><b>ต้องการข้อมูลเร็วขึ้น</b> <span class="en">demanded in a timelier manner</span> — ยิ่งเร่ง ยิ่งมีโอกาสผิดพลาด</li>
+          <li><b>ผลกระทบกว้างไกล</b> <span class="en">has far reaching consequences</span> — ข้อมูลผิดพลาดกระทบผู้ใช้จำนวนมากพร้อมกัน</li>
+        </ul>
+        <div class="note key">
+          <span class="nh">ข้อสรุป</span>
+          เมื่อความเสี่ยงของข้อมูลสูง ผู้ใช้จึงเรียกร้อง <b>การประเมินโดยบุคคลที่สามที่เป็นอิสระ</b> (independent third-party assessment) ความเป็นอิสระคือสิ่งที่ทำให้ความเห็นของผู้สอบบัญชีมีค่า ถ้าขาดความเป็นอิสระ รายงานก็ไร้ความหมาย
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s2">
+      <div class="sec-h"><span class="sec-n">2</span><h2>นิยามของการสอบบัญชีงบการเงิน</h2></div>
+      <div class="body">
+        <div class="note src">
+          <span class="nh">หมายเหตุเรื่องแหล่งที่มา</span>
+          สไลด์หน้านี้ในไฟล์ต้นฉบับเป็นรูปภาพ (ระบุว่า <span class="mono">Access the text alternative for slide images</span>) จึงดึงข้อความออกมาไม่ได้ เนื้อหาด้านล่างเรียบเรียงจากนิยามมาตรฐานที่ตำราเล่มนี้ใช้ <b>กรุณาเทียบกับสไลด์จริงอีกครั้งก่อนนำไปใช้สอน</b>
+        </div>
+        <p>การสอบบัญชีคือ <b>กระบวนการที่เป็นระบบ</b> ในการรวบรวมและประเมินหลักฐานอย่างเป็นภาวะวิสัย เกี่ยวกับข้อกำหนดที่ผู้บริหารให้ไว้ในงบการเงิน เพื่อพิจารณาว่าข้อกำหนดเหล่านั้น<b>สอดคล้องกับเกณฑ์ที่กำหนดไว้</b>มากน้อยเพียงใด แล้วจึง<b>สื่อสารผลลัพธ์</b>ให้ผู้ใช้ที่เกี่ยวข้องทราบ</p>
+        <div class="grid g3">
+          <div class="card"><span class="cn">องค์ประกอบ 1</span><div class="ct">หลักฐาน</div><div class="cs">รวบรวมและประเมินอย่างเป็นระบบและเป็นภาวะวิสัย ไม่ใช่ตามความรู้สึก</div></div>
+          <div class="card"><span class="cn">องค์ประกอบ 2</span><div class="ct">เกณฑ์ที่กำหนดไว้</div><div class="cs">มาตรฐานการรายงานทางการเงิน (GAAP / TFRS) คือไม้บรรทัดที่ใช้วัด</div></div>
+          <div class="card"><span class="cn">องค์ประกอบ 3</span><div class="ct">การสื่อสารผล</div><div class="cs">รายงานของผู้สอบบัญชี คือผลผลิตสุดท้ายที่ส่งถึงผู้ใช้</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s3">
+      <div class="sec-h"><span class="sec-n">3</span><h2>ภาพรวมกระบวนการสอบบัญชี</h2></div>
+      <div class="body">
+        <div class="note src">
+          <span class="nh">หมายเหตุเรื่องแหล่งที่มา</span>
+          Exhibit 1.3 ในสไลด์เป็นรูปภาพเช่นกัน แผนภาพด้านล่างจึงเป็นการเรียบเรียงลำดับตามกรอบมาตรฐานของตำรา ควรเทียบกับ Exhibit จริงก่อนใช้
+        </div>
+        <div class="flow">
+          <div class="fstep"><span class="fn">Step 1</span><div class="ft">ผู้บริหารจัดทำงบการเงิน</div><div class="fd">งบการเงินทุกบรรทัดคือ <b>ข้อกำหนด (assertion)</b> ที่ผู้บริหารกล่าวอ้างโดยปริยาย</div></div>
+          <div class="fstep"><span class="fn">Step 2</span><div class="ft">ผู้สอบบัญชีรวบรวมหลักฐาน</div><div class="fd">ออกแบบวิธีตรวจสอบให้ตรงกับข้อกำหนดแต่ละข้อ</div></div>
+          <div class="fstep"><span class="fn">Step 3</span><div class="ft">เทียบกับเกณฑ์</div><div class="fd">เปรียบเทียบสิ่งที่พบกับมาตรฐานการรายงานทางการเงิน</div></div>
+          <div class="fstep"><span class="fn">Step 4</span><div class="ft">แสดงความเห็น</div><div class="fd">ออกรายงานของผู้สอบบัญชีถึงผู้ใช้งบการเงิน</div></div>
+        </div>
+        <p class="cap">หัวใจอยู่ที่ Step 1 → Step 2 — ข้อกำหนดของผู้บริหารเป็นตัวกำหนดว่าผู้สอบบัญชีต้องหาหลักฐานอะไร นี่คือเหตุผลที่ต้องท่องข้อกำหนดให้แม่น</p>
+      </div>
+    </section>
+
+    <section class="sec" id="s4">
+      <div class="sec-h"><span class="sec-n">4</span><h2>ข้อกำหนดของผู้บริหารตาม PCAOB · 5 ข้อ</h2></div>
+      <div class="body">
+        <p class="lede">ชุดคลาสสิก 5 ข้อ จำง่ายด้วยตัวย่อ <b class="mono">E-C-V-R-P</b> ใช้กับทั้งยอดคงเหลือและรายการค้ารวมกัน</p>
+        <div class="asrts">
+          <div class="asrt">
+            <div class="asrt-en">Existence or occurrence</div>
+            <div class="asrt-th">ความมีอยู่จริง หรือความเกิดขึ้นจริง</div>
+            <p class="asrt-d">สินทรัพย์และหนี้สินที่บันทึกไว้มีอยู่จริง และรายการค้าที่บันทึกไว้สมเหตุสมผลและเกิดขึ้นจริง</p>
+          </div>
+          <div class="asrt">
+            <div class="asrt-en">Completeness</div>
+            <div class="asrt-th">ความครบถ้วน</div>
+            <p class="asrt-d">ยอดคงเหลือและรายการค้าทั้งหมดได้ถูกบันทึกไว้ในงบการเงินแล้ว</p>
+          </div>
+          <div class="asrt">
+            <div class="asrt-en">Valuation or allocation</div>
+            <div class="asrt-th">การวัดมูลค่าหรือการปันส่วน</div>
+            <p class="asrt-d">สินทรัพย์ หนี้สิน และรายการค้าที่บันทึกไว้ ได้วัดมูลค่าตามหลักการบัญชีที่รับรองทั่วไป</p>
+          </div>
+          <div class="asrt">
+            <div class="asrt-en">Rights and obligations</div>
+            <div class="asrt-th">สิทธิและภาระผูกพัน</div>
+            <p class="asrt-d">กิจการมีสิทธิตามกฎหมายในสินทรัพย์และรายได้ที่รายงาน และมีภาระรับผิดชอบตามกฎหมายในหนี้สินและค่าใช้จ่ายทั้งหมด</p>
+          </div>
+          <div class="asrt">
+            <div class="asrt-en">Presentation and disclosure</div>
+            <div class="asrt-th">การแสดงรายการและการเปิดเผยข้อมูล</div>
+            <p class="asrt-d">ทุกบัญชีแสดงอยู่ในที่ที่เหมาะสม และข้อมูลที่ต้องเปิดเผยได้ถูกเปิดเผยไว้ในงบการเงินและหมายเหตุประกอบครบถ้วน</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s5">
+      <div class="sec-h"><span class="sec-n">5</span><h2>ข้อกำหนดของผู้บริหารตาม ASB</h2></div>
+      <div class="body">
+        <p class="lede">ASB แยกข้อกำหนดออกเป็น <b>สองกลุ่มตามสิ่งที่กำลังพูดถึง</b> คือกลุ่มรายการค้าและเหตุการณ์ กับกลุ่มยอดคงเหลือในบัญชี ความต่างสำคัญคือกลุ่มแรกมองที่ <b>การเคลื่อนไหวระหว่างงวด</b> ส่วนกลุ่มหลังมองที่ <b>ยอด ณ วันสิ้นงวด</b></p>
+
+        <h3>กลุ่มที่ 1 · รายการค้าและเหตุการณ์ และการเปิดเผยที่เกี่ยวข้อง</h3>
+        <p class="cap">Assertions about Classes of Transactions and Events, and Related Disclosures</p>
+        <div class="asrts">
+          <div class="asrt"><div class="asrt-en">Occurrence</div><div class="asrt-th">ความเกิดขึ้นจริง</div><p class="asrt-d">เหตุการณ์ที่ก่อให้เกิดรายการค้านั้นสมเหตุสมผลและได้เกิดขึ้นจริง</p></div>
+          <div class="asrt"><div class="asrt-en">Cutoff</div><div class="asrt-th">การตัดยอดตามงวด</div><p class="asrt-d">รายได้ ค่าใช้จ่าย และรายการอื่น ถูกบันทึกในงวดบัญชีที่ถูกต้อง</p></div>
+          <div class="asrt"><div class="asrt-en">Completeness</div><div class="asrt-th">ความครบถ้วน</div><p class="asrt-d">รายการค้าทั้งหมดถูกบันทึกไว้ และบันทึกในงวดที่เหมาะสม</p></div>
+          <div class="asrt"><div class="asrt-en">Accuracy</div><div class="asrt-th">ความถูกต้องของจำนวนเงิน</div><p class="asrt-d">รายการค้าถูกบันทึกด้วยจำนวนเงินที่ถูกต้อง</p></div>
+          <div class="asrt"><div class="asrt-en">Rights and obligations</div><div class="asrt-th">สิทธิและภาระผูกพัน</div><p class="asrt-d">กิจการมีสิทธิตามกฎหมายในสินทรัพย์และรายได้ที่รายงาน และมีภาระรับผิดชอบในหนี้สินและค่าใช้จ่าย</p></div>
+          <div class="asrt"><div class="asrt-en">Classification</div><div class="asrt-th">การจัดประเภท</div><p class="asrt-d">รายการค้าถูกผ่านรายการเข้าบัญชีที่ถูกต้อง</p></div>
+          <div class="asrt"><div class="asrt-en">Presentation</div><div class="asrt-th">การแสดงรายการ</div><p class="asrt-d">การเปิดเผยข้อมูลต้องแสดงตามหลักการบัญชีที่รับรองทั่วไป</p></div>
+        </div>
+
+        <h3>กลุ่มที่ 2 · ยอดคงเหลือในบัญชี และการเปิดเผยที่เกี่ยวข้อง</h3>
+        <p class="cap">Assertions about Account Balances and Related Disclosures</p>
+        <div class="asrts">
+          <div class="asrt"><div class="asrt-en">Existence</div><div class="asrt-th">ความมีอยู่จริง</div><p class="asrt-d">ยอดคงเหลือประกอบด้วยสินทรัพย์และหนี้สินที่มีอยู่จริงเท่านั้น</p></div>
+          <div class="asrt"><div class="asrt-en">Completeness</div><div class="asrt-th">ความครบถ้วน</div><p class="asrt-d">ยอดคงเหลือรวมทุกรายการที่ควรรวมไว้ตามหลักการบัญชีที่รับรองทั่วไป</p></div>
+          <div class="asrt"><div class="asrt-en">Accuracy, valuation<br>and allocation</div><div class="asrt-th">ความถูกต้อง การวัดมูลค่า และการปันส่วน</div><p class="asrt-d">ยอดคงเหลือรายงานด้วยจำนวนเงินที่ถูกต้องตามหลักการบัญชีที่รับรองทั่วไป</p></div>
+          <div class="asrt"><div class="asrt-en">Rights and obligations</div><div class="asrt-th">สิทธิและภาระผูกพัน</div><p class="asrt-d">กิจการมีสิทธิตามกฎหมายในสินทรัพย์ที่รายงาน และมีภาระรับผิดชอบในหนี้สินทั้งหมด</p></div>
+          <div class="asrt"><div class="asrt-en">Presentation</div><div class="asrt-th">การแสดงรายการ</div><p class="asrt-d">การเปิดเผยข้อมูลต้องแสดงตามหลักการบัญชีที่รับรองทั่วไป</p></div>
+        </div>
+
+        <div class="note key">
+          <span class="nh">จุดที่สับสนบ่อย</span>
+          <b>Existence</b> ใช้กับยอดคงเหลือ ส่วน <b>Occurrence</b> ใช้กับรายการค้า — ทั้งคู่ถามเรื่องเดียวกันคือ “ของจริงหรือเปล่า” แต่คนละมุมเวลา และ <b>Cutoff</b> ปรากฏใต้ทั้ง Existence/occurrence และ Completeness เพราะการตัดยอดผิดงวดทำให้เกิดได้ทั้งการบันทึกเกินและการบันทึกขาด
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s6">
+      <div class="sec-h"><span class="sec-n">6</span><h2>ตารางเทียบข้อกำหนด PCAOB ↔ ASB</h2></div>
+      <div class="body">
+        <p class="lede">ตารางนี้คือหัวใจของบท กดเลือกข้อกำหนดของ PCAOB เพื่อดูว่าตรงกับข้อกำหนดของ ASB ข้อใดบ้าง และคำถามหลักที่ผู้สอบบัญชีต้องตอบคืออะไร</p>
+        <div class="switch" role="group" aria-label="กรองตามข้อกำหนด PCAOB">
+          <button type="button" data-pc="all" aria-pressed="true">ทั้งหมด</button>
+          <button type="button" data-pc="EO" aria-pressed="false">Existence or occurrence</button>
+          <button type="button" data-pc="C" aria-pressed="false">Completeness</button>
+          <button type="button" data-pc="VA" aria-pressed="false">Valuation or allocation</button>
+          <button type="button" data-pc="RO" aria-pressed="false">Rights and obligations</button>
+          <button type="button" data-pc="PD" aria-pressed="false">Presentation and disclosure</button>
+        </div>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:22%">PCAOB</th>
+              <th style="width:22%">ASB · รายการค้าและเหตุการณ์</th>
+              <th style="width:22%">ASB · ยอดคงเหลือในบัญชี</th>
+              <th>คำถามหลัก</th>
+            </tr></thead>
+            <tbody id="mx">
+              <tr data-pc="EO" class="grp"><td class="pc">Existence or occurrence</td><td></td><td class="asb">Existence</td><td class="q">Do the assets listed really exist?</td></tr>
+              <tr data-pc="EO"><td></td><td class="asb">Occurrence</td><td></td><td class="q">Did the transactions really occur?</td></tr>
+              <tr data-pc="EO"><td></td><td class="asb">Cutoff</td><td></td><td class="q">Did the recorded sales transactions occur in the period?</td></tr>
+              <tr data-pc="C" class="grp"><td class="pc">Completeness</td><td></td><td class="asb">Completeness</td><td class="q">Are all accounts recorded on the balance sheet?</td></tr>
+              <tr data-pc="C"><td></td><td class="asb">Completeness</td><td></td><td class="q">Were all transactions recorded on the income statement?</td></tr>
+              <tr data-pc="C"><td></td><td class="asb">Cutoff</td><td></td><td class="q">Are transactions included in the proper period?</td></tr>
+              <tr data-pc="VA" class="grp"><td class="pc">Valuation or allocation</td><td></td><td class="asb">Accuracy, valuation, and allocation</td><td class="q">Are the balance sheet accounts valued correctly?</td></tr>
+              <tr data-pc="VA"><td></td><td class="asb">Accuracy</td><td></td><td class="q">Are the transactions accurately recorded?</td></tr>
+              <tr data-pc="RO" class="grp"><td class="pc">Rights and obligations</td><td></td><td class="asb">Rights and obligations</td><td class="q">Does the company really own the assets?</td></tr>
+              <tr data-pc="RO"><td></td><td class="asb">Rights and obligations</td><td></td><td class="q">Are all legal responsibilities to pay the liabilities identified?</td></tr>
+              <tr data-pc="PD" class="grp"><td class="pc">Presentation and disclosure</td><td class="asb">Classification</td><td></td><td class="q">Were all transactions recorded in the correct accounts?</td></tr>
+              <tr data-pc="PD"><td></td><td></td><td class="asb">Presentation</td><td class="q">Are the disclosures understandable to users?</td></tr>
+              <tr data-pc="PD"><td></td><td class="asb">Presentation</td><td></td><td class="q">Are all required footnote disclosures included?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">ข้อกำหนด PCAOB 1 ข้อ อาจกระจายไปเป็นข้อกำหนด ASB ได้หลายข้อ — สังเกตว่า Presentation and disclosure ข้อเดียวครอบคลุมทั้ง Classification และ Presentation</p>
+
+        <details class="reveal">
+          <summary>เทคนิคจำ — จะรู้ได้อย่างไรว่าโจทย์ถาม assertion ไหน</summary>
+          <div class="rc">
+            <p style="margin-bottom:10px">ดูที่ <b>ทิศทางของการตรวจสอบ</b> เป็นหลัก</p>
+            <ul class="list" style="margin-bottom:0">
+              <li>เริ่มจาก<b>บัญชี</b>แล้วตามกลับไปหา<b>เอกสาร</b> (vouching) → ทดสอบ <b>Existence / Occurrence</b> คือกลัวว่ามีการบันทึกสิ่งที่ไม่มีจริง</li>
+              <li>เริ่มจาก<b>เอกสาร</b>แล้วตามไปหา<b>บัญชี</b> (tracing) → ทดสอบ <b>Completeness</b> คือกลัวว่ามีของจริงที่ไม่ได้บันทึก</li>
+              <li>ตรวจ<b>ตัวเลข</b>ว่าคำนวณหรือตีราคาถูกไหม → <b>Accuracy / Valuation</b></li>
+              <li>ตรวจ<b>วันที่</b>คร่อมสิ้นงวด → <b>Cutoff</b></li>
+              <li>ตรวจ<b>เอกสารสิทธิ์หรือสัญญา</b> → <b>Rights and obligations</b></li>
+              <li>ตรวจ<b>ที่อยู่ของรายการในงบ</b>หรือ<b>หมายเหตุประกอบ</b> → <b>Classification / Presentation</b></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="sec" id="s7">
+      <div class="sec-h"><span class="sec-n">7</span><h2>การสังเกตและสงสัยเยี่ยงผู้ประกอบวิชาชีพ</h2></div>
+      <div class="body">
+        <p class="lede">Professional skepticism นิยามว่าเป็นทัศนคติที่ประกอบด้วย <b>“a questioning mind and a critical assessment of evidence”</b> คือการมีจิตใจที่ตั้งคำถามและประเมินหลักฐานอย่างมีวิจารณญาณ</p>
+        <div class="grid g2">
+          <div class="card"><span class="cn">กฎข้อ 1</span><div class="ct">การสอบถามอย่างเดียวไม่เคยเพียงพอ</div><div class="cs">ผู้สอบบัญชีต้องได้หลักฐานสนับสนุนที่เพียงพอมายืนยันคำตอบเสมอ <span class="en">Inquiry alone is never enough</span></div></div>
+          <div class="card"><span class="cn">กฎข้อ 2</span><div class="ct">แนวโน้มทางการเงินที่ผิดปกติต้องสืบหาสาเหตุ</div><div class="cs">ตัวเลขที่แกว่งผิดปกติคือสัญญาณ ไม่ใช่เรื่องบังเอิญที่ปล่อยผ่านได้</div></div>
+          <div class="card"><span class="cn">กฎข้อ 3</span><div class="ct">ตรวจเอกสารว่าเป็นของแท้เสมอ</div><div class="cs">ต้องระวังทั้งเอกสารปลอมและเอกสารที่ถูกแก้ไข <span class="en">authenticity or possible alteration</span></div></div>
+          <div class="card"><span class="cn">กฎข้อ 4</span><div class="ct">ถาม · รับคำตอบ · แล้วพิสูจน์คำตอบนั้น</div><div class="cs">ลำดับนี้จบที่การพิสูจน์เสมอ ไม่ใช่จบที่การได้คำตอบ <span class="en">Ask questions, get answers, then verify the answers</span></div></div>
+        </div>
+        <div class="note">
+          <span class="nh">ทำไมต้องสงสัยไว้ก่อน</span>
+          เพราะ<b>ความขัดแย้งทางผลประโยชน์ระหว่างผู้สอบบัญชีกับลูกค้ามีอยู่เสมอ</b> — ผู้บริหารต้องการนำเสนอกิจการและผลการดำเนินงานในภาพที่ดีที่สุดเท่าที่จะทำได้ ส่วนผู้สอบบัญชีต้องการให้แน่ใจว่าภาพที่นำเสนอนั้นยุติธรรมและถูกต้อง ความขัดแย้งนี้เป็นเรื่องปกติของโครงสร้าง ไม่ได้แปลว่าลูกค้าเป็นคนไม่ดี
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s8">
+      <div class="sec-h"><span class="sec-n">8</span><h2>โครงสร้างสำนักงานสอบบัญชี</h2></div>
+      <div class="body">
+        <div class="note src">
+          <span class="nh">หมายเหตุเรื่องแหล่งที่มา</span>
+          สไลด์หน้านี้เป็นรูปภาพ ลำดับตำแหน่งด้านล่างเรียบเรียงตามโครงสร้างมาตรฐานของสำนักงานสอบบัญชี ควรเทียบกับสไลด์จริงก่อนใช้
+        </div>
+        <div class="flow">
+          <div class="fstep"><span class="fn">ระดับ 1</span><div class="ft">Partner</div><div class="fd">รับผิดชอบสูงสุดต่องานตรวจสอบ ลงนามในรายงาน และดูแลความสัมพันธ์กับลูกค้า</div></div>
+          <div class="fstep"><span class="fn">ระดับ 2</span><div class="ft">Manager</div><div class="fd">บริหารงานตรวจสอบหลายงานพร้อมกัน สอบทานกระดาษทำการ และควบคุมงบประมาณ</div></div>
+          <div class="fstep"><span class="fn">ระดับ 3</span><div class="ft">Senior / In-charge</div><div class="fd">คุมงานตรวจสอบภาคสนาม มอบหมายงานและสอบทานงานของทีม</div></div>
+          <div class="fstep"><span class="fn">ระดับ 4</span><div class="ft">Staff</div><div class="fd">ปฏิบัติงานตรวจสอบตามที่ได้รับมอบหมาย และจัดทำกระดาษทำการ</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="s9">
+      <div class="sec-h"><span class="sec-n">9</span><h2>เส้นทางสู่การเป็นผู้ประกอบวิชาชีพ</h2></div>
+      <div class="body">
+        <p class="lede">สไลด์สรุปเงื่อนไขการได้รับใบอนุญาตไว้เป็น <b>3 E</b></p>
+        <div class="grid g3">
+          <div class="card"><span class="cn">E ที่ 1</span><div class="ct">Education</div><div class="cs">คุณวุฒิการศึกษาตามที่กำหนด</div></div>
+          <div class="card"><span class="cn">E ที่ 2</span><div class="ct">Examination</div><div class="cs">การสอบผ่านตามหลักสูตรที่กำหนด</div></div>
+          <div class="card"><span class="cn">E ที่ 3</span><div class="ct">Experience</div><div class="cs">ประสบการณ์การทำงานตามระยะเวลาที่กำหนด</div></div>
+        </div>
+        <div class="note src">
+          <span class="nh">บริบทประเทศไทย</span>
+          ตำราเล่มนี้อธิบายเงื่อนไขในบริบทของสหรัฐอเมริกา (CPA) สำหรับผู้สอบบัญชีรับอนุญาตของไทย เงื่อนไขรายละเอียดกำหนดโดย<b>สภาวิชาชีพบัญชีในพระบรมราชูปถัมภ์</b> ซึ่งควรอ้างอิงจากประกาศฉบับล่าสุดโดยตรง ไม่ได้ระบุไว้ในสไลด์ชุดนี้
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="quiz" class="hidden" role="tabpanel" aria-labelledby="t-quiz">
+    <div id="quiz-top"></div>
+    <p class="lede">12 ข้อ เน้นการระบุข้อกำหนดจากสถานการณ์จริง ซึ่งเป็นรูปแบบที่ออกสอบมากที่สุดของบทนี้ เลือกคำตอบเพื่อดูเฉลยทันที</p>
+    <div class="score">
+      <span>ตอบถูก <span class="sv" id="sc-val">0</span> ข้อ · ตอบแล้ว <span class="sv" id="sc-of">0 จาก 12 ข้อ</span></span>
+      <button type="button" id="sc-reset">เริ่มใหม่</button>
+    </div>
+    <div id="quiz-list"></div>
+  </div>
+  </main>
+</div>
+
+<footer>
+  <div class="shell">
+    <p><b>การสอบบัญชี · บทที่ 1</b> — สรุปจาก Louwers, Bagley, Blay, Strawser &amp; Thibodeau, <i>Auditing &amp; Assurance Services</i>, Evergreen Release (McGraw Hill)</p>
+    <p>สไลด์ที่ 4, 5 และ 15 ในไฟล์ต้นฉบับเป็นรูปภาพซึ่งดึงข้อความไม่ได้ เนื้อหาในหัวข้อ 2, 3 และ 8 จึงเรียบเรียงจากกรอบมาตรฐานของตำรา และมีหมายเหตุกำกับไว้ในแต่ละหัวข้อ</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var rails = {ch1:'rail-ch1', quiz:'rail-quiz'};
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var id = t.getAttribute('aria-controls');
+      tabs.forEach(function(x){
+        var on = x.getAttribute('aria-controls') === id;
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(x.getAttribute('aria-controls')).classList.toggle('hidden', !on);
+      });
+      Object.keys(rails).forEach(function(k){
+        document.getElementById(rails[k]).classList.toggle('hidden', k !== id);
+      });
+      window.scrollTo({top:0});
+    });
+  });
+
+  /* matrix filter */
+  var mxBtns = Array.prototype.slice.call(document.querySelectorAll('.switch button[data-pc]'));
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#mx tr'));
+  mxBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var pc = b.dataset.pc;
+      mxBtns.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      rows.forEach(function(r){
+        var hit = (pc === 'all') || (r.dataset.pc === pc);
+        r.classList.toggle('dim', !hit && pc !== 'all');
+        r.classList.toggle('hit', hit && pc !== 'all');
+      });
+    });
+  });
+
+  /* quiz */
+  var QS = [
+    {q:'ผู้สอบบัญชีเข้าร่วมสังเกตการณ์การตรวจนับสินค้าคงเหลือที่คลังสินค้า กำลังทดสอบข้อกำหนดใดเป็นหลัก',
+     o:['Existence','Completeness','Classification','Cutoff'], a:0,
+     e:'การไปเห็นของจริงคือการพิสูจน์ว่าสินค้าที่บันทึกไว้ในบัญชี “มีอยู่จริง” ตรงกับข้อกำหนด Existence สำหรับยอดคงเหลือ'},
+    {q:'ผู้สอบบัญชีเลือกใบส่งสินค้าจากแฟ้มเอกสาร แล้วตามไปดูว่ามีการบันทึกรายการขายในบัญชีหรือไม่ (tracing) กำลังทดสอบข้อกำหนดใด',
+     o:['Occurrence','Completeness','Accuracy','Rights and obligations'], a:1,
+     e:'ทิศทางจากเอกสารไปหาบัญชี คือการหาว่ามีของจริงที่ตกหล่นไม่ได้บันทึกหรือไม่ ตรงกับ Completeness — ถ้าทำกลับทางคือจากบัญชีไปหาเอกสาร (vouching) จะเป็นการทดสอบ Occurrence'},
+    {q:'ผู้สอบบัญชีตรวจใบกำกับสินค้าที่ออกในช่วงวันที่ 26 ธันวาคม ถึง 5 มกราคม เพื่อดูว่าบันทึกในงวดที่ถูกต้อง กำลังทดสอบข้อกำหนดใด',
+     o:['Cutoff','Existence','Presentation','Valuation'], a:0,
+     e:'การตรวจรายการที่คร่อมวันสิ้นงวดคือการทดสอบ Cutoff ซึ่งอยู่ในกลุ่มรายการค้าและเหตุการณ์'},
+    {q:'ผู้สอบบัญชีตรวจโฉนดที่ดินและสัญญาซื้อขาย เพื่อยืนยันว่ากิจการเป็นเจ้าของที่ดินที่แสดงในงบ กำลังทดสอบข้อกำหนดใด',
+     o:['Existence','Valuation','Rights and obligations','Completeness'], a:2,
+     e:'การมีอยู่จริงกับการเป็นเจ้าของเป็นคนละเรื่องกัน ที่ดินอาจมีอยู่จริงแต่ไม่ใช่ของกิจการ การตรวจเอกสารสิทธิ์จึงเป็นการทดสอบ Rights and obligations'},
+    {q:'ผู้สอบบัญชีคำนวณค่าเผื่อหนี้สงสัยจะสูญขึ้นใหม่จากอายุหนี้ แล้วเทียบกับที่กิจการบันทึกไว้ กำลังทดสอบข้อกำหนดใด',
+     o:['Accuracy, valuation and allocation','Existence','Cutoff','Classification'], a:0,
+     e:'การประเมินว่ายอดคงเหลือถูกตีมูลค่าตามหลักการบัญชีที่รับรองทั่วไปหรือไม่ ตรงกับ Accuracy, valuation and allocation ของกลุ่มยอดคงเหลือ'},
+    {q:'ผู้สอบบัญชีพบว่าเงินกู้ระยะยาวส่วนที่ครบกำหนดชำระภายใน 1 ปี ยังถูกแสดงรวมอยู่ในหนี้สินไม่หมุนเวียน เป็นปัญหาของข้อกำหนดใด',
+     o:['Completeness','Existence','Classification','Occurrence'], a:2,
+     e:'ยอดรวมถูกต้องและหนี้มีอยู่จริง แต่ไปอยู่ผิดที่ในงบ จึงเป็นปัญหาของ Classification'},
+    {q:'ผู้สอบบัญชีตรวจว่าหมายเหตุประกอบงบการเงินเปิดเผยภาระผูกพันตามสัญญาเช่าครบถ้วนและเข้าใจได้ กำลังทดสอบข้อกำหนดใด',
+     o:['Presentation','Accuracy','Rights and obligations','Cutoff'], a:0,
+     e:'การเปิดเผยข้อมูลในหมายเหตุประกอบ ทั้งความครบถ้วนและความเข้าใจได้ของผู้ใช้ อยู่ภายใต้ Presentation'},
+    {q:'ข้อใดอธิบาย “information risk” ได้ถูกต้อง',
+     o:['ความเสี่ยงที่กิจการจะไม่บรรลุวัตถุประสงค์ที่ตั้งไว้','ความน่าจะเป็นที่ข้อมูลที่กิจการเผยแพร่จะไม่ถูกต้องหรือทำให้เข้าใจผิด','ความเสี่ยงที่ผู้สอบบัญชีจะแสดงความเห็นผิดพลาด','ความเสี่ยงที่ระบบสารสนเทศของกิจการจะถูกโจมตี'], a:1,
+     e:'ตัวเลือกแรกคือ business risk ซึ่งเป็นความเสี่ยงของตัวธุรกิจ ส่วน information risk คือความเสี่ยงที่ข้อมูลที่เผยแพร่ออกไปจะไม่ถูกต้อง ซึ่งเป็นความเสี่ยงที่การสอบบัญชีเข้ามาลด'},
+    {q:'เหตุใดความต้องการข้อมูลที่เชื่อถือได้จึงเพิ่มขึ้นในปัจจุบัน ข้อใด<b>ไม่ใช่</b>เหตุผลที่สไลด์ระบุไว้',
+     o:['ข้อมูลมีความซับซ้อนมากขึ้น','ผู้ใช้ข้อมูลอยู่ห่างไกลจากกิจการ','ต้องการข้อมูลที่รวดเร็วขึ้น','ต้นทุนการจัดทำงบการเงินสูงขึ้น'], a:3,
+     e:'สไลด์ระบุ 4 ข้อคือ ซับซ้อนขึ้น ผู้ใช้อยู่ห่างไกล ต้องการเร็วขึ้น และมีผลกระทบกว้างไกล ต้นทุนการจัดทำงบไม่ได้อยู่ในรายการ'},
+    {q:'ตามหลัก professional skepticism การสอบถามผู้บริหารแล้วได้คำตอบที่สมเหตุสมผล ถือว่าเพียงพอหรือไม่',
+     o:['เพียงพอ ถ้าผู้บริหารมีความน่าเชื่อถือ','เพียงพอ ถ้าบันทึกคำตอบไว้ในกระดาษทำการ','ไม่เพียงพอ ต้องได้หลักฐานสนับสนุนมายืนยันคำตอบเสมอ','ไม่เพียงพอ เฉพาะกรณีที่พบความผิดปกติ'], a:2,
+     e:'“Inquiry alone is never enough” — ลำดับที่ถูกต้องคือ ถาม รับคำตอบ แล้วพิสูจน์คำตอบนั้น การพิสูจน์เป็นขั้นตอนที่ข้ามไม่ได้ ไม่ว่าลูกค้าจะน่าเชื่อถือเพียงใด'},
+    {q:'เหตุใดผู้สอบบัญชีจึงต้องมีความสงสัยเยี่ยงผู้ประกอบวิชาชีพอยู่เสมอ',
+     o:['เพราะผู้บริหารส่วนใหญ่มีเจตนาทุจริต','เพราะมีความขัดแย้งทางผลประโยชน์ระหว่างผู้สอบบัญชีกับลูกค้าอยู่เสมอ','เพราะกฎหมายกำหนดให้ต้องสงสัยลูกค้า','เพราะผู้สอบบัญชีต้องรับผิดชอบต่อการจัดทำงบการเงิน'], a:1,
+     e:'ผู้บริหารต้องการนำเสนอกิจการในภาพที่ดีที่สุด ส่วนผู้สอบบัญชีต้องการให้ภาพนั้นยุติธรรมและถูกต้อง ความขัดแย้งนี้เป็นเรื่องของโครงสร้าง ไม่ได้แปลว่าผู้บริหารมีเจตนาทุจริต และผู้จัดทำงบการเงินคือผู้บริหาร ไม่ใช่ผู้สอบบัญชี'},
+    {q:'ข้อกำหนด Presentation and disclosure ตาม PCAOB ครอบคลุมข้อกำหนดใดของ ASB บ้าง',
+     o:['Classification และ Presentation','Existence และ Occurrence','Accuracy และ Valuation','Completeness และ Cutoff'], a:0,
+     e:'ตามตารางเทียบ Presentation and disclosure ข้อเดียวของ PCAOB กระจายไปเป็น Classification (รายการเข้าบัญชีถูกต้องหรือไม่) และ Presentation (การเปิดเผยเข้าใจได้และครบถ้วนหรือไม่) ของ ASB'}
+  ];
+
+  var listEl = document.getElementById('quiz-list');
+  var scVal = document.getElementById('sc-val'), scOf = document.getElementById('sc-of');
+  var answered = 0, correct = 0;
+  function updateScore(){
+    scVal.textContent = String(correct);
+    scOf.textContent = answered + ' จาก ' + QS.length + ' ข้อ';
+  }
+  function buildQuiz(){
+    listEl.innerHTML = '';
+    answered = 0; correct = 0; updateScore();
+    QS.forEach(function(item, i){
+      var wrap = document.createElement('div'); wrap.className = 'q';
+      var n = document.createElement('div'); n.className = 'q-n'; n.textContent = 'ข้อ ' + (i+1);
+      var t = document.createElement('div'); t.className = 'q-t'; t.innerHTML = item.q;
+      var opts = document.createElement('div'); opts.className = 'opts';
+      var expl = document.createElement('div'); expl.className = 'expl hidden'; expl.textContent = item.e;
+      item.o.forEach(function(text, j){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.textContent = text;
+        b.addEventListener('click', function(){
+          Array.prototype.forEach.call(opts.querySelectorAll('.opt'), function(x, k){
+            x.disabled = true;
+            if (k === item.a) x.classList.add('ok');
+            else if (k === j) x.classList.add('no');
+          });
+          expl.classList.remove('hidden');
+          answered++; if (j === item.a) correct++;
+          updateScore();
+        });
+        opts.appendChild(b);
+      });
+      wrap.appendChild(n); wrap.appendChild(t); wrap.appendChild(opts); wrap.appendChild(expl);
+      listEl.appendChild(wrap);
+    });
+  }
+  buildQuiz();
+  document.getElementById('sc-reset').addEventListener('click', buildQuiz);
+
+  /* scrollspy */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a[href^="#"]'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('on'); });
+          if (map[en.target.id]) map[en.target.id].classList.add('on');
+        }
+      });
+    }, {rootMargin:'-70px 0px -70% 0px', threshold:0});
+    Object.keys(map).forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
