@@ -1,0 +1,79 @@
+<title>ระบบวางแผนทรัพยากรองค์กร</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans+Thai:wght@400;500;600;700&amp;family=Noto+Serif+Thai:wght@600;700&amp;display=swap">
+<style>
+:root{
+  --paper:#fbfcfa; --surface:#f2f5f1; --surface-2:#e8eee7;
+  --ink:#16211c; --ink-2:#41514a; --ink-3:#6c7d75;
+  --rule:#cfdbd0; --rule-strong:#a9bcac;
+  --accent:#33507e; --accent-soft:#dee5f2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101613; --surface:#161d19; --surface-2:#1e2721;
+    --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
+    --rule:#2b3630; --rule-strong:#3f4d45;
+    --accent:#8fadde; --accent-soft:#1a2338;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101613; --surface:#161d19; --surface-2:#1e2721;
+  --ink:#e5ece5; --ink-2:#adbcb2; --ink-3:#82938a;
+  --rule:#2b3630; --rule-strong:#3f4d45;
+  --accent:#8fadde; --accent-soft:#1a2338;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink); min-height:100vh;
+  font-family:"IBM Plex Sans Thai","IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.72; -webkit-font-smoothing:antialiased}
+h1{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; text-wrap:balance;
+  line-height:1.35; margin:8px 0 0; font-size:clamp(1.6rem,4vw,2.2rem)}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+.shell{max-width:660px; margin:0 auto; padding:clamp(40px,9vw,88px) clamp(16px,4vw,40px) 60px}
+.back{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.76rem;
+  letter-spacing:.1em; text-transform:uppercase; text-decoration:none; color:var(--ink-3); margin-bottom:30px}
+.back:hover{color:var(--accent)}
+.code{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); font-weight:600}
+.en{font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--ink-3); margin-top:6px}
+.pill{display:inline-block; font-size:.75rem; font-weight:600; padding:3px 12px; border-radius:99px;
+  background:var(--accent-soft); color:var(--accent); margin:22px 0 0}
+.panel{border:1px solid var(--rule); border-radius:4px; background:var(--surface);
+  padding:20px 22px; margin-top:26px}
+.panel h2{font-family:"IBM Plex Sans Thai",sans-serif; font-size:.92rem; font-weight:700; margin:0 0 8px}
+.panel p{font-size:.9rem; color:var(--ink-2)}
+.panel + .panel{margin-top:12px}
+ul{margin:8px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+li{position:relative; padding-left:18px; font-size:.89rem; color:var(--ink-2)}
+li::before{content:""; position:absolute; left:2px; top:.72em; width:5px; height:5px;
+  border-radius:1px; background:var(--accent); opacity:.55}
+code{font-family:"IBM Plex Mono",monospace; font-size:.85em; background:var(--surface-2);
+  padding:1px 5px; border-radius:3px}
+</style>
+
+<div class="shell">
+  <a class="back" href="../">← กลับไปหน้ารวมวิชา</a>
+  <div class="code">ERP</div>
+  <h1>ระบบวางแผนทรัพยากรองค์กร</h1>
+  <div class="en">Enterprise Resource Planning</div>
+  <span class="pill">กำลังจัดทำ</span>
+
+  <div class="panel">
+    <h2>ยังไม่มีเนื้อหาในหน้านี้</h2>
+    <p>ส่งเอกสารประกอบการสอนของวิชานี้มาได้เลย ไม่ว่าจะเป็นไฟล์ PDF สไลด์ หรือเอกสาร Word เดี๋ยวจัดทำให้ในรูปแบบเดียวกับวิชาการบัญชีขั้นสูง 1 คือหน้าเว็บเดียวจบ มีสารบัญด้านข้าง เนื้อหาแยกเป็นหัวข้อ และแบบทดสอบพร้อมเฉลย</p>
+  </div>
+
+  <div class="panel">
+    <h2>หัวข้อที่คาดว่าจะมี</h2>
+    <p>รายการนี้เป็นเพียงตัวอย่างโครงร่าง ยังไม่ได้อิงจากเอกสารจริงของวิชา</p>
+    <ul><li>โครงสร้างและโมดูลของระบบ ERP</li><li>กระบวนการทางธุรกิจแบบบูรณาการ</li><li>การนำระบบมาใช้</li><li>การควบคุมและความปลอดภัยของข้อมูล</li></ul>
+  </div>
+
+  <div class="panel">
+    <h2>แก้ไขหน้านี้</h2>
+    <p>ไฟล์อยู่ที่ <code>erp/index.html</code> เปลี่ยนชื่อวิชา รหัสวิชา หรือสีประจำวิชาได้ที่ส่วนบนของไฟล์ และแก้ชื่อที่แสดงในหน้ารวมได้ที่ <code>index.html</code> ที่โฟลเดอร์นอกสุด</p>
+  </div>
+</div>
