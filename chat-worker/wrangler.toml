@@ -1,0 +1,18 @@
+name = "classroom-chat"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# โดเมนที่อนุญาตให้เรียก Worker นี้ คั่นด้วยจุลภาค ปล่อยว่าง = อนุญาตทุกโดเมน (ไม่แนะนำ)
+ALLOWED_ORIGINS = "https://peerakong.github.io"
+# จำนวนคำถามต่อคนต่อวัน
+DAILY_LIMIT = "40"
+# ระดับความพยายามในการคิด: low | medium | high | xhigh | max
+EFFORT = "medium"
+
+# โควตารายวันเก็บใน KV — สร้างด้วย `npx wrangler kv namespace create CHAT_KV`
+# แล้วเอา id ที่ได้มาใส่ตรงนี้ และลบเครื่องหมาย # ออกทั้งสามบรรทัด
+# [[kv_namespaces]]
+# binding = "CHAT_KV"
+# id = "<ใส่ id ที่ได้จากคำสั่งข้างบน>"
