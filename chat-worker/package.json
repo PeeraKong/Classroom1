@@ -7,7 +7,8 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.120.0"
+    "@anthropic-ai/sdk": "^0.120.0",
+    "@google/genai": "^2.18.0"
   },
   "devDependencies": {
     "wrangler": "^4.124.0"

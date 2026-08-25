@@ -1,13 +1,20 @@
+import { GoogleGenAI, ApiError } from "@google/genai";
 import Anthropic from "@anthropic-ai/sdk";
 
 // ---------------------------------------------------------------------------
 // ผู้ช่วยตอบคำถามประจำวิชา — Cloudflare Worker
 //
-// หน้าเว็บในคลังสื่อการเรียนยิง POST มาที่ /chat แล้ว Worker ตัวนี้เรียก Claude ให้
+// หน้าเว็บในคลังสื่อการเรียนยิง POST มาที่ /chat แล้ว Worker ตัวนี้เรียกโมเดลให้
 // API key อยู่ใน secret ของ Worker เท่านั้น ไม่เคยถูกส่งไปที่เบราว์เซอร์
+//
+// เลือกผู้ให้บริการได้ด้วยตัวแปร PROVIDER ใน wrangler.toml
+//   gemini (ค่าเริ่มต้น) ใช้ GEMINI_API_KEY
+//   claude               ใช้ ANTHROPIC_API_KEY
 // ---------------------------------------------------------------------------
 
-const MODEL = "claude-sonnet-5";
+const DEFAULT_GEMINI_MODEL = "gemini-flash-latest";
+const DEFAULT_CLAUDE_MODEL = "claude-sonnet-5";
+const MAX_OUTPUT_TOKENS = 8000;
 
 // เพดานความยาว กันคนวางข้อความยาวผิดปกติเข้ามาให้เปลืองโทเคน
 const MAX_MESSAGES = 20;
@@ -22,6 +29,7 @@ const SHARED_RULES = `
 - ตอบให้ตรงคำถามก่อนในหนึ่งถึงสองประโยค แล้วค่อยขยายความ
 - เวลาอธิบายการคำนวณ ให้แสดงวิธีคิดเป็นขั้น ๆ พร้อมตัวเลข ไม่ใช่บอกแต่คำตอบ
 - ถ้านิสิตถามว่า "ทำไม" ให้ตอบด้วยเหตุผลเชิงหลักการ ไม่ใช่ท่องนิยาม
+- ใช้ **ตัวหนา** เน้นคำสำคัญได้ แต่อย่าใช้หัวข้อหรือตารางแบบ Markdown เพราะกล่องแชทแสดงไม่ได้
 - ความยาวพอเหมาะ อย่ายาวเกินจำเป็น
 
 ความซื่อตรงทางวิชาการ
@@ -149,9 +157,89 @@ function sanitize(messages) {
     if (typeof m.content !== "string" || m.content.trim() === "") return null;
     out.push({ role: m.role, content: m.content.slice(0, MAX_CHARS_PER_MESSAGE) });
   }
-  // Claude ต้องเริ่มด้วย user เสมอ
+  // บทสนทนาต้องเริ่มด้วยฝั่งผู้ใช้เสมอ ทั้งสองผู้ให้บริการ
   while (out.length && out[0].role !== "user") out.shift();
   return out.length ? out : null;
+}
+
+/** เลือกผู้ให้บริการและตรวจว่ามีคีย์ครบ คืน {name, key, model} หรือ null */
+function resolveProvider(env) {
+  const name = (env.PROVIDER || "gemini").toLowerCase();
+  if (name === "claude") {
+    if (!env.ANTHROPIC_API_KEY) return null;
+    return { name, key: env.ANTHROPIC_API_KEY, model: env.CLAUDE_MODEL || DEFAULT_CLAUDE_MODEL };
+  }
+  if (!env.GEMINI_API_KEY) return null;
+  return { name: "gemini", key: env.GEMINI_API_KEY, model: env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL };
+}
+
+/**
+ * ยิงคำถามไปยัง Gemini แล้วส่งข้อความกลับทีละส่วนผ่าน onText
+ * Gemini ใช้ role ว่า "model" แทน "assistant" และรับ system prompt ผ่าน config.systemInstruction
+ */
+async function streamGemini(provider, system, messages, onText) {
+  const ai = new GoogleGenAI({ apiKey: provider.key });
+  const stream = await ai.models.generateContentStream({
+    model: provider.model,
+    contents: messages.map((m) => ({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.content }],
+    })),
+    config: {
+      systemInstruction: system,
+      maxOutputTokens: MAX_OUTPUT_TOKENS,
+    },
+  });
+  for await (const chunk of stream) {
+    const text = chunk.text;
+    if (text) await onText(text);
+  }
+}
+
+/** ยิงคำถามไปยัง Claude แล้วส่งข้อความกลับทีละส่วนผ่าน onText */
+async function streamClaude(provider, system, messages, onText) {
+  const client = new Anthropic({ apiKey: provider.key });
+  const stream = client.messages.stream({
+    model: provider.model,
+    max_tokens: MAX_OUTPUT_TOKENS,
+    system,
+    thinking: { type: "adaptive" },
+    messages,
+  });
+  for await (const event of stream) {
+    if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+      await onText(event.delta.text);
+    }
+  }
+  await stream.finalMessage();
+}
+
+/** แปลงข้อผิดพลาดของแต่ละผู้ให้บริการเป็นรหัสเดียวกัน เพื่อให้หน้าเว็บแสดงข้อความไทยได้ */
+function errorCode(err, providerName) {
+  if (providerName === "gemini") {
+    if (err instanceof ApiError) {
+      // คีย์ผิดของ Google กลับมาเป็น 400 ไม่ใช่ 401 จึงต้องดูเหตุผลในเนื้อความด้วย
+      // ไม่อย่างนั้นความผิดพลาดที่พบบ่อยที่สุดจะขึ้นข้อความว่า "คำขอไม่ถูกต้อง" ซึ่งชี้ทางผิด
+      const detail = String(err.message || "");
+      if (detail.includes("API_KEY_INVALID") || detail.includes("API key not valid")) {
+        return "bad_api_key";
+      }
+      if (detail.includes("RESOURCE_EXHAUSTED") || err.status === 429) return "upstream_rate_limited";
+      if (err.status === 401 || err.status === 403) return "upstream_forbidden";
+      if (err.status === 400) return "bad_request";
+      return "upstream_error";
+    }
+    return "server_error";
+  }
+  // เรียงจากเฉพาะเจาะจงไปกว้าง เพื่อแยกกรณีที่ลองใหม่ได้ออกจากกรณีที่ลองใหม่ไม่ช่วย
+  if (err instanceof Anthropic.RateLimitError) return "upstream_rate_limited";
+  if (err instanceof Anthropic.AuthenticationError) return "bad_api_key";
+  if (err instanceof Anthropic.PermissionDeniedError) return "upstream_forbidden";
+  if (err instanceof Anthropic.BadRequestError) return "bad_request";
+  if (err instanceof Anthropic.InternalServerError) return "upstream_error";
+  if (err instanceof Anthropic.APIConnectionError) return "upstream_unreachable";
+  if (err instanceof Anthropic.APIError) return "upstream_error";
+  return "server_error";
 }
 
 export default {
@@ -167,7 +255,9 @@ export default {
     if (request.method !== "POST") {
       return json({ error: "method_not_allowed" }, 405, origin);
     }
-    if (!env.ANTHROPIC_API_KEY) {
+
+    const provider = resolveProvider(env);
+    if (!provider) {
       return json({ error: "server_not_configured" }, 500, origin);
     }
 
@@ -202,7 +292,6 @@ export default {
       return json({ error: "quota_exceeded", used: over }, 429, origin);
     }
 
-    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
     const system = `${SHARED_RULES}\n\nวิชาที่นิสิตกำลังทบทวนคือ ${subject.name}\n\n${subject.scope}`;
 
     const { readable, writable } = new TransformStream();
@@ -212,38 +301,26 @@ export default {
 
     ctx.waitUntil(
       (async () => {
+        let sent = 0;
         try {
-          const stream = client.messages.stream({
-            model: MODEL,
-            max_tokens: 8000,
-            system,
-            thinking: { type: "adaptive" },
-            output_config: { effort: env.EFFORT || "medium" },
-            messages,
-          });
-
-          for await (const event of stream) {
-            if (
-              event.type === "content_block_delta" &&
-              event.delta.type === "text_delta"
-            ) {
-              await send({ text: event.delta.text });
-            }
+          const onText = async (text) => {
+            sent += text.length;
+            await send({ text });
+          };
+          if (provider.name === "gemini") {
+            await streamGemini(provider, system, messages, onText);
+          } else {
+            await streamClaude(provider, system, messages, onText);
           }
-
-          const final = await stream.finalMessage();
-          await send({ done: true, stop_reason: final.stop_reason });
+          if (sent === 0) {
+            // โมเดลไม่ส่งข้อความกลับเลย มักเกิดจากตัวกรองความปลอดภัยของผู้ให้บริการ
+            await send({ error: "empty_response" });
+          } else {
+            await send({ done: true });
+          }
         } catch (err) {
-          // เรียงจากเฉพาะเจาะจงไปกว้าง เพื่อแยกกรณีที่ลองใหม่ได้ออกจากกรณีที่ลองใหม่ไม่ช่วย
-          let code = "server_error";
-          if (err instanceof Anthropic.RateLimitError) code = "upstream_rate_limited";
-          else if (err instanceof Anthropic.AuthenticationError) code = "bad_api_key";
-          else if (err instanceof Anthropic.PermissionDeniedError) code = "upstream_forbidden";
-          else if (err instanceof Anthropic.BadRequestError) code = "bad_request";
-          else if (err instanceof Anthropic.InternalServerError) code = "upstream_error";
-          else if (err instanceof Anthropic.APIConnectionError) code = "upstream_unreachable";
-          else if (err instanceof Anthropic.APIError) code = "upstream_error";
-          console.error(code, err && err.message);
+          const code = errorCode(err, provider.name);
+          console.error(provider.name, code, err && err.message);
           await send({ error: code });
         } finally {
           await writer.close();

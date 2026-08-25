@@ -4,12 +4,17 @@ compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
+# ผู้ให้บริการโมเดล: gemini หรือ claude
+PROVIDER = "gemini"
+# ชื่อโมเดล — gemini-flash-latest คือ alias ที่ชี้ไปยังรุ่น flash ปัจจุบันเสมอ
+# ถ้าอยากตรึงรุ่นให้เปลี่ยนเป็นชื่อรุ่นเจาะจง เช่น "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-flash-latest"
+# ใช้เมื่อ PROVIDER = "claude"
+CLAUDE_MODEL = "claude-sonnet-5"
 # โดเมนที่อนุญาตให้เรียก Worker นี้ คั่นด้วยจุลภาค ปล่อยว่าง = อนุญาตทุกโดเมน (ไม่แนะนำ)
 ALLOWED_ORIGINS = "https://peerakong.github.io"
 # จำนวนคำถามต่อคนต่อวัน
 DAILY_LIMIT = "40"
-# ระดับความพยายามในการคิด: low | medium | high | xhigh | max
-EFFORT = "medium"
 
 # โควตารายวันเก็บใน KV — สร้างด้วย `npx wrangler kv namespace create CHAT_KV`
 # แล้วเอา id ที่ได้มาใส่ตรงนี้ และลบเครื่องหมาย # ออกทั้งสามบรรทัด

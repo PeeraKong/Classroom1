@@ -1,7 +1,14 @@
 # ผู้ช่วยตอบคำถาม (Cloudflare Worker)
 
-Backend ตัวกลางที่เก็บ Anthropic API key ไว้ฝั่งเซิร์ฟเวอร์ หน้าเว็บของแต่ละวิชายิงคำถามมาที่นี่
-แล้ว Worker ค่อยเรียก **Claude Sonnet 5** (`claude-sonnet-5`) ให้ตอบ แล้วสตรีมกลับไปทีละคำ
+Backend ตัวกลางที่เก็บ API key ไว้ฝั่งเซิร์ฟเวอร์ หน้าเว็บของแต่ละวิชายิงคำถามมาที่นี่
+แล้ว Worker ค่อยเรียกโมเดลให้ตอบ แล้วสตรีมกลับไปทีละคำ
+
+รองรับสองผู้ให้บริการ สลับได้ที่ `PROVIDER` ใน `wrangler.toml`
+
+| ค่า | โมเดล | คีย์ที่ต้องตั้ง |
+|---|---|---|
+| `gemini` (ค่าเริ่มต้น) | `gemini-flash-latest` | `GEMINI_API_KEY` |
+| `claude` | `claude-sonnet-5` | `ANTHROPIC_API_KEY` |
 
 **คีย์ไม่เคยถูกส่งไปที่เบราว์เซอร์** — นี่คือเหตุผลทั้งหมดที่ต้องมีตัวกลาง ห้ามใส่ API key
 ลงในไฟล์ HTML โดยตรงเด็ดขาด เพราะใครกดดู source ก็เอาไปใช้ได้
@@ -9,8 +16,9 @@ Backend ตัวกลางที่เก็บ Anthropic API key ไว้�
 ## สิ่งที่ต้องมีก่อน
 
 1. บัญชี [Cloudflare](https://dash.cloudflare.com/sign-up) — ฟรี ไม่ต้องผูกบัตร
-2. บัญชี [Anthropic Console](https://console.anthropic.com) และ **API key** — คนละอันกับ Claude Pro
-   ที่ใช้คุยผ่านเว็บ ตัวนี้คิดเงินตามการใช้งานจริง ต้องเติมเครดิตก่อน
+2. **API key ของผู้ให้บริการที่เลือก**
+   - Gemini — สร้างที่ [Google AI Studio](https://aistudio.google.com/apikey) ใช้บัญชี Google ธรรมดา
+   - Claude — สร้างที่ [Anthropic Console](https://console.anthropic.com) คนละอันกับ Claude Pro ที่ใช้คุยผ่านเว็บ
 3. Node.js บนเครื่อง
 
 ## ติดตั้งครั้งแรก
@@ -24,9 +32,23 @@ npx wrangler login          # เปิดเบราว์เซอร์ใ�
 ### ใส่ API key เป็น secret
 
 ```bash
-npx wrangler secret put ANTHROPIC_API_KEY
-# วางคีย์ที่ขึ้นต้นด้วย sk-ant-... แล้วกด Enter
+npx wrangler secret put GEMINI_API_KEY
+# วางคีย์แล้วกด Enter
 ```
+
+ถ้าใช้ Claude ให้เปลี่ยน `PROVIDER = "claude"` ใน `wrangler.toml` แล้วตั้ง `ANTHROPIC_API_KEY` แทน
+
+### เช็คว่าคีย์ใช้โมเดลไหนได้บ้าง
+
+`gemini-flash-latest` เป็น alias ที่ชี้ไปยังรุ่น flash ปัจจุบันเสมอ ถ้าอยากตรึงรุ่นหรือดูว่ามีรุ่นอะไรให้ใช้
+
+```bash
+node -e "const {GoogleGenAI}=require('@google/genai');
+new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY}).models.list()
+  .then(async p=>{for await(const m of p) console.log(m.name)})"
+```
+
+แล้วเอาชื่อที่ได้ไปใส่ `GEMINI_MODEL` ใน `wrangler.toml`
 
 ### (ทางเลือก) ตั้งรหัสเข้าใช้ของชั้นเรียน
 
@@ -93,9 +115,9 @@ var ENDPOINT = "https://classroom-chat.<ชื่อบัญชี>.workers.dev
 
 ## ค่าใช้จ่าย
 
-Claude Sonnet 5 คิดที่ **$3 ต่อล้าน input token และ $15 ต่อล้าน output token**
-(ช่วงแนะนำ $2 / $10 ถึง 31 ส.ค. 2026) คำถามหนึ่งครั้งพร้อมบริบทของวิชา
-ตกราวหลักสตางค์ถึงหนึ่งบาทกว่า ๆ แล้วแต่ความยาวคำตอบ
+ราคาและโควตาฟรีของแต่ละผู้ให้บริการเปลี่ยนบ่อย **ให้ดูจากหน้าราคาอย่างเป็นทางการก่อนเปิดใช้จริง**
+— [ราคา Gemini API](https://ai.google.dev/pricing) และ [ราคา Claude](https://www.anthropic.com/pricing)
+Gemini มีโควตาให้ทดลองใช้ฟรีในระดับหนึ่ง ซึ่งมักพอสำหรับการใช้ในชั้นเรียน
 
 ตัวคุมค่าใช้จ่ายที่ตั้งไว้แล้วในโค้ด
 
@@ -105,9 +127,8 @@ Claude Sonnet 5 คิดที่ **$3 ต่อล้าน input token แล
 | ความยาวคำตอบสูงสุด | 8,000 token | `max_tokens` ใน `src/index.js` |
 | จำนวนข้อความที่ส่งย้อนหลัง | 20 ข้อความ | `MAX_MESSAGES` |
 | ความยาวต่อข้อความ | 4,000 ตัวอักษร | `MAX_CHARS_PER_MESSAGE` |
-| ระดับการคิด | `medium` | `EFFORT` ใน `wrangler.toml` |
 
-ตั้งงบจำกัดไว้ที่หน้า Anthropic Console ด้วย จะได้ไม่มีเซอร์ไพรส์
+ตั้งงบจำกัดหรือเปิดการแจ้งเตือนที่หน้า console ของผู้ให้บริการด้วย จะได้ไม่มีเซอร์ไพรส์
 
 > โควตารายวันนับจากรหัสประจำเบราว์เซอร์ที่เก็บใน localStorage ซึ่งนิสิตล้างทิ้งเพื่อรีเซ็ตได้
 > ถ้าต้องการกันจริงจังให้ตั้ง `ACCESS_CODE` ร่วมด้วย
@@ -115,7 +136,7 @@ Claude Sonnet 5 คิดที่ **$3 ต่อล้าน input token แล
 ## ทดสอบก่อน deploy
 
 ```bash
-echo 'ANTHROPIC_API_KEY=sk-ant-...' > .dev.vars   # ไฟล์นี้อยู่ใน .gitignore แล้ว
+echo 'GEMINI_API_KEY=...' > .dev.vars   # ไฟล์นี้อยู่ใน .gitignore แล้ว
 npx wrangler dev
 ```
 
