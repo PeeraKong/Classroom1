@@ -18,6 +18,6 @@ DAILY_LIMIT = "40"
 
 # โควตารายวันเก็บใน KV — สร้างด้วย `npx wrangler kv namespace create CHAT_KV`
 # แล้วเอา id ที่ได้มาใส่ตรงนี้ และลบเครื่องหมาย # ออกทั้งสามบรรทัด
-# [[kv_namespaces]]
-# binding = "CHAT_KV"
-# id = "<ใส่ id ที่ได้จากคำสั่งข้างบน>"
+[[kv_namespaces]]
+binding = "CHAT_KV"
+id = "f6f7d8293efb422691355009d15161c8"
