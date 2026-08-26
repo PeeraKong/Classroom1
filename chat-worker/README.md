@@ -19,7 +19,7 @@ Backend ตัวกลางที่เก็บ API key ไว้ฝั่ง
 2. **API key ของผู้ให้บริการที่เลือก**
    - Gemini — สร้างที่ [Google AI Studio](https://aistudio.google.com/apikey) ใช้บัญชี Google ธรรมดา
    - Claude — สร้างที่ [Anthropic Console](https://console.anthropic.com) คนละอันกับ Claude Pro ที่ใช้คุยผ่านเว็บ
-3. Node.js บนเครื่อง
+3. **Node.js v22 ขึ้นไป** — Cloudflare Wrangler บังคับ เช็คด้วย `node -v` ถ้าต่ำกว่านี้ให้โหลดตัว LTS จาก [nodejs.org](https://nodejs.org) แล้วเปิด Terminal ใหม่
 
 ## ติดตั้งครั้งแรก — ทางลัด
 

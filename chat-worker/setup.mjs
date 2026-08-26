@@ -95,6 +95,23 @@ if (mode === "link" || mode === "unlink") {
 
 // --------------------------- ติดตั้งเต็มรูปแบบ ---------------------------
 
+// wrangler ต้องการ Node 22 ขึ้นไป ถ้าไม่เช็คตรงนี้ ผู้ใช้จะไปเจอ error ภาษาอังกฤษ
+// กลางคันหลังติดตั้ง dependency ไปแล้ว ซึ่งอ่านยากและไม่บอกว่าต้องทำอะไรต่อ
+const NODE_MIN = 22;
+const nodeMajor = Number(process.versions.node.split(".")[0]);
+if (nodeMajor < NODE_MIN) {
+  console.log(c.err(`\nNode.js ในเครื่องเป็นรุ่น v${process.versions.node} ซึ่งเก่าเกินไป`));
+  console.log(`Cloudflare Wrangler ต้องการ ${c.b("v" + NODE_MIN + " ขึ้นไป")}\n`);
+  console.log(c.b("วิธีแก้ที่ง่ายที่สุด"));
+  console.log("  1. เปิด https://nodejs.org แล้วโหลดปุ่ม LTS");
+  console.log("  2. เปิดไฟล์ที่โหลดมา กด Next ไปจนจบ");
+  console.log("  3. " + c.b("ปิดหน้าต่าง Terminal นี้แล้วเปิดใหม่") + " (สำคัญ ไม่งั้นจะยังเห็นรุ่นเก่า)");
+  console.log("  4. เช็คด้วย " + c.b("node -v") + " ต้องขึ้น v22 ขึ้นไป แล้วรัน node setup.mjs อีกครั้ง\n");
+  console.log(c.dim("ถ้าใช้ nvm อยู่แล้ว:  nvm install 22 && nvm use 22"));
+  console.log(c.dim("ถ้าใช้ Homebrew:      brew install node@22\n"));
+  process.exit(1);
+}
+
 console.log(c.b("\nติดตั้งผู้ช่วยตอบคำถามประจำวิชา"));
 console.log(c.dim("จะมีสองจังหวะที่ต้องใช้มือคุณ คือล็อกอิน Cloudflare และวาง API key"));
 console.log(c.dim("นอกนั้นสคริปต์จัดการให้ทั้งหมด · กด Ctrl+C เพื่อหยุดได้ทุกเมื่อ"));
