@@ -102,6 +102,64 @@ const SUBJECTS = {
 ให้ชี้ว่ามาตรฐานการสอบบัญชีของไทยกำหนดโดยสภาวิชาชีพบัญชี และควรอ้างอิงประกาศฉบับล่าสุดโดยตรง
 `.trim(),
   },
+  erp: {
+    name: "ระบบวางแผนทรัพยากรองค์กร (ERP)",
+    scope: `
+ขอบเขตของวิชานี้คือ
+
+บทที่ 1 ERP และ SAP
+- ตลาด ERP และผู้เล่นหลัก SAP กับ Oracle ความหมายของ Tier-1 ERP
+- องค์กรยุคก่อน ERP ที่แยกตามหน้าที่ (functional area) ระบบแยกกัน มี interface คั่น และต้องทำ audit กับ reconciliation
+- กรณีศึกษาบริษัท A ใช้เวลาราว 2 นาที เทียบกับบริษัท B ที่ใช้ฐานข้อมูลกลางแล้วเหลือราว 5 วินาที
+- ความต่างระหว่าง business function กับ business process และระบบบูรณาการ (integrated information system)
+- ที่มาของคำว่า ERP โดย Gartner Group ปี 1990 ต่อยอดจาก MRP และ MRP II และนิยามของ ERP
+- คุณลักษณะ 5 ข้อ ได้แก่ Integrated System, Real Time, Best Practice, Customizing (Configuration) และ Process Oriented
+- เป้าหมายเชิงกลยุทธ์ 4 ข้อ และระบบสารสนเทศ 4 ระดับ คือ OLTP, MIS, DSS, EIS
+- โมดูลของ ERP ทั่วไป และ Enterprise Application รุ่นแรกที่ครอบคลุมเฉพาะงาน back office
+- ประวัติ SAP ก่อตั้งปี 1972 ที่ Mannheim โดยอดีตนักวิเคราะห์ระบบของ IBM 5 คน ที่มาของชื่อย่อทั้งสองความหมาย และการย้ายสำนักงานใหญ่ไป Walldorf ปี 1977
+- วิวัฒนาการ R/1 ปี 1973 สถาปัตยกรรม 1 ชั้น, R/2 ปี 1978 สถาปัตยกรรม 2 ชั้น, R/3 ปี 1992 สถาปัตยกรรม 3 ชั้น และตัว R ย่อมาจาก Real-time
+- สถาปัตยกรรม 3 ชั้น Presentation, Application (ABAP), Database และเรื่อง scalability
+- โมดูลของ SAP ได้แก่ FI, CO, AM, TR, MM, SD, LE, PP, QM, PM, PS, HR, CA (WF และ Office), IS พร้อมชั้นเทคนิค BC (SAP Basis) และภาษา ABAP กับ ABAP Workbench
+- แนวคิด Best Practice ที่ธุรกิจต้องปรับกระบวนการเข้าหาซอฟต์แวร์ และเครื่องมือ Business Engineering กับ Business Navigator
+- Industry Solution ICOE ปี 1995 IBU ปี 1998 และข้อสำคัญว่าโมดูล IS เช่น IS-OIL ต้องติดตั้งเป็น Add-On ไม่ได้อยู่ในแกนหลัก
+- SAP Business One เทียบกับ SAP Business ByDesign ทั้งกลุ่มเป้าหมาย จำนวนผู้ใช้ และงบประมาณติดตั้ง รวมถึงกรณี Microsoft ที่ใช้ SAP แทน Dynamics ของตัวเอง
+- แพลตฟอร์มฮาร์ดแวร์ที่รองรับ ตั้งแต่ PC Server, Mini Computer จนถึง Mainframe
+
+บทที่ 2 การใช้งาน SAP (SAP Navigation)
+- SAP GUI ในฐานะ presentation server และ SAP Logon ที่ใช้เลือกระบบ
+- การเข้าสู่ระบบด้วย Client, User, Password และ Logon Language ระบบตัวอย่างของวิชาคือ SID AC4 client 900
+- ความหมายของ Client ว่าเป็นหน่วยข้อมูลอิสระในระบบเดียวกัน และเรื่อง multiple logon
+- หน้าจอ SAP Easy Access ทั้ง user menu และ SAP menu
+- โครงสร้างหน้าจอ 6 ส่วน คือ menu bar, standard toolbar, title bar, application toolbar, screen body และ status bar
+- ปุ่มบน standard toolbar โดยเฉพาะความต่างระหว่าง Enter กับ Save และระหว่าง Back, Exit, Cancel
+- Transaction code คืออะไร โดยปกติยาว 4 ตัวอักษร ทุกฟังก์ชันมี T-Code ผูกอยู่
+- วิธีหา T-Code จาก status bar, เมนู System แล้ว Status และการเปิดแสดงชื่อทางเทคนิคที่ Extras แล้ว Settings
+- Command Field (OK Code Field) และคำสั่ง /n, /o, /i, /nend, /nex พร้อมรูปแบบ /n ตามด้วย T-Code และ /o ตามด้วย T-Code
+- Session การสร้างและปิด ข้อความ Maximum number of sessions reached และพารามิเตอร์ที่ RZ11
+- ปุ่ม F1 (help และ technical information รวมถึง Parameter ID) กับ F4 (value help หรือ possible entry)
+- Decimal notation และ date format ตั้งที่ SU01 สำหรับผู้ใช้คนอื่น และ SU3 สำหรับตัวเอง
+- Parameter ID ที่ตั้งเป็นค่าเริ่มต้นของช่องข้อมูลผ่านแท็บ Parameters ของ SU3
+- การรันรายงาน ABAP ที่ SA38 ทั้งแบบ foreground ที่มีเพดานเวลาจนเกิด time limit exceeded และแบบ background ที่ติดตามที่ SMX รวมถึงความต่างจาก SE38 ที่ใช้เขียนโปรแกรม
+- Favorites, ธีมของ SAP GUI (Enjoy, Blue Crystal, Quartz), SBWP ที่เป็นเมลภายใน และ SPRO ที่ใช้ตั้งค่าระบบ
+- T-Code ที่ใช้ในแบบฝึกหัดของระบบ AC4 ได้แก่ F-02, SE38, SU01, VA01, SU03, SA38, SM04
+
+บทที่ 3 การนำระบบมาใช้ (SAP ERP Implementation)
+- วิธี ASAP หรือ Accelerated SAP ซึ่งเป็น waterfall project methodology
+- 5 เฟส คือ Project Preparation, Business Blueprint, Realization, Final Preparation, Go-Live and Support และเส้นทางต่อไปเป็น Continuous Improvement
+- กิจกรรมที่ปรากฏในทุกเฟส ได้แก่ Project Management, Organizational Change Management, Training และ Quality Check
+- คนในโครงการ แบ่งเป็นสาย Technical (Basis Administrator, ABAP Programmer) และสาย Functional (FI, CO, MM, SD)
+- Configuration ผ่าน IMG (Implementation Guide) ที่เปิดด้วย SPRO
+- ตัวอย่างกระบวนการจ่ายเงินเจ้าหนี้ ทั้งแบบทีละรายการและ Automatic Payment Program ที่ F110
+- งานก่อน Go-Live ได้แก่ integration test, data conversion และ end user training รวมถึงคำว่า cutover
+- การเปลี่ยนมือจากบริษัทที่ปรึกษาไปเป็นทีม IT ขององค์กรเองหลัง Go-Live
+- ต้นทุนรวมของการเป็นเจ้าของในอัตราส่วน 1 ต่อ 2 ต่อ 4 คือ hardware, software license และ implementation รวมถึงค่าสนับสนุนรายปีที่ราว 22 เปอร์เซ็นต์ของค่าลิขสิทธิ์
+- กรณีศึกษา Exotic Food Thailand ปิดงบจาก 14 วันเหลือ 8 วัน คำนวณวัตถุดิบจาก 3 ชั่วโมงเหลือ 2 ถึง 3 นาที รายได้ปี 2023 โต 31 เปอร์เซ็นต์ด้วยพนักงานเท่าเดิม และอัตราลาออกลดเหลือ 3 เปอร์เซ็นต์
+
+หมายเหตุ วิชานี้อิงระบบ SAP R/3 หรือ SAP ERP แบบ on-premise ตามเอกสารประกอบการสอน
+ถ้านิสิตถามถึง SAP S/4HANA หรือ SAP Fiori ให้บอกตรง ๆ ว่าอยู่นอกขอบเขตของเอกสารชุดนี้
+และค่า Client, User, Password ที่ปรากฏเป็นค่าตัวอย่างของระบบฝึกปฏิบัติเท่านั้น
+`.trim(),
+  },
 };
 
 const json = (obj, status, origin) =>
