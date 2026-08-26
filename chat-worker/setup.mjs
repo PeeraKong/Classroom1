@@ -197,12 +197,20 @@ try {
 
   // 6 ────────────────────────────────────────────────────────────
   step(6, TOTAL, "Deploy ขึ้น Cloudflare");
-  const dep = runCapture("npx", ["wrangler", "deploy"]);
-  let url = (dep.out.match(/https:\/\/[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev/i) || [])[0];
-  if (!url) {
-    console.log(c.warn("      หา URL จากผลลัพธ์ไม่เจอ"));
-    url = await ask(rl, "ถ้าเห็น URL ที่ลงท้ายด้วย .workers.dev ให้วางตรงนี้ (หรือ Enter เพื่อข้าม):");
+  note("ถ้าถามว่าจะจด subdomain workers.dev ไหม ให้ตอบ yes");
+  // ต้องปล่อยให้โต้ตอบได้จริง ถ้าดักอ่านผลลัพธ์ wrangler จะคิดว่าไม่มีคนอยู่
+  // แล้วตอบคำถามเรื่อง subdomain ให้เป็น no เอง ทำให้ deploy ไม่ผ่าน
+  const deployed = runVisible("npx", ["wrangler", "deploy"]);
+  let url = "";
+  if (!deployed) {
+    console.log(c.warn("\n      deploy ไม่ผ่าน"));
+    console.log(c.dim("      สาเหตุที่พบบ่อยที่สุดคือบัญชียังไม่เคยจด subdomain ของ workers.dev"));
+    console.log(c.dim("      ถ้าเห็นลิงก์ dash.cloudflare.com ในข้อความข้างบน ให้เปิดลิงก์นั้น"));
+    console.log(c.dim("      ตั้งชื่อ subdomain (ตั้งอะไรก็ได้ที่ยังว่าง) แล้วกลับมารันสคริปต์นี้ใหม่"));
+  } else {
+    note("มองหาบรรทัดที่ลงท้ายด้วย .workers.dev ในข้อความข้างบน");
   }
+  url = await ask(rl, "วาง URL ที่ได้ตรงนี้ (หรือ Enter เพื่อข้าม):");
 
   // 7 ────────────────────────────────────────────────────────────
   step(7, TOTAL, "ใส่ URL ลงในหน้าเว็บทุกวิชา");

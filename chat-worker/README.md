@@ -108,6 +108,11 @@ npx wrangler deploy
 
 จะได้ URL หน้าตาแบบ `https://classroom-chat.<ชื่อบัญชี>.workers.dev`
 
+> **ครั้งแรกของบัญชีใหม่** Cloudflare จะถามว่าจะจด subdomain ของ `workers.dev` ไหม ให้ตอบ **yes**
+> ถ้าเผลอตอบ no หรือ deploy ขึ้น `You need to register a workers.dev subdomain` ให้เปิดลิงก์
+> `dash.cloudflare.com/.../workers/onboarding` ที่แสดงในข้อความ ตั้งชื่อ subdomain แล้ว deploy ใหม่
+> เป็นการตั้งค่าครั้งเดียวของบัญชี
+
 ## เชื่อมหน้าเว็บเข้ากับ Worker
 
 เปิดไฟล์ `index.html` ของแต่ละวิชา เลื่อนไปท้ายไฟล์ หา
