@@ -21,7 +21,27 @@ Backend ตัวกลางที่เก็บ API key ไว้ฝั่ง
    - Claude — สร้างที่ [Anthropic Console](https://console.anthropic.com) คนละอันกับ Claude Pro ที่ใช้คุยผ่านเว็บ
 3. Node.js บนเครื่อง
 
-## ติดตั้งครั้งแรก
+## ติดตั้งครั้งแรก — ทางลัด
+
+```bash
+cd chat-worker
+node setup.mjs
+```
+
+สคริปต์จะทำให้ทั้งหมด ตั้งแต่ติดตั้ง dependency ล็อกอิน Cloudflare สร้าง KV แล้วผูก id ให้เอง
+deploy และ**เอา URL ที่ได้ไปใส่ในหน้าเว็บทุกวิชาให้อัตโนมัติ** มีสองจังหวะเท่านั้นที่ต้องใช้มือคุณ
+คือกด Allow ตอนล็อกอิน และวาง API key
+
+รันซ้ำได้ ขั้นตอนไหนทำไปแล้วจะข้ามให้เอง คำสั่งย่อยที่มีให้
+
+```bash
+node setup.mjs link https://ชื่อ.workers.dev   # เอา URL ใส่หน้าเว็บอย่างเดียว
+node setup.mjs unlink                          # เอา URL ออก ปุ่มแชทจะหายไป
+```
+
+ถ้าอยากทำเองทีละขั้น อ่านหัวข้อถัดไป
+
+## ติดตั้งแบบทีละขั้น
 
 ```bash
 cd chat-worker

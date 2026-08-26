@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "setup": "node setup.mjs",
+    "link": "node setup.mjs link",
+    "unlink": "node setup.mjs unlink"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.120.0",
