@@ -902,3 +902,443 @@ footer p{max-width:70ch; margin-bottom:6px}
   fab.addEventListener("click", open);
 })();
 </script>
+
+<style>
+/* ---------- ปุ่มจดโน้ตในหัวข้อ ---------- */
+.nt-add{appearance:none; font:inherit; font-size:.72rem; font-weight:600; cursor:pointer;
+  padding:2px 9px; margin-left:auto; border-radius:99px; white-space:nowrap; align-self:center;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-3); line-height:1.6}
+.nt-add:hover{border-color:var(--accent); color:var(--accent)}
+.nt-add[data-has="1"]{border-color:var(--accent); background:var(--accent-soft); color:var(--accent)}
+
+/* ---------- กล่องโน้ตใต้หัวข้อ ---------- */
+.nt-box{margin:14px 0 4px; border:1px dashed var(--rule-strong); border-radius:4px;
+  background:var(--surface); padding:10px 12px}
+.nt-box[hidden]{display:none}
+.nt-box textarea{display:block; width:100%; min-height:70px; resize:vertical; font:inherit;
+  font-size:.88rem; line-height:1.7; padding:8px 10px; border:1px solid var(--rule);
+  border-radius:3px; background:var(--paper); color:var(--ink)}
+.nt-box textarea:focus{outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent)}
+.nt-foot{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:7px}
+.nt-hint{font-size:.72rem; color:var(--ink-3)}
+.nt-del{appearance:none; font:inherit; font-size:.72rem; cursor:pointer; padding:2px 8px;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); color:var(--ink-3)}
+.nt-del:hover{border-color:var(--accent); color:var(--accent)}
+
+/* ---------- ปุ่มลอยเปิดกระดาษทด ---------- */
+.pad-fab{position:fixed; left:18px; bottom:18px; z-index:200; display:flex; align-items:center; gap:8px;
+  font:inherit; font-size:.86rem; font-weight:600; cursor:pointer; padding:11px 17px; border-radius:99px;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2); box-shadow:var(--shadow)}
+.pad-fab:hover{border-color:var(--accent); color:var(--accent)}
+.pad-fab svg{width:15px; height:15px; flex:none}
+.pad-fab .pad-dot{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none}
+
+/* ---------- แผงกระดาษทด ---------- */
+.pad{position:fixed; left:18px; bottom:18px; z-index:201; width:min(430px, calc(100vw - 36px));
+  height:min(620px, calc(100vh - 36px)); display:flex; flex-direction:column; border:1px solid var(--rule);
+  border-radius:8px; background:var(--paper); box-shadow:0 18px 60px -20px rgba(0,0,0,.45); overflow:hidden}
+.pad-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px;
+  border-bottom:1px solid var(--rule); background:var(--surface); flex:none}
+.pad-tabs{display:flex; gap:4px}
+.pad-tab{appearance:none; font:inherit; font-size:.82rem; font-weight:600; cursor:pointer; padding:5px 11px;
+  border:1px solid transparent; border-radius:99px; background:none; color:var(--ink-3)}
+.pad-tab:hover{color:var(--ink)}
+.pad-tab[aria-selected="true"]{background:var(--accent-soft); color:var(--accent)}
+.pad-x{appearance:none; border:0; background:none; cursor:pointer; color:var(--ink-3); font-size:1.35rem;
+  line-height:1; padding:2px 6px; border-radius:4px}
+.pad-x:hover{color:var(--ink); background:var(--surface-2)}
+.pad-body{flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px}
+.pad-body[hidden]{display:none}
+.pad-in{width:100%; flex:none; min-height:150px; resize:vertical; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.86rem; line-height:1.75; font-variant-numeric:tabular-nums; padding:9px 11px;
+  border:1px solid var(--rule-strong); border-radius:4px; background:var(--surface); color:var(--ink)}
+.pad-in:focus{outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent)}
+.pad-res{display:flex; flex-direction:column; gap:2px}
+.pad-row{display:flex; justify-content:space-between; gap:14px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.8rem; font-variant-numeric:tabular-nums; padding:3px 0; border-bottom:1px solid var(--rule)}
+.pad-row .src{color:var(--ink-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+.pad-row .val{color:var(--accent); font-weight:600; flex:none}
+.pad-row.sum{border-bottom:0; border-top:1px solid var(--rule-strong); margin-top:4px; padding-top:7px}
+.pad-row.sum .src{color:var(--ink-2); font-family:"IBM Plex Sans Thai",sans-serif}
+.pad-row.sum .val{color:var(--ink)}
+.pad-empty{font-size:.8rem; color:var(--ink-3); line-height:1.7}
+.pad-empty code{font-family:"IBM Plex Mono",monospace; background:var(--surface-2); padding:1px 5px; border-radius:3px}
+
+/* รายการโน้ตทั้งหมด */
+.pad-note{border:1px solid var(--rule); border-radius:4px; background:var(--surface); padding:9px 11px}
+.pad-note a{display:block; font-size:.8rem; font-weight:600; color:var(--accent); text-decoration:none; margin-bottom:3px}
+.pad-note a:hover{text-decoration:underline}
+.pad-note p{font-size:.82rem; color:var(--ink-2); line-height:1.65; white-space:pre-wrap; overflow-wrap:anywhere; margin:0}
+
+.pad-foot{flex:none; border-top:1px solid var(--rule); padding:9px 12px; background:var(--surface);
+  display:flex; gap:6px; flex-wrap:wrap; align-items:center}
+.pad-act{appearance:none; font:inherit; font-size:.76rem; font-weight:600; cursor:pointer; padding:5px 10px;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); color:var(--ink-2)}
+.pad-act:hover{border-color:var(--accent); color:var(--accent)}
+.pad-act.danger:hover{border-color:var(--red, #a3341f); color:var(--red, #a3341f)}
+.pad-msg{font-size:.74rem; color:var(--ink-3); margin-left:auto}
+
+@media (max-width:520px){ .pad{left:10px; right:10px; width:auto} .pad-fab{left:12px; bottom:12px} }
+
+/* ---------- ตอนสั่งพิมพ์ ให้โน้ตติดไปด้วย แต่ซ่อนปุ่มและแผง ---------- */
+@media print{
+  .pad-fab, .pad, .nt-add, .nt-del, .nt-hint, .ai-fab, .ai-panel{display:none !important}
+  .nt-box[hidden]{display:block !important}
+  .nt-box{border-style:solid; break-inside:avoid}
+  .nt-box textarea{border:0; padding:0; background:none; min-height:0; height:auto; resize:none}
+}
+</style>
+<script>
+(function(){
+  "use strict";
+
+  // แยกพื้นที่เก็บของแต่ละวิชาด้วยชื่อโฟลเดอร์
+  // จำเป็นเพราะเวลาเปิดไฟล์ตรง ๆ ด้วย file:// เบราว์เซอร์บางตัวใช้ localStorage ร่วมกันทุกไฟล์
+  var COURSE = (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
+  var K_NOTE = 'classroom-notes-' + COURSE;
+  var K_PAD  = 'classroom-scratch-' + COURSE;
+
+  // localStorage ใช้ไม่ได้ในบางกรณี เช่น หน้าต่างส่วนตัวหรือเบราว์เซอร์ที่ปิดการเก็บข้อมูลเว็บ
+  var canStore = true;
+  function get(k, d){ try { var v = localStorage.getItem(k); return v == null ? d : v; } catch(e){ canStore = false; return d; } }
+  function set(k, v){ try { localStorage.setItem(k, v); return true; } catch(e){ canStore = false; return false; } }
+
+  var notes;
+  try { notes = JSON.parse(get(K_NOTE, '{}')) || {}; } catch(e){ notes = {}; }
+  function persist(){ return set(K_NOTE, JSON.stringify(notes)); }
+
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.sec[id]'));
+  var titleOf = {};
+
+  secs.forEach(function(sec){
+    var head = sec.querySelector('.sec-h');
+    var h2 = sec.querySelector('h2');
+    if (!head || !h2) return;
+    var id = sec.id;
+    titleOf[id] = h2.textContent.trim();
+
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'nt-add';
+    btn.setAttribute('aria-expanded', 'false');
+    head.appendChild(btn);
+
+    var box = document.createElement('div');
+    box.className = 'nt-box'; box.hidden = true;
+    var ta = document.createElement('textarea');
+    ta.placeholder = 'จดโน้ตของหัวข้อนี้... พิมพ์แล้วบันทึกให้เอง';
+    ta.setAttribute('aria-label', 'โน้ตของหัวข้อ ' + titleOf[id]);
+    var foot = document.createElement('div'); foot.className = 'nt-foot';
+    var hint = document.createElement('span'); hint.className = 'nt-hint';
+    var del = document.createElement('button');
+    del.type = 'button'; del.className = 'nt-del'; del.textContent = 'ลบโน้ตนี้';
+    foot.appendChild(hint); foot.appendChild(del);
+    box.appendChild(ta); box.appendChild(foot);
+    (sec.querySelector('.body') || sec).appendChild(box);
+
+    function paint(){
+      var has = !!(notes[id] && notes[id].trim());
+      btn.dataset.has = has ? '1' : '0';
+      btn.textContent = has ? 'โน้ต ✓' : '+ โน้ต';
+      del.hidden = !has;
+    }
+    function open(show){
+      box.hidden = !show;
+      btn.setAttribute('aria-expanded', show ? 'true' : 'false');
+      if (show){ grow(); ta.focus(); }
+    }
+    function grow(){ ta.style.height = 'auto'; ta.style.height = Math.max(70, ta.scrollHeight) + 'px'; }
+
+    ta.value = notes[id] || '';
+    paint();
+    if (ta.value.trim()) open(true);          // มีโน้ตอยู่แล้วให้เปิดค้างไว้
+
+    btn.addEventListener('click', function(){ open(box.hidden); });
+    ta.addEventListener('input', function(){
+      notes[id] = ta.value;
+      if (!ta.value.trim()) delete notes[id];
+      var ok = persist();
+      hint.textContent = ok ? 'บันทึกแล้ว' : 'เบราว์เซอร์นี้เก็บโน้ตไม่ได้ ลองคัดลอกเก็บไว้เอง';
+      paint(); grow(); renderNotes();
+    });
+    del.addEventListener('click', function(){
+      ta.value = ''; delete notes[id]; persist();
+      hint.textContent = ''; paint(); grow(); open(false); renderNotes();
+    });
+  });
+
+  /* ---------- เครื่องคิดเลขของกระดาษทด ----------
+     เขียน parser เองแทนการใช้ eval เพราะ eval รันโค้ดอะไรก็ได้ที่พิมพ์ลงไป */
+  function tokenize(s){
+    var out = [], i = 0;
+    while (i < s.length){
+      var c = s.charAt(i);
+      if (/\s/.test(c)){ i++; continue; }
+      if (/[0-9.,]/.test(c)){
+        var num = '', dot = false;
+        while (i < s.length && /[0-9.,]/.test(s.charAt(i))){
+          var d = s.charAt(i);
+          if (d === ','){ i++; continue; }                 // ลูกน้ำถือเป็นตัวคั่นหลักพัน
+          if (d === '.'){ if (dot) break; dot = true; }
+          num += d; i++;
+        }
+        if (num === '' || num === '.') return null;
+        out.push(parseFloat(num));
+        continue;
+      }
+      if ('+-*/×÷()%'.indexOf(c) >= 0){ out.push(c); i++; continue; }
+      return null;
+    }
+    return out;
+  }
+
+  function calc(line){
+    // ตัดข้อความอธิบายทิ้ง เหลือเฉพาะตัวเลขกับเครื่องหมาย เช่น "ค่าตัดจำหน่าย 80,000 / 10 ปี"
+    var s = String(line).replace(/[^0-9.,+\-*/×÷()%\s]/g, ' ');
+    if (!/[+\-*/×÷]/.test(s) || !/\d/.test(s)) return null;
+    var t = tokenize(s);
+    if (!t) return null;
+    var i = 0, bad = false;
+    function eat(x){ if (t[i] === x){ i++; return true; } return false; }
+    function primary(){
+      if (eat('(')){ var v = expr(); if (!eat(')')) bad = true; return v; }
+      if (typeof t[i] === 'number') return t[i++];
+      bad = true; return 0;
+    }
+    function unary(){
+      if (eat('-')) return -unary();
+      if (eat('+')) return unary();
+      var v = primary();
+      while (eat('%')) v = v / 100;               // 60% อ่านว่า 0.6
+      return v;
+    }
+    function term(){
+      var v = unary();
+      for(;;){
+        if (eat('*') || eat('×')) v *= unary();
+        else if (eat('/') || eat('÷')){ var d = unary(); if (d === 0){ bad = true; return 0; } v /= d; }
+        else return v;
+      }
+    }
+    function expr(){
+      var v = term();
+      for(;;){
+        if (eat('+')) v += term();
+        else if (eat('-')) v -= term();
+        else return v;
+      }
+    }
+    var out = expr();
+    if (bad || i !== t.length || !isFinite(out)) return null;   // เหลือโทเคน = ไม่ใช่นิพจน์
+    return out;
+  }
+
+  function money(n){
+    var d = Math.abs(n % 1) > 1e-9 ? 2 : 0;
+    return n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:Math.max(d, 2)});
+  }
+
+  /* ---------- แผงกระดาษทด ---------- */
+  var fab = document.createElement('button');
+  fab.type = 'button'; fab.className = 'pad-fab';
+  fab.setAttribute('aria-label', 'เปิดกระดาษทดและโน้ต');
+  fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>' +
+    '<span>กระดาษทด</span>';
+  document.body.appendChild(fab);
+
+  var pad = null, padIn = null, padRes = null, padNotes = null, msgEl = null;
+
+  function markFab(){
+    var n = Object.keys(notes).length;
+    var old = fab.querySelector('.pad-dot');
+    if (n > 0 && !old){ fab.appendChild(Object.assign(document.createElement('span'), {className:'pad-dot'})); }
+    else if (n === 0 && old){ old.remove(); }
+  }
+
+  function renderCalc(){
+    if (!padRes) return;
+    padRes.innerHTML = '';
+    var lines = (padIn.value || '').split('\n');
+    var sum = 0, hits = 0;
+    lines.forEach(function(ln){
+      var v = calc(ln);
+      if (v === null) return;
+      hits++; sum += v;
+      var row = document.createElement('div'); row.className = 'pad-row';
+      var a = document.createElement('span'); a.className = 'src'; a.textContent = ln.trim();
+      var b = document.createElement('span'); b.className = 'val'; b.textContent = money(v);
+      row.appendChild(a); row.appendChild(b); padRes.appendChild(row);
+    });
+    if (!hits){
+      var e = document.createElement('div'); e.className = 'pad-empty';
+      e.innerHTML = 'พิมพ์บรรทัดที่มีการคำนวณ แล้วผลลัพธ์จะขึ้นตรงนี้เอง<br>' +
+        'เช่น <code>60% * 100,000</code> · <code>80,000 / 10</code> · <code>(500,000 + 80,000) * 40%</code><br>' +
+        'พิมพ์คำอธิบายไทยปนได้ เช่น <code>ค่าตัดจำหน่าย 80,000 / 10 ปี</code><br><br>' +
+        'ขึ้นต้นบรรทัดด้วย <code>+</code> หรือ <code>-</code> เพื่อไล่ยอดแบบคอลัมน์บัญชี ' +
+        'แล้วดูผลรวมท้ายรายการ เช่น<br><code>+ ส่วนแบ่งกำไร 60% * 50,000</code><br>' +
+        '<code>- ตัดจำหน่าย 60% * 8,000</code><br><code>- ปันผล 60% * 40,000</code>';
+      padRes.appendChild(e);
+    } else if (hits > 1){
+      var s = document.createElement('div'); s.className = 'pad-row sum';
+      var sa = document.createElement('span'); sa.className = 'src'; sa.textContent = 'ผลรวมทุกบรรทัด (' + hits + ' บรรทัด)';
+      var sb = document.createElement('span'); sb.className = 'val'; sb.textContent = money(sum);
+      s.appendChild(sa); s.appendChild(sb); padRes.appendChild(s);
+    }
+  }
+
+  function renderNotes(){
+    markFab();
+    if (!padNotes) return;
+    padNotes.innerHTML = '';
+    var ids = secs.map(function(s){ return s.id; }).filter(function(id){ return notes[id] && notes[id].trim(); });
+    if (!ids.length){
+      var e = document.createElement('div'); e.className = 'pad-empty';
+      e.textContent = 'ยังไม่มีโน้ต — กดปุ่ม “+ โน้ต” ที่หัวข้อไหนก็ได้เพื่อเริ่มจด';
+      padNotes.appendChild(e); return;
+    }
+    ids.forEach(function(id){
+      var wrap = document.createElement('div'); wrap.className = 'pad-note';
+      var a = document.createElement('a'); a.href = '#' + id; a.textContent = titleOf[id] || id;
+      a.addEventListener('click', function(ev){
+        ev.preventDefault();
+        goTo(id);
+      });
+      var p = document.createElement('p'); p.textContent = notes[id];
+      wrap.appendChild(a); wrap.appendChild(p); padNotes.appendChild(wrap);
+    });
+  }
+
+  // หัวข้ออาจอยู่ในแท็บที่ซ่อนอยู่ ต้องกดแท็บนั้นก่อนแล้วค่อยเลื่อนไปหา
+  function goTo(id){
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    var panel = sec.closest('[role="tabpanel"]');
+    if (panel && panel.classList.contains('hidden')){
+      var tab = document.querySelector('.tab[aria-controls="' + panel.id + '"]');
+      if (tab) tab.click();
+    }
+    close();
+    setTimeout(function(){ sec.scrollIntoView({block:'start'}); }, 60);
+  }
+
+  function allText(){
+    var out = ['โน้ตวิชา ' + COURSE + ' — ' + new Date().toLocaleString('th-TH'), ''];
+    secs.forEach(function(s){
+      if (notes[s.id] && notes[s.id].trim()){
+        out.push('## ' + (titleOf[s.id] || s.id));
+        out.push(notes[s.id].trim());
+        out.push('');
+      }
+    });
+    var pd = get(K_PAD, '');
+    if (pd.trim()){ out.push('## กระดาษทด'); out.push(pd.trim()); }
+    return out.join('\n');
+  }
+
+  function flash(t){ if (msgEl){ msgEl.textContent = t; setTimeout(function(){ if (msgEl) msgEl.textContent = ''; }, 2600); } }
+
+  function onEsc(e){ if (e.key === 'Escape' && pad) close(); }
+  function close(){
+    if (!pad) return;
+    document.removeEventListener('keydown', onEsc);
+    pad.remove(); pad = null; padIn = null; padRes = null; padNotes = null; msgEl = null;
+    fab.style.display = ''; markFab();
+  }
+
+  function open(){
+    if (pad) return;
+    pad = document.createElement('div');
+    pad.className = 'pad';
+    pad.setAttribute('role', 'dialog');
+    pad.setAttribute('aria-label', 'กระดาษทดและโน้ต');
+    pad.innerHTML =
+      '<div class="pad-head"><div class="pad-tabs">' +
+        '<button type="button" class="pad-tab" data-p="calc" aria-selected="true">กระดาษทด</button>' +
+        '<button type="button" class="pad-tab" data-p="notes" aria-selected="false">โน้ตทั้งหมด</button>' +
+      '</div><button type="button" class="pad-x" aria-label="ปิด">&times;</button></div>' +
+      '<div class="pad-body" data-p="calc">' +
+        '<textarea class="pad-in" spellcheck="false" aria-label="กระดาษทด" ' +
+        'placeholder="ทดเลขตรงนี้ได้เลย พิมพ์บรรทัดละรายการ&#10;เช่น  60% * 100,000&#10;      80,000 / 10"></textarea>' +
+        '<div class="pad-res"></div>' +
+      '</div>' +
+      '<div class="pad-body" data-p="notes" hidden></div>' +
+      '<div class="pad-foot">' +
+        '<button type="button" class="pad-act" data-a="copy">คัดลอกทั้งหมด</button>' +
+        '<button type="button" class="pad-act" data-a="save">ดาวน์โหลด .txt</button>' +
+        '<button type="button" class="pad-act" data-a="print">พิมพ์พร้อมโน้ต</button>' +
+        '<button type="button" class="pad-act danger" data-a="clear">ล้างทั้งหมด</button>' +
+        '<span class="pad-msg"></span>' +
+      '</div>';
+    document.body.appendChild(pad);
+    fab.style.display = 'none';
+
+    padIn = pad.querySelector('.pad-in');
+    padRes = pad.querySelector('.pad-res');
+    padNotes = pad.querySelector('.pad-body[data-p="notes"]');
+    msgEl = pad.querySelector('.pad-msg');
+
+    padIn.value = get(K_PAD, '');
+    renderCalc(); renderNotes();
+    if (!canStore) flash('เบราว์เซอร์นี้เก็บข้อมูลไม่ได้');
+
+    padIn.addEventListener('input', function(){ set(K_PAD, padIn.value); renderCalc(); });
+
+    Array.prototype.forEach.call(pad.querySelectorAll('.pad-tab'), function(t){
+      t.addEventListener('click', function(){
+        var p = t.dataset.p;
+        Array.prototype.forEach.call(pad.querySelectorAll('.pad-tab'), function(x){
+          x.setAttribute('aria-selected', x.dataset.p === p ? 'true' : 'false');
+        });
+        Array.prototype.forEach.call(pad.querySelectorAll('.pad-body'), function(x){
+          x.hidden = x.dataset.p !== p;
+        });
+      });
+    });
+
+    pad.querySelector('.pad-x').addEventListener('click', close);
+    pad.addEventListener('click', function(ev){
+      var b = ev.target.closest('.pad-act');
+      if (!b) return;
+      var a = b.dataset.a;
+      if (a === 'copy'){
+        var txt = allText();
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt).then(function(){ flash('คัดลอกแล้ว'); },
+                                                  function(){ flash('คัดลอกไม่สำเร็จ'); });
+        } else { flash('เบราว์เซอร์นี้คัดลอกให้ไม่ได้'); }
+      } else if (a === 'save'){
+        try {
+          var blob = new Blob([allText()], {type:'text/plain;charset=utf-8'});
+          var url = URL.createObjectURL(blob);
+          var link = document.createElement('a');
+          link.href = url; link.download = 'notes-' + COURSE + '.txt';
+          document.body.appendChild(link); link.click(); link.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+          flash('ดาวน์โหลดแล้ว');
+        } catch(e){ flash('ดาวน์โหลดไม่ได้ในหน้านี้'); }
+      } else if (a === 'print'){
+        close(); setTimeout(function(){ window.print(); }, 120);
+      } else if (a === 'clear'){
+        if (!confirm('ลบโน้ตทุกหัวข้อและกระดาษทดของวิชานี้ทั้งหมด ยืนยันหรือไม่')) return;
+        notes = {}; persist(); set(K_PAD, '');
+        padIn.value = ''; renderCalc();
+        Array.prototype.forEach.call(document.querySelectorAll('.nt-box textarea'), function(t){
+          t.value = ''; t.style.height = 'auto';
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.nt-box'), function(b2){ b2.hidden = true; });
+        Array.prototype.forEach.call(document.querySelectorAll('.nt-add'), function(b2){
+          b2.dataset.has = '0'; b2.textContent = '+ โน้ต'; b2.setAttribute('aria-expanded','false');
+        });
+        renderNotes(); flash('ล้างแล้ว');
+      }
+    });
+
+    document.addEventListener('keydown', onEsc);
+    padIn.focus();
+  }
+
+  fab.addEventListener('click', open);
+  markFab();
+})();
+</script>
