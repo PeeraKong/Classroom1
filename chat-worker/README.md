@@ -190,3 +190,4 @@ curl -N -X POST http://127.0.0.1:8787/chat \
 | `adv-acctg-1` | การบัญชีขั้นสูง 1 (2601-421) | `adv-acctg-1/index.html` |
 | `audit` | การสอบบัญชี | `audit/index.html` |
 | `erp` | ระบบวางแผนทรัพยากรองค์กร (ERP) | `erp/index.html` |
+| `marketing` | หลักการตลาด | `marketing/index.html` |

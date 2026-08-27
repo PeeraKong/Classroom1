@@ -124,6 +124,84 @@ const SUBJECTS = {
 ให้ชี้ว่ามาตรฐานการสอบบัญชีของไทยกำหนดโดยสภาวิชาชีพบัญชี และควรอ้างอิงประกาศฉบับล่าสุดโดยตรง
 `.trim(),
   },
+  marketing: {
+    name: "หลักการตลาด (Principles of Marketing)",
+    scope: `
+ขอบเขตของวิชานี้คือเนื้อหาสอบกลางภาค อ้างอิงตำรา Kotler และ Armstrong เรื่อง Principles of Marketing
+มี 4 บท คือบทที่ 1, 3, 4 และ 5 โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
+
+บทที่ 1 กระบวนการการตลาด
+- นิยามการตลาดของ Kotler ว่าเป็นกระบวนการที่บริษัทสร้างคุณค่าให้ลูกค้าและสร้างความสัมพันธ์
+  เพื่อเก็บเกี่ยวคุณค่ากลับคืน รวมถึงนิยามของ AMA ปี 2017
+- มุมมองเก่าคือ telling and selling เทียบมุมมองใหม่คือการตอบสนองความต้องการของลูกค้า
+- กระบวนการการตลาด 5 ขั้น โดยขั้นที่ 1 ถึง 4 คือสร้างคุณค่า และขั้นที่ 5 คือเก็บเกี่ยวคุณค่ากลับคืน
+- แนวคิดแกนกลาง 5 ข้อ คือ needs wants demands, market offerings, value และ satisfaction,
+  exchanges และ relationships, และ markets
+- Needs คือสภาวะรู้สึกขาด Wants คือรูปแบบที่ needs แปลงไปตามวัฒนธรรมและบุคลิกภาพ
+  Demands คือ wants ที่มีกำลังซื้อหนุนหลัง
+- Marketing myopia คือการสนใจตัวสินค้ามากกว่าประโยชน์และประสบการณ์ที่สินค้าสร้าง
+- กับดักการตั้งความคาดหวังทั้งต่ำเกินไปและสูงเกินไป
+- Marketing management, segmentation, targeting, value proposition, demand management และ de-marketing
+- แนวคิดการจัดการการตลาด 5 แบบ คือ production, product, selling, marketing และ societal marketing
+- ความต่างของ selling concept ที่เริ่มจากโรงงาน กับ marketing concept ที่เริ่มจากตลาด
+- ส่วนประสมการตลาด 4P และความสำคัญของการบูรณาการ
+- CRM, customer-perceived value, customer satisfaction, การ delight ลูกค้า และโปรแกรมสร้างความภักดี
+- Customer lifetime value, share of customer, customer equity และความต่างจาก share of market
+- ภูมิทัศน์ที่เปลี่ยนไป ได้แก่ ดิจิทัล AI และ big data องค์กรไม่แสวงหากำไร โลกาภิวัตน์ และความยั่งยืน
+- ข้อวิจารณ์ทางสังคมและจริยธรรมทางการตลาด
+
+บทที่ 3 สภาพแวดล้อมทางการตลาด
+- นิยามสภาพแวดล้อมทางการตลาด และความต่างระหว่าง microenvironment กับ macroenvironment
+- ผู้แสดงใน microenvironment 6 กลุ่ม คือ บริษัทเอง ซัพพลายเออร์ คนกลาง คู่แข่ง สาธารณชน และลูกค้า
+- Publics 7 ประเภท และ customer markets 5 ตลาด
+- PESTLE ครบ 6 ด้าน คือ political, economic, social, technological, legal และ environmental
+- เหตุผล 3 ข้อของกฎหมายธุรกิจ และกฎหมายการตลาดไทยทั้งยุคดั้งเดิมและยุคดิจิทัลรวมถึง PDPA
+- ระบบเศรษฐกิจ 3 แบบ คือ industrial, subsistence และ developing และการกระจายรายได้ที่สร้างตลาดแบบแบ่งชั้น
+- ประชากรศาสตร์และ 5 เจเนอเรชัน คือ Baby Boomers 1946-1964, Gen X 1965-1980, Gen Y 1981-1996,
+  Gen Z 1997-2012 และ Gen Alpha 2013-2025 พร้อมประโยคสรุป Trust Me, Help Me, Understand Me,
+  Represent Me และ Engage Me
+- Core beliefs และ secondary beliefs และผลของวัฒนธรรมต่อกลยุทธ์ข้ามชาติ
+- เทคโนโลยี IoT และสิ่งแวดล้อมทางธรรมชาติกับความยั่งยืน
+- SWOT โดย S กับ W เป็นเรื่องภายใน ส่วน O กับ T เป็นเรื่องภายนอก
+- การตอบสนองแบบ reactive เทียบ proactive
+
+บทที่ 4 การบริหารสารสนเทศทางการตลาดและการวิจัยตลาด
+- Customer insights และความต่างจากข้อมูลดิบ ปัญหาสมัยนี้ไม่ใช่การขาดข้อมูลแต่คือการแปลงข้อมูลเป็นความเข้าใจ
+- Marketing information ecosystem 3 ช่วง และหลักการถ่วงดุลข้อมูลที่อยากได้กับที่จำเป็นต้องมี
+- ข้อมูลภายในและข้อจำกัด และ competitive marketing intelligence ที่ใช้เฉพาะข้อมูลที่เปิดเผยต่อสาธารณะ
+- กระบวนการวิจัยตลาด 4 ขั้น
+- ประเภทการวิจัย 3 แบบ คือ exploratory, descriptive และ causal
+- Secondary data เทียบ primary data และลำดับที่ควรใช้
+- วิธีวิจัย ได้แก่ observation, survey, interview และ focus group, customer insight communities,
+  experiment, digital text analysis, biosensors และ online tracking
+- Ethnographic research และข้อจำกัดของการสังเกตที่มองไม่เห็นความรู้สึกและพฤติกรรมระยะยาว
+- A/B testing และ online listening, behavioral targeting, social targeting
+- วิธีติดต่อ 4 แบบ คือ mail, telephone, personal และ online พร้อมข้อดีข้อเสียของแต่ละแบบ
+- แผนสุ่มตัวอย่าง 3 คำถาม คือ sampling unit, sample size และ sampling procedure
+- เครื่องมือวิจัย ทั้งแบบสอบถามและเครื่องมือกลไกรวมถึง neuromarketing
+- Big data, marketing analytics และประเด็นความเป็นส่วนตัวกับการใช้ผลวิจัยในทางที่ผิด
+
+บทที่ 5 พฤติกรรมผู้บริโภค
+- นิยามตลาดผู้บริโภคและพฤติกรรมผู้ซื้อ
+- แบบจำลองกล่องดำ คือ สิ่งเร้าเข้า ผ่านกล่องดำ แล้วออกมาเป็นการตอบสนอง
+- ปัจจัย 4 กลุ่ม คือ cultural, social, personal และ psychological
+- วัฒนธรรม วัฒนธรรมย่อย และชนชั้นทางสังคม 7 ระดับ ซึ่งวัดจากส่วนผสมของอาชีพ รายได้ การศึกษา และความมั่งคั่ง
+- Reference groups, opinion leaders, influencer marketing, ครอบครัว และความต่างของ role กับ status
+- Age, occupation, economic situation, lifestyle, personality และ self-concept
+- Motivation และ Maslow, perception ที่มี selective attention distortion และ retention,
+  learning, beliefs และ attitudes
+- กระบวนการตัดสินใจซื้อ 5 ขั้น และแหล่งข้อมูล 4 ประเภท
+- สองสิ่งที่ขวางระหว่างความตั้งใจกับการซื้อจริง คือ ทัศนคติของผู้อื่นและปัจจัยเชิงสถานการณ์ที่ไม่คาดคิด
+- สมการความพอใจ สมรรถนะต่ำกว่าความคาดหวังคือผิดหวัง เท่ากันคือพอใจ สูงกว่าคือปลื้ม
+- Adoption process 5 ขั้น คือ awareness, interest, evaluation, trial และ adoption
+- Adopter categories 5 กลุ่ม คือ innovators 2.5 เปอร์เซ็นต์ early adopters 13.5 เปอร์เซ็นต์
+  early mainstream 34 เปอร์เซ็นต์ late mainstream 34 เปอร์เซ็นต์ และ lagging adopters 16 เปอร์เซ็นต์
+- คุณลักษณะ 6 ข้อที่กำหนดอัตราการยอมรับ โดย 4 ข้อแรกเร่งการยอมรับ ส่วน complexity และ perceived risk ชะลอ
+
+หมายเหตุ ตัวเลขสัดส่วนชนชั้นทางสังคมและตัวอย่างส่วนใหญ่อยู่ในบริบทสหรัฐอเมริกาตามตำรา
+ถ้านิสิตถามถึงบริบทไทยให้ระบุว่าตัวเลขอาจต่างออกไป และถ้าถามเรื่องบทที่ 2 ให้บอกว่าอยู่นอกขอบเขตของสื่อชุดนี้
+`.trim(),
+  },
   erp: {
     name: "ระบบวางแผนทรัพยากรองค์กร (ERP)",
     scope: `
