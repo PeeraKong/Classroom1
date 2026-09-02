@@ -178,7 +178,7 @@ const SUBJECTS = {
     name: "หลักการตลาด (Principles of Marketing)",
     scope: `
 ขอบเขตของวิชานี้คือเนื้อหาสอบกลางภาค อ้างอิงตำรา Kotler และ Armstrong เรื่อง Principles of Marketing
-มี 4 บท คือบทที่ 1, 3, 4 และ 5 โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
+มี 5 บท คือบทที่ 1, 3, 4, 5 และ 6 โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
 
 บทที่ 1 กระบวนการการตลาด
 - นิยามการตลาดของ Kotler ว่าเป็นกระบวนการที่บริษัทสร้างคุณค่าให้ลูกค้าและสร้างความสัมพันธ์
@@ -247,6 +247,47 @@ const SUBJECTS = {
 - Adopter categories 5 กลุ่ม คือ innovators 2.5 เปอร์เซ็นต์ early adopters 13.5 เปอร์เซ็นต์
   early mainstream 34 เปอร์เซ็นต์ late mainstream 34 เปอร์เซ็นต์ และ lagging adopters 16 เปอร์เซ็นต์
 - คุณลักษณะ 6 ข้อที่กำหนดอัตราการยอมรับ โดย 4 ข้อแรกเร่งการยอมรับ ส่วน complexity และ perceived risk ชะลอ
+
+บทที่ 6 กลยุทธ์การตลาดที่ขับเคลื่อนด้วยลูกค้า หรือ STP
+- สี่ขั้นคือ segmentation, targeting, differentiation และ positioning พร้อมนิยามของแต่ละขั้น
+  โดย positioning คือการครองพื้นที่ที่ชัดเจน โดดเด่น และน่าปรารถนา ในใจของผู้บริโภคเป้าหมาย
+  และ product position คือวิธีที่ผู้บริโภคนิยามสินค้าจากคุณลักษณะที่สำคัญ
+- ฐานการแบ่งส่วนตลาดผู้บริโภค 4 ฐาน คือ geographic, demographic, psychographic และ behavioral
+- ประชากรศาสตร์ ตัวแปรที่ใช้บ่อยคือ อายุและช่วงวงจรชีวิต เพศ และรายได้
+  ตัวอย่างคือ Disney Cruise Lines เจาะครอบครัวที่มีลูก และ Harley-Davidson ที่ผู้หญิงเป็นกลุ่มโตเร็วที่สุด
+  คิดเป็น 12 เปอร์เซ็นต์ของยอดซื้อรถใหม่
+- จิตวิทยา แบ่งจากชนชั้นทางสังคม รูปแบบการดำเนินชีวิต หรือบุคลิกภาพ ตัวอย่างคือ Panera และ Zipcar
+- พฤติกรรม 5 ตัวแปร คือ occasions, benefits sought, user status, usage rate และ loyalty status
+  โดย user status แบ่งเป็น nonusers, ex-users, potential users, first-time users และ regular users
+  ส่วน usage rate แบ่งเป็น light, medium และ heavy
+- multiple segmentation และระบบเชิงพาณิชย์ คือ Mosaic USA ของ Experian ที่มี 71 ส่วนตลาด
+  กับ 19 ระดับความมั่งคั่ง และ Personicx ของ Acxiom
+- การแบ่งส่วนตลาดธุรกิจ มีตัวแปรเพิ่ม 4 กลุ่ม คือ operating characteristics, purchasing approaches,
+  situational factors และ personal characteristics
+- เกณฑ์ 5 ข้อของการแบ่งส่วนที่ได้ผล คือ measurable, accessible, substantial, differentiable และ actionable
+- การประเมินส่วนตลาด 3 เรื่อง คือ ขนาดและการเติบโต ความน่าสนใจเชิงโครงสร้าง และวัตถุประสงค์กับทรัพยากรของบริษัท
+- กลยุทธ์การเลือกตลาดเป้าหมาย 4 แบบ เรียงจากกว้างไปแคบ คือ undifferentiated หรือ mass marketing,
+  differentiated หรือ segmented marketing, concentrated หรือ niche marketing และ micromarketing
+  โดย micromarketing แบ่งเป็น local marketing และ individual marketing ซึ่งเรียกอีกชื่อว่า
+  one-to-one marketing หรือ mass customization
+- ปัจจัย 5 ข้อที่ใช้เลือกกลยุทธ์ คือ ทรัพยากรของบริษัท ความแปรผันของสินค้า ขั้นในวงจรชีวิตของสินค้า
+  ความแปรผันของตลาด และกลยุทธ์การตลาดของคู่แข่ง
+- การตลาดเป้าหมายที่รับผิดชอบต่อสังคม ประเด็นเรื่องกลุ่มเปราะบาง กลุ่มน้อย กลุ่มด้อยโอกาส และเด็กกับวัยรุ่น
+- persona ในฐานะการแปลงส่วนตลาดให้เป็นภาพคนหนึ่งคน
+- positioning map แสดงการรับรู้ของผู้บริโภคต่อแบรนด์เทียบคู่แข่งบนมิติการซื้อที่สำคัญ
+  โดยขนาดของวงกลมบอกส่วนแบ่งตลาดสัมพัทธ์
+- กลยุทธ์การสร้างความแตกต่างและการวางตำแหน่ง 4 ขั้น และ competitive advantage
+  คือความได้เปรียบที่ได้จากการเสนอคุณค่าที่มากกว่า ด้วยราคาที่ต่ำกว่าหรือประโยชน์ที่มากกว่าจนคุ้มราคาที่สูงกว่า
+- มิติของการสร้างความแตกต่าง 5 มิติ คือ product, services, channels, people และ image
+- เกณฑ์ 7 ข้อของความได้เปรียบที่คุ้มค่าจะสื่อสาร คือ important, distinctive, superior, communicable,
+  preemptive, affordable และ profitable
+- value proposition คือการวางตำแหน่งทั้งชุดของแบรนด์ ตารางไขว้ระหว่างประโยชน์กับราคา
+  ข้อเสนอที่ชนะคือ more for more, more for the same, more for less, the same for less
+  และ less for much less โดย more for less เป็น best winning proposition
+  ส่วนช่องที่ให้เท่าเดิมหรือน้อยลงในราคาเท่าเดิมหรือแพงขึ้นคือข้อเสนอที่แพ้
+- positioning statement ตามรูปแบบ To (ส่วนตลาดเป้าหมายและความต้องการ) our (แบรนด์) is (แนวคิด)
+  that (จุดที่แตกต่าง) พร้อมตัวอย่างของ Evernote
+  และหลักที่ว่าส่วนประสมการตลาดทุกตัวต้องสนับสนุนกลยุทธ์การวางตำแหน่งที่เลือกไว้
 
 หมายเหตุ ตัวเลขสัดส่วนชนชั้นทางสังคมและตัวอย่างส่วนใหญ่อยู่ในบริบทสหรัฐอเมริกาตามตำรา
 ถ้านิสิตถามถึงบริบทไทยให้ระบุว่าตัวเลขอาจต่างออกไป และถ้าถามเรื่องบทที่ 2 ให้บอกว่าอยู่นอกขอบเขตของสื่อชุดนี้
