@@ -272,6 +272,36 @@ figure.fig figcaption b{color:var(--ink-2); font-weight:600}
 footer{border-top:1px solid var(--rule); background:var(--surface); padding:26px 0 40px; font-size:.82rem; color:var(--ink-3)}
 footer p{max-width:70ch; margin-bottom:6px}
 @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important; scroll-behavior:auto !important}}
+/* ---- แสดงวิธีคำนวณทีละขั้น (บทที่ 4) ---- */
+.wk{border:1px solid var(--rule); border-radius:4px; background:var(--surface); margin:14px 0 18px; overflow:hidden}
+.wk-h{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--accent); font-weight:600; padding:10px 16px; border-bottom:1px solid var(--rule); background:var(--surface-2)}
+.wk ol{list-style:none; margin:0; padding:0; counter-reset:wk}
+.wk ol li{counter-increment:wk; padding:14px 16px 15px 54px; position:relative; border-bottom:1px solid var(--rule)}
+.wk ol li:last-child{border-bottom:0}
+.wk ol li::before{content:counter(wk); position:absolute; left:16px; top:14px; width:25px; height:25px;
+  display:flex; align-items:center; justify-content:center; border-radius:99px;
+  border:1px solid var(--rule-strong); background:var(--paper);
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:600; color:var(--accent)}
+.wk ol li.fin{background:var(--sunk)}
+.wk-t{font-weight:700; font-size:.9rem; margin-bottom:6px; line-height:1.5}
+.wk-f{font-family:"IBM Plex Mono",monospace; font-size:.79rem; color:var(--ink-3); line-height:1.7; overflow-wrap:anywhere}
+.wk-s{font-family:"IBM Plex Mono",monospace; font-size:.86rem; font-variant-numeric:tabular-nums;
+  color:var(--ink-2); line-height:1.8; overflow-wrap:anywhere}
+.wk-r{font-family:"IBM Plex Mono",monospace; font-size:.95rem; font-weight:600; font-variant-numeric:tabular-nums;
+  color:var(--accent); margin-top:4px; overflow-wrap:anywhere}
+.wk-x{font-size:.82rem; color:var(--ink-3); margin-top:8px; line-height:1.65; max-width:66ch}
+.wk-x b{color:var(--ink-2); font-weight:600}
+.wk-tt{width:100%; max-width:520px; border-collapse:collapse; margin-top:5px;
+  font-family:"IBM Plex Mono",monospace; font-size:.83rem; font-variant-numeric:tabular-nums}
+.wk-tt td{padding:2px 0; vertical-align:top; color:var(--ink-2); line-height:1.65}
+.wk-tt td.n{text-align:right; white-space:nowrap; padding-left:16px; width:1%}
+.wk-tt tr.sum td{border-top:1px solid var(--rule-strong); padding-top:5px; font-weight:600; color:var(--ink)}
+.wk-tt tr.sum2 td{border-top:2px double var(--rule-strong); padding-top:5px; font-weight:700; color:var(--accent)}
+.wk-tt tr.tiny td{font-size:.76rem; color:var(--ink-3); padding-bottom:6px}
+.wk-yr{font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin:14px 0 3px}
+.wk-yr:first-of-type{margin-top:4px}
 </style>
 
 <header class="mast">
@@ -366,7 +396,7 @@ footer p{max-width:70ch; margin-bottom:6px}
         <li><a href="#c4-6"><i>6</i>รายการบันทึกบัญชี 4 แบบ</a></li>
         <li><a href="#c4-7"><i>7</i>กฎทอง &amp; งบจริง</a></li>
         <li><a href="#c4-8"><i>8</i>โจทย์ตัวอย่าง</a></li>
-        <li><a href="#c4-9"><i>9</i>ตารางไล่ยอด</a></li>
+        <li><a href="#c4-9"><i>9</i>ตารางไล่ยอดและวิธีทำ</a></li>
         <li><a href="#c4-10"><i>10</i>ปี 25X1</a></li>
         <li><a href="#c4-11"><i>11</i>ปี 25X2</a></li>
         <li><a href="#c4-12"><i>12</i>ปี 25X3 · ลองทำเอง</a></li>
@@ -2352,7 +2382,7 @@ footer p{max-width:70ch; margin-bottom:6px}
     </section>
 
     <section class="sec" id="c4-9">
-      <div class="sec-h"><span class="sec-n">9</span><h2>ตารางไล่ยอด · เครื่องมือที่ใช้ได้กับทุกโจทย์</h2></div>
+      <div class="sec-h"><span class="sec-n">9</span><h2>ตารางไล่ยอดและวิธีคำนวณทีละขั้น</h2></div>
       <div class="body">
         <p class="lede">แทนที่จะท่องสูตร ให้วาดตารางสามชุดนี้แล้วไล่ทีละปี — ทุกโจทย์ของบทนี้แก้ได้ด้วยตารางเดียวกันหมด และยอดเงินลงทุนคือผลรวมของคอลัมน์ <b>Inv. 60%</b> ทั้งสามตาราง</p>
         <div class="calc">
@@ -2392,6 +2422,19 @@ footer p{max-width:70ch; margin-bottom:6px}
             <div class="out-row"><span>ตรวจทาน · คำนวณจากราคาทุนตั้งต้นบวกส่วนเปลี่ยนแปลง</span><span id="eq-chk2">433,600</span></div>
           </div>
           <p class="je-note" style="margin-top:12px">เครื่องมือนี้ถือว่า<b>ค่าความนิยมไม่ด้อยค่า</b> และ<b>วัดมูลค่า NCI ด้วยสัดส่วนของสินทรัพย์สุทธิที่ระบุได้</b> ตามที่โจทย์ในบทกำหนด · ถ้าโจทย์ให้ใช้มูลค่ายุติธรรมของ NCI หรือมีการด้อยค่า ต้องปรับเพิ่มเอง · ถ้าใส่ตัวเลขจนสิ่งตอบแทนต่ำกว่าส่วนแบ่งในมูลค่ายุติธรรมสุทธิ บรรทัดสุดท้ายจะเปลี่ยนเป็น <b>กำไรจากการต่อรองราคาซื้อ</b> ซึ่ง<b>รับรู้เป็นรายได้ทันทีในงวดที่ซื้อ</b> ไม่สะสมอยู่ในมูลค่าเงินลงทุนแบบค่าความนิยม</p>
+
+        <h3>วิธีคำนวณทีละขั้น</h3>
+        <p class="lede">สามบล็อกข้างล่างนี้<b>คำนวณใหม่ตามตัวเลขที่กรอกไว้ด้านบน</b> ทุกบรรทัดแสดงทั้ง<b>สูตร</b> <b>การแทนค่า</b> และ<b>ผลลัพธ์</b> จึงลอกลงกระดาษสอบได้ทั้งบรรทัด</p>
+
+        <div class="wk" id="wk-gw"><div class="wk-h">ก · ค่าความนิยม ณ วันซื้อหุ้น</div><ol></ol></div>
+        <div class="wk" id="wk-sh"><div class="wk-h">ข · ส่วนแบ่งกำไรจากบริษัทย่อย รายปี</div><ol></ol></div>
+        <div class="wk" id="wk-inv"><div class="wk-h">ค · เงินลงทุนในบริษัทย่อย รายปี</div><ol></ol></div>
+
+        <div class="note rule">
+          <span class="nh">ลำดับที่ต้องทำเสมอ</span>
+          หา<b>ค่าความนิยม</b>ให้ได้ก่อน เพราะมันเป็นก้อนคงที่ที่ฝังอยู่ในมูลค่าเงินลงทุนตลอดไป → แล้วจึงหา<b>ส่วนแบ่งกำไร</b>ของแต่ละปี ซึ่งต้องหักค่าตัดจำหน่ายส่วนที่ตีเพิ่มเสมอ → สุดท้ายจึงไล่<b>ยอดเงินลงทุน</b> โดยบวกส่วนแบ่งกำไรและหักเงินปันผลรับ
+        </div>
+
         </div>
       </div>
     </section>
@@ -2935,20 +2978,29 @@ footer p{max-width:70ch; margin-bottom:6px}
     var body = document.getElementById('eq-body');
     body.innerHTML = '';
     var se = se0, exLeft = ex, invEnd = 0;
+    var rows = [], invPrev = ct + bargain;
     for (var y = 0; y < 3; y++){
+      var seOpen = se;
       se += ni[y] - dv[y];
       // ตัดจำหน่ายได้ไม่เกินยอดคงเหลือ กันกรณีอายุสั้นกว่าจำนวนปีที่ไล่
-      exLeft = exLeft - Math.min(amort, Math.max(exLeft, 0));
+      var amortY = Math.min(amort, Math.max(exLeft, 0));
+      exLeft = exLeft - amortY;
       if (exLeft < 0) exLeft = 0;
       var nciTot = nci * se + nci * exLeft;
       var inv = own * se + own * exLeft + gw;
       invEnd = inv;
+      rows.push({y:y + 1, seOpen:seOpen, se:se, ni:ni[y], dv:dv[y], amortY:amortY, exLeft:exLeft,
+                 share: own * ni[y], shareAm: own * amortY, shareNet: own * (ni[y] - amortY),
+                 divIn: own * dv[y], invOpen: invPrev, inv: inv, nciTot: nciTot});
+      invPrev = inv;
       var tr = document.createElement('tr');
       if (y === 2) tr.className = 'tot';
       tr.innerHTML = '<td>สิ้นปีที่ ' + (y + 1) + '</td><td>' + i0(se) + '</td><td>' + i0(exLeft) +
                      '</td><td>' + i0(nciTot) + '</td><td><b>' + i0(inv) + '</b></td>';
       body.appendChild(tr);
     }
+    workSteps({own:own, nci:nci, ct:ct, se0:se0, ex:ex, life:life, fvna:fvna, nciAcq:nciAcq,
+               diff:diff, gw:gw, bargain:bargain, amort:amort, rows:rows});
 
     // ตรวจทานสองทางที่ควรได้ผลตรงกับตาราง
     var sumNi = ni[0] + ni[1] + ni[2], sumDv = dv[0] + dv[1] + dv[2];
@@ -2958,6 +3010,126 @@ footer p{max-width:70ch; margin-bottom:6px}
     document.getElementById('eq-chk1').textContent = i0(c1);
     document.getElementById('eq-chk2').textContent = i0(c2);
   }
+  /* ---- แสดงวิธีคำนวณทีละขั้น (บทที่ 4) ---- */
+  function pc(x){ return (Math.round(x * 10000) / 100) + '%'; }
+  function li(title, formula, subst, result, explain, fin){
+    return '<li' + (fin ? ' class="fin"' : '') + '><div class="wk-t">' + title + '</div>' +
+      (formula ? '<div class="wk-f">' + formula + '</div>' : '') +
+      (subst ? '<div class="wk-s">' + subst + '</div>' : '') +
+      (result ? '<div class="wk-r">' + result + '</div>' : '') +
+      (explain ? '<div class="wk-x">' + explain + '</div>' : '') + '</li>';
+  }
+  function row(label, value, cls){
+    return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><td>' + label + '</td><td class="n">' + value + '</td></tr>';
+  }
+  function workSteps(d){
+    var gwBox  = document.getElementById('wk-gw');
+    var shBox  = document.getElementById('wk-sh');
+    var invBox = document.getElementById('wk-inv');
+    if (!gwBox || !shBox || !invBox) return;
+
+    var ownP = pc(d.own), nciP = pc(d.nci);
+    var isBargain = d.bargain > 0;
+    var gwVal = isBargain ? d.bargain : d.gw;
+    var gwName = isBargain ? 'กำไรจากการต่อรองราคาซื้อ' : 'ค่าความนิยม';
+
+    /* ---- ก · ค่าความนิยม ---- */
+    var g = '';
+    g += li('หามูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้',
+      'FVNA = ส่วนของผู้ถือหุ้นของบริษัทย่อย ณ วันซื้อ + ส่วนที่ตีเพิ่มเป็นมูลค่ายุติธรรม',
+      '= ' + i0(d.se0) + ' + ' + i0(d.ex),
+      '= ' + i0(d.fvna),
+      'ส่วนที่ตีเพิ่ม ' + i0(d.ex) + ' คือสินทรัพย์ที่<b>ไม่ได้อยู่ในบัญชีของบริษัทย่อย</b> เช่น สิทธิบัตร แต่ TFRS 3 ให้รับรู้ ณ วันซื้อด้วยมูลค่ายุติธรรม จึงต้องบวกกลับเข้าไปก่อนเทียบกับราคาซื้อ');
+    g += li('คำนวณส่วนได้เสียที่ไม่มีอำนาจควบคุม ณ วันซื้อ',
+      'NCI = สัดส่วนที่บริษัทใหญ่ไม่ได้ถือ × FVNA',
+      '= ' + nciP + ' × ' + i0(d.fvna),
+      '= ' + i0(d.nciAcq),
+      'วัด NCI ด้วย<b>สัดส่วนของสินทรัพย์สุทธิที่ระบุได้</b> ซึ่งเรียกว่า <b>partial goodwill</b> — ผลคือค่าความนิยมที่ได้จะเป็นของบริษัทใหญ่ทั้งจำนวน ถ้าโจทย์ให้วัด NCI ด้วยมูลค่ายุติธรรมจะได้ค่าความนิยมสูงกว่านี้ และต้องแบ่งส่วนหนึ่งให้ NCI');
+    g += li('รวมสองก้อนที่จ่ายเพื่อให้ได้บริษัทย่อยมาทั้งบริษัท',
+      'รวม = สิ่งตอบแทนที่โอนให้ + NCI ณ วันซื้อ',
+      '= ' + i0(d.ct) + ' + ' + i0(d.nciAcq),
+      '= ' + i0(d.ct + d.nciAcq),
+      'ตัวเลขนี้คือ<b>มูลค่ารวมของบริษัทย่อยทั้งบริษัท</b>ตามที่การซื้อครั้งนี้บอกเป็นนัย ไม่ใช่แค่ส่วนที่บริษัทใหญ่ซื้อ จึงเอาไปเทียบกับ FVNA ทั้งจำนวนได้');
+    g += li('หักด้วยมูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้',
+      'ผลต่าง = รวม − FVNA',
+      '= ' + i0(d.ct + d.nciAcq) + ' − ' + i0(d.fvna),
+      '= ' + paren(d.diff),
+      'ถ้าผลต่างเป็น<b>บวก</b> คือจ่ายแพงกว่าสินทรัพย์สุทธิที่ระบุได้ ส่วนเกินคือ<b>ค่าความนิยม</b> · ถ้าเป็น<b>ลบ</b> คือซื้อได้ถูกกว่า ต้องรับรู้เป็น<b>กำไรจากการต่อรองราคาซื้อ</b>ในงบกำไรขาดทุนทันที <b>ไม่</b>สะสมอยู่ในมูลค่าเงินลงทุน');
+    g += li(gwName,
+      isBargain ? 'กำไรจากการต่อรองราคาซื้อ = FVNA − (สิ่งตอบแทน + NCI)' : 'ค่าความนิยม = (สิ่งตอบแทน + NCI) − FVNA',
+      '',
+      '= ' + i0(gwVal),
+      isBargain
+        ? 'มาตรฐานกำหนดให้<b>ทบทวนการวัดมูลค่าใหม่ก่อน</b> ว่าระบุสินทรัพย์และหนี้สินครบและวัดมูลค่าถูกต้องแล้วหรือไม่ ถ้ายังเป็นลบอยู่จึงรับรู้เป็นรายได้'
+        : 'ค่าความนิยม<b>ไม่ตัดจำหน่าย</b> แต่ต้องทดสอบการด้อยค่าอย่างน้อยปีละครั้ง ในเครื่องมือนี้ถือว่าไม่ด้อยค่า ยอดจึงคงที่ ' + i0(gwVal) + ' ตลอดสามปี');
+    g += li('พิสูจน์อีกทาง · แตกราคาซื้อออกเป็นสามก้อน',
+      'สิ่งตอบแทนที่โอนให้ = ส่วนแบ่งในมูลค่าตามบัญชี + ส่วนแบ่งในส่วนที่ตีเพิ่ม + ' + gwName,
+      '<table class="wk-tt">' +
+        row(ownP + ' × ' + i0(d.se0) + ' &nbsp;ส่วนแบ่งในมูลค่าตามบัญชี', i0(d.own * d.se0)) +
+        row(ownP + ' × ' + i0(d.ex) + ' &nbsp;ส่วนแบ่งในส่วนที่ตีเพิ่ม', i0(d.own * d.ex)) +
+        row(gwName + (isBargain ? ' (หัก)' : ''), (isBargain ? '(' + i0(gwVal) + ')' : i0(gwVal))) +
+        row('รวม = สิ่งตอบแทนที่โอนให้', i0(d.ct), 'sum2') +
+      '</table>', '', '',
+      'ถ้าสามก้อนนี้บวกกันแล้วไม่เท่ากับเงินที่จ่ายจริง แปลว่าคำนวณผิดที่ใดที่หนึ่ง — เป็นวิธีตรวจที่เร็วที่สุดในห้องสอบ', true);
+    gwBox.querySelector('ol').innerHTML = g;
+
+    /* ---- ข · ส่วนแบ่งกำไร ---- */
+    var h = '';
+    h += li('หาค่าตัดจำหน่ายส่วนที่ตีเพิ่มต่อปี',
+      'ค่าตัดจำหน่ายต่อปี = ส่วนที่ตีเพิ่ม ÷ อายุการให้ประโยชน์',
+      '= ' + i0(d.ex) + ' ÷ ' + i0(d.life),
+      '= ' + i0(d.amort) + ' ต่อปี',
+      'สิทธิบัตรก้อนนี้<b>ไม่เคยอยู่ในสมุดของบริษัทย่อย</b> กำไรที่บริษัทย่อยรายงานจึงยังไม่ได้หักค่าตัดจำหน่ายส่วนนี้ บริษัทใหญ่ต้องหักเองในการคำนวณส่วนแบ่งกำไร — <b>นี่คือรายการที่ลืมกันมากที่สุด</b>');
+    d.rows.forEach(function(r){
+      h += li('ส่วนแบ่งกำไร ปีที่ ' + r.y,
+        'ส่วนแบ่งกำไรที่รับรู้ = สัดส่วนที่ถือ × (กำไรสุทธิของย่อย − ค่าตัดจำหน่ายส่วนที่ตีเพิ่ม)',
+        '<table class="wk-tt">' +
+          row('กำไรสุทธิของบริษัทย่อย', i0(r.ni)) +
+          row('ส่วนแบ่งตามสัดส่วน &nbsp;' + ownP + ' × ' + i0(r.ni), i0(r.share)) +
+          row('หัก ส่วนแบ่งค่าตัดจำหน่าย &nbsp;' + ownP + ' × ' + i0(r.amortY), '(' + i0(r.shareAm) + ')') +
+          row('ส่วนแบ่งกำไรที่รับรู้ในงบกำไรขาดทุน', i0(r.shareNet), 'sum2') +
+        '</table>', '', '',
+        r.y === 1
+          ? 'บันทึก <b>Dr. เงินลงทุนในบริษัทย่อย ' + i0(r.share) + ' / Cr. ส่วนแบ่งกำไร ' + i0(r.share) + '</b> แล้วบันทึกค่าตัดจำหน่ายกลับด้าน <b>Dr. ส่วนแบ่งกำไร ' + i0(r.shareAm) + ' / Cr. เงินลงทุน ' + i0(r.shareAm) + '</b> · เงินปันผล<b>ไม่</b>เกี่ยวกับบรรทัดนี้เลย เพราะเป็นการคืนทุน ไม่ใช่รายได้'
+          : 'ค่าตัดจำหน่ายเท่าเดิมทุกปีตราบใดที่ยังไม่ตัดหมด ส่วนแบ่งกำไรจึงเปลี่ยนตามกำไรของบริษัทย่อยเท่านั้น');
+    });
+    shBox.querySelector('ol').innerHTML = h;
+
+    /* ---- ค · เงินลงทุน ---- */
+    var v = '';
+    v += li(isBargain ? 'ตั้งต้นด้วยส่วนแบ่งในมูลค่ายุติธรรม ณ วันซื้อ' : 'ตั้งต้นด้วยราคาทุน ณ วันซื้อ',
+      'ยอดตั้งต้น = สิ่งตอบแทนที่โอนให้' + (isBargain ? ' + กำไรจากการต่อรองราคาซื้อ' : ''),
+      isBargain ? '= ' + i0(d.ct) + ' + ' + i0(d.bargain) : '',
+      '= ' + i0(d.ct + d.bargain),
+      'บันทึก <b>Dr. เงินลงทุนในบริษัทย่อย / Cr. เงินสด</b> ด้วยจำนวนที่จ่ายจริง' +
+        (isBargain ? ' และรับรู้กำไรจากการต่อรองราคาซื้ออีกด้านหนึ่ง' : ''));
+    d.rows.forEach(function(r){
+      var amCum = Math.min(d.amort * r.y, d.ex);
+      v += li('ยอดเงินลงทุนสิ้นปีที่ ' + r.y,
+        'ยอดปลายปี = ยอดยกมา + ส่วนแบ่งกำไรที่รับรู้ − เงินปันผลรับ',
+        '<table class="wk-tt">' +
+          row('ยอดยกมาต้นปี', i0(r.invOpen)) +
+          row('บวก ส่วนแบ่งกำไรที่รับรู้ (จากบล็อก ข)', i0(r.shareNet)) +
+          row('หัก เงินปันผลรับ &nbsp;' + ownP + ' × ' + i0(r.dv), '(' + i0(r.divIn) + ')') +
+          row('ยอดเงินลงทุนปลายปี', i0(r.inv), 'sum2') +
+          '<tr class="tiny"><td colspan="2" style="padding-top:10px">พิสูจน์ทางที่ 2 · คิดจากส่วนแบ่งในสินทรัพย์สุทธิปลายงวด</td></tr>' +
+          row(ownP + ' × ' + i0(r.se) + ' &nbsp;ส่วนแบ่งในส่วนของผู้ถือหุ้นปลายปี', i0(d.own * r.se)) +
+          row(ownP + ' × ' + i0(r.exLeft) + ' &nbsp;ส่วนแบ่งในส่วนตีเพิ่มคงเหลือ', i0(d.own * r.exLeft)) +
+          row('บวก ' + gwName + (isBargain ? ' (ไม่รวมในเงินลงทุน)' : ''), isBargain ? '—' : i0(d.gw)) +
+          row('รวม', i0(d.own * r.se + d.own * r.exLeft + d.gw), 'sum') +
+          '<tr class="tiny"><td colspan="2" style="padding-top:10px">พิสูจน์ทางที่ 3 · ราคาทุนตั้งต้นบวกส่วนที่เปลี่ยนไป</td></tr>' +
+          row('ราคาทุนตั้งต้น', i0(d.ct + d.bargain)) +
+          row('บวก ' + ownP + ' × (' + i0(r.se) + ' − ' + i0(d.se0) + ')', paren(d.own * (r.se - d.se0))) +
+          row('หัก ' + ownP + ' × ' + i0(amCum) + ' &nbsp;ค่าตัดจำหน่ายสะสม', '(' + i0(d.own * amCum) + ')') +
+          row('รวม', i0(d.ct + d.bargain + d.own * (r.se - d.se0) - d.own * amCum), 'sum') +
+        '</table>', '', '',
+        'ส่วนของผู้ถือหุ้นบริษัทย่อยปลายปี = ' + i0(r.seOpen) + ' + ' + i0(r.ni) + ' − ' + i0(r.dv) + ' = <b>' + i0(r.se) +
+        '</b> · ส่วนตีเพิ่มคงเหลือ = ' + i0(r.exLeft) + ' · <b>ทั้งสามทางต้องได้ตัวเลขเดียวกัน</b> ถ้าไม่ตรงแปลว่าพลาดที่ใดที่หนึ่ง',
+        r.y === 3);
+    });
+    invBox.querySelector('ol').innerHTML = v;
+  }
+
   eqIds.forEach(function(id){ var el = document.getElementById(id); if (el) el.addEventListener('input', equityRoll); });
   if (document.getElementById('eq-own')) equityRoll();
 
