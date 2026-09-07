@@ -2670,3 +2670,675 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
   markFab();
 })();
 </script>
+
+<script>
+window.CLASSROOM_NARRATION = {
+  ch1: { s:'บทที่ 1', t:'บทที่ 1 · การสอบบัญชีและข้อกำหนดของผู้บริหาร', c:[
+    {h:'บทนี้ตอบคำถามอะไร', s:'s1', t:[
+      'ยินดีต้อนรับสู่บทที่ 1 ของวิชาการสอบบัญชีครับ บทนี้ตอบคำถามที่พื้นฐานที่สุดของทั้งวิชา คือทำไมโลกถึงต้องการผู้สอบบัญชี',
+      'คำตอบสั้น ๆ คือ เพราะมีช่องว่างระหว่างคนที่จัดทำข้อมูล กับคนที่ต้องใช้ข้อมูลนั้นตัดสินใจ',
+      'ผู้บริหารเป็นคนทำงบการเงิน แต่คนที่เอางบไปใช้คือผู้ลงทุนและเจ้าหนี้ ซึ่งอยู่ไกลจากกิจการ และตรวจสอบเองไม่ได้'
+    ]},
+    {h:'ความเสี่ยงสองตัวที่ต้องแยกให้ออก', s:'s1', t:[
+      'ตัวแรกคือความเสี่ยงทางธุรกิจ หรือ business risk คือความเสี่ยงที่กิจการจะไม่บรรลุวัตถุประสงค์ที่ตั้งไว้ เช่น ขายไม่ได้ตามเป้า หรือคู่แข่งแย่งส่วนแบ่งตลาดไป',
+      'ตัวที่สองคือความเสี่ยงของข้อมูล หรือ information risk คือความน่าจะเป็นที่ข้อมูลที่กิจการเผยแพร่ออกไปจะไม่ถูกต้องหรือทำให้เข้าใจผิด',
+      'จำให้แม่นว่า ผู้สอบบัญชีเข้ามาลดความเสี่ยงตัวที่สอง ไม่ใช่ตัวแรก การสอบบัญชีไม่ได้ทำให้ธุรกิจขายดีขึ้น แต่ทำให้ตัวเลขที่รายงานออกไปเชื่อถือได้มากขึ้น',
+      'ข้อสอบชอบสลับสองคำนี้กัน เพราะชื่อคล้ายกันมาก แต่เป็นคนละเรื่องกันโดยสิ้นเชิง'
+    ]},
+    {h:'ทำไมความเสี่ยงของข้อมูลจึงสูงขึ้น', s:'s1', t:[
+      'ตำราให้เหตุผลไว้สี่ข้อ หนึ่ง ข้อมูลซับซ้อนขึ้นมาก สอง ผู้ใช้ข้อมูลอยู่ห่างไกลจากกิจการ',
+      'สาม ผู้ใช้ต้องการข้อมูลที่รวดเร็วขึ้น และสี่ ข้อมูลมีผลกระทบกว้างไกลกว่าเดิม',
+      'สังเกตว่าต้นทุนการจัดทำงบการเงินไม่ได้อยู่ในสี่ข้อนี้ ซึ่งเป็นตัวเลือกลวงที่ออกสอบบ่อย'
+    ]},
+    {h:'นิยามของการสอบบัญชี', s:'s2', t:[
+      'การสอบบัญชีคือกระบวนการที่เป็นระบบ ในการรวบรวมและประเมินหลักฐานเกี่ยวกับข้อกำหนดของผู้บริหาร แล้วเปรียบเทียบกับเกณฑ์ที่กำหนดไว้ และสื่อสารผลไปยังผู้ใช้ที่สนใจ',
+      'วลีสำคัญมีสี่ส่วน คำว่า assertions หมายถึงงบการเงินและหมายเหตุประกอบ ซึ่งเป็นคำกล่าวอ้างของผู้บริหาร',
+      'คำว่า established criteria คือหลักการบัญชีที่รับรองทั่วไป ส่วน communicating the results คือรายงานของผู้สอบบัญชี และ interested users คือผู้ที่พึ่งพารายงานทางการเงิน'
+    ]},
+    {h:'ข้อกำหนดของผู้บริหารตาม PCAOB', s:'s4', t:[
+      'ข้อกำหนดของผู้บริหาร หรือ management assertions คือแกนกลางของทั้งวิชา เป็นสิ่งที่ผู้บริหารกล่าวอ้างไว้ในงบการเงินโดยไม่ต้องพูดออกมา',
+      'ตามฝั่ง PCAOB มีห้าข้อ คือ existence or occurrence, rights and obligations, completeness, valuation and allocation และ presentation and disclosure',
+      'ทุกวิธีการตรวจสอบที่จะเรียนต่อจากนี้ มีเป้าหมายเพื่อพิสูจน์ข้อกำหนดข้อใดข้อหนึ่งเสมอ ถ้าตอบไม่ได้ว่ากำลังทดสอบข้อกำหนดใด แปลว่ายังไม่เข้าใจว่าทำไปทำไม'
+    ]},
+    {h:'ข้อกำหนดตาม ASB', s:'s5', t:[
+      'ฝั่ง ASB แยกละเอียดกว่า และแบ่งเป็นสองกลุ่ม กลุ่มแรกคือกลุ่มรายการค้าและเหตุการณ์ ได้แก่ occurrence, completeness, accuracy, cutoff และ classification',
+      'กลุ่มที่สองคือกลุ่มยอดคงเหลือในบัญชี ได้แก่ existence, rights and obligations, completeness และ valuation',
+      'วิธีจำที่ง่ายที่สุดคือ กลุ่มรายการค้าถามถึงสิ่งที่เกิดขึ้นระหว่างงวด ส่วนกลุ่มยอดคงเหลือถามถึงสิ่งที่มีอยู่ ณ วันสิ้นงวด'
+    ]},
+    {h:'การเทียบสองมาตรฐาน', s:'s6', t:[
+      'จุดที่ต้องระวังคือ PCAOB รวมหลายข้อกำหนดของ ASB ไว้ในข้อเดียว',
+      'ตัวอย่างที่ออกสอบบ่อยที่สุดคือ presentation and disclosure ข้อเดียวของ PCAOB กระจายไปเป็นสองข้อของ ASB คือ classification ซึ่งถามว่ารายการเข้าบัญชีถูกต้องหรือไม่ และ presentation ซึ่งถามว่าการเปิดเผยเข้าใจได้และครบถ้วนหรือไม่',
+      'ในหน้าเว็บมีตารางเทียบแบบกดกรองได้ ลองกดดูทีละข้อกำหนดจะเห็นความสัมพันธ์ชัดขึ้นมาก'
+    ]},
+    {h:'ความสงสัยเยี่ยงผู้ประกอบวิชาชีพ', s:'s7', t:[
+      'Professional skepticism คือหัวใจของท่าทีที่ผู้สอบบัญชีต้องมี และมีประโยคหนึ่งที่ต้องจำให้ขึ้นใจ คือ inquiry alone is never enough',
+      'การสอบถามอย่างเดียวไม่เคยเพียงพอ ลำดับที่ถูกต้องคือ ถาม รับคำตอบ แล้วต้องหาหลักฐานมาพิสูจน์คำตอบนั้นเสมอ',
+      'เหตุผลที่ต้องสงสัย ไม่ใช่เพราะผู้บริหารส่วนใหญ่ทุจริต แต่เพราะมีความขัดแย้งทางผลประโยชน์เชิงโครงสร้าง ผู้บริหารอยากนำเสนอกิจการในภาพที่ดีที่สุด ส่วนผู้สอบบัญชีต้องการให้ภาพนั้นยุติธรรมและถูกต้อง'
+    ]},
+    {h:'สรุปบทที่ 1', s:'s8', t:[
+      'สรุปสามเรื่องที่ต้องเอาไปใช้ต่อ หนึ่ง แยกความเสี่ยงทางธุรกิจกับความเสี่ยงของข้อมูลให้ออก',
+      'สอง ข้อกำหนดของผู้บริหารคือเครื่องมือหลัก และต้องเทียบสองมาตรฐานได้',
+      'สาม การสอบถามอย่างเดียวไม่พอเสมอ ต้องมีหลักฐานมายืนยัน จบบทที่ 1 ครับ ลองทำแบบทดสอบดูก่อนจะไปบทที่ 3'
+    ]}
+  ]},
+
+  ch3: { s:'บทที่ 3', t:'บทที่ 3 · การวางแผนงานสอบบัญชี', c:[
+    {h:'บทนี้อยู่ตรงไหนของวิชา', s:'a3-1', t:[
+      'บทที่ 1 ตอบว่าทำไมต้องมีการสอบบัญชี บทที่ 3 ตอบว่างานสอบบัญชีเริ่มต้นอย่างไร',
+      'ตั้งแต่ยังไม่รับงาน ไปจนถึงการวางแผนว่าจะตรวจอะไร ด้วยวิธีไหน เมื่อไร และมากแค่ไหน',
+      'แกนกลางของบทมีสองคำ คือความมีสาระสำคัญ ซึ่งบอกว่าอะไรใหญ่พอที่จะต้องสนใจ และข้อกำหนดของผู้บริหารจากบทที่ 1 ซึ่งกลับมาเป็นตัวชี้ว่าจะใช้วิธีตรวจสอบใด'
+    ]},
+    {h:'กิจกรรมก่อนรับงาน', s:'a3-1', t:[
+      'ก่อนเซ็นชื่อรับงาน ต้องผ่านสามด่าน ด่านแรกคือการรับหรือคงไว้ซึ่งลูกค้า ด่านที่สองคือความเป็นอิสระและจรรยาบรรณ และด่านที่สามคือหนังสือตอบรับงาน',
+      'จุดที่มักเข้าใจผิดคือ การประเมินลูกค้าไม่ได้ทำเฉพาะตอนรับลูกค้าใหม่ คำว่า continuance แปลว่าลูกค้าเดิมก็ต้องถูกประเมินซ้ำทุกปีว่ายังควรรับงานต่อหรือไม่'
+    ]},
+    {h:'การติดต่อผู้สอบบัญชีคนเดิม', s:'a3-2', t:[
+      'ผู้สอบบัญชีคนใหม่เป็นฝ่ายที่ต้องพยายามติดต่อผู้สอบบัญชีคนเดิม คำสำคัญคือต้องพยายามติดต่อ ไม่ใช่ต้องได้คำตอบกลับมาเสมอ',
+      'แต่จะติดต่อได้ต่อเมื่อได้รับอนุญาตจากลูกค้าก่อน เพราะผู้สอบบัญชีคนเดิมมีหน้าที่รักษาความลับของลูกค้า',
+      'เรื่องที่ต้องถามมีสามเรื่อง คือความซื่อสัตย์ของผู้บริหาร ข้อขัดแย้งกับผู้บริหาร และเหตุผลที่ลูกค้าเปลี่ยนผู้สอบบัญชี ส่วนค่าธรรมเนียมที่เคยเรียกเก็บไม่ใช่เรื่องที่ต้องถาม'
+    ]},
+    {h:'ความเป็นอิสระสามด้าน', s:'a3-3', t:[
+      'ความเป็นอิสระมีสามด้านที่ต้องแยกให้ออก ด้านแรกคืออิสระในข้อเท็จจริง คือใจเป็นอิสระจริง ไม่มีอะไรทำให้ตัดสินใจเอนเอียง',
+      'ด้านที่สองคืออิสระในทัศนคติ คือรักษาท่าทีที่เป็นกลางตลอดการปฏิบัติงาน',
+      'ด้านที่สามคืออิสระในการปรากฏ ซึ่งเป็นเรื่องของการรับรู้ของบุคคลภายนอก ต่อให้ใจเป็นอิสระจริง แต่ถ้าภาพที่คนนอกเห็นทำให้สงสัยได้ ก็ถือว่ามีปัญหาแล้ว'
+    ]},
+    {h:'หนังสือตอบรับงานและแผนการสอบบัญชี', s:'a3-4', t:[
+      'หนังสือตอบรับงาน หรือ engagement letter คือสัญญาระหว่างผู้สอบบัญชีกับลูกค้า ทำทั้งงานใหม่และงานต่อเนื่อง',
+      'ต้องมีสี่เรื่อง คือวัตถุประสงค์ของงาน ความรับผิดชอบของผู้บริหาร ความรับผิดชอบของผู้สอบบัญชี และข้อจำกัดของงาน',
+      'ส่วนแผนการสอบบัญชีคือรายการวิธีการตรวจสอบทั้งหมดที่ทีมต้องทำ เพื่อให้ได้หลักฐานที่เพียงพอและเหมาะสม',
+      'เป้าหมายของการวางแผนมีสามข้อ คือมีบุคลากรพอและเหมาะ กำหนดความมีสาระสำคัญ และระบุวิธีตรวจสอบที่จะลดความเสี่ยงที่ประเมินไว้'
+    ]},
+    {h:'ทีมงานและผู้เชี่ยวชาญ', s:'a3-6', t:[
+      'เรื่องผู้ตรวจสอบภายในของลูกค้า มีหลักที่ต้องจำสองข้อ ข้อแรก ก่อนจะใช้ผลงานของเขา ต้องพิจารณาความเที่ยงธรรมและความสามารถก่อนเสมอ',
+      'ข้อที่สอง ผู้สอบบัญชีภายนอกจะโอนความรับผิดชอบในการตัดสินใจทางการสอบบัญชีให้ผู้ตรวจสอบภายในไม่ได้เด็ดขาด และห้ามมอบหมายงานที่ต้องใช้ดุลยพินิจในระดับสูง',
+      'ส่วนผู้เชี่ยวชาญ หลักคือไม่อ้างถึงผู้เชี่ยวชาญในรายงานของผู้สอบบัญชี ยกเว้นกรณีเดียว คือผลงานของผู้เชี่ยวชาญทำให้ต้องเปลี่ยนแปลงรายงาน'
+    ]},
+    {h:'ความมีสาระสำคัญ', s:'a3-8', t:[
+      'ความมีสาระสำคัญคือจำนวนเงินหรือรายการที่จะมีผลต่อการตัดสินใจของผู้ใช้งบการเงิน',
+      'ขอเน้นคำว่าผู้ใช้ ไม่ใช่ผู้บริหาร และไม่ใช่ทีมสอบบัญชี นี่เป็นจุดที่ตอบผิดกันบ่อยที่สุด',
+      'เกณฑ์เชิงปริมาณมีสามตัว คือขนาดสัมบูรณ์ ขนาดสัมพัทธ์ และผลสะสม ส่วนเกณฑ์เชิงคุณภาพมีสามตัวเช่นกัน คือลักษณะของรายการ สถานการณ์แวดล้อม และความไม่แน่นอน',
+      'และท้ายที่สุด ความมีสาระสำคัญเป็นเรื่องของดุลยพินิจเยี่ยงผู้ประกอบวิชาชีพ ไม่มีสูตรตายตัว'
+    ]},
+    {h:'Overall กับ performance materiality', s:'a3-8', t:[
+      'ให้อ่านแผนภาพจากบนลงล่าง กล่องบนสุดคือ overall materiality ของงบการเงินโดยรวม แล้วจึงกระจายลงไปเป็น performance materiality ของแต่ละกลุ่มรายการ',
+      'สังเกตว่ากล่องล่างสุด ซึ่งเป็นรายการที่ความเสี่ยงสูง กลับเป็นกล่องที่แคบที่สุด แปลว่าตั้งเกณฑ์ไว้ต่ำ',
+      'ตรรกะคือ ยิ่งเสี่ยงมาก ยิ่งยอมให้คลาดเคลื่อนได้น้อย จึงต้องตรวจละเอียดขึ้น ข้อสอบชอบถามกลับด้านว่ารายการเสี่ยงสูงตั้งเกณฑ์สูงหรือต่ำ คำตอบคือต่ำกว่า'
+    ]},
+    {h:'สามวัตถุประสงค์ของวิธีการตรวจสอบ', s:'a3-9', t:[
+      'วิธีการตรวจสอบทั้งหมดมีอยู่เพื่อสามวัตถุประสงค์เท่านั้น',
+      'หนึ่ง risk assessment procedures เพื่อทำความเข้าใจลูกค้าและความเสี่ยง สอง tests of controls เพื่อทดสอบว่าการควบคุมภายในทำงานได้ผลจริงหรือไม่',
+      'และสาม substantive procedures เพื่อหาหลักฐานยืนยันจำนวนเงินและการเปิดเผยข้อมูลในงบการเงิน ซึ่งทำได้สองทาง คือวิธีวิเคราะห์เปรียบเทียบเชิงเนื้อหาสาระ และการตรวจสอบรายละเอียด'
+    ]},
+    {h:'Vouching กับ tracing', s:'a3-11', t:[
+      'นี่คือสองคำที่สับสนกันมากที่สุดในบทนี้ ทั้งสองคือการตรวจเอกสารเหมือนกัน ต่างกันแค่ทิศทาง และทิศทางนั่นเองที่กำหนดว่ากำลังทดสอบข้อกำหนดใด',
+      'Vouching เริ่มจากตัวเลขที่มีอยู่แล้วในบัญชี แล้วย้อนกลับไปหาเอกสาร เป็นการถามว่า สิ่งที่บันทึกไว้นี้เกิดขึ้นจริงหรือเปล่า จึงทดสอบ existence หรือ occurrence',
+      'Tracing เริ่มจากเอกสารต้นทาง แล้วตามไปหาบัญชี เป็นการถามว่า สิ่งที่เกิดขึ้นจริงถูกบันทึกครบหรือเปล่า จึงทดสอบ completeness',
+      'วิธีจำง่าย ๆ คือ ถ้าเริ่มจากบัญชีคือถามเรื่องความมีอยู่จริง ถ้าเริ่มจากเอกสารคือถามเรื่องความครบถ้วน'
+    ]},
+    {h:'วิธีวิเคราะห์เปรียบเทียบ', s:'a3-12', t:[
+      'หัวใจของ analytical procedures คือผู้สอบบัญชีสร้างความคาดหวังว่ายอดคงเหลือควรจะเป็นเท่าไร แล้วจึงนำไปเทียบกับยอดที่บันทึกจริง',
+      'ประเด็นที่ออกสอบบ่อยมากคือ วิธีนี้บังคับในขั้นวางแผน และบังคับอีกครั้งในขั้นสอบทานตอนจบงาน ส่วนการใช้เป็นการตรวจสอบเนื้อหาสาระนั้น ใช้ได้แต่ไม่บังคับ',
+      'มีห้ารูปแบบ ตั้งแต่เทียบกับงวดก่อน เทียบกับงบประมาณ ดูความสัมพันธ์ระหว่างบัญชีด้วยกัน เทียบกับสถิติอุตสาหกรรม และเทียบกับข้อมูลที่ไม่ใช่ตัวเงิน เช่น สถิติปริมาณการผลิต'
+    ]},
+    {h:'เอกสารหลักฐานการสอบบัญชี', s:'a3-13', t:[
+      'เอกสารหลักฐานคือบันทึกเป็นลายลักษณ์อักษรที่แสดงฐานของข้อสรุปของผู้สอบบัญชี แบ่งเป็นสองแฟ้ม คือแฟ้มถาวรสำหรับข้อมูลที่มีความสำคัญต่อเนื่อง และแฟ้มปีปัจจุบันสำหรับปีที่ตรวจสอบ',
+      'เกณฑ์ความละเอียดที่ต้องจำคือ ต้องละเอียดพอที่ผู้สอบบัญชีที่มีประสบการณ์ซึ่งไม่เคยเกี่ยวข้องกับงานนี้มาก่อน จะเข้าใจงานที่ทำและทราบว่าใครทำ ใครสอบทาน และเมื่อใด',
+      'ส่วนการเก็บรักษา กิจการที่ไม่ใช่บริษัทมหาชนเก็บ 5 ปี และจัดทำให้เสร็จภายใน 60 วัน ส่วนบริษัทมหาชนเก็บ 7 ปี และจัดทำให้เสร็จภายใน 14 วัน',
+      'จบบทที่ 3 ครับ บทถัดไปจะตอบว่าจะตรวจหนักแค่ไหน ซึ่งคำตอบมาจากความเสี่ยง'
+    ]}
+  ]},
+
+  ch4: { s:'บทที่ 4', t:'บทที่ 4 · การประเมินความเสี่ยง', c:[
+    {h:'แกนของบทนี้', s:'a4-1', t:[
+      'บทที่ 3 วางแผนว่าจะตรวจอย่างไร บทที่ 4 ตอบว่าจะตรวจหนักแค่ไหน คำตอบมาจากความเสี่ยง',
+      'ความเสี่ยงในการสอบบัญชีคือความเสี่ยงที่ผู้สอบบัญชีจะแสดงความเห็นอย่างไม่เหมาะสม คือให้ความเห็นแบบสะอาด ทั้งที่งบการเงินมีการแสดงข้อมูลที่ขัดต่อข้อเท็จจริงอันเป็นสาระสำคัญอยู่',
+      'แยกได้เป็นสามองค์ประกอบ ตามลำดับเวลาที่ข้อผิดพลาดเดินทางผ่าน'
+    ]},
+    {h:'สามองค์ประกอบของความเสี่ยง', s:'a4-2', t:[
+      'ตัวแรกคือความเสี่ยงสืบเนื่อง หรือ inherent risk คือความน่าจะเป็นที่ข้อผิดพลาดหรือการทุจริตจะเกิดขึ้น โดยไม่คำนึงถึงการควบคุมภายใน',
+      'ตัวที่สองคือความเสี่ยงจากการควบคุม หรือ control risk คือความน่าจะเป็นที่การควบคุมภายในของลูกค้าจะไม่ป้องกันหรือตรวจไม่พบสิ่งนั้น',
+      'ตัวที่สามคือความเสี่ยงจากการตรวจสอบ หรือ detection risk คือความน่าจะเป็นที่วิธีการตรวจสอบของผู้สอบบัญชีเองจะตรวจไม่พบ',
+      'ประเด็นสำคัญที่สุดของบทคือ สองตัวแรกเป็นความเสี่ยงฝั่งลูกค้า ผู้สอบบัญชีทำได้แค่ประเมิน เปลี่ยนไม่ได้ ส่วนตัวที่สามเป็นของผู้สอบบัญชีเอง และเป็นตัวเดียวที่ควบคุมได้'
+    ]},
+    {h:'ความเสี่ยงจากการแสดงข้อมูลที่ขัดต่อข้อเท็จจริง', s:'a4-1', t:[
+      'ในแผนภาพจะเห็นแถบที่ครอบ inherent risk กับ control risk ไว้ด้วยกัน เขียนว่า risk of material misstatement หรือเรียกย่อว่า RMM',
+      'RMM จึงเท่ากับ inherent risk คูณ control risk เป็นความเสี่ยงฝั่งลูกค้าทั้งหมด',
+      'ส่วน detection risk อยู่นอกแถบนี้ เพราะเป็นความเสี่ยงของผู้สอบบัญชีเอง ข้อสอบชอบถามว่า RMM ประกอบด้วยอะไร คำตอบคือ IR คูณ CR ไม่รวม DR'
+    ]},
+    {h:'แบบจำลองความเสี่ยง', s:'a4-3', t:[
+      'แบบจำลองเขียนว่า AR เท่ากับ IR คูณ CR คูณ DR อ่านจากซ้ายไปขวาแล้วจะเห็นบทบาทของแต่ละตัว',
+      'AR เป็นตัวที่ผู้สอบบัญชีกำหนดเอง ตั้งไว้ที่ระดับต่ำหรือต่ำมาก ส่วน IR และ CR เป็นตัวที่ประเมิน และ DR เป็นตัวที่คำนวณออกมา',
+      'จัดรูปใหม่จะได้ว่า DR เท่ากับ AR หารด้วย IR คูณ CR',
+      'ตรรกะที่ต้องเข้าใจ ไม่ใช่ท่องจำ คือ เมื่อความเสี่ยงฝั่งลูกค้าสูงขึ้น และ AR ถูกตั้งไว้คงที่ ตัวเดียวที่ปรับได้คือ DR ซึ่งต้องต่ำลง และ DR ที่ต่ำลงแปลว่าต้องทำงานตรวจสอบหนักขึ้น'
+    ]},
+    {h:'DR กระทบลักษณะ เวลา และขอบเขต', s:'a4-4', t:[
+      'เมื่อรู้ว่า DR ที่ยอมรับได้เป็นเท่าไร ก็แปลงเป็นแผนงานจริงได้ทันที',
+      'ถ้ายอมให้ DR ต่ำ แปลว่าต้องใช้วิธีที่มีประสิทธิผลมากขึ้น ทดสอบ ณ วันสิ้นงวด และทดสอบมากขึ้น',
+      'ถ้ายอมให้ DR สูง ก็ผ่อนลงได้ คือใช้วิธีที่มีประสิทธิผลน้อยลง ทดสอบระหว่างงวดได้ และทดสอบน้อยลง',
+      'เหตุผลที่ความเสี่ยงสูงต้องตรวจตอนสิ้นงวด เพราะถ้าตรวจระหว่างงวด จะยังเหลือช่วงเวลาที่ผู้สอบบัญชีไม่ได้ดู ยิ่งเสี่ยงมาก ช่องว่างนั้นยิ่งอันตราย',
+      'ในหน้าเว็บมีเครื่องคำนวณให้ลองเลือกระดับ AR IR และ CR แล้วดูว่า DR เปลี่ยนไปอย่างไร ลองเล่นดูจะเข้าใจเร็วขึ้นมาก'
+    ]},
+    {h:'ความเสี่ยงสองแบบใน detection risk', s:'a4-2', t:[
+      'Sampling risk คือความเสี่ยงที่เลือกตัวอย่างมาผิด คือตัวอย่างที่หยิบมาไม่เป็นตัวแทนของประชากร',
+      'Nonsampling risk ไม่เกี่ยวกับการเลือกตัวอย่างเลย แต่เกิดจากผู้สอบบัญชีเองสรุปผิด เช่น ใช้วิธีตรวจสอบผิดวิธี หรือตีความหลักฐานที่ได้มาผิด',
+      'สองคำนี้ถูกสลับกันในข้อสอบบ่อยมาก ให้จำที่คำว่า sampling ซึ่งแปลว่าเกี่ยวกับตัวอย่าง'
+    ]},
+    {h:'การทุจริตและเจตนา', s:'a4-5', t:[
+      'การทุจริตคือการจงใจแสดงข้อเท็จจริงอันเป็นเท็จในเรื่องที่มีสาระสำคัญ โดยมีเจตนาให้ผู้อื่นเชื่อและกระทำตาม จนได้รับความเสียหาย',
+      'สิ่งเดียวที่แยกข้อผิดพลาดออกจากการทุจริต คือเจตนา ตัวเลขในงบอาจผิดเท่ากันทุกประการ แต่ถ้ามีเจตนาก็คือทุจริต',
+      'ปัจจัยที่บ่งชี้ความเสี่ยงจากการรายงานเท็จมีสามกลุ่ม คือลักษณะและอิทธิพลของผู้บริหาร สภาวะอุตสาหกรรม และลักษณะการดำเนินงานกับความมั่นคงทางการเงิน'
+    ]},
+    {h:'ประเภทของการทุจริต', s:'a4-6', t:[
+      'มีสองประเภทใหญ่ ต่างกันที่ใครเป็นผู้เสียหาย และอะไรถูกขโมย',
+      'ประเภทแรกคือการรายงานทางการเงินที่เป็นเท็จ ผู้กระทำมักเป็นผู้บริหาร ผู้เสียหายคือผู้ลงทุนและเจ้าหนี้',
+      'ประเภทที่สองคือการยักยอกสินทรัพย์ ผู้กระทำมักเป็นพนักงาน ผู้เสียหายคือตัวกิจการเอง',
+      'ในกลุ่มการยักยอกมีศัพท์สี่คำ ที่ต้องแยกให้ออกคือ embezzlement ซึ่งเป็นการยักยอกทรัพย์สินที่ได้รับมอบหมายให้ดูแลอยู่แล้ว กับ larceny ซึ่งเป็นการลักทรัพย์ที่ไม่ได้อยู่ในความดูแลของผู้กระทำ'
+    ]},
+    {h:'การประเมินความเสี่ยงสืบเนื่อง', s:'a4-7', t:[
+      'ประโยคเปิดของหัวข้อนี้คือ การประเมินความเสี่ยงเป็นรากฐานของกระบวนการสอบบัญชีทั้งหมด',
+      'ความเสี่ยงสืบเนื่องประเมินลงลึกถึงระดับข้อกำหนด ไม่ใช่ระดับบัญชีอย่างเดียว',
+      'ตารางที่ควรจำคือ ตารางที่ให้ข้อผิดพลาดมาแล้วถามว่าละเมิดข้อกำหนดใด เช่น บันทึกรายการที่ไม่มีอยู่จริงคือ occurrence รายการที่มีจริงแต่ตกหล่นคือ completeness บันทึกผิดบัญชีคือ classification และบันทึกผิดงวดคือ cutoff',
+      'ส่วนปัจจัยที่ทำให้บัญชีเสี่ยงมีห้าข้อ คือขนาดของยอด สภาพคล่อง ปริมาณรายการ ความซับซ้อน และประมาณการที่ต้องใช้ดุลยพินิจ'
+    ]},
+    {h:'ขั้นตอนการทำความเข้าใจและระดมสมอง', s:'a4-9', t:[
+      'วิธีวิเคราะห์เปรียบเทียบขั้นต้นมีห้าขั้น คือสร้างความคาดหวัง นิยามส่วนต่างที่มีนัยสำคัญ เปรียบเทียบกับยอดจริง ตรวจสอบส่วนต่าง และจัดทำเอกสาร',
+      'ขั้นที่สองสำคัญมาก เพราะต้องกำหนดเกณฑ์ก่อนเห็นตัวเลขจริง มิฉะนั้นเกณฑ์จะถูกปรับตามผลลัพธ์',
+      'การประชุมระดมสมองของทีมเป็นวิธีการที่บังคับ และต้องคุยกันต่อเนื่องตลอดงาน ไม่ใช่ประชุมครั้งเดียวตอนต้นแล้วจบ',
+      'ส่วนการสอบถาม ต้องถามทั้งผู้บริหาร ผู้ตรวจสอบภายใน กรรมการ คณะกรรมการตรวจสอบ และพนักงานอื่น ข้อสุดท้ายสำคัญ เพราะถ้าความเสี่ยงคือตัวผู้บริหารเอง การถามแต่ผู้บริหารย่อมไม่ได้คำตอบ'
+    ]},
+    {h:'ความเสี่ยงที่มีนัยสำคัญ', s:'a4-12', t:[
+      'มาตรฐานกำหนดข้อสันนิษฐานไว้ข้อหนึ่ง คือให้สันนิษฐานไว้ก่อนเสมอว่า การรับรู้รายได้ที่ไม่เหมาะสมเป็นความเสี่ยงจากการทุจริต',
+      'ผู้สอบบัญชีไม่ต้องรอให้มีเหตุอันควรสงสัยก่อน และถ้าจะสรุปว่าไม่มีความเสี่ยงนี้ ต้องบันทึกคำอธิบายไว้เป็นเอกสาร',
+      'อีกเรื่องคือการล้มล้างการควบคุมโดยผู้บริหาร รับมือด้วยสามวิธี คือตรวจรายการในสมุดรายวันทั่วไปและรายการปรับปรุง สอบทานประมาณการว่ามีความเอนเอียงหรือไม่ และประเมินเหตุผลทางธุรกิจของรายการผิดปกติที่มีสาระสำคัญ'
+    ]},
+    {h:'การสื่อสารและการไม่ปฏิบัติตามกฎหมาย', s:'a4-14', t:[
+      'เรื่องการสื่อสารความเสี่ยงทุจริต มีสามหลัก หนึ่ง ต้องระมัดระวังอย่างยิ่ง สอง ต้องรายงานไปยังระดับที่สูงกว่าผู้เกี่ยวข้องอย่างน้อยหนึ่งระดับ',
+      'และสาม การทุจริตใด ๆ ที่กระทำโดยผู้บริหารถือว่ามีสาระสำคัญเสมอ ไม่ว่าจำนวนเงินจะเล็กเพียงใด และต้องรายงานต่อผู้มีหน้าที่กำกับดูแล ซึ่งโดยปกติคือคณะกรรมการตรวจสอบ',
+      'ส่วนการไม่ปฏิบัติตามกฎหมาย แยกสองแบบ แบบมีผลโดยตรง เช่น การหลบเลี่ยงภาษีเงินได้ ผู้สอบบัญชีต้องออกแบบวิธีการตรวจสอบเพื่อให้ความเชื่อมั่นอย่างสมเหตุสมผลว่าจะตรวจพบ',
+      'แบบมีผลโดยอ้อม เช่น การใช้ข้อมูลภายในซื้อขายหลักทรัพย์ หรือกฎเกณฑ์สิ่งแวดล้อม ผู้สอบบัญชีเพียงติดตามผลเมื่อสงสัยว่ามีการฝ่าฝืนที่มีสาระสำคัญ ไม่ต้องออกแบบวิธีค้นหาโดยเฉพาะ'
+    ]},
+    {h:'สรุปบทที่ 4', s:'a4-15', t:[
+      'ปิดท้ายด้วยเอกสาร ผู้สอบบัญชีต้องบันทึกการอภิปรายกับทีม วิธีที่ใช้ระบุและประเมินความเสี่ยง ความเสี่ยงที่ระบุได้กับการตอบสนอง และคำอธิบายว่าเหตุใดการรับรู้รายได้ที่ไม่เหมาะสมจึงไม่ถือเป็นความเสี่ยง หากสรุปเช่นนั้น',
+      'บันทึกกลยุทธ์การสอบบัญชีเป็นฐานในการจัดทำแผนงานสอบบัญชี และมาตรฐานบังคับให้ต้องมีแผนงานเป็นลายลักษณ์อักษรในทุกงาน',
+      'สรุปทั้งบท ให้จำสามอย่าง หนึ่ง AR เท่ากับ IR คูณ CR คูณ DR สอง มีแต่ DR ที่ควบคุมได้ และสาม เจตนาคือสิ่งเดียวที่แยกข้อผิดพลาดออกจากการทุจริต จบบทที่ 4 ครับ'
+    ]}
+  ]}
+};
+</script>
+
+<!-- ============================================================
+     เครื่องเล่นเสียงบรรยายประจำบท · แปะต่อท้าย index.html ของแต่ละวิชา
+     ต้องประกาศ window.CLASSROOM_NARRATION ไว้ก่อนบล็อกนี้ รูปแบบ
+       { "<id ของแท็บ>": { t:"ชื่อบท", c:[ {h:"หัวข้อ", s:"<id ของ section>", t:["ประโยค", ...]} ] } }
+     ใช้เสียงพากย์ของระบบผ่าน Web Speech API จึงไม่ต้องมีไฟล์เสียงและไม่ต้องต่อเน็ต
+     ============================================================ -->
+<style>
+.au-fab{position:fixed; left:18px; bottom:68px; z-index:200; display:flex; align-items:center; gap:8px;
+  font:inherit; font-size:.84rem; font-weight:600; cursor:pointer; padding:10px 16px; border-radius:99px;
+  border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink-2); box-shadow:var(--shadow)}
+.au-fab:hover{border-color:var(--accent); color:var(--accent)}
+.au-fab svg{width:15px; height:15px; flex:none}
+.au-fab.on{border-color:var(--accent); color:var(--accent); background:var(--accent-soft)}
+.au-fab[hidden]{display:none !important}
+
+.au-panel{position:fixed; left:18px; bottom:18px; z-index:201; width:min(440px, calc(100vw - 36px));
+  max-height:min(640px, calc(100vh - 36px)); display:flex; flex-direction:column;
+  border:1px solid var(--rule-strong); border-radius:8px; background:var(--paper); box-shadow:var(--shadow); overflow:hidden}
+.au-panel[hidden]{display:none !important}
+.au-head{flex:none; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--surface)}
+.au-title{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; font-size:.95rem; line-height:1.35}
+.au-sub{font-family:"IBM Plex Mono",monospace; font-size:.65rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink-3); margin-top:2px}
+.au-x{appearance:none; border:0; background:none; cursor:pointer; color:var(--ink-3); font-size:1.35rem;
+  line-height:1; padding:2px 7px; border-radius:4px}
+.au-x:hover{color:var(--ink); background:var(--surface-2)}
+
+.au-chaps{flex:none; display:flex; gap:5px; overflow-x:auto; padding:9px 14px; border-bottom:1px solid var(--rule);
+  background:var(--surface); scrollbar-width:none}
+.au-chaps::-webkit-scrollbar{display:none}
+.au-chap{appearance:none; font:inherit; font-size:.76rem; font-weight:600; white-space:nowrap; cursor:pointer;
+  padding:4px 11px; border-radius:99px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2)}
+.au-chap:hover{border-color:var(--accent); color:var(--accent)}
+.au-chap[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+
+.au-body{flex:1; overflow-y:auto; padding:12px 14px 14px}
+.au-cue{margin-bottom:14px}
+.au-cue:last-child{margin-bottom:0}
+.au-ch{appearance:none; font:inherit; text-align:left; width:100%; cursor:pointer; border:0; background:none;
+  font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; padding:3px 0 5px; display:flex; gap:8px; align-items:baseline}
+.au-ch:hover{color:var(--accent)}
+.au-ch b{font-family:inherit; color:var(--ink-2); font-weight:600}
+.au-line{font-size:.88rem; line-height:1.72; color:var(--ink-2); padding:3px 8px; border-radius:3px;
+  border-left:2px solid transparent; cursor:pointer}
+.au-line:hover{background:var(--surface)}
+.au-line.now{background:var(--accent-soft); color:var(--ink); border-left-color:var(--accent); font-weight:500}
+.au-line.done{color:var(--ink-3)}
+
+.au-foot{flex:none; border-top:1px solid var(--rule); background:var(--surface); padding:10px 14px 12px}
+.au-ctrl{display:flex; align-items:center; gap:7px}
+.au-b{appearance:none; font:inherit; font-size:.82rem; font-weight:600; cursor:pointer; padding:7px 11px;
+  border-radius:4px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2);
+  display:flex; align-items:center; gap:6px}
+.au-b:hover:not(:disabled){border-color:var(--accent); color:var(--accent)}
+.au-b:disabled{opacity:.4; cursor:not-allowed}
+.au-b.play{background:var(--accent); border-color:var(--accent); color:var(--paper); min-width:96px; justify-content:center}
+.au-b.play:hover{filter:brightness(1.08); color:var(--paper)}
+.au-b svg{width:13px; height:13px; flex:none}
+.au-pos{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--ink-3);
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+.au-bar{height:3px; border-radius:99px; background:var(--surface-2); margin:10px 0 9px; overflow:hidden}
+.au-bar i{display:block; height:100%; background:var(--accent); width:0; transition:width .25s}
+.au-opt{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; font-size:.76rem; color:var(--ink-3)}
+.au-rate{display:flex; gap:3px}
+.au-rate button{appearance:none; font:inherit; font-size:.72rem; font-weight:600; cursor:pointer; padding:3px 8px;
+  border-radius:3px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-3)}
+.au-rate button[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.au-opt select{font:inherit; font-size:.75rem; max-width:158px; padding:3px 6px; border-radius:3px;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2)}
+.au-opt label{display:flex; align-items:center; gap:5px; cursor:pointer}
+.au-dl{appearance:none; font:inherit; font-size:.75rem; font-weight:600; cursor:pointer; background:none; border:0;
+  color:var(--ink-3); text-decoration:underline; text-underline-offset:3px; padding:0}
+.au-dl:hover{color:var(--accent)}
+.au-warn{font-size:.78rem; color:var(--ink-3); line-height:1.6; padding:10px 12px; margin-bottom:12px;
+  border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:3px}
+.au-warn b{color:var(--ink)}
+@media (max-width:520px){
+  .au-panel{left:9px; right:9px; bottom:9px; width:auto; max-height:calc(100vh - 18px)}
+  .au-fab{left:9px; bottom:62px}
+}
+@media (prefers-reduced-motion:reduce){.au-bar i{transition:none}}
+</style>
+
+<button type="button" class="au-fab" id="au-fab" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+  </svg>
+  ฟังสรุปบท
+</button>
+
+<div class="au-panel" id="au-panel" hidden role="dialog" aria-label="เครื่องเล่นเสียงบรรยายประจำบท">
+  <div class="au-head">
+    <div>
+      <div class="au-title" id="au-title">ฟังสรุปบท</div>
+      <div class="au-sub" id="au-sub">เสียงอ่านจากระบบของเครื่อง</div>
+    </div>
+    <button type="button" class="au-x" id="au-close" aria-label="ปิด">&times;</button>
+  </div>
+  <div class="au-chaps" id="au-chaps" role="group" aria-label="เลือกบท"></div>
+  <div class="au-body" id="au-body"></div>
+  <div class="au-foot">
+    <div class="au-ctrl">
+      <button type="button" class="au-b" id="au-prev" aria-label="ย่อหน้าก่อนหน้า">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 5v14l-9-7 9-7zM7 5h2v14H7z"/></svg>
+      </button>
+      <button type="button" class="au-b play" id="au-play">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" id="au-icon"><path d="M7 4l13 8-13 8V4z"/></svg>
+        <span id="au-plabel">เล่น</span>
+      </button>
+      <button type="button" class="au-b" id="au-next" aria-label="ย่อหน้าถัดไป">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5l9 7-9 7V5zM15 5h2v14h-2z"/></svg>
+      </button>
+      <button type="button" class="au-b" id="au-stop" aria-label="หยุดและกลับไปต้นบท">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 5h14v14H5z"/></svg>
+      </button>
+      <span class="au-pos" id="au-pos">0 / 0</span>
+    </div>
+    <div class="au-bar"><i id="au-fill"></i></div>
+    <div class="au-opt">
+      <span class="au-rate" role="group" aria-label="ความเร็วเสียง">
+        <button type="button" data-rate="0.8" aria-pressed="false">0.8&times;</button>
+        <button type="button" data-rate="1" aria-pressed="true">1&times;</button>
+        <button type="button" data-rate="1.2" aria-pressed="false">1.2&times;</button>
+        <button type="button" data-rate="1.5" aria-pressed="false">1.5&times;</button>
+      </span>
+      <select id="au-voice" aria-label="เลือกเสียง"></select>
+      <label><input type="checkbox" id="au-follow" checked> เลื่อนหน้าตาม</label>
+      <button type="button" class="au-dl" id="au-dl">ดาวน์โหลดบทบรรยาย</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var DATA = window.CLASSROOM_NARRATION;
+  if (!DATA || !Object.keys(DATA).length) return;
+
+  var COURSE = (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
+  var K = 'classroom-audio-' + COURSE;
+  var synth = window.speechSynthesis || null;
+
+  var fab    = document.getElementById('au-fab');
+  var panel  = document.getElementById('au-panel');
+  var chaps  = document.getElementById('au-chaps');
+  var bodyEl = document.getElementById('au-body');
+  var titleEl= document.getElementById('au-title');
+  var subEl  = document.getElementById('au-sub');
+  var posEl  = document.getElementById('au-pos');
+  var fillEl = document.getElementById('au-fill');
+  var playBt = document.getElementById('au-play');
+  var plabel = document.getElementById('au-plabel');
+  var icon   = document.getElementById('au-icon');
+  var voiceSel = document.getElementById('au-voice');
+  var followCb = document.getElementById('au-follow');
+
+  var ICON_PLAY  = 'M7 4l13 8-13 8V4z';
+  var ICON_PAUSE = 'M6 4h4v16H6zM14 4h4v16h-4z';
+
+  var keys = Object.keys(DATA);
+  var cur = keys[0];      // บทที่กำลังเปิดอยู่ในเครื่องเล่น
+  var lines = [];         // ประโยคทั้งหมดของบทปัจจุบัน
+  var idx = 0;            // ประโยคที่กำลังอ่าน
+  var playing = false;
+  var voices = [];
+  var rate = 1;
+  var chosenVoice = '';
+  var stopping = false;
+
+  /* ---------- จำค่าที่ผู้ใช้ตั้งไว้ ---------- */
+  function load(){
+    try {
+      var raw = localStorage.getItem(K);
+      if (!raw) return {};
+      return JSON.parse(raw) || {};
+    } catch (e){ return {}; }
+  }
+  function save(){
+    try {
+      var st = load();
+      st.rate = rate; st.voice = chosenVoice; st.follow = followCb.checked;
+      st.at = st.at || {};
+      st.at[cur] = idx;
+      localStorage.setItem(K, JSON.stringify(st));
+    } catch (e){ /* โหมดส่วนตัวหรือปิดการเก็บข้อมูล — ข้ามไป */ }
+  }
+  var saved = load();
+  if (saved.rate) rate = saved.rate;
+  if (saved.voice) chosenVoice = saved.voice;
+  if (saved.follow === false) followCb.checked = false;
+
+  /* ---------- แปลงข้อมูลบทเป็นรายการประโยค ---------- */
+  function build(key){
+    cur = key;
+    lines = [];
+    var ch = DATA[key];
+    (ch.c || []).forEach(function(cue, ci){
+      (cue.t || []).forEach(function(txt, li){
+        lines.push({ text: txt, sec: cue.s || '', head: li === 0 ? cue.h : '', ci: ci });
+      });
+    });
+    titleEl.textContent = ch.t || 'ฟังสรุปบท';
+    var words = lines.reduce(function(n, l){ return n + l.text.length; }, 0);
+    var mins = Math.max(1, Math.round(words / 800));
+    subEl.textContent = lines.length + ' ย่อหน้า · ประมาณ ' + mins + ' นาที';
+    render();
+    var st = load();
+    idx = (st.at && typeof st.at[key] === 'number' && st.at[key] < lines.length) ? st.at[key] : 0;
+    mark();
+  }
+
+  function render(){
+    bodyEl.innerHTML = '';
+    if (!synth){
+      var w = document.createElement('div');
+      w.className = 'au-warn';
+      w.innerHTML = '<b>เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน</b><br>อ่านบทบรรยายด้านล่างได้ตามปกติ หรือกดดาวน์โหลดบทบรรยายไปเปิดในแอปอ่านออกเสียงอื่น';
+      bodyEl.appendChild(w);
+    }
+    var cueEl = null, lastCi = -1;
+    lines.forEach(function(l, i){
+      if (l.ci !== lastCi){
+        lastCi = l.ci;
+        cueEl = document.createElement('div');
+        cueEl.className = 'au-cue';
+        var h = document.createElement('button');
+        h.type = 'button'; h.className = 'au-ch';
+        h.innerHTML = '<span>' + (l.ci + 1) + '</span><b>' + esc(l.head || '') + '</b>';
+        h.addEventListener('click', function(){ jump(i); });
+        cueEl.appendChild(h);
+        bodyEl.appendChild(cueEl);
+      }
+      var p = document.createElement('div');
+      p.className = 'au-line';
+      p.dataset.i = String(i);
+      p.textContent = l.text;
+      p.addEventListener('click', function(){ jump(i); });
+      cueEl.appendChild(p);
+    });
+  }
+  function esc(t){
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function mark(){
+    var all = bodyEl.querySelectorAll('.au-line');
+    for (var i = 0; i < all.length; i++){
+      all[i].classList.toggle('now', i === idx);
+      all[i].classList.toggle('done', i < idx);
+    }
+    posEl.textContent = (lines.length ? idx + 1 : 0) + ' / ' + lines.length;
+    fillEl.style.width = lines.length ? ((idx / lines.length) * 100) + '%' : '0';
+    var el = all[idx];
+    if (el && panel.hidden === false){
+      var top = el.offsetTop - bodyEl.clientHeight / 2 + el.offsetHeight;
+      bodyEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  }
+
+  /* ---------- เลื่อนหน้าเว็บตามหัวข้อที่กำลังอ่าน ---------- */
+  var lastSec = '';
+  function follow(){
+    if (!followCb.checked) return;
+    var sec = lines[idx] && lines[idx].sec;
+    if (!sec || sec === lastSec) return;
+    var el = document.getElementById(sec);
+    if (!el) return;
+    lastSec = sec;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------- เสียง ---------- */
+  function loadVoices(){
+    if (!synth) return;
+    voices = synth.getVoices() || [];
+    var th = voices.filter(function(v){ return /^th/i.test(v.lang); });
+    var list = th.length ? th : voices;
+    voiceSel.innerHTML = '';
+    if (!list.length){
+      var o = document.createElement('option');
+      o.value = ''; o.textContent = 'เสียงเริ่มต้นของระบบ';
+      voiceSel.appendChild(o);
+      return;
+    }
+    list.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v.name;
+      o.textContent = v.name + (th.length ? '' : ' · ' + v.lang);
+      voiceSel.appendChild(o);
+    });
+    if (chosenVoice && list.some(function(v){ return v.name === chosenVoice; })) voiceSel.value = chosenVoice;
+    else chosenVoice = voiceSel.value;
+    if (!th.length){
+      subEl.textContent = 'ไม่พบเสียงภาษาไทยในเครื่องนี้ — คำอ่านอาจเพี้ยน';
+    }
+  }
+  if (synth){
+    loadVoices();
+    if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+  }
+  voiceSel.addEventListener('change', function(){
+    chosenVoice = voiceSel.value; save();
+    if (playing){ restartCurrent(); }
+  });
+
+  /* ---------- เล่น ---------- */
+  var keepAlive = null;
+  function speakCurrent(){
+    if (!synth || idx >= lines.length){ stop(); return; }
+    var u = new SpeechSynthesisUtterance(lines[idx].text);
+    u.lang = 'th-TH';
+    u.rate = rate;
+    if (chosenVoice){
+      var v = voices.filter(function(x){ return x.name === chosenVoice; })[0];
+      if (v){ u.voice = v; u.lang = v.lang; }
+    }
+    u.onend = function(){
+      if (stopping) return;
+      idx++;
+      save();
+      if (idx >= lines.length){ finish(); return; }
+      mark(); follow();
+      speakCurrent();
+    };
+    u.onerror = function(e){
+      // interrupted / canceled เกิดจากการกดหยุดเอง ไม่ต้องแจ้ง
+      if (stopping || !e || e.error === 'interrupted' || e.error === 'canceled') return;
+      setUi(false);
+    };
+    synth.speak(u);
+  }
+  function restartCurrent(){
+    stopping = true; synth.cancel(); stopping = false;
+    setTimeout(function(){ if (playing) speakCurrent(); }, 60);
+  }
+  function setUi(on){
+    playing = on;
+    plabel.textContent = on ? 'หยุดชั่วคราว' : 'เล่น';
+    icon.firstChild.setAttribute('d', on ? ICON_PAUSE : ICON_PLAY);
+    fab.classList.toggle('on', on);
+    if (on){
+      // Chrome หยุดสังเคราะห์เสียงเองเมื่อเล่นต่อเนื่องนาน จึงต้องปลุกเป็นระยะ
+      if (keepAlive) clearInterval(keepAlive);
+      keepAlive = setInterval(function(){
+        if (!playing || !synth) return;
+        if (synth.speaking && !synth.paused){ synth.pause(); synth.resume(); }
+      }, 9000);
+    } else if (keepAlive){
+      clearInterval(keepAlive); keepAlive = null;
+    }
+  }
+  function play(){
+    if (!synth || !lines.length) return;
+    if (idx >= lines.length) idx = 0;
+    setUi(true); mark(); follow();
+    stopping = true; synth.cancel(); stopping = false;
+    setTimeout(speakCurrent, 60);
+  }
+  function pause(){
+    if (!synth) return;
+    stopping = true; synth.cancel(); stopping = false;
+    setUi(false);
+  }
+  function stop(){
+    if (synth){ stopping = true; synth.cancel(); stopping = false; }
+    setUi(false);
+  }
+  function finish(){
+    setUi(false);
+    idx = lines.length ? lines.length - 1 : 0;
+    mark(); save();
+  }
+  function jump(i){
+    idx = Math.max(0, Math.min(i, lines.length - 1));
+    mark(); follow(); save();
+    if (playing) restartCurrent();
+  }
+
+  playBt.addEventListener('click', function(){ playing ? pause() : play(); });
+  document.getElementById('au-prev').addEventListener('click', function(){ jump(idx - 1); });
+  document.getElementById('au-next').addEventListener('click', function(){ jump(idx + 1); });
+  document.getElementById('au-stop').addEventListener('click', function(){ stop(); jump(0); });
+  followCb.addEventListener('change', save);
+
+  Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(b){
+    b.setAttribute('aria-pressed', String(parseFloat(b.dataset.rate) === rate));
+    b.addEventListener('click', function(){
+      rate = parseFloat(b.dataset.rate);
+      Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(x){
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+      save();
+      if (playing) restartCurrent();
+    });
+  });
+
+  /* ---------- เลือกบท · ผูกกับแท็บของหน้า ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function tabFor(key){
+    return tabs.filter(function(t){ return t.getAttribute('aria-controls') === key; })[0] || null;
+  }
+  keys.forEach(function(k){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'au-chap'; b.dataset.k = k;
+    b.textContent = DATA[k].s || DATA[k].t;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function(){
+      if (k === cur) return;
+      stop();
+      var t = tabFor(k);
+      if (t) t.click();
+      pick(k);
+    });
+    chaps.appendChild(b);
+  });
+  function pick(k){
+    if (!DATA[k]) return;
+    build(k);
+    lastSec = '';
+    Array.prototype.forEach.call(chaps.children, function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.k === k));
+    });
+  }
+  // เปลี่ยนแท็บของหน้าแล้วให้เครื่องเล่นตามไปด้วย ถ้ายังไม่ได้กดเล่น
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var k = t.getAttribute('aria-controls');
+      if (playing || !DATA[k] || k === cur) return;
+      pick(k);
+    });
+  });
+
+  /* ---------- ดาวน์โหลดบทบรรยาย ---------- */
+  document.getElementById('au-dl').addEventListener('click', function(){
+    var ch = DATA[cur];
+    var out = [ch.t, ''];
+    (ch.c || []).forEach(function(cue, i){
+      out.push((i + 1) + '. ' + cue.h);
+      (cue.t || []).forEach(function(x){ out.push('   ' + x); });
+      out.push('');
+    });
+    var blob = new Blob([out.join('\n')], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'narration-' + COURSE + '-' + cur + '.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  });
+
+  /* ---------- เปิดปิดแผง ---------- */
+  function open(){
+    panel.hidden = false; fab.hidden = true;
+    mark();
+  }
+  function close(){
+    panel.hidden = true; fab.hidden = false;
+  }
+  fab.addEventListener('click', open);
+  document.getElementById('au-close').addEventListener('click', function(){ stop(); close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !panel.hidden){ stop(); close(); }
+  });
+  window.addEventListener('beforeunload', function(){ if (synth) synth.cancel(); });
+
+  /* ---------- เริ่มต้น ---------- */
+  var open0 = null;
+  tabs.forEach(function(t){
+    if (t.getAttribute('aria-selected') === 'true') open0 = t.getAttribute('aria-controls');
+  });
+  pick(DATA[open0] ? open0 : keys[0]);
+  fab.hidden = false;
+})();
+</script>

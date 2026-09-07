@@ -4337,3 +4337,712 @@ footer p{max-width:70ch; margin-bottom:6px}
   markFab();
 })();
 </script>
+
+<script>
+window.CLASSROOM_NARRATION = {
+  ch1: { s:'บทที่ 1', t:'บทที่ 1 · บัญชีสำนักงานใหญ่และสาขา', c:[
+    {h:'บัญชีระหว่างกัน', s:'c1-1', t:[
+      'ยินดีต้อนรับสู่วิชาการบัญชีขั้นสูง 1 ครับ บทแรกว่าด้วยบัญชีสำนักงานใหญ่และสาขา',
+      'หัวใจของบทนี้คือบัญชีคู่หนึ่งที่เรียกว่าบัญชีระหว่างกัน ในสมุดของสำนักงานใหญ่จะมีบัญชีชื่อ สาขา ซึ่งเป็นสินทรัพย์ มียอดปกติด้านเดบิต',
+      'ส่วนในสมุดของสาขาจะมีบัญชีคู่กันชื่อ สำนักงานใหญ่ ซึ่งเป็นหนี้สินหรือส่วนของเจ้าของ มียอดปกติด้านเครดิต',
+      'สองบัญชีนี้เป็นเหมือนกระจกเงาของกันและกัน ทุกครั้งที่มีรายการระหว่างกัน ต้องบันทึกทั้งสองฝั่งให้ยอดเท่ากันเสมอ'
+    ]},
+    {h:'อุปกรณ์ที่สาขาใช้', s:'c1-3', t:[
+      'เรื่องอุปกรณ์ที่สาขาใช้แบ่งได้สี่กรณี ขึ้นกับสองคำถาม คือใครเป็นคนซื้อ และบันทึกไว้ในสมุดของใคร',
+      'หลักที่ใช้ตัดสินคือ สินทรัพย์ควรอยู่ในสมุดของหน่วยงานที่ควบคุมและใช้ประโยชน์จริง',
+      'แต่ในทางปฏิบัติ หลายกิจการเลือกบันทึกไว้ที่สำนักงานใหญ่ทั้งหมด เพื่อความสะดวกในการควบคุมและคิดค่าเสื่อมราคา',
+      'ให้ดูโจทย์ให้ดีว่ากำหนดวิธีไว้อย่างไร แล้วบันทึกตามนั้นให้สม่ำเสมอทั้งสองฝั่ง'
+    ]},
+    {h:'งบทดลองและการปิดบัญชี', s:'c1-5', t:[
+      'ตอนสิ้นงวด สาขาจะปิดบัญชีรายได้และค่าใช้จ่ายเข้าบัญชีกำไรขาดทุน แล้วโอนกำไรสุทธิเข้าบัญชีสำนักงานใหญ่',
+      'ส่วนสำนักงานใหญ่ก็รับรู้กำไรจากสาขาโดยเดบิตบัญชีสาขา และเครดิตบัญชีกำไรจากสาขา',
+      'จุดสำคัญคือ หลังปิดบัญชีแล้ว ยอดบัญชีสาขาในสมุดใหญ่ กับยอดบัญชีสำนักงานใหญ่ในสมุดสาขา ต้องยังคงเท่ากันเสมอ'
+    ]},
+    {h:'กระดาษทำการงบการเงินรวม', s:'c1-7', t:[
+      'กระดาษทำการเป็นเครื่องมือรวมงบของสำนักงานใหญ่กับสาขาเข้าด้วยกัน เพื่อแสดงเป็นกิจการเดียว',
+      'รายการตัดบัญชีที่สำคัญที่สุดคือ ตัดบัญชีสาขากับบัญชีสำนักงานใหญ่ออกจากกัน เพราะเป็นรายการภายในกิจการเดียวกัน จะแสดงต่อบุคคลภายนอกไม่ได้',
+      'และต้องตัดบัญชีสินค้าส่งไปสาขา กับสินค้ารับจากสำนักงานใหญ่ ออกจากกันด้วยเหตุผลเดียวกัน'
+    ]},
+    {h:'ราคาสินค้าที่ส่งไปสาขา', s:'c1-8', t:[
+      'สำนักงานใหญ่ส่งสินค้าไปให้สาขาได้สองราคา',
+      'แบบแรกคือส่งในราคาทุน ซึ่งง่ายที่สุด เพราะไม่มีกำไรระหว่างกันเกิดขึ้น',
+      'แบบที่สองคือส่งในราคาสูงกว่าทุน ซึ่งทำให้เกิดกำไรที่ยังไม่เกิดขึ้นจริงฝังอยู่ในสินค้าคงเหลือของสาขา',
+      'ในกรณีที่สอง ตอนทำงบรวมต้องตัดกำไรส่วนนี้ออก มิฉะนั้นกิจการจะรายงานกำไรจากการขายให้ตัวเอง ซึ่งไม่ถูกต้อง'
+    ]},
+    {h:'ยอดไม่ตรงกันและค่าขนส่งระหว่างสาขา', s:'c1-9', t:[
+      'ยอดบัญชีระหว่างกันไม่ตรงกันได้จากหลายสาเหตุ เช่น รายการที่ฝ่ายหนึ่งบันทึกแล้วแต่อีกฝ่ายยังไม่ได้บันทึก หรือบันทึกผิดจำนวน',
+      'วิธีแก้คือทำกระดาษกระทบยอด ไล่หาสาเหตุทีละรายการ แล้วปรับปรุงให้ถูกต้อง',
+      'ส่วนค่าขนส่งระหว่างสาขา หลักคือ ค่าขนส่งที่ควรรับรู้เป็นต้นทุนสินค้าคือค่าขนส่งเสมือนว่าส่งตรงจากสำนักงานใหญ่ไปยังสาขาปลายทาง',
+      'ส่วนที่เกินจากนั้น ซึ่งเกิดจากการส่งอ้อมผ่านสาขาแรก ให้รับรู้เป็นค่าใช้จ่ายของสำนักงานใหญ่ทันที จบบทที่ 1 ครับ'
+    ]}
+  ]},
+
+  ch2: { s:'บทที่ 2', t:'บทที่ 2 · การรวมธุรกิจ', c:[
+    {h:'รูปแบบการรวมธุรกิจสี่แบบ', s:'c2-1', t:[
+      'บทนี้ว่าด้วยการรวมธุรกิจตามมาตรฐานการรายงานทางการเงินฉบับที่ 3',
+      'รูปแบบการรวมธุรกิจมีสี่แบบ ที่ต่างกันตรงว่ากิจการเดิมยังคงอยู่หรือไม่ และผู้ซื้อได้อะไรมา',
+      'แบบที่ต้องแยกให้ออกที่สุดคือ การซื้อหุ้นซึ่งทำให้เกิดความสัมพันธ์บริษัทใหญ่กับบริษัทย่อย โดยทั้งสองบริษัทยังคงอยู่ กับการซื้อสินทรัพย์สุทธิซึ่งบริษัทที่ถูกซื้อจะเลิกไป',
+      'ความต่างนี้กำหนดว่าต้องทำงบการเงินรวมหรือไม่'
+    ]},
+    {h:'สัดส่วนการถือหุ้นกำหนดมาตรฐานที่ใช้', s:'c2-2', t:[
+      'นี่คือแผนที่ที่ใช้ได้ตลอดทั้งวิชา',
+      'ถือต่ำกว่ายี่สิบเปอร์เซ็นต์ โดยทั่วไปถือว่าเป็นเงินลงทุนทั่วไป ใช้มาตรฐานฉบับที่ 9',
+      'ถือตั้งแต่ยี่สิบถึงห้าสิบเปอร์เซ็นต์ โดยทั่วไปถือว่ามีอิทธิพลอย่างมีนัยสำคัญ เป็นบริษัทร่วม ใช้มาตรฐานฉบับที่ 28 และวิธีส่วนได้เสีย',
+      'ถือเกินห้าสิบเปอร์เซ็นต์ โดยทั่วไปถือว่ามีอำนาจควบคุม เป็นบริษัทย่อย ต้องทำงบการเงินรวมตามฉบับที่ 10',
+      'ขอย้ำคำว่าโดยทั่วไป เพราะเกณฑ์จริงคือเนื้อหาของอำนาจ ไม่ใช่ตัวเลขสัดส่วนอย่างเดียว'
+    ]},
+    {h:'นิยามของธุรกิจ', s:'c2-4', t:[
+      'ก่อนจะใช้มาตรฐานเรื่องการรวมธุรกิจ ต้องตอบก่อนว่าสิ่งที่ซื้อมาเป็นธุรกิจหรือไม่',
+      'ธุรกิจต้องมีทั้งปัจจัยนำเข้าและกระบวนการที่มีสาระสำคัญ ซึ่งเมื่อรวมกันแล้วสามารถสร้างผลผลิตได้',
+      'ถ้าซื้อมาเป็นเพียงกลุ่มสินทรัพย์ที่ไม่มีกระบวนการ ก็ไม่ใช่การรวมธุรกิจ ให้บันทึกเป็นการซื้อสินทรัพย์ตามปกติ ซึ่งจะไม่มีค่าความนิยมเกิดขึ้น'
+    ]},
+    {h:'วิธีซื้อสี่ขั้นตอน', s:'c2-5', t:[
+      'มาตรฐานกำหนดให้ใช้วิธีซื้อ หรือ acquisition method ซึ่งมีสี่ขั้นตอน',
+      'ขั้นที่หนึ่ง ระบุผู้ซื้อ ขั้นที่สอง กำหนดวันที่ซื้อ',
+      'ขั้นที่สาม รับรู้และวัดมูลค่าสินทรัพย์ที่ระบุได้ที่ได้มา หนี้สินที่รับมา และส่วนได้เสียที่ไม่มีอำนาจควบคุม',
+      'และขั้นที่สี่ รับรู้และวัดมูลค่าค่าความนิยม หรือกำไรจากการต่อรองราคาซื้อ',
+      'ทุกโจทย์ของบทนี้เดินตามสี่ขั้นนี้เสมอ'
+    ]},
+    {h:'ค่าความนิยม', s:'c2-7', t:[
+      'สูตรของค่าความนิยมคือ สิ่งตอบแทนที่โอนให้ บวกส่วนได้เสียที่ไม่มีอำนาจควบคุม แล้วหักด้วยมูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้',
+      'ถ้าผลลัพธ์เป็นบวกคือค่าความนิยม ซึ่งไม่ตัดจำหน่าย แต่ต้องทดสอบการด้อยค่าอย่างน้อยปีละครั้ง',
+      'สิ่งที่ต้องระวังคือ ต้องใช้มูลค่ายุติธรรมของสินทรัพย์สุทธิ ไม่ใช่มูลค่าตามบัญชี และต้องรวมสินทรัพย์ไม่มีตัวตนที่ระบุได้ซึ่งไม่เคยอยู่ในบัญชีของผู้ถูกซื้อด้วย'
+    ]},
+    {h:'ต้นทุนที่เกี่ยวข้องกับการซื้อ', s:'c2-9', t:[
+      'นี่เป็นจุดที่ออกสอบบ่อยมาก เพราะเคยเปลี่ยนหลักการมาแล้ว',
+      'ตามมาตรฐานปัจจุบัน ค่าใช้จ่ายที่เกี่ยวข้องกับการซื้อ เช่น ค่าที่ปรึกษา ค่าทนายความ และค่าธรรมเนียมวาณิชธนกิจ ต้องรับรู้เป็นค่าใช้จ่ายในงวดที่เกิดขึ้น',
+      'ห้ามนำไปรวมเป็นต้นทุนของเงินลงทุน และห้ามนำไปเพิ่มค่าความนิยม',
+      'ส่วนต้นทุนการออกตราสารทุนให้หักจากส่วนเกินมูลค่าหุ้น และต้นทุนการออกตราสารหนี้ให้ปฏิบัติตามมาตรฐานเรื่องเครื่องมือทางการเงิน'
+    ]},
+    {h:'กำไรจากการต่อรองราคาซื้อ', s:'c2-12', t:[
+      'ถ้าสูตรค่าความนิยมให้ผลเป็นลบ แปลว่าผู้ซื้อจ่ายน้อยกว่ามูลค่ายุติธรรมของสินทรัพย์สุทธิที่ได้มา',
+      'มาตรฐานกำหนดให้ทบทวนการวัดมูลค่าใหม่ก่อน ว่าระบุสินทรัพย์และหนี้สินครบถ้วนและวัดมูลค่าถูกต้องแล้วหรือไม่',
+      'ถ้าทบทวนแล้วยังเป็นลบอยู่ ให้รับรู้เป็นกำไรจากการต่อรองราคาซื้อในงบกำไรขาดทุนทันที ในงวดที่ซื้อ',
+      'ขอเน้นว่ารับรู้ทันที ไม่ใช่ทยอยรับรู้ และไม่ใช่ค่าความนิยมติดลบตามหลักการเก่า'
+    ]},
+    {h:'ระยะเวลาในการวัดมูลค่า', s:'c2-13', t:[
+      'มาตรฐานให้เวลาผู้ซื้อในการวัดมูลค่าให้เสร็จสมบูรณ์ ซึ่งเรียกว่า measurement period และต้องไม่เกินหนึ่งปีนับจากวันที่ซื้อ',
+      'ในช่วงนี้ ถ้าได้ข้อมูลใหม่เกี่ยวกับข้อเท็จจริงที่มีอยู่แล้ว ณ วันที่ซื้อ ให้ปรับปรุงย้อนหลังได้',
+      'แต่ถ้าเป็นข้อมูลของเหตุการณ์ที่เกิดขึ้นหลังวันที่ซื้อ ให้บันทึกตามปกติในงวดปัจจุบัน ไม่ใช่ย้อนกลับไปแก้ค่าความนิยม'
+    ]},
+    {h:'การรวมธุรกิจภายใต้การควบคุมเดียวกัน', s:'c2-14', t:[
+      'BCUCC ย่อมาจาก business combinations under common control คือกรณีที่ทั้งผู้ซื้อและผู้ถูกซื้ออยู่ภายใต้การควบคุมของฝ่ายเดียวกัน ทั้งก่อนและหลังการรวมธุรกิจ',
+      'กรณีนี้อยู่นอกขอบเขตของมาตรฐานฉบับที่ 3 เพราะโดยเนื้อหาแล้วไม่ได้มีการเปลี่ยนมือที่แท้จริง',
+      'ในทางปฏิบัติของไทย มักใช้วิธีรวมส่วนได้เสีย คือยกยอดตามมูลค่าตามบัญชีเดิมมา ไม่มีการตีมูลค่ายุติธรรมใหม่ และไม่เกิดค่าความนิยม จบบทที่ 2 ครับ'
+    ]}
+  ]},
+
+  ch3: { s:'บทที่ 3', t:'บทที่ 3 · งบการเงินรวม ณ วันซื้อหุ้น', c:[
+    {h:'ความสัมพันธ์บริษัทใหญ่กับบริษัทย่อย', s:'c3-1', t:[
+      'บทนี้เจาะเฉพาะกรณีซื้อหุ้นจนเกิดความสัมพันธ์บริษัทใหญ่กับบริษัทย่อย และเน้นที่การทำงบการเงินรวม ณ วันซื้อหุ้น',
+      'สิ่งที่ต้องเข้าใจก่อนคือ ทั้งสองบริษัทยังคงเป็นนิติบุคคลแยกกัน มีสมุดบัญชีของตัวเอง',
+      'งบการเงินรวมจึงไม่ใช่การรวมสมุดบัญชีเข้าด้วยกัน แต่เป็นการรวมกันบนกระดาษทำการเท่านั้น'
+    ]},
+    {h:'การควบคุมตาม TFRS 10', s:'c3-2', t:[
+      'อำนาจควบคุมมีสามองค์ประกอบที่ต้องมีครบพร้อมกัน',
+      'หนึ่ง มีอำนาจเหนือผู้ถูกลงทุน สอง มีการเปิดรับหรือมีสิทธิในผลตอบแทนผันแปรจากการเข้าไปเกี่ยวข้อง',
+      'และสาม มีความสามารถใช้อำนาจนั้นเพื่อทำให้จำนวนเงินผลตอบแทนเปลี่ยนแปลงไป',
+      'สังเกตว่าไม่ได้พูดถึงเปอร์เซ็นต์การถือหุ้นเลย เพราะเกณฑ์คือเนื้อหา ไม่ใช่รูปแบบ จึงเป็นไปได้ที่จะควบคุมโดยถือหุ้นไม่ถึงครึ่ง'
+    ]},
+    {h:'เมื่อไรที่ไม่ต้องทำงบการเงินรวม', s:'c3-3', t:[
+      'มีข้อยกเว้นสำหรับบริษัทใหญ่ที่เป็นบริษัทย่อยของกิจการอื่นอีกทอดหนึ่ง',
+      'เงื่อนไขคือ ผู้ถือหุ้นทุกรายไม่คัดค้าน ตราสารหนี้และตราสารทุนของกิจการไม่ได้ซื้อขายในตลาดสาธารณะ',
+      'ไม่ได้อยู่ระหว่างยื่นขอออกตราสารต่อสาธารณะ และบริษัทใหญ่ในลำดับสูงสุดจัดทำงบการเงินรวมที่เป็นไปตามมาตรฐานอยู่แล้ว',
+      'ต้องเข้าเงื่อนไขครบทุกข้อจึงจะได้รับยกเว้น'
+    ]},
+    {h:'ขั้นตอนการจัดทำงบการเงินรวม', s:'c3-6', t:[
+      'ขั้นตอนหลักมีสี่ขั้น ขั้นที่หนึ่ง นำงบของทั้งสองบริษัทมาบวกกันทีละบรรทัด',
+      'ขั้นที่สอง ตัดรายการเงินลงทุนในบริษัทย่อยออก คู่กับส่วนของผู้ถือหุ้นของบริษัทย่อยในส่วนที่บริษัทใหญ่ถือ',
+      'ขั้นที่สาม ปรับสินทรัพย์และหนี้สินของบริษัทย่อยให้เป็นมูลค่ายุติธรรม ณ วันซื้อ และรับรู้ค่าความนิยมกับส่วนได้เสียที่ไม่มีอำนาจควบคุม',
+      'ขั้นที่สี่ ตัดรายการระหว่างกันทั้งหมด เช่น ลูกหนี้เจ้าหนี้ระหว่างกัน'
+    ]},
+    {h:'กรณีที่ 1 ซื้อทั้งหมดในราคาเท่ามูลค่าตามบัญชี', s:'c3-7', t:[
+      'กรณีนี้ง่ายที่สุด เป็นจุดตั้งต้นที่ควรทำให้คล่องก่อน',
+      'เมื่อซื้อหุ้นทั้งหมดในราคาเท่ากับมูลค่าตามบัญชีของสินทรัพย์สุทธิ รายการตัดบัญชีจะมีเพียงรายการเดียว',
+      'คือเดบิตส่วนของผู้ถือหุ้นทั้งหมดของบริษัทย่อย และเครดิตเงินลงทุนในบริษัทย่อย',
+      'ไม่มีค่าความนิยม และไม่มีส่วนได้เสียที่ไม่มีอำนาจควบคุม เพราะซื้อครบร้อยเปอร์เซ็นต์'
+    ]},
+    {h:'กรณีที่ 2 จ่ายสูงกว่ามูลค่าตามบัญชี', s:'c3-9', t:[
+      'เมื่อจ่ายสูงกว่ามูลค่าตามบัญชี ต้องหาก่อนว่าส่วนที่จ่ายเกินไปนั้นเป็นอะไร',
+      'ลำดับที่ถูกต้องคือ ปันส่วนให้สินทรัพย์และหนี้สินที่ระบุได้จนเต็มมูลค่ายุติธรรมก่อน',
+      'ส่วนที่ยังเหลืออยู่หลังจากนั้น จึงจะเป็นค่าความนิยม',
+      'ข้อผิดพลาดที่พบบ่อยคือ กระโดดไปเรียกส่วนต่างทั้งก้อนว่าค่าความนิยมทันที โดยไม่ปันส่วนให้สินทรัพย์ที่ระบุได้ก่อน'
+    ]},
+    {h:'กรณีที่ 4 จ่ายต่ำกว่ามูลค่ายุติธรรม', s:'c3-11', t:[
+      'กรณีนี้คือกำไรจากการต่อรองราคาซื้อ ซึ่งอธิบายไว้แล้วในบทที่ 2',
+      'ให้ทบทวนการวัดมูลค่าก่อน ถ้ายังเป็นลบ ให้รับรู้เป็นกำไรในงบกำไรขาดทุนรวมทันที ณ วันที่ซื้อ',
+      'ในกระดาษทำการ กำไรก้อนนี้จะไปเพิ่มกำไรสะสมของบริษัทใหญ่'
+    ]},
+    {h:'ส่วนได้เสียที่ไม่มีอำนาจควบคุม', s:'c3-12', t:[
+      'เมื่อซื้อหุ้นเพียงบางส่วน จะเกิดส่วนได้เสียที่ไม่มีอำนาจควบคุม หรือ NCI ขึ้น',
+      'มาตรฐานให้เลือกวัดมูลค่า NCI ได้สองวิธี วิธีแรกคือวัดด้วยสัดส่วนของมูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ ซึ่งเรียกว่า partial goodwill',
+      'วิธีที่สองคือวัดด้วยมูลค่ายุติธรรมของ NCI เอง ซึ่งเรียกว่า full goodwill',
+      'ความต่างคือ วิธีแรกให้ค่าความนิยมที่เป็นของบริษัทใหญ่ล้วน ส่วนวิธีที่สองให้ค่าความนิยมที่สูงกว่า และมีส่วนหนึ่งเป็นของ NCI',
+      'โจทย์ต้องระบุเสมอว่าให้ใช้วิธีใด ถ้าไม่ระบุให้ดูจากตัวเลขที่ให้มาว่าให้มูลค่ายุติธรรมของ NCI มาหรือไม่'
+    ]},
+    {h:'ทฤษฎีเบื้องหลังและสินทรัพย์ถาวร', s:'c3-13', t:[
+      'ทฤษฎีเบื้องหลังงบการเงินรวมมีสามแนว คือทฤษฎีบริษัทใหญ่ ทฤษฎีกิจการ และทฤษฎีร่วมกัน ซึ่งต่างกันที่มุมมองว่างบการเงินรวมทำเพื่อใคร',
+      'มาตรฐานปัจจุบันโน้มไปทางทฤษฎีกิจการมากขึ้น จึงแสดง NCI ไว้ในส่วนของผู้ถือหุ้น ไม่ใช่แสดงเป็นหนี้สินหรือแสดงคั่นกลางแบบเดิม',
+      'อีกเรื่องที่ต้องระวังคือ สินทรัพย์ถาวรที่มีค่าเสื่อมราคาสะสม เวลาปรับเป็นมูลค่ายุติธรรมในกระดาษทำการ ต้องล้างค่าเสื่อมราคาสะสมเดิมออกด้วย ไม่ใช่แค่บวกส่วนต่างเข้าไปเฉย ๆ จบบทที่ 3 ครับ'
+    ]}
+  ]},
+
+  ch4: { s:'บทที่ 4', t:'บทที่ 4 · งบการเงินรวมภายหลังวันซื้อหุ้น', c:[
+    {h:'งบการเงินสองประเภท', s:'c4-1', t:[
+      'บทนี้ต่อจากบทที่ 3 คือหลังจากวันซื้อหุ้นผ่านไปแล้ว บริษัทย่อยดำเนินงานต่อ มีกำไร และจ่ายเงินปันผล บริษัทใหญ่ต้องบันทึกอย่างไร',
+      'สิ่งแรกที่ต้องแยกให้ออกคือ บริษัทใหญ่ต้องจัดทำงบการเงินสองประเภท',
+      'ประเภทแรกคืองบการเงินรวม ซึ่งแสดงกลุ่มกิจการเป็นหน่วยเดียว',
+      'ประเภทที่สองคืองบการเงินเฉพาะกิจการ ซึ่งแสดงเฉพาะตัวบริษัทใหญ่เอง และแสดงเงินลงทุนในบริษัทย่อยเป็นสินทรัพย์บรรทัดเดียว',
+      'บทนี้เน้นที่งบการเงินเฉพาะกิจการเป็นหลัก'
+    ]},
+    {h:'สามทางเลือกในงบการเงินเฉพาะกิจการ', s:'c4-2', t:[
+      'มาตรฐานให้เลือกได้สามวิธีในการวัดมูลค่าเงินลงทุนในบริษัทย่อยและบริษัทร่วม',
+      'ทางเลือกที่หนึ่งคือวิธีราคาทุน ทางเลือกที่สองคือวิธีตามมาตรฐานฉบับที่ 9 คือวัดด้วยมูลค่ายุติธรรม',
+      'และทางเลือกที่สามคือวิธีส่วนได้เสีย',
+      'เมื่อเลือกแล้วต้องใช้อย่างสม่ำเสมอกับเงินลงทุนทุกประเภทในชั้นเดียวกัน'
+    ]},
+    {h:'วิธีราคาทุน', s:'c4-3', t:[
+      'วิธีราคาทุนง่ายที่สุด บันทึกเงินลงทุนด้วยราคาทุนตอนซื้อ แล้วยอดนั้นค้างอยู่ตลอดไป ไม่เปลี่ยนแปลง',
+      'เมื่อบริษัทย่อยจ่ายเงินปันผล บริษัทใหญ่รับรู้เป็นรายได้เงินปันผลตามสัดส่วนที่ถือ',
+      'ข้อสังเกตสำคัญคือ ไม่มีรายการใดแตะบัญชีเงินลงทุนเลยหลังจากวันซื้อ ไม่ว่าบริษัทย่อยจะกำไรหรือขาดทุนก็ตาม'
+    ]},
+    {h:'วิธีส่วนได้เสีย', s:'c4-5', t:[
+      'วิธีส่วนได้เสียมองว่า เมื่อบริษัทย่อยมีกำไร ความมั่งคั่งของบริษัทใหญ่ก็เพิ่มขึ้นทันที ไม่ต้องรอให้จ่ายปันผล',
+      'บัญชีเงินลงทุนจึงเคลื่อนไหวตลอดเวลา มีรายการบันทึกบัญชีสี่แบบที่ต้องจำ',
+      'แบบที่หนึ่ง ตอนซื้อ เดบิตเงินลงทุน เครดิตเงินสด',
+      'แบบที่สอง เมื่อบริษัทย่อยมีกำไร เดบิตเงินลงทุน เครดิตส่วนแบ่งกำไร',
+      'แบบที่สาม เมื่อรับเงินปันผล เดบิตเงินสด เครดิตเงินลงทุน ซึ่งเป็นการคืนทุน ไม่ใช่รายได้',
+      'และแบบที่สี่ ตัดจำหน่ายส่วนที่ตีเพิ่ม เดบิตส่วนแบ่งกำไร เครดิตเงินลงทุน ซึ่งเป็นรายการที่นิสิตลืมบ่อยที่สุด'
+    ]},
+    {h:'กฎทองของบทนี้', s:'c4-7', t:[
+      'กฎทองคือ ถ้าใช้วิธีส่วนได้เสียในงบการเงินเฉพาะกิจการ กำไรสุทธิในงบเฉพาะกิจการจะเท่ากับส่วนแบ่งกำไรในงบการเงินรวมพอดี',
+      'แต่ถ้าใช้วิธีราคาทุน ตัวเลขทั้งสองจะไม่เท่ากัน',
+      'ในหน้าเว็บมีหลักฐานจากงบการเงินจริงปี 2567 ที่พิสูจน์กฎนี้',
+      'PTG ใช้วิธีราคาทุน กำไรในงบเฉพาะกิจการจึงต่างจากส่วนแบ่งในงบรวม',
+      'ส่วน Land and Houses กับ AIS ใช้วิธีส่วนได้เสีย ตัวเลขจึงตรงกันถึงหลักบาท ลองเปิดดูจะเห็นภาพชัดมาก'
+    ]},
+    {h:'โจทย์ตัวอย่างของบท', s:'c4-8', t:[
+      'โจทย์ที่ใช้ตลอดบทคือ วันที่ 1 มกราคม 25X1 บริษัทใหญ่ซื้อหุ้นบริษัทย่อยหกสิบเปอร์เซ็นต์ เป็นเงินสดสี่แสนบาท',
+      'วันนั้นบริษัทย่อยมีส่วนของผู้ถือหุ้นห้าแสนบาท และมีสิทธิบัตรที่ไม่ได้แสดงในงบ มูลค่าแปดหมื่นบาท อายุการให้ประโยชน์สิบปี',
+      'ผลการดำเนินงานสามปี กำไรสุทธิหนึ่งแสน ห้าหมื่น และหกหมื่น ตามลำดับ',
+      'เงินปันผลจ่ายเจ็ดหมื่น สี่หมื่น และสองหมื่น ตามลำดับ'
+    ]},
+    {h:'คำนวณค่าความนิยม', s:'c4-9', t:[
+      'ขั้นแรก หามูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ เท่ากับห้าแสนบวกแปดหมื่น เท่ากับห้าแสนแปดหมื่น',
+      'ขั้นที่สอง NCI ณ วันซื้อ เท่ากับสี่สิบเปอร์เซ็นต์ของห้าแสนแปดหมื่น เท่ากับสองแสนสามหมื่นสองพัน',
+      'ขั้นที่สาม รวมสิ่งตอบแทนกับ NCI ได้หกแสนสามหมื่นสองพัน',
+      'ขั้นที่สี่ หักด้วยห้าแสนแปดหมื่น เหลือห้าหมื่นสองพัน ซึ่งก็คือค่าความนิยม',
+      'พิสูจน์อีกทางได้ว่า ราคาซื้อสี่แสน แตกเป็นสามก้อน คือหกสิบเปอร์เซ็นต์ของห้าแสนได้สามแสน บวกหกสิบเปอร์เซ็นต์ของแปดหมื่นได้สี่หมื่นแปดพัน บวกค่าความนิยมห้าหมื่นสองพัน รวมได้สี่แสนพอดี'
+    ]},
+    {h:'ส่วนแบ่งกำไรและเงินลงทุน', s:'c4-9', t:[
+      'ค่าตัดจำหน่ายสิทธิบัตรคือแปดหมื่นหารสิบ เท่ากับแปดพันบาทต่อปี',
+      'ส่วนแบ่งกำไรปีแรก เท่ากับหกสิบเปอร์เซ็นต์ของหนึ่งแสน ได้หกหมื่น แล้วหักส่วนแบ่งค่าตัดจำหน่าย คือหกสิบเปอร์เซ็นต์ของแปดพัน ได้สี่พันแปดร้อย เหลือส่วนแบ่งกำไรที่รับรู้จริงห้าหมื่นห้าพันสองร้อย',
+      'ยอดเงินลงทุนสิ้นปีแรก เท่ากับสี่แสน บวกห้าหมื่นห้าพันสองร้อย หักเงินปันผลรับซึ่งเท่ากับหกสิบเปอร์เซ็นต์ของเจ็ดหมื่น คือสี่หมื่นสองพัน ได้ยอดสี่แสนหนึ่งหมื่นสามพันสองร้อย',
+      'ในหน้าเว็บมีเครื่องไล่ยอดที่กรอกตัวเลขเองได้ พร้อมวิธีคำนวณทีละขั้นที่เขียนใหม่ตามตัวเลขที่กรอก ลองเปลี่ยนสัดส่วนหรือราคาซื้อดูจะเข้าใจเร็วขึ้นมาก'
+    ]},
+    {h:'พิสูจน์ยอดสามทาง', s:'c4-10', t:[
+      'ยอดเงินลงทุนพิสูจน์ได้สามทาง ซึ่งต้องได้ตัวเลขเดียวกันเสมอ',
+      'ทางที่หนึ่ง ไล่จากรายการบันทึกบัญชี คือยอดยกมา บวกส่วนแบ่งกำไรที่รับรู้ หักเงินปันผลรับ',
+      'ทางที่สอง คิดจากส่วนแบ่งในสินทรัพย์สุทธิปลายงวด คือสัดส่วนที่ถือคูณส่วนของผู้ถือหุ้นปลายปี บวกสัดส่วนคูณส่วนตีเพิ่มคงเหลือ บวกค่าความนิยม',
+      'ทางที่สาม คือราคาทุนตั้งต้น บวกสัดส่วนคูณส่วนของผู้ถือหุ้นที่เปลี่ยนไป หักสัดส่วนคูณค่าตัดจำหน่ายสะสม',
+      'ถ้าสามทางไม่ตรงกัน แปลว่าคำนวณผิดที่ใดที่หนึ่ง นี่คือวิธีตรวจที่เร็วที่สุดในห้องสอบ'
+    ]},
+    {h:'บริษัทร่วม', s:'c4-14', t:[
+      'ครึ่งหลังของบทว่าด้วยบริษัทร่วม ตามมาตรฐานการบัญชีฉบับที่ 28',
+      'บริษัทร่วมคือกิจการที่ผู้ลงทุนมีอิทธิพลอย่างมีนัยสำคัญ แต่ไม่ถึงขั้นควบคุม',
+      'เกณฑ์เชิงปริมาณคือถือหุ้นตั้งแต่ยี่สิบถึงห้าสิบเปอร์เซ็นต์ แต่ที่สำคัญกว่าคือเกณฑ์เชิงคุณภาพ',
+      'เช่น มีตัวแทนในคณะกรรมการ มีส่วนร่วมในการกำหนดนโยบาย มีรายการค้าที่มีสาระสำคัญระหว่างกัน มีการแลกเปลี่ยนผู้บริหาร หรือให้ข้อมูลทางเทคนิคที่จำเป็น',
+      'ถ้ามีข้อใดข้อหนึ่ง อาจถือว่ามีอิทธิพลอย่างมีนัยสำคัญได้แม้ถือหุ้นไม่ถึงยี่สิบเปอร์เซ็นต์'
+    ]},
+    {h:'บริษัทร่วมต่างจากบริษัทย่อยอย่างไร', s:'c4-17', t:[
+      'ความต่างที่สำคัญที่สุดคือ บริษัทร่วมไม่ต้องนำมารวมทีละบรรทัดในงบการเงินรวม',
+      'แต่แสดงเป็นบรรทัดเดียวในงบแสดงฐานะการเงิน ชื่อว่าเงินลงทุนในบริษัทร่วม และแสดงส่วนแบ่งกำไรเป็นบรรทัดเดียวในงบกำไรขาดทุน',
+      'อีกความต่างคือ ขาดทุนที่รับรู้จากบริษัทร่วมจะรับรู้ได้จนมูลค่าเงินลงทุนเป็นศูนย์เท่านั้น หลังจากนั้นหยุดรับรู้ เว้นแต่มีภาระผูกพันตามกฎหมาย'
+    ]},
+    {h:'การเลิกใช้วิธีส่วนได้เสีย', s:'c4-18', t:[
+      'เมื่อสูญเสียอิทธิพลอย่างมีนัยสำคัญ ต้องเลิกใช้วิธีส่วนได้เสีย',
+      'ให้วัดมูลค่าเงินลงทุนที่เหลืออยู่ด้วยมูลค่ายุติธรรม ณ วันที่สูญเสียอิทธิพล',
+      'และรับรู้ผลต่างระหว่างมูลค่ายุติธรรมนั้นกับมูลค่าตามบัญชีเดิม เป็นกำไรหรือขาดทุนในงบกำไรขาดทุน',
+      'สรุปทั้งบท ให้จำสามอย่าง หนึ่ง วิธีราคาทุนกับวิธีส่วนได้เสียให้คำตอบต่างกัน สอง ค่าตัดจำหน่ายส่วนที่ตีเพิ่มต้องหักจากส่วนแบ่งกำไรเสมอ',
+      'และสาม เงินปันผลลดเงินลงทุน ไม่ใช่รายได้ ในวิธีส่วนได้เสีย จบบทที่ 4 และจบวิชาการบัญชีขั้นสูง 1 ครับ'
+    ]}
+  ]}
+};
+</script>
+
+<!-- ============================================================
+     เครื่องเล่นเสียงบรรยายประจำบท · แปะต่อท้าย index.html ของแต่ละวิชา
+     ต้องประกาศ window.CLASSROOM_NARRATION ไว้ก่อนบล็อกนี้ รูปแบบ
+       { "<id ของแท็บ>": { t:"ชื่อบท", c:[ {h:"หัวข้อ", s:"<id ของ section>", t:["ประโยค", ...]} ] } }
+     ใช้เสียงพากย์ของระบบผ่าน Web Speech API จึงไม่ต้องมีไฟล์เสียงและไม่ต้องต่อเน็ต
+     ============================================================ -->
+<style>
+.au-fab{position:fixed; left:18px; bottom:68px; z-index:200; display:flex; align-items:center; gap:8px;
+  font:inherit; font-size:.84rem; font-weight:600; cursor:pointer; padding:10px 16px; border-radius:99px;
+  border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink-2); box-shadow:var(--shadow)}
+.au-fab:hover{border-color:var(--accent); color:var(--accent)}
+.au-fab svg{width:15px; height:15px; flex:none}
+.au-fab.on{border-color:var(--accent); color:var(--accent); background:var(--accent-soft)}
+.au-fab[hidden]{display:none !important}
+
+.au-panel{position:fixed; left:18px; bottom:18px; z-index:201; width:min(440px, calc(100vw - 36px));
+  max-height:min(640px, calc(100vh - 36px)); display:flex; flex-direction:column;
+  border:1px solid var(--rule-strong); border-radius:8px; background:var(--paper); box-shadow:var(--shadow); overflow:hidden}
+.au-panel[hidden]{display:none !important}
+.au-head{flex:none; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--surface)}
+.au-title{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; font-size:.95rem; line-height:1.35}
+.au-sub{font-family:"IBM Plex Mono",monospace; font-size:.65rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink-3); margin-top:2px}
+.au-x{appearance:none; border:0; background:none; cursor:pointer; color:var(--ink-3); font-size:1.35rem;
+  line-height:1; padding:2px 7px; border-radius:4px}
+.au-x:hover{color:var(--ink); background:var(--surface-2)}
+
+.au-chaps{flex:none; display:flex; gap:5px; overflow-x:auto; padding:9px 14px; border-bottom:1px solid var(--rule);
+  background:var(--surface); scrollbar-width:none}
+.au-chaps::-webkit-scrollbar{display:none}
+.au-chap{appearance:none; font:inherit; font-size:.76rem; font-weight:600; white-space:nowrap; cursor:pointer;
+  padding:4px 11px; border-radius:99px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2)}
+.au-chap:hover{border-color:var(--accent); color:var(--accent)}
+.au-chap[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+
+.au-body{flex:1; overflow-y:auto; padding:12px 14px 14px}
+.au-cue{margin-bottom:14px}
+.au-cue:last-child{margin-bottom:0}
+.au-ch{appearance:none; font:inherit; text-align:left; width:100%; cursor:pointer; border:0; background:none;
+  font-family:"IBM Plex Mono",monospace; font-size:.67rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; padding:3px 0 5px; display:flex; gap:8px; align-items:baseline}
+.au-ch:hover{color:var(--accent)}
+.au-ch b{font-family:inherit; color:var(--ink-2); font-weight:600}
+.au-line{font-size:.88rem; line-height:1.72; color:var(--ink-2); padding:3px 8px; border-radius:3px;
+  border-left:2px solid transparent; cursor:pointer}
+.au-line:hover{background:var(--surface)}
+.au-line.now{background:var(--accent-soft); color:var(--ink); border-left-color:var(--accent); font-weight:500}
+.au-line.done{color:var(--ink-3)}
+
+.au-foot{flex:none; border-top:1px solid var(--rule); background:var(--surface); padding:10px 14px 12px}
+.au-ctrl{display:flex; align-items:center; gap:7px}
+.au-b{appearance:none; font:inherit; font-size:.82rem; font-weight:600; cursor:pointer; padding:7px 11px;
+  border-radius:4px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2);
+  display:flex; align-items:center; gap:6px}
+.au-b:hover:not(:disabled){border-color:var(--accent); color:var(--accent)}
+.au-b:disabled{opacity:.4; cursor:not-allowed}
+.au-b.play{background:var(--accent); border-color:var(--accent); color:var(--paper); min-width:96px; justify-content:center}
+.au-b.play:hover{filter:brightness(1.08); color:var(--paper)}
+.au-b svg{width:13px; height:13px; flex:none}
+.au-pos{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--ink-3);
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+.au-bar{height:3px; border-radius:99px; background:var(--surface-2); margin:10px 0 9px; overflow:hidden}
+.au-bar i{display:block; height:100%; background:var(--accent); width:0; transition:width .25s}
+.au-opt{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; font-size:.76rem; color:var(--ink-3)}
+.au-rate{display:flex; gap:3px}
+.au-rate button{appearance:none; font:inherit; font-size:.72rem; font-weight:600; cursor:pointer; padding:3px 8px;
+  border-radius:3px; border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-3)}
+.au-rate button[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.au-opt select{font:inherit; font-size:.75rem; max-width:158px; padding:3px 6px; border-radius:3px;
+  border:1px solid var(--rule-strong); background:var(--paper); color:var(--ink-2)}
+.au-opt label{display:flex; align-items:center; gap:5px; cursor:pointer}
+.au-dl{appearance:none; font:inherit; font-size:.75rem; font-weight:600; cursor:pointer; background:none; border:0;
+  color:var(--ink-3); text-decoration:underline; text-underline-offset:3px; padding:0}
+.au-dl:hover{color:var(--accent)}
+.au-warn{font-size:.78rem; color:var(--ink-3); line-height:1.6; padding:10px 12px; margin-bottom:12px;
+  border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:3px}
+.au-warn b{color:var(--ink)}
+@media (max-width:520px){
+  .au-panel{left:9px; right:9px; bottom:9px; width:auto; max-height:calc(100vh - 18px)}
+  .au-fab{left:9px; bottom:62px}
+}
+@media (prefers-reduced-motion:reduce){.au-bar i{transition:none}}
+</style>
+
+<button type="button" class="au-fab" id="au-fab" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+  </svg>
+  ฟังสรุปบท
+</button>
+
+<div class="au-panel" id="au-panel" hidden role="dialog" aria-label="เครื่องเล่นเสียงบรรยายประจำบท">
+  <div class="au-head">
+    <div>
+      <div class="au-title" id="au-title">ฟังสรุปบท</div>
+      <div class="au-sub" id="au-sub">เสียงอ่านจากระบบของเครื่อง</div>
+    </div>
+    <button type="button" class="au-x" id="au-close" aria-label="ปิด">&times;</button>
+  </div>
+  <div class="au-chaps" id="au-chaps" role="group" aria-label="เลือกบท"></div>
+  <div class="au-body" id="au-body"></div>
+  <div class="au-foot">
+    <div class="au-ctrl">
+      <button type="button" class="au-b" id="au-prev" aria-label="ย่อหน้าก่อนหน้า">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 5v14l-9-7 9-7zM7 5h2v14H7z"/></svg>
+      </button>
+      <button type="button" class="au-b play" id="au-play">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" id="au-icon"><path d="M7 4l13 8-13 8V4z"/></svg>
+        <span id="au-plabel">เล่น</span>
+      </button>
+      <button type="button" class="au-b" id="au-next" aria-label="ย่อหน้าถัดไป">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5l9 7-9 7V5zM15 5h2v14h-2z"/></svg>
+      </button>
+      <button type="button" class="au-b" id="au-stop" aria-label="หยุดและกลับไปต้นบท">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 5h14v14H5z"/></svg>
+      </button>
+      <span class="au-pos" id="au-pos">0 / 0</span>
+    </div>
+    <div class="au-bar"><i id="au-fill"></i></div>
+    <div class="au-opt">
+      <span class="au-rate" role="group" aria-label="ความเร็วเสียง">
+        <button type="button" data-rate="0.8" aria-pressed="false">0.8&times;</button>
+        <button type="button" data-rate="1" aria-pressed="true">1&times;</button>
+        <button type="button" data-rate="1.2" aria-pressed="false">1.2&times;</button>
+        <button type="button" data-rate="1.5" aria-pressed="false">1.5&times;</button>
+      </span>
+      <select id="au-voice" aria-label="เลือกเสียง"></select>
+      <label><input type="checkbox" id="au-follow" checked> เลื่อนหน้าตาม</label>
+      <button type="button" class="au-dl" id="au-dl">ดาวน์โหลดบทบรรยาย</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var DATA = window.CLASSROOM_NARRATION;
+  if (!DATA || !Object.keys(DATA).length) return;
+
+  var COURSE = (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
+  var K = 'classroom-audio-' + COURSE;
+  var synth = window.speechSynthesis || null;
+
+  var fab    = document.getElementById('au-fab');
+  var panel  = document.getElementById('au-panel');
+  var chaps  = document.getElementById('au-chaps');
+  var bodyEl = document.getElementById('au-body');
+  var titleEl= document.getElementById('au-title');
+  var subEl  = document.getElementById('au-sub');
+  var posEl  = document.getElementById('au-pos');
+  var fillEl = document.getElementById('au-fill');
+  var playBt = document.getElementById('au-play');
+  var plabel = document.getElementById('au-plabel');
+  var icon   = document.getElementById('au-icon');
+  var voiceSel = document.getElementById('au-voice');
+  var followCb = document.getElementById('au-follow');
+
+  var ICON_PLAY  = 'M7 4l13 8-13 8V4z';
+  var ICON_PAUSE = 'M6 4h4v16H6zM14 4h4v16h-4z';
+
+  var keys = Object.keys(DATA);
+  var cur = keys[0];      // บทที่กำลังเปิดอยู่ในเครื่องเล่น
+  var lines = [];         // ประโยคทั้งหมดของบทปัจจุบัน
+  var idx = 0;            // ประโยคที่กำลังอ่าน
+  var playing = false;
+  var voices = [];
+  var rate = 1;
+  var chosenVoice = '';
+  var stopping = false;
+
+  /* ---------- จำค่าที่ผู้ใช้ตั้งไว้ ---------- */
+  function load(){
+    try {
+      var raw = localStorage.getItem(K);
+      if (!raw) return {};
+      return JSON.parse(raw) || {};
+    } catch (e){ return {}; }
+  }
+  function save(){
+    try {
+      var st = load();
+      st.rate = rate; st.voice = chosenVoice; st.follow = followCb.checked;
+      st.at = st.at || {};
+      st.at[cur] = idx;
+      localStorage.setItem(K, JSON.stringify(st));
+    } catch (e){ /* โหมดส่วนตัวหรือปิดการเก็บข้อมูล — ข้ามไป */ }
+  }
+  var saved = load();
+  if (saved.rate) rate = saved.rate;
+  if (saved.voice) chosenVoice = saved.voice;
+  if (saved.follow === false) followCb.checked = false;
+
+  /* ---------- แปลงข้อมูลบทเป็นรายการประโยค ---------- */
+  function build(key){
+    cur = key;
+    lines = [];
+    var ch = DATA[key];
+    (ch.c || []).forEach(function(cue, ci){
+      (cue.t || []).forEach(function(txt, li){
+        lines.push({ text: txt, sec: cue.s || '', head: li === 0 ? cue.h : '', ci: ci });
+      });
+    });
+    titleEl.textContent = ch.t || 'ฟังสรุปบท';
+    var words = lines.reduce(function(n, l){ return n + l.text.length; }, 0);
+    var mins = Math.max(1, Math.round(words / 800));
+    subEl.textContent = lines.length + ' ย่อหน้า · ประมาณ ' + mins + ' นาที';
+    render();
+    var st = load();
+    idx = (st.at && typeof st.at[key] === 'number' && st.at[key] < lines.length) ? st.at[key] : 0;
+    mark();
+  }
+
+  function render(){
+    bodyEl.innerHTML = '';
+    if (!synth){
+      var w = document.createElement('div');
+      w.className = 'au-warn';
+      w.innerHTML = '<b>เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน</b><br>อ่านบทบรรยายด้านล่างได้ตามปกติ หรือกดดาวน์โหลดบทบรรยายไปเปิดในแอปอ่านออกเสียงอื่น';
+      bodyEl.appendChild(w);
+    }
+    var cueEl = null, lastCi = -1;
+    lines.forEach(function(l, i){
+      if (l.ci !== lastCi){
+        lastCi = l.ci;
+        cueEl = document.createElement('div');
+        cueEl.className = 'au-cue';
+        var h = document.createElement('button');
+        h.type = 'button'; h.className = 'au-ch';
+        h.innerHTML = '<span>' + (l.ci + 1) + '</span><b>' + esc(l.head || '') + '</b>';
+        h.addEventListener('click', function(){ jump(i); });
+        cueEl.appendChild(h);
+        bodyEl.appendChild(cueEl);
+      }
+      var p = document.createElement('div');
+      p.className = 'au-line';
+      p.dataset.i = String(i);
+      p.textContent = l.text;
+      p.addEventListener('click', function(){ jump(i); });
+      cueEl.appendChild(p);
+    });
+  }
+  function esc(t){
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function mark(){
+    var all = bodyEl.querySelectorAll('.au-line');
+    for (var i = 0; i < all.length; i++){
+      all[i].classList.toggle('now', i === idx);
+      all[i].classList.toggle('done', i < idx);
+    }
+    posEl.textContent = (lines.length ? idx + 1 : 0) + ' / ' + lines.length;
+    fillEl.style.width = lines.length ? ((idx / lines.length) * 100) + '%' : '0';
+    var el = all[idx];
+    if (el && panel.hidden === false){
+      var top = el.offsetTop - bodyEl.clientHeight / 2 + el.offsetHeight;
+      bodyEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  }
+
+  /* ---------- เลื่อนหน้าเว็บตามหัวข้อที่กำลังอ่าน ---------- */
+  var lastSec = '';
+  function follow(){
+    if (!followCb.checked) return;
+    var sec = lines[idx] && lines[idx].sec;
+    if (!sec || sec === lastSec) return;
+    var el = document.getElementById(sec);
+    if (!el) return;
+    lastSec = sec;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------- เสียง ---------- */
+  function loadVoices(){
+    if (!synth) return;
+    voices = synth.getVoices() || [];
+    var th = voices.filter(function(v){ return /^th/i.test(v.lang); });
+    var list = th.length ? th : voices;
+    voiceSel.innerHTML = '';
+    if (!list.length){
+      var o = document.createElement('option');
+      o.value = ''; o.textContent = 'เสียงเริ่มต้นของระบบ';
+      voiceSel.appendChild(o);
+      return;
+    }
+    list.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v.name;
+      o.textContent = v.name + (th.length ? '' : ' · ' + v.lang);
+      voiceSel.appendChild(o);
+    });
+    if (chosenVoice && list.some(function(v){ return v.name === chosenVoice; })) voiceSel.value = chosenVoice;
+    else chosenVoice = voiceSel.value;
+    if (!th.length){
+      subEl.textContent = 'ไม่พบเสียงภาษาไทยในเครื่องนี้ — คำอ่านอาจเพี้ยน';
+    }
+  }
+  if (synth){
+    loadVoices();
+    if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+  }
+  voiceSel.addEventListener('change', function(){
+    chosenVoice = voiceSel.value; save();
+    if (playing){ restartCurrent(); }
+  });
+
+  /* ---------- เล่น ---------- */
+  var keepAlive = null;
+  function speakCurrent(){
+    if (!synth || idx >= lines.length){ stop(); return; }
+    var u = new SpeechSynthesisUtterance(lines[idx].text);
+    u.lang = 'th-TH';
+    u.rate = rate;
+    if (chosenVoice){
+      var v = voices.filter(function(x){ return x.name === chosenVoice; })[0];
+      if (v){ u.voice = v; u.lang = v.lang; }
+    }
+    u.onend = function(){
+      if (stopping) return;
+      idx++;
+      save();
+      if (idx >= lines.length){ finish(); return; }
+      mark(); follow();
+      speakCurrent();
+    };
+    u.onerror = function(e){
+      // interrupted / canceled เกิดจากการกดหยุดเอง ไม่ต้องแจ้ง
+      if (stopping || !e || e.error === 'interrupted' || e.error === 'canceled') return;
+      setUi(false);
+    };
+    synth.speak(u);
+  }
+  function restartCurrent(){
+    stopping = true; synth.cancel(); stopping = false;
+    setTimeout(function(){ if (playing) speakCurrent(); }, 60);
+  }
+  function setUi(on){
+    playing = on;
+    plabel.textContent = on ? 'หยุดชั่วคราว' : 'เล่น';
+    icon.firstChild.setAttribute('d', on ? ICON_PAUSE : ICON_PLAY);
+    fab.classList.toggle('on', on);
+    if (on){
+      // Chrome หยุดสังเคราะห์เสียงเองเมื่อเล่นต่อเนื่องนาน จึงต้องปลุกเป็นระยะ
+      if (keepAlive) clearInterval(keepAlive);
+      keepAlive = setInterval(function(){
+        if (!playing || !synth) return;
+        if (synth.speaking && !synth.paused){ synth.pause(); synth.resume(); }
+      }, 9000);
+    } else if (keepAlive){
+      clearInterval(keepAlive); keepAlive = null;
+    }
+  }
+  function play(){
+    if (!synth || !lines.length) return;
+    if (idx >= lines.length) idx = 0;
+    setUi(true); mark(); follow();
+    stopping = true; synth.cancel(); stopping = false;
+    setTimeout(speakCurrent, 60);
+  }
+  function pause(){
+    if (!synth) return;
+    stopping = true; synth.cancel(); stopping = false;
+    setUi(false);
+  }
+  function stop(){
+    if (synth){ stopping = true; synth.cancel(); stopping = false; }
+    setUi(false);
+  }
+  function finish(){
+    setUi(false);
+    idx = lines.length ? lines.length - 1 : 0;
+    mark(); save();
+  }
+  function jump(i){
+    idx = Math.max(0, Math.min(i, lines.length - 1));
+    mark(); follow(); save();
+    if (playing) restartCurrent();
+  }
+
+  playBt.addEventListener('click', function(){ playing ? pause() : play(); });
+  document.getElementById('au-prev').addEventListener('click', function(){ jump(idx - 1); });
+  document.getElementById('au-next').addEventListener('click', function(){ jump(idx + 1); });
+  document.getElementById('au-stop').addEventListener('click', function(){ stop(); jump(0); });
+  followCb.addEventListener('change', save);
+
+  Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(b){
+    b.setAttribute('aria-pressed', String(parseFloat(b.dataset.rate) === rate));
+    b.addEventListener('click', function(){
+      rate = parseFloat(b.dataset.rate);
+      Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(x){
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+      save();
+      if (playing) restartCurrent();
+    });
+  });
+
+  /* ---------- เลือกบท · ผูกกับแท็บของหน้า ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function tabFor(key){
+    return tabs.filter(function(t){ return t.getAttribute('aria-controls') === key; })[0] || null;
+  }
+  keys.forEach(function(k){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'au-chap'; b.dataset.k = k;
+    b.textContent = DATA[k].s || DATA[k].t;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function(){
+      if (k === cur) return;
+      stop();
+      var t = tabFor(k);
+      if (t) t.click();
+      pick(k);
+    });
+    chaps.appendChild(b);
+  });
+  function pick(k){
+    if (!DATA[k]) return;
+    build(k);
+    lastSec = '';
+    Array.prototype.forEach.call(chaps.children, function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.k === k));
+    });
+  }
+  // เปลี่ยนแท็บของหน้าแล้วให้เครื่องเล่นตามไปด้วย ถ้ายังไม่ได้กดเล่น
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var k = t.getAttribute('aria-controls');
+      if (playing || !DATA[k] || k === cur) return;
+      pick(k);
+    });
+  });
+
+  /* ---------- ดาวน์โหลดบทบรรยาย ---------- */
+  document.getElementById('au-dl').addEventListener('click', function(){
+    var ch = DATA[cur];
+    var out = [ch.t, ''];
+    (ch.c || []).forEach(function(cue, i){
+      out.push((i + 1) + '. ' + cue.h);
+      (cue.t || []).forEach(function(x){ out.push('   ' + x); });
+      out.push('');
+    });
+    var blob = new Blob([out.join('\n')], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'narration-' + COURSE + '-' + cur + '.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  });
+
+  /* ---------- เปิดปิดแผง ---------- */
+  function open(){
+    panel.hidden = false; fab.hidden = true;
+    mark();
+  }
+  function close(){
+    panel.hidden = true; fab.hidden = false;
+  }
+  fab.addEventListener('click', open);
+  document.getElementById('au-close').addEventListener('click', function(){ stop(); close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !panel.hidden){ stop(); close(); }
+  });
+  window.addEventListener('beforeunload', function(){ if (synth) synth.cancel(); });
+
+  /* ---------- เริ่มต้น ---------- */
+  var open0 = null;
+  tabs.forEach(function(t){
+    if (t.getAttribute('aria-selected') === 'true') open0 = t.getAttribute('aria-controls');
+  });
+  pick(DATA[open0] ? open0 : keys[0]);
+  fab.hidden = false;
+})();
+</script>
