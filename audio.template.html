@@ -2,7 +2,8 @@
      เครื่องเล่นเสียงบรรยายประจำบท · แปะต่อท้าย index.html ของแต่ละวิชา
      ต้องประกาศ window.CLASSROOM_NARRATION ไว้ก่อนบล็อกนี้ รูปแบบ
        { "<id ของแท็บ>": { t:"ชื่อบท", c:[ {h:"หัวข้อ", s:"<id ของ section>", t:["ประโยค", ...]} ] } }
-     ใช้เสียงพากย์ของระบบผ่าน Web Speech API จึงไม่ต้องมีไฟล์เสียงและไม่ต้องต่อเน็ต
+     ถ้ามีบล็อก JSON id="cn-audio" ชี้ไปยังไฟล์ mp3 ที่สร้างด้วย tools/make-audio.py จะเล่นไฟล์นั้น
+     ถ้าไม่มี จะถอยไปใช้เสียงสังเคราะห์ของระบบผ่าน Web Speech API ซึ่งไม่ต้องมีไฟล์และไม่ต้องต่อเน็ต
      ============================================================ -->
 <style>
 .au-fab{position:fixed; left:18px; bottom:68px; z-index:200; display:flex; align-items:center; gap:8px;
@@ -140,8 +141,15 @@
 <script>
 (function(){
   "use strict";
-  var DATA = window.CLASSROOM_NARRATION;
+  function readJson(id){
+    var el = document.getElementById(id);
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e){ return null; }
+  }
+  var DATA = readJson('cn-data') || window.CLASSROOM_NARRATION;
   if (!DATA || !Object.keys(DATA).length) return;
+  // ไฟล์เสียงที่สร้างไว้ล่วงหน้าด้วย tools/make-audio.py ถ้ามีจะใช้แทนเสียงสังเคราะห์ของเบราว์เซอร์
+  var CLIPS = readJson('cn-audio') || {};
 
   var COURSE = (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
   var K = 'classroom-audio-' + COURSE;
@@ -210,10 +218,15 @@
       });
     });
     titleEl.textContent = ch.t || 'ฟังสรุปบท';
-    var words = lines.reduce(function(n, l){ return n + l.text.length; }, 0);
-    var mins = Math.max(1, Math.round(words / 800));
-    subEl.textContent = lines.length + ' ย่อหน้า · ประมาณ ' + mins + ' นาที';
+    clip = clipOf(key);
+    if (clip){
+      var a = ensureAudio();
+      if (a && a.getAttribute('src') !== clip.src){ a.setAttribute('src', clip.src); a.load(); }
+    } else if (audioEl){
+      audioEl.pause();
+    }
     render();
+    showEngine();
     var st = load();
     idx = (st.at && typeof st.at[key] === 'number' && st.at[key] < lines.length) ? st.at[key] : 0;
     mark();
@@ -333,9 +346,8 @@
       hintEl.hidden = true;
     }
   }
-  if (synth){
-    loadVoices();
-    if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+  if (synth && typeof synth.onvoiceschanged !== 'undefined'){
+    synth.onvoiceschanged = function(){ if (!clip) loadVoices(); };
   }
   voiceSel.addEventListener('change', function(){
     chosenVoice = voiceSel.value; save();
@@ -383,7 +395,7 @@
     plabel.textContent = on ? 'หยุดชั่วคราว' : 'เล่น';
     icon.firstChild.setAttribute('d', on ? ICON_PAUSE : ICON_PLAY);
     fab.classList.toggle('on', on);
-    if (on){
+    if (on && !clip){
       // Chrome หยุดสังเคราะห์เสียงเองเมื่อเล่นต่อเนื่องนาน จึงต้องปลุกเป็นระยะ
       if (keepAlive) clearInterval(keepAlive);
       keepAlive = setInterval(function(){
@@ -394,22 +406,88 @@
       clearInterval(keepAlive); keepAlive = null;
     }
   }
+  /* ---------- โหมดไฟล์เสียงจริง ----------
+     ถ้ามีไฟล์ที่สร้างไว้ด้วย tools/make-audio.py จะเล่นไฟล์นั้นแทนเสียงสังเคราะห์
+     เพราะได้เสียงผู้ชายแบบ neural ซึ่งฟังเป็นธรรมชาติกว่ามาก */
+  var audioEl = null, clip = null;
+  function clipOf(key){
+    var c = CLIPS[key];
+    if (!c || !c.src || !c.cues) return null;
+    var n = 0;
+    (DATA[key].c || []).forEach(function(q){ n += (q.t || []).length; });
+    return c.cues.length === n ? c : null;   // ไฟล์เสียงต้องตรงกับบทบรรยายรุ่นปัจจุบัน
+  }
+  function ensureAudio(){
+    if (audioEl) return audioEl;
+    audioEl = document.createElement('audio');
+    audioEl.preload = 'metadata';
+    audioEl.hidden = true;
+    // ต่อเข้าเอกสารจริง เพื่อให้เบราว์เซอร์จัดการเสียงพื้นหลังและปุ่มบนหน้าจอล็อกได้ถูกต้อง
+    panel.appendChild(audioEl);
+    audioEl.addEventListener('timeupdate', function(){
+      if (!playing || !clip) return;
+      var t = audioEl.currentTime, j = idx;
+      while (j + 1 < clip.cues.length && t >= clip.cues[j + 1]) j++;
+      while (j > 0 && t < clip.cues[j]) j--;
+      if (j !== idx){ idx = j; mark(); follow(); save(); }
+    });
+    audioEl.addEventListener('ended', function(){ finish(); });
+    audioEl.addEventListener('error', function(){
+      // หาไฟล์ไม่เจอหรือเล่นไม่ได้ ให้ถอยไปใช้เสียงสังเคราะห์แทน
+      clip = null; audioEl = null;
+      setUi(false); showEngine();
+    });
+    return audioEl;
+  }
+  function mmss(sec){
+    sec = Math.max(0, Math.round(sec || 0));
+    return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2);
+  }
+  function showEngine(){
+    var onClip = !!clip;
+    // ปุ่มเลือกเสียงกับระดับเสียงใช้ได้เฉพาะโหมดเสียงสังเคราะห์
+    voiceSel.disabled = onClip;
+    Array.prototype.forEach.call(document.querySelectorAll('.au-rate button[data-pitch]'), function(b){
+      b.disabled = onClip;
+    });
+    if (onClip){
+      subEl.textContent = lines.length + ' ย่อหน้า · ' + mmss(clip.dur) + ' นาที · ' + (clip.voice || 'ไฟล์เสียง');
+      hintEl.hidden = true;
+    } else {
+      var words = lines.reduce(function(n, l){ return n + l.text.length; }, 0);
+      subEl.textContent = lines.length + ' ย่อหน้า · ประมาณ ' + Math.max(1, Math.round(words / 800)) + ' นาที';
+      loadVoices();
+    }
+  }
+
   function play(){
-    if (!synth || !lines.length) return;
+    if (!lines.length) return;
     if (idx >= lines.length) idx = 0;
     setUi(true); mark(); follow();
     clearGap();
+    if (clip){
+      var a = ensureAudio();
+      if (!a) return;
+      a.playbackRate = rate;
+      if (Math.abs(a.currentTime - clip.cues[idx]) > 0.4) a.currentTime = clip.cues[idx];
+      var pr = a.play();
+      if (pr && pr.catch) pr.catch(function(){ setUi(false); });
+      return;
+    }
+    if (!synth){ setUi(false); return; }
     stopping = true; synth.cancel(); stopping = false;
     setTimeout(speakCurrent, 60);
   }
   function pause(){
-    if (!synth) return;
     clearGap();
+    if (clip && audioEl){ audioEl.pause(); setUi(false); return; }
+    if (!synth) return;
     stopping = true; synth.cancel(); stopping = false;
     setUi(false);
   }
   function stop(){
     clearGap();
+    if (clip && audioEl){ audioEl.pause(); }
     if (synth){ stopping = true; synth.cancel(); stopping = false; }
     setUi(false);
   }
@@ -421,6 +499,11 @@
   function jump(i){
     idx = Math.max(0, Math.min(i, lines.length - 1));
     mark(); follow(); save();
+    if (clip){
+      var a = ensureAudio();
+      if (a) a.currentTime = clip.cues[idx];
+      return;
+    }
     if (playing) restartCurrent();
   }
 
@@ -450,7 +533,8 @@
         x.setAttribute('aria-pressed', String(x === b));
       });
       save();
-      if (playing) restartCurrent();
+      if (clip && audioEl){ audioEl.playbackRate = rate; }
+      else if (playing) restartCurrent();
     });
   });
 
@@ -521,7 +605,10 @@
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && !panel.hidden){ stop(); close(); }
   });
-  window.addEventListener('beforeunload', function(){ if (synth) synth.cancel(); });
+  window.addEventListener('beforeunload', function(){
+    if (synth) synth.cancel();
+    if (audioEl) audioEl.pause();
+  });
 
   /* ---------- เริ่มต้น ---------- */
   var open0 = null;
