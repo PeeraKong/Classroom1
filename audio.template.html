@@ -99,7 +99,7 @@
     <button type="button" class="au-x" id="au-close" aria-label="ปิด">&times;</button>
   </div>
   <div class="au-chaps" id="au-chaps" role="group" aria-label="เลือกบท"></div>
-  <div class="au-body" id="au-body"></div>
+  <div class="au-body" id="au-body"><div class="au-warn" id="au-hint" hidden></div></div>
   <div class="au-foot">
     <div class="au-ctrl">
       <button type="button" class="au-b" id="au-prev" aria-label="ย่อหน้าก่อนหน้า">
@@ -126,6 +126,11 @@
         <button type="button" data-rate="1.5" aria-pressed="false">1.5&times;</button>
       </span>
       <select id="au-voice" aria-label="เลือกเสียง"></select>
+      <span class="au-rate" role="group" aria-label="ระดับเสียง">
+        <button type="button" data-pitch="0.8" aria-pressed="false">ทุ้ม</button>
+        <button type="button" data-pitch="1" aria-pressed="true">ปกติ</button>
+        <button type="button" data-pitch="1.2" aria-pressed="false">สูง</button>
+      </span>
       <label><input type="checkbox" id="au-follow" checked> เลื่อนหน้าตาม</label>
       <button type="button" class="au-dl" id="au-dl">ดาวน์โหลดบทบรรยาย</button>
     </div>
@@ -155,6 +160,7 @@
   var icon   = document.getElementById('au-icon');
   var voiceSel = document.getElementById('au-voice');
   var followCb = document.getElementById('au-follow');
+  var hintEl   = document.getElementById('au-hint');
 
   var ICON_PLAY  = 'M7 4l13 8-13 8V4z';
   var ICON_PAUSE = 'M6 4h4v16H6zM14 4h4v16h-4z';
@@ -166,6 +172,7 @@
   var playing = false;
   var voices = [];
   var rate = 1;
+  var pitch = 1;
   var chosenVoice = '';
   var stopping = false;
 
@@ -180,7 +187,7 @@
   function save(){
     try {
       var st = load();
-      st.rate = rate; st.voice = chosenVoice; st.follow = followCb.checked;
+      st.rate = rate; st.pitch = pitch; st.voice = chosenVoice; st.follow = followCb.checked;
       st.at = st.at || {};
       st.at[cur] = idx;
       localStorage.setItem(K, JSON.stringify(st));
@@ -188,6 +195,7 @@
   }
   var saved = load();
   if (saved.rate) rate = saved.rate;
+  if (saved.pitch) pitch = saved.pitch;
   if (saved.voice) chosenVoice = saved.voice;
   if (saved.follow === false) followCb.checked = false;
 
@@ -213,6 +221,7 @@
 
   function render(){
     bodyEl.innerHTML = '';
+    bodyEl.appendChild(hintEl);
     if (!synth){
       var w = document.createElement('div');
       w.className = 'au-warn';
@@ -271,12 +280,27 @@
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  /* ---------- เสียง ---------- */
+  /* ---------- เสียง ----------
+     เสียงไทยที่มีอยู่จริงในตลาดตอนนี้ เสียงชายมีน้อยมาก
+     ที่พบคือ Niwat ของ Microsoft ซึ่งเป็นเสียง neural และมักโผล่ใน Edge
+     ส่วน Kanya ของ Apple กับ Premwadee, Achara และ Google ไทย เป็นเสียงหญิง
+     จึงจัดอันดับให้เสียงชายและเสียงแบบ neural ขึ้นก่อน แล้วเลือกให้อัตโนมัติ */
+  var MALE_TH = /niwat|ni̇wat|male/i;
+  var NEURAL  = /natural|neural|online|enhanced|premium|siri/i;
+  function voiceSex(v){
+    if (MALE_TH.test(v.name)) return 'ชาย';
+    if (/kanya|premwadee|achara|narisa|google/i.test(v.name)) return 'หญิง';
+    return '';
+  }
+  function voiceScore(v){
+    return (MALE_TH.test(v.name) ? 100 : 0) + (NEURAL.test(v.name) ? 40 : 0);
+  }
   function loadVoices(){
     if (!synth) return;
     voices = synth.getVoices() || [];
     var th = voices.filter(function(v){ return /^th/i.test(v.lang); });
-    var list = th.length ? th : voices;
+    var list = (th.length ? th : voices).slice();
+    list.sort(function(a, b){ return voiceScore(b) - voiceScore(a); });
     voiceSel.innerHTML = '';
     if (!list.length){
       var o = document.createElement('option');
@@ -285,15 +309,28 @@
       return;
     }
     list.forEach(function(v){
+      var tag = [];
+      var sex = voiceSex(v);
+      if (sex) tag.push(sex);
+      if (NEURAL.test(v.name)) tag.push('ธรรมชาติ');
+      if (!th.length) tag.push(v.lang);
       var o = document.createElement('option');
       o.value = v.name;
-      o.textContent = v.name + (th.length ? '' : ' · ' + v.lang);
+      o.textContent = v.name.replace(/\s*\(Thailand\)|Microsoft\s|\sOnline/gi, '').trim() +
+                      (tag.length ? ' · ' + tag.join(' ') : '');
       voiceSel.appendChild(o);
     });
     if (chosenVoice && list.some(function(v){ return v.name === chosenVoice; })) voiceSel.value = chosenVoice;
-    else chosenVoice = voiceSel.value;
+    else chosenVoice = voiceSel.value;   // ตัวแรกคือตัวที่คะแนนดีที่สุด
+    var picked = list.filter(function(v){ return v.name === chosenVoice; })[0];
     if (!th.length){
-      subEl.textContent = 'ไม่พบเสียงภาษาไทยในเครื่องนี้ — คำอ่านอาจเพี้ยน';
+      hintEl.innerHTML = '<b>ไม่พบเสียงภาษาไทยในเครื่องนี้</b> คำอ่านจะเพี้ยน — บน macOS ติดตั้งได้ที่ System Settings แล้วไปที่ Accessibility เลือก Spoken Content เลือก System Voice แล้วกด Manage Voices เพื่อโหลดเสียงไทย';
+      hintEl.hidden = false;
+    } else if (picked && !MALE_TH.test(picked.name)){
+      hintEl.innerHTML = '<b>เครื่องนี้มีแต่เสียงไทยผู้หญิง</b> ถ้าอยากได้เสียงผู้ชาย ให้เปิดหน้านี้ด้วย <b>Microsoft Edge</b> ซึ่งมีเสียง <b>Niwat</b> เป็นเสียงชายแบบธรรมชาติ · หรือกดปุ่ม <b>ทุ้ม</b> เพื่อลดระดับเสียงลงก็ช่วยได้บ้าง';
+      hintEl.hidden = false;
+    } else {
+      hintEl.hidden = true;
     }
   }
   if (synth){
@@ -306,12 +343,13 @@
   });
 
   /* ---------- เล่น ---------- */
-  var keepAlive = null;
+  var keepAlive = null, gapTimer = null;
   function speakCurrent(){
     if (!synth || idx >= lines.length){ stop(); return; }
     var u = new SpeechSynthesisUtterance(lines[idx].text);
     u.lang = 'th-TH';
     u.rate = rate;
+    u.pitch = pitch;
     if (chosenVoice){
       var v = voices.filter(function(x){ return x.name === chosenVoice; })[0];
       if (v){ u.voice = v; u.lang = v.lang; }
@@ -322,7 +360,10 @@
       save();
       if (idx >= lines.length){ finish(); return; }
       mark(); follow();
-      speakCurrent();
+      // เว้นจังหวะหายใจระหว่างย่อหน้า และเว้นนานขึ้นเมื่อขึ้นหัวข้อใหม่ ให้ฟังเป็นธรรมชาติ
+      var gap = lines[idx].head ? 750 : 330;
+      if (gapTimer) clearTimeout(gapTimer);
+      gapTimer = setTimeout(function(){ if (playing) speakCurrent(); }, gap / Math.max(rate, .5));
     };
     u.onerror = function(e){
       // interrupted / canceled เกิดจากการกดหยุดเอง ไม่ต้องแจ้ง
@@ -331,7 +372,9 @@
     };
     synth.speak(u);
   }
+  function clearGap(){ if (gapTimer){ clearTimeout(gapTimer); gapTimer = null; } }
   function restartCurrent(){
+    clearGap();
     stopping = true; synth.cancel(); stopping = false;
     setTimeout(function(){ if (playing) speakCurrent(); }, 60);
   }
@@ -355,15 +398,18 @@
     if (!synth || !lines.length) return;
     if (idx >= lines.length) idx = 0;
     setUi(true); mark(); follow();
+    clearGap();
     stopping = true; synth.cancel(); stopping = false;
     setTimeout(speakCurrent, 60);
   }
   function pause(){
     if (!synth) return;
+    clearGap();
     stopping = true; synth.cancel(); stopping = false;
     setUi(false);
   }
   function stop(){
+    clearGap();
     if (synth){ stopping = true; synth.cancel(); stopping = false; }
     setUi(false);
   }
@@ -384,11 +430,23 @@
   document.getElementById('au-stop').addEventListener('click', function(){ stop(); jump(0); });
   followCb.addEventListener('change', save);
 
-  Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(b){
+  Array.prototype.forEach.call(document.querySelectorAll('.au-rate button[data-pitch]'), function(b){
+    b.setAttribute('aria-pressed', String(parseFloat(b.dataset.pitch) === pitch));
+    b.addEventListener('click', function(){
+      pitch = parseFloat(b.dataset.pitch);
+      Array.prototype.forEach.call(document.querySelectorAll('.au-rate button[data-pitch]'), function(x){
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+      save();
+      if (playing) restartCurrent();
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.au-rate button[data-rate]'), function(b){
     b.setAttribute('aria-pressed', String(parseFloat(b.dataset.rate) === rate));
     b.addEventListener('click', function(){
       rate = parseFloat(b.dataset.rate);
-      Array.prototype.forEach.call(document.querySelectorAll('.au-rate button'), function(x){
+      Array.prototype.forEach.call(document.querySelectorAll('.au-rate button[data-rate]'), function(x){
         x.setAttribute('aria-pressed', String(x === b));
       });
       save();
