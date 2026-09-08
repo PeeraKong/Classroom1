@@ -2989,7 +2989,14 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     if (!synth) return;
     voices = synth.getVoices() || [];
     var th = voices.filter(function(v){ return /^th/i.test(v.lang); });
-    var list = (th.length ? th : voices).slice();
+    // macOS คืนเสียงตัวเดียวกันซ้ำหลายรายการอยู่บ่อย ต้องกรองชื่อซ้ำออกก่อน
+    var seen = {}, list = [];
+    (th.length ? th : voices).forEach(function(v){
+      var k = v.name + '|' + v.lang;
+      if (seen[k]) return;
+      seen[k] = 1;
+      list.push(v);
+    });
     list.sort(function(a, b){ return voiceScore(b) - voiceScore(a); });
     voiceSel.innerHTML = '';
     if (!list.length){
