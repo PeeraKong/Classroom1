@@ -3769,15 +3769,42 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 .au-warn{flex:none; font-size:.78rem; color:var(--ink-3); line-height:1.65; padding:10px 14px;
   border-bottom:1px solid var(--rule); background:var(--accent-soft)}
 .au-warn[hidden]{display:none !important}
+
+/* ขอบบนสำหรับลากปรับความสูง และปุ่มย่อขยาย เพื่อไม่ให้หน้าต่างบังเนื้อหาตอนอ่านไปฟังไป */
+.au-grip{flex:none; height:10px; cursor:ns-resize; touch-action:none; display:flex; align-items:center;
+  justify-content:center; background:var(--surface); border-bottom:1px solid var(--rule)}
+.au-grip::before{content:""; width:36px; height:3px; border-radius:99px; background:var(--rule-strong)}
+.au-grip:hover::before{background:var(--accent)}
+.au-panel.sizing{user-select:none}
+.au-min{appearance:none; border:0; background:none; cursor:pointer; color:var(--ink-3); font-size:1rem;
+  line-height:1; padding:4px 7px; border-radius:4px; display:flex; align-items:center}
+.au-min:hover{color:var(--ink); background:var(--surface-2)}
+.au-min svg{width:14px; height:14px; transition:transform .18s}
+.au-panel.mini .au-min svg{transform:rotate(180deg)}
+.au-panel.mini{width:min(340px, calc(100vw - 36px)); height:auto !important; max-height:none !important}
+.au-panel.mini .au-grip,
+.au-panel.mini .au-chaps,
+.au-panel.mini .au-warn,
+.au-panel.mini .au-body,
+.au-panel.mini .au-sub,
+.au-panel.mini #au-voice,
+.au-panel.mini #au-pitch,
+.au-panel.mini #au-followlb,
+.au-panel.mini #au-dl{display:none !important}
+.au-panel.mini .au-head{padding:8px 8px 8px 14px}
+.au-panel.mini .au-title{font-size:.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.au-panel.mini .au-head > div:first-child{min-width:0; flex:1}
+.au-panel.mini .au-foot{border-top:0; padding-top:4px}
 .au-warn b{color:var(--ink)}
 .au-warn code{font-family:"IBM Plex Mono",monospace; font-size:.9em; background:var(--paper);
   border:1px solid var(--rule-strong); border-radius:3px; padding:1px 5px; white-space:nowrap;
   display:inline-block; margin-top:3px; color:var(--ink)}
 @media (max-width:520px){
   .au-panel{left:9px; right:9px; bottom:9px; width:auto; max-height:calc(100vh - 18px)}
+  .au-panel.mini{width:auto}
   .au-fab{left:9px; bottom:62px}
 }
-@media (prefers-reduced-motion:reduce){.au-bar i{transition:none}}
+@media (prefers-reduced-motion:reduce){.au-bar i{transition:none} .au-min svg{transition:none}}
 </style>
 
 <button type="button" class="au-fab" id="au-fab" hidden>
@@ -3788,11 +3815,18 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 </button>
 
 <div class="au-panel" id="au-panel" hidden role="dialog" aria-label="เครื่องเล่นเสียงบรรยายประจำบท">
+  <div class="au-grip" id="au-grip" role="separator" aria-orientation="horizontal"
+       title="ลากขึ้นลงเพื่อปรับความสูง · ดับเบิลคลิกเพื่อคืนขนาดเดิม"></div>
   <div class="au-head">
     <div>
       <div class="au-title" id="au-title">ฟังสรุปบท</div>
       <div class="au-sub" id="au-sub">เสียงอ่านจากระบบของเครื่อง</div>
     </div>
+    <button type="button" class="au-min" id="au-min" aria-expanded="true" aria-controls="au-body"
+            title="ย่อหน้าต่างให้เหลือแค่ปุ่มควบคุม">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+           stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+    </button>
     <button type="button" class="au-x" id="au-close" aria-label="ปิด">&times;</button>
   </div>
   <div class="au-chaps" id="au-chaps" role="group" aria-label="เลือกบท"></div>
@@ -3824,12 +3858,12 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
         <button type="button" data-rate="1.5" aria-pressed="false">1.5&times;</button>
       </span>
       <select id="au-voice" aria-label="เลือกเสียง"></select>
-      <span class="au-rate" role="group" aria-label="ระดับเสียง">
+      <span class="au-rate" id="au-pitch" role="group" aria-label="ระดับเสียง">
         <button type="button" data-pitch="0.8" aria-pressed="false">ทุ้ม</button>
         <button type="button" data-pitch="1" aria-pressed="true">ปกติ</button>
         <button type="button" data-pitch="1.2" aria-pressed="false">สูง</button>
       </span>
-      <label><input type="checkbox" id="au-follow" checked> เลื่อนหน้าตาม</label>
+      <label id="au-followlb"><input type="checkbox" id="au-follow" checked> เลื่อนหน้าตาม</label>
       <button type="button" class="au-dl" id="au-dl">ดาวน์โหลดบทบรรยาย</button>
     </div>
   </div>
@@ -3854,6 +3888,8 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 
   var fab    = document.getElementById('au-fab');
   var panel  = document.getElementById('au-panel');
+  var gripEl = document.getElementById('au-grip');
+  var minBt  = document.getElementById('au-min');
   var chaps  = document.getElementById('au-chaps');
   var bodyEl = document.getElementById('au-body');
   var titleEl= document.getElementById('au-title');
@@ -3893,8 +3929,10 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     try {
       var st = load();
       st.rate = rate; st.pitch = pitch; st.voice = chosenVoice; st.follow = followCb.checked;
+      st.mini = panel.classList.contains('mini');
+      st.h = panelH;
       st.at = st.at || {};
-      st.at[cur] = idx;
+      if (cur) st.at[cur] = idx;   // ตอนเริ่มต้นยังไม่ได้เลือกบท อย่าเพิ่งเขียนคีย์ว่าง
       localStorage.setItem(K, JSON.stringify(st));
     } catch (e){ /* โหมดส่วนตัวหรือปิดการเก็บข้อมูล — ข้ามไป */ }
   }
@@ -3972,7 +4010,7 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     posEl.textContent = (lines.length ? idx + 1 : 0) + ' / ' + lines.length;
     fillEl.style.width = lines.length ? ((idx / lines.length) * 100) + '%' : '0';
     var el = all[idx];
-    if (el && panel.hidden === false){
+    if (el && panel.hidden === false && !panel.classList.contains('mini')){
       var top = el.offsetTop - bodyEl.clientHeight / 2 + el.offsetHeight;
       bodyEl.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     }
@@ -4309,6 +4347,78 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
   });
+
+  /* ---------- ย่อขยายและปรับความสูง ----------
+     ตอนฟังไปอ่านไป หน้าต่างเต็มความสูงจะบังเนื้อหา จึงให้ย่อเหลือแค่แถบควบคุมได้
+     และลากขอบบนเพื่อปรับความสูงเองได้ ทั้งสองอย่างจำค่าไว้ให้ครั้งต่อไป */
+  var MIN_H = 190, panelH = 0;
+  function applyH(){
+    if (panelH){
+      panel.style.height = panelH + 'px';
+      panel.style.maxHeight = panelH + 'px';
+    } else {
+      panel.style.height = '';
+      panel.style.maxHeight = '';
+    }
+  }
+  function capH(){
+    return Math.max(MIN_H, window.innerHeight - 36);
+  }
+  function setMini(on){
+    panel.classList.toggle('mini', !!on);
+    minBt.setAttribute('aria-expanded', on ? 'false' : 'true');
+    minBt.title = on ? 'ขยายหน้าต่างให้เห็นบทพูดทั้งหมด' : 'ย่อหน้าต่างให้เหลือแค่ปุ่มควบคุม';
+    if (!on){ applyH(); mark(); }
+    save();
+  }
+  minBt.addEventListener('click', function(){
+    setMini(!panel.classList.contains('mini'));
+  });
+
+  var dragFrom = 0, dragH = 0;
+  function onMove(e){
+    // ลากขึ้นให้สูงขึ้น เพราะหน้าต่างยึดขอบล่างไว้
+    var h = Math.min(capH(), Math.max(MIN_H, dragH + (dragFrom - e.clientY)));
+    panelH = h;
+    applyH();
+  }
+  function onUp(e){
+    panel.classList.remove('sizing');
+    window.removeEventListener('pointermove', onMove);
+    window.removeEventListener('pointerup', onUp);
+    if (gripEl.releasePointerCapture && e && e.pointerId != null){
+      try { gripEl.releasePointerCapture(e.pointerId); } catch (err){ /* ปล่อยไม่ได้ก็ข้ามไป */ }
+    }
+    save();
+    mark();
+  }
+  gripEl.addEventListener('pointerdown', function(e){
+    if (panel.classList.contains('mini')) return;
+    e.preventDefault();
+    dragFrom = e.clientY;
+    dragH = panel.getBoundingClientRect().height;
+    panel.classList.add('sizing');
+    if (gripEl.setPointerCapture){
+      try { gripEl.setPointerCapture(e.pointerId); } catch (err){ /* จับไม่ได้ก็ยังลากได้ */ }
+    }
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+  });
+  gripEl.addEventListener('dblclick', function(){   // คืนความสูงมาตรฐาน
+    panelH = 0;
+    applyH();
+    save();
+    mark();
+  });
+  window.addEventListener('resize', function(){
+    if (panelH && panelH > capH()){ panelH = capH(); applyH(); }
+  });
+
+  if (saved.mini) setMini(true);
+  if (typeof saved.h === 'number' && saved.h >= MIN_H){
+    panelH = Math.min(saved.h, capH());
+    applyH();
+  }
 
   /* ---------- เปิดปิดแผง ---------- */
   function open(){
