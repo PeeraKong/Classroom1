@@ -95,6 +95,23 @@ if (mode === "link" || mode === "unlink") {
 
 // --------------------------- ติดตั้งเต็มรูปแบบ ---------------------------
 
+// wrangler ต้องการ Node 22 ขึ้นไป ถ้าไม่เช็คตรงนี้ ผู้ใช้จะไปเจอ error ภาษาอังกฤษ
+// กลางคันหลังติดตั้ง dependency ไปแล้ว ซึ่งอ่านยากและไม่บอกว่าต้องทำอะไรต่อ
+const NODE_MIN = 22;
+const nodeMajor = Number(process.versions.node.split(".")[0]);
+if (nodeMajor < NODE_MIN) {
+  console.log(c.err(`\nNode.js ในเครื่องเป็นรุ่น v${process.versions.node} ซึ่งเก่าเกินไป`));
+  console.log(`Cloudflare Wrangler ต้องการ ${c.b("v" + NODE_MIN + " ขึ้นไป")}\n`);
+  console.log(c.b("วิธีแก้ที่ง่ายที่สุด"));
+  console.log("  1. เปิด https://nodejs.org แล้วโหลดปุ่ม LTS");
+  console.log("  2. เปิดไฟล์ที่โหลดมา กด Next ไปจนจบ");
+  console.log("  3. " + c.b("ปิดหน้าต่าง Terminal นี้แล้วเปิดใหม่") + " (สำคัญ ไม่งั้นจะยังเห็นรุ่นเก่า)");
+  console.log("  4. เช็คด้วย " + c.b("node -v") + " ต้องขึ้น v22 ขึ้นไป แล้วรัน node setup.mjs อีกครั้ง\n");
+  console.log(c.dim("ถ้าใช้ nvm อยู่แล้ว:  nvm install 22 && nvm use 22"));
+  console.log(c.dim("ถ้าใช้ Homebrew:      brew install node@22\n"));
+  process.exit(1);
+}
+
 console.log(c.b("\nติดตั้งผู้ช่วยตอบคำถามประจำวิชา"));
 console.log(c.dim("จะมีสองจังหวะที่ต้องใช้มือคุณ คือล็อกอิน Cloudflare และวาง API key"));
 console.log(c.dim("นอกนั้นสคริปต์จัดการให้ทั้งหมด · กด Ctrl+C เพื่อหยุดได้ทุกเมื่อ"));
@@ -180,12 +197,20 @@ try {
 
   // 6 ────────────────────────────────────────────────────────────
   step(6, TOTAL, "Deploy ขึ้น Cloudflare");
-  const dep = runCapture("npx", ["wrangler", "deploy"]);
-  let url = (dep.out.match(/https:\/\/[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev/i) || [])[0];
-  if (!url) {
-    console.log(c.warn("      หา URL จากผลลัพธ์ไม่เจอ"));
-    url = await ask(rl, "ถ้าเห็น URL ที่ลงท้ายด้วย .workers.dev ให้วางตรงนี้ (หรือ Enter เพื่อข้าม):");
+  note("ถ้าถามว่าจะจด subdomain workers.dev ไหม ให้ตอบ yes");
+  // ต้องปล่อยให้โต้ตอบได้จริง ถ้าดักอ่านผลลัพธ์ wrangler จะคิดว่าไม่มีคนอยู่
+  // แล้วตอบคำถามเรื่อง subdomain ให้เป็น no เอง ทำให้ deploy ไม่ผ่าน
+  const deployed = runVisible("npx", ["wrangler", "deploy"]);
+  let url = "";
+  if (!deployed) {
+    console.log(c.warn("\n      deploy ไม่ผ่าน"));
+    console.log(c.dim("      สาเหตุที่พบบ่อยที่สุดคือบัญชียังไม่เคยจด subdomain ของ workers.dev"));
+    console.log(c.dim("      ถ้าเห็นลิงก์ dash.cloudflare.com ในข้อความข้างบน ให้เปิดลิงก์นั้น"));
+    console.log(c.dim("      ตั้งชื่อ subdomain (ตั้งอะไรก็ได้ที่ยังว่าง) แล้วกลับมารันสคริปต์นี้ใหม่"));
+  } else {
+    note("มองหาบรรทัดที่ลงท้ายด้วย .workers.dev ในข้อความข้างบน");
   }
+  url = await ask(rl, "วาง URL ที่ได้ตรงนี้ (หรือ Enter เพื่อข้าม):");
 
   // 7 ────────────────────────────────────────────────────────────
   step(7, TOTAL, "ใส่ URL ลงในหน้าเว็บทุกวิชา");

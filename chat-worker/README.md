@@ -19,7 +19,7 @@ Backend ตัวกลางที่เก็บ API key ไว้ฝั่ง
 2. **API key ของผู้ให้บริการที่เลือก**
    - Gemini — สร้างที่ [Google AI Studio](https://aistudio.google.com/apikey) ใช้บัญชี Google ธรรมดา
    - Claude — สร้างที่ [Anthropic Console](https://console.anthropic.com) คนละอันกับ Claude Pro ที่ใช้คุยผ่านเว็บ
-3. Node.js บนเครื่อง
+3. **Node.js v22 ขึ้นไป** — Cloudflare Wrangler บังคับ เช็คด้วย `node -v` ถ้าต่ำกว่านี้ให้โหลดตัว LTS จาก [nodejs.org](https://nodejs.org) แล้วเปิด Terminal ใหม่
 
 ## ติดตั้งครั้งแรก — ทางลัด
 
@@ -108,6 +108,11 @@ npx wrangler deploy
 
 จะได้ URL หน้าตาแบบ `https://classroom-chat.<ชื่อบัญชี>.workers.dev`
 
+> **ครั้งแรกของบัญชีใหม่** Cloudflare จะถามว่าจะจด subdomain ของ `workers.dev` ไหม ให้ตอบ **yes**
+> ถ้าเผลอตอบ no หรือ deploy ขึ้น `You need to register a workers.dev subdomain` ให้เปิดลิงก์
+> `dash.cloudflare.com/.../workers/onboarding` ที่แสดงในข้อความ ตั้งชื่อ subdomain แล้ว deploy ใหม่
+> เป็นการตั้งค่าครั้งเดียวของบัญชี
+
 ## เชื่อมหน้าเว็บเข้ากับ Worker
 
 เปิดไฟล์ `index.html` ของแต่ละวิชา เลื่อนไปท้ายไฟล์ หา
@@ -177,3 +182,12 @@ curl -N -X POST http://127.0.0.1:8787/chat \
   รวมทั้งไม่ให้เฉลยการบ้านตรง ๆ แต่ให้อธิบายหลักการแล้วชวนนิสิตลองทำเอง
 - ผู้ช่วยเห็นเฉพาะ **ขอบเขตเนื้อหาที่เขียนไว้ใน `SUBJECTS`** ไม่ได้อ่านหน้าเว็บหรือ PDF จริง
   ถ้าเพิ่มบทใหม่ในหน้าเว็บ อย่าลืมมาเพิ่มขอบเขตตรงนี้ด้วย
+
+## วิชาที่ตั้งขอบเขตไว้แล้ว
+
+| คีย์ใน `SUBJECTS` | วิชา | หน้าเว็บ |
+|---|---|---|
+| `adv-acctg-1` | การบัญชีขั้นสูง 1 (2601-421) | `adv-acctg-1/index.html` |
+| `audit` | การสอบบัญชี | `audit/index.html` |
+| `erp` | ระบบวางแผนทรัพยากรองค์กร (ERP) | `erp/index.html` |
+| `marketing` | หลักการตลาด | `marketing/index.html` |
