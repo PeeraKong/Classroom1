@@ -106,6 +106,10 @@ python3 tools/make-audio.py
 | `python3 tools/make-audio.py --voice female` | เสียงผู้หญิง Premwadee |
 | `python3 tools/make-audio.py --rate -10%` | พูดช้าลง 10 เปอร์เซ็นต์ |
 | `python3 tools/make-audio.py --force` | สร้างใหม่ทั้งหมด |
+| `python3 tools/make-audio.py --check` | **ตรวจว่าติดตรงไหน** ไม่สร้างจริง บอกว่าใช้ Python ตัวไหน ติดตั้ง edge-tts แล้วหรือยัง และมีไฟล์เสียงกี่บทแล้ว |
+
+ถ้ารันแล้วขึ้นว่าหา `edge-tts` ไม่เจอ ทั้ง ๆ ที่เพิ่ง `pip3 install` ไป แปลว่า `pip3` กับ `python3`
+คนละตัวกัน สคริปต์จะบอกคำสั่งที่ผูกกับ Python ตัวเดียวกันให้เอง
 
 รันซ้ำได้ บทที่บทบรรยายไม่เปลี่ยนจะถูกข้าม ถ้าแก้บทบรรยายแล้วรันใหม่ จะสร้างเฉพาะบทที่แก้
 

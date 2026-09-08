@@ -122,7 +122,11 @@ async def build_chapter(lines, voice, rate, pitch, label):
                 break
             except Exception as exc:                      # เครือข่ายสะดุดเป็นเรื่องปกติ ลองใหม่
                 if attempt == 2:
-                    raise
+                    raise RuntimeError(
+                        u'เรียกบริการอ่านออกเสียงไม่สำเร็จ สาเหตุที่พบบ่อยคือเน็ตหลุด '
+                        u'หรือเครือข่ายที่ใช้อยู่บล็อกปลายทาง speech.platform.bing.com '
+                        u'ลองเปลี่ยนเครือข่ายหรือปิด VPN แล้วรันใหม่ '
+                        u'สคริปต์จะทำต่อจากบทที่ค้างไว้ให้เอง\n  ข้อความจากระบบ %s' % exc)
                 await asyncio.sleep(1.5 * (attempt + 1))
         cues.append(round(at, 3))
         at += mp3_duration(data)
@@ -134,6 +138,64 @@ async def build_chapter(lines, voice, rate, pitch, label):
     return b''.join(parts), cues, round(at, 3)
 
 
+def problem_edge_tts():
+    return (u'\n  ยังไม่ได้ติดตั้ง edge-tts สำหรับ Python ตัวที่กำลังรันอยู่\n'
+            u'  ตัวที่รันอยู่คือ %s\n\n'
+            u'  ให้ติดตั้งด้วยคำสั่งนี้ ซึ่งผูกกับ Python ตัวเดียวกันแน่นอน\n\n'
+            u'      %s -m pip install edge-tts\n\n'
+            u'  แล้วรันใหม่อีกครั้ง\n' % (sys.executable, sys.executable))
+
+
+def check():
+    """บอกสถานะทุกอย่างที่จำเป็น เพื่อให้รู้ว่าติดตรงไหน"""
+    print(u'\nPython ที่ใช้อยู่   %s' % sys.executable)
+    print(u'เวอร์ชัน            %s' % sys.version.split()[0])
+    try:
+        import edge_tts
+        v = getattr(edge_tts, '__version__', 'ไม่ทราบเวอร์ชัน')
+        print(u'edge-tts           ติดตั้งแล้ว รุ่น %s' % v)
+        ok = True
+    except ImportError:
+        print(u'edge-tts           ยังไม่ได้ติดตั้ง')
+        ok = False
+
+    print('')
+    total_ch = total_done = 0
+    for course in COURSES:
+        path, html, data = read_page(course)
+        if not data:
+            print(u'%-13s ไม่พบบทบรรยายในหน้า' % course)
+            continue
+        m = AUDIO_RE.search(html or '')
+        clips = {}
+        if m:
+            try:
+                clips = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1))
+            except Exception:
+                clips = {}
+        done = []
+        for key in data:
+            c = clips.get(key)
+            if c and os.path.exists(os.path.join(ROOT, course, 'audio', key + '.mp3')):
+                done.append(key)
+        total_ch += len(data)
+        total_done += len(done)
+        if len(done) == len(data) and data:
+            voice = (clips.get(list(data)[0]) or {}).get('voice', '')
+            print(u'%-13s มีไฟล์เสียงครบ %d บท · เสียง %s' % (course, len(data), voice))
+        else:
+            print(u'%-13s มีไฟล์เสียง %d จาก %d บท' % (course, len(done), len(data)))
+
+    print('')
+    if total_done == total_ch and total_ch:
+        print(u'พร้อมแล้ว ทุกบทมีไฟล์เสียง เปิดหน้าเว็บแล้วกดฟังสรุปบทได้เลย')
+    elif not ok:
+        print(problem_edge_tts())
+    else:
+        print(u'ยังขาดไฟล์เสียง %d บท ให้รัน  %s tools/make-audio.py' % (total_ch - total_done, sys.executable))
+    return 0
+
+
 async def main():
     ap = argparse.ArgumentParser(description='สร้างไฟล์เสียงบรรยายประจำบท')
     ap.add_argument('courses', nargs='*', default=[], help='ชื่อโฟลเดอร์วิชา เว้นว่างคือทำทุกวิชา')
@@ -141,12 +203,16 @@ async def main():
     ap.add_argument('--rate', default='', help='ปรับความเร็วตอนสร้าง เช่น -10%% หรือ +15%%')
     ap.add_argument('--pitch', default='', help='ปรับระดับเสียงตอนสร้าง เช่น -5Hz')
     ap.add_argument('--force', action='store_true', help='สร้างใหม่แม้บทบรรยายไม่เปลี่ยน')
+    ap.add_argument('--check', action='store_true', help='ตรวจว่าพร้อมสร้างไหม แล้วรายงานสถานะ ไม่สร้างจริง')
     a = ap.parse_args()
+
+    if a.check:
+        return check()
 
     try:
         import edge_tts  # noqa: F401
     except ImportError:
-        print('ยังไม่ได้ติดตั้ง edge-tts ให้รันคำสั่งนี้ก่อน\n\n    pip3 install edge-tts\n')
+        print(problem_edge_tts())
         return 1
 
     voice = VOICES.get(a.voice, a.voice)

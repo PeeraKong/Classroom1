@@ -4418,9 +4418,13 @@ footer p{max-width:70ch; margin-bottom:6px}
 .au-dl{appearance:none; font:inherit; font-size:.75rem; font-weight:600; cursor:pointer; background:none; border:0;
   color:var(--ink-3); text-decoration:underline; text-underline-offset:3px; padding:0}
 .au-dl:hover{color:var(--accent)}
-.au-warn{font-size:.78rem; color:var(--ink-3); line-height:1.6; padding:10px 12px; margin-bottom:12px;
-  border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:3px}
+.au-warn{flex:none; font-size:.78rem; color:var(--ink-3); line-height:1.65; padding:10px 14px;
+  border-bottom:1px solid var(--rule); background:var(--accent-soft)}
+.au-warn[hidden]{display:none !important}
 .au-warn b{color:var(--ink)}
+.au-warn code{font-family:"IBM Plex Mono",monospace; font-size:.9em; background:var(--paper);
+  border:1px solid var(--rule-strong); border-radius:3px; padding:1px 5px; white-space:nowrap;
+  display:inline-block; margin-top:3px; color:var(--ink)}
 @media (max-width:520px){
   .au-panel{left:9px; right:9px; bottom:9px; width:auto; max-height:calc(100vh - 18px)}
   .au-fab{left:9px; bottom:62px}
@@ -4444,7 +4448,8 @@ footer p{max-width:70ch; margin-bottom:6px}
     <button type="button" class="au-x" id="au-close" aria-label="ปิด">&times;</button>
   </div>
   <div class="au-chaps" id="au-chaps" role="group" aria-label="เลือกบท"></div>
-  <div class="au-body" id="au-body"><div class="au-warn" id="au-hint" hidden></div></div>
+  <div class="au-warn" id="au-hint" hidden></div>
+  <div class="au-body" id="au-body"></div>
   <div class="au-foot">
     <div class="au-ctrl">
       <button type="button" class="au-b" id="au-prev" aria-label="ย่อหน้าก่อนหน้า">
@@ -4578,7 +4583,6 @@ footer p{max-width:70ch; margin-bottom:6px}
 
   function render(){
     bodyEl.innerHTML = '';
-    bodyEl.appendChild(hintEl);
     if (!synth){
       var w = document.createElement('div');
       w.className = 'au-warn';
@@ -4691,7 +4695,10 @@ footer p{max-width:70ch; margin-bottom:6px}
       hintEl.innerHTML = '<b>ไม่พบเสียงภาษาไทยในเครื่องนี้</b> คำอ่านจะเพี้ยน — บน macOS ติดตั้งได้ที่ System Settings แล้วไปที่ Accessibility เลือก Spoken Content เลือก System Voice แล้วกด Manage Voices เพื่อโหลดเสียงไทย';
       hintEl.hidden = false;
     } else if (picked && !MALE_TH.test(picked.name)){
-      hintEl.innerHTML = '<b>เครื่องนี้มีแต่เสียงไทยผู้หญิง</b> ถ้าอยากได้เสียงผู้ชาย ให้เปิดหน้านี้ด้วย <b>Microsoft Edge</b> ซึ่งมีเสียง <b>Niwat</b> เป็นเสียงชายแบบธรรมชาติ · หรือกดปุ่ม <b>ทุ้ม</b> เพื่อลดระดับเสียงลงก็ช่วยได้บ้าง';
+      hintEl.innerHTML = '<b>ตอนนี้ใช้เสียงสังเคราะห์ของเบราว์เซอร์อยู่ ซึ่งเครื่องนี้มีแต่เสียงผู้หญิง</b><br>' +
+        'อยากได้เสียงผู้ชาย ให้เปิด Terminal ที่โฟลเดอร์โปรเจกต์แล้วรันสองบรรทัดนี้ครั้งเดียว<br>' +
+        '<code>pip3 install edge-tts</code><br><code>python3 tools/make-audio.py</code><br>' +
+        'เสร็จแล้วรีเฟรชหน้านี้ จะได้เสียงผู้ชาย Niwat และกล่องนี้จะหายไปเอง';
       hintEl.hidden = false;
     } else {
       hintEl.hidden = true;
