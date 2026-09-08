@@ -1,0 +1,14 @@
+# ไฟล์ชั่วคราวที่ Python สร้างเองตอนรันสคริปต์ ไม่ต้องเก็บเข้า git
+__pycache__/
+*.pyc
+
+# สภาพแวดล้อม Python ที่สร้างในเครื่อง
+venv/
+.venv/
+
+# ความลับของ Cloudflare Worker ห้ามขึ้น git เด็ดขาด
+chat-worker/.dev.vars
+.dev.vars
+
+# ขยะของ macOS
+.DS_Store
