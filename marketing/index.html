@@ -3911,6 +3911,7 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
       });
     });
     titleEl.textContent = ch.t || 'ฟังสรุปบท';
+    clipFailed = null;
     clip = clipOf(key);
     if (clip){
       var a = ensureAudio();
@@ -4111,7 +4112,7 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
   /* ---------- โหมดไฟล์เสียงจริง ----------
      ถ้ามีไฟล์ที่สร้างไว้ด้วย tools/make-audio.py จะเล่นไฟล์นั้นแทนเสียงสังเคราะห์
      เพราะได้เสียงผู้ชายแบบ neural ซึ่งฟังเป็นธรรมชาติกว่ามาก */
-  var audioEl = null, clip = null;
+  var audioEl = null, clip = null, clipFailed = null;
   function clipOf(key){
     var c = CLIPS[key];
     if (!c || !c.src || !c.cues) return null;
@@ -4136,6 +4137,8 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     audioEl.addEventListener('ended', function(){ finish(); });
     audioEl.addEventListener('error', function(){
       // หาไฟล์ไม่เจอหรือเล่นไม่ได้ ให้ถอยไปใช้เสียงสังเคราะห์แทน
+      // แต่ต้องจำไว้ว่าล้มเพราะไฟล์ ไม่ใช่เพราะไม่มีไฟล์ ไม่งั้นจะขึ้นสาเหตุผิด
+      clipFailed = clip ? clip.src : null;
       clip = null; audioEl = null;
       setUi(false); showEngine();
     });
@@ -4159,6 +4162,15 @@ table.vpm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
       var words = lines.reduce(function(n, l){ return n + l.text.length; }, 0);
       subEl.textContent = lines.length + ' ย่อหน้า · ประมาณ ' + Math.max(1, Math.round(words / 800)) + ' นาที';
       loadVoices();
+      if (clipFailed){
+        // มีไฟล์เสียงผู้ชายอยู่แล้ว แต่เบราว์เซอร์เปิดไม่ได้ ต้องบอกสาเหตุนี้แทน
+        hintEl.innerHTML = '<b>มีไฟล์เสียงผู้ชายอยู่แล้ว แต่เบราว์เซอร์เปิดไฟล์นี้ไม่ได้</b><br>' +
+          '<code>' + clipFailed + '</code><br>' +
+          'สาเหตุที่พบบ่อยที่สุดคือเปิดหน้าเว็บแบบ <code>file://</code> ซึ่ง Safari ห้ามโหลดไฟล์เสียงข้างเคียง<br>' +
+          'วิธีแก้ ให้กลับไปที่โฟลเดอร์โปรเจกต์แล้ว<b>ดับเบิลคลิกไฟล์ เปิดเว็บ.command</b> ' +
+          'มันจะเปิดหน้าเว็บผ่าน <code>http://localhost</code> ให้ แล้วเสียงผู้ชายจะเล่นได้ทันที';
+        hintEl.hidden = false;
+      }
     }
   }
 
