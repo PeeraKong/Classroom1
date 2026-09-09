@@ -178,7 +178,7 @@ const SUBJECTS = {
     name: "หลักการตลาด (Principles of Marketing)",
     scope: `
 ขอบเขตของวิชานี้คือเนื้อหาสอบกลางภาค อ้างอิงตำรา Kotler และ Armstrong เรื่อง Principles of Marketing
-มี 5 บท คือบทที่ 1, 3, 4, 5 และ 6 โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
+มี 6 บท คือบทที่ 1, 3, 4, 5, 6 และ 7 โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
 
 บทที่ 1 กระบวนการการตลาด
 - นิยามการตลาดของ Kotler ว่าเป็นกระบวนการที่บริษัทสร้างคุณค่าให้ลูกค้าและสร้างความสัมพันธ์
@@ -288,6 +288,38 @@ const SUBJECTS = {
 - positioning statement ตามรูปแบบ To (ส่วนตลาดเป้าหมายและความต้องการ) our (แบรนด์) is (แนวคิด)
   that (จุดที่แตกต่าง) พร้อมตัวอย่างของ Evernote
   และหลักที่ว่าส่วนประสมการตลาดทุกตัวต้องสนับสนุนกลยุทธ์การวางตำแหน่งที่เลือกไว้
+
+บทที่ 7 ผลิตภัณฑ์ บริการ และตราสินค้า
+- นิยามของ product ว่าเป็นอะไรก็ตามที่เสนอสู่ตลาดเพื่อให้เกิดความสนใจ การได้มา การใช้ หรือการบริโภค
+  ครอบคลุมวัตถุที่จับต้องได้ บริการ เหตุการณ์ บุคคล องค์กร สถานที่ และแนวคิด
+  ส่วน services เป็นรูปแบบหนึ่งของสินค้าที่จับต้องไม่ได้และไม่ก่อให้เกิดความเป็นเจ้าของ
+- สามระดับของสินค้าตาม Figure 8.1 คือ core customer value, actual product และ augmented product
+  โดยชื่อตราสินค้าอยู่ในชั้น actual product ส่วนการรับประกันและบริการหลังการขายอยู่ชั้น augmented
+- สินค้าบริโภคสี่ประเภทคือ convenience, shopping, specialty และ unsought
+  พร้อมตาราง 8.1 ที่เทียบพฤติกรรมการซื้อ ราคา การจัดจำหน่าย และการส่งเสริมการตลาดของทั้งสี่ประเภท
+  โดย specialty ไม่เปรียบเทียบตราและใช้ exclusive distribution ส่วน shopping เปรียบเทียบหลายตรา
+- สินค้าอุตสาหกรรมสามกลุ่มคือ materials and parts, capital items และ supplies and services
+- การตลาดขององค์กร บุคคล สถานที่ และแนวคิด รวมถึง social marketing
+  ซึ่งต่างจาก social media marketing
+- ห้าการตัดสินใจของสินค้าแต่ละรายการตาม Figure 8.2 คือ product attributes, branding, packaging,
+  labeling and logos และ product support services
+- คุณภาพสินค้า ได้แก่ total quality management, return on quality
+  และคู่ performance quality กับ conformance quality ที่ไม่จำเป็นต้องไปด้วยกัน
+  รวมถึงความต่างระหว่าง style ที่เป็นรูปลักษณ์ กับ design ที่มีส่วนต่อประโยชน์ใช้สอยด้วย
+- product line, line filling และ line stretching ทั้งแบบยืดลงและยืดขึ้น
+- product mix สี่มิติคือ width ที่เป็นจำนวนสาย, length ที่เป็นจำนวนรายการ,
+  depth ที่เป็นจำนวนรุ่นของแต่ละรายการ และ consistency ที่วัดความใกล้ชิดของสายในแง่การใช้งานปลายทาง
+- ลักษณะสี่ประการของบริการตาม Figure 8.3 คือ intangibility, inseparability,
+  variability และ perishability
+- การตลาดบริการสามแบบตาม Figure 8.4 คือ external, internal และ interactive marketing
+  พร้อม service-profit chain ห้าข้อที่เริ่มจากคุณภาพบริการภายในและจบที่กำไร
+  และการบริหาร service differentiation, service quality และ service productivity
+- กลยุทธ์ตราสินค้า ได้แก่ ความต่างระหว่าง brand equity, brand value และ customer equity
+  สี่การตัดสินใจใหญ่ตาม Figure 8.5 คือ brand positioning สามระดับ attributes benefits
+  และ beliefs and values, brand name selection หกคุณสมบัติ,
+  brand sponsorship สี่แบบคือ national brand, store brand, licensing และ co-branding
+  และ brand development สี่แบบจากตารางสองคูณสองคือ line extension, brand extension,
+  multibrands และ new brands พร้อมการบริหารตราสินค้าและจุดสัมผัสของตรา
 
 หมายเหตุ ตัวเลขสัดส่วนชนชั้นทางสังคมและตัวอย่างส่วนใหญ่อยู่ในบริบทสหรัฐอเมริกาตามตำรา
 ถ้านิสิตถามถึงบริบทไทยให้ระบุว่าตัวเลขอาจต่างออกไป และถ้าถามเรื่องบทที่ 2 ให้บอกว่าอยู่นอกขอบเขตของสื่อชุดนี้
