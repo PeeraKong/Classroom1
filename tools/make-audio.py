@@ -227,6 +227,22 @@ async def main():
     ap.add_argument('--check', action='store_true', help='ตรวจว่าพร้อมสร้างไหม แล้วรายงานสถานะ ไม่สร้างจริง')
     a = ap.parse_args()
 
+    # ชื่อวิชาที่ไม่รู้จักต้องบอกให้ชัดตั้งแต่ต้น ไม่ใช่ปล่อยไปพังตอนเปิดไฟล์
+    # กรณีที่เจอบ่อยที่สุดคือพิมพ์ตัวเลือกตกขีดสองขีด เช่น check แทน --check
+    unknown = [c for c in a.courses if c not in COURSES]
+    if unknown:
+        print(u'\nไม่รู้จักวิชา %s' % ' '.join(unknown))
+        for c in unknown:
+            flag = c.lstrip('-')
+            if flag in ('check', 'force', 'voice', 'rate', 'pitch', 'help'):
+                print(u'\nถ้าตั้งใจจะใช้ตัวเลือก ต้องมีขีดสองขีดนำหน้าเสมอ')
+                print(u'   พิมพ์   --%s' % flag)
+                print(u'   ไม่ใช่  %s' % c)
+                break
+        print(u'\nชื่อวิชาที่ใช้ได้คือ %s' % ' '.join(COURSES))
+        print(u'เว้นว่างไว้คือทำทุกวิชา')
+        return 1
+
     if a.check:
         return check(VOICES.get(a.voice, a.voice), a.rate, a.pitch, a.courses or None)
 
