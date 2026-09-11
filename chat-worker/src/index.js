@@ -107,8 +107,9 @@ const SUBJECTS = {
   audit: {
     name: "การสอบบัญชี",
     scope: `
-ขอบเขตของวิชานี้คือบทที่ 1, 3 และ 4 จากตำรา Louwers, Bagley, Blay, Strawser และ Thibodeau
-เรื่อง Auditing and Assurance Services โดยบทที่ 2 ไม่ได้อยู่ในเอกสารที่ใช้ทำสื่อนี้
+ขอบเขตของวิชานี้คือบทที่ 1, 2, 3, 4 และ Module B, E, F จากตำรา Louwers, Bagley, Blay,
+Strawser และ Thibodeau เรื่อง Auditing and Assurance Services
+รวมถึงภาคปฏิบัติจากการบรรยายของวิทยากรรับเชิญซึ่งเป็นผู้สอบบัญชีรับอนุญาตของไทย
 
 บทที่ 1 ความต้องการข้อมูลที่เชื่อถือได้และข้อกำหนดของผู้บริหาร
 
@@ -169,6 +170,57 @@ const SUBJECTS = {
 - การไม่ปฏิบัติตามกฎหมายและข้อบังคับ แบบ direct-effect กับ indirect-effect และความรับผิดชอบ
   ของผู้สอบบัญชีที่ต่างกัน พร้อมสัญญาณบ่งชี้
 - การจัดทำเอกสารการประเมินความเสี่ยง และบันทึกกลยุทธ์การสอบบัญชี (audit strategy memorandum)
+
+บทที่ 2 มาตรฐานการสอบบัญชีและหลักการสามกลุ่ม
+- GAAS ที่ระบุคุณสมบัติของผู้สอบบัญชีและกำกับการปฏิบัติงาน โดยมีวัตถุประสงค์คือ
+  ได้ความเชื่อมั่นอย่างสมเหตุสมผล ซึ่งไม่ใช่ความเชื่อมั่นอย่างสมบูรณ์
+- หลักการสามกลุ่มคือ responsibilities, performance และ reporting
+- Responsibilities ประกอบด้วย competence and capabilities, independence,
+  due care และ professional skepticism กับ judgment
+  โดย independence แยกเป็น in fact ซึ่งเป็นสภาพจิตใจ และ in appearance
+  ซึ่งวัดจากมุมมองของนักลงทุนที่สมเหตุสมผลที่รู้ข้อเท็จจริงทั้งหมด
+- Performance ประกอบด้วย planning and supervision, materiality, risk assessment
+  และ audit evidence โดย sufficient คือปริมาณและ appropriate คือคุณภาพ
+  ซึ่งประกอบด้วย relevance และ reliability
+- ลำดับความน่าเชื่อถือของหลักฐานตามแหล่งที่มา คือความรู้โดยตรงของผู้สอบบัญชี
+  แล้วจึงเป็นเอกสารภายนอก และเอกสารภายในตามลำดับ
+- ความสัมพันธ์ที่ว่าการควบคุมภายในที่มีประสิทธิผลนำไปสู่ความเสี่ยงจากการควบคุมที่ต่ำลง
+  และใช้วิธีตรวจสอบเนื้อหาสาระที่เข้มน้อยลงได้
+- Reporting คือการแสดงความเห็นหรือระบุว่าไม่สามารถแสดงความเห็นได้
+  โดยเทียบกับแม่บทการรายงานทางการเงิน เช่น GAAP หรือ IFRS
+- ระบบบริหารคุณภาพของสำนักงานแปดองค์ประกอบ
+
+Module B จรรยาบรรณของผู้ประกอบวิชาชีพ
+- นิยามของปัญหาทางจริยธรรม และเกณฑ์สามข้อของพฤติกรรมที่มีจริยธรรม
+- แหล่งที่มาของกฎจรรยาบรรณ ได้แก่ SEC, PCAOB, IFAC, AICPA
+  สมาคม CPA ระดับมลรัฐ และคณะกรรมการบัญชีระดับมลรัฐ
+- Independence Rule 1.200 และข้อห้ามของ covered member ตาม Exhibit B.2
+  โดยส่วนได้เสียทางการเงินโดยตรงห้ามทุกจำนวน ส่วนโดยอ้อมห้ามเฉพาะเมื่อมีสาระสำคัญ
+- ข้อห้ามที่ขยายไปถึง immediate family และ close relatives ซึ่งเข้มไม่เท่ากัน
+- ภัยคุกคามต่อความเป็นอิสระเจ็ดประเภท คือ adverse interest, undue influence,
+  advocacy, management participation, familiarity, self-interest และ self-review
+- กรอบแนวคิดสี่ขั้นตาม Exhibit B.3 โดยถ้ามาตรการป้องกันลดภัยคุกคามลงสู่ระดับที่ยอมรับไม่ได้ ต้องหยุด
+- บริการที่ SEC และ PCAOB ห้ามให้แก่ลูกค้างานสอบบัญชี และการเปิดเผยค่าธรรมเนียม
+  ซึ่งบริษัทเป็นผู้เปิดเผยในหนังสือเชิญประชุมผู้ถือหุ้น ไม่ใช่ผู้สอบบัญชี
+- กฎอื่นของ AICPA ได้แก่ integrity and objectivity, general standards สี่ข้อ,
+  compliance with standards, fees and other remuneration, advertising
+  และ confidential client information
+- ภาคปฏิบัติจากวิทยากรรับเชิญ ได้แก่ เส้นทางอาชีพผู้สอบบัญชีห้าระดับ
+  ตั้งแต่ Associate ถึง Audit Partner ข้อจำกัดจำนวนงานตามกฎหมายไทย
+  คือผู้ทำบัญชีไม่เกิน 100 ผู้สอบบัญชีไม่เกิน 200 และผู้สอบบัญชีภาษีอากรไม่เกิน 300 งบการเงิน
+  รวมถึงความต่างระหว่าง test of controls กับ substantive procedures
+  และตัวอย่างจุดควบคุมของวงจรขายและวงจรซื้อ เช่น 3-way matching
+
+Module E และ F การเลือกตัวอย่างในการสอบบัญชี
+- attributes sampling ใช้ประมาณอัตราการเบี่ยงเบนของการควบคุม จึงคู่กับ test of controls
+  ส่วน variables sampling ใช้ประมาณจำนวนเงิน จึงคู่กับ substantive procedures
+- การวางแผนสามขั้น คือกำหนดวัตถุประสงค์ นิยาม deviation condition และนิยามประชากร
+- risk of overreliance ทำให้เสียประสิทธิผล ส่วน risk of underreliance ทำให้เสียประสิทธิภาพ
+  โดย overreliance ร้ายแรงกว่าเพราะกระทบความถูกต้องของความเห็น
+- วิธีเลือกรายการสี่แบบ โดยใช้กับ statistical sampling ได้เฉพาะ unrestricted random
+  และ systematic random ส่วน block และ haphazard ใช้ไม่ได้
+- ข้อพิจารณาเชิงคุณภาพของการเบี่ยงเบน สามคู่คือ pervasive เทียบ isolated,
+  unintentional เทียบ intentional และ misunderstanding เทียบ carelessness
 
 หมายเหตุ ตำราเล่มนี้อธิบายในบริบทของสหรัฐอเมริกา ถ้านิสิตถามถึงบริบทไทย
 ให้ชี้ว่ามาตรฐานการสอบบัญชีของไทยกำหนดโดยสภาวิชาชีพบัญชี และควรอ้างอิงประกาศฉบับล่าสุดโดยตรง
