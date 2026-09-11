@@ -82,6 +82,8 @@ def mp3_duration(data):
 
 def read_page(course):
     path = os.path.join(ROOT, course, 'index.html')
+    if not os.path.exists(path):          # วิชาที่ยังไม่มีหน้าเว็บ ให้ข้ามไปแทนที่จะพัง
+        return None, None, None
     html = io.open(path, encoding='utf-8').read()
     m = DATA_RE.search(html)
     if not m:
@@ -146,7 +148,13 @@ def problem_edge_tts():
             u'  แล้วรันใหม่อีกครั้ง\n' % (sys.executable, sys.executable))
 
 
-def check():
+def sig_of(lines, voice, rate, pitch):
+    """ลายเซ็นของบท ใช้ตัดสินว่าต้องสร้างไฟล์เสียงใหม่หรือไม่"""
+    return hashlib.sha1(('\n'.join(lines) + '|' + voice + '|' + rate + '|' + pitch)
+                        .encode('utf-8')).hexdigest()[:12]
+
+
+def check(voice='th-TH-NiwatNeural', rate='', pitch='', courses=None):
     """บอกสถานะทุกอย่างที่จำเป็น เพื่อให้รู้ว่าติดตรงไหน"""
     print(u'\nPython ที่ใช้อยู่   %s' % sys.executable)
     print(u'เวอร์ชัน            %s' % sys.version.split()[0])
@@ -160,8 +168,8 @@ def check():
         ok = False
 
     print('')
-    total_ch = total_done = 0
-    for course in COURSES:
+    total_ch = total_done = total_lines = 0
+    for course in (courses or COURSES):
         path, html, data = read_page(course)
         if not data:
             print(u'%-13s ไม่พบบทบรรยายในหน้า' % course)
@@ -173,18 +181,27 @@ def check():
                 clips = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1))
             except Exception:
                 clips = {}
-        done = []
-        for key in data:
+        done, todo = [], []
+        for key, ch in data.items():
+            lines = chapter_lines(ch)
             c = clips.get(key)
-            if c and os.path.exists(os.path.join(ROOT, course, 'audio', key + '.mp3')):
+            has = os.path.exists(os.path.join(ROOT, course, 'audio', key + '.mp3'))
+            if not has:
+                todo.append((key, len(lines), u'ยังไม่มีไฟล์'))
+            elif not c or c.get('sig') != sig_of(lines, voice, rate, pitch):
+                todo.append((key, len(lines), u'บทบรรยายเปลี่ยน ต้องสร้างใหม่'))
+            else:
                 done.append(key)
         total_ch += len(data)
         total_done += len(done)
-        if len(done) == len(data) and data:
-            voice = (clips.get(list(data)[0]) or {}).get('voice', '')
-            print(u'%-13s มีไฟล์เสียงครบ %d บท · เสียง %s' % (course, len(data), voice))
+        total_lines += sum(t[1] for t in todo)
+        if not todo and data:
+            v = (clips.get(list(data)[0]) or {}).get('voice', '')
+            print(u'%-13s ครบ %d บท · เสียง %s' % (course, len(data), v))
         else:
-            print(u'%-13s มีไฟล์เสียง %d จาก %d บท' % (course, len(done), len(data)))
+            print(u'%-13s พร้อม %d จาก %d บท' % (course, len(done), len(data)))
+            for key, n, why in todo:
+                print(u'              %-5s %3d ย่อหน้า · %s' % (key, n, why))
 
     print('')
     if total_done == total_ch and total_ch:
@@ -192,7 +209,11 @@ def check():
     elif not ok:
         print(problem_edge_tts())
     else:
-        print(u'ยังขาดไฟล์เสียง %d บท ให้รัน  %s tools/make-audio.py' % (total_ch - total_done, sys.executable))
+        # ประมาณเวลาจากจำนวนย่อหน้า วัดได้ราว 25 ย่อหน้าต่อนาทีจากการใช้งานจริง
+        mins = max(1, int(round(total_lines / 25.0)))
+        print(u'ต้องสร้างไฟล์เสียง %d บท รวม %d ย่อหน้า ใช้เวลาราว %d นาที'
+              % (total_ch - total_done, total_lines, mins))
+        print(u'ให้รัน  %s tools/make-audio.py' % sys.executable)
     return 0
 
 
@@ -207,7 +228,7 @@ async def main():
     a = ap.parse_args()
 
     if a.check:
-        return check()
+        return check(VOICES.get(a.voice, a.voice), a.rate, a.pitch, a.courses or None)
 
     try:
         import edge_tts  # noqa: F401
@@ -241,8 +262,7 @@ async def main():
             lines = chapter_lines(chapter)
             if not lines:
                 continue
-            sig = hashlib.sha1(('\n'.join(lines) + '|' + voice + '|' + a.rate + '|' + a.pitch)
-                               .encode('utf-8')).hexdigest()[:12]
+            sig = sig_of(lines, voice, a.rate, a.pitch)
             mp3 = os.path.join(outdir, key + '.mp3')
             prev = old.get(key)
             if prev and prev.get('sig') == sig and os.path.exists(mp3) and not a.force:
