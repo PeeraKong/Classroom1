@@ -26,6 +26,20 @@ if [ ! -f "tools/make-audio.py" ]; then
   exit 1
 fi
 
+# ดึงโค้ดล่าสุดก่อน เพราะสาเหตุที่พบบ่อยที่สุดของ "รันแล้วไม่สร้างบทใหม่"
+# คือหน้าเว็บในเครื่องยังเป็นรุ่นเก่า จึงไม่มีบทใหม่ให้สร้าง
+# ใช้ --ff-only เพื่อไม่ให้ไปรวมทับงานที่ยังไม่ได้ commit ถ้าทำไม่ได้ก็แค่เตือนแล้วไปต่อ
+if [ -d .git ] && command -v git >/dev/null 2>&1; then
+  echo "  กำลังดึงโค้ดรุ่นล่าสุด..."
+  if git pull --ff-only 2>/dev/null; then
+    echo "  โค้ดเป็นรุ่นล่าสุดแล้ว"
+  else
+    echo "  ดึงอัตโนมัติไม่ได้ อาจมีงานที่ยังไม่ได้ commit หรือสาขาแยกกันอยู่"
+    echo "  จะใช้ไฟล์ที่มีอยู่ในเครื่องนี้ต่อไป ถ้าบทใหม่ไม่ขึ้น ให้ git pull เองก่อน"
+  fi
+  echo ""
+fi
+
 # หา Python ที่ใช้ได้ ไล่จากตัวที่พบบ่อยที่สุดบน macOS
 PY=""
 for c in python3 /usr/bin/python3 /opt/homebrew/bin/python3 /usr/local/bin/python3 python; do

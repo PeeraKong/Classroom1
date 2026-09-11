@@ -255,6 +255,7 @@ async def main():
     voice = VOICES.get(a.voice, a.voice)
     courses = a.courses or COURSES
     made = skipped = 0
+    found = []          # เก็บไว้บอกผู้ใช้ว่าหน้าเว็บในเครื่องนี้มีบทอะไรบ้าง
 
     for course in courses:
         path, html, data = read_page(course)
@@ -273,7 +274,9 @@ async def main():
             except Exception:
                 old = {}
 
+        found.append((course, list(data)))
         print('\n%s · %d บท · เสียง %s' % (course, len(data), voice))
+        print('  บทที่พบในหน้าเว็บ  %s' % ' '.join(data))
         for key, chapter in data.items():
             lines = chapter_lines(chapter)
             if not lines:
@@ -315,6 +318,16 @@ async def main():
     print('\nเสร็จแล้ว สร้างใหม่ %d บท · ข้าม %d บท' % (made, skipped))
     if made:
         print('อย่าลืม git add แล้ว commit ไฟล์ในโฟลเดอร์ audio ด้วยนะครับ')
+    else:
+        # กรณีที่สับสนกันบ่อยที่สุด คือหน้าเว็บในเครื่องยังเป็นรุ่นเก่า
+        # จึงไม่มีบทใหม่ให้สร้าง แต่สคริปต์บอกแค่ว่าข้ามหมด ทำให้ดูเหมือนไม่ทำงาน
+        print(u'\nไม่ได้สร้างไฟล์เสียงใหม่เลย เพราะทุกบทที่พบมีไฟล์เสียงตรงกันอยู่แล้ว')
+        print(u'\nบทที่พบในเครื่องนี้')
+        for course, keys in found:
+            print(u'   %-13s %s' % (course, ' '.join(keys)))
+        print(u'\nถ้าคิดว่าควรมีบทมากกว่านี้ แปลว่าไฟล์ index.html ในเครื่องยังไม่ใช่รุ่นล่าสุด')
+        print(u'ให้รันคำสั่งนี้ก่อน แล้วดับเบิลคลิกไฟล์นี้ใหม่')
+        print(u'\n    git pull\n')
     return 0
 
 
