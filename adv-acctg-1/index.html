@@ -302,6 +302,72 @@ footer p{max-width:70ch; margin-bottom:6px}
 .wk-yr{font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
   color:var(--ink-3); margin:14px 0 3px}
 .wk-yr:first-of-type{margin-top:4px}
+
+/* ---------- แบบฝึกเขียนตอบ ---------- */
+.ex-bar{position:sticky; top:53px; z-index:20; background:var(--surface-2); border:1px solid var(--rule); border-radius:4px;
+  padding:11px 14px; margin:0 0 22px; display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; justify-content:space-between}
+.ex-bar .grp{display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.ex-bar .glab{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin-right:2px}
+.ex-bar button{appearance:none; font:inherit; font-size:.78rem; font-weight:600; cursor:pointer; padding:5px 11px;
+  border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink-2); border-radius:3px}
+.ex-bar button:hover{border-color:var(--accent); color:var(--accent)}
+.ex-bar button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+.ex-prog{font-family:"IBM Plex Mono",monospace; font-size:.8rem; font-variant-numeric:tabular-nums; color:var(--ink-2)}
+.ex-prog b{color:var(--ink)}
+
+.ex{border:1px solid var(--rule); border-radius:5px; background:var(--surface); padding:18px 20px 16px; margin:0 0 20px;
+  box-shadow:var(--shadow)}
+.ex.hidden{display:none}
+.ex-h{display:flex; flex-wrap:wrap; gap:7px; align-items:center; margin-bottom:9px}
+.ex-n{font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600; color:var(--accent);
+  border:1px solid var(--accent); border-radius:3px; padding:1px 7px}
+.pill{font-size:.71rem; font-weight:600; border-radius:3px; padding:2px 8px; border:1px solid var(--rule-strong);
+  color:var(--ink-3); background:var(--sunk); white-space:nowrap}
+.pill.k{color:var(--ink-2)}
+.ex-mark{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-3)}
+.ex > h3{font-size:1.02rem; margin:0 0 10px}
+.ex-q{font-size:.95rem; color:var(--ink-2)}
+.ex-q p + p{margin-top:9px}
+.ex-q b{color:var(--ink)}
+.ex-ask{margin:14px 0 4px; padding:10px 14px; border-left:3px solid var(--accent); background:var(--accent-soft);
+  border-radius:0 4px 4px 0; font-size:.9rem}
+.ex-ask .nh{display:block; font-weight:700; color:var(--ink); font-size:.82rem; margin-bottom:3px}
+.ex-ask ol{margin:4px 0 0; padding-left:20px}
+.ex-ask li{margin:2px 0}
+
+.ex-lab{display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin:16px 0 4px}
+.ex-save{text-transform:none; letter-spacing:0; font-size:.72rem; opacity:0; transition:opacity .25s}
+.ex-save.on{opacity:1}
+.ex-a{width:100%; display:block; resize:vertical; min-height:120px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86rem; line-height:1.72;
+  color:var(--ink); background:var(--paper); border:1px solid var(--rule-strong); border-radius:4px; padding:11px 13px}
+.ex-a:focus{outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent)}
+.ex-a::placeholder{color:var(--ink-3); opacity:.75}
+
+.ex-sol h4{font-family:"IBM Plex Sans Thai",sans-serif; font-size:.84rem; font-weight:700; color:var(--accent);
+  margin:16px 0 5px; letter-spacing:.01em}
+.ex-sol h4:first-child{margin-top:6px}
+.ex-sol p + p{margin-top:7px}
+.ex-sol ol,.ex-sol ul{margin:5px 0; padding-left:20px}
+.ex-sol li{margin:3px 0}
+.mk{margin-top:14px; border-top:1px dashed var(--rule-strong); padding-top:10px; font-size:.84rem; color:var(--ink-2)}
+.mk .nh{display:block; font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:5px}
+.mk ul{margin:0; padding-left:19px}
+#rail-ex a.off{opacity:.35; pointer-events:none}
+.ex-none{border:1px dashed var(--rule-strong); border-radius:4px; padding:26px 20px; text-align:center;
+  color:var(--ink-3); font-size:.9rem}
+
+@media print{
+  .tabs,.rail,.ex-bar,footer,.mast-meta,
+  .ai-fab,.ai-panel,.pad-fab,.pad,.au-fab,.au-panel{display:none !important}
+  .ex{break-inside:avoid; box-shadow:none; border-color:#999}
+  .ex-a{min-height:190px}
+  .reveal{display:none !important}
+}
 </style>
 
 <header class="mast">
@@ -326,6 +392,7 @@ footer p{max-width:70ch; margin-bottom:6px}
     <button class="tab" role="tab" id="t-ch3" aria-controls="ch3" aria-selected="false"><span class="tnum">03</span>งบการเงินรวม ณ วันซื้อหุ้น</button>
     <button class="tab" role="tab" id="t-ch4" aria-controls="ch4" aria-selected="false"><span class="tnum">04</span>งบรวมภายหลังวันซื้อหุ้น</button>
     <button class="tab" role="tab" id="t-c4x" aria-controls="c4x" aria-selected="false"><span class="tnum">05</span>ตัวอย่างครบวงจร</button>
+    <button class="tab" role="tab" id="t-ex" aria-controls="ex" aria-selected="false"><span class="tnum">E</span>แบบฝึกเขียนตอบ</button>
     <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false"><span class="tnum">Q</span>แบบทดสอบ</button>
   </div>
 </div>
@@ -421,6 +488,32 @@ footer p{max-width:70ch; margin-bottom:6px}
         <li><a href="#c5-7"><i>7</i>รูปแบบทั่วไป ปี 1–4</a></li>
         <li><a href="#c5-8"><i>8</i>ลองคำนวณเอง</a></li>
         <li><a href="#c5-9"><i>9</i>เมื่อมีบริษัทร่วม</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-ex" class="hidden" aria-label="แบบฝึกเขียนตอบ">
+      <div class="rail-h">แบบฝึกเขียนตอบ</div>
+      <ol>
+        <li><a href="#ex-map"><i>•</i>โจทย์ออกได้กี่แบบ</a></li>
+        <li><a href="#q1"><i>1</i>รายการค้าสองสมุด</a></li>
+        <li><a href="#q2"><i>2</i>อุปกรณ์ 4 กรณี</a></li>
+        <li><a href="#q3"><i>3</i>กระทบยอดบัญชีระหว่างกัน</a></li>
+        <li><a href="#q4"><i>4</i>กำไรส่วนเพิ่มในสินค้าสาขา</a></li>
+        <li><a href="#q5"><i>5</i>ค่าขนส่งระหว่างสาขา</a></li>
+        <li><a href="#q6"><i>6</i>ซื้อธุรกิจโดยจ่ายด้วยหุ้น</a></li>
+        <li><a href="#q7"><i>7</i>สิ่งตอบแทนที่คาดว่าจะจ่าย</a></li>
+        <li><a href="#q8"><i>8</i>ระยะเวลาวัดมูลค่า</a></li>
+        <li><a href="#q9"><i>9</i>ค่าความนิยมจากกำไรเกินปกติ</a></li>
+        <li><a href="#q10"><i>10</i>NCI สองวิธีวัดมูลค่า</a></li>
+        <li><a href="#q11"><i>11</i>สินทรัพย์ที่มีค่าเสื่อมสะสม</a></li>
+        <li><a href="#q12"><i>12</i>วินิจฉัยการควบคุม</a></li>
+        <li><a href="#q13"><i>13</i>ราคาทุนเทียบส่วนได้เสีย</a></li>
+        <li><a href="#q14"><i>14</i>ไล่ยอด NCI สามปี</a></li>
+        <li><a href="#q15"><i>15</i>FVTPL เทียบ FVOCI</a></li>
+        <li><a href="#q16"><i>16</i>บริษัทร่วม</a></li>
+        <li><a href="#q17"><i>17</i>ครบวงจร ปีแรก</a></li>
+        <li><a href="#q18"><i>18</i>ปีที่ผลต่างลดลง</a></li>
+        <li><a href="#q19"><i>19</i>ถูกหรือผิด พร้อมเหตุผล</a></li>
+        <li><a href="#q20"><i>20</i>ทฤษฎีเบื้องหลังงบรวม</a></li>
       </ol>
     </nav>
     <nav id="rail-quiz" class="hidden" aria-label="แบบทดสอบ">
@@ -3162,6 +3255,1208 @@ footer p{max-width:70ch; margin-bottom:6px}
     </section>
   </div>
 
+  <div id="ex" class="hidden" role="tabpanel" aria-labelledby="t-ex">
+    <p class="lede">แบบทดสอบแท็บ <b>Q</b> เป็นปรนัยไว้เช็กความเข้าใจเร็ว ๆ · แท็บนี้คือ<b>ข้อสอบอัตนัย</b> ต้องคำนวณเอง เขียนรายการบัญชีเอง และอธิบายเหตุผลเอง เหมือนข้อสอบกลางภาคและปลายภาคจริง — <b>20 ข้อ 210 คะแนน</b> ครอบคลุมทุกรูปแบบโจทย์ที่ออกได้ในวิชานี้</p>
+
+    <div class="note key" style="margin-bottom:20px"><span class="nh">ใช้อย่างไรให้ได้ผล</span>พิมพ์คำตอบลงในช่องของแต่ละข้อ <b>ระบบบันทึกให้อัตโนมัติในเครื่องนี้</b> ปิดแล้วเปิดใหม่คำตอบยังอยู่ · <b>อย่าเพิ่งเปิดเฉลย</b>จนกว่าจะเขียนจนสุดความสามารถแล้ว เพราะการนึกเองคือสิ่งที่ทำให้จำได้ · เฉลยทุกข้อมี<b>เกณฑ์ให้คะแนนแยกเป็นข้อ ๆ</b> ให้ตรวจตัวเองได้ว่าตกตรงไหน · ถ้าอยากทำบนกระดาษ กดปุ่ม <b>พิมพ์เป็นกระดาษข้อสอบ</b> จะได้เฉพาะโจทย์กับช่องว่าง ไม่มีเฉลยติดไป</div>
+
+    <section class="sec" id="ex-map">
+      <div class="sec-h"><span class="sec-n">แผนที่</span><h2>โจทย์วิชานี้ออกได้กี่แบบ</h2></div>
+      <div class="body">
+        <p class="lede">ก่อนลงมือทำ ให้ดูภาพรวมก่อนว่าข้อสอบวิชานี้วนอยู่ใน <b>5 รูปแบบ</b> เท่านั้น แต่ละรูปแบบใช้กับได้ทุกบท ข้อสอบจริงมักเอา 2 รูปแบบมาผสมกันในข้อเดียว</p>
+        <div class="tw">
+          <table class="tbl">
+            <thead><tr><th>รูปแบบ</th><th>สิ่งที่ต้องส่ง</th><th>จุดที่คนพลาดบ่อย</th><th>ข้อในชุดนี้</th></tr></thead>
+            <tbody>
+              <tr><td class="k">คำนวณหาตัวเลข</td><td>ค่าความนิยม · NCI · กำไรที่ปรับแล้ว · ยอดเงินลงทุน</td><td>ใส่ค่าใช้จ่ายในการซื้อเข้าไปคิดค่าความนิยม · ลืมตัดจำหน่ายผลต่าง</td><td>7 · 9 · 16 · 17</td></tr>
+              <tr><td class="k">บันทึกรายการบัญชี</td><td>Dr/Cr พร้อมจำนวนเงิน ครบทั้งสองข้าง</td><td>เดบิตเครดิตไม่เท่ากัน · ใช้ชื่อบัญชีกว้างเกินจนไม่รู้ว่าหมายถึงอะไร</td><td>1 · 2 · 5 · 6 · 11 · 13</td></tr>
+              <tr><td class="k">กระดาษทำการ กระทบยอด ตารางไล่ยอด</td><td>รายการตัดบัญชีครบชุด ตารางกระทบยอดสองฝั่ง หรือตารางเคลื่อนไหวรายปี</td><td>เงินลงทุนล้างไม่หมด · ปรับผิดฝั่ง · NCI ไม่ไปต่อปีถัดไป</td><td>3 · 10 · 14</td></tr>
+              <tr><td class="k">อธิบาย · วินิจฉัย · ให้เหตุผล</td><td>ข้อความ อ้างหลักการหรือชื่อมาตรฐาน</td><td>ตอบว่า “ใช่/ไม่ใช่” เฉย ๆ โดยไม่บอกว่าเข้าเงื่อนไขข้อไหน</td><td>8 · 12 · 15 · 19 · 20</td></tr>
+              <tr><td class="k">หาข้อผิดพลาด</td><td>ชี้จุดผิด บอกเหตุผล แล้วเขียนที่ถูกให้ดู</td><td>แก้ตัวเลขแต่ไม่บอกว่าทำไมเดิมถึงผิด</td><td>4 · 18</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.85rem; color:var(--ink-3); margin:-6px 0 14px">เลขข้อในคอลัมน์สุดท้ายตรงกับ<b>ปุ่มกรองแบบข้อสอบ</b>ด้านล่าง กดแล้วจะเหลือเฉพาะข้อเหล่านั้น · ข้อสอบจริงมักผสมสองรูปแบบในข้อเดียว เช่น คำนวณเสร็จแล้วให้เขียนรายการบัญชีต่อ</p>
+        <div class="note warn"><span class="nh">เขียนคำตอบอย่างไรให้ได้คะแนนเต็ม</span>รายการบัญชีต้องเขียน<b>ชื่อบัญชีให้เจาะจง</b> — “เงินลงทุนในบริษัทย่อย” ไม่ใช่ “เงินลงทุน” · ข้อคำนวณให้<b>โชว์วิธี</b>ทุกบรรทัด เพราะคะแนนส่วนใหญ่อยู่ที่ขั้นตอน ไม่ใช่คำตอบสุดท้าย · ข้ออธิบายให้ตอบเป็น<b>สามชั้น</b> คือ สรุปคำตอบ → หลักการที่ใช้ → เอาข้อเท็จจริงในโจทย์มาจับกับหลักการ</div>
+      </div>
+    </section>
+
+    <div class="ex-bar">
+      <div class="grp">
+        <span class="glab">บท</span>
+        <button type="button" data-f="ch" data-v="all" aria-pressed="true">ทั้งหมด</button>
+        <button type="button" data-f="ch" data-v="1" aria-pressed="false">1</button>
+        <button type="button" data-f="ch" data-v="2" aria-pressed="false">2</button>
+        <button type="button" data-f="ch" data-v="3" aria-pressed="false">3</button>
+        <button type="button" data-f="ch" data-v="4" aria-pressed="false">4</button>
+        <button type="button" data-f="ch" data-v="5" aria-pressed="false">5</button>
+        <button type="button" data-f="ch" data-v="x" aria-pressed="false">รวมบท</button>
+      </div>
+      <div class="grp">
+        <span class="glab">แบบ</span>
+        <button type="button" data-f="kind" data-v="all" aria-pressed="true">ทุกแบบ</button>
+        <button type="button" data-f="kind" data-v="calc" aria-pressed="false">คำนวณ</button>
+        <button type="button" data-f="kind" data-v="je" aria-pressed="false">บันทึกบัญชี</button>
+        <button type="button" data-f="kind" data-v="wk" aria-pressed="false">กระดาษทำการ</button>
+        <button type="button" data-f="kind" data-v="exp" aria-pressed="false">อธิบาย</button>
+        <button type="button" data-f="kind" data-v="err" aria-pressed="false">หาข้อผิดพลาด</button>
+      </div>
+      <div class="grp">
+        <span class="ex-prog" id="ex-prog">เขียนแล้ว <b>0</b> จาก 20 ข้อ</span>
+        <button type="button" id="ex-print">พิมพ์เป็นกระดาษข้อสอบ</button>
+        <button type="button" id="ex-dl">ดาวน์โหลดคำตอบ</button>
+        <button type="button" id="ex-clear">ล้างคำตอบ</button>
+      </div>
+    </div>
+
+    <div id="ex-list">
+
+    <article class="ex" id="q1" data-ch="1" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 1</span><span class="pill">บทที่ 1</span><span class="pill k">บันทึกบัญชี</span><span class="pill k">พื้นฐาน</span><span class="ex-mark">10 คะแนน</span></div>
+      <h3>รายการค้าระหว่างสำนักงานใหญ่กับสาขา · บันทึกสองสมุด</h3>
+      <div class="ex-q">
+        <p>บริษัท รุ่งเรือง จำกัด เปิดสาขาเชียงใหม่ ระหว่างเดือนมีนาคม 25X5 มีรายการดังนี้</p>
+        <ol style="padding-left:20px; margin:9px 0">
+          <li>สำนักงานใหญ่ส่งสินค้าไปให้สาขา <b>ราคาทุน 80,000 บาท</b></li>
+          <li>สาขาจ่ายค่าโฆษณาแทนสำนักงานใหญ่ <b>5,000 บาท</b></li>
+          <li>สำนักงานใหญ่เก็บเงินจากลูกหนี้ของสาขาได้ <b>12,000 บาท</b></li>
+          <li>สำนักงานใหญ่โอนเงินสดไปให้สาขาใช้หมุนเวียน <b>30,000 บาท</b></li>
+        </ol>
+        <p>บริษัทใช้<b>วิธีบันทึกสินค้าแบบต่อเนื่อง</b> และส่งสินค้าให้สาขา<b>ในราคาทุน</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>บันทึกรายการทั้งสี่ใน<b>สมุดของสำนักงานใหญ่</b></li>
+          <li>บันทึกรายการทั้งสี่ใน<b>สมุดของสาขา</b></li>
+          <li>หายอดคงเหลือของบัญชี “สาขา” และบัญชี “สำนักงานใหญ่” พร้อมระบุด้านเดบิตหรือเครดิต และอธิบายว่าทำไมสองยอดนี้ต้องเท่ากัน</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x01">คำตอบของคุณ<span class="ex-save" data-save="x01">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x01" data-ex="x01" rows="10" placeholder="สมุดสำนักงานใหญ่&#10;1) Dr ............ xx,xxx&#10;     Cr ............ xx,xxx&#10;..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>สมุดของสำนักงานใหญ่ — บัญชี “สาขา” ยอดปกติอยู่ด้าน<b>เดบิต</b></h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">1</td><td>Dr สาขา <span class="m">80,000</span></td><td>Cr สินค้าส่งไปสาขา <span class="m">80,000</span></td><td>สาขาเป็นหนี้เพิ่ม</td></tr>
+          <tr><td class="k">2</td><td>Dr ค่าโฆษณา <span class="m">5,000</span></td><td>Cr สาขา <span class="m">5,000</span></td><td>สาขาออกเงินแทน หนี้ที่สาขาค้างจึงลด</td></tr>
+          <tr><td class="k">3</td><td>Dr เงินสด <span class="m">12,000</span></td><td>Cr สาขา <span class="m">12,000</span></td><td>สำนักงานใหญ่เก็บเงินของสาขามาไว้เอง</td></tr>
+          <tr><td class="k">4</td><td>Dr สาขา <span class="m">30,000</span></td><td>Cr เงินสด <span class="m">30,000</span></td><td>ส่งทรัพยากรไปให้สาขาเพิ่ม</td></tr>
+        </tbody></table></div>
+        <p><b>ยอดคงเหลือบัญชีสาขา</b> 80,000 &minus; 5,000 &minus; 12,000 + 30,000 = <b>93,000 บาท ด้านเดบิต</b></p>
+        <h4>สมุดของสาขา — บัญชี “สำนักงานใหญ่” ยอดปกติอยู่ด้าน<b>เครดิต</b></h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">1</td><td>Dr สินค้ารับจากสำนักงานใหญ่ <span class="m">80,000</span></td><td>Cr สำนักงานใหญ่ <span class="m">80,000</span></td><td></td></tr>
+          <tr><td class="k">2</td><td>Dr สำนักงานใหญ่ <span class="m">5,000</span></td><td>Cr เงินสด <span class="m">5,000</span></td><td>จ่ายแทน หนี้ที่ค้างสำนักงานใหญ่จึงลด</td></tr>
+          <tr><td class="k">3</td><td>Dr สำนักงานใหญ่ <span class="m">12,000</span></td><td>Cr ลูกหนี้ <span class="m">12,000</span></td><td>ลูกหนี้ของสาขาหายไป เงินไปอยู่ที่สำนักงานใหญ่</td></tr>
+          <tr><td class="k">4</td><td>Dr เงินสด <span class="m">30,000</span></td><td>Cr สำนักงานใหญ่ <span class="m">30,000</span></td><td></td></tr>
+        </tbody></table></div>
+        <p><b>ยอดคงเหลือบัญชีสำนักงานใหญ่</b> 80,000 &minus; 5,000 &minus; 12,000 + 30,000 = <b>93,000 บาท ด้านเครดิต</b></p>
+        <h4>ทำไมต้องเท่ากัน</h4>
+        <p>บัญชี “สาขา” กับบัญชี “สำนักงานใหญ่” เป็น<b>บัญชีคู่กระจก</b> (reciprocal accounts) ทุกรายการที่กระทบฝ่ายหนึ่งต้องกระทบอีกฝ่ายด้วยจำนวนเท่ากันแต่กลับด้าน เพราะทั้งสองหน่วยงานเป็น<b>นิติบุคคลเดียวกัน</b> บัญชีคู่นี้เป็นแค่เครื่องมือภายในไว้ติดตามว่าใครถือทรัพยากรของใครอยู่ ตอนทำงบการเงินรวมจึง<b>ตัดทิ้งทั้งคู่</b> ไม่ปรากฏในงบที่เผยแพร่</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สมุดสำนักงานใหญ่ถูกครบสี่รายการ <b>4 คะแนน</b> (รายการละ 1)</li>
+          <li>สมุดสาขาถูกครบสี่รายการ <b>4 คะแนน</b></li>
+          <li>ยอดคงเหลือ 93,000 พร้อมระบุด้านถูกทั้งสองฝั่ง <b>1 คะแนน</b></li>
+          <li>อธิบายความเป็นบัญชีคู่กระจกและการตัดทิ้งในงบรวม <b>1 คะแนน</b></li>
+          <li><b>หักคะแนน</b> ถ้าใช้ชื่อ “สินค้าส่งไปสาขา” กับ “สินค้ารับจากสำนักงานใหญ่” สลับกัน หรือใช้ “ซื้อสินค้า/ขายสินค้า” ซึ่งจะทำให้ดูเหมือนมีการซื้อขายกับคนนอก</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q2" data-ch="1" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 2</span><span class="pill">บทที่ 1</span><span class="pill k">บันทึกบัญชี</span><span class="pill k">ต้องแม่นกฎ</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ซื้ออุปกรณ์ให้สาขา · สี่กรณีที่ต้องแยกให้ออก</h3>
+      <div class="ex-q">
+        <p>บริษัทซื้ออุปกรณ์สำนักงานมาใช้ที่<b>สาขา</b> ราคา <b>60,000 บาท</b> อายุการใช้ประโยชน์ 10 ปี</p>
+        <p>โจทย์ให้พิจารณา <b>4 กรณี</b> ซึ่งต่างกันที่ว่า<b>ใครเป็นคนจ่ายเงิน</b> และ<b>บัญชีสินทรัพย์ไปอยู่ในสมุดของใคร</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>กรณี</th><th>ผู้จ่ายเงิน</th><th>บัญชีอุปกรณ์อยู่ในสมุดของ</th></tr></thead>
+          <tbody>
+            <tr><td class="k">ก</td><td>สาขา</td><td>สำนักงานใหญ่</td></tr>
+            <tr><td class="k">ข</td><td>สาขา</td><td>สาขา</td></tr>
+            <tr><td class="k">ค</td><td>สำนักงานใหญ่</td><td>สำนักงานใหญ่</td></tr>
+            <tr><td class="k">ง</td><td>สำนักงานใหญ่</td><td>สาขา</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>บันทึกรายการซื้อในสมุดของทั้งสองฝ่าย ครบทั้งสี่กรณี ถ้าฝ่ายใดไม่ต้องบันทึกให้เขียนว่า “ไม่บันทึก”</li>
+          <li>สรุปเป็น<b>กฎเดียว</b>ว่าเมื่อใดบัญชีระหว่างกันจึงขยับ</li>
+          <li>ในกรณี ก. ใครเป็นผู้บันทึกค่าเสื่อมราคาประจำปี และถ้าอยากให้กำไรของสาขาสะท้อนต้นทุนจริง ต้องทำอะไรเพิ่ม</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x02">คำตอบของคุณ<span class="ex-save" data-save="x02">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x02" data-ex="x02" rows="10" placeholder="กรณี ก&#10;  สมุดสาขา   Dr .......... / Cr ..........&#10;  สมุด สนญ.  Dr .......... / Cr ..........&#10;..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>กรณี</th><th>สมุดสาขา</th><th>สมุดสำนักงานใหญ่</th></tr></thead>
+          <tbody>
+            <tr><td class="k">ก</td><td>Dr สำนักงานใหญ่ <span class="m">60,000</span><br>Cr เงินสด <span class="m">60,000</span></td><td>Dr อุปกรณ์–สาขา <span class="m">60,000</span><br>Cr สาขา <span class="m">60,000</span></td></tr>
+            <tr><td class="k">ข</td><td>Dr อุปกรณ์ <span class="m">60,000</span><br>Cr เงินสด <span class="m">60,000</span></td><td><i>ไม่บันทึก</i></td></tr>
+            <tr><td class="k">ค</td><td><i>ไม่บันทึก</i></td><td>Dr อุปกรณ์–สาขา <span class="m">60,000</span><br>Cr เงินสด <span class="m">60,000</span></td></tr>
+            <tr><td class="k">ง</td><td>Dr อุปกรณ์ <span class="m">60,000</span><br>Cr สำนักงานใหญ่ <span class="m">60,000</span></td><td>Dr สาขา <span class="m">60,000</span><br>Cr เงินสด <span class="m">60,000</span></td></tr>
+          </tbody>
+        </table></div>
+        <h4>กฎเดียวที่ใช้ได้ทุกกรณี</h4>
+        <p>บัญชีระหว่างกันจะขยับก็ต่อเมื่อ <b>“คนจ่ายเงิน” กับ “คนถือบัญชีสินทรัพย์” เป็นคนละฝ่ายกัน</b> เพราะนั่นแปลว่าฝ่ายหนึ่งเอาทรัพยากรของตัวเองไปสร้างสินทรัพย์ให้อีกฝ่ายถือ · ถ้าเป็นฝ่ายเดียวกัน (กรณี ข และ ค) ทุกอย่างจบในสมุดเดียว อีกฝ่ายไม่ต้องรู้เรื่องเลย</p>
+        <h4>ค่าเสื่อมราคาในกรณี ก</h4>
+        <p><b>สำนักงานใหญ่เป็นผู้บันทึกค่าเสื่อมราคา</b> ปีละ 6,000 บาท เพราะบัญชีสินทรัพย์อยู่ในสมุดของสำนักงานใหญ่ · แต่ถ้าอยากให้<b>งบกำไรขาดทุนของสาขาสะท้อนต้นทุนจริง</b> สำนักงานใหญ่ต้อง<b>เรียกเก็บค่าเสื่อมราคาไปที่สาขา</b> โดยบันทึก Dr สาขา 6,000 / Cr ค่าเสื่อมราคา 6,000 และสาขาบันทึก Dr ค่าเสื่อมราคา 6,000 / Cr สำนักงานใหญ่ 6,000 · ถ้าไม่ทำ กำไรสาขาจะดูสูงเกินจริงเพราะใช้อุปกรณ์ฟรี ซึ่งทำให้ประเมินผลงานสาขาผิดพลาด</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สี่กรณี กรณีละ <b>1.5 คะแนน</b> รวม <b>6 คะแนน</b> · ต้องตอบ “ไม่บันทึก” ในฝั่งที่ไม่เกี่ยวด้วย จึงจะได้เต็ม</li>
+          <li>สรุปกฎได้ถูก <b>1 คะแนน</b></li>
+          <li>ค่าเสื่อมราคาและการเรียกเก็บ <b>1 คะแนน</b></li>
+          <li><b>จุดที่เสียคะแนนบ่อยที่สุด</b> คือกรณี ก. มักเผลอให้สาขาบันทึก Dr อุปกรณ์ ทั้งที่บัญชีสินทรัพย์อยู่ที่สำนักงานใหญ่ จะทำให้บันทึกอุปกรณ์ซ้ำสองที่</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q3" data-ch="1" data-kind="wk">
+      <div class="ex-h"><span class="ex-n">ข้อ 3</span><span class="pill">บทที่ 1</span><span class="pill k">กระทบยอด</span><span class="pill k">ออกบ่อย</span><span class="ex-mark">12 คะแนน</span></div>
+      <h3>กระทบยอดบัญชีระหว่างกัน ณ วันสิ้นปี</h3>
+      <div class="ex-q">
+        <p>ณ วันที่ 31 ธันวาคม 25X5 ก่อนปรับปรุง</p>
+        <ul style="padding-left:20px; margin:9px 0">
+          <li>บัญชี <b>“สาขา”</b> ในสมุดสำนักงานใหญ่มียอด <b>152,000 บาท ด้านเดบิต</b></li>
+          <li>บัญชี <b>“สำนักงานใหญ่”</b> ในสมุดสาขามียอด <b>100,400 บาท ด้านเครดิต</b></li>
+        </ul>
+        <p>ตรวจสอบพบสาเหตุดังนี้</p>
+        <ol style="padding-left:20px; margin:9px 0">
+          <li>สำนักงานใหญ่ส่งสินค้าไปสาขา <b>25,000 บาท</b> เมื่อ 28 ธันวาคม สาขาได้รับของวันที่ 3 มกราคม จึงยังไม่ได้บันทึก</li>
+          <li>สาขาโอนเงินเข้าบัญชีสำนักงานใหญ่ <b>18,000 บาท</b> วันที่ 30 ธันวาคม สำนักงานใหญ่เพิ่งเห็นรายการวันที่ 4 มกราคม</li>
+          <li>สำนักงานใหญ่จัดสรรค่าใช้จ่ายส่วนกลางไปให้สาขา <b>7,600 บาท</b> และส่งใบแจ้งหนี้ทางไปรษณีย์ สาขายังไม่ได้รับ</li>
+          <li>สาขาบันทึกค่าเสื่อมราคาอุปกรณ์ <b>1,000 บาท</b> โดย Dr ค่าเสื่อมราคา / Cr สำนักงานใหญ่ ทั้งที่อุปกรณ์ตัวนี้บัญชีอยู่ในสมุดของสำนักงานใหญ่และสำนักงานใหญ่ยังไม่ได้เรียกเก็บ</li>
+        </ol>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>จัดทำ<b>กระดาษกระทบยอดบัญชีระหว่างกัน</b> แสดงยอดก่อนปรับ รายการปรับแต่ละรายการ และยอดที่ถูกต้อง</li>
+          <li>เขียน<b>รายการปรับปรุง</b>ที่แต่ละฝ่ายต้องบันทึก ณ วันที่ 31 ธันวาคม 25X5</li>
+          <li>อธิบายว่ารายการใดใน 4 รายการที่<b>ไม่ใช่</b>รายการค้างระหว่างทาง และต้องจัดการต่างจากรายการอื่นอย่างไร</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x03">คำตอบของคุณ<span class="ex-save" data-save="x03">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x03" data-ex="x03" rows="12" placeholder="                            สมุด สนญ.      สมุดสาขา&#10;ยอดก่อนปรับ                  152,000        100,400&#10;..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>กระดาษกระทบยอด</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>รายการ</th><th>บัญชี “สาขา”<br>ในสมุด สนญ.</th><th>บัญชี “สำนักงานใหญ่”<br>ในสมุดสาขา</th></tr></thead>
+          <tbody>
+            <tr><td class="k">ยอดก่อนปรับ</td><td class="m">152,000 Dr</td><td class="m">100,400 Cr</td></tr>
+            <tr><td class="k">1 · สินค้าระหว่างทาง 25,000</td><td class="m">—</td><td class="m">+25,000</td></tr>
+            <tr><td class="k">2 · เงินโอนที่ยังไม่ลง 18,000</td><td class="m">&minus;18,000</td><td class="m">—</td></tr>
+            <tr><td class="k">3 · ใบแจ้งหนี้ค่าใช้จ่ายส่วนกลาง 7,600</td><td class="m">—</td><td class="m">+7,600</td></tr>
+            <tr><td class="k">4 · กลับรายการที่สาขาบันทึกผิด 1,000</td><td class="m">—</td><td class="m">+1,000</td></tr>
+            <tr><td class="k"><b>ยอดที่ถูกต้อง</b></td><td class="m"><b>134,000 Dr</b></td><td class="m"><b>134,000 Cr</b></td></tr>
+          </tbody>
+        </table></div>
+        <h4>รายการปรับปรุง</h4>
+        <p><b>สมุดสำนักงานใหญ่</b> — รายการ 2 เท่านั้น</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr เงินสด <span class="m">18,000</span></td><td>Cr สาขา <span class="m">18,000</span></td><td>รับเงินที่สาขาโอนมาตั้งแต่ 30 ธันวาคม</td></tr>
+        </tbody></table></div>
+        <p><b>สมุดสาขา</b> — รายการ 1, 3 และ 4</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr สินค้ารับจากสำนักงานใหญ่ <span class="m">25,000</span></td><td>Cr สำนักงานใหญ่ <span class="m">25,000</span></td><td>สินค้าระหว่างทาง กรรมสิทธิ์โอนแล้ว</td></tr>
+          <tr><td>Dr ค่าใช้จ่ายส่วนกลาง <span class="m">7,600</span></td><td>Cr สำนักงานใหญ่ <span class="m">7,600</span></td><td>รับรู้ภาระที่สำนักงานใหญ่เรียกเก็บ</td></tr>
+          <tr><td>Dr สำนักงานใหญ่ <span class="m">1,000</span></td><td>Cr ค่าเสื่อมราคา <span class="m">1,000</span></td><td><b>กลับรายการที่บันทึกผิด</b></td></tr>
+        </tbody></table></div>
+        <p>ทวนอีกที ยอดสาขาฝั่งสมุดสาขา 100,400 + 25,000 + 7,600 + 1,000 = <b>134,000</b> และฝั่งสำนักงานใหญ่ 152,000 &minus; 18,000 = <b>134,000</b> ตรงกันพอดี</p>
+        <h4>รายการที่ไม่ใช่ของค้างระหว่างทาง</h4>
+        <p><b>รายการ 4 เป็นการบันทึกผิด ไม่ใช่รายการค้าง</b> · สามรายการแรกคือรายการที่<b>เกิดจริงแล้ว</b> เพียงแต่อีกฝ่ายยังไม่ทราบ พอทราบก็บันทึกตามปกติ · แต่รายการ 4 สาขาไม่ควรบันทึกตั้งแต่ต้น เพราะอุปกรณ์อยู่ในสมุดสำนักงานใหญ่และสำนักงานใหญ่ยังไม่ได้เรียกเก็บ จึงต้อง<b>กลับรายการทิ้ง</b> ไม่ใช่รอให้สำนักงานใหญ่บันทึกตามในภายหลัง · ถ้าเผลอไปปรับฝั่งสำนักงานใหญ่ให้เพิ่ม 1,000 แทน ยอดจะไม่ตรงและยังบันทึกค่าเสื่อมราคาซ้ำสองที่อีกด้วย</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>กระดาษกระทบยอดครบทุกบรรทัดและปรับถูกฝั่ง <b>5 คะแนน</b> (รายการละ 1 · ยอดสุดท้าย 134,000 ตรงกันทั้งสองฝั่ง 1)</li>
+          <li>รายการปรับปรุงถูกครบ 4 รายการ <b>4 คะแนน</b></li>
+          <li>วินิจฉัยรายการ 4 ว่าเป็นการบันทึกผิด พร้อมเหตุผล <b>3 คะแนน</b></li>
+          <li><b>ข้อสังเกต</b> ข้อสอบจริงมักซ่อนรายการบันทึกผิดไว้หนึ่งรายการเสมอ · ให้เช็กก่อนว่ารายการนั้น “ควรบันทึกแต่แรกหรือไม่” ก่อนจะตัดสินใจว่าจะปรับฝั่งไหน</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q4" data-ch="1" data-kind="err">
+      <div class="ex-h"><span class="ex-n">ข้อ 4</span><span class="pill">บทที่ 1</span><span class="pill k">คำนวณ · หาข้อผิดพลาด</span><span class="pill k">ยาก</span><span class="ex-mark">12 คะแนน</span></div>
+      <h3>ส่งสินค้าให้สาขาสูงกว่าราคาทุน · กำไรส่วนเพิ่มที่ยังไม่เกิด</h3>
+      <div class="ex-q">
+        <p>สำนักงานใหญ่ส่งสินค้าให้สาขาโดย<b>บวกกำไรส่วนเพิ่ม 25% ของราคาทุน</b> ข้อมูลปี 25X5 มีดังนี้</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">สินค้าคงเหลือต้นงวดที่สาขา (ราคาที่สำนักงานใหญ่คิด)</td><td class="m">20,000</td></tr>
+          <tr><td class="k">สินค้าที่ส่งไปสาขาระหว่างปี (ราคาที่สำนักงานใหญ่คิด)</td><td class="m">250,000</td></tr>
+          <tr><td class="k">สินค้าคงเหลือปลายงวดที่สาขา (ราคาที่สำนักงานใหญ่คิด)</td><td class="m">60,000</td></tr>
+          <tr><td class="k">กำไรสุทธิที่สาขารายงาน</td><td class="m">40,000</td></tr>
+        </tbody></table></div>
+        <p>ผู้ช่วยบัญชีคนหนึ่งสรุปมาว่า <i>“กำไรส่วนเพิ่มคิดที่ 25% ของราคาที่คิด ดังนั้นค่าเผื่อปลายงวด = 60,000 × 25% = 15,000 บาท และกำไรของกิจการรวมจากสาขา = 40,000 + 15,000 = 55,000 บาท”</i></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>ชี้ว่าผู้ช่วยบัญชี<b>ผิดตรงไหน</b> และผิดเพราะเข้าใจอะไรคลาดเคลื่อน</li>
+          <li>คำนวณ<b>ค่าเผื่อกำไรส่วนเพิ่มต้นงวดและปลายงวด</b>ให้ถูกต้อง</li>
+          <li>คำนวณ<b>กำไรส่วนเพิ่มที่รับรู้เป็นกำไรได้ในปี 25X5</b> และเขียนรายการปรับปรุงในสมุดสำนักงานใหญ่</li>
+          <li>หา<b>กำไรที่แท้จริงของสาขาในมุมของกิจการรวม</b> และบอกว่าสินค้าคงเหลือของสาขาจะแสดงในงบแสดงฐานะการเงินรวมด้วยจำนวนเท่าใด</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x04">คำตอบของคุณ<span class="ex-save" data-save="x04">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x04" data-ex="x04" rows="11" placeholder="1) ที่ผิดคือ ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · ผิดตรงไหน</h4>
+        <p>ผู้ช่วยบัญชีเอา <b>25% ซึ่งเป็นอัตราบวกเพิ่มจากราคาทุน</b> ไปคูณกับ<b>ราคาที่คิด</b>ตรง ๆ · สองฐานนี้คนละตัวกัน</p>
+        <p>ถ้าราคาทุนคือ 100 บวก 25% จะได้ราคาที่คิด 125 · กำไรส่วนเพิ่ม 25 บาทนี้คิดเป็น <b>25 ÷ 125 = 20% ของราคาที่คิด</b> ไม่ใช่ 25% · การใช้ 25% จึงทำให้ค่าเผื่อสูงเกินจริง และไปดันกำไรให้สูงเกินตามไปด้วย</p>
+        <div class="note warn" style="margin:10px 0"><span class="nh">สูตรที่ต้องจำให้แม่น</span>บวกเพิ่มจาก<b>ราคาทุน</b> r → อัตราต่อ<b>ราคาที่คิด</b> = r ÷ (1 + r) · ในข้อนี้ 0.25 ÷ 1.25 = <b>20%</b> · ข้อสอบชอบสลับคำว่า “กำไร 25% ของราคาทุน” กับ “กำไร 25% ของราคาขาย” ให้อ่านให้ดีว่าฐานคืออะไร</div>
+        <h4>2 · ค่าเผื่อกำไรส่วนเพิ่ม</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ค่าเผื่อ ต้นงวด</td><td class="m">20,000 &times; 20% = <b>4,000</b></td></tr>
+          <tr><td class="k">ตั้งเพิ่มระหว่างปี</td><td class="m">250,000 &times; 20% = <b>50,000</b></td></tr>
+          <tr><td class="k">ค่าเผื่อ ปลายงวด</td><td class="m">60,000 &times; 20% = <b>12,000</b></td></tr>
+        </tbody></table></div>
+        <h4>3 · กำไรส่วนเพิ่มที่รับรู้ได้ในปีนี้</h4>
+        <p>4,000 + 50,000 &minus; 12,000 = <b>42,000 บาท</b> — คือส่วนที่ติดอยู่กับสินค้าที่<b>ขายออกไปให้คนนอกแล้ว</b> จึงถือว่าเกิดขึ้นจริง</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr ค่าเผื่อกำไรส่วนเพิ่มในสินค้าสาขา <span class="m">42,000</span></td><td>Cr กำไรส่วนเพิ่มที่รับรู้แล้ว <span class="m">42,000</span></td></tr>
+        </tbody></table></div>
+        <p>หลังปรับ บัญชีค่าเผื่อคงเหลือ 4,000 + 50,000 &minus; 42,000 = <b>12,000</b> ตรงกับค่าเผื่อปลายงวดที่คำนวณไว้ ✓</p>
+        <h4>4 · กำไรที่แท้จริงและสินค้าคงเหลือในงบรวม</h4>
+        <p><b>กำไรจากสาขาในมุมกิจการรวม</b> = 40,000 + 42,000 = <b>82,000 บาท</b> · ที่ต้องบวกกลับเพราะสาขาคิดต้นทุนขายจากราคาที่สำนักงานใหญ่คิด ซึ่งสูงเกินต้นทุนจริงไป 42,000 กำไรที่สาขารายงานจึงต่ำเกินไปเท่านั้นพอดี</p>
+        <p><b>สินค้าคงเหลือของสาขาในงบแสดงฐานะการเงินรวม</b> = 60,000 &minus; 12,000 = <b>48,000 บาท</b> ซึ่งก็คือ<b>ราคาทุนที่แท้จริง</b>ของกิจการ · กำไรจากการขายภายในองค์กรเดียวกันจะรับรู้ไม่ได้จนกว่าสินค้าจะถูกขายให้บุคคลภายนอก</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>ชี้จุดผิดเรื่องฐานการคำนวณ พร้อมแสดง 25/125 = 20% <b>3 คะแนน</b></li>
+          <li>ค่าเผื่อต้นงวด ปลายงวด และที่ตั้งระหว่างปี <b>3 คะแนน</b></li>
+          <li>กำไรส่วนเพิ่มที่รับรู้ 42,000 พร้อมรายการปรับปรุง <b>3 คะแนน</b></li>
+          <li>กำไรที่แท้จริง 82,000 และสินค้าคงเหลือ 48,000 <b>3 คะแนน</b></li>
+          <li>ถ้าใช้ 25% ตลอดทั้งข้อแต่วิธีคิดถูกหมด ได้ <b>ไม่เกินครึ่ง</b> เพราะตัวเลขผิดทุกบรรทัด</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q5" data-ch="1" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 5</span><span class="pill">บทที่ 1</span><span class="pill k">คำนวณ · บันทึกบัญชี</span><span class="pill k">ออกเป็นข้อย่อย</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ค่าขนส่งระหว่างสาขา</h3>
+      <div class="ex-q">
+        <p>สำนักงานใหญ่ส่งสินค้าไปให้<b>สาขาขอนแก่น</b> จ่ายค่าขนส่ง <b>3,000 บาท</b> และคิดเข้าบัญชีสาขาขอนแก่นเรียบร้อยแล้ว</p>
+        <p>ต่อมาสำนักงานใหญ่เปลี่ยนใจ สั่งให้<b>สาขาขอนแก่นส่งสินค้าล็อตนั้นต่อไปยังสาขาอุดรธานี</b> สาขาขอนแก่นจ่ายค่าขนส่งอีก <b>2,500 บาท</b></p>
+        <p>ถ้าส่งตรงจากสำนักงานใหญ่ไปสาขาอุดรธานีตั้งแต่แรก ค่าขนส่งจะเป็น <b>4,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>ค่าขนส่งจำนวนเท่าใดถือเป็น<b>ต้นทุนสินค้า</b>ที่สาขาอุดรธานี และเท่าใดเป็น<b>ค่าใช้จ่าย</b> ของใคร</li>
+          <li>เขียนรายการบันทึกบัญชีในสมุด<b>สำนักงานใหญ่</b> สำหรับการโอนสินค้าครั้งนี้</li>
+          <li>อธิบายเหตุผลเชิงหลักการว่าทำไมส่วนเกินจึงเป็นค่าใช้จ่าย ไม่ใช่ต้นทุนสินค้า</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x05">คำตอบของคุณ<span class="ex-save" data-save="x05">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x05" data-ex="x05" rows="9" placeholder="1) ต้นทุนสินค้าที่สาขาอุดรธานี = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · แบ่งค่าขนส่ง</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ค่าขนส่งที่จ่ายจริงทั้งหมด</td><td class="m">3,000 + 2,500 = 5,500</td></tr>
+          <tr><td class="k">หัก ค่าขนส่งปกติถ้าส่งตรง</td><td class="m">(4,000)</td></tr>
+          <tr><td class="k"><b>ค่าขนส่งส่วนเกิน</b></td><td class="m"><b>1,500</b></td></tr>
+        </tbody></table></div>
+        <p><b>ต้นทุนสินค้าที่สาขาอุดรธานี</b> รับค่าขนส่งได้ <b>4,000 บาท</b> · ส่วนเกิน <b>1,500 บาท</b> เป็น<b>ค่าใช้จ่ายของสำนักงานใหญ่</b></p>
+        <h4>2 · รายการในสมุดสำนักงานใหญ่</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr สาขาอุดรธานี <span class="m">4,000</span><br>Dr ค่าขนส่งส่วนเกิน <span class="m">1,500</span></td><td>Cr สาขาขอนแก่น <span class="m">5,500</span></td></tr>
+        </tbody></table></div>
+        <p>ฝั่งสาขาขอนแก่นจะบันทึก Dr สำนักงานใหญ่ 5,500 / Cr เงินสด 2,500 และ Cr สินค้ารับจากสำนักงานใหญ่ (รวมค่าขนส่งเดิม) 3,000 — ล้างของออกจากสมุดตัวเองให้หมด</p>
+        <h4>3 · ทำไมส่วนเกินเป็นค่าใช้จ่าย</h4>
+        <p>ต้นทุนสินค้าประกอบด้วยรายจ่ายที่<b>จำเป็นเพื่อทำให้สินค้าอยู่ในสภาพและสถานที่พร้อมขาย</b> · การขนสินค้าไปขอนแก่นก่อนแล้วค่อยย้อนมาอุดรธานี เป็นผลจาก<b>การตัดสินใจผิดพลาดของฝ่ายบริหาร</b> ไม่ได้เพิ่มมูลค่าให้สินค้าแม้แต่บาทเดียว จึงรับเข้าเป็นต้นทุนไม่ได้ ต้องรับรู้เป็นค่าใช้จ่ายทันทีในงวดที่เกิด</p>
+        <p>และต้องเป็นค่าใช้จ่ายของ<b>สำนักงานใหญ่</b> ไม่ใช่ของสาขาใดสาขาหนึ่ง เพราะสำนักงานใหญ่เป็นผู้สั่งย้าย ถ้าผลักไปให้สาขา ผลการดำเนินงานของสาขาจะถูกบิดเบือนจากการตัดสินใจที่ตัวเองไม่ได้เป็นคนทำ</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>แยกได้ว่า 4,000 เป็นต้นทุน 1,500 เป็นค่าใช้จ่าย <b>3 คะแนน</b></li>
+          <li>รายการบันทึกบัญชีถูกทั้งสามบรรทัด <b>3 คะแนน</b></li>
+          <li>เหตุผลเชิงหลักการ ทั้งเรื่องต้นทุนสินค้าและเรื่องว่าเป็นของสำนักงานใหญ่ <b>2 คะแนน</b></li>
+          <li><b>กับดัก</b> คนที่ตอบ 5,500 เป็นต้นทุนสินค้าทั้งก้อน จะได้ 0 ในข้อ 1 และ 2 เพราะพลาดประเด็นทั้งข้อ</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q6" data-ch="2" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 6</span><span class="pill">บทที่ 2</span><span class="pill k">คำนวณ · บันทึกบัญชี</span><span class="pill k">ออกแน่นอน</span><span class="ex-mark">14 คะแนน</span></div>
+      <h3>ซื้อสินทรัพย์สุทธิโดยจ่ายด้วยหุ้น · ค่าความนิยมและต้นทุนสามก้อน</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 กรกฎาคม 25X6 บริษัท เอ จำกัด (มหาชน) <b>ซื้อสินทรัพย์สุทธิทั้งหมดของบริษัท บี จำกัด</b> โดยบริษัท บี จะเลิกกิจการหลังการซื้อ</p>
+        <p>เอ จ่ายด้วย<b>หุ้นสามัญออกใหม่ 50,000 หุ้น</b> มูลค่าตราไว้หุ้นละ 10 บาท ราคาตลาดในวันซื้อ<b>หุ้นละ 12 บาท</b></p>
+        <p>นอกจากนี้ เอ จ่ายเงินสดเพิ่ม</p>
+        <ul style="padding-left:20px; margin:9px 0">
+          <li>ค่าที่ปรึกษาทางการเงินและค่าตรวจสอบสถานะกิจการ <b>90,000 บาท</b></li>
+          <li>ค่าธรรมเนียมจดทะเบียนและค่าใช้จ่ายในการออกหุ้น <b>40,000 บาท</b></li>
+        </ul>
+        <p>มูลค่ายุติธรรม ณ วันซื้อของบริษัท บี</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">สินทรัพย์ที่ระบุได้ซึ่ง บี บันทึกไว้แล้ว</td><td class="m">900,000</td></tr>
+          <tr><td class="k">หนี้สินที่รับมา</td><td class="m">350,000</td></tr>
+          <tr><td class="k">สิทธิบัตรที่ บี พัฒนาขึ้นเองและไม่เคยบันทึกในบัญชี</td><td class="m">60,000</td></tr>
+          <tr><td class="k">คดีความที่ บี ถูกฟ้อง ประเมินว่ามีภาระผูกพันในปัจจุบันและวัดมูลค่าได้อย่างน่าเชื่อถือ</td><td class="m">25,000</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณ<b>สิ่งตอบแทนที่โอนให้</b> และ<b>มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</b></li>
+          <li>คำนวณ<b>ค่าความนิยม</b></li>
+          <li>บันทึกรายการทั้งหมดในสมุดของบริษัท เอ รวมถึงค่าใช้จ่ายสองก้อน</li>
+          <li>อธิบายว่าค่าใช้จ่ายสองก้อนนั้นปฏิบัติต่างกันอย่างไร และทำไม</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x06">คำตอบของคุณ<span class="ex-save" data-save="x06">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x06" data-ex="x06" rows="12" placeholder="1) สิ่งตอบแทนที่โอนให้ = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · สิ่งตอบแทนและสินทรัพย์สุทธิ</h4>
+        <p><b>สิ่งตอบแทนที่โอนให้</b> = 50,000 หุ้น &times; <b>ราคาตลาด 12 บาท</b> = <b>600,000 บาท</b> — ใช้ราคาตลาด ไม่ใช่มูลค่าตราไว้ และ<b>ไม่รวม</b>ค่าใช้จ่ายทั้งสองก้อน</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">สินทรัพย์ที่ระบุได้ (ตามมูลค่ายุติธรรม)</td><td class="m">900,000</td></tr>
+          <tr><td class="k">บวก สิทธิบัตรที่ระบุได้แม้ บี ไม่เคยบันทึก</td><td class="m">60,000</td></tr>
+          <tr><td class="k">หัก หนี้สินที่รับมา</td><td class="m">(350,000)</td></tr>
+          <tr><td class="k">หัก ประมาณการหนี้สินจากคดีความ</td><td class="m">(25,000)</td></tr>
+          <tr><td class="k"><b>มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</b></td><td class="m"><b>585,000</b></td></tr>
+        </tbody></table></div>
+        <div class="note key" style="margin:10px 0"><span class="nh">สองรายการที่ข้อสอบใส่มาเพื่อทดสอบโดยเฉพาะ</span><b>สิทธิบัตรที่พัฒนาขึ้นเอง</b> ผู้ถูกซื้อบันทึกไม่ได้เพราะเป็นรายจ่ายวิจัยพัฒนา แต่<b>ผู้ซื้อต้องรับรู้</b>เพราะเป็นสินทรัพย์ไม่มีตัวตนที่<b>ระบุได้</b> (แยกขายได้หรือเกิดจากสิทธิตามกฎหมาย) · <b>คดีความ</b> TFRS 3 ให้รับรู้หนี้สินที่อาจเกิดขึ้นได้ถ้าเป็นภาระผูกพันในปัจจุบันและวัดมูลค่ายุติธรรมได้อย่างน่าเชื่อถือ ซึ่งเป็น<b>ข้อยกเว้น</b>ของ TAS 37 ที่ปกติห้ามรับรู้</div>
+        <h4>2 · ค่าความนิยม</h4>
+        <p>600,000 &minus; 585,000 = <b>ค่าความนิยม 15,000 บาท</b></p>
+        <h4>3 · รายการบันทึกบัญชีในสมุดบริษัท เอ</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>เดบิต</th><th>เครดิต</th></tr></thead>
+          <tbody>
+            <tr><td class="k">การซื้อ</td><td>สินทรัพย์ที่ระบุได้ <span class="m">900,000</span><br>สิทธิบัตร <span class="m">60,000</span><br>ค่าความนิยม <span class="m">15,000</span></td><td>หนี้สิน <span class="m">350,000</span><br>ประมาณการหนี้สินจากคดีความ <span class="m">25,000</span><br>ทุนหุ้นสามัญ <span class="m">500,000</span><br>ส่วนเกินมูลค่าหุ้นสามัญ <span class="m">100,000</span></td></tr>
+            <tr><td class="k">ค่าที่ปรึกษา</td><td>ค่าใช้จ่ายเกี่ยวกับการซื้อธุรกิจ <span class="m">90,000</span></td><td>เงินสด <span class="m">90,000</span></td></tr>
+            <tr><td class="k">ค่าออกหุ้น</td><td>ส่วนเกินมูลค่าหุ้นสามัญ <span class="m">40,000</span></td><td>เงินสด <span class="m">40,000</span></td></tr>
+          </tbody>
+        </table></div>
+        <p>ทุนหุ้นสามัญ = 50,000 &times; 10 = 500,000 · ส่วนเกินมูลค่าหุ้น = 50,000 &times; (12 &minus; 10) = 100,000 · หลังหักค่าออกหุ้น ส่วนเกินมูลค่าหุ้นคงเหลือ <b>60,000 บาท</b></p>
+        <h4>4 · ทำไมปฏิบัติต่างกัน</h4>
+        <ul>
+          <li><b>ค่าที่ปรึกษาและค่าตรวจสอบสถานะกิจการ</b> เป็น<b>ต้นทุนที่เกี่ยวข้องกับการซื้อ</b> · TFRS 3 กำหนดชัดว่าต้อง<b>รับรู้เป็นค่าใช้จ่ายในงวดที่เกิด</b> เพราะไม่ใช่สิ่งที่จ่ายให้ผู้ขายเพื่อแลกกับธุรกิจ แต่เป็นค่าบริการที่ซื้อจากบุคคลที่สาม ผู้ขายไม่ได้รับเงินก้อนนี้เลย</li>
+          <li><b>ค่าใช้จ่ายในการออกหุ้น</b> เป็น<b>ต้นทุนการทำรายการทางด้านทุน</b> · ตาม TAS 32 ต้อง<b>นำไปหักจากส่วนของผู้ถือหุ้น</b> โดยหักจากส่วนเกินมูลค่าหุ้นที่เกิดจากการออกหุ้นครั้งนั้น ไม่ผ่านงบกำไรขาดทุน</li>
+        </ul>
+        <p>ทั้งสองก้อน<b>ห้ามนำไปรวมในสิ่งตอบแทนที่โอนให้</b> เพราะจะทำให้ค่าความนิยมสูงเกินจริง — ถ้าเผลอเอาทั้ง 130,000 ไปรวม ค่าความนิยมจะกลายเป็น 145,000 ผิดไปเกือบสิบเท่า</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สิ่งตอบแทน 600,000 ใช้ราคาตลาด <b>2 คะแนน</b></li>
+          <li>สินทรัพย์สุทธิ 585,000 · ได้ 1 คะแนนเพิ่มสำหรับ<b>แต่ละ</b>รายการที่ตัดสินใจถูก คือรับรู้สิทธิบัตร และรับรู้คดีความ <b>4 คะแนน</b></li>
+          <li>ค่าความนิยม 15,000 <b>2 คะแนน</b></li>
+          <li>รายการบันทึกบัญชีครบสามรายการ <b>4 คะแนน</b></li>
+          <li>อธิบายความต่างของค่าใช้จ่ายสองก้อน <b>2 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q7" data-ch="2" data-kind="calc">
+      <div class="ex-h"><span class="ex-n">ข้อ 7</span><span class="pill">บทที่ 2</span><span class="pill k">คำนวณ · บันทึกบัญชี</span><span class="pill k">ยาก</span><span class="ex-mark">12 คะแนน</span></div>
+      <h3>สิ่งตอบแทนที่คาดว่าจะต้องจ่าย และกำไรจากการต่อรองราคาซื้อ</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มกราคม 25X7 บริษัท พี ซื้อธุรกิจของบริษัท คิว โดย</p>
+        <ul style="padding-left:20px; margin:9px 0">
+          <li>จ่ายเงินสดทันที <b>400,000 บาท</b></li>
+          <li>ตกลงว่าถ้ากำไรของธุรกิจที่ซื้อมาในปี 25X7 เกินเป้าที่วางไว้ จะ<b>จ่ายเพิ่มอีกเป็นเงินสด</b> ผู้ประเมินอิสระวัด<b>มูลค่ายุติธรรมของภาระนี้ ณ วันซื้อได้ 30,000 บาท</b></li>
+        </ul>
+        <p>มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ของ คิว ณ วันซื้อ = <b>480,000 บาท</b> ซึ่งผู้ซื้อได้ทบทวนการระบุและวัดมูลค่าซ้ำแล้วยืนยันว่าถูกต้อง สาเหตุที่ซื้อได้ถูกเพราะผู้ขายอยู่ในภาวะจำเป็นต้องขายด่วน</p>
+        <p>ณ วันที่ 31 ธันวาคม 25X7 ผลประกอบการดีกว่าที่คาด <b>มูลค่ายุติธรรมของภาระที่ต้องจ่ายเพิ่มกลายเป็น 45,000 บาท</b> การเปลี่ยนแปลงนี้เกิดจากผลการดำเนินงานหลังวันซื้อ ไม่ใช่ข้อมูลเพิ่มเติมเกี่ยวกับข้อเท็จจริงที่มีอยู่แล้ว ณ วันซื้อ</p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณสิ่งตอบแทนที่โอนให้ทั้งหมด และหาว่าเกิด<b>ค่าความนิยม</b>หรือ<b>กำไรจากการต่อรองราคาซื้อ</b> จำนวนเท่าใด</li>
+          <li>ก่อนรับรู้ผลลัพธ์ในข้อ 1 มาตรฐานบังคับให้ทำอะไรก่อน</li>
+          <li>บันทึกรายการ ณ วันซื้อ</li>
+          <li>บันทึกรายการ ณ วันที่ 31 ธันวาคม 25X7 สำหรับการเปลี่ยนแปลงมูลค่าของภาระ และอธิบายว่าทำไมจึง<b>ห้าม</b>ไปปรับค่าความนิยมหรือกำไรจากการต่อรองราคาซื้อ</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x07">คำตอบของคุณ<span class="ex-save" data-save="x07">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x07" data-ex="x07" rows="11" placeholder="1) สิ่งตอบแทนที่โอนให้ = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · สิ่งตอบแทนและผลลัพธ์</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">เงินสดที่จ่ายทันที</td><td class="m">400,000</td></tr>
+          <tr><td class="k">บวก มูลค่ายุติธรรมของสิ่งตอบแทนที่คาดว่าจะต้องจ่าย</td><td class="m">30,000</td></tr>
+          <tr><td class="k"><b>สิ่งตอบแทนที่โอนให้</b></td><td class="m"><b>430,000</b></td></tr>
+          <tr><td class="k">หัก มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</td><td class="m">(480,000)</td></tr>
+          <tr><td class="k"><b>กำไรจากการต่อรองราคาซื้อ</b></td><td class="m"><b>50,000</b></td></tr>
+        </tbody></table></div>
+        <p>สิ่งตอบแทนที่คาดว่าจะต้องจ่าย<b>ต้องรวมเข้าไปตั้งแต่วันซื้อ</b>ด้วยมูลค่ายุติธรรม แม้ยังไม่รู้ว่าจะต้องจ่ายจริงหรือไม่ ถ้าไม่รวมจะเหลือ 400,000 และกำไรต่อรองจะกลายเป็น 80,000 ซึ่งผิด</p>
+        <h4>2 · สิ่งที่ต้องทำก่อนรับรู้กำไร</h4>
+        <p>TFRS 3 กำหนดว่าก่อนจะรับรู้กำไรจากการต่อรองราคาซื้อ ผู้ซื้อต้อง<b>ประเมินซ้ำ (reassess)</b> ว่า</p>
+        <ul>
+          <li>ได้<b>ระบุ</b>สินทรัพย์และหนี้สินที่ได้มาครบถ้วนแล้วหรือยัง มีอะไรตกหล่นไหม</li>
+          <li>การ<b>วัดมูลค่า</b>สินทรัพย์ หนี้สิน สิ่งตอบแทนที่โอนให้ และ NCI ถูกต้องหรือไม่</li>
+        </ul>
+        <p>เหตุผลคือกำไรจากการซื้อของถูกเป็นเรื่องผิดปกติทางเศรษฐกิจ สาเหตุที่พบบ่อยกว่ามากคือ<b>ตีมูลค่าสินทรัพย์สูงเกินไป</b>หรือ<b>ลืมรับรู้หนี้สิน</b> · เมื่อประเมินซ้ำแล้วยังเหลือส่วนเกินอยู่ จึงรับรู้เป็น<b>กำไรในงบกำไรขาดทุนของผู้ซื้อทันที</b> พร้อมเปิดเผยเหตุผลว่าทำไมรายการนี้จึงทำให้เกิดกำไร</p>
+        <h4>3 · รายการ ณ วันซื้อ</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr สินทรัพย์สุทธิที่ระบุได้ <span class="m">480,000</span></td><td>Cr เงินสด <span class="m">400,000</span><br>Cr หนี้สินสิ่งตอบแทนที่คาดว่าจะต้องจ่าย <span class="m">30,000</span><br>Cr กำไรจากการต่อรองราคาซื้อ <span class="m">50,000</span></td></tr>
+        </tbody></table></div>
+        <h4>4 · รายการ ณ 31 ธันวาคม 25X7</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr ขาดทุนจากการวัดมูลค่าสิ่งตอบแทนที่คาดว่าจะต้องจ่าย <span class="m">15,000</span></td><td>Cr หนี้สินสิ่งตอบแทนที่คาดว่าจะต้องจ่าย <span class="m">15,000</span></td></tr>
+        </tbody></table></div>
+        <p><b>ทำไมห้ามไปปรับค่าความนิยม</b> · สิ่งตอบแทนที่คาดว่าจะต้องจ่ายซึ่งจัดประเภทเป็น<b>หนี้สิน</b> ต้องวัดมูลค่ายุติธรรมใหม่ทุกวันสิ้นรอบระยะเวลารายงาน และรับรู้การเปลี่ยนแปลง<b>ในกำไรขาดทุน</b></p>
+        <p>เหตุผลคือการเปลี่ยนแปลงครั้งนี้เกิดจาก<b>เหตุการณ์หลังวันซื้อ</b> คือผลประกอบการปี 25X7 ที่ดีกว่าคาด ไม่ใช่การได้ข้อมูลเพิ่มเติมเกี่ยวกับ<b>ข้อเท็จจริงที่มีอยู่แล้ว ณ วันซื้อ</b> · การบัญชีสำหรับการซื้อธุรกิจ<b>ปิดจบไปแล้ว ณ วันซื้อ</b> ค่าความนิยมและกำไรต่อรองเป็นตัวเลขที่ถ่ายภาพ ณ วันนั้น จะย้อนกลับไปแก้ได้เฉพาะกรณีที่เข้าเงื่อนไข<b>ระยะเวลาในการวัดมูลค่า</b>เท่านั้น (ดูข้อ 8)</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สิ่งตอบแทน 430,000 โดยรวมส่วนที่คาดว่าจะต้องจ่าย <b>3 คะแนน</b></li>
+          <li>ระบุว่าเป็นกำไรจากการต่อรองราคาซื้อ 50,000 <b>2 คะแนน</b></li>
+          <li>การประเมินซ้ำก่อนรับรู้กำไร <b>2 คะแนน</b></li>
+          <li>รายการ ณ วันซื้อ <b>2 คะแนน</b></li>
+          <li>รายการวัดมูลค่าใหม่ 15,000 เข้ากำไรขาดทุน พร้อมเหตุผลว่าเป็นเหตุการณ์หลังวันซื้อ <b>3 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q8" data-ch="2" data-kind="exp">
+      <div class="ex-h"><span class="ex-n">ข้อ 8</span><span class="pill">บทที่ 2</span><span class="pill k">อธิบาย · คำนวณ</span><span class="pill k">คู่กับข้อ 7</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ระยะเวลาในการวัดมูลค่า · แก้ย้อนหลังได้แค่ไหน</h3>
+      <div class="ex-q">
+        <p>บริษัท เอ็ม ซื้อธุรกิจของบริษัท เอ็น เมื่อ <b>1 ตุลาคม 25X8</b> ณ วันนั้นยังประเมินราคาที่ดินไม่เสร็จ จึงบันทึก<b>ที่ดินชั่วคราวที่ 200,000 บาท</b> และคำนวณ<b>ค่าความนิยมได้ 80,000 บาท</b></p>
+        <p>บริษัท เอ็ม ปิดบัญชี 31 ธันวาคม และ<b>อนุมัติให้ออกงบการเงินปี 25X8 เมื่อวันที่ 28 กุมภาพันธ์ 25X9</b></p>
+        <p>วันที่ <b>15 มีนาคม 25X9</b> ผู้ประเมินอิสระส่งรายงานมาว่า<b>มูลค่ายุติธรรมของที่ดิน ณ วันที่ 1 ตุลาคม 25X8 คือ 245,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>รายการนี้เข้าเงื่อนไข<b>ระยะเวลาในการวัดมูลค่า</b>หรือไม่ ตอบพร้อมเงื่อนไขที่ใช้พิจารณาให้ครบ</li>
+          <li>เขียนรายการปรับปรุงและระบุ<b>ยอดค่าความนิยมใหม่</b></li>
+          <li>งบการเงินปี 25X8 ที่ออกไปแล้วต้องทำอย่างไร</li>
+          <li>สมมติแทนว่ารายงานมาถึงวันที่ <b>15 พฤศจิกายน 25X9</b> คำตอบจะเปลี่ยนไปอย่างไร</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x08">คำตอบของคุณ<span class="ex-save" data-save="x08">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x08" data-ex="x08" rows="10" placeholder="1) เข้าเงื่อนไขหรือไม่ เพราะ ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · เข้าเงื่อนไขหรือไม่</h4>
+        <p><b>เข้าเงื่อนไข</b> · ต้องครบสามข้อ</p>
+        <ul>
+          <li><b>อยู่ในกรอบเวลา</b> — ระยะเวลาในการวัดมูลค่าสิ้นสุดเมื่อผู้ซื้อได้รับข้อมูลที่ต้องการ แต่<b>ต้องไม่เกิน 1 ปีนับจากวันที่ซื้อ</b> · วันซื้อคือ 1 ตุลาคม 25X8 ครบปีคือ 30 กันยายน 25X9 · ได้รับรายงาน 15 มีนาคม 25X9 จึง<b>ยังอยู่ในกรอบ</b></li>
+          <li><b>เป็นข้อมูลเกี่ยวกับข้อเท็จจริงที่มีอยู่แล้ว ณ วันซื้อ</b> — รายงานระบุมูลค่ายุติธรรม <b>ณ วันที่ 1 ตุลาคม 25X8</b> ไม่ใช่ราคาที่ดินที่ขยับขึ้นในปี 25X9 · ถ้าเป็นอย่างหลังจะเป็นการเปลี่ยนแปลงหลังวันซื้อ แก้ย้อนหลังไม่ได้</li>
+          <li><b>เป็นการทำบัญชีที่ยังไม่เสร็จสมบูรณ์ ณ วันซื้อ</b> — ผู้ซื้อบันทึกที่ดินไว้เป็นจำนวน<b>ชั่วคราว</b>อย่างชัดเจนและเปิดเผยไว้แล้ว</li>
+        </ul>
+        <h4>2 · รายการปรับปรุงและค่าความนิยมใหม่</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr ที่ดิน <span class="m">45,000</span></td><td>Cr ค่าความนิยม <span class="m">45,000</span></td><td>245,000 &minus; 200,000</td></tr>
+        </tbody></table></div>
+        <p><b>ค่าความนิยมใหม่</b> = 80,000 &minus; 45,000 = <b>35,000 บาท</b> · สินทรัพย์สุทธิที่ระบุได้สูงขึ้น 45,000 สิ่งตอบแทนเท่าเดิม ค่าความนิยมจึงลดลงเท่ากันพอดี</p>
+        <h4>3 · งบการเงินปี 25X8 ที่ออกไปแล้ว</h4>
+        <p>ต้องปรับปรุง<b>ย้อนหลังเสมือนว่าการบัญชีสำหรับการซื้อธุรกิจเสร็จสมบูรณ์ตั้งแต่วันที่ซื้อ</b> · ในทางปฏิบัติคือเมื่อนำงบปี 25X8 มาแสดง<b>เป็นงบเปรียบเทียบ</b>ในงบการเงินปี 25X9 ต้อง<b>ปรับตัวเลขใหม่</b> ที่ดินเป็น 245,000 ค่าความนิยมเป็น 35,000 พร้อมเปิดเผยจำนวนที่ปรับและเหตุผล</p>
+        <p>ข้อสำคัญคือ<b>ไม่ใช่</b>การรับรู้เป็นกำไรหรือขาดทุนของปี 25X9 และ<b>ไม่ใช่</b>การเปลี่ยนแปลงประมาณการทางบัญชีตาม TAS 8 ที่รับรู้ไปข้างหน้า</p>
+        <h4>4 · ถ้ารายงานมาถึง 15 พฤศจิกายน 25X9</h4>
+        <p><b>เลยกรอบ 1 ปีไปแล้ว</b> (ครบกำหนด 30 กันยายน 25X9) · ระยะเวลาในการวัดมูลค่าปิดไปแล้ว จึง<b>ห้ามปรับค่าความนิยม</b>อีก</p>
+        <p>ต้องปฏิบัติตาม TAS 8 แทน โดยพิจารณาว่าเป็น<b>ข้อผิดพลาดในงวดก่อน</b>หรือ<b>การเปลี่ยนแปลงประมาณการ</b> · ถ้าเป็นข้อผิดพลาดที่มีสาระสำคัญให้ปรับงบย้อนหลัง ถ้าเป็นการเปลี่ยนแปลงประมาณการให้รับรู้ไปข้างหน้า · ไม่ว่าทางใดก็<b>ไม่กระทบยอดค่าความนิยมที่ตั้งไว้ ณ วันซื้อ</b></p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สามเงื่อนไขครบ โดยเฉพาะการคำนวณวันครบ 1 ปีให้เห็น <b>3 คะแนน</b></li>
+          <li>รายการปรับปรุงและค่าความนิยม 35,000 <b>2 คะแนน</b></li>
+          <li>การปรับงบเปรียบเทียบย้อนหลัง พร้อมย้ำว่าไม่ใช่กำไรปี 25X9 <b>2 คะแนน</b></li>
+          <li>กรณีเลยกรอบ 1 ปี ต้องไปใช้ TAS 8 <b>1 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q9" data-ch="2" data-kind="calc">
+      <div class="ex-h"><span class="ex-n">ข้อ 9</span><span class="pill">บทที่ 2</span><span class="pill k">คำนวณ · อธิบาย</span><span class="pill k">ออกเป็นข้อย่อย</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ประเมินค่าความนิยมจากกำไรเกินปกติ</h3>
+      <div class="ex-q">
+        <p>ผู้ซื้อกำลังต่อรองราคาซื้อกิจการแห่งหนึ่ง ข้อมูลที่ใช้ประเมิน</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</td><td class="m">2,000,000</td></tr>
+          <tr><td class="k">อัตราผลตอบแทนปกติของอุตสาหกรรมนี้</td><td class="m">12% ต่อปี</td></tr>
+          <tr><td class="k">กำไรเฉลี่ยต่อปีที่คาดว่าจะทำได้</td><td class="m">300,000</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณ<b>กำไรปกติ</b>และ<b>กำไรเกินปกติ</b></li>
+          <li>ประเมินค่าความนิยมด้วยวิธี<b>ซื้อกำไรเกินปกติเป็นจำนวนปี</b> โดยตกลงกันที่ 5 ปี</li>
+          <li>ประเมินค่าความนิยมด้วยวิธี<b>คิดลดกำไรเกินปกติแบบตลอดไป</b> ที่อัตราคิดลด 25%</li>
+          <li>อธิบายว่าทำไมสองวิธีให้คำตอบต่างกัน และค่าความนิยมที่ประเมินได้นี้เอาไปใช้ทำอะไร <b>ไม่</b>ใช้ทำอะไร</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x09">คำตอบของคุณ<span class="ex-save" data-save="x09">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x09" data-ex="x09" rows="9" placeholder="1) กำไรปกติ = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · กำไรปกติและกำไรเกินปกติ</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">กำไรปกติ</td><td class="m">2,000,000 &times; 12% = <b>240,000</b></td></tr>
+          <tr><td class="k">กำไรที่คาดว่าจะทำได้</td><td class="m">300,000</td></tr>
+          <tr><td class="k"><b>กำไรเกินปกติ</b></td><td class="m"><b>60,000</b> ต่อปี</td></tr>
+        </tbody></table></div>
+        <h4>2 · วิธีซื้อกำไรเกินปกติ 5 ปี</h4>
+        <p>60,000 &times; 5 = <b>300,000 บาท</b> · ตรรกะคือผู้ซื้อยอมจ่ายเพิ่มเท่ากับกำไรส่วนเกินที่คาดว่าจะได้รับใน 5 ปีข้างหน้า หลังจากนั้นถือว่าคู่แข่งตามทันแล้ว ความได้เปรียบหมดไป</p>
+        <h4>3 · วิธีคิดลดแบบตลอดไป</h4>
+        <p>60,000 &divide; 0.25 = <b>240,000 บาท</b> · ตรรกะคือกำไรส่วนเกินจะได้รับไปเรื่อย ๆ ไม่มีที่สิ้นสุด แต่คิดลดด้วยอัตรา 25% ซึ่งสูงกว่าอัตราผลตอบแทนปกติ 12% เพราะ<b>กำไรส่วนเกินมีความเสี่ยงสูงกว่ากำไรปกติมาก</b> — ไม่มีอะไรรับประกันว่าความได้เปรียบจะอยู่ได้นาน</p>
+        <h4>4 · ทำไมต่างกัน และเอาไปใช้ทำอะไร</h4>
+        <p><b>ทำไมต่างกัน</b> · สองวิธีตั้งสมมติฐานคนละแบบเรื่อง<b>อายุของความได้เปรียบ</b>และ<b>ความเสี่ยง</b> · วิธีซื้อเป็นจำนวนปีตัดจบที่ปีที่ 5 ไม่คิดลด ส่วนวิธีตลอดไปยืดไม่จำกัดแต่ลงโทษด้วยอัตราคิดลดที่สูง · สังเกตว่าการหารด้วย 25% ให้ผลเท่ากับคูณ 4 ปี จึงได้ตัวเลขต่ำกว่าวิธี 5 ปี · ถ้าเปลี่ยนอัตราคิดลดเป็น 20% จะได้ 300,000 เท่ากับวิธี 5 ปีพอดี</p>
+        <p><b>เอาไปใช้ทำอะไร</b> · ใช้เป็น<b>เครื่องมือต่อรองราคา</b>ในการเจรจาเท่านั้น ช่วยตอบว่าผู้ซื้อควรยอมจ่ายเกินมูลค่าสินทรัพย์สุทธิได้สักเท่าไร</p>
+        <p><b>ไม่ใช้ทำอะไร</b> · <b>ห้ามเอาตัวเลขนี้ไปบันทึกเป็นค่าความนิยมในบัญชี</b> · ค่าความนิยมทางบัญชีตาม TFRS 3 เป็น<b>ผลลัพธ์ที่คำนวณย้อนกลับ</b>จากราคาที่ตกลงกันจริง คือ สิ่งตอบแทนที่โอนให้ บวก NCI ลบด้วยมูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ · ถ้าสุดท้ายตกลงกันที่ราคาอื่น ค่าความนิยมที่บันทึกก็เป็นไปตามราคานั้น ไม่ใช่ตามตัวเลขที่ประเมินไว้</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>กำไรปกติ 240,000 และกำไรเกินปกติ 60,000 <b>2 คะแนน</b></li>
+          <li>วิธี 5 ปี ได้ 300,000 <b>1.5 คะแนน</b></li>
+          <li>วิธีคิดลดตลอดไป ได้ 240,000 <b>1.5 คะแนน</b></li>
+          <li>อธิบายสมมติฐานที่ต่างกัน <b>1 คะแนน</b></li>
+          <li>ระบุว่าใช้ต่อรองราคา แต่ห้ามบันทึกเป็นค่าความนิยมในบัญชี <b>2 คะแนน</b> — ข้อนี้คือหัวใจของคำถาม คนที่ตอบแต่ตัวเลขจะเสียคะแนนตรงนี้ทั้งหมด</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q10" data-ch="3" data-kind="wk">
+      <div class="ex-h"><span class="ex-n">ข้อ 10</span><span class="pill">บทที่ 3</span><span class="pill k">คำนวณ · กระดาษทำการ</span><span class="pill k">ออกแน่นอน</span><span class="ex-mark">14 คะแนน</span></div>
+      <h3>งบรวม ณ วันซื้อหุ้น · NCI สองวิธีวัดมูลค่า</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มกราคม 25X9 บริษัท พี ซื้อหุ้นสามัญของบริษัท เอส <b>80%</b> โดยจ่ายเงินสด <b>440,000 บาท</b></p>
+        <p>ส่วนของผู้ถือหุ้นของ เอส ณ วันนั้น</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ทุนหุ้นสามัญ</td><td class="m">300,000</td></tr>
+          <tr><td class="k">กำไรสะสม</td><td class="m">100,000</td></tr>
+          <tr><td class="k"><b>รวม</b></td><td class="m"><b>400,000</b></td></tr>
+        </tbody></table></div>
+        <p>สินทรัพย์ของ เอส มีราคาตามบัญชีเท่ากับมูลค่ายุติธรรมทุกรายการ <b>ยกเว้นที่ดิน</b>ซึ่งมีมูลค่ายุติธรรม<b>สูงกว่าราคาตามบัญชี 60,000 บาท</b></p>
+        <p>ราคาตลาดของหุ้นสามัญของ เอส ในวันซื้อ บ่งชี้ว่า<b>มูลค่ายุติธรรมของหุ้นทั้งบริษัทเท่ากับ 550,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณ<b>ค่าความนิยม</b>และ<b>ยอด NCI ณ วันซื้อ</b> ทั้งสองวิธีวัดมูลค่า คือวิธี<b>สัดส่วนในมูลค่ายุติธรรมของสินทรัพย์สุทธิ</b> และวิธี<b>มูลค่ายุติธรรม</b></li>
+          <li>อธิบายว่าผลต่างระหว่างสองวิธีคืออะไร และเหตุใดจึงเป็นเช่นนั้น</li>
+          <li>เขียน<b>รายการตัดบัญชีในกระดาษทำการงบการเงินรวม</b> ณ วันซื้อ โดยใช้<b>วิธีสัดส่วนในมูลค่ายุติธรรมของสินทรัพย์สุทธิ</b> แล้วพิสูจน์ว่าบัญชีเงินลงทุนถูกล้างหมดและ NCI ได้ยอดตรง</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x10">คำตอบของคุณ<span class="ex-save" data-save="x10">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x10" data-ex="x10" rows="12" placeholder="1) วิธีสัดส่วน&#10;   NCI = ...&#10;   ค่าความนิยม = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>ตั้งต้นก่อน · มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</h4>
+        <p>400,000 + 60,000 = <b>460,000 บาท</b></p>
+        <h4>1 · สองวิธีวัดมูลค่า NCI</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>วิธีสัดส่วนในสินทรัพย์สุทธิ</th><th>วิธีมูลค่ายุติธรรม</th></tr></thead>
+          <tbody>
+            <tr><td class="k">สิ่งตอบแทนที่โอนให้</td><td class="m">440,000</td><td class="m">440,000</td></tr>
+            <tr><td class="k">บวก NCI</td><td class="m">20% &times; 460,000 = <b>92,000</b></td><td class="m">20% &times; 550,000 = <b>110,000</b></td></tr>
+            <tr><td class="k">รวม</td><td class="m">532,000</td><td class="m">550,000</td></tr>
+            <tr><td class="k">หัก สินทรัพย์สุทธิที่ระบุได้</td><td class="m">(460,000)</td><td class="m">(460,000)</td></tr>
+            <tr><td class="k"><b>ค่าความนิยม</b></td><td class="m"><b>72,000</b></td><td class="m"><b>90,000</b></td></tr>
+          </tbody>
+        </table></div>
+        <h4>2 · ผลต่างคืออะไร</h4>
+        <p>ผลต่าง <b>18,000 บาท</b> ทั้งในค่าความนิยมและใน NCI คือ<b>ค่าความนิยมส่วนที่เป็นของผู้ถือหุ้นที่ไม่มีอำนาจควบคุม</b></p>
+        <ul>
+          <li><b>วิธีสัดส่วน</b> รับรู้ค่าความนิยม<b>เฉพาะส่วนที่บริษัทใหญ่ซื้อมา</b> เพราะวัด NCI จากสินทรัพย์สุทธิที่ระบุได้เท่านั้น ซึ่งไม่มีค่าความนิยมอยู่ในนั้นเลย · สะท้อน<b>ทฤษฎีความเป็นเจ้าของ</b></li>
+          <li><b>วิธีมูลค่ายุติธรรม</b> รับรู้ค่าความนิยม<b>ทั้งบริษัท</b> ทั้งส่วนของบริษัทใหญ่และส่วนของ NCI เพราะราคาตลาดของหุ้นสะท้อนค่าความนิยมอยู่แล้ว · สะท้อน<b>ทฤษฎีความเป็นหน่วยงาน</b></li>
+        </ul>
+        <p>ตรวจได้อีกทาง — ค่าความนิยมส่วนของบริษัทใหญ่ = 440,000 &minus; (80% &times; 460,000 = 368,000) = <b>72,000</b> เท่ากับวิธีสัดส่วนพอดี · ส่วนของ NCI = 110,000 &minus; 92,000 = <b>18,000</b> · รวม 90,000 ตรงกับวิธีมูลค่ายุติธรรม ✓</p>
+        <div class="note warn" style="margin:10px 0"><span class="nh">ข้อควรระวัง</span>มาตรฐานให้<b>เลือกได้เป็นรายรายการ</b> ไม่ใช่เลือกครั้งเดียวใช้ตลอด · และวิธีมูลค่ายุติธรรมจะให้ค่าความนิยม<b>ไม่ต่ำกว่า</b>วิธีสัดส่วนเสมอ · จะเท่ากันก็ต่อเมื่อราคาที่บริษัทใหญ่จ่ายต่อหุ้นเท่ากับมูลค่ายุติธรรมต่อหุ้นของ NCI พอดี ซึ่งแปลว่าไม่มี<b>ส่วนเพิ่มจากการได้อำนาจควบคุม</b> (control premium)</div>
+        <h4>3 · รายการตัดบัญชีในกระดาษทำการ · วิธีสัดส่วน</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>เดบิต</th><th>เครดิต</th><th>ทำอะไร</th></tr></thead>
+          <tbody>
+            <tr><td class="k">1</td><td>ที่ดิน <span class="m">60,000</span></td><td>เงินลงทุนในบริษัทย่อย <span class="m">48,000</span><br>ส่วนได้เสียที่ไม่มีอำนาจควบคุม <span class="m">12,000</span></td><td>ปรับที่ดินขึ้นเป็นมูลค่ายุติธรรม แบ่ง 80 : 20</td></tr>
+            <tr><td class="k">2</td><td>ค่าความนิยม <span class="m">72,000</span></td><td>เงินลงทุนในบริษัทย่อย <span class="m">72,000</span></td><td>แยกค่าความนิยมออกมาเป็นบรรทัดของตัวเอง · <b>ไม่แบ่งให้ NCI</b> เพราะใช้วิธีสัดส่วน</td></tr>
+            <tr><td class="k">3</td><td>ทุนหุ้นสามัญ–เอส <span class="m">300,000</span><br>กำไรสะสม–เอส <span class="m">100,000</span></td><td>เงินลงทุนในบริษัทย่อย <span class="m">320,000</span><br>ส่วนได้เสียที่ไม่มีอำนาจควบคุม <span class="m">80,000</span></td><td>ล้างส่วนของผู้ถือหุ้นบริษัทย่อยทิ้งทั้งหมด แบ่ง 80 : 20</td></tr>
+          </tbody>
+        </table></div>
+        <h4>พิสูจน์</h4>
+        <p><b>เงินลงทุนถูกล้างหมด</b> 48,000 + 72,000 + 320,000 = <b>440,000</b> ✓ ตรงกับยอดที่บันทึกไว้ในงบเฉพาะกิจการ</p>
+        <p><b>NCI รวม</b> 12,000 + 80,000 = <b>92,000</b> ✓ ตรงกับที่ใช้คำนวณค่าความนิยม</p>
+        <p>ถ้าเลือกวิธีมูลค่ายุติธรรมแทน รายการ 2 จะเปลี่ยนเป็น Dr ค่าความนิยม 90,000 / Cr เงินลงทุน 72,000 / Cr NCI 18,000 และ NCI รวมจะเป็น 110,000</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สินทรัพย์สุทธิที่ระบุได้ 460,000 <b>1 คะแนน</b></li>
+          <li>วิธีสัดส่วน NCI 92,000 ค่าความนิยม 72,000 <b>3 คะแนน</b></li>
+          <li>วิธีมูลค่ายุติธรรม NCI 110,000 ค่าความนิยม 90,000 <b>3 คะแนน</b></li>
+          <li>อธิบายผลต่าง 18,000 ว่าเป็นค่าความนิยมส่วนของ NCI พร้อมโยงไปทฤษฎีที่อยู่เบื้องหลัง <b>3 คะแนน</b></li>
+          <li>รายการตัดบัญชีครบสามรายการและพิสูจน์ยอด <b>4 คะแนน</b> · <b>ต้องแบ่งผลต่างมูลค่ายุติธรรมของที่ดินให้ NCI ด้วย</b> คนที่เครดิตเงินลงทุนเต็ม 60,000 จะเสียคะแนนข้อนี้ทั้งข้อเพราะทำให้เงินลงทุนล้างเกิน</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q11" data-ch="3" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 11</span><span class="pill">บทที่ 3</span><span class="pill k">บันทึกบัญชี · อธิบาย</span><span class="pill k">คนพลาดเยอะ</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>สินทรัพย์ถาวรที่มีค่าเสื่อมราคาสะสม</h3>
+      <div class="ex-q">
+        <p>บริษัท พี ซื้อหุ้นของบริษัท เอส <b>100%</b> ณ วันซื้อ เอส มีอาคารดังนี้</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">อาคาร ราคาทุน</td><td class="m">500,000</td></tr>
+          <tr><td class="k">หัก ค่าเสื่อมราคาสะสม</td><td class="m">(200,000)</td></tr>
+          <tr><td class="k">ราคาตามบัญชี</td><td class="m">300,000</td></tr>
+          <tr><td class="k"><b>มูลค่ายุติธรรม ณ วันซื้อ</b></td><td class="m"><b>380,000</b></td></tr>
+        </tbody></table></div>
+        <p>อาคารเหลืออายุการใช้ประโยชน์อีก <b>10 ปี</b> ไม่มีมูลค่าคงเหลือ คิดค่าเสื่อมราคาแบบเส้นตรง</p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>เขียน<b>รายการตัดบัญชีเฉพาะส่วนของอาคาร</b>ในกระดาษทำการงบรวม ณ วันซื้อ</li>
+          <li>อธิบายว่าทำไมต้อง<b>ล้างบัญชีค่าเสื่อมราคาสะสมของบริษัทย่อยทิ้ง</b></li>
+          <li>ในปีถัดไป ค่าเสื่อมราคาของอาคารหลังนี้<b>ในงบการเงินรวม</b>เป็นเท่าใด และต่างจากที่บริษัทย่อยบันทึกในสมุดตัวเองเท่าใด พร้อมเขียนรายการปรับปรุงในกระดาษทำการปีนั้น</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x11">คำตอบของคุณ<span class="ex-save" data-save="x11">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x11" data-ex="x11" rows="10" placeholder="1) Dr ........... / Cr ..........."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · รายการตัดบัญชีส่วนอาคาร</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr ค่าเสื่อมราคาสะสม–อาคาร <span class="m">200,000</span></td><td>Cr อาคาร <span class="m">120,000</span><br>Cr เงินลงทุนในบริษัทย่อย <span class="m">80,000</span></td></tr>
+        </tbody></table></div>
+        <p>ตรวจผลลัพธ์ · อาคารในงบรวม = 500,000 &minus; 120,000 = <b>380,000</b> ซึ่งคือมูลค่ายุติธรรม ✓ และค่าเสื่อมราคาสะสม = 200,000 &minus; 200,000 = <b>ศูนย์</b> ✓</p>
+        <p>ผลสุทธิที่ปรับ = 380,000 &minus; 300,000 = <b>80,000</b> ตรงกับยอดที่เครดิตเงินลงทุน ✓ (ถือ 100% จึงไม่ต้องแบ่งให้ NCI)</p>
+        <h4>2 · ทำไมต้องล้างค่าเสื่อมราคาสะสม</h4>
+        <p>ในมุมของ<b>กลุ่มกิจการ</b> วันที่ซื้อหุ้นคือวันที่กลุ่มได้อาคารหลังนี้มา<b>เป็นครั้งแรก</b> จึงต้องบันทึกเสมือน<b>ซื้อสินทรัพย์ใหม่ในราคา 380,000 บาท</b></p>
+        <p>สินทรัพย์ที่เพิ่งซื้อมาย่อม<b>ยังไม่มีค่าเสื่อมราคาสะสม</b> · ค่าเสื่อมราคาสะสม 200,000 ที่อยู่ในสมุดของบริษัทย่อยเป็นการใช้งานในช่วงที่<b>ยังไม่ได้เป็นของกลุ่ม</b> จึงไม่มีความหมายในงบรวม ต้องล้างทิ้ง</p>
+        <p>ถ้าไม่ล้าง งบรวมจะแสดงอาคารราคาทุน 560,000 หักค่าเสื่อมสะสม 200,000 ซึ่งราคาตามบัญชีเท่ากัน 380,000 ก็จริง แต่<b>ตัวเลขราคาทุนและค่าเสื่อมสะสมที่แสดงในหมายเหตุประกอบงบจะบิดเบือน</b> และทำให้ผู้ใช้งบเข้าใจผิดว่าสินทรัพย์เก่ากว่าความเป็นจริงในมุมของกลุ่ม</p>
+        <h4>3 · ค่าเสื่อมราคาปีถัดไป</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ค่าเสื่อมราคาในงบการเงินรวม</td><td class="m">380,000 &divide; 10 = <b>38,000</b></td></tr>
+          <tr><td class="k">ค่าเสื่อมราคาที่บริษัทย่อยบันทึกในสมุดตัวเอง</td><td class="m">300,000 &divide; 10 = <b>30,000</b></td></tr>
+          <tr><td class="k"><b>ผลต่างที่ต้องปรับเพิ่ม</b></td><td class="m"><b>8,000</b> ต่อปี</td></tr>
+        </tbody></table></div>
+        <p>สังเกตว่า 8,000 ต่อปีก็คือ ผลต่างมูลค่ายุติธรรม 80,000 หารด้วยอายุคงเหลือ 10 ปีนั่นเอง</p>
+        <p><b>รายการปรับปรุงในกระดาษทำการปีถัดไป</b></p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr ค่าเสื่อมราคา <span class="m">8,000</span></td><td>Cr ค่าเสื่อมราคาสะสม–อาคาร <span class="m">8,000</span></td></tr>
+        </tbody></table></div>
+        <p>และอย่าลืมว่าในปีถัดไปยัง<b>ต้องทำรายการตัดบัญชีในข้อ 1 ซ้ำอีกครั้ง</b>ด้วย เพราะกระดาษทำการงบรวม<b>ไม่ได้บันทึกลงสมุดจริงของใครเลย</b> ทุกปีจึงต้องเริ่มจากงบของสองบริษัทตามที่เป็นอยู่แล้วปรับใหม่หมด</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>รายการตัดบัญชีถูกทั้งสามบรรทัด <b>3 คะแนน</b> · คนที่เขียน Dr อาคาร 80,000 / Cr เงินลงทุน 80,000 เฉย ๆ ได้ <b>1 คะแนน</b> เพราะราคาตามบัญชีถูกแต่ไม่ล้างค่าเสื่อมสะสม</li>
+          <li>เหตุผลว่ากลุ่มเพิ่งได้สินทรัพย์มา จึงยังไม่มีค่าเสื่อมสะสม <b>2 คะแนน</b></li>
+          <li>ค่าเสื่อมราคา 38,000 เทียบ 30,000 ผลต่าง 8,000 พร้อมรายการปรับ <b>2 คะแนน</b></li>
+          <li>ระบุว่าต้องทำรายการตัดบัญชีซ้ำทุกปี เพราะกระดาษทำการไม่ลงสมุดจริง <b>1 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q12" data-ch="3" data-kind="exp">
+      <div class="ex-h"><span class="ex-n">ข้อ 12</span><span class="pill">บทที่ 3</span><span class="pill k">อธิบาย · วินิจฉัย</span><span class="pill k">ข้อเขียนล้วน</span><span class="ex-mark">10 คะแนน</span></div>
+      <h3>วินิจฉัยการควบคุมตาม TFRS 10</h3>
+      <div class="ex-q">
+        <p>พิจารณาสามสถานการณ์ต่อไปนี้แยกกัน</p>
+        <p><b>สถานการณ์ ก</b> · บริษัท ก. ถือหุ้นที่มีสิทธิออกเสียง <b>45%</b> ของบริษัท ข. ผู้ถือหุ้นรายอื่น<b>กระจัดกระจายมาก</b> รายใหญ่ที่สุดถือเพียง 3% และไม่มีข้อตกลงร่วมกัน · สถิติสามปีที่ผ่านมา มีผู้มาใช้สิทธิออกเสียงในที่ประชุมเฉลี่ยเพียง <b>60% ของหุ้นทั้งหมด</b> และ ก. สามารถแต่งตั้งกรรมการได้ <b>5 ใน 7 คน</b> ทุกครั้ง</p>
+        <p><b>สถานการณ์ ข</b> · บริษัท ค. ถือหุ้น <b>55%</b> ของบริษัท ง. แต่ ง. อยู่ระหว่างกระบวนการฟื้นฟูกิจการตามคำสั่งศาล อำนาจตัดสินใจในกิจกรรมที่สำคัญทั้งหมดอยู่ที่<b>ผู้ทำแผนที่ศาลแต่งตั้ง</b></p>
+        <p><b>สถานการณ์ ค</b> · บริษัท จ. ถือหุ้น <b>40%</b> ของบริษัท ฉ. และถือ<b>สิทธิซื้อหุ้นเพิ่มอีก 20%</b> ซึ่งใช้สิทธิได้ทันทีในราคาที่<b>ต่ำกว่าราคาตลาดมาก</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>อธิบาย<b>องค์ประกอบของการควบคุม</b>ตาม TFRS 10 ให้ครบ</li>
+          <li>วินิจฉัยทั้งสามสถานการณ์ว่ามีการควบคุมหรือไม่ พร้อมเหตุผลที่อ้างองค์ประกอบข้างต้น</li>
+          <li>ในกรณีที่<b>ไม่มี</b>การควบคุม ให้ระบุว่าต้องใช้มาตรฐานฉบับใดและวิธีใดแทน</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x12">คำตอบของคุณ<span class="ex-save" data-save="x12">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x12" data-ex="x12" rows="12" placeholder="1) องค์ประกอบของการควบคุมมีสามข้อ คือ ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · องค์ประกอบของการควบคุม</h4>
+        <p>ผู้ลงทุนควบคุมผู้ถูกลงทุนเมื่อ<b>เข้าเงื่อนไขครบทั้งสามข้อ</b> ขาดข้อใดข้อหนึ่งถือว่าไม่มีการควบคุม</p>
+        <ol>
+          <li><b>อำนาจเหนือผู้ถูกลงทุน</b> — มีสิทธิที่ทำให้สามารถสั่งการ<b>กิจกรรมที่เกี่ยวข้อง</b> คือกิจกรรมที่กระทบผลตอบแทนอย่างมีนัยสำคัญ</li>
+          <li><b>การรับผลตอบแทนผันแปร</b> — ได้รับหรือมีสิทธิในผลตอบแทนที่ผันแปรตามผลการดำเนินงาน ทั้งด้านบวกและด้านลบ</li>
+          <li><b>ความสามารถใช้อำนาจเพื่อทำให้ผลตอบแทนเปลี่ยนแปลง</b> — มีเส้นเชื่อมระหว่างอำนาจกับผลตอบแทน ไม่ใช่ถืออำนาจแทนคนอื่นในฐานะตัวแทน</li>
+        </ol>
+        <p>หลักสำคัญคือ<b>ดูเนื้อหามากกว่าสัดส่วนการถือหุ้น</b> · การถือเกินครึ่งเป็นเพียงข้อบ่งชี้ที่พบบ่อย ไม่ใช่เงื่อนไขที่จำเป็นหรือเพียงพอ</p>
+        <h4>2 · วินิจฉัยสามสถานการณ์</h4>
+        <p><b>สถานการณ์ ก · มีการควบคุม</b> — เป็น<b>การควบคุมโดยพฤตินัย</b> (de facto control) แม้ถือไม่ถึงกึ่งหนึ่ง</p>
+        <ul>
+          <li><b>อำนาจ</b> · 45% จากผู้มาใช้สิทธิจริงเพียง 60% เท่ากับคุมเสียงได้ 45/60 = <b>75% ของเสียงที่ออกจริง</b> · ผู้ถือหุ้นอื่นกระจัดกระจายมากและไม่มีข้อตกลงร่วมกัน โอกาสรวมตัวกันคัดค้านต่ำมาก · ยิ่งชัดเมื่อแต่งตั้งกรรมการได้ 5 ใน 7 คน ซึ่งคือการสั่งการกิจกรรมที่เกี่ยวข้องโดยตรง</li>
+          <li><b>ผลตอบแทนผันแปร</b> · ได้รับเงินปันผลและส่วนแบ่งในมูลค่ากิจการ</li>
+          <li><b>เชื่อมโยงกัน</b> · ใช้อำนาจผ่านคณะกรรมการเพื่อกำหนดนโยบายที่กระทบผลตอบแทนของตนเอง</li>
+        </ul>
+        <p>→ ต้องนำ ข. มา<b>จัดทำงบการเงินรวม</b> และรับรู้ NCI 55%</p>
+        <p><b>สถานการณ์ ข · ไม่มีการควบคุม</b> — แม้ถือหุ้น 55% ซึ่งเกินกึ่งหนึ่ง แต่<b>ขาดองค์ประกอบข้อ 1</b> เพราะอำนาจสั่งการกิจกรรมที่เกี่ยวข้องอยู่ที่ผู้ทำแผนที่ศาลแต่งตั้ง สิทธิออกเสียงของ ค. ใช้ไม่ได้จริงในทางปฏิบัติ · เป็นตัวอย่างชัดเจนว่า<b>เนื้อหาสำคัญกว่ารูปแบบ</b></p>
+        <p><b>สถานการณ์ ค · มีการควบคุม</b> — TFRS 10 กำหนดให้พิจารณา<b>สิทธิในเนื้อหา</b> (substantive rights) รวมถึง<b>สิทธิที่อาจเกิดขึ้น</b>ด้วย · สิทธิซื้อหุ้นนี้<b>ใช้ได้ทันที</b>และ<b>ราคาใช้สิทธิต่ำกว่าราคาตลาดมาก</b> จึงมีแรงจูงใจทางเศรษฐกิจให้ใช้สิทธิแน่นอน ไม่มีอุปสรรคขัดขวาง → ถือว่ามีอำนาจแล้วตั้งแต่วันนี้ แม้ยังไม่ได้ใช้สิทธิจริง · ถ้าสิทธินั้น<b>ใช้ได้ในอีกสองปีข้างหน้า</b> หรือ<b>ราคาใช้สิทธิสูงกว่าราคาตลาดมาก</b> จะไม่ถือเป็นสิทธิในเนื้อหา และคำตอบจะกลับเป็นไม่มีการควบคุม</p>
+        <h4>3 · เมื่อไม่มีการควบคุม</h4>
+        <p>สถานการณ์ ข ไม่ต้องจัดทำงบรวม · ต้องพิจารณาต่อว่ายังมี<b>อิทธิพลอย่างมีนัยสำคัญ</b>หรือไม่ ซึ่งในกรณีฟื้นฟูกิจการมักไม่มี เพราะอำนาจอยู่ที่ผู้ทำแผน</p>
+        <ul>
+          <li><b>ถ้ายังมีอิทธิพลอย่างมีนัยสำคัญ</b> → ใช้ <b>TAS 28</b> วิธี<b>ส่วนได้เสีย</b> ในฐานะบริษัทร่วม</li>
+          <li><b>ถ้าไม่มีแม้อิทธิพลอย่างมีนัยสำคัญ</b> → ใช้ <b>TFRS 9</b> จัดประเภทเป็นเงินลงทุนในตราสารทุน วัดด้วย<b>มูลค่ายุติธรรมผ่านกำไรขาดทุน</b> หรือเลือกแบบเพิกถอนไม่ได้ให้วัดด้วยมูลค่ายุติธรรม<b>ผ่านกำไรขาดทุนเบ็ดเสร็จอื่น</b></li>
+        </ul>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>องค์ประกอบสามข้อครบและอธิบายได้ <b>3 คะแนน</b></li>
+          <li>สถานการณ์ ก · ตอบว่าควบคุม พร้อมคำนวณ 45/60 ให้เห็น <b>2 คะแนน</b></li>
+          <li>สถานการณ์ ข · ตอบว่าไม่ควบคุม พร้อมชี้ว่าขาดองค์ประกอบข้อใด <b>2 คะแนน</b></li>
+          <li>สถานการณ์ ค · ตอบว่าควบคุม พร้อมอธิบายสิทธิในเนื้อหา <b>2 คะแนน</b></li>
+          <li>ระบุมาตรฐานทางเลือก TAS 28 หรือ TFRS 9 <b>1 คะแนน</b></li>
+          <li><b>ตอบแค่ “ใช่” หรือ “ไม่ใช่” โดยไม่อ้างองค์ประกอบ ได้ไม่เกินครึ่งของข้อย่อยนั้น</b> — ข้อแบบนี้คะแนนอยู่ที่เหตุผล ไม่ใช่คำตอบ</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q13" data-ch="4" data-kind="je">
+      <div class="ex-h"><span class="ex-n">ข้อ 13</span><span class="pill">บทที่ 4</span><span class="pill k">บันทึกบัญชี · เปรียบเทียบ</span><span class="pill k">ออกแน่นอน</span><span class="ex-mark">10 คะแนน</span></div>
+      <h3>วิธีราคาทุนเทียบวิธีส่วนได้เสีย ในงบเฉพาะกิจการ</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มกราคม 25X1 บริษัท พี ซื้อหุ้นสามัญของบริษัท เอส <b>70%</b> จ่ายเงินสด <b>350,000 บาท</b></p>
+        <p>ณ วันนั้นส่วนของผู้ถือหุ้นของ เอส เท่ากับ <b>500,000 บาท</b> และ<b>ราคาตามบัญชีของสินทรัพย์และหนี้สินทุกรายการเท่ากับมูลค่ายุติธรรม</b></p>
+        <p>ระหว่างปี 25X1 บริษัท เอส มี<b>กำไรสุทธิ 80,000 บาท</b> และ<b>ประกาศจ่ายเงินปันผล 30,000 บาท</b> ซึ่งจ่ายครบแล้วภายในปี</p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>พิสูจน์ว่า<b>ไม่มีค่าความนิยม</b>เกิดขึ้น</li>
+          <li>บันทึกรายการทั้งหมดที่เกี่ยวกับเงินลงทุนในสมุดของ พี ตลอดปี 25X1 <b>ตามวิธีราคาทุน</b> และหายอดเงินลงทุน ณ สิ้นปี</li>
+          <li>ทำเหมือนข้อ 2 แต่ใช้<b>วิธีส่วนได้เสีย</b></li>
+          <li>กำไรสุทธิในงบเฉพาะกิจการของ พี จากสองวิธีนี้ต่างกันเท่าใด และวิธีใดที่จะทำให้<b>กำไรสุทธิของ พี เท่ากับกำไรส่วนของบริษัทใหญ่ในงบการเงินรวม</b> เพราะเหตุใด</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x13">คำตอบของคุณ<span class="ex-save" data-save="x13">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x13" data-ex="x13" rows="12" placeholder="1) ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · พิสูจน์ว่าไม่มีค่าความนิยม</h4>
+        <p>ส่วนได้เสียของ พี ในสินทรัพย์สุทธิที่ระบุได้ = 70% &times; 500,000 = <b>350,000</b> ซึ่งเท่ากับราคาที่จ่ายพอดี → <b>ค่าความนิยมเป็นศูนย์</b> · และเมื่อวัด NCI ด้วยวิธีสัดส่วน NCI = 30% &times; 500,000 = 150,000</p>
+        <h4>2 · วิธีราคาทุน</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">1 ม.ค.</td><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">350,000</span></td><td>Cr เงินสด <span class="m">350,000</span></td></tr>
+          <tr><td class="k">รับปันผล</td><td>Dr เงินสด <span class="m">21,000</span></td><td>Cr รายได้เงินปันผล <span class="m">21,000</span></td></tr>
+          <tr><td class="k">กำไรของ เอส</td><td colspan="2"><i>ไม่บันทึก</i></td></tr>
+        </tbody></table></div>
+        <p>เงินปันผล 30,000 &times; 70% = 21,000 · <b>ยอดเงินลงทุน ณ 31 ธันวาคม 25X1 = 350,000 บาท คงเดิม</b></p>
+        <h4>3 · วิธีส่วนได้เสีย</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">1 ม.ค.</td><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">350,000</span></td><td>Cr เงินสด <span class="m">350,000</span></td></tr>
+          <tr><td class="k">ส่วนแบ่งกำไร</td><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">56,000</span></td><td>Cr ส่วนแบ่งกำไรจากเงินลงทุน <span class="m">56,000</span></td></tr>
+          <tr><td class="k">รับปันผล</td><td>Dr เงินสด <span class="m">21,000</span></td><td>Cr เงินลงทุนในบริษัทย่อย <span class="m">21,000</span></td></tr>
+        </tbody></table></div>
+        <p>ส่วนแบ่งกำไร 80,000 &times; 70% = 56,000 · เงินปันผลที่รับ<b>ไม่ใช่รายได้</b> แต่เป็นการ<b>คืนทุน</b> จึงไปลดเงินลงทุน</p>
+        <p><b>ยอดเงินลงทุน ณ 31 ธันวาคม 25X1</b> = 350,000 + 56,000 &minus; 21,000 = <b>385,000 บาท</b></p>
+        <h4>4 · เปรียบเทียบกำไร</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>วิธีราคาทุน</th><th>วิธีส่วนได้เสีย</th></tr></thead>
+          <tbody>
+            <tr><td class="k">รายได้ที่รับรู้จากเงินลงทุน</td><td class="m">21,000</td><td class="m">56,000</td></tr>
+            <tr><td class="k">เงินลงทุนปลายปี</td><td class="m">350,000</td><td class="m">385,000</td></tr>
+          </tbody>
+        </table></div>
+        <p>กำไรต่างกัน <b>35,000 บาท</b> ซึ่งก็คือ 70% ของกำไรที่ เอส <b>เก็บไว้ไม่ได้จ่ายออกมา</b> คือ 70% &times; (80,000 &minus; 30,000) = 35,000</p>
+        <p><b>วิธีส่วนได้เสีย</b>คือวิธีที่ทำให้กำไรสุทธิของ พี เท่ากับกำไรส่วนของบริษัทใหญ่ในงบรวม</p>
+        <p><b>เหตุผล</b> · ในงบการเงินรวม เราตัดรายได้เงินปันผลจากบริษัทย่อยทิ้งทั้งหมด แล้วนำ<b>กำไรทั้งก้อนของ เอส</b> มารวม จากนั้นจึงแบ่งออกเป็นส่วนของบริษัทใหญ่ 70% และส่วนของ NCI 30% · กำไรส่วนของบริษัทใหญ่จึงเท่ากับ 70% ของกำไร เอส = <b>56,000</b> พอดี ซึ่งตรงกับส่วนแบ่งกำไรที่วิธีส่วนได้เสียบันทึกไว้</p>
+        <p>พูดอีกอย่างคือ<b>วิธีส่วนได้เสียคืองบการเงินรวมที่ย่อลงเหลือบรรทัดเดียว</b> (one-line consolidation) · ด้วยเหตุนี้ TAS 27 ที่แก้ไขในปี 2560 จึงเปิดให้บริษัทใหญ่เลือกใช้วิธีส่วนได้เสียในงบเฉพาะกิจการได้ เพื่อให้ตัวเลขกำไรของสองงบตรงกัน</p>
+        <p>ส่วนวิธีราคาทุนจะให้กำไรตรงกับงบรวมก็ต่อเมื่อบริษัทย่อย<b>จ่ายปันผลออกมาเท่ากับกำไรทั้งหมดพอดี</b> ซึ่งแทบไม่เกิดขึ้นจริง</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>พิสูจน์ว่าไม่มีค่าความนิยม <b>1 คะแนน</b></li>
+          <li>วิธีราคาทุน สองรายการ พร้อมระบุว่าไม่บันทึกกำไรของ เอส และยอดเงินลงทุน 350,000 <b>3 คะแนน</b></li>
+          <li>วิธีส่วนได้เสีย สามรายการ และยอด 385,000 <b>3 คะแนน</b></li>
+          <li>ผลต่าง 35,000 พร้อมอธิบายว่ามาจากกำไรที่เก็บไว้ <b>1 คะแนน</b></li>
+          <li>ตอบว่าวิธีส่วนได้เสีย พร้อมเหตุผลเรื่อง one-line consolidation <b>2 คะแนน</b></li>
+          <li><b>ผิดที่พบบ่อยที่สุด</b> คือวิธีส่วนได้เสียแล้วยังบันทึกเงินปันผลเป็นรายได้ ทำให้นับกำไรซ้ำสองรอบ</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q14" data-ch="4" data-kind="wk">
+      <div class="ex-h"><span class="ex-n">ข้อ 14</span><span class="pill">บทที่ 4</span><span class="pill k">ตารางไล่ยอด</span><span class="pill k">ต้องทำให้เร็ว</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ไล่ยอด NCI สามปี รวมปีที่ขาดทุน</h3>
+      <div class="ex-q">
+        <p>บริษัท พี ถือหุ้น เอส <b>80%</b> ซื้อเมื่อ 1 มกราคม 25X1 ส่วนของผู้ถือหุ้นของ เอส ณ วันนั้น <b>400,000 บาท</b> · ราคาตามบัญชีเท่ากับมูลค่ายุติธรรมทุกรายการ และวัด NCI ด้วย<b>วิธีสัดส่วนในมูลค่ายุติธรรมของสินทรัพย์สุทธิ</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ปี</th><th>กำไร (ขาดทุน) สุทธิของ เอส</th><th>เงินปันผลที่ เอส ประกาศจ่าย</th></tr></thead>
+          <tbody>
+            <tr><td class="k">25X1</td><td class="m">50,000</td><td class="m">20,000</td></tr>
+            <tr><td class="k">25X2</td><td class="m">(30,000)</td><td class="m">—</td></tr>
+            <tr><td class="k">25X3</td><td class="m">90,000</td><td class="m">40,000</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>จัดทำ<b>ตารางไล่ยอด NCI</b> ตั้งแต่วันซื้อจนสิ้นปี 25X3 แสดงทุกบรรทัดที่เคลื่อนไหว</li>
+          <li>คำนวณ<b>กำไรสะสมของ เอส ณ สิ้นปี 25X3</b> และใช้ตรวจสอบยอด NCI ที่ได้ ด้วยวิธีที่สอง</li>
+          <li>สมมติแทนว่าในปี 25X2 บริษัท เอส <b>ขาดทุน 600,000 บาท</b> จน<b>ส่วนของผู้ถือหุ้นติดลบ</b> จะปฏิบัติต่อยอด NCI อย่างไร</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x14">คำตอบของคุณ<span class="ex-save" data-save="x14">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x14" data-ex="x14" rows="11" placeholder="NCI ณ วันซื้อ            = ...&#10;บวก ส่วนแบ่งกำไร 25X1    = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · ตารางไล่ยอด NCI</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>รายการ</th><th>จำนวนเงิน</th><th>ที่มา</th></tr></thead>
+          <tbody>
+            <tr><td class="k">NCI ณ 1 ม.ค. 25X1</td><td class="m">80,000</td><td>20% &times; 400,000</td></tr>
+            <tr><td class="k">บวก ส่วนแบ่งกำไร 25X1</td><td class="m">10,000</td><td>20% &times; 50,000</td></tr>
+            <tr><td class="k">หัก ส่วนแบ่งเงินปันผล 25X1</td><td class="m">(4,000)</td><td>20% &times; 20,000</td></tr>
+            <tr><td class="k"><b>NCI ณ 31 ธ.ค. 25X1</b></td><td class="m"><b>86,000</b></td><td></td></tr>
+            <tr><td class="k">หัก ส่วนแบ่งขาดทุน 25X2</td><td class="m">(6,000)</td><td>20% &times; 30,000</td></tr>
+            <tr><td class="k"><b>NCI ณ 31 ธ.ค. 25X2</b></td><td class="m"><b>80,000</b></td><td>ไม่มีปันผล</td></tr>
+            <tr><td class="k">บวก ส่วนแบ่งกำไร 25X3</td><td class="m">18,000</td><td>20% &times; 90,000</td></tr>
+            <tr><td class="k">หัก ส่วนแบ่งเงินปันผล 25X3</td><td class="m">(8,000)</td><td>20% &times; 40,000</td></tr>
+            <tr><td class="k"><b>NCI ณ 31 ธ.ค. 25X3</b></td><td class="m"><b>90,000</b></td><td></td></tr>
+          </tbody>
+        </table></div>
+        <h4>2 · ตรวจด้วยวิธีที่สอง</h4>
+        <p>การเปลี่ยนแปลงของกำไรสะสมของ เอส สะสมสามปี = (50,000 &minus; 20,000) + (&minus;30,000) + (90,000 &minus; 40,000) = <b>+50,000</b></p>
+        <p>ส่วนของผู้ถือหุ้นของ เอส ณ 31 ธ.ค. 25X3 = 400,000 + 50,000 = <b>450,000 บาท</b></p>
+        <p><b>NCI = 20% &times; 450,000 = 90,000</b> ✓ ตรงกับตาราง</p>
+        <p>วิธีตรวจนี้ใช้ได้เพราะข้อนี้<b>ไม่มีผลต่างมูลค่ายุติธรรมและไม่มีค่าความนิยมส่วนของ NCI</b> · ถ้ามีผลต่างมูลค่ายุติธรรม ต้องเอาส่วนที่ยังไม่ตัดจำหน่าย &times; สัดส่วน NCI มาบวกเพิ่มด้วย</p>
+        <h4>3 · เมื่อขาดทุนจนส่วนของผู้ถือหุ้นติดลบ</h4>
+        <p>ส่วนแบ่งขาดทุนของ NCI = 20% &times; 600,000 = 120,000 · NCI จะกลายเป็น 86,000 &minus; 120,000 = <b>ติดลบ 34,000 บาท</b></p>
+        <p><b>TFRS 10 กำหนดให้ปันส่วนกำไรขาดทุนเบ็ดเสร็จรวมให้แก่บริษัทใหญ่และ NCI ตามสัดส่วน แม้จะทำให้ยอด NCI ติดลบก็ตาม</b> · ต้องแสดง NCI เป็นยอดติดลบในส่วนของผู้ถือหุ้น <b>ห้ามหยุดไว้ที่ศูนย์</b> และ<b>ห้ามผลักส่วนที่เกินไปให้บริษัทใหญ่รับแทน</b></p>
+        <p>เหตุผลเชิงแนวคิด · NCI เป็น<b>ส่วนหนึ่งของส่วนของผู้ถือหุ้น</b>ตามทฤษฎีความเป็นหน่วยงาน ไม่ใช่หนี้สิน จึงไม่มีเพดานที่ศูนย์เหมือนหนี้สินที่ต้องจ่ายจริง · ถ้าภายหลัง เอส กลับมามีกำไร ส่วนแบ่งกำไรของ NCI จะไปหักล้างยอดติดลบนั้นจนเป็นบวกได้เอง โดยไม่ต้องให้บริษัทใหญ่ได้คืนก่อน</p>
+        <p><b>ข้อควรรู้</b> · ก่อนปี 2552 มาตรฐานเดิมเคยกำหนดให้หยุดที่ศูนย์แล้วผลักส่วนเกินให้บริษัทใหญ่ ข้อสอบชอบถามจุดที่เปลี่ยนไปนี้</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>ตารางไล่ยอดครบทุกบรรทัด ยอดปลายปีถูกทั้งสามปี <b>4 คะแนน</b> · ปีที่ขาดทุนต้องเป็นเครื่องหมายลบ</li>
+          <li>ตรวจด้วยส่วนของผู้ถือหุ้น 450,000 &times; 20% <b>2 คะแนน</b></li>
+          <li>กรณี NCI ติดลบ ตอบว่าต้องแสดงติดลบ ห้ามหยุดที่ศูนย์ พร้อมเหตุผล <b>2 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q15" data-ch="4" data-kind="exp">
+      <div class="ex-h"><span class="ex-n">ข้อ 15</span><span class="pill">บทที่ 4</span><span class="pill k">เปรียบเทียบ · บันทึกบัญชี</span><span class="pill k">TFRS 9</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>เงินลงทุนที่ไม่มีอิทธิพล · FVTPL เทียบ FVOCI</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มีนาคม 25X4 บริษัท พี ซื้อหุ้นสามัญของบริษัท คิว <b>15%</b> ราคา <b>200,000 บาท</b> โดย<b>ไม่มีอิทธิพลอย่างมีนัยสำคัญ</b> และถือไว้โดยไม่ได้มีวัตถุประสงค์เพื่อค้า</p>
+        <p>ระหว่างปี พี ได้รับ<b>เงินปันผล 6,000 บาท</b></p>
+        <p>ณ 31 ธันวาคม 25X4 <b>มูลค่ายุติธรรมของเงินลงทุนเท่ากับ 230,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>บันทึกรายการทั้งปีตามทางเลือก<b>วัดมูลค่ายุติธรรมผ่านกำไรขาดทุน (FVTPL)</b></li>
+          <li>บันทึกรายการทั้งปีตามทางเลือก<b>วัดมูลค่ายุติธรรมผ่านกำไรขาดทุนเบ็ดเสร็จอื่น (FVOCI)</b></li>
+          <li>เปรียบเทียบ<b>ผลกระทบต่อกำไรสุทธิ</b> <b>ต่อกำไรขาดทุนเบ็ดเสร็จอื่น</b> และ<b>ต่อส่วนของผู้ถือหุ้นรวม</b></li>
+          <li>ถ้าปีถัดไป พี <b>ขายเงินลงทุนทั้งหมด</b> ในราคา 250,000 บาท ผลต่อกำไรสุทธิของแต่ละทางเลือกต่างกันอย่างไร</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x15">คำตอบของคุณ<span class="ex-save" data-save="x15">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x15" data-ex="x15" rows="11" placeholder="FVTPL&#10;  Dr ......... / Cr ........."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · FVTPL</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ซื้อ</td><td>Dr เงินลงทุนในตราสารทุน <span class="m">200,000</span></td><td>Cr เงินสด <span class="m">200,000</span></td></tr>
+          <tr><td class="k">ปันผล</td><td>Dr เงินสด <span class="m">6,000</span></td><td>Cr รายได้เงินปันผล <span class="m">6,000</span></td></tr>
+          <tr><td class="k">สิ้นปี</td><td>Dr เงินลงทุนในตราสารทุน <span class="m">30,000</span></td><td>Cr กำไรจากการวัดมูลค่าเงินลงทุน <span class="m">30,000</span></td></tr>
+        </tbody></table></div>
+        <p>หมายเหตุ · ถ้าเลือก FVTPL <b>ต้นทุนการทำรายการ</b>เช่นค่านายหน้า ต้องรับรู้เป็นค่าใช้จ่ายทันที ไม่รวมเป็นราคาทุน (ข้อนี้ไม่มีให้)</p>
+        <h4>2 · FVOCI</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ซื้อ</td><td>Dr เงินลงทุนในตราสารทุน <span class="m">200,000</span></td><td>Cr เงินสด <span class="m">200,000</span></td></tr>
+          <tr><td class="k">ปันผล</td><td>Dr เงินสด <span class="m">6,000</span></td><td>Cr รายได้เงินปันผล <span class="m">6,000</span></td></tr>
+          <tr><td class="k">สิ้นปี</td><td>Dr เงินลงทุนในตราสารทุน <span class="m">30,000</span></td><td>Cr กำไรจากการวัดมูลค่า–กำไรขาดทุนเบ็ดเสร็จอื่น <span class="m">30,000</span></td></tr>
+        </tbody></table></div>
+        <div class="note key" style="margin:10px 0"><span class="nh">จุดที่คนตอบผิดบ่อย</span>แม้จะเลือก FVOCI <b>เงินปันผลรับก็ยังรับรู้ในกำไรขาดทุนตามปกติ</b> ไม่ได้ไปอยู่ใน OCI · มีเพียง<b>ผลต่างจากการวัดมูลค่ายุติธรรม</b>เท่านั้นที่ไปอยู่ใน OCI · และทางเลือกนี้เป็นทางเลือกที่<b>เพิกถอนไม่ได้</b> เลือกแล้วเปลี่ยนกลับไม่ได้ตลอดอายุการถือ</div>
+        <h4>3 · เปรียบเทียบผลกระทบ</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>FVTPL</th><th>FVOCI</th></tr></thead>
+          <tbody>
+            <tr><td class="k">กำไรสุทธิ</td><td class="m">+36,000</td><td class="m">+6,000</td></tr>
+            <tr><td class="k">กำไรขาดทุนเบ็ดเสร็จอื่น</td><td class="m">—</td><td class="m">+30,000</td></tr>
+            <tr><td class="k">กำไรขาดทุนเบ็ดเสร็จรวม</td><td class="m">+36,000</td><td class="m">+36,000</td></tr>
+            <tr><td class="k"><b>ส่วนของผู้ถือหุ้นรวม</b></td><td class="m"><b>+36,000</b></td><td class="m"><b>+36,000</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>ประเด็นสำคัญ · <b>ส่วนของผู้ถือหุ้นรวมเท่ากันทั้งสองทางเลือก</b> ต่างกันเพียงว่าผลต่าง 30,000 ไปโผล่ที่บรรทัดไหน · ทางเลือกนี้จึงกระทบ<b>อัตราส่วนที่คำนวณจากกำไรสุทธิ</b> เช่น กำไรต่อหุ้น อย่างมีนัยสำคัญ ทั้งที่ความมั่งคั่งของผู้ถือหุ้นไม่ต่างกันเลย</p>
+        <h4>4 · เมื่อขายในราคา 250,000</h4>
+        <p><b>FVTPL</b> · กำไรจากการขาย = 250,000 &minus; 230,000 = <b>20,000 เข้ากำไรขาดทุน</b> · รวมกับที่รับรู้ไปแล้ว 30,000 ในปีก่อน กำไรที่ผ่านงบกำไรขาดทุนทั้งหมด = 50,000 ตรงกับกำไรที่ได้จริง</p>
+        <p><b>FVOCI</b> · ปรับมูลค่าเป็น 250,000 ก่อนขาย โดยผลต่างอีก 20,000 <b>เข้า OCI</b> จากนั้นจึงตัดรายการเงินลงทุน · <b>กำไรที่ผ่านงบกำไรขาดทุนเท่ากับศูนย์</b></p>
+        <p>เพราะทางเลือก FVOCI สำหรับ<b>ตราสารทุน</b> กำหนดว่า<b>ห้ามจัดประเภทรายการใหม่เข้ากำไรขาดทุนเมื่อขาย</b> (no recycling) · ยอดสะสม 50,000 ที่อยู่ในองค์ประกอบอื่นของส่วนของผู้ถือหุ้นจะ<b>โอนไปกำไรสะสมได้ภายในส่วนของผู้ถือหุ้นเท่านั้น</b> ไม่ผ่านงบกำไรขาดทุน</p>
+        <p>จุดนี้ต่างจาก<b>ตราสารหนี้</b>ที่วัดด้วย FVOCI ซึ่ง<b>ต้อง</b>จัดประเภทใหม่เข้ากำไรขาดทุนเมื่อตัดรายการ · ข้อสอบชอบเอาสองอย่างนี้มาสลับกัน</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>FVTPL สามรายการ <b>2 คะแนน</b></li>
+          <li>FVOCI สามรายการ โดยเงินปันผลยังเข้ากำไรขาดทุน <b>2 คะแนน</b></li>
+          <li>ตารางเปรียบเทียบ พร้อมสรุปว่าส่วนของผู้ถือหุ้นรวมเท่ากัน <b>2 คะแนน</b></li>
+          <li>เรื่อง no recycling เมื่อขาย <b>2 คะแนน</b> — ตอบว่า FVOCI แล้วโอนกำไรสะสม 50,000 เข้ากำไรขาดทุนตอนขาย จะเสียคะแนนข้อนี้ทั้งหมด</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q16" data-ch="4" data-kind="calc">
+      <div class="ex-h"><span class="ex-n">ข้อ 16</span><span class="pill">บทที่ 4</span><span class="pill k">คำนวณ · บันทึกบัญชี</span><span class="pill k">TAS 28</span><span class="ex-mark">10 คะแนน</span></div>
+      <h3>บริษัทร่วม · ค่าความนิยมแฝงและการตัดจำหน่ายผลต่าง</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มกราคม 25X5 บริษัท พี ซื้อหุ้นสามัญของบริษัท เอ <b>30%</b> จ่ายเงินสด <b>150,000 บาท</b> และถือว่ามี<b>อิทธิพลอย่างมีนัยสำคัญ</b></p>
+        <p>ส่วนของผู้ถือหุ้นของ เอ ณ วันนั้น <b>450,000 บาท</b> · ราคาตามบัญชีเท่ากับมูลค่ายุติธรรมทุกรายการ <b>ยกเว้นอาคาร</b>ซึ่งมีมูลค่ายุติธรรมสูงกว่าราคาตามบัญชี <b>40,000 บาท</b> และมีอายุการใช้ประโยชน์คงเหลือ <b>10 ปี</b></p>
+        <p>ระหว่างปี 25X5 บริษัท เอ มี<b>กำไรสุทธิ 70,000 บาท</b> และ<b>ประกาศจ่ายเงินปันผล 20,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณ<b>ค่าความนิยมแฝง</b>ที่รวมอยู่ในราคาซื้อ และอธิบายว่าทำไมจึง<b>ไม่แสดงแยกเป็นบรรทัดของตัวเอง</b>ในงบแสดงฐานะการเงิน</li>
+          <li>คำนวณ<b>ส่วนแบ่งกำไรจากบริษัทร่วม</b>ที่ พี ต้องรับรู้ในปี 25X5</li>
+          <li>บันทึกรายการทั้งหมดในสมุดของ พี ตลอดปี 25X5 และหา<b>ยอดเงินลงทุน ณ 31 ธันวาคม 25X5</b></li>
+          <li>ค่าความนิยมแฝงนี้ต้อง<b>ทดสอบการด้อยค่าแยกต่างหาก</b>หรือไม่ อธิบาย</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x16">คำตอบของคุณ<span class="ex-save" data-save="x16">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x16" data-ex="x16" rows="11" placeholder="1) ค่าความนิยมแฝง = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · ค่าความนิยมแฝง</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ราคาที่จ่าย</td><td class="m">150,000</td></tr>
+          <tr><td class="k">หัก ส่วนได้เสียใน<b>มูลค่ายุติธรรม</b>ของสินทรัพย์สุทธิ</td><td class="m">30% &times; (450,000 + 40,000) = (147,000)</td></tr>
+          <tr><td class="k"><b>ค่าความนิยมแฝง</b></td><td class="m"><b>3,000</b></td></tr>
+        </tbody></table></div>
+        <p><b>ทำไมไม่แสดงแยก</b> · วิธีส่วนได้เสียเป็น<b>การรวมบรรทัดเดียว</b> · เราไม่ได้ควบคุมสินทรัพย์ของบริษัทร่วม จึงไม่นำสินทรัพย์หนี้สินของ เอ มาแสดงรายบรรทัดในงบของ พี และค่าความนิยมก็เช่นกัน · ทุกอย่างถูก<b>ห่อรวมอยู่ในบัญชี “เงินลงทุนในบริษัทร่วม” บรรทัดเดียว</b></p>
+        <p>ต่างจากบริษัทย่อยซึ่งเราควบคุม จึงนำสินทรัพย์มาแสดงเต็มจำนวนและแยกค่าความนิยมออกมาเป็นบรรทัดของตัวเอง</p>
+        <h4>2 · ส่วนแบ่งกำไร</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ส่วนแบ่งในกำไรที่ เอ รายงาน</td><td class="m">30% &times; 70,000 = 21,000</td></tr>
+          <tr><td class="k">หัก ส่วนแบ่งในค่าเสื่อมราคาส่วนเพิ่มของอาคาร</td><td class="m">30% &times; (40,000 &divide; 10) = (1,200)</td></tr>
+          <tr><td class="k"><b>ส่วนแบ่งกำไรจากบริษัทร่วม</b></td><td class="m"><b>19,800</b></td></tr>
+        </tbody></table></div>
+        <p>ที่ต้องหักเพราะ เอ คิดค่าเสื่อมราคาจาก<b>ราคาตามบัญชีเดิม</b> แต่ในมุมของ พี ต้นทุนอาคารคือ<b>มูลค่ายุติธรรม ณ วันซื้อ</b>ซึ่งสูงกว่า · กำไรที่ เอ รายงานจึงสูงเกินไปในมุมของ พี ต้องปรับลดลงตามสัดส่วนที่ถือ · <b>หลักเดียวกันกับการตัดจำหน่ายผลต่างมูลค่ายุติธรรมของบริษัทย่อยทุกประการ</b></p>
+        <h4>3 · รายการบันทึกบัญชีและยอดเงินลงทุน</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">1 ม.ค.</td><td>Dr เงินลงทุนในบริษัทร่วม <span class="m">150,000</span></td><td>Cr เงินสด <span class="m">150,000</span></td></tr>
+          <tr><td class="k">ส่วนแบ่งกำไร</td><td>Dr เงินลงทุนในบริษัทร่วม <span class="m">19,800</span></td><td>Cr ส่วนแบ่งกำไรจากบริษัทร่วม <span class="m">19,800</span></td></tr>
+          <tr><td class="k">ปันผล</td><td>Dr เงินสด <span class="m">6,000</span></td><td>Cr เงินลงทุนในบริษัทร่วม <span class="m">6,000</span></td></tr>
+        </tbody></table></div>
+        <p>เงินปันผล = 30% &times; 20,000 = 6,000 · <b>ยอดเงินลงทุน ณ 31 ธ.ค. 25X5</b> = 150,000 + 19,800 &minus; 6,000 = <b>163,800 บาท</b></p>
+        <h4>4 · การทดสอบการด้อยค่า</h4>
+        <p><b>ไม่ต้องทดสอบแยกต่างหาก</b> · TAS 28 กำหนดว่าค่าความนิยมที่รวมอยู่ในราคาตามบัญชีของเงินลงทุนในบริษัทร่วม<b>ไม่ให้รับรู้แยกต่างหาก</b> จึงไม่ต้องทดสอบการด้อยค่าตาม TAS 36 เป็นรายการเดี่ยว</p>
+        <p>แทนที่จะทำอย่างนั้น ให้ทดสอบ<b>มูลค่าตามบัญชีของเงินลงทุนทั้งจำนวนเป็นสินทรัพย์รายการเดียว</b> โดยเทียบราคาตามบัญชี 163,800 กับ<b>มูลค่าที่คาดว่าจะได้รับคืน</b> ซึ่งเป็นจำนวนที่สูงกว่าระหว่างมูลค่ายุติธรรมหักต้นทุนในการจำหน่าย กับมูลค่าจากการใช้</p>
+        <p>และจะทดสอบก็ต่อเมื่อ<b>มีข้อบ่งชี้ว่าอาจด้อยค่า</b>ตาม TAS 28 เท่านั้น <b>ไม่ใช่ทุกปีโดยอัตโนมัติ</b>แบบค่าความนิยมของบริษัทย่อย — ข้อนี้เป็นจุดที่ข้อสอบชอบถาม</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>ค่าความนิยมแฝง 3,000 โดยใช้ฐาน 490,000 ไม่ใช่ 450,000 <b>2 คะแนน</b></li>
+          <li>เหตุผลว่าเป็น one-line consolidation <b>1 คะแนน</b></li>
+          <li>ส่วนแบ่งกำไร 19,800 โดยหักค่าเสื่อมส่วนเพิ่ม 1,200 <b>3 คะแนน</b> · ตอบ 21,000 เฉย ๆ ได้ <b>1 คะแนน</b></li>
+          <li>รายการบันทึกบัญชีและยอด 163,800 <b>2 คะแนน</b></li>
+          <li>การทดสอบด้อยค่าทั้งก้อน และเฉพาะเมื่อมีข้อบ่งชี้ <b>2 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q17" data-ch="5" data-kind="calc">
+      <div class="ex-h"><span class="ex-n">ข้อ 17</span><span class="pill">บทที่ 5</span><span class="pill k">คำนวณ · กระดาษทำการ</span><span class="pill k">ข้อยาว · ออกท้ายกระดาษ</span><span class="ex-mark">20 คะแนน</span></div>
+      <h3>ตัวอย่างครบวงจร · จากวันซื้อหุ้นถึงสิ้นปีที่หนึ่ง</h3>
+      <div class="ex-q">
+        <p>วันที่ 1 มกราคม 25X1 บริษัท พี ซื้อหุ้นสามัญของบริษัท เอส <b>75%</b> จ่ายเงินสด <b>300,000 บาท</b> และจ่าย<b>ค่าที่ปรึกษาในการซื้อหุ้นอีก 5,000 บาท</b></p>
+        <p>ส่วนของผู้ถือหุ้นของ เอส ณ วันนั้น ทุนหุ้นสามัญ 200,000 กำไรสะสม 80,000</p>
+        <p>ผลต่างระหว่างมูลค่ายุติธรรมกับราคาตามบัญชี</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>รายการ</th><th>ผลต่าง</th><th>การตัดจำหน่าย</th></tr></thead>
+          <tbody>
+            <tr><td class="k">สินค้าคงเหลือ</td><td class="m">+12,000</td><td>ขายหมดภายในปี 25X1</td></tr>
+            <tr><td class="k">อาคาร</td><td class="m">+60,000</td><td>อายุคงเหลือ 15 ปี</td></tr>
+            <tr><td class="k">อุปกรณ์</td><td class="m">&minus;15,000</td><td>อายุคงเหลือ 3 ปี</td></tr>
+          </tbody>
+        </table></div>
+        <p>วัด NCI ด้วย<b>วิธีสัดส่วนในมูลค่ายุติธรรมของสินทรัพย์สุทธิ</b> · บริษัท พี ใช้<b>วิธีราคาทุน</b>ในงบเฉพาะกิจการ</p>
+        <p>ระหว่างปี 25X1 บริษัท เอส มี<b>กำไรสุทธิ 70,000 บาท</b> และ<b>จ่ายเงินปันผล 25,000 บาท</b></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>คำนวณ<b>มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ · NCI ณ วันซื้อ · ค่าความนิยม</b></li>
+          <li>คำนวณ<b>รายการตัดจำหน่ายผลต่างมูลค่ายุติธรรมสำหรับปี 25X1</b> และ<b>กำไรของ เอส ที่ปรับแล้ว</b></li>
+          <li>แบ่งกำไรที่ปรับแล้วออกเป็น<b>ส่วนของ NCI</b>และ<b>ส่วนของบริษัทใหญ่</b> และหา<b>ยอด NCI ณ สิ้นปี 25X1</b></li>
+          <li>คำนวณ<b>ผลต่างสะสมเพื่อแปลงเงินลงทุนจากวิธีราคาทุนเป็นวิธีส่วนได้เสีย</b> เขียนรายการปรับในกระดาษทำการ แล้ว<b>พิสูจน์ยอดเงินลงทุนด้วยวิธีที่สอง</b></li>
+          <li>อธิบายว่าทำไมปีนี้<b>ไม่มี</b>รายการปรับเข้า “กำไรสะสม–พี ต้นงวด”</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x17">คำตอบของคุณ<span class="ex-save" data-save="x17">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x17" data-ex="x17" rows="16" placeholder="1) FV สินทรัพย์สุทธิ = ...&#10;   NCI = ...&#10;   ค่าความนิยม = ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · สินทรัพย์สุทธิ NCI และค่าความนิยม</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ส่วนของผู้ถือหุ้นตามบัญชี</td><td class="m">200,000 + 80,000 = 280,000</td></tr>
+          <tr><td class="k">บวก ผลต่างมูลค่ายุติธรรมสุทธิ</td><td class="m">12,000 + 60,000 &minus; 15,000 = 57,000</td></tr>
+          <tr><td class="k"><b>มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้</b></td><td class="m"><b>337,000</b></td></tr>
+          <tr><td class="k">NCI 25%</td><td class="m">25% &times; 337,000 = <b>84,250</b></td></tr>
+          <tr><td class="k">สิ่งตอบแทนที่โอนให้</td><td class="m">300,000 <i>ไม่รวมค่าที่ปรึกษา 5,000</i></td></tr>
+          <tr><td class="k">รวม</td><td class="m">384,250</td></tr>
+          <tr><td class="k"><b>ค่าความนิยม</b></td><td class="m">384,250 &minus; 337,000 = <b>47,250</b></td></tr>
+        </tbody></table></div>
+        <div class="note warn" style="margin:10px 0"><span class="nh">ค่าที่ปรึกษา 5,000 อยู่ตรงไหน</span>งบเฉพาะกิจการของ พี บันทึกรวมในบัญชีเงินลงทุน ยอดจึงเป็น <b>305,000</b> · แต่ในงบรวมต้อง<b>ดึงออกไปเป็นค่าใช้จ่าย</b> และ<b>ห้ามนำไปคำนวณค่าความนิยม</b> · ถ้าใช้ 305,000 ค่าความนิยมจะกลายเป็น 52,250 ซึ่งผิด</div>
+        <h4>2 · รายการตัดจำหน่ายปี 25X1 และกำไรที่ปรับแล้ว</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>รายการ</th><th>ปี 25X1</th><th>คำอธิบาย</th></tr></thead>
+          <tbody>
+            <tr><td class="k">สินค้าคงเหลือ</td><td class="m">12,000</td><td>ขายหมดในปีเดียว เข้าต้นทุนขายทั้งก้อน</td></tr>
+            <tr><td class="k">อาคาร</td><td class="m">4,000</td><td>60,000 &divide; 15 · ค่าเสื่อม<b>เพิ่ม</b></td></tr>
+            <tr><td class="k">อุปกรณ์</td><td class="m">(5,000)</td><td>15,000 &divide; 3 · ค่าเสื่อม<b>ลด</b> จึงบวกกลับเข้ากำไร</td></tr>
+            <tr><td class="k"><b>รวมตัดจำหน่ายสุทธิ</b></td><td class="m"><b>11,000</b></td><td></td></tr>
+          </tbody>
+        </table></div>
+        <p><b>กำไรของ เอส ที่ปรับแล้ว</b> = 70,000 &minus; 11,000 = <b>59,000 บาท</b></p>
+        <h4>3 · แบ่งกำไรและยอด NCI สิ้นปี</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ส่วนของ NCI</td><td class="m">25% &times; 59,000 = <b>14,750</b></td></tr>
+          <tr><td class="k">ส่วนของบริษัทใหญ่</td><td class="m">75% &times; 59,000 = <b>44,250</b></td></tr>
+        </tbody></table></div>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">NCI ณ วันซื้อ</td><td class="m">84,250</td></tr>
+          <tr><td class="k">บวก ส่วนแบ่งกำไรที่ปรับแล้ว</td><td class="m">14,750</td></tr>
+          <tr><td class="k">หัก ส่วนแบ่งเงินปันผล 25% &times; 25,000</td><td class="m">(6,250)</td></tr>
+          <tr><td class="k"><b>NCI ณ 31 ธ.ค. 25X1</b></td><td class="m"><b>92,750</b></td></tr>
+        </tbody></table></div>
+        <h4>4 · แปลงราคาทุนเป็นส่วนได้เสีย</h4>
+        <p>กำไรสะสมของ เอส ณ สิ้นปี = 80,000 + 70,000 &minus; 25,000 = <b>125,000</b></p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">กำไรสะสม เอส ปลายปี</td><td class="m">125,000</td></tr>
+          <tr><td class="k">หัก กำไรสะสม เอส ณ วันซื้อ</td><td class="m">(80,000)</td></tr>
+          <tr><td class="k">หัก รายการตัดจำหน่ายสะสม</td><td class="m">(11,000)</td></tr>
+          <tr><td class="k">ฐานที่ใช้คำนวณ</td><td class="m">34,000</td></tr>
+          <tr><td class="k">&times; สัดส่วนของบริษัทใหญ่ 75%</td><td class="m">25,500</td></tr>
+          <tr><td class="k">หัก ค่าที่ปรึกษาในการซื้อหุ้นที่ต้องตัดเป็นค่าใช้จ่าย</td><td class="m">(5,000)</td></tr>
+          <tr><td class="k"><b>ผลต่างสะสม</b></td><td class="m"><b>20,500</b></td></tr>
+        </tbody></table></div>
+        <p><b>รายการปรับในกระดาษทำการ</b></p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">20,500</span></td><td>Cr กำไรสุทธิ–พี ปีนี้ <span class="m">20,500</span></td></tr>
+        </tbody></table></div>
+        <p><b>พิสูจน์ด้วยวิธีที่สอง</b> — ไล่จากยอดตามวิธีส่วนได้เสียโดยตรง</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ราคาซื้อหุ้น (ไม่รวมค่าที่ปรึกษา)</td><td class="m">300,000</td></tr>
+          <tr><td class="k">บวก ส่วนแบ่งกำไรที่ปรับแล้ว</td><td class="m">44,250</td></tr>
+          <tr><td class="k">หัก เงินปันผลรับ 75% &times; 25,000</td><td class="m">(18,750)</td></tr>
+          <tr><td class="k"><b>เงินลงทุนตามวิธีส่วนได้เสีย</b></td><td class="m"><b>325,500</b></td></tr>
+          <tr><td class="k">เงินลงทุนตามวิธีราคาทุนในสมุด พี</td><td class="m">(305,000)</td></tr>
+          <tr><td class="k"><b>ผลต่าง</b></td><td class="m"><b>20,500</b> ✓</td></tr>
+        </tbody></table></div>
+        <p>ตรวจฝั่งกำไรก็ได้เช่นกัน · กลับรายได้เงินปันผลทิ้ง &minus;18,750 · รับรู้ส่วนแบ่งกำไร +44,250 · ตัดค่าที่ปรึกษาเป็นค่าใช้จ่าย &minus;5,000 · สุทธิ = <b>+20,500</b> ✓ ตรงกับฝั่งเงินลงทุนพอดี</p>
+        <h4>5 · ทำไมไม่มีรายการเข้ากำไรสะสมต้นงวด</h4>
+        <p>เพราะ<b>ปี 25X1 เป็นปีแรกหลังวันซื้อ</b> · รายการที่เข้า “กำไรสะสม–พี ต้นงวด” มีหน้าที่ปรับผลสะสมที่ควรรับรู้ไว้แล้วใน<b>งวดก่อน ๆ</b> แต่วิธีราคาทุนไม่ได้รับรู้ไว้</p>
+        <p>ในปีแรก ยัง<b>ไม่มีงวดก่อนหน้า</b>เลย ผลต่างทั้ง 20,500 จึงเกิดขึ้นภายในปี 25X1 ทั้งหมด ต้องเข้า<b>กำไรสุทธิของปีนี้</b>ก้อนเดียว</p>
+        <p>วิธีตรวจว่าเป็นปีแรกหรือไม่ · ดูว่า<b>กำไรสะสมของบริษัทย่อยต้นงวด เท่ากับกำไรสะสม ณ วันซื้อหรือยัง</b> และ<b>รายการตัดจำหน่ายสะสมถึงปลายงวดก่อนยังเป็นศูนย์หรือไม่</b> · ถ้าใช่ทั้งสองข้อ แปลว่าเป็นปีแรก · ตั้งแต่ปีที่ 2 เป็นต้นไป ผลต่างจะถูกแยกเป็นสองบรรทัด คือส่วนที่สะสมมาถึงปลายปีก่อนเข้ากำไรสะสมต้นงวด และส่วนที่เพิ่มขึ้นในปีนี้เข้ากำไรสุทธิปีนี้</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>สินทรัพย์สุทธิ 337,000 · NCI 84,250 · ค่าความนิยม 47,250 <b>5 คะแนน</b> · <b>หัก 2 คะแนน</b> ถ้าเอาค่าที่ปรึกษา 5,000 ไปรวมในสิ่งตอบแทน</li>
+          <li>รายการตัดจำหน่าย 11,000 โดยเครื่องหมายของอุปกรณ์ถูก และกำไรที่ปรับแล้ว 59,000 <b>4 คะแนน</b></li>
+          <li>แบ่งกำไร 14,750 กับ 44,250 และ NCI ปลายปี 92,750 <b>4 คะแนน</b></li>
+          <li>ผลต่างสะสม 20,500 พร้อมรายการปรับ และพิสูจน์ด้วยวิธีที่สอง <b>5 คะแนน</b></li>
+          <li>อธิบายว่าปีแรกไม่มีรายการเข้ากำไรสะสมต้นงวด <b>2 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q18" data-ch="5" data-kind="err">
+      <div class="ex-h"><span class="ex-n">ข้อ 18</span><span class="pill">บทที่ 5</span><span class="pill k">หาข้อผิดพลาด</span><span class="pill k">ข้อสั้นแต่ตัดสินความเข้าใจ</span><span class="ex-mark">8 คะแนน</span></div>
+      <h3>ปีที่ผลต่างสะสมลดลง</h3>
+      <div class="ex-q">
+        <p>บริษัท พี ใช้วิธีราคาทุนในงบเฉพาะกิจการ · ในการทำกระดาษทำการงบรวมสำหรับ<b>ปีที่ 3</b> ผู้ช่วยคำนวณผลต่างสะสมได้ดังนี้</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td class="k">ผลต่างสะสมถึงปลาย<b>ปีที่ 3</b></td><td class="m">52,000</td></tr>
+          <tr><td class="k">ผลต่างสะสมถึงปลาย<b>ปีที่ 2</b></td><td class="m">61,000</td></tr>
+        </tbody></table></div>
+        <p>แล้วเขียนรายการปรับมาว่า</p>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">52,000</span></td><td>Cr กำไรสะสม–พี ต้นงวด <span class="m">61,000</span><br>Cr กำไรสุทธิ–พี ปีนี้ <span class="m">(9,000)</span></td></tr>
+        </tbody></table></div>
+        <p>พร้อมหมายเหตุว่า <i>“ปีนี้ส่วนแบ่งติดลบ จึงใส่วงเล็บไว้ที่ฝั่งเครดิต”</i></p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>ระบุว่ารายการนี้<b>ผิดอย่างไร</b> และผิดเพราะเข้าใจอะไรคลาดเคลื่อน</li>
+          <li>เขียน<b>รายการปรับที่ถูกต้อง</b></li>
+          <li>อธิบายว่า<b>สถานการณ์แบบใด</b>ที่ทำให้ผลต่างสะสมลดลงได้ ยกตัวอย่างมาอย่างน้อยสองแบบ</li>
+          <li>หลังปรับรายการที่ถูกต้องแล้ว ถ้าเงินลงทุนตามวิธีราคาทุนในสมุดของ พี เท่ากับ 400,000 บาท ยอดเงินลงทุนในกระดาษทำการจะเป็นเท่าใด</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x18">คำตอบของคุณ<span class="ex-save" data-save="x18">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x18" data-ex="x18" rows="10" placeholder="1) ที่ผิดคือ ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · ผิดอย่างไร</h4>
+        <p>รายการนี้ <b>เดบิตไม่เท่ากับเครดิต</b> ในความหมายที่แท้จริง · เดบิต 52,000 ส่วนเครดิต 61,000 + (&minus;9,000) แม้จะบวกกันได้ 52,000 แต่<b>การใส่จำนวนติดลบไว้ในฝั่งเครดิตไม่ใช่วิธีบันทึกบัญชี</b></p>
+        <p>ความเข้าใจที่คลาดเคลื่อนคือ ผู้ช่วยคิดว่า “ส่วนแบ่งของปีนี้” ต้องอยู่ฝั่งเครดิตเสมอไม่ว่าจะเป็นบวกหรือลบ · ความจริงคือ<b>เครื่องหมายเป็นตัวบอกว่าจำนวนนั้นต้องย้ายไปอยู่อีกฝั่งหนึ่ง</b> · จำนวนติดลบฝั่งเครดิต ก็คือจำนวนบวกฝั่งเดบิตนั่นเอง</p>
+        <p>ในเชิงเนื้อหา ปีที่ 3 <b>ผลต่างสะสมลดลง 9,000</b> แปลว่าในปีนี้ ส่วนแบ่งกำไรที่ พี ควรรับรู้ตามวิธีส่วนได้เสีย<b>ต่ำกว่า</b>รายได้เงินปันผลที่บันทึกไว้ตามวิธีราคาทุนอยู่ 9,000 · การปรับจึงต้อง<b>ลดกำไรสุทธิของปีนี้ลง</b> ซึ่งก็คือ<b>เดบิต</b></p>
+        <h4>2 · รายการที่ถูกต้อง</h4>
+        <div class="tw"><table class="tbl"><tbody>
+          <tr><td>Dr เงินลงทุนในบริษัทย่อย <span class="m">52,000</span><br>Dr กำไรสุทธิ–พี ปีนี้ <span class="m">9,000</span></td><td>Cr กำไรสะสม–พี ต้นงวด <span class="m">61,000</span></td></tr>
+        </tbody></table></div>
+        <p>ตรวจ · เดบิต 52,000 + 9,000 = 61,000 = เครดิต ✓ ทุกจำนวนเป็นบวก ไม่มีวงเล็บ</p>
+        <h4>3 · เมื่อใดผลต่างสะสมจึงลดลง</h4>
+        <ul>
+          <li><b>บริษัทย่อยขาดทุนในปีนั้น</b> · กำไรสะสมของบริษัทย่อยลดลง ฐานที่ใช้คำนวณจึงหดตัว</li>
+          <li><b>บริษัทย่อยจ่ายเงินปันผลมากกว่ากำไรของปีนั้น</b> · เช่น กำไร 20,000 แต่จ่ายปันผล 50,000 กำไรสะสมลดลงสุทธิ 30,000</li>
+          <li><b>รายการตัดจำหน่ายผลต่างมูลค่ายุติธรรมในปีนั้นมากกว่ากำไรที่บริษัทย่อยทำได้</b> · เช่น สินค้าคงเหลือที่ปรับขึ้นถูกขายออกไปทั้งก้อนในปีเดียว ทำให้กำไรที่ปรับแล้วติดลบทั้งที่บริษัทย่อยรายงานกำไร</li>
+        </ul>
+        <p>สามกรณีนี้ให้ผลเหมือนกันหมดคือ <b>ผลต่างสะสมปลายปีนี้ น้อยกว่าปลายปีก่อน</b> และรายการปรับจะพลิกให้ “กำไรสุทธิ–พี ปีนี้” ไปอยู่ฝั่งเดบิต</p>
+        <h4>4 · ยอดเงินลงทุนในกระดาษทำการ</h4>
+        <p>400,000 + 52,000 = <b>452,000 บาท</b> · ใช้<b>ผลต่างสะสม</b> ไม่ใช่ผลต่างของปีนี้ เพราะรายการนี้มีหน้าที่ดันยอดเงินลงทุนจากฐานราคาทุนขึ้นไปให้เท่ากับฐานส่วนได้เสีย ณ วันสิ้นงวด</p>
+        <p>และอย่าลืมว่ายอด 452,000 นี้ยังเป็นแค่ขั้นกลาง · ในกระดาษทำการจะถูก<b>ตัดออกจนเหลือศูนย์</b>ด้วยรายการตัดบัญชีชุดถัดไปที่ล้างเงินลงทุนกับส่วนของผู้ถือหุ้นบริษัทย่อยและตั้งค่าความนิยมกับ NCI</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>ชี้ว่าห้ามใส่จำนวนติดลบในฝั่งเครดิต และอธิบายความหมายเชิงเนื้อหาว่าทำไมต้องเดบิต <b>3 คะแนน</b></li>
+          <li>รายการที่ถูกต้อง <b>2 คะแนน</b></li>
+          <li>ยกสถานการณ์ได้อย่างน้อยสองแบบ <b>2 คะแนน</b></li>
+          <li>ยอดเงินลงทุน 452,000 <b>1 คะแนน</b> · ตอบ 409,000 (ใช้ผลต่างของปีนี้) ได้ 0</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q19" data-ch="x" data-kind="exp">
+      <div class="ex-h"><span class="ex-n">ข้อ 19</span><span class="pill">รวมทุกบท</span><span class="pill k">ถูกหรือผิด พร้อมเหตุผล</span><span class="pill k">คะแนนอยู่ที่เหตุผล</span><span class="ex-mark">10 คะแนน</span></div>
+      <h3>ข้อความต่อไปนี้ถูกหรือผิด อธิบายเหตุผลทุกข้อ</h3>
+      <div class="ex-q">
+        <p>ตอบว่า <b>ถูก</b> หรือ <b>ผิด</b> พร้อมเหตุผลสั้น ๆ · ข้อที่ตอบว่าผิด ให้เขียน<b>ข้อความที่ถูกต้อง</b>กำกับด้วย</p>
+        <ol style="padding-left:20px; margin:9px 0">
+          <li>ค่าใช้จ่ายในการออกหุ้นเพื่อจ่ายเป็นสิ่งตอบแทนในการซื้อธุรกิจ ถือเป็นส่วนหนึ่งของสิ่งตอบแทนที่โอนให้</li>
+          <li>การวัดมูลค่า NCI ด้วยมูลค่ายุติธรรม จะให้ค่าความนิยมไม่ต่ำกว่าการวัดด้วยสัดส่วนในสินทรัพย์สุทธิเสมอ</li>
+          <li>บริษัทใหญ่ที่ใช้วิธีส่วนได้เสียในงบเฉพาะกิจการ จะมีกำไรสุทธิเท่ากับกำไรส่วนของบริษัทใหญ่ในงบการเงินรวมเสมอ</li>
+          <li>เงินปันผลรับจากบริษัทย่อยแสดงเป็นรายได้ในงบกำไรขาดทุนรวม</li>
+          <li>ค่าความนิยมต้องตัดจำหน่ายเป็นค่าใช้จ่ายตามอายุการให้ประโยชน์ที่ประมาณไว้</li>
+          <li>เมื่อบริษัทใหญ่ซื้อหุ้นบริษัทย่อยเพิ่มจาก 80% เป็น 90% โดยยังควบคุมอยู่เหมือนเดิม ส่วนต่างระหว่างราคาที่จ่ายกับ NCI ที่ลดลง ให้รับรู้เป็นค่าความนิยมเพิ่ม</li>
+        </ol>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span> ตอบครบทั้งหกข้อ ข้อละประมาณ 2–3 บรรทัด</div>
+      <label class="ex-lab" for="a-x19">คำตอบของคุณ<span class="ex-save" data-save="x19">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x19" data-ex="x19" rows="12" placeholder="1) ผิด/ถูก เพราะ ...&#10;2) ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · <b>ผิด</b></h4>
+        <p>ค่าใช้จ่ายในการออกหุ้นเป็น<b>ต้นทุนการทำรายการทางด้านทุน</b> ตาม TAS 32 ต้องนำไป<b>หักจากส่วนเกินมูลค่าหุ้น</b>ในส่วนของผู้ถือหุ้น · ไม่เข้าสิ่งตอบแทน ไม่เข้ากำไรขาดทุน · สิ่งตอบแทนที่โอนให้คือ<b>มูลค่ายุติธรรมของหุ้นที่ออก</b>เท่านั้น</p>
+        <p><b>ข้อความที่ถูก</b> · ค่าใช้จ่ายในการออกหุ้นเพื่อจ่ายเป็นสิ่งตอบแทนในการซื้อธุรกิจ ให้นำไปหักจากส่วนของผู้ถือหุ้น</p>
+        <h4>2 · <b>ถูก</b></h4>
+        <p>มูลค่ายุติธรรมของ NCI ย่อม<b>ไม่ต่ำกว่า</b>สัดส่วนของ NCI ในสินทรัพย์สุทธิที่ระบุได้ เพราะราคาตลาดของหุ้นสะท้อนค่าความนิยมที่ผู้ซื้อในตลาดมองเห็นอยู่แล้ว · เมื่อยอด NCI สูงขึ้น ค่าความนิยมซึ่งเป็นผลลัพธ์ของ (สิ่งตอบแทน + NCI &minus; สินทรัพย์สุทธิ) จึงสูงขึ้นตาม</p>
+        <p>จะ<b>เท่ากัน</b>ได้เฉพาะกรณีที่มูลค่ายุติธรรมต่อหุ้นของ NCI เท่ากับราคาที่บริษัทใหญ่จ่ายต่อหุ้น คือไม่มี<b>ส่วนเพิ่มจากการได้อำนาจควบคุม</b> ซึ่งพบได้น้อย</p>
+        <h4>3 · <b>ถูก</b></h4>
+        <p>วิธีส่วนได้เสียคือ<b>งบการเงินรวมที่ย่อลงเหลือบรรทัดเดียว</b> · ส่วนแบ่งกำไรที่รับรู้เท่ากับสัดส่วน &times; กำไรของบริษัทย่อยที่ปรับผลต่างมูลค่ายุติธรรมแล้ว ซึ่งคือนิยามเดียวกับกำไรส่วนของบริษัทใหญ่ในงบรวม</p>
+        <p><b>ข้อควรระวัง</b> · จะตรงเป๊ะก็ต่อเมื่อใช้วิธีส่วนได้เสีย<b>อย่างถูกต้องครบถ้วน</b> คือตัดจำหน่ายผลต่างมูลค่ายุติธรรมและตัดกำไรระหว่างกันครบ · ถ้าบันทึกแค่สัดส่วน &times; กำไรที่บริษัทย่อยรายงาน จะไม่ตรง</p>
+        <h4>4 · <b>ผิด</b></h4>
+        <p>ในงบการเงินรวมต้อง<b>ตัดรายได้เงินปันผลจากบริษัทย่อยออกทั้งจำนวน</b> พร้อมกับตัดเงินปันผลจ่ายของบริษัทย่อยฝั่งตรงข้าม · เพราะเป็นการโอนเงินภายในกลุ่มเดียวกัน กลุ่มไม่ได้ร่ำรวยขึ้นจากการย้ายเงินจากกระเป๋าซ้ายไปกระเป๋าขวา</p>
+        <p><b>ข้อความที่ถูก</b> · เงินปันผลรับจากบริษัทย่อยถูกตัดออกทั้งจำนวนในงบการเงินรวม · ส่วนเงินปันผลที่จ่ายให้ NCI จะไปแสดงเป็นการลดยอด NCI ในงบแสดงการเปลี่ยนแปลงส่วนของผู้ถือหุ้น</p>
+        <h4>5 · <b>ผิด</b></h4>
+        <p>ตาม TFRS 3 และ TAS 36 ค่าความนิยม<b>ไม่ตัดจำหน่าย</b> เพราะถือว่ามีอายุการให้ประโยชน์<b>ไม่ทราบแน่นอน</b> · ต้อง<b>ทดสอบการด้อยค่าอย่างน้อยปีละครั้ง</b> และทดสอบทันทีที่มีข้อบ่งชี้ · เมื่อรับรู้ผลขาดทุนจากการด้อยค่าของค่าความนิยมแล้ว<b>กลับรายการไม่ได้</b>ในภายหลัง</p>
+        <p><b>ข้อสังเกต</b> · US GAAP เปิดให้กิจการเอกชนเลือกตัดจำหน่ายได้ และมาตรฐานไทยในอดีตก่อนปี 2550 ก็เคยให้ตัดจำหน่าย · ข้อสอบชอบเอาเรื่องนี้มาหลอก</p>
+        <h4>6 · <b>ผิด</b></h4>
+        <p>การซื้อหุ้นเพิ่มโดยที่<b>ยังควบคุมอยู่ทั้งก่อนและหลัง</b> เป็น<b>รายการกับผู้ถือหุ้นในฐานะผู้ถือหุ้น</b> ไม่ใช่การซื้อธุรกิจ · TFRS 10 กำหนดให้<b>ปรับยอด NCI</b> ตามส่วนที่เปลี่ยน และให้ผลต่างระหว่างราคาที่จ่ายกับยอด NCI ที่ปรับ ไป<b>รับรู้ในส่วนของผู้ถือหุ้นของบริษัทใหญ่โดยตรง</b></p>
+        <p><b>ห้ามรับรู้ค่าความนิยมเพิ่ม และห้ามรับรู้กำไรขาดทุน</b> · ค่าความนิยมถูกกำหนดไว้ครั้งเดียวคือ ณ วันที่ได้อำนาจควบคุม</p>
+        <p><b>ข้อความที่ถูก</b> · ให้ปรับ NCI และรับรู้ผลต่างในส่วนของผู้ถือหุ้นของบริษัทใหญ่</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>ข้อละ <b>1.5 คะแนน</b> รวม 9 คะแนน แบ่งเป็น ตอบถูก/ผิดได้ถูก 0.5 · เหตุผล 1</li>
+          <li>เขียนข้อความที่ถูกต้องกำกับในข้อที่ตอบว่าผิดครบทุกข้อ <b>1 คะแนน</b></li>
+          <li><b>ตอบถูก/ผิดอย่างเดียวโดยไม่มีเหตุผล ได้ข้อละ 0.5 เท่านั้น</b> · ข้อสอบแบบนี้มีไว้วัดว่าเข้าใจหรือแค่จำ</li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    <article class="ex" id="q20" data-ch="x" data-kind="exp">
+      <div class="ex-h"><span class="ex-n">ข้อ 20</span><span class="pill">รวมทุกบท</span><span class="pill k">อธิบายเชิงแนวคิด</span><span class="pill k">ข้อปิดท้าย</span><span class="ex-mark">12 คะแนน</span></div>
+      <h3>ทฤษฎีเบื้องหลังงบการเงินรวม</h3>
+      <div class="ex-q">
+        <p>งบการเงินรวมสร้างขึ้นจากมุมมองทางทฤษฎีที่ต่างกันสองแบบ คือ<b>ทฤษฎีความเป็นหน่วยงาน</b> (entity theory) และ<b>ทฤษฎีความเป็นเจ้าของ</b> (proprietary theory)</p>
+        <p>บริษัท พี ถือหุ้น เอส 70% · ณ วันซื้อ มูลค่ายุติธรรมของสินทรัพย์สุทธิที่ระบุได้ของ เอส เท่ากับ <b>500,000 บาท</b> โดยราคาตามบัญชีเท่ากับ <b>420,000 บาท</b> (ผลต่างอยู่ที่ที่ดิน)</p>
+      </div>
+      <div class="ex-ask"><span class="nh">ให้ทำ</span>
+        <ol>
+          <li>อธิบายสาระสำคัญของทั้งสองทฤษฎี และบอกว่า<b>มาตรฐานการรายงานทางการเงินในปัจจุบันเอนไปทางใด</b> พร้อมยกหลักฐานจากตัวมาตรฐานมาอย่างน้อย<b>สามเรื่อง</b></li>
+          <li>ถ้าใช้ทฤษฎีความเป็นเจ้าของอย่างเคร่งครัด ที่ดินของ เอส จะแสดงในงบรวมด้วยจำนวนเท่าใด และถ้าใช้ทฤษฎีความเป็นหน่วยงานจะเป็นเท่าใด</li>
+          <li>อธิบายว่าการจัดประเภท NCI ไว้ใน<b>ส่วนของผู้ถือหุ้น</b>แทนที่จะเป็น<b>หนี้สิน</b> ส่งผลต่อการวิเคราะห์อัตราส่วนทางการเงินอย่างไร ยกตัวอย่างอัตราส่วนที่ได้รับผลกระทบมาอย่างน้อยสองตัว</li>
+        </ol>
+      </div>
+      <label class="ex-lab" for="a-x20">คำตอบของคุณ<span class="ex-save" data-save="x20">บันทึกแล้ว</span></label>
+      <textarea class="ex-a" id="a-x20" data-ex="x20" rows="13" placeholder="1) ทฤษฎีความเป็นหน่วยงานมองว่า ..."></textarea>
+      <details class="reveal"><summary>เฉลยและเกณฑ์ให้คะแนน</summary><div class="rc ex-sol">
+        <h4>1 · สาระสำคัญของสองทฤษฎี</h4>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th></th><th>ทฤษฎีความเป็นหน่วยงาน</th><th>ทฤษฎีความเป็นเจ้าของ</th></tr></thead>
+          <tbody>
+            <tr><td class="k">งบรวมทำเพื่อใคร</td><td>กลุ่มกิจการทั้งกลุ่ม ในฐานะหน่วยงานเดียว</td><td>ผู้ถือหุ้นของบริษัทใหญ่โดยเฉพาะ</td></tr>
+            <tr><td class="k">สินทรัพย์ของบริษัทย่อย</td><td>แสดง<b>เต็มจำนวน</b>ตามมูลค่ายุติธรรม เพราะกลุ่มควบคุมได้ทั้งหมด</td><td>แสดง<b>เฉพาะสัดส่วน</b>ที่บริษัทใหญ่ถือ</td></tr>
+            <tr><td class="k">NCI</td><td>เป็น<b>ส่วนของผู้ถือหุ้น</b>กลุ่มหนึ่ง</td><td>เป็น<b>บุคคลภายนอก</b> จึงเป็นหนี้สินหรือรายการกึ่งกลาง</td></tr>
+            <tr><td class="k">ค่าความนิยม</td><td>รับรู้<b>ทั้งบริษัท</b> รวมส่วนของ NCI</td><td>รับรู้<b>เฉพาะส่วนที่บริษัทใหญ่ซื้อมา</b></td></tr>
+          </tbody>
+        </table></div>
+        <p><b>มาตรฐานปัจจุบันเอนไปทางทฤษฎีความเป็นหน่วยงานอย่างชัดเจน</b> หลักฐานอย่างน้อยสามเรื่อง</p>
+        <ol>
+          <li><b>NCI แสดงในส่วนของผู้ถือหุ้น</b> · TAS 1 กำหนดให้แสดง NCI เป็นรายการหนึ่งใน<b>ส่วนของผู้ถือหุ้น</b> แยกจากส่วนที่เป็นของผู้ถือหุ้นบริษัทใหญ่ ไม่ใช่หนี้สิน</li>
+          <li><b>รวมสินทรัพย์และหนี้สินของบริษัทย่อยเต็มจำนวน</b> · แม้จะถือเพียง 70% ก็นำสินทรัพย์และหนี้สิน<b>ทั้ง 100%</b> มารวม เพราะกลุ่มควบคุมทรัพยากรทั้งหมด · ถ้าใช้ทฤษฎีความเป็นเจ้าของจะรวมเพียง 70%</li>
+          <li><b>เปิดทางเลือกให้วัด NCI ด้วยมูลค่ายุติธรรม</b> ซึ่งทำให้รับรู้ค่าความนิยม<b>เต็มทั้งบริษัท</b> รวมส่วนของ NCI ด้วย · ทฤษฎีความเป็นเจ้าของยอมรับไม่ได้</li>
+          <li><b>ปันส่วนขาดทุนให้ NCI จนติดลบได้</b> · TFRS 10 ให้ปันส่วนกำไรขาดทุนเบ็ดเสร็จตามสัดส่วนแม้ทำให้ NCI ติดลบ · ถ้ามองว่า NCI เป็นหนี้สิน จะทำอย่างนั้นไม่ได้เพราะหนี้สินติดลบไม่มีความหมาย</li>
+          <li><b>การซื้อขายหุ้นเพิ่มหรือลดโดยไม่เสียการควบคุม ถือเป็นรายการในส่วนของผู้ถือหุ้น</b> ไม่กระทบกำไรขาดทุนและไม่กระทบค่าความนิยม · เพราะเป็นการโยกสัดส่วน<b>ระหว่างกลุ่มผู้ถือหุ้นด้วยกันเอง</b> ไม่ใช่รายการกับคนนอก</li>
+        </ol>
+        <p>อย่างไรก็ตาม มาตรฐานปัจจุบันเป็น<b>ลูกผสม</b> ไม่ใช่ทฤษฎีความเป็นหน่วยงานบริสุทธิ์ · ที่เห็นชัดคือยัง<b>เปิดให้เลือก</b>วัด NCI ด้วยวิธีสัดส่วนในสินทรัพย์สุทธิได้ ซึ่งเป็นแนวคิดของทฤษฎีความเป็นเจ้าของ และงบกำไรขาดทุนยังต้องแยกแสดง<b>กำไรส่วนที่เป็นของผู้ถือหุ้นบริษัทใหญ่</b>เป็นบรรทัดต่างหาก เพราะผู้ใช้งบส่วนใหญ่คือผู้ถือหุ้นของบริษัทใหญ่</p>
+        <h4>2 · ที่ดินของ เอส ในงบรวม</h4>
+        <p>ผลต่างมูลค่ายุติธรรมของที่ดิน = 500,000 &minus; 420,000 = <b>80,000 บาท</b></p>
+        <ul>
+          <li><b>ทฤษฎีความเป็นเจ้าของอย่างเคร่งครัด</b> · นำที่ดินมารวมเพียง 70% และปรับมูลค่ายุติธรรมเพียง 70% ของผลต่าง คือ <b>70% ของราคาตามบัญชี + 56,000</b></li>
+          <li><b>ทฤษฎีความเป็นหน่วยงาน ซึ่งคือวิธีที่มาตรฐานปัจจุบันใช้</b> · นำที่ดินมารวม<b>เต็มจำนวน</b>และปรับผลต่าง<b>เต็ม 80,000</b> โดยแบ่งฝั่งเครดิตเป็นเงินลงทุน 56,000 และ NCI 24,000</li>
+        </ul>
+        <p>รายการตัดบัญชีตามวิธีที่ใช้จริงคือ Dr ที่ดิน 80,000 / Cr เงินลงทุน 56,000 / Cr NCI 24,000</p>
+        <h4>3 · ผลต่อการวิเคราะห์อัตราส่วน</h4>
+        <p>การจัดประเภท NCI ไว้ในส่วนของผู้ถือหุ้นทำให้<b>ส่วนของผู้ถือหุ้นรวมสูงขึ้น</b>และ<b>หนี้สินรวมต่ำลง</b>เมื่อเทียบกับการจัดเป็นหนี้สิน</p>
+        <ul>
+          <li><b>อัตราส่วนหนี้สินต่อส่วนของผู้ถือหุ้น</b> · ต่ำลง ทั้งเพราะตัวเศษลดและตัวส่วนเพิ่ม ทำให้กิจการดู<b>มีความเสี่ยงทางการเงินน้อยกว่า</b>ความเป็นจริงในมุมของผู้ถือหุ้นบริษัทใหญ่</li>
+          <li><b>อัตราผลตอบแทนต่อส่วนของผู้ถือหุ้น</b> · ต้องระวังให้มากที่สุด เพราะถ้าเอา<b>กำไรส่วนของบริษัทใหญ่</b>ไปหารด้วย<b>ส่วนของผู้ถือหุ้นรวมที่มี NCI อยู่ด้วย</b> จะได้ตัวเลขที่<b>ต่ำเกินจริง</b> · ต้องจับคู่ให้ตรงกัน คือกำไรส่วนของบริษัทใหญ่หารด้วยส่วนของผู้ถือหุ้นบริษัทใหญ่เท่านั้น</li>
+          <li><b>กำไรต่อหุ้น</b> · ต้องใช้<b>กำไรส่วนที่เป็นของผู้ถือหุ้นบริษัทใหญ่</b>เป็นตัวตั้ง ไม่ใช่กำไรสุทธิรวม เพราะจำนวนหุ้นที่ใช้เป็นตัวหารคือหุ้นของบริษัทใหญ่เท่านั้น</li>
+        </ul>
+        <p>บทเรียนสำคัญคือ ต้องดูให้ออกว่าตัวเลขแต่ละตัวใน<b>งบรวม</b>เป็นของ<b>ทั้งกลุ่ม</b>หรือของ<b>ผู้ถือหุ้นบริษัทใหญ่</b> แล้วจับคู่ตัวเศษกับตัวส่วนให้เป็นมุมมองเดียวกันเสมอ</p>
+        <div class="mk"><span class="nh">เกณฑ์ให้คะแนน</span><ul>
+          <li>อธิบายสองทฤษฎีได้ครบทั้งเรื่องสินทรัพย์ NCI และค่าความนิยม <b>3 คะแนน</b></li>
+          <li>ระบุว่าเอนไปทางความเป็นหน่วยงาน พร้อมหลักฐาน<b>สามเรื่อง</b> <b>3 คะแนน</b> (เรื่องละ 1) · ได้ <b>1 คะแนนพิเศษ</b> ถ้าชี้ได้ว่าปัจจุบันเป็นลูกผสม ไม่ใช่ทฤษฎีบริสุทธิ์</li>
+          <li>ที่ดินสองแบบ พร้อมรายการตัดบัญชี 80,000 / 56,000 / 24,000 <b>2 คะแนน</b></li>
+          <li>ผลต่ออัตราส่วน อย่างน้อยสองตัว พร้อมชี้ประเด็นการจับคู่ตัวเศษกับตัวส่วน <b>3 คะแนน</b></li>
+        </ul></div>
+      </div></details>
+    </article>
+
+    </div>
+    <div class="ex-none hidden" id="ex-none">ไม่มีข้อที่ตรงกับตัวกรองนี้ · ลองเลือกบทหรือแบบข้อสอบอื่นดูครับ</div>
+  </div>
+
   <div id="quiz" class="hidden" role="tabpanel" aria-labelledby="t-quiz">
     <div id="quiz-top"></div>
     <p class="lede">46 ข้อ ครอบคลุมทั้งสี่บทและตัวอย่างครบวงจร เลือกคำตอบเพื่อดูเฉลยและคำอธิบายทันที · ลำดับตัวเลือกสลับใหม่ทุกครั้งที่เริ่มทำ</p>
@@ -3187,7 +4482,7 @@ footer p{max-width:70ch; margin-bottom:6px}
 
   /* ---- tabs ---- */
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var rails = {ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', ch4:'rail-ch4', c4x:'rail-c4x', quiz:'rail-quiz'};
+  var rails = {ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', ch4:'rail-ch4', c4x:'rail-c4x', ex:'rail-ex', quiz:'rail-quiz'};
   function showTab(id){
     tabs.forEach(function(t){
       var on = t.getAttribute('aria-controls') === id;
@@ -3723,6 +5018,131 @@ footer p{max-width:70ch; margin-bottom:6px}
       if (el) el.addEventListener('input', calcCe);
     });
     calcCe();
+  }
+
+
+  /* ---------------------------------------------------------
+     แบบฝึกเขียนตอบ
+     เก็บคำตอบไว้ใน localStorage ของเครื่องผู้เรียนเอง
+     ไม่ได้ส่งไปไหนทั้งสิ้น และแยกคีย์ตามชื่อโฟลเดอร์วิชา
+     เพราะเปิดด้วย file:// เบราว์เซอร์บางตัวใช้ที่เก็บร่วมกันทุกไฟล์
+     --------------------------------------------------------- */
+  var exList = document.getElementById('ex-list');
+  if (exList){
+    var EX_KEY = 'classroom-exam-' +
+      (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
+    var exAll = Array.prototype.slice.call(exList.querySelectorAll('.ex'));
+    var exAreas = Array.prototype.slice.call(exList.querySelectorAll('.ex-a'));
+    var exNone = document.getElementById('ex-none');
+    var exProg = document.getElementById('ex-prog');
+    var exStore = {};
+
+    function exRead(){
+      try { exStore = JSON.parse(localStorage.getItem(EX_KEY) || '{}') || {}; }
+      catch(e){ exStore = {}; }
+    }
+    function exWrite(){
+      try { localStorage.setItem(EX_KEY, JSON.stringify(exStore)); return true; }
+      catch(e){ return false; }
+    }
+
+    function exCount(){
+      var n = 0;
+      exAreas.forEach(function(t){ if (t.value.trim()) n++; });
+      exProg.innerHTML = 'เขียนแล้ว <b>' + n + '</b> จาก ' + exAreas.length + ' ข้อ';
+    }
+
+    exRead();
+    exAreas.forEach(function(t){
+      var id = t.dataset.ex;
+      if (typeof exStore[id] === 'string') t.value = exStore[id];
+      var flag = exList.querySelector('.ex-save[data-save="' + id + '"]');
+      var timer = null, hide = null;
+      t.addEventListener('input', function(){
+        // หน่วงไว้ครึ่งวินาที จะได้ไม่เขียนดิสก์ทุกตัวอักษรที่พิมพ์
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          if (t.value.trim()) exStore[id] = t.value; else delete exStore[id];
+          var ok = exWrite();
+          if (flag){
+            flag.textContent = ok ? 'บันทึกแล้ว' : 'บันทึกไม่ได้ · เบราว์เซอร์ปิดที่เก็บข้อมูลไว้';
+            flag.classList.add('on');
+            clearTimeout(hide);
+            hide = setTimeout(function(){ flag.classList.remove('on'); }, 1800);
+          }
+          exCount();
+        }, 500);
+      });
+    });
+    exCount();
+
+    /* ---- ตัวกรอง ---- */
+    var exF = {ch:'all', kind:'all'};
+    function exFilter(){
+      var shown = 0;
+      exAll.forEach(function(a){
+        var on = (exF.ch === 'all' || a.dataset.ch === exF.ch) &&
+                 (exF.kind === 'all' || (a.dataset.kind || '').split(' ').indexOf(exF.kind) >= 0);
+        a.classList.toggle('hidden', !on);
+        // จางลิงก์ในสารบัญของข้อที่ถูกกรองออก จะได้ไม่กดแล้วไม่มีอะไรเกิดขึ้น
+        var link = a.id && document.querySelector('#rail-ex a[href="#' + a.id + '"]');
+        if (link) link.classList.toggle('off', !on);
+        if (on) shown++;
+      });
+      exNone.classList.toggle('hidden', shown > 0);
+    }
+    Array.prototype.slice.call(document.querySelectorAll('.ex-bar button[data-f]')).forEach(function(b){
+      b.addEventListener('click', function(){
+        var f = b.dataset.f;
+        exF[f] = b.dataset.v;
+        document.querySelectorAll('.ex-bar button[data-f="' + f + '"]').forEach(function(o){
+          o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+        });
+        exFilter();
+      });
+    });
+
+    /* ---- ดาวน์โหลดคำตอบเป็นไฟล์ข้อความ ---- */
+    var exDl = document.getElementById('ex-dl');
+    if (exDl) exDl.addEventListener('click', function(){
+      var lines = ['แบบฝึกเขียนตอบ · การบัญชีขั้นสูง 1', ''];
+      exAll.forEach(function(a){
+        var t = a.querySelector('.ex-a');
+        if (!t || !t.value.trim()) return;
+        var no = a.querySelector('.ex-n');
+        var h = a.querySelector('h3');
+        lines.push('========================================');
+        lines.push((no ? no.textContent + ' · ' : '') + (h ? h.textContent : ''));
+        lines.push('');
+        lines.push(t.value.trim());
+        lines.push('');
+      });
+      if (lines.length === 2){ alert('ยังไม่ได้เขียนคำตอบข้อไหนเลยครับ'); return; }
+      var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'คำตอบแบบฝึก-บัญชีสูง1.txt';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    });
+
+    /* ---- ล้างคำตอบ ---- */
+    var exClear = document.getElementById('ex-clear');
+    if (exClear) exClear.addEventListener('click', function(){
+      if (!confirm('ล้างคำตอบทุกข้อในเครื่องนี้ ย้อนกลับไม่ได้นะครับ ยืนยันไหม')) return;
+      exAreas.forEach(function(t){ t.value = ''; });
+      exStore = {};
+      exWrite();
+      exCount();
+    });
+
+    /* ---- พิมพ์เป็นกระดาษข้อสอบ ---- */
+    var exPrint = document.getElementById('ex-print');
+    if (exPrint) exPrint.addEventListener('click', function(){
+      // ปิดเฉลยทุกข้อก่อนสั่งพิมพ์ กันเฉลยหลุดไปติดกระดาษ
+      exList.querySelectorAll('details.reveal[open]').forEach(function(d){ d.open = false; });
+      window.print();
+    });
   }
 
   var scOf = document.getElementById('sc-of');
