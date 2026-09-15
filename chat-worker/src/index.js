@@ -514,6 +514,98 @@ Module E และ F การเลือกตัวอย่างในก�
 และค่า Client, User, Password ที่ปรากฏเป็นค่าตัวอย่างของระบบฝึกปฏิบัติเท่านั้น
 `.trim(),
   },
+
+  "oral-eng": {
+    name: "ภาษาอังกฤษเพื่อการสื่อสาร · Market Leader Upper Intermediate",
+    scope: `
+ขอบเขตของวิชานี้คือ
+
+Unit 2 International Marketing · Noun compounds และ noun phrases
+- compound noun คือคำนามสองคำวางติดกัน โดยคำแรกขยายคำหลัง เช่น a market survey ย่อมาจาก a survey into the market
+  และ a product design brief ย่อมาจาก a brief for the design of a product
+- head noun คือคำสุดท้ายของวลีเสมอ คำข้างหน้าทั้งหมดเป็นตัวขยาย
+  วิธีอ่านคืออ่านจากขวาไปซ้ายแล้วเติมคำว่า ที่เกี่ยวกับ
+- ลำดับคำคือ adverb แล้ว adjective หรือ -ing participle แล้วคำนามขยาย แล้ว head noun
+  ตัวอย่างในตารางของหนังสือคือ highly confidential sales report, excellent sponsorship deal, expanding customer base
+- adverb ขยาย adjective เท่านั้น จึงต้องอยู่ติดหน้า adjective ห้ามมีคำนามคั่นกลาง
+- absolutely totally completely ใช้กับ adjective ที่สุดทางแล้ว เช่น brilliant perfect
+  ส่วน very highly extremely really ใช้กับ adjective ที่มีระดับ
+- คำนามที่ทำหน้าที่ขยายอยู่ในรูปเอกพจน์ เช่น a three-year plan ไม่ใช่ three-years
+  ยกเว้นคำที่ใช้พหูพจน์เสมอ เช่น sales report, savings account
+- ความต่างของ -ing กับ -ed ในวลีนาม เช่น an expanding customer base เทียบ an established brand
+- Exercise B ตัดคำที่เข้าคู่ไม่ได้ คำตอบคือ marketing ตัด leader, market ตัด check, product ตัด market,
+  advertising ตัด exchange, brand ตัด contract, sales ตัด conditions, price ตัด product
+- Exercise C เรียงคำ คำตอบคือ a really impressive advertising campaign, a new customer relations department,
+  a highly competitive mobile phone market, an incredibly successful product launch, a loyal customer base,
+  an extremely thorough sales report, an absolutely brilliant global campaign,
+  an increasingly competitive marketing environment
+
+Unit 2 · คำศัพท์การตลาดที่ใช้คู่กัน (word partnerships)
+- marketing คู่กับ mix, strategy, plan
+- market คู่กับ adaptation, penetration, segmentation
+- product คู่กับ placement, portfolio, feature
+- customer คู่กับ profile, retention, base
+- brand คู่กับ positioning, identity, extension
+- ความต่างของ market ที่แปลว่าตลาด กับ marketing ที่แปลว่ากิจกรรมการตลาด ซึ่งเป็นจุดที่ผิดกันมากที่สุด
+- SWOT วิเคราะห์จุดแข็งจุดอ่อนโอกาสอุปสรรค ใช้ก่อนตัดสินใจเลือก marketing strategy
+- STEP หรือ PEST วิเคราะห์สภาพแวดล้อมภายนอก ใช้ตัดสินใจเรื่อง market adaptation
+- USP คือ product feature ที่ทำให้ต่างจากคู่แข่ง
+- customer profile สร้างจากการวิเคราะห์พฤติกรรมการซื้อ
+- brand positioning คือการวางตำแหน่งแบรนด์ ระดับ up-market, mid-market, budget
+- Exercise C หาคำแปลกแยก คำตอบคือ declining market, promotion, market research, domestic market,
+  withdraw a product, slogan, exporter
+- ศัพท์เพิ่มเติม market share, market leader, target market, niche market, mass market, word of mouth,
+  outlet, endorsement, point of sale, brand awareness, brand loyalty, premium product
+
+Unit 12 Mergers and Acquisitions · คำศัพท์
+- joint venture คือกิจการร่วมค้า สองบริษัทขึ้นไปลงทุนร่วมกัน
+- MBO หรือ management buyout คือผู้บริหารระดับสูงซื้อกิจการที่ตัวเองทำงานอยู่
+- merger คือสองบริษัทขึ้นไปรวมกันเป็นบริษัทใหญ่ขึ้น
+- takeover หรือ acquisition คือการได้อำนาจควบคุมโดยซื้อหุ้นเกิน 50 เปอร์เซ็นต์
+- bid คือการเสนอเงินซื้อหุ้น ส่วน stake คือเงินที่ลงทุนหรือสัดส่วนที่ถืออยู่แล้ว
+- คู่กริยาที่ต้องจำ take a stake, make a bid, launch a bid, target a company, set up a joint venture,
+  make an acquisition, reject a bid, sell a stake รวมถึง accept a bid, raise a bid, withdraw a bid,
+  hold a stake, build up a stake, acquire a company, merge with
+- take over เขียนแยกเป็นกริยา ส่วน takeover เขียนติดกันเป็นคำนาม
+- friendly takeover คือคณะกรรมการเห็นชอบ ส่วน hostile takeover คือคณะกรรมการคัดค้าน
+- ศัพท์เพิ่มเติม shareholder, share price, subsidiary, parent company, due diligence, synergy,
+  economies of scale, white knight, poison pill, divest, spin-off, asset stripping, premium, bidder, target
+
+Unit 12 · Prediction and probability
+- บันไดความมั่นใจของ modal คือ will 100 เปอร์เซ็นต์, must 80, should 60, may หรือ could 40, might 20
+  โดยรูปปฏิเสธของ will คือ won't และของ must ในความหมายคาดเดาคือ can't ไม่ใช่ mustn't
+  เพราะ mustn't แปลว่าห้าม ซึ่งเป็นจุดที่ผิดกันมากที่สุดในเรื่องนี้
+- modal บวก have บวกกริยาช่องสาม ใช้เดาเรื่องที่เกิดไปแล้ว ส่วน modal บวกกริยาช่องหนึ่งใช้เดาปัจจุบัน
+- should have บวกช่องสาม มีสองความหมาย คือคาดเดา และตำหนิสิ่งที่ไม่ได้ทำ
+- future continuous คือ will be บวก -ing ใช้กับสิ่งที่กำลังดำเนินอยู่ ณ เวลาหนึ่ง
+- future perfect คือ will have บวกช่องสาม ใช้กับสิ่งที่เสร็จสิ้นก่อนถึงเวลาหนึ่ง
+- กฎลัดคือ by บวกเวลาใช้ future perfect ส่วน at หรือ this time หรือ from หรือ all บวกช่วงเวลา
+  ใช้ future continuous
+- Exercise A คำตอบคือ will have paid, will have been, will be working, will be holding, I'll be working,
+  will be offering, will have launched, will be enjoying
+  โดยข้อ 6 ต้องเป็น will be offering เพราะ from January 1st แปลว่าเริ่มแล้วทำต่อเนื่อง
+  และข้อ 7 ต้องเป็น will have launched เพราะ by the end of เป็นการนับผลงานสะสม
+- first conditional คือ If บวกช่องหนึ่ง แล้ว will บวกช่องหนึ่ง ห้ามใส่ will ในประโยค if
+  second conditional คือ If บวกช่องสอง แล้ว would บวกช่องหนึ่ง
+- วลีบอกความน่าจะเป็น about to, going to, bound to, sure to, likely to, unlikely to, due to
+- ห้าระดับพร้อมรูปประโยค certain ใช้ There's certain to be, probable ใช้ It's quite probable that
+  หรือ It's highly likely that, possible ใช้ Maybe หรือ Perhaps, unlikely ใช้ It is unlikely that
+  หรือ I doubt whether, impossible ใช้ It is impossible to หรือ There's no chance of บวกกริยาเติม -ing
+- จุดที่รูปประโยคผิดบ่อย คือ There's certain ต้องมี to be, unlikely ต้องตามด้วย that เมื่อขึ้นต้นด้วย It is,
+  no chance of ต้องตามด้วย -ing ไม่ใช่ to, และ probable ใช้กับรูป be probable to ไม่ได้ ต้องใช้ likely แทน
+- วลีบอกเวลา In my lifetime, Before long, In the near future, In the next ... years,
+  Over the next decade, By this time next year, By the end of this century, Sometime in the next decade
+
+แบบฝึกเขียนตอบ 14 ข้อ 106 คะแนน
+- ห้ารูปแบบ คือ เรียงคำสร้างวลีนาม เติมคำจับคู่ศัพท์ แปลงรูปกริยา หาข้อผิดพลาด และเขียนประโยคเอง
+- ทุกข้อมีเฉลยและเกณฑ์ให้คะแนนแยกเป็นข้อ ๆ
+
+แนวทางการตอบสำหรับวิชานี้
+- ตอบเป็นภาษาไทย แต่ยกตัวอย่างประโยคภาษาอังกฤษประกอบเสมอ และอธิบายว่าทำไมประโยคนั้นถูกหรือผิด
+- ถ้านิสิตเขียนประโยคภาษาอังกฤษมาให้ตรวจ ให้ชี้จุดที่ผิด เขียนที่ถูกให้ดู แล้วบอกกฎที่ใช้
+- อย่าเพิ่งเฉลยทันทีถ้านิสิตยังไม่ได้ลองทำ ให้ใบ้กฎที่เกี่ยวข้องก่อน
+`.trim(),
+  },
 };
 
 const json = (obj, status, origin) =>

@@ -25,7 +25,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COURSES = ['adv-acctg-1', 'audit', 'erp', 'marketing']
+COURSES = ['adv-acctg-1', 'audit', 'erp', 'marketing', 'oral-eng']
 
 # เสียงไทยที่บริการนี้มีให้ ตัวแรกเป็นผู้ชาย
 VOICES = {
