@@ -98,7 +98,10 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
         run: |
-          if git diff --quiet; then
+          # ต้องใช้ status --porcelain ไม่ใช่ diff --quiet
+          # เพราะ diff มองเฉพาะไฟล์ที่ git ติดตามอยู่แล้ว ไฟล์ใหม่ทั้งโฟลเดอร์
+          # อย่าง samples/ จะไม่ถูกนับ ทำให้ข้ามการ commit ไปเงียบ ๆ
+          if [ -z "$(git status --porcelain)" ]; then
             echo "ไม่มีอะไรเปลี่ยน ทุกบทมีไฟล์เสียงอยู่แล้ว"
             exit 0
           fi
