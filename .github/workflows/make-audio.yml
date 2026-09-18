@@ -20,6 +20,18 @@ on:
         required: false
         default: false
         type: boolean
+      en_voice:
+        description: 'เสียงที่ใช้อ่านช่วงภาษาอังกฤษ · off คือให้เสียงไทยอ่านทั้งหมดแบบเดิม'
+        required: false
+        default: 'us-male'
+        type: choice
+        options: [us-male, us-male2, uk-male, us-female, uk-female, off]
+      task:
+        description: 'audio คือสร้างไฟล์เสียงจริง · sample คือทำคลิปสั้นไว้เทียบเสียงก่อน'
+        required: false
+        default: 'audio'
+        type: choice
+        options: [audio, sample]
 
 permissions:
   contents: write
@@ -47,32 +59,44 @@ jobs:
       - name: ติดตั้ง edge-tts
         run: python -m pip install --quiet --upgrade edge-tts
 
+      - name: ทำคลิปตัวอย่างไว้เทียบเสียง
+        if: inputs.task == 'sample'
+        run: python tools/sample-voices.py
+
       - name: ดูว่าบทไหนยังขาดไฟล์เสียง
+        if: inputs.task == 'audio'
         # ส่งค่าที่ผู้ใช้กรอกผ่าน env ไม่แทรกลงคำสั่งตรง ๆ กันการแทรกคำสั่งเชลล์
         # ตั้งใจไม่ใส่เครื่องหมายคำพูดรอบ $COURSES เพราะต้องการให้แยกเป็นหลายอาร์กิวเมนต์
         env:
           COURSES: ${{ inputs.courses }}
-        run: python tools/make-audio.py $COURSES --check
+          EN_VOICE: ${{ inputs.en_voice }}
+        run: python tools/make-audio.py $COURSES --en-voice "$EN_VOICE" --check
 
       - name: สร้างไฟล์เสียง
+        if: inputs.task == 'audio'
         env:
           COURSES: ${{ inputs.courses }}
           VOICE: ${{ inputs.voice }}
           FORCE: ${{ inputs.force }}
+          EN_VOICE: ${{ inputs.en_voice }}
         run: |
           ARGS=""
           if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
-          python tools/make-audio.py $COURSES --voice "$VOICE" $ARGS
+          python tools/make-audio.py $COURSES --voice "$VOICE" --en-voice "$EN_VOICE" $ARGS
 
       - name: ตรวจซ้ำว่าครบแล้ว
+        if: inputs.task == 'audio'
         env:
           COURSES: ${{ inputs.courses }}
-        run: python tools/make-audio.py $COURSES --check
+          EN_VOICE: ${{ inputs.en_voice }}
+        run: python tools/make-audio.py $COURSES --en-voice "$EN_VOICE" --check
 
       - name: เก็บไฟล์เสียงเข้า git
         env:
           VOICE: ${{ inputs.voice }}
+          EN_VOICE: ${{ inputs.en_voice }}
           BRANCH: ${{ github.ref_name }}
+          SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
         run: |
           if git diff --quiet; then
             echo "ไม่มีอะไรเปลี่ยน ทุกบทมีไฟล์เสียงอยู่แล้ว"
@@ -81,8 +105,8 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "เพิ่มไฟล์เสียงบรรยายด้วยเสียง $VOICE" \
-                     -m "สร้างโดย GitHub Actions จาก tools/make-audio.py"
+          git commit -m "$SUBJECT" \
+                     -m "สร้างโดย GitHub Actions · ช่วงภาษาอังกฤษใช้เสียง $EN_VOICE"
           # ถ้ามีคน push แทรกระหว่างที่รันอยู่ ให้ rebase ทับแล้วค่อยส่ง
           git pull --rebase origin "$BRANCH"
           git push origin HEAD:"$BRANCH"
