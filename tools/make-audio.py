@@ -24,6 +24,9 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from langsplit import split_lang
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSES = ['adv-acctg-1', 'audit', 'erp', 'marketing', 'oral-eng']
 
@@ -32,6 +35,17 @@ VOICES = {
     'male':   'th-TH-NiwatNeural',
     'female': 'th-TH-PremwadeeNeural',
 }
+
+# เสียงอังกฤษที่ใช้อ่านเฉพาะช่วงที่เป็นภาษาอังกฤษ ตั้งชื่อย่อไว้ให้พิมพ์ง่าย
+EN_VOICES = {
+    'us-male':   'en-US-AndrewNeural',
+    'us-male2':  'en-US-GuyNeural',
+    'uk-male':   'en-GB-RyanNeural',
+    'us-female': 'en-US-AvaNeural',
+    'uk-female': 'en-GB-SoniaNeural',
+    'off':       '',
+}
+DEFAULT_EN_VOICE = 'en-US-AndrewNeural'
 
 DATA_RE  = re.compile(r'(<script type="application/json" id="cn-data">)(.*?)(</script>)', re.S)
 AUDIO_RE = re.compile(r'\n*<script type="application/json" id="cn-audio">.*?</script>', re.S)
@@ -114,25 +128,37 @@ async def synth(text, voice, rate, pitch):
     return bytes(buf)
 
 
-async def build_chapter(lines, voice, rate, pitch, label):
-    """สร้างทีละย่อหน้าแล้วต่อกัน เพื่อให้รู้เวลาเริ่มของแต่ละย่อหน้าอย่างแม่นยำ"""
+async def build_chapter(lines, voice, rate, pitch, label, en_voice=None):
+    """สร้างทีละย่อหน้าแล้วต่อกัน เพื่อให้รู้เวลาเริ่มของแต่ละย่อหน้าอย่างแม่นยำ
+
+    ถ้าระบุ en_voice มาด้วย จะแยกช่วงภาษาในแต่ละย่อหน้าออกจากกัน
+    แล้วอ่านช่วงอังกฤษด้วยเสียงอังกฤษ ช่วงไทยด้วยเสียงไทย ก่อนต่อเป็นย่อหน้าเดียว
+    เพราะเสียงไทยล้วนอ่านคำอังกฤษด้วยระบบเสียงไทย ทำให้ศัพท์เฉพาะฟังไม่ออก
+    """
     parts, cues, at = [], [], 0.0
     for i, line in enumerate(lines):
-        for attempt in range(3):
-            try:
-                data = await synth(line, voice, rate, pitch)
-                break
-            except Exception as exc:                      # เครือข่ายสะดุดเป็นเรื่องปกติ ลองใหม่
-                if attempt == 2:
-                    raise RuntimeError(
-                        u'เรียกบริการอ่านออกเสียงไม่สำเร็จ สาเหตุที่พบบ่อยคือเน็ตหลุด '
-                        u'หรือเครือข่ายที่ใช้อยู่บล็อกปลายทาง speech.platform.bing.com '
-                        u'ลองเปลี่ยนเครือข่ายหรือปิด VPN แล้วรันใหม่ '
-                        u'สคริปต์จะทำต่อจากบทที่ค้างไว้ให้เอง\n  ข้อความจากระบบ %s' % exc)
-                await asyncio.sleep(1.5 * (attempt + 1))
+        if en_voice:
+            segs = [(voice if lang == 'th' else en_voice, s)
+                    for lang, s in split_lang(line)]
+        else:
+            segs = [(voice, line)]
+
         cues.append(round(at, 3))
-        at += mp3_duration(data)
-        parts.append(data)
+        for seg_voice, seg_text in segs:
+            for attempt in range(3):
+                try:
+                    data = await synth(seg_text, seg_voice, rate, pitch)
+                    break
+                except Exception as exc:                  # เครือข่ายสะดุดเป็นเรื่องปกติ ลองใหม่
+                    if attempt == 2:
+                        raise RuntimeError(
+                            u'เรียกบริการอ่านออกเสียงไม่สำเร็จ สาเหตุที่พบบ่อยคือเน็ตหลุด '
+                            u'หรือเครือข่ายที่ใช้อยู่บล็อกปลายทาง speech.platform.bing.com '
+                            u'ลองเปลี่ยนเครือข่ายหรือปิด VPN แล้วรันใหม่ '
+                            u'สคริปต์จะทำต่อจากบทที่ค้างไว้ให้เอง\n  ข้อความจากระบบ %s' % exc)
+                    await asyncio.sleep(1.5 * (attempt + 1))
+            at += mp3_duration(data)
+            parts.append(data)
         sys.stdout.write('\r  %s  %d/%d ย่อหน้า · %d:%02d' %
                          (label, i + 1, len(lines), int(at // 60), int(at % 60)))
         sys.stdout.flush()
@@ -148,13 +174,22 @@ def problem_edge_tts():
             u'  แล้วรันใหม่อีกครั้ง\n' % (sys.executable, sys.executable))
 
 
-def sig_of(lines, voice, rate, pitch):
-    """ลายเซ็นของบท ใช้ตัดสินว่าต้องสร้างไฟล์เสียงใหม่หรือไม่"""
-    return hashlib.sha1(('\n'.join(lines) + '|' + voice + '|' + rate + '|' + pitch)
-                        .encode('utf-8')).hexdigest()[:12]
+def sig_of(lines, voice, rate, pitch, en_voice=''):
+    """ลายเซ็นของบท ใช้ตัดสินว่าต้องสร้างไฟล์เสียงใหม่หรือไม่
+
+    ต้องรวมเสียงอังกฤษเข้าไปด้วย ไม่งั้นพอเปลี่ยนเสียงอังกฤษแล้วบทเดิมจะถูกข้าม
+    ทั้งที่เสียงที่ได้ต่างไปจากเดิม
+
+    แต่ถ้าไม่ได้ใช้เสียงอังกฤษเลย ต้องได้ลายเซ็นเดิมเป๊ะ ๆ เหมือนก่อนมีตัวเลือกนี้
+    ไฟล์ที่สร้างไว้แล้วจะได้ไม่ถูกสั่งให้สร้างใหม่ทั้งที่เสียงที่ได้เหมือนเดิมทุกประการ
+    """
+    key = '\n'.join(lines) + '|' + voice + '|' + rate + '|' + pitch
+    if en_voice:
+        key += '|' + en_voice
+    return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12]
 
 
-def check(voice='th-TH-NiwatNeural', rate='', pitch='', courses=None):
+def check(voice='th-TH-NiwatNeural', rate='', pitch='', courses=None, en_voice=''):
     """บอกสถานะทุกอย่างที่จำเป็น เพื่อให้รู้ว่าติดตรงไหน"""
     print(u'\nPython ที่ใช้อยู่   %s' % sys.executable)
     print(u'เวอร์ชัน            %s' % sys.version.split()[0])
@@ -188,7 +223,7 @@ def check(voice='th-TH-NiwatNeural', rate='', pitch='', courses=None):
             has = os.path.exists(os.path.join(ROOT, course, 'audio', key + '.mp3'))
             if not has:
                 todo.append((key, len(lines), u'ยังไม่มีไฟล์'))
-            elif not c or c.get('sig') != sig_of(lines, voice, rate, pitch):
+            elif not c or c.get('sig') != sig_of(lines, voice, rate, pitch, en_voice):
                 todo.append((key, len(lines), u'บทบรรยายเปลี่ยน ต้องสร้างใหม่'))
             else:
                 done.append(key)
@@ -223,6 +258,9 @@ async def main():
     ap.add_argument('--voice', default='male', help='male, female หรือชื่อเสียงเต็ม เช่น th-TH-NiwatNeural')
     ap.add_argument('--rate', default='', help='ปรับความเร็วตอนสร้าง เช่น -10%% หรือ +15%%')
     ap.add_argument('--pitch', default='', help='ปรับระดับเสียงตอนสร้าง เช่น -5Hz')
+    ap.add_argument('--en-voice', default='us-male',
+                    help='เสียงที่ใช้อ่านช่วงภาษาอังกฤษ · %s · off คือใช้เสียงไทยอ่านทั้งหมดแบบเดิม'
+                         % ' '.join(k for k in EN_VOICES if k != 'off'))
     ap.add_argument('--force', action='store_true', help='สร้างใหม่แม้บทบรรยายไม่เปลี่ยน')
     ap.add_argument('--check', action='store_true', help='ตรวจว่าพร้อมสร้างไหม แล้วรายงานสถานะ ไม่สร้างจริง')
     a = ap.parse_args()
@@ -244,7 +282,8 @@ async def main():
         return 1
 
     if a.check:
-        return check(VOICES.get(a.voice, a.voice), a.rate, a.pitch, a.courses or None)
+        return check(VOICES.get(a.voice, a.voice), a.rate, a.pitch, a.courses or None,
+                     EN_VOICES.get(a.en_voice, a.en_voice))
 
     try:
         import edge_tts  # noqa: F401
@@ -253,6 +292,7 @@ async def main():
         return 1
 
     voice = VOICES.get(a.voice, a.voice)
+    en_voice = EN_VOICES.get(a.en_voice, a.en_voice)
     courses = a.courses or COURSES
     made = skipped = 0
     found = []          # เก็บไว้บอกผู้ใช้ว่าหน้าเว็บในเครื่องนี้มีบทอะไรบ้าง
@@ -275,13 +315,14 @@ async def main():
                 old = {}
 
         found.append((course, list(data)))
-        print('\n%s · %d บท · เสียง %s' % (course, len(data), voice))
+        print('\n%s · %d บท · เสียง %s%s' % (course, len(data), voice,
+              (' · ช่วงอังกฤษใช้ ' + en_voice) if en_voice else ' · อ่านอังกฤษด้วยเสียงไทย'))
         print('  บทที่พบในหน้าเว็บ  %s' % ' '.join(data))
         for key, chapter in data.items():
             lines = chapter_lines(chapter)
             if not lines:
                 continue
-            sig = sig_of(lines, voice, a.rate, a.pitch)
+            sig = sig_of(lines, voice, a.rate, a.pitch, en_voice)
             mp3 = os.path.join(outdir, key + '.mp3')
             prev = old.get(key)
             if prev and prev.get('sig') == sig and os.path.exists(mp3) and not a.force:
@@ -291,13 +332,15 @@ async def main():
                 continue
 
             audio, cues, dur = await build_chapter(lines, voice, a.rate, a.pitch,
-                                                   key + ' ' + (chapter.get('s') or ''))
+                                                   key + ' ' + (chapter.get('s') or ''),
+                                                   en_voice or None)
             with open(mp3, 'wb') as f:
                 f.write(audio)
             clips[key] = {
                 'src': 'audio/' + key + '.mp3',
                 'dur': dur,
                 'voice': voice,
+                'enVoice': en_voice or '',
                 'sig': sig,
                 'cues': cues,
             }

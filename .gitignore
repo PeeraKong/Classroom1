@@ -12,3 +12,6 @@ chat-worker/.dev.vars
 
 # ขยะของ macOS
 .DS_Store
+
+# คลิปตัวอย่างเทียบเสียง สร้างใหม่ได้เสมอด้วย tools/sample-voices.py
+# แต่ถ้ารันผ่าน GitHub Actions จะ commit เข้ามาให้เพื่อกดฟังจากเครื่องไหนก็ได้
