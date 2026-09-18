@@ -44,7 +44,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - name: ดึงโค้ดของสาขานี้
         uses: actions/checkout@v4
