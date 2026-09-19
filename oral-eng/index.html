@@ -10,7 +10,7 @@
   --rule:#dcd2ce; --rule-strong:#bdaea9;
   --accent:#6b3560; --accent-soft:#f0e2ee;
   --steel:#33507e; --steel-soft:#dee5f2;
-  --red-ink:#a3341f;
+  --red-ink:#a3341f; --red-soft:#f7e4de;
   --teal:#1f6b5e; --teal-soft:#dcebe7;
   --amber:#8a6314; --amber-soft:#f6ecd6;
   --shadow:0 1px 2px rgba(30,25,23,.05), 0 10px 30px -18px rgba(30,25,23,.35);
@@ -22,7 +22,7 @@
     --rule:#352c29; --rule-strong:#4b3f3b;
     --accent:#d09ac4; --accent-soft:#2c1a29;
   --steel:#8fadde; --steel-soft:#1a2338;
-  --red-ink:#eda386;
+  --red-ink:#eda386; --red-soft:#32201a;
     --teal:#68c2b0; --teal-soft:#152825;
     --amber:#d9ab52; --amber-soft:#2b2413;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
@@ -34,7 +34,7 @@
   --rule:#352c29; --rule-strong:#4b3f3b;
   --accent:#d09ac4; --accent-soft:#2c1a29;
   --steel:#8fadde; --steel-soft:#1a2338;
-  --red-ink:#eda386;
+  --red-ink:#eda386; --red-soft:#32201a;
   --teal:#68c2b0; --teal-soft:#152825;
   --amber:#d9ab52; --amber-soft:#2b2413;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px -20px rgba(0,0,0,.8);
@@ -383,6 +383,94 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
   .vc-list.quiz .vc-th,.vc-list.quiz .vc-note{filter:none}
 }
 
+/* ---------- แท็บข้อสอบเสมือนจริง ---------- */
+.mx-intro{border-left:3px solid var(--accent); background:var(--accent-soft); padding:13px 16px;
+  border-radius:0 4px 4px 0; font-size:.92rem; margin-bottom:24px}
+.mx-intro .nh{display:block; font-weight:700; color:var(--ink); margin-bottom:4px; font-size:.87rem}
+.mx-intro i{font-style:italic; color:var(--ink)}
+
+.mx-set{border:1px solid var(--rule); border-radius:6px; background:var(--surface);
+  margin:0 0 22px; overflow:hidden; box-shadow:var(--shadow)}
+.mx-sh{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding:13px 18px; background:var(--surface-2); border-bottom:1px solid var(--rule)}
+.mx-sh h3{font-family:"Noto Serif Thai",Georgia,serif; font-size:1.05rem; font-weight:700; margin:0}
+.mx-sh .tot{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.78rem;
+  color:var(--ink-2); font-variant-numeric:tabular-nums}
+.mx-sh .tot b{color:var(--ink)}
+
+.mx-part{padding:16px 18px 18px}
+.mx-part + .mx-part{border-top:1px solid var(--rule)}
+.mx-ph{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:5px}
+.mx-kind{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--paper); background:var(--accent);
+  border-radius:3px; padding:2px 8px}
+.mx-kind.two{background:var(--teal)}
+.mx-ph h4{font-family:"IBM Plex Sans Thai",sans-serif; font-size:1rem; font-weight:700; margin:0}
+.mx-ph .pts{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.73rem; color:var(--ink-3)}
+.mx-task{font-size:.87rem; color:var(--ink-2); margin:0 0 11px; font-style:italic}
+
+/* กล่องคำของ Part I · โชว์ทุกวลีที่เลือกได้ รวมตัวลวง */
+.mx-box{display:flex; flex-wrap:wrap; gap:6px; padding:11px 13px; margin-bottom:13px;
+  border:1px dashed var(--rule-strong); border-radius:4px; background:var(--paper)}
+.mx-box .bl{flex:0 0 100%; font-family:"IBM Plex Mono",monospace; font-size:.66rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:2px}
+.mx-chip{font-size:.85rem; padding:3px 10px; border-radius:3px; background:var(--surface-2);
+  border:1px solid var(--rule); color:var(--ink-2)}
+.mx-chip.used{opacity:.4; text-decoration:line-through}
+
+.mx-qs{display:flex; flex-direction:column; gap:13px}
+.mx-q{border-top:1px solid var(--rule); padding-top:11px}
+.mx-qt{font-size:.92rem; margin-bottom:8px; display:flex; gap:9px; line-height:1.65}
+.mx-qt i{font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:.75rem;
+  color:var(--accent); padding-top:3px; flex:0 0 auto; font-weight:600}
+.mx-qt .gap{font-weight:700; color:var(--accent); letter-spacing:.02em}
+.mx-qt .ph{font-weight:600; color:var(--ink)}
+
+.mx-pick{appearance:none; font:inherit; font-size:.88rem; max-width:100%;
+  padding:6px 10px; border:1px solid var(--rule-strong); border-radius:4px;
+  background:var(--paper); color:var(--ink); margin-left:27px; cursor:pointer}
+.mx-pick:disabled{cursor:default; opacity:1}
+.mx-pick.ok{border-color:var(--teal); background:var(--teal-soft); font-weight:600}
+.mx-pick.no{border-color:var(--red-ink); background:var(--red-soft)}
+
+.mx-opts{display:flex; flex-direction:column; gap:5px; margin-left:27px}
+.mx-opts.tf{flex-direction:row; gap:7px}
+.mx-opt{appearance:none; font:inherit; font-size:.88rem; text-align:left; cursor:pointer;
+  padding:7px 12px; border:1px solid var(--rule); background:var(--paper);
+  color:var(--ink-2); border-radius:4px; line-height:1.5}
+.mx-opts.tf .mx-opt{min-width:104px; text-align:center; font-weight:600}
+.mx-opt:hover:not(:disabled){border-color:var(--accent); color:var(--ink)}
+.mx-opt:disabled{cursor:default}
+.mx-opt.ok{border-color:var(--teal); background:var(--teal-soft); color:var(--ink); font-weight:600}
+.mx-opt.no{border-color:var(--red-ink); background:var(--red-soft); color:var(--ink)}
+
+.mx-exp{margin:8px 0 0 27px; font-size:.84rem; color:var(--ink-2);
+  border-left:2px solid var(--rule-strong); padding-left:11px; line-height:1.6}
+.mx-exp .fix{display:block; margin-top:3px; color:var(--ink); font-weight:600}
+
+.mx-tools{display:flex; flex-wrap:wrap; gap:7px; align-items:center; margin:13px 0 0}
+.mx-tools button{appearance:none; font:inherit; font-size:.77rem; font-weight:600; cursor:pointer;
+  padding:5px 11px; border:1px solid var(--rule-strong); background:var(--surface-2);
+  color:var(--ink-2); border-radius:3px}
+.mx-tools button:hover{border-color:var(--accent); color:var(--accent)}
+.mx-score{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.78rem;
+  color:var(--ink-2); font-variant-numeric:tabular-nums}
+.mx-score b{color:var(--ink)}
+
+.mx-foot{display:flex; flex-wrap:wrap; gap:9px; align-items:center;
+  padding:13px 18px; background:var(--surface-2); border-top:1px solid var(--rule)}
+.mx-foot .hint{font-size:.84rem; color:var(--ink-2)}
+.mx-go{appearance:none; font:inherit; font-size:.8rem; font-weight:600; cursor:pointer;
+  padding:6px 13px; border:1px solid var(--accent); background:var(--accent);
+  color:var(--paper); border-radius:3px; margin-left:auto}
+.mx-go:hover{filter:brightness(1.08)}
+
+@media print{
+  .mx-intro,.mx-tools,.mx-go,.mx-foot{display:none !important}
+  .mx-set{break-inside:avoid; box-shadow:none}
+  .mx-exp{display:none !important}
+}
+
 /* ---------- แท็บฝึกฟัง ---------- */
 .ls-intro{border-left:3px solid var(--accent); background:var(--accent-soft); padding:13px 16px;
   border-radius:0 4px 4px 0; font-size:.92rem; margin-bottom:24px}
@@ -477,6 +565,7 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     <button class="tab" role="tab" id="t-mk" aria-controls="mk" aria-selected="false"><span class="tnum">02</span>Marketing</button>
     <button class="tab" role="tab" id="t-ma" aria-controls="ma" aria-selected="false"><span class="tnum">03</span>Mergers &amp; acq.</button>
     <button class="tab" role="tab" id="t-pr" aria-controls="pr" aria-selected="false"><span class="tnum">04</span>Prediction</button>
+    <button class="tab" role="tab" id="t-mx" aria-controls="mx" aria-selected="false"><span class="tnum">M</span>ข้อสอบเสมือนจริง</button>
     <button class="tab" role="tab" id="t-ls" aria-controls="ls" aria-selected="false"><span class="tnum">L</span>ฝึกฟัง</button>
     <button class="tab" role="tab" id="t-vc" aria-controls="vc" aria-selected="false"><span class="tnum">V</span>คำศัพท์</button>
     <button class="tab" role="tab" id="t-ex" aria-controls="ex" aria-selected="false"><span class="tnum">E</span>แบบฝึกเขียนตอบ</button>
@@ -532,6 +621,16 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
         <li><a href="#pr-7"><i>7</i>certain ถึง impossible</a></li>
         <li><a href="#pr-8"><i>8</i>วลีบอกเวลาในอนาคต</a></li>
         <li><a href="#pr-9"><i>9</i>เอาไปพูดจริงอย่างไร</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-mx" class="hidden" aria-label="ข้อสอบเสมือนจริง">
+      <div class="rail-h">ข้อสอบ · 5 ชุด</div>
+      <ol>
+        <li><a href="#mxs-L1"><i>1</i>ชุดที่ 1 · Part I และ Part II</a></li>
+        <li><a href="#mxs-L2"><i>2</i>ชุดที่ 2 · Part I และ Part II</a></li>
+        <li><a href="#mxs-L3"><i>3</i>ชุดที่ 3 · Part I และ Part II</a></li>
+        <li><a href="#mxs-L4"><i>4</i>ชุดที่ 4 · Part I และ Part II</a></li>
+        <li><a href="#mxs-L5"><i>5</i>ชุดที่ 5 · Part I และ Part II</a></li>
       </ol>
     </nav>
     <nav id="rail-ls" class="hidden" aria-label="แบบฝึกฟัง">
@@ -1326,6 +1425,17 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     </section>
   </div>
 
+  <div id="mx" class="hidden" role="tabpanel" aria-labelledby="t-mx">
+    <p class="lede">ข้อสอบตามแนวที่อาจารย์ให้มา <b>5 ชุด</b> · แต่ละชุดมี <b>Part I Vocabulary 10 คะแนน</b> และ <b>Part II Language Points 10 คะแนน</b> <b>ข้อละ 1 คะแนน</b> · เมื่อทำครบแล้วกดไปทำ <b>Part III Listening 20 คะแนน</b> ของชุดเดียวกันในแท็บฝึกฟัง จะได้ครบ <b>40 คะแนนเหมือนข้อสอบจริง</b></p>
+
+    <div class="mx-intro"><span class="nh">รูปแบบโจทย์ตรงกับที่ระบุในแนวข้อสอบ</span>
+      <b>Part I A</b> ศัพท์การตลาด และ <b>Part I B</b> ศัพท์ merger กับ acquisition · ทั้งสองส่วนเป็นแบบ <i>Choose the most appropriate phrases from the box to complete the sentences</i> โดยกล่องคำมี <b>8 วลี แต่ใช้จริง 5 ข้อ</b> ที่เหลือเป็นตัวลวงเหมือนข้อสอบจริง<br>
+      <b>Part II A</b> เป็นแบบ <i>Decide whether each noun phrase is written in the correct order</i> ตอบว่าถูกหรือผิด ถ้าผิดจะเฉลยรูปที่ถูกให้ · <b>Part II B</b> เป็นแบบ <i>Choose the verb form that correctly completes each sentence</i> สี่ตัวเลือก<br><br>
+      ตัวเลือกและลำดับในกล่องคำ<b>สลับใหม่ทุกครั้ง</b>ที่กดเริ่มทำใหม่ จะได้ไม่จำตำแหน่งคำตอบ · ของจริงตอบลงกระดาษคำตอบคอมพิวเตอร์ด้วยดินสอ 2B จึงควรฝึกตัดสินใจให้ขาด ไม่ลังเลกลับไปกลับมา</div>
+
+    <div id="mx-root"></div>
+  </div>
+
   <div id="ls" class="hidden" role="tabpanel" aria-labelledby="t-ls" style="--accent:var(--amber); --accent-soft:var(--amber-soft)">
     <p class="lede">แบบฝึกฟังตามแนวข้อสอบ <b>Part III</b> · <b>5 ชุด 10 คลิป 100 ข้อ</b> · แต่ละชุดมีครบทั้งสองแบบเหมือนข้อสอบจริง คือ <b>Listening 1</b> การนำเสนอกลุ่มเรื่อง international marketing และ <b>Listening 2</b> การบรรยายกรณี merger ชุดละ 20 คะแนน</p>
 
@@ -1947,6 +2057,10 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 <script type="application/json" id="ls-audio">
 {"L1a":{"src":"listening/L1a.mp3","dur":135.12,"sig":"e7af2131e876","cues":[0.0,16.344,45.864,64.488,82.68,102.888,117.696],"voices":["en-GB-RyanNeural","en-US-AndrewNeural","en-US-AvaNeural"]},"L1b":{"src":"listening/L1b.mp3","dur":110.352,"sig":"d0766c5fad78","cues":[0.0,10.32,29.832,42.744,61.8,80.16,98.184],"voices":["en-US-AndrewNeural"]},"L2a":{"src":"listening/L2a.mp3","dur":113.304,"sig":"dc49c52afe97","cues":[0.0,16.44,33.12,50.928,68.544,83.76,99.768],"voices":["en-GB-SoniaNeural","en-US-GuyNeural"]},"L2b":{"src":"listening/L2b.mp3","dur":110.376,"sig":"934855a2cb9d","cues":[0.0,12.792,32.352,43.08,63.792,72.72,91.368],"voices":["en-US-AvaNeural"]},"L3a":{"src":"listening/L3a.mp3","dur":123.792,"sig":"585a312d3896","cues":[0.0,19.032,40.536,60.72,75.816,90.936,105.984],"voices":["en-GB-RyanNeural","en-US-AvaNeural","en-US-JennyNeural"]},"L3b":{"src":"listening/L3b.mp3","dur":114.648,"sig":"7b7ec8cd71f3","cues":[0.0,13.392,29.592,45.816,61.392,74.424,88.584,103.68],"voices":["en-GB-RyanNeural"]},"L4a":{"src":"listening/L4a.mp3","dur":103.512,"sig":"5f3a46f88367","cues":[0.0,17.64,30.768,47.088,59.664,75.576,86.976],"voices":["en-US-AndrewNeural","en-US-AvaNeural"]},"L4b":{"src":"listening/L4b.mp3","dur":117.288,"sig":"ea803c6775d8","cues":[0.0,10.992,31.056,40.608,65.136,80.544,102.12],"voices":["en-GB-SoniaNeural"]},"L5a":{"src":"listening/L5a.mp3","dur":126.6,"sig":"abfed3370426","cues":[0.0,14.736,30.096,46.512,61.56,80.28,91.368,112.008],"voices":["en-GB-SoniaNeural","en-US-AvaNeural","en-US-GuyNeural"]},"L5b":{"src":"listening/L5b.mp3","dur":116.736,"sig":"e907a8b095f5","cues":[0.0,11.352,27.6,41.64,62.952,78.624,99.888],"voices":["en-US-GuyNeural"]}}
 </script>
+
+<script type="application/json" id="mx-data">
+[{"id":"L1","title":"ชุดที่ 1","p1a":{"box":["market research","market share","brand loyalty","product launch","customer profile","market leader","brand awareness","price range"],"items":[["Before we decide anything, we need to carry out ………… in all four cities.","market research","ใช้ carry out คู่กับ market research เสมอ · ห้ามใช้ make"],["Our ………… fell from eighteen percent to fourteen percent last year.","market share","ตัวเลขเปอร์เซ็นต์ที่บริษัทครองอยู่ คือส่วนแบ่งตลาด"],["The ………… was delayed by three months because of supply problems.","product launch","สิ่งที่ถูกเลื่อนได้และเกี่ยวกับสินค้าใหม่ คือการเปิดตัวสินค้า"],["Building up a ………… means analysing who our buyers actually are.","customer profile","analysing who our buyers are คือการสร้างภาพลักษณะกลุ่มลูกค้า"],["Shoppers switch brands easily here, so ………… is very low.","brand loyalty","switch brands easily = ไม่ภักดีต่อแบรนด์"]]},"p1b":{"box":["made a bid","rejected the bid","took a stake","hostile takeover","joint venture","due diligence","synergy","management buyout"],"items":[["In September Kraft ………… for Cadbury worth ten point two billion pounds.","made a bid","ยื่นข้อเสนอซื้อ ใช้ make a bid"],["The board ………… within four days, saying it undervalued the company.","rejected the bid","ปฏิเสธข้อเสนอ ใช้ reject a bid"],["Because the directors refused, it became a ………… .","hostile takeover","กรรมการคัดค้าน ผู้ซื้อจึงไปหาผู้ถือหุ้นตรง ๆ"],["During ………… the buyer found a problem at two of the plants.","due diligence","ตรวจสอบสถานะกิจการก่อนซื้อ"],["The five directors borrowed money and bought the firm themselves, in a ………… .","management buyout","ผู้บริหารซื้อกิจการที่ตัวเองทำงานอยู่"]]},"p2a":[["a really impressive advertising campaign",true,"","ADVERB → ADJECTIVE → NOUN → HEAD NOUN ครบถูกลำดับ"],["a customer new relations department",false,"a new customer relations department","adjective ต้องอยู่หน้านามขยายทั้งหมด · new ต้องมาก่อน customer relations"],["a highly competitive mobile phone market",true,"","highly ติดหน้า competitive แล้วตามด้วยนามขยาย mobile phone จบที่ market"],["an incredibly product successful launch",false,"an incredibly successful product launch","adverb หลุดจาก adjective · incredibly ต้องติดกับ successful"],["a loyal customer base",true,"","ไม่มี adverb · adjective loyal นำหน้านามขยาย customer และ head noun base"]],"p2b":[["By December, we ………… back the whole loan.",["will have paid","will be paying","will pay","are paying"],"by + เวลา บอกว่าเสร็จก่อนถึงจุดนั้น จึงใช้ future perfect"],["This time next year, we ………… the results of the merger.",["will be enjoying","will have enjoyed","enjoy","have enjoyed"],"this time + เวลา ชี้จุดเวลาแล้วถามว่าตอนนั้นกำลังทำอะไร จึงใช้ future continuous"],["Their plane landed five minutes ago. They ………… arrived yet.",["can't have","mustn't have","shouldn't have","wouldn't have"],"รูปปฏิเสธของ must ในความหมายคาดเดา คือ can’t เท่านั้น · mustn’t แปลว่าห้าม"],["If we ………… the Chinese market, we will need a local partner.",["enter","will enter","entered","will have entered"],"first conditional ห้ามใส่ will ในประโยค if"],["There's ………… to be more acquisitions in this sector next year.",["certain","certainly","certainty","certained"],"รูปที่ถูกคือ There’s certain to be + คำนาม"]]},{"id":"L2","title":"ชุดที่ 2","p1a":{"box":["marketing mix","market segmentation","brand positioning","product portfolio","customer retention","target market","word of mouth","market penetration"],"items":[["The ………… covers product, price, place and promotion.","marketing mix","สี่ P รวมกันเรียกว่าส่วนประสมการตลาด"],["………… divides buyers into groups with similar needs.","Market segmentation","แบ่งผู้ซื้อออกเป็นกลุ่ม คือการแบ่งส่วนตลาด"],["Keeping existing buyers happy is cheaper than finding new ones, so ………… matters.","customer retention","keeping existing buyers = การรักษาลูกค้าเดิม"],["We now sell forty different items, which is a very wide ………… .","product portfolio","ของทั้งหมดที่บริษัทขาย เรียกรวมว่ากลุ่มผลิตภัณฑ์"],["The restaurant spends nothing on advertising and grew entirely through ………… .","word of mouth","ไม่ลงโฆษณาแต่โตได้ คือการบอกต่อปากต่อปาก"]]},"p1b":{"box":["set up a joint venture","sold its stake","raised its bid","friendly takeover","parent company","economies of scale","white knight","subsidiary"],"items":[["The two firms ………… in Hungary, each taking fifty percent.","set up a joint venture","ตั้งกิจการร่วมค้า ใช้ set up"],["After the first refusal the bidder ………… by forty pence a share.","raised its bid","เพิ่มราคาที่เสนอ ใช้ raise a bid"],["Both boards agreed, so this was a ………… , not a hostile one.","friendly takeover","คณะกรรมการเห็นชอบทั้งสองฝ่าย"],["Pixar became a ………… of Disney after the deal completed.","subsidiary","บริษัทที่ถูกอีกบริษัทควบคุม คือบริษัทย่อย"],["Producing at a larger scale cuts the cost per unit, which is called ………… .","economies of scale","ยิ่งผลิตมาก ต้นทุนต่อหน่วยยิ่งต่ำ"]]},"p2a":[["an extremely thorough sales report",true,"","extremely ขยาย thorough แล้วตามด้วย sales และ report"],["a brilliant absolutely global campaign",false,"an absolutely brilliant global campaign","adverb ต้องอยู่หน้า adjective ไม่ใช่หลัง · และต้องใช้ an เพราะขึ้นต้นด้วยสระ"],["an increasingly competitive marketing environment",true,"","increasingly ขยาย competitive แล้วตามด้วย marketing และ environment"],["a marketing new budget drastically reduced",false,"a drastically reduced marketing budget","คำขยายทั้งหมดต้องอยู่หน้าคำนาม ภาษาอังกฤษไม่วางไว้ข้างหลังแบบภาษาไทย"],["a rapidly product expanding portfolio",false,"a rapidly expanding product portfolio","เอา product ไปคั่นระหว่าง adverb กับ participle ไม่ได้ · rapidly ต้องติด expanding"]],"p2b":[["We ………… a special discount from January the first.",["will be offering","will have offered","have offered","offered"],"from + วันที่ แปลว่าเริ่มแล้วทำต่อเนื่อง จึงใช้ future continuous"],["Don't phone me tomorrow because I ………… on the bid all morning.",["will be working","will have worked","work","worked"],"all morning เป็นช่วงเวลาต่อเนื่อง จึงใช้ future continuous"],["There is ………… chance of the merger taking place.",["no","not","none","any"],"รูปที่ถูกคือ There’s no chance of + V-ing"],["It is unlikely ………… the retirement age will be increased to seventy-five.",["that","to","for","of"],"It is unlikely that + ประโยคเต็ม · ส่วน be unlikely to ใช้เมื่อประธานอยู่ข้างหน้า"],["Look at that queue. We ………… miss our flight.",["are going to","will","would","are about"],"มีหลักฐานตรงหน้าคือคิวยาว จึงใช้ going to"]]},{"id":"L3","title":"ชุดที่ 3","p1a":{"box":["market niche","focus group","special offer","brand extension","retail outlets","product feature","market adaptation","sales forecast"],"items":[["We ran six ………… sessions and recorded what people said about the packaging.","focus group","เชิญคนมานั่งคุยเป็นกลุ่ม คือ focus group"],["The unique selling point is the ………… that makes us different from rivals.","product feature","USP คือคุณสมบัติของสินค้าที่ไม่เหมือนใคร"],["The recipe is too sweet for this market, so some ………… is needed.","market adaptation","ปรับสินค้าให้เข้ากับตลาดนั้น คือ market adaptation"],["Our distributor supplies eight thousand ………… across the country.","retail outlets","ร้านค้าที่ขายปลีก ใช้รูปพหูพจน์เพราะมีแปดพันแห่ง"],["Launching shampoo under our famous soap name was a ………… .","brand extension","เอาชื่อแบรนด์เดิมไปทำสินค้าประเภทใหม่ คือการต่อยอดแบรนด์"]]},"p1b":{"box":["withdrew its bid","built up a stake","competition authority","merged with","share price","shareholders","premium","asset stripping"],"items":[["A rival had quietly ………… of five percent before anyone noticed.","built up a stake","ทยอยสะสมหุ้น ใช้ build up a stake"],["The ………… in Brussels opened a full investigation into the deal.","competition authority","หน่วยงานกำกับการแข่งขัน"],["In July the buyer ………… and walked away from the deal.","withdrew its bid","ถอนข้อเสนอ ใช้ withdraw a bid"],["They paid a twenty-five percent ………… over the market value of the shares.","premium","ส่วนเพิ่มเหนือราคาตลาด"],["Exxon ………… Mobil in nineteen ninety-nine to form a single company.","merged with","ควบรวมกับ ใช้ merge with"]]},"p2a":[["a badly damaged brand image",true,"","badly ขยาย damaged แล้วตามด้วย brand และ image"],["a confidential highly sales report",false,"a highly confidential sales report","adverb ต้องอยู่ติดหน้า adjective · highly ต้องมาก่อน confidential"],["a very lucrative sponsorship deal",true,"","very ขยาย lucrative แล้วตามด้วย sponsorship และ deal"],["a three-year expansion programme",true,"","ตัวเลขกับหน่วยเวลาที่ขยายคำนาม ใช้รูปเอกพจน์และมีขีดกลาง เขียนแบบนี้ถูกแล้ว"],["a shrinking customer base",true,"","ไม่มี adverb · shrinking เป็น -ing participle นำหน้านามขยายและ head noun"]],"p2b":[["By the end of next year, we ………… six new products in three years.",["will have launched","will be launching","launch","are launching"],"by the end of เป็นการนับผลงานสะสม จึงใช้ future perfect"],["I ………… here for three years next May.",["will have been","will be being","am being","will be"],"นับระยะเวลาสะสมถึงจุดหนึ่งในอนาคต จึงใช้ future perfect"],["She's ………… be late, she always is.",["bound to","about to","unlikely to","due for"],"bound to แปลว่าแน่นอนว่าจะ ใช้กับสิ่งที่เกิดซ้ำจนคาดเดาได้"],["Prices are ………… to rise next quarter.",["likely","probable","possible","certainly"],"likely ใช้รูป be likely to ได้ ส่วน probable ใช้ได้เฉพาะ It is probable that"],["They ………… have received our offer by now, I am fairly sure.",["must","might","could","would"],"must ใช้กับความมั่นใจราว 80% · might คือ 20%"]]},{"id":"L4","title":"ชุดที่ 4","p1a":{"box":["questionnaire","market sector","premium product","free samples","advertising campaign","distributor","market leader","sales targets"],"items":[["Two thousand shoppers completed our ………… online.","questionnaire","สิ่งที่คนกรอกตอบ คือแบบสอบถาม"],["They hold thirty-one percent of the market, which makes them the ………… .","market leader","ครองส่วนแบ่งสูงสุด คือผู้นำตลาด · ระวังอย่าเขียน marketing leader"],["We priced it above every rival, so it is clearly a ………… .","premium product","ตั้งราคาสูงกว่าคู่แข่งทุกราย คือสินค้าระดับพรีเมียม"],["Handing out ………… in stores is still the fastest way to get people to try it.","free samples","แจกให้ลองฟรี คือ free samples"],["The ………… will run on television and social media for six weeks.","advertising campaign","สิ่งที่ออกอากาศเป็นช่วงเวลา คือแคมเปญโฆษณา"]]},"p1b":{"box":["acquired","target","bidder","divest","spin-off","vendor finance","poison pill","stake"],"items":[["Disney ………… Pixar for seven point four billion dollars in two thousand and six.","acquired","ซื้อกิจการ ใช้ acquire a company"],["The company being bought is usually called the ………… .","target","บริษัทเป้าหมาย"],["The seller left part of the price in the business, which is known as ………… .","vendor finance","ผู้ขายให้ผู้ซื้อกู้ส่วนหนึ่งของราคา"],["The group plans to ………… two loss-making divisions next year.","divest","ขายกิจการทิ้ง ตรงข้ามกับ acquire"],["Separating the software unit into an independent company was a ………… .","spin-off","แยกหน่วยธุรกิจออกมาตั้งเป็นบริษัทใหม่"]]},"p2a":[["a highly aggressive pricing strategy",true,"","highly ขยาย aggressive แล้วตามด้วย pricing และ strategy"],["a very brilliant marketing plan",false,"an absolutely brilliant marketing plan","brilliant เป็น adjective ที่สุดทางแล้ว ใช้กับ absolutely ไม่ใช่ very"],["an extremely market detailed segmentation",false,"an extremely detailed market segmentation","market ไปคั่นระหว่าง extremely กับ detailed · adverb ต้องติด adjective เสมอ"],["a campaign highly successful global",false,"a highly successful global campaign","คำขยายทั้งหมดอยู่หน้าคำนาม และ adverb ต้องติดหน้า adjective"],["a relations new customer department",false,"a new customer relations department","นามขยายต้องเรียงเป็น customer relations ตามลำดับ และ adjective new อยู่หน้าสุด"]],"p2b":[["Next year, she ………… in our Tokyo office.",["will be working","will have worked","works","has worked"],"ปีหน้าเธอจะกำลังทำงานอยู่ที่นั่น จึงใช้ future continuous"],["He's tapping his glass. I think he's ………… make a speech.",["about to","bound to","likely to","due to"],"about to แปลว่ากำลังจะเกิดในอีกไม่กี่วินาที"],["The email ………… have gone into her spam folder, but I am not sure.",["may","must","will","can't"],"may หรือ could ใช้กับความมั่นใจราว 40%"],["If you ………… harder, you would be able to do it.",["tried","try","will try","would try"],"second conditional คือ If + ช่องสอง แล้ว would + ช่องหนึ่ง"],["By twenty fifty, most banks ………… half of their branches.",["will have closed","will be closing","close","are closing"],"by + ปี บอกว่าเสร็จก่อนถึงปีนั้น จึงใช้ future perfect"]]},{"id":"L5","title":"ชุดที่ 5","p1a":{"box":["wholesaler","brand image","market survey","point of sale","niche market","endorsement","price promotion","customer base"],"items":[["After the scandal, our ………… was badly damaged and sales fell.","brand image","สิ่งที่คนคิดถึงแบรนด์ เสียหายได้ คือภาพลักษณ์แบรนด์"],["We have built up a loyal ………… of fifty thousand households.","customer base","กลุ่มลูกค้าที่สะสมมา คือฐานลูกค้า"],["We sell to a ………… , who then supplies hundreds of small shops.","wholesaler","ขายส่งต่อให้ร้านเล็ก คือผู้ค้าส่ง"],["A celebrity ………… can work well, but it is expensive.","endorsement","ให้คนดังมารับรองสินค้า คือ endorsement"],["It is small but very specific, so it is best described as a ………… .","niche market","เล็กแต่เจาะจงมาก คือตลาดเฉพาะกลุ่ม"]]},"p1b":{"box":["holds a stake","accepted the bid","merger of equals","takeover","antitrust","due diligence","sell its stake","shareholder"],"items":[["The founding family still ………… of twelve percent in the business.","holds a stake","ถือหุ้นอยู่ ใช้ hold a stake"],["Shareholders voted and ………… at the higher price.","accepted the bid","ตอบรับข้อเสนอ ใช้ accept a bid"],["When two companies of similar size combine, it is described as a ………… .","merger of equals","ควบรวมโดยที่ทั้งคู่ฐานะเท่ากัน"],["Getting control by buying over half the shares is a ………… .","takeover","ซื้อหุ้นเกินครึ่งเพื่อคุมอำนาจ · ตรงนี้ต้องการคำนาม จึงเขียนติดกัน"],["The fund decided to ………… and take the profit.","sell its stake","ขายหุ้นที่ถืออยู่ ใช้ sell a stake"]]},"p2a":[["an absolutely brilliant global campaign",true,"","absolutely ใช้กับ brilliant ได้เพราะเป็น adjective ที่สุดทางแล้ว"],["a mobile highly competitive phone market",false,"a highly competitive mobile phone market","เอา mobile ไปคั่นระหว่าง adverb กับ adjective ไม่ได้"],["a drastically reduced marketing budget",true,"","drastically ขยาย reduced แล้วตามด้วย marketing และ budget"],["an expanded customer base that grows every month",false,"an expanding customer base that grows every month","ประโยคบอกว่ากำลังโตอยู่ จึงต้องใช้ -ing ไม่ใช่ -ed"],["a two-hour board meeting",true,"","two-hour เอกพจน์และมีขีดกลาง ถูกต้องแล้ว"]],"p2b":[["At nine on Monday, the new CEO ………… the whole department.",["will be meeting","will have met","meets","has met"],"at + เวลา ชี้จุดเวลา จึงใช้ future continuous"],["I ………… whether L’Oréal will make a bid at all.",["doubt","doubtful","doubtless","am doubt"],"I doubt whether + ประโยค เป็นการแสดงว่าไม่น่าจะเกิด"],["The Bank of England ………… one hundred billion in bonds by the end of July.",["will have bought","will be bought","will be buying","will have been bought"],"by the end of ใช้ future perfect · ระวัง will be bought เป็น passive แปลว่าธนาคารถูกซื้อ"],["It is ………… probable that an economic upturn will start next year.",["quite","quiet","quietly","quit"],"It’s quite probable that เป็นรูปมาตรฐานของระดับน่าจะเป็น"],["The parcel ………… have arrived this morning, I am certain of it.",["will","might","may","could"],"will ใช้กับความมั่นใจ 100%"]]}]
+</script>
 <script type="application/json" id="vc-data">
 [{"code":"pair5","name":"คำคู่ 5 กลุ่มหลัก","unit":"Unit 2","items":[["marketing mix","ส่วนประสมการตลาด · 4P","Product Price Place Promotion"],["marketing strategy","กลยุทธ์การตลาด","ทิศทางใหญ่ ตัดสินใจก่อน plan"],["marketing plan","แผนการตลาด","เอกสารรายละเอียด เขียนตามหลัง strategy"],["market adaptation","การปรับสินค้าให้เข้ากับตลาด","ใช้ STEP analysis ช่วยตัดสิน"],["market penetration","การเจาะตลาด","ไม่มี -ing เพราะกระทำต่อตัวตลาด"],["market segmentation","การแบ่งส่วนตลาด","เป็นคำนามนับไม่ได้ ไม่ใส่ a"],["product placement","การวางสินค้าในสื่อ เช่น ในหนัง",""],["product portfolio","กลุ่มผลิตภัณฑ์ทั้งหมดที่บริษัทมี",""],["product feature","คุณสมบัติของสินค้า","USP คือ product feature ที่ไม่เหมือนใคร"],["customer profile","ลักษณะกลุ่มลูกค้า","สร้างจากการวิเคราะห์พฤติกรรมการซื้อ"],["customer retention","การรักษาลูกค้าเดิมไว้","ถูกกว่าการหาลูกค้าใหม่"],["customer base","ฐานลูกค้า",""],["brand positioning","การวางตำแหน่งแบรนด์ในใจผู้บริโภค","up-market · mid-market · budget"],["brand identity","อัตลักษณ์แบรนด์ · โลโก้ สี น้ำเสียง",""],["brand extension","การต่อยอดแบรนด์ไปสินค้าประเภทใหม่",""]]},{"code":"compound","name":"compound noun","unit":"Unit 2","items":[["marketing campaign","แคมเปญการตลาด",""],["marketing budget","งบประมาณการตลาด",""],["market leader","ผู้นำตลาด","ห้ามเขียน marketing leader"],["market survey","การสำรวจตลาด",""],["market sector","ภาคส่วนของตลาด","เช่น ภาคยานยนต์"],["product range","สายผลิตภัณฑ์ · ช่วงสินค้า",""],["product features","คุณสมบัติสินค้า",""],["product launch","การเปิดตัวสินค้า",""],["advertising agency","เอเจนซีโฆษณา",""],["advertising slogan","สโลแกนโฆษณา",""],["brand awareness","การรับรู้แบรนด์",""],["brand loyalty","ความภักดีต่อแบรนด์",""],["brand image","ภาพลักษณ์แบรนด์",""],["sales figures","ตัวเลขยอดขาย","sales คงรูปพหูพจน์เสมอ"],["sales forecast","การพยากรณ์ยอดขาย",""],["sales targets","เป้าหมายการขาย","ใช้ meet · hit · achieve a target"],["sales report","รายงานการขาย",""],["price promotion","การส่งเสริมการขายด้วยราคา",""],["price rise","การขึ้นราคา",""],["price range","ช่วงราคา",""],["sponsorship deal","ข้อตกลงการเป็นผู้สนับสนุน","an excellent sponsorship deal"]]},{"code":"markets","name":"ตลาดและส่วนของตลาด","unit":"Unit 2","items":[["market share","ส่วนแบ่งตลาด","วัดเป็นเปอร์เซ็นต์ของยอดขายรวม"],["market segment","ส่วนตลาด · กลุ่มผู้ซื้อที่มีลักษณะร่วมกัน",""],["market niche","ตลาดเฉพาะกลุ่ม","สลับเป็น niche market ก็ได้"],["target market","ตลาดเป้าหมาย",""],["mass market","ตลาดมวลชน","ตรงข้ามกับ niche"],["domestic market","ตลาดในประเทศ","ตัวแปลกแยก Ex C ข้อ 4"],["overseas market","ตลาดต่างประเทศ",""],["international market","ตลาดระหว่างประเทศ",""],["worldwide market","ตลาดทั่วโลก",""],["growing market","ตลาดที่กำลังเติบโต",""],["developing market","ตลาดที่กำลังพัฒนา",""],["expanding market","ตลาดที่กำลังขยายตัว",""],["declining market","ตลาดที่กำลังหดตัว","ตัวแปลกแยก Ex C ข้อ 1"],["up-market","ระดับบน · สินค้าราคาแพง","ตรงข้ามคือ down-market หรือ budget"],["premium product","สินค้าระดับพรีเมียม","ตั้งราคาสูงกว่าคู่แข่งโดยตั้งใจ"]]},{"code":"research","name":"การวิจัยตลาด","unit":"Unit 2","items":[["market research","การวิจัยตลาด","ใช้ carry out หรือ conduct ไม่ใช่ make"],["questionnaire","แบบสอบถาม",""],["focus group","กลุ่มสนทนา","เชิญคนมานั่งคุยเพื่อเก็บความเห็น"],["survey","การสำรวจ",""]]},{"code":"promo","name":"เปิดตัวและส่งเสริมการขาย","unit":"Unit 2","items":[["launch a product","เปิดตัวสินค้า",""],["introduce a product","นำสินค้าออกขาย",""],["bring out a product","นำสินค้าออกสู่ตลาด",""],["withdraw a product","ถอนสินค้าออกจากตลาด","ตัวแปลกแยก Ex C ข้อ 5"],["promotion","การส่งเสริมการขาย","ตัวแปลกแยก Ex C ข้อ 2"],["special offer","ข้อเสนอพิเศษ",""],["free sample","สินค้าตัวอย่างแจกฟรี",""],["discount","ส่วนลด",""],["slogan","สโลแกน · คำขวัญโฆษณา","ตัวแปลกแยก Ex C ข้อ 6"],["endorsement","การรับรองโดยบุคคลมีชื่อเสียง","celebrity endorsement"],["word of mouth","การบอกต่อปากต่อปาก","ไม่เสียเงินแต่ควบคุมไม่ได้"],["point of sale","จุดขาย · ณ จุดชำระเงิน","ย่อว่า POS"]]},{"code":"channel","name":"ช่องทางจำหน่าย","unit":"Unit 2","items":[["retailer","ผู้ค้าปลีก",""],["wholesaler","ผู้ค้าส่ง",""],["distributor","ผู้จัดจำหน่าย",""],["outlet","ร้านจำหน่าย · ช่องทางขาย","retail outlet = จุดขายปลีก"],["exporter","ผู้ส่งออก","ตัวแปลกแยก Ex C ข้อ 7"]]},{"code":"adverb","name":"adverb ในวลีนาม","unit":"Unit 2","items":[["highly","อย่างสูง · อย่างยิ่ง","ใช้กับ adjective ที่มีระดับ"],["extremely","อย่างที่สุด",""],["incredibly","อย่างเหลือเชื่อ",""],["absolutely","อย่างสมบูรณ์ · สุด ๆ","ใช้กับ adjective ที่สุดทางแล้ว เช่น brilliant"],["really","จริง ๆ · มาก",""],["increasingly","มากขึ้นเรื่อย ๆ",""],["totally","ทั้งหมด · โดยสิ้นเชิง","ใช้กับ adjective ที่สุดทางแล้ว"],["fairly","ค่อนข้าง",""]]},{"code":"phrase","name":"วลีนามจากบทความ","unit":"Unit 2","items":[["an advertising campaign","แคมเปญโฆษณา","a programme of activities to persuade the public to buy"],["chief executive","ประธานเจ้าหน้าที่บริหาร","the person with the highest position · CEO"],["fashion houses","ห้องเสื้อ · แบรนด์แฟชั่น","the makers of clothes in new and changing styles"],["a luxury goods company","บริษัทสินค้าหรูหรา","makes expensive things for comfort and pleasure"],["growth potential","ศักยภาพในการเติบโต","possibility for future development and expansion"]]},{"code":"abbr","name":"ตัวย่อ","unit":"Unit 2","items":[["SWOT","จุดแข็ง จุดอ่อน โอกาส อุปสรรค","Strengths Weaknesses Opportunities Threats · วิเคราะห์ตัวบริษัท"],["STEP · PEST","สังคม เทคโนโลยี เศรษฐกิจ การเมือง","Sociological Technological Economic Political · วิเคราะห์ภายนอก"],["USP","จุดขายที่ไม่เหมือนใคร","Unique Selling Point"],["4P","ส่วนประสมการตลาดสี่ตัว","Product Price Place Promotion"]]},{"code":"core6","name":"หกคำหลัก","unit":"Unit 12","items":[["joint venture","กิจการร่วมค้า","สองบริษัทขึ้นไปลงทุนร่วมกัน · คำใบ้อยู่ที่คำว่า joint"],["MBO · management buyout","ผู้บริหารซื้อกิจการที่ตัวเองทำงานอยู่",""],["merger","การควบรวม","รวมกันเป็นบริษัทใหญ่ขึ้น มักเกิดชื่อใหม่"],["takeover · acquisition","การเข้าซื้อกิจการ","ซื้อหุ้นเกิน 50% เพื่อให้ได้อำนาจควบคุม"],["bid","การเสนอราคาซื้อหุ้น","แค่เสนอ ยังไม่ได้ซื้อ"],["stake","สัดส่วนการถือหุ้น · เงินที่ลงทุนไว้","สิ่งที่ถืออยู่แล้ว ต่างจาก bid"]]},{"code":"verbs","name":"กริยาที่ใช้คู่กัน","unit":"Unit 12","items":[["take a stake in","เข้าถือหุ้นใน","Nestlé took a 30% stake in the start-up."],["hold a stake","ถือหุ้นอยู่","The family still holds a 12% stake."],["build up a stake","ทยอยสะสมหุ้น","The investor quietly built up a stake."],["sell a stake","ขายหุ้นที่ถืออยู่","They sold their stake at a large profit."],["make a bid for","ยื่นข้อเสนอซื้อ","Kraft made a bid for Cadbury in 2009."],["launch a bid","เปิดฉากเสนอซื้อ","They launched a hostile bid last week."],["accept a bid","ตอบรับข้อเสนอ","Shareholders voted to accept the bid."],["reject a bid","ปฏิเสธข้อเสนอ","The board rejected the bid as too low."],["raise a bid","เพิ่มราคาที่เสนอ","They raised their bid by 20p a share."],["withdraw a bid","ถอนข้อเสนอ","The bidder withdrew the bid."],["target a company","เล็งบริษัทเป็นเป้า","target ต้องตามด้วยสิ่งที่เป็นเป้า"],["acquire a company","ซื้อกิจการ","Disney acquired Pixar for $7.4bn."],["take over a company","เข้าครอบครองกิจการ","เขียนแยกสองคำเป็นกริยา"],["merge with","ควบรวมกับ","Exxon merged with Mobil in 1999."],["set up a joint venture","ตั้งกิจการร่วมค้า","set up ใช้กับสิ่งที่ก่อตั้งขึ้นใหม่"],["make an acquisition","เข้าซื้อกิจการ","We plan to make two acquisitions this year."]]},{"code":"maextra","name":"ศัพท์ M and A เพิ่มเติม","unit":"Unit 12","items":[["shareholder","ผู้ถือหุ้น","อเมริกันใช้ stockholder"],["share price","ราคาหุ้น","The share price rose 8% on the news."],["subsidiary","บริษัทย่อย","บริษัทที่ถูกอีกบริษัทควบคุม"],["parent company","บริษัทแม่","คู่กับ subsidiary"],["bidder","ผู้เสนอซื้อ",""],["target","บริษัทเป้าหมาย",""],["due diligence","การตรวจสอบสถานะกิจการ","ตรวจก่อนซื้อว่ามีปัญหาซ่อนอยู่ไหม"],["synergy","การผนึกกำลัง","ผลรวมที่มากกว่าผลบวก · เหตุผลยอดนิยมเวลาควบรวม"],["economies of scale","การประหยัดต่อขนาด","ยิ่งผลิตมาก ต้นทุนต่อหน่วยยิ่งต่ำ"],["premium","ส่วนเพิ่มเหนือราคาตลาด","They paid a 25% premium over the share price."],["friendly takeover","การเข้าซื้อแบบเป็นมิตร","คณะกรรมการของบริษัทเป้าหมายเห็นชอบ"],["hostile takeover","การเข้าซื้อแบบไม่เป็นมิตร","กรรมการคัดค้าน จึงเสนอซื้อกับผู้ถือหุ้นโดยตรง"],["white knight","อัศวินขี่ม้าขาว","ผู้ซื้อที่เป็นมิตร เชิญมาช่วยสู้ hostile bid"],["poison pill","ยาพิษ","มาตรการที่ทำให้ตัวเองถูกซื้อยากขึ้น"],["divest","ขายกิจการทิ้ง","ตรงข้ามกับ acquire"],["spin-off","การแยกกิจการออกมาตั้งใหม่","แยกหน่วยธุรกิจเป็นบริษัทอิสระ"],["asset stripping","การซื้อมาเพื่อแยกขายทรัพย์สิน",""],["antitrust · competition authority","หน่วยงานกำกับการแข่งขัน","อาจสั่งห้ามดีลที่ทำให้ผูกขาด"]]}]
 </script>
@@ -1962,7 +2076,7 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 (function(){
   "use strict";
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var rails = {np:'rail-np', mk:'rail-mk', ma:'rail-ma', pr:'rail-pr', ls:'rail-ls', vc:'rail-vc', ex:'rail-ex', quiz:'rail-quiz'};
+  var rails = {np:'rail-np', mk:'rail-mk', ma:'rail-ma', pr:'rail-pr', mx:'rail-mx', ls:'rail-ls', vc:'rail-vc', ex:'rail-ex', quiz:'rail-quiz'};
   tabs.forEach(function(t){
     t.addEventListener('click', function(){
       var id = t.getAttribute('aria-controls');
@@ -2220,6 +2334,238 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 
 
 
+
+  /* ---------------------------------------------------------
+     แท็บข้อสอบเสมือนจริง · Part I และ Part II
+     โจทย์อยู่ในบล็อก JSON id="mx-data" ซึ่ง tools/make-exam.py เขียนให้
+     จาก tools/exam-data.py เพราะแก้โจทย์ในไฟล์ Python ง่ายกว่าแก้ JSON ยาว ๆ
+
+     ทุกข้อ 1 คะแนน ชุดละ 20 คะแนน แล้วไปต่อ Part III อีก 20 คะแนนในแท็บฝึกฟัง
+     --------------------------------------------------------- */
+  var mxRoot = document.getElementById('mx-root');
+  if (mxRoot){
+    var MX = JSON.parse(document.getElementById('mx-data').textContent);
+
+    function mxEsc(s){
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function mxShuffle(n){
+      var a = [], i, j, t;
+      for (i = 0; i < n; i++) a.push(i);
+      for (i = n-1; i > 0; i--){ j = Math.floor(Math.random()*(i+1)); t=a[i]; a[i]=a[j]; a[j]=t; }
+      return a;
+    }
+    // ช่องว่างในโจทย์เขียนเป็นจุดไข่ปลา ทำให้เด่นขึ้นเพื่อให้เห็นว่าต้องเติมตรงไหน
+    function mxGap(s){
+      return mxEsc(s).replace(/…+/g, '<span class="gap">…………</span>');
+    }
+
+    /* ---- โครงของแต่ละชุด ---- */
+    var mxHtml = '';
+    MX.forEach(function(set){
+      function part(pid, kind, label, title, task, pts){
+        return '<div class="mx-part" data-part="' + set.id + '-' + pid + '">' +
+               '<div class="mx-ph"><span class="mx-kind' + (kind === 2 ? ' two' : '') + '">' +
+               label + '</span><h4>' + mxEsc(title) + '</h4>' +
+               '<span class="pts">' + pts + ' ข้อ ' + pts + ' คะแนน</span></div>' +
+               '<p class="mx-task">' + mxEsc(task) + '</p>' +
+               '<div class="mx-body"></div>' +
+               '<div class="mx-tools"><button type="button" data-act="reset">เริ่มทำใหม่</button>' +
+               '<span class="mx-score">ได้ <b>0</b> จาก ' + pts + ' คะแนน</span></div></div>';
+      }
+      mxHtml += '<section class="mx-set" id="mxs-' + set.id + '">' +
+        '<div class="mx-sh"><h3>' + mxEsc(set.title) + '</h3>' +
+        '<span class="tot">Part I และ Part II · ได้ <b>0</b> จาก 20 คะแนน</span></div>' +
+        part('1a', 1, 'Part I A', 'Marketing Word Partnerships',
+             'Choose the most appropriate phrases from the box to complete the sentences.', 5) +
+        part('1b', 1, 'Part I B', 'Describing Mergers and Acquisitions',
+             'Choose the most appropriate phrases from the box to complete the sentences.', 5) +
+        part('2a', 2, 'Part II A', 'Noun Compounds and Noun Phrases',
+             'Decide whether each noun phrase is written in the correct order.', 5) +
+        part('2b', 2, 'Part II B', 'Prediction and Probability',
+             'Choose the verb form that correctly completes each sentence.', 5) +
+        '<div class="mx-foot"><span class="hint">ทำ Part I และ Part II ครบแล้ว ไปต่อ Part III ของชุดเดียวกันเพื่อให้ครบ 40 คะแนนเหมือนข้อสอบจริง</span>' +
+        '<button type="button" class="mx-go" data-go="' + set.id + '">ไปทำ Part III ของชุดนี้ · 20 คะแนน</button></div>' +
+        '</section>';
+    });
+    mxRoot.innerHTML = mxHtml;
+
+    /* ---- ผูกคะแนนรวมของชุด ---- */
+    MX.forEach(function(set){
+      var sec = mxRoot.querySelector('#mxs-' + set.id);
+      var totEl = sec.querySelector('.tot b');
+      var got = {};
+      function retotal(){
+        var sum = 0;
+        Object.keys(got).forEach(function(k){ sum += got[k]; });
+        totEl.textContent = String(sum);
+      }
+
+      /* ผูกกลไกให้ส่วนหนึ่ง ๆ · make รับหน้าที่สร้างข้อทั้งหมดใหม่
+         โดยเรียก hit() ทุกครั้งที่ตอบถูก จะได้นับคะแนนที่เดียว */
+      function wire(pid, make){
+        var wrap = sec.querySelector('[data-part="' + set.id + '-' + pid + '"]');
+        var body = wrap.querySelector('.mx-body');
+        var score = wrap.querySelector('.mx-score b');
+        var right = 0;
+        function build(){
+          right = 0; score.textContent = '0';
+          got[pid] = 0; retotal();
+          body.innerHTML = '';
+          make(body, function(){
+            right++; score.textContent = String(right);
+            got[pid] = right; retotal();
+          });
+        }
+        build();
+        wrap.querySelector('[data-act="reset"]').addEventListener('click', build);
+      }
+
+      /* ---- Part I · เลือกวลีจากกล่องคำ ---- */
+      function fillIn(part){
+        return function(body, hit){
+          var box = document.createElement('div'); box.className = 'mx-box';
+          var order = mxShuffle(part.box.length);
+          var chips = {};
+          box.innerHTML = '<span class="bl">Word box</span>';
+          order.forEach(function(src){
+            var c = document.createElement('span');
+            c.className = 'mx-chip'; c.textContent = part.box[src];
+            chips[part.box[src].toLowerCase()] = c;
+            box.appendChild(c);
+          });
+          body.appendChild(box);
+
+          var qs = document.createElement('div'); qs.className = 'mx-qs';
+          part.items.forEach(function(it, qi){
+            var sent = it[0], ans = it[1], exp = it[2];
+            var q = document.createElement('div'); q.className = 'mx-q';
+            var t = document.createElement('div'); t.className = 'mx-qt';
+            t.innerHTML = '<i>' + (qi+1) + '</i><span>' + mxGap(sent) + '</span>';
+
+            var sel = document.createElement('select'); sel.className = 'mx-pick';
+            var ph = document.createElement('option');
+            ph.value = ''; ph.textContent = '— เลือกวลีจากกล่องคำ —';
+            sel.appendChild(ph);
+            mxShuffle(part.box.length).forEach(function(src){
+              var o = document.createElement('option');
+              o.value = part.box[src]; o.textContent = part.box[src];
+              sel.appendChild(o);
+            });
+
+            var ex = document.createElement('div'); ex.className = 'mx-exp'; ex.hidden = true;
+            sel.addEventListener('change', function(){
+              if (!sel.value) return;
+              var ok = sel.value.toLowerCase() === ans.toLowerCase();
+              sel.disabled = true;
+              sel.classList.add(ok ? 'ok' : 'no');
+              ex.innerHTML = mxEsc(exp) +
+                (ok ? '' : '<span class="fix">คำตอบที่ถูกคือ ' + mxEsc(ans) + '</span>');
+              ex.hidden = false;
+              var chip = chips[ans.toLowerCase()];
+              if (chip) chip.classList.add('used');
+              if (ok) hit();
+            });
+
+            q.appendChild(t); q.appendChild(sel); q.appendChild(ex);
+            qs.appendChild(q);
+          });
+          body.appendChild(qs);
+        };
+      }
+
+      /* ---- Part II A · ตัดสินว่าวลีเรียงถูกไหม ---- */
+      function orderCheck(items){
+        return function(body, hit){
+          var qs = document.createElement('div'); qs.className = 'mx-qs';
+          items.forEach(function(it, qi){
+            var phrase = it[0], correct = it[1], fix = it[2], exp = it[3];
+            var q = document.createElement('div'); q.className = 'mx-q';
+            var t = document.createElement('div'); t.className = 'mx-qt';
+            t.innerHTML = '<i>' + (qi+1) + '</i><span class="ph">' + mxEsc(phrase) + '</span>';
+
+            var opts = document.createElement('div'); opts.className = 'mx-opts tf';
+            var ex = document.createElement('div'); ex.className = 'mx-exp'; ex.hidden = true;
+
+            // สองปุ่มนี้ไม่สลับตำแหน่ง เพราะถูกกับผิดต้องอยู่ที่เดิมให้กดเร็วได้
+            [['เรียงถูกแล้ว', true], ['เรียงผิด', false]].forEach(function(pair){
+              var b = document.createElement('button');
+              b.type = 'button'; b.className = 'mx-opt'; b.textContent = pair[0];
+              b.addEventListener('click', function(){
+                var ok = pair[1] === correct;
+                Array.prototype.forEach.call(opts.children, function(x, k){
+                  x.disabled = true;
+                  if ((k === 0) === correct) x.classList.add('ok');
+                  else if (x === b) x.classList.add('no');
+                });
+                ex.innerHTML = mxEsc(exp) +
+                  (correct ? '' : '<span class="fix">รูปที่ถูกคือ ' + mxEsc(fix) + '</span>');
+                ex.hidden = false;
+                if (ok) hit();
+              });
+              opts.appendChild(b);
+            });
+
+            q.appendChild(t); q.appendChild(opts); q.appendChild(ex);
+            qs.appendChild(q);
+          });
+          body.appendChild(qs);
+        };
+      }
+
+      /* ---- Part II B · เลือกรูปกริยาที่ถูก ---- */
+      function verbForm(items){
+        return function(body, hit){
+          var qs = document.createElement('div'); qs.className = 'mx-qs';
+          items.forEach(function(it, qi){
+            var sent = it[0], o = it[1], exp = it[2];
+            var q = document.createElement('div'); q.className = 'mx-q';
+            var t = document.createElement('div'); t.className = 'mx-qt';
+            t.innerHTML = '<i>' + (qi+1) + '</i><span>' + mxGap(sent) + '</span>';
+
+            var opts = document.createElement('div'); opts.className = 'mx-opts';
+            var ex = document.createElement('div'); ex.className = 'mx-exp'; ex.hidden = true;
+
+            // ตัวแรกในข้อมูลคือคำตอบเสมอ จึงต้องสลับตำแหน่งก่อนแสดง
+            var order = mxShuffle(o.length);
+            var at = order.indexOf(0);
+            order.forEach(function(src, j){
+              var b = document.createElement('button');
+              b.type = 'button'; b.className = 'mx-opt'; b.textContent = o[src];
+              b.addEventListener('click', function(){
+                Array.prototype.forEach.call(opts.children, function(x, k){
+                  x.disabled = true;
+                  if (k === at) x.classList.add('ok');
+                  else if (k === j) x.classList.add('no');
+                });
+                ex.innerHTML = mxEsc(exp);
+                ex.hidden = false;
+                if (j === at) hit();
+              });
+              opts.appendChild(b);
+            });
+
+            q.appendChild(t); q.appendChild(opts); q.appendChild(ex);
+            qs.appendChild(q);
+          });
+          body.appendChild(qs);
+        };
+      }
+
+      wire('1a', fillIn(set.p1a));
+      wire('1b', fillIn(set.p1b));
+      wire('2a', orderCheck(set.p2a));
+      wire('2b', verbForm(set.p2b));
+
+      // ข้ามไปทำ Part III ของชุดเดียวกัน ต้องสลับแท็บก่อนแล้วค่อยเลื่อน
+      sec.querySelector('.mx-go').addEventListener('click', function(){
+        var tab = document.getElementById('t-ls');
+        if (tab) tab.click();
+        var target = document.getElementById('lss-' + set.id);
+        if (target) target.scrollIntoView({block:'start'});
+      });
+    });
+  }
 
   /* ---------------------------------------------------------
      แท็บฝึกฟัง · Part III
