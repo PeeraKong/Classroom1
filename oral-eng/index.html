@@ -324,6 +324,64 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 .body i,.rc i{font-style:italic}
 .note .ok{color:var(--teal); font-weight:700}
 .note .no{color:var(--accent); font-weight:700}
+
+/* ---------- แท็บคำศัพท์ ---------- */
+.vc-bar{position:sticky; top:53px; z-index:20; background:var(--surface-2); border:1px solid var(--rule);
+  border-radius:4px; padding:12px 14px; margin:0 0 20px; display:flex; flex-direction:column; gap:10px}
+.vc-row{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center}
+.vc-glab{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3)}
+.vc-bar input[type="search"]{flex:1 1 200px; min-width:0; font:inherit; font-size:.9rem;
+  padding:7px 12px; border:1px solid var(--rule-strong); border-radius:4px;
+  background:var(--paper); color:var(--ink)}
+.vc-bar input[type="search"]:focus{outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent)}
+.vc-bar button{appearance:none; font:inherit; font-size:.78rem; font-weight:600; cursor:pointer;
+  padding:5px 11px; border:1px solid var(--rule-strong); background:var(--surface);
+  color:var(--ink-2); border-radius:3px; white-space:nowrap}
+.vc-bar button:hover{border-color:var(--accent); color:var(--accent)}
+.vc-bar button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+.vc-count{font-family:"IBM Plex Mono",monospace; font-size:.8rem; font-variant-numeric:tabular-nums;
+  color:var(--ink-2); margin-left:auto}
+.vc-count b{color:var(--ink)}
+
+.vc-group{margin:0 0 26px}
+.vc-gh{display:flex; align-items:baseline; gap:10px; margin:0 0 10px; flex-wrap:wrap}
+.vc-gh h3{font-family:"IBM Plex Sans Thai",sans-serif; font-size:.95rem; font-weight:700; margin:0}
+.vc-gh .u{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--accent); border:1px solid var(--rule-strong);
+  border-radius:3px; padding:1px 7px}
+.vc-gh .n{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-3); margin-left:auto}
+
+.vc-list{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:8px}
+.vc{border:1px solid var(--rule); border-radius:4px; background:var(--surface);
+  padding:10px 13px; display:flex; gap:10px; align-items:flex-start}
+.vc.hidden{display:none}
+.vc-main{min-width:0; flex:1}
+.vc-en{font-weight:600; font-size:.93rem; color:var(--ink); line-height:1.5}
+.vc-th{font-size:.87rem; color:var(--ink-2); line-height:1.55}
+.vc-note{font-size:.76rem; color:var(--ink-3); line-height:1.5; margin-top:2px}
+.vc-know{appearance:none; flex:0 0 auto; width:19px; height:19px; margin-top:3px; cursor:pointer;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--paper); position:relative}
+.vc-know:hover{border-color:var(--accent)}
+.vc-know[aria-pressed="true"]{background:var(--accent); border-color:var(--accent)}
+.vc-know[aria-pressed="true"]::after{content:"✓"; position:absolute; inset:0; color:var(--paper);
+  font-size:.75rem; line-height:17px; text-align:center; font-weight:700}
+.vc.done{opacity:.5}
+.vc.done .vc-en{text-decoration:line-through; text-decoration-thickness:1px}
+
+/* โหมดท่อง ซ่อนคำแปลไว้จนกว่าจะกด */
+.vc-list.quiz .vc-th,.vc-list.quiz .vc-note{filter:blur(5px); cursor:pointer; user-select:none}
+.vc-list.quiz .vc.open .vc-th,.vc-list.quiz .vc.open .vc-note{filter:none; user-select:auto}
+.vc-list.quiz .vc-main{cursor:pointer}
+.vc-none{border:1px dashed var(--rule-strong); border-radius:4px; padding:26px 20px;
+  text-align:center; color:var(--ink-3); font-size:.9rem}
+
+@media print{
+  .vc-bar{display:none !important}
+  .vc-list{grid-template-columns:1fr 1fr}
+  .vc{break-inside:avoid; box-shadow:none}
+  .vc-list.quiz .vc-th,.vc-list.quiz .vc-note{filter:none}
+}
 </style>
 
 <header class="mast">
@@ -350,6 +408,7 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     <button class="tab" role="tab" id="t-mk" aria-controls="mk" aria-selected="false"><span class="tnum">02</span>Marketing</button>
     <button class="tab" role="tab" id="t-ma" aria-controls="ma" aria-selected="false"><span class="tnum">03</span>Mergers &amp; acq.</button>
     <button class="tab" role="tab" id="t-pr" aria-controls="pr" aria-selected="false"><span class="tnum">04</span>Prediction</button>
+    <button class="tab" role="tab" id="t-vc" aria-controls="vc" aria-selected="false"><span class="tnum">V</span>คำศัพท์</button>
     <button class="tab" role="tab" id="t-ex" aria-controls="ex" aria-selected="false"><span class="tnum">E</span>แบบฝึกเขียนตอบ</button>
     <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false"><span class="tnum">Q</span>แบบทดสอบ</button>
   </div>
@@ -403,6 +462,23 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
         <li><a href="#pr-7"><i>7</i>certain ถึง impossible</a></li>
         <li><a href="#pr-8"><i>8</i>วลีบอกเวลาในอนาคต</a></li>
         <li><a href="#pr-9"><i>9</i>เอาไปพูดจริงอย่างไร</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-vc" class="hidden" aria-label="คำศัพท์">
+      <div class="rail-h">คำศัพท์ 129 คำ</div>
+      <ol>
+        <li><a href="#vcg-pair5"><i>15</i>คำคู่ 5 กลุ่มหลัก</a></li>
+        <li><a href="#vcg-compound"><i>21</i>compound noun</a></li>
+        <li><a href="#vcg-markets"><i>15</i>ตลาดและส่วนของตลาด</a></li>
+        <li><a href="#vcg-research"><i>4</i>การวิจัยตลาด</a></li>
+        <li><a href="#vcg-promo"><i>12</i>เปิดตัวและส่งเสริมการขาย</a></li>
+        <li><a href="#vcg-channel"><i>5</i>ช่องทางจำหน่าย</a></li>
+        <li><a href="#vcg-adverb"><i>8</i>adverb ในวลีนาม</a></li>
+        <li><a href="#vcg-phrase"><i>5</i>วลีนามจากบทความ</a></li>
+        <li><a href="#vcg-abbr"><i>4</i>ตัวย่อ</a></li>
+        <li><a href="#vcg-core6"><i>6</i>หกคำหลัก</a></li>
+        <li><a href="#vcg-verbs"><i>16</i>กริยาที่ใช้คู่กัน</a></li>
+        <li><a href="#vcg-maextra"><i>18</i>ศัพท์ M and A เพิ่มเติม</a></li>
       </ol>
     </nav>
     <nav id="rail-ex" class="hidden" aria-label="แบบฝึกเขียนตอบ">
@@ -1170,6 +1246,50 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     </section>
   </div>
 
+  <div id="vc" class="hidden" role="tabpanel" aria-labelledby="t-vc">
+    <p class="lede">คำศัพท์ทั้งหมด <b>129 คำ</b> จาก Unit 2 และ Unit 12 จัดกลุ่มตามหัวข้อ · พิมพ์ค้นหาได้ทั้งคำอังกฤษ คำแปลไทย และคำอธิบาย · กด <b>โหมดท่อง</b> เพื่อซ่อนคำแปลไว้ แล้วกดที่คำเพื่อเปิดเฉลยทีละคำ</p>
+
+    <div class="note key" style="margin-bottom:20px"><span class="nh">ติ๊กคำที่จำได้แล้ว</span>กดช่องสี่เหลี่ยมหน้าคำเพื่อทำเครื่องหมายว่าจำได้ <b>ระบบจำไว้ในเครื่องนี้</b> ปิดแล้วเปิดใหม่ยังอยู่ · จากนั้นกด <b>เฉพาะที่ยังไม่จำ</b> เพื่อให้เหลือแต่คำที่ต้องทบทวน · ยิ่งทบทวนรอบหลัง ๆ รายการยิ่งสั้นลง</div>
+
+    <div class="vc-bar">
+      <div class="vc-row">
+        <input type="search" id="vc-q" placeholder="ค้นหา เช่น stake หรือ ตลาด หรือ bid">
+        <button type="button" id="vc-quiz" aria-pressed="false">โหมดท่อง · ซ่อนคำแปล</button>
+        <button type="button" id="vc-new" aria-pressed="false">เฉพาะที่ยังไม่จำ</button>
+      </div>
+      <div class="vc-row">
+        <span class="vc-glab">หน่วย</span>
+        <button type="button" data-f="unit" data-v="all" aria-pressed="true">ทั้งหมด</button>
+        <button type="button" data-f="unit" data-v="Unit 2" aria-pressed="false">Unit 2</button>
+        <button type="button" data-f="unit" data-v="Unit 12" aria-pressed="false">Unit 12</button>
+        <span class="vc-count" id="vc-count"></span>
+      </div>
+      <div class="vc-row">
+        <span class="vc-glab">หมวด</span>
+        <button type="button" data-f="cat" data-v="all" aria-pressed="true">ทุกหมวด</button>
+        <button type="button" data-f="cat" data-v="pair5" aria-pressed="false">คำคู่ 5 กลุ่มหลัก</button>
+        <button type="button" data-f="cat" data-v="compound" aria-pressed="false">compound noun</button>
+        <button type="button" data-f="cat" data-v="markets" aria-pressed="false">ตลาดและส่วนของตลาด</button>
+        <button type="button" data-f="cat" data-v="research" aria-pressed="false">การวิจัยตลาด</button>
+        <button type="button" data-f="cat" data-v="promo" aria-pressed="false">เปิดตัวและส่งเสริมการขาย</button>
+        <button type="button" data-f="cat" data-v="channel" aria-pressed="false">ช่องทางจำหน่าย</button>
+        <button type="button" data-f="cat" data-v="adverb" aria-pressed="false">adverb ในวลีนาม</button>
+        <button type="button" data-f="cat" data-v="phrase" aria-pressed="false">วลีนามจากบทความ</button>
+        <button type="button" data-f="cat" data-v="abbr" aria-pressed="false">ตัวย่อ</button>
+        <button type="button" data-f="cat" data-v="core6" aria-pressed="false">หกคำหลัก</button>
+        <button type="button" data-f="cat" data-v="verbs" aria-pressed="false">กริยาที่ใช้คู่กัน</button>
+        <button type="button" data-f="cat" data-v="maextra" aria-pressed="false">ศัพท์ M and A เพิ่มเติม</button>
+      </div>
+      <div class="vc-row">
+        <button type="button" id="vc-dl">ดาวน์โหลดเป็นไฟล์</button>
+        <button type="button" id="vc-reset">ล้างเครื่องหมายที่จำได้</button>
+      </div>
+    </div>
+
+    <div id="vc-list"></div>
+    <div class="vc-none hidden" id="vc-none">ไม่พบคำที่ตรงกับที่ค้นหา · ลองพิมพ์สั้นลง หรือเปลี่ยนตัวกรองดูครับ</div>
+  </div>
+
   <div id="ex" class="hidden" role="tabpanel" aria-labelledby="t-ex">
     <p class="lede">แบบทดสอบแท็บ <b>Q</b> เป็นปรนัยไว้เช็กเร็ว ๆ · แท็บนี้คือ<b>แบบฝึกที่ต้องเขียนตอบเอง</b> ทั้งเติมคำ แก้ประโยคผิด แปลงรูปกริยา และเขียนประโยคของตัวเอง — <b>14 ข้อ 106 คะแนน</b> ครอบคลุมทั้งสี่เรื่องที่จะออกสอบ</p>
 
@@ -1731,6 +1851,10 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
   </main>
 </div>
 
+<script type="application/json" id="vc-data">
+[{"code":"pair5","name":"คำคู่ 5 กลุ่มหลัก","unit":"Unit 2","items":[["marketing mix","ส่วนประสมการตลาด · 4P","Product Price Place Promotion"],["marketing strategy","กลยุทธ์การตลาด","ทิศทางใหญ่ ตัดสินใจก่อน plan"],["marketing plan","แผนการตลาด","เอกสารรายละเอียด เขียนตามหลัง strategy"],["market adaptation","การปรับสินค้าให้เข้ากับตลาด","ใช้ STEP analysis ช่วยตัดสิน"],["market penetration","การเจาะตลาด","ไม่มี -ing เพราะกระทำต่อตัวตลาด"],["market segmentation","การแบ่งส่วนตลาด","เป็นคำนามนับไม่ได้ ไม่ใส่ a"],["product placement","การวางสินค้าในสื่อ เช่น ในหนัง",""],["product portfolio","กลุ่มผลิตภัณฑ์ทั้งหมดที่บริษัทมี",""],["product feature","คุณสมบัติของสินค้า","USP คือ product feature ที่ไม่เหมือนใคร"],["customer profile","ลักษณะกลุ่มลูกค้า","สร้างจากการวิเคราะห์พฤติกรรมการซื้อ"],["customer retention","การรักษาลูกค้าเดิมไว้","ถูกกว่าการหาลูกค้าใหม่"],["customer base","ฐานลูกค้า",""],["brand positioning","การวางตำแหน่งแบรนด์ในใจผู้บริโภค","up-market · mid-market · budget"],["brand identity","อัตลักษณ์แบรนด์ · โลโก้ สี น้ำเสียง",""],["brand extension","การต่อยอดแบรนด์ไปสินค้าประเภทใหม่",""]]},{"code":"compound","name":"compound noun","unit":"Unit 2","items":[["marketing campaign","แคมเปญการตลาด",""],["marketing budget","งบประมาณการตลาด",""],["market leader","ผู้นำตลาด","ห้ามเขียน marketing leader"],["market survey","การสำรวจตลาด",""],["market sector","ภาคส่วนของตลาด","เช่น ภาคยานยนต์"],["product range","สายผลิตภัณฑ์ · ช่วงสินค้า",""],["product features","คุณสมบัติสินค้า",""],["product launch","การเปิดตัวสินค้า",""],["advertising agency","เอเจนซีโฆษณา",""],["advertising slogan","สโลแกนโฆษณา",""],["brand awareness","การรับรู้แบรนด์",""],["brand loyalty","ความภักดีต่อแบรนด์",""],["brand image","ภาพลักษณ์แบรนด์",""],["sales figures","ตัวเลขยอดขาย","sales คงรูปพหูพจน์เสมอ"],["sales forecast","การพยากรณ์ยอดขาย",""],["sales targets","เป้าหมายการขาย","ใช้ meet · hit · achieve a target"],["sales report","รายงานการขาย",""],["price promotion","การส่งเสริมการขายด้วยราคา",""],["price rise","การขึ้นราคา",""],["price range","ช่วงราคา",""],["sponsorship deal","ข้อตกลงการเป็นผู้สนับสนุน","an excellent sponsorship deal"]]},{"code":"markets","name":"ตลาดและส่วนของตลาด","unit":"Unit 2","items":[["market share","ส่วนแบ่งตลาด","วัดเป็นเปอร์เซ็นต์ของยอดขายรวม"],["market segment","ส่วนตลาด · กลุ่มผู้ซื้อที่มีลักษณะร่วมกัน",""],["market niche","ตลาดเฉพาะกลุ่ม","สลับเป็น niche market ก็ได้"],["target market","ตลาดเป้าหมาย",""],["mass market","ตลาดมวลชน","ตรงข้ามกับ niche"],["domestic market","ตลาดในประเทศ","ตัวแปลกแยก Ex C ข้อ 4"],["overseas market","ตลาดต่างประเทศ",""],["international market","ตลาดระหว่างประเทศ",""],["worldwide market","ตลาดทั่วโลก",""],["growing market","ตลาดที่กำลังเติบโต",""],["developing market","ตลาดที่กำลังพัฒนา",""],["expanding market","ตลาดที่กำลังขยายตัว",""],["declining market","ตลาดที่กำลังหดตัว","ตัวแปลกแยก Ex C ข้อ 1"],["up-market","ระดับบน · สินค้าราคาแพง","ตรงข้ามคือ down-market หรือ budget"],["premium product","สินค้าระดับพรีเมียม","ตั้งราคาสูงกว่าคู่แข่งโดยตั้งใจ"]]},{"code":"research","name":"การวิจัยตลาด","unit":"Unit 2","items":[["market research","การวิจัยตลาด","ใช้ carry out หรือ conduct ไม่ใช่ make"],["questionnaire","แบบสอบถาม",""],["focus group","กลุ่มสนทนา","เชิญคนมานั่งคุยเพื่อเก็บความเห็น"],["survey","การสำรวจ",""]]},{"code":"promo","name":"เปิดตัวและส่งเสริมการขาย","unit":"Unit 2","items":[["launch a product","เปิดตัวสินค้า",""],["introduce a product","นำสินค้าออกขาย",""],["bring out a product","นำสินค้าออกสู่ตลาด",""],["withdraw a product","ถอนสินค้าออกจากตลาด","ตัวแปลกแยก Ex C ข้อ 5"],["promotion","การส่งเสริมการขาย","ตัวแปลกแยก Ex C ข้อ 2"],["special offer","ข้อเสนอพิเศษ",""],["free sample","สินค้าตัวอย่างแจกฟรี",""],["discount","ส่วนลด",""],["slogan","สโลแกน · คำขวัญโฆษณา","ตัวแปลกแยก Ex C ข้อ 6"],["endorsement","การรับรองโดยบุคคลมีชื่อเสียง","celebrity endorsement"],["word of mouth","การบอกต่อปากต่อปาก","ไม่เสียเงินแต่ควบคุมไม่ได้"],["point of sale","จุดขาย · ณ จุดชำระเงิน","ย่อว่า POS"]]},{"code":"channel","name":"ช่องทางจำหน่าย","unit":"Unit 2","items":[["retailer","ผู้ค้าปลีก",""],["wholesaler","ผู้ค้าส่ง",""],["distributor","ผู้จัดจำหน่าย",""],["outlet","ร้านจำหน่าย · ช่องทางขาย","retail outlet = จุดขายปลีก"],["exporter","ผู้ส่งออก","ตัวแปลกแยก Ex C ข้อ 7"]]},{"code":"adverb","name":"adverb ในวลีนาม","unit":"Unit 2","items":[["highly","อย่างสูง · อย่างยิ่ง","ใช้กับ adjective ที่มีระดับ"],["extremely","อย่างที่สุด",""],["incredibly","อย่างเหลือเชื่อ",""],["absolutely","อย่างสมบูรณ์ · สุด ๆ","ใช้กับ adjective ที่สุดทางแล้ว เช่น brilliant"],["really","จริง ๆ · มาก",""],["increasingly","มากขึ้นเรื่อย ๆ",""],["totally","ทั้งหมด · โดยสิ้นเชิง","ใช้กับ adjective ที่สุดทางแล้ว"],["fairly","ค่อนข้าง",""]]},{"code":"phrase","name":"วลีนามจากบทความ","unit":"Unit 2","items":[["an advertising campaign","แคมเปญโฆษณา","a programme of activities to persuade the public to buy"],["chief executive","ประธานเจ้าหน้าที่บริหาร","the person with the highest position · CEO"],["fashion houses","ห้องเสื้อ · แบรนด์แฟชั่น","the makers of clothes in new and changing styles"],["a luxury goods company","บริษัทสินค้าหรูหรา","makes expensive things for comfort and pleasure"],["growth potential","ศักยภาพในการเติบโต","possibility for future development and expansion"]]},{"code":"abbr","name":"ตัวย่อ","unit":"Unit 2","items":[["SWOT","จุดแข็ง จุดอ่อน โอกาส อุปสรรค","Strengths Weaknesses Opportunities Threats · วิเคราะห์ตัวบริษัท"],["STEP · PEST","สังคม เทคโนโลยี เศรษฐกิจ การเมือง","Sociological Technological Economic Political · วิเคราะห์ภายนอก"],["USP","จุดขายที่ไม่เหมือนใคร","Unique Selling Point"],["4P","ส่วนประสมการตลาดสี่ตัว","Product Price Place Promotion"]]},{"code":"core6","name":"หกคำหลัก","unit":"Unit 12","items":[["joint venture","กิจการร่วมค้า","สองบริษัทขึ้นไปลงทุนร่วมกัน · คำใบ้อยู่ที่คำว่า joint"],["MBO · management buyout","ผู้บริหารซื้อกิจการที่ตัวเองทำงานอยู่",""],["merger","การควบรวม","รวมกันเป็นบริษัทใหญ่ขึ้น มักเกิดชื่อใหม่"],["takeover · acquisition","การเข้าซื้อกิจการ","ซื้อหุ้นเกิน 50% เพื่อให้ได้อำนาจควบคุม"],["bid","การเสนอราคาซื้อหุ้น","แค่เสนอ ยังไม่ได้ซื้อ"],["stake","สัดส่วนการถือหุ้น · เงินที่ลงทุนไว้","สิ่งที่ถืออยู่แล้ว ต่างจาก bid"]]},{"code":"verbs","name":"กริยาที่ใช้คู่กัน","unit":"Unit 12","items":[["take a stake in","เข้าถือหุ้นใน","Nestlé took a 30% stake in the start-up."],["hold a stake","ถือหุ้นอยู่","The family still holds a 12% stake."],["build up a stake","ทยอยสะสมหุ้น","The investor quietly built up a stake."],["sell a stake","ขายหุ้นที่ถืออยู่","They sold their stake at a large profit."],["make a bid for","ยื่นข้อเสนอซื้อ","Kraft made a bid for Cadbury in 2009."],["launch a bid","เปิดฉากเสนอซื้อ","They launched a hostile bid last week."],["accept a bid","ตอบรับข้อเสนอ","Shareholders voted to accept the bid."],["reject a bid","ปฏิเสธข้อเสนอ","The board rejected the bid as too low."],["raise a bid","เพิ่มราคาที่เสนอ","They raised their bid by 20p a share."],["withdraw a bid","ถอนข้อเสนอ","The bidder withdrew the bid."],["target a company","เล็งบริษัทเป็นเป้า","target ต้องตามด้วยสิ่งที่เป็นเป้า"],["acquire a company","ซื้อกิจการ","Disney acquired Pixar for $7.4bn."],["take over a company","เข้าครอบครองกิจการ","เขียนแยกสองคำเป็นกริยา"],["merge with","ควบรวมกับ","Exxon merged with Mobil in 1999."],["set up a joint venture","ตั้งกิจการร่วมค้า","set up ใช้กับสิ่งที่ก่อตั้งขึ้นใหม่"],["make an acquisition","เข้าซื้อกิจการ","We plan to make two acquisitions this year."]]},{"code":"maextra","name":"ศัพท์ M and A เพิ่มเติม","unit":"Unit 12","items":[["shareholder","ผู้ถือหุ้น","อเมริกันใช้ stockholder"],["share price","ราคาหุ้น","The share price rose 8% on the news."],["subsidiary","บริษัทย่อย","บริษัทที่ถูกอีกบริษัทควบคุม"],["parent company","บริษัทแม่","คู่กับ subsidiary"],["bidder","ผู้เสนอซื้อ",""],["target","บริษัทเป้าหมาย",""],["due diligence","การตรวจสอบสถานะกิจการ","ตรวจก่อนซื้อว่ามีปัญหาซ่อนอยู่ไหม"],["synergy","การผนึกกำลัง","ผลรวมที่มากกว่าผลบวก · เหตุผลยอดนิยมเวลาควบรวม"],["economies of scale","การประหยัดต่อขนาด","ยิ่งผลิตมาก ต้นทุนต่อหน่วยยิ่งต่ำ"],["premium","ส่วนเพิ่มเหนือราคาตลาด","They paid a 25% premium over the share price."],["friendly takeover","การเข้าซื้อแบบเป็นมิตร","คณะกรรมการของบริษัทเป้าหมายเห็นชอบ"],["hostile takeover","การเข้าซื้อแบบไม่เป็นมิตร","กรรมการคัดค้าน จึงเสนอซื้อกับผู้ถือหุ้นโดยตรง"],["white knight","อัศวินขี่ม้าขาว","ผู้ซื้อที่เป็นมิตร เชิญมาช่วยสู้ hostile bid"],["poison pill","ยาพิษ","มาตรการที่ทำให้ตัวเองถูกซื้อยากขึ้น"],["divest","ขายกิจการทิ้ง","ตรงข้ามกับ acquire"],["spin-off","การแยกกิจการออกมาตั้งใหม่","แยกหน่วยธุรกิจเป็นบริษัทอิสระ"],["asset stripping","การซื้อมาเพื่อแยกขายทรัพย์สิน",""],["antitrust · competition authority","หน่วยงานกำกับการแข่งขัน","อาจสั่งห้ามดีลที่ทำให้ผูกขาด"]]}]
+</script>
+
 <footer>
   <div class="shell">
     <p><b>Business English · Market Leader Upper Intermediate</b> — สรุปจาก Unit 2 International Marketing และ Unit 12 Mergers and Acquisitions เพื่อทบทวนประกอบชั้นเรียน</p>
@@ -1742,7 +1866,7 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
 (function(){
   "use strict";
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var rails = {np:'rail-np', mk:'rail-mk', ma:'rail-ma', pr:'rail-pr', ex:'rail-ex', quiz:'rail-quiz'};
+  var rails = {np:'rail-np', mk:'rail-mk', ma:'rail-ma', pr:'rail-pr', vc:'rail-vc', ex:'rail-ex', quiz:'rail-quiz'};
   tabs.forEach(function(t){
     t.addEventListener('click', function(){
       var id = t.getAttribute('aria-controls');
@@ -1998,6 +2122,164 @@ table.drm td{padding:0; border:1px solid var(--rule); background:var(--paper)}
     return a;
   }
 
+
+
+  /* ---------------------------------------------------------
+     แท็บคำศัพท์
+     รายการคำอยู่ในบล็อก JSON id="vc-data" เพื่อให้ค้นหาและกรองได้
+     สถานะ "จำได้แล้ว" เก็บใน localStorage ของเครื่องผู้เรียนเอง
+     --------------------------------------------------------- */
+  var vcList = document.getElementById('vc-list');
+  if (vcList){
+    var VC = JSON.parse(document.getElementById('vc-data').textContent);
+    var VC_KEY = 'classroom-vocab-' +
+      (location.pathname.replace(/\/[^\/]*$/, '').split('/').filter(Boolean).pop() || 'course');
+
+    var known = {};
+    try { known = JSON.parse(localStorage.getItem(VC_KEY) || '{}') || {}; } catch(e){ known = {}; }
+    function saveKnown(){
+      try { localStorage.setItem(VC_KEY, JSON.stringify(known)); } catch(e){}
+    }
+
+    var vcF = {unit:'all', cat:'all', q:'', onlyNew:false, quiz:false};
+    var vcCount = document.getElementById('vc-count');
+    var vcNone  = document.getElementById('vc-none');
+
+    function esc(s){
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    /* ---- วาดรายการทั้งหมดครั้งเดียว แล้วค่อยซ่อนแสดงตามตัวกรอง ---- */
+    function render(){
+      var html = '';
+      VC.forEach(function(g){
+        html += '<section class="vc-group" id="vcg-' + g.code + '" ' +
+                'data-cat="' + g.code + '" data-unit="' + g.unit + '">' +
+                '<div class="vc-gh"><h3>' + esc(g.name) + '</h3>' +
+                '<span class="u">' + esc(g.unit) + '</span>' +
+                '<span class="n"></span></div><div class="vc-list">';
+        g.items.forEach(function(it){
+          var id = g.code + '|' + it[0];
+          html += '<div class="vc" data-id="' + esc(id) + '">' +
+                  '<button type="button" class="vc-know" aria-pressed="false" ' +
+                  'aria-label="ทำเครื่องหมายว่าจำคำนี้ได้แล้ว"></button>' +
+                  '<div class="vc-main"><div class="vc-en">' + esc(it[0]) + '</div>' +
+                  '<div class="vc-th">' + esc(it[1]) + '</div>' +
+                  (it[2] ? '<div class="vc-note">' + esc(it[2]) + '</div>' : '') +
+                  '</div></div>';
+        });
+        html += '</div></section>';
+      });
+      vcList.innerHTML = html;
+
+      Array.prototype.forEach.call(vcList.querySelectorAll('.vc'), function(card){
+        var id = card.dataset.id;
+        if (known[id]) mark(card, true);
+        card.querySelector('.vc-know').addEventListener('click', function(ev){
+          ev.stopPropagation();
+          var now = !known[card.dataset.id];
+          if (now) known[card.dataset.id] = 1; else delete known[card.dataset.id];
+          mark(card, now); saveKnown(); apply();
+        });
+        // ในโหมดท่อง กดที่ตัวคำเพื่อเปิดเฉลยทีละใบ
+        card.querySelector('.vc-main').addEventListener('click', function(){
+          if (vcF.quiz) card.classList.toggle('open');
+        });
+      });
+    }
+    function mark(card, on){
+      card.classList.toggle('done', on);
+      card.querySelector('.vc-know').setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+
+    /* ---- ตัวกรอง ---- */
+    function apply(){
+      var q = vcF.q.trim().toLowerCase();
+      var shown = 0, total = 0, done = 0;
+      Array.prototype.forEach.call(vcList.querySelectorAll('.vc-group'), function(sec){
+        var okGroup = (vcF.unit === 'all' || sec.dataset.unit === vcF.unit) &&
+                      (vcF.cat  === 'all' || sec.dataset.cat  === vcF.cat);
+        var n = 0;
+        Array.prototype.forEach.call(sec.querySelectorAll('.vc'), function(card){
+          total++;
+          var isKnown = !!known[card.dataset.id];
+          if (isKnown) done++;
+          var text = card.textContent.toLowerCase();
+          var ok = okGroup && (!q || text.indexOf(q) >= 0) && (!vcF.onlyNew || !isKnown);
+          card.classList.toggle('hidden', !ok);
+          if (ok){ n++; shown++; }
+        });
+        sec.classList.toggle('hidden', n === 0);
+        sec.querySelector('.vc-gh .n').textContent = n + ' คำ';
+      });
+      vcNone.classList.toggle('hidden', shown > 0);
+      vcCount.innerHTML = 'แสดง <b>' + shown + '</b> จาก ' + total +
+                          ' คำ · จำได้แล้ว <b>' + done + '</b>';
+    }
+
+    render();
+
+    document.getElementById('vc-q').addEventListener('input', function(){
+      vcF.q = this.value; apply();
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.vc-bar button[data-f]'), function(b){
+      b.addEventListener('click', function(){
+        var f = b.dataset.f;
+        vcF[f] = b.dataset.v;
+        document.querySelectorAll('.vc-bar button[data-f="' + f + '"]').forEach(function(o){
+          o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+        });
+        apply();
+      });
+    });
+
+    var vcNew = document.getElementById('vc-new');
+    vcNew.addEventListener('click', function(){
+      vcF.onlyNew = !vcF.onlyNew;
+      vcNew.setAttribute('aria-pressed', vcF.onlyNew ? 'true' : 'false');
+      apply();
+    });
+
+    var vcQuiz = document.getElementById('vc-quiz');
+    vcQuiz.addEventListener('click', function(){
+      vcF.quiz = !vcF.quiz;
+      vcQuiz.setAttribute('aria-pressed', vcF.quiz ? 'true' : 'false');
+      vcQuiz.textContent = vcF.quiz ? 'เลิกโหมดท่อง' : 'โหมดท่อง · ซ่อนคำแปล';
+      Array.prototype.forEach.call(vcList.querySelectorAll('.vc-list'), function(l){
+        l.classList.toggle('quiz', vcF.quiz);
+      });
+      // เริ่มรอบใหม่ทุกครั้ง ปิดเฉลยที่เปิดค้างไว้ให้หมด
+      Array.prototype.forEach.call(vcList.querySelectorAll('.vc.open'), function(c){
+        c.classList.remove('open');
+      });
+    });
+
+    document.getElementById('vc-reset').addEventListener('click', function(){
+      if (!confirm('ล้างเครื่องหมาย จำได้แล้ว ทั้งหมดในเครื่องนี้ ยืนยันไหมครับ')) return;
+      known = {}; saveKnown();
+      Array.prototype.forEach.call(vcList.querySelectorAll('.vc'), function(c){ mark(c, false); });
+      apply();
+    });
+
+    document.getElementById('vc-dl').addEventListener('click', function(){
+      var lines = ['คำศัพท์ · ภาษาอังกฤษเพื่อการสื่อสาร', ''];
+      VC.forEach(function(g){
+        lines.push('== ' + g.name + ' · ' + g.unit + ' ==');
+        g.items.forEach(function(it){
+          lines.push(it[0] + '\t' + it[1] + (it[2] ? '\t' + it[2] : ''));
+        });
+        lines.push('');
+      });
+      var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'คำศัพท์-อังกฤษธุรกิจ.txt';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    });
+
+    apply();
+  }
 
   /* ---------------------------------------------------------
      แบบฝึกเขียนตอบ
