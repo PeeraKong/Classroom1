@@ -38,11 +38,27 @@ SETS, VOICES = _ld.SETS, _ld.VOICES
 INDEX_RE = re.compile(r'\n*<script type="application/json" id="ls-audio">.*?</script>', re.S)
 
 # เว้นจังหวะระหว่างผู้พูด ให้ฟังเหมือนการนำเสนอจริงที่มีการสลับคน
-# ใช้วิธีสังเคราะห์เครื่องหมายจุดไข่ปลา เพราะต่อไฟล์ MP3 เปล่าเข้าไปตรง ๆ ไม่ได้
-PAUSE_TEXT = '...'
+#
+# เดิมใช้วิธีสังเคราะห์จุดไข่ปลา แต่บริการตอบกลับว่า NoAudioReceived
+# เพราะข้อความที่มีแต่เครื่องหมายวรรคตอนไม่มีอะไรให้อ่านออกเสียง
+# จึงเปลี่ยนมาประกอบเฟรม MP3 เงียบขึ้นเองแทน ซึ่งไม่ต้องเรียกบริการเลย
+#
+# เฟรมของบริการนี้คือ MPEG-2 Layer III 24 kHz โมโน 48 kbps
+#   FF        ซิงก์
+#   F3        ซิงก์ต่อ · เวอร์ชัน MPEG2 · เลเยอร์ III · ไม่มี CRC
+#   64        บิตเรต 48 kbps · อัตราสุ่ม 24 kHz · ไม่มีไบต์เสริม
+#   C0        โมโน
+# ส่วนข้อมูลเสียงเป็นศูนย์ทั้งหมด ตัวถอดรหัสจึงได้ความเงียบ
+SILENT_FRAME = bytes([0xFF, 0xF3, 0x64, 0xC0]) + b'\x00' * 140
+FRAME_SECONDS = 576 / 24000.0
+PAUSE_SECONDS = 0.7
 
 
-async def build_part(part, pause_cache):
+def silence(seconds):
+    return SILENT_FRAME * max(1, int(round(seconds / FRAME_SECONDS)))
+
+
+async def build_part(part):
     """สังเคราะห์ทีละช่วงพูด แล้วต่อกัน คืนเสียง จุดเริ่มของแต่ละช่วง และความยาวรวม"""
     parts, cues, at = [], [], 0.0
     prev_speaker = None
@@ -51,9 +67,7 @@ async def build_part(part, pause_cache):
 
         # เปลี่ยนคนพูดเมื่อไร ให้เว้นจังหวะก่อน
         if prev_speaker is not None and name != prev_speaker:
-            if voice not in pause_cache:
-                pause_cache[voice] = await synth(PAUSE_TEXT, voice, '', '')
-            gap = pause_cache[voice]
+            gap = silence(PAUSE_SECONDS)
             at += mp3_duration(gap)
             parts.append(gap)
         prev_speaker = name
@@ -171,7 +185,6 @@ async def main():
             old = {}
 
     clips, made, skipped = {}, 0, 0
-    pause_cache = {}
     for st in SETS:
         print(u'\n%s' % st['title'])
         for part in st['parts']:
@@ -184,7 +197,7 @@ async def main():
                 print(u'  ข้าม %s เพราะยังเหมือนเดิม' % part['id'])
                 continue
 
-            audio, cues, dur = await build_part(part, pause_cache)
+            audio, cues, dur = await build_part(part)
             with open(mp3, 'wb') as f:
                 f.write(audio)
             clips[part['id']] = {
