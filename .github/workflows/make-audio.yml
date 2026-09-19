@@ -31,7 +31,7 @@ on:
         required: false
         default: 'audio'
         type: choice
-        options: [audio, sample]
+        options: [audio, sample, listening]
 
 permissions:
   contents: write
@@ -62,6 +62,13 @@ jobs:
       - name: ทำคลิปตัวอย่างไว้เทียบเสียง
         if: inputs.task == 'sample'
         run: python tools/sample-voices.py
+
+      - name: สร้างไฟล์เสียงแบบฝึกฟัง
+        if: inputs.task == 'listening'
+        run: |
+          python tools/make-listening.py --check
+          python tools/make-listening.py
+          python tools/make-listening.py --check
 
       - name: ดูว่าบทไหนยังขาดไฟล์เสียง
         if: inputs.task == 'audio'
@@ -96,7 +103,7 @@ jobs:
           VOICE: ${{ inputs.voice }}
           EN_VOICE: ${{ inputs.en_voice }}
           BRANCH: ${{ github.ref_name }}
-          SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
+          SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || inputs.task == 'listening' && 'เพิ่มไฟล์เสียงแบบฝึกฟัง Part III' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
         run: |
           # ต้องใช้ status --porcelain ไม่ใช่ diff --quiet
           # เพราะ diff มองเฉพาะไฟล์ที่ git ติดตามอยู่แล้ว ไฟล์ใหม่ทั้งโฟลเดอร์
