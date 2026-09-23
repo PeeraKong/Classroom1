@@ -113,9 +113,11 @@ def read_page():
 
 def page_data():
     """แปลงบทจาก listening-data.py เป็นรูปแบบที่หน้าเว็บอ่าน"""
+    # ติดลายเซ็นของบทไปกับหน้าเว็บด้วย หน้าเว็บจะได้เทียบกับลายเซ็นที่ติดมากับไฟล์เสียง
+    # แล้วรู้เองว่าคลิปยังพูดบทเก่าอยู่ไหม ไม่ต้องรอให้คนมาเจอเอง
     return [{'id': st['id'], 'title': st['title'],
              'parts': [{'id': p['id'], 'kind': p['kind'], 'title': p['title'],
-                        'context': p['context'],
+                        'context': p['context'], 'sig': sig_of(p),
                         'turns': [[t[0], t[3]] for t in p['turns']],
                         'questions': [{'q': q['q'], 'o': list(q['o']),
                                        'a': q['a'], 'e': q['e']} for q in p['questions']]}
@@ -160,6 +162,27 @@ def verify_page():
             if [q['q'] for q in a['questions']] != [q['q'] for q in p['questions']]:
                 print(u'  %s คำถามในหน้าเว็บไม่ตรงกับไฟล์บท' % p['id']); bad += 1
     print(u'  ตรวจบทในหน้าเว็บเทียบกับไฟล์บท · พบไม่ตรง %d จุด' % bad)
+
+    # เทียบลายเซ็นของบทกับลายเซ็นที่ติดมากับไฟล์เสียง
+    # นับจำนวนช่วงเสียงอย่างเดียวไม่พอ เพราะแก้ข้อความโดยไม่เพิ่มลดจำนวนช่วง
+    # จะผ่านการตรวจแบบนั้นไปได้ทั้งที่คลิปยังพูดของเก่า ซึ่งเคยเกิดขึ้นมาแล้วจริง
+    old = {}
+    ma = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+    if ma:
+        try:
+            old = json.loads(ma.group(1)) or {}
+        except Exception:
+            old = {}
+    stale = [p['id'] for st in SETS for p in st['parts']
+             if (old.get(p['id']) or {}).get('sig') not in (None, sig_of(p))]
+    missing = [p['id'] for st in SETS for p in st['parts'] if p['id'] not in old]
+    if stale:
+        print(u'  คลิปที่ยังพูดบทเก่า ต้องสร้างเสียงใหม่ %d คลิป · %s'
+              % (len(stale), ' '.join(stale)))
+    if missing:
+        print(u'  คลิปที่ยังไม่มีไฟล์เสียง %d คลิป · %s' % (len(missing), ' '.join(missing)))
+    if not stale and not missing:
+        print(u'  ไฟล์เสียงทุกคลิปตรงกับบทปัจจุบัน')
     return bad
 
 
@@ -208,7 +231,57 @@ def audit_scripts():
                     for piece in [x.strip() for x in quote.split(u'…') if len(x.strip()) > 12]:
                         if piece not in script:
                             fail(pid, u'คำอธิบายอ้างข้อความที่ไม่มีในบท · %s' % piece[:50])
+
+                # หัวใจของแบบฝึกฟัง คือคลิปต้องไม่พูดคำตอบออกมาตรง ๆ
+                # ถ้าพูดเป๊ะ นิสิตแค่รอจับเสียงให้ตรงคำในตัวเลือกก็ได้คะแนน
+                # โดยไม่ต้องเข้าใจว่าพูดอะไร ตัวเลือกที่ถูกจึงต้องเป็นการถอดความ
+                # หรือเป็นข้อสรุปจากสิ่งที่ได้ยิน
+                why = echoes(q['o'][q['a']], script)
+                if why:
+                    fail(pid, u'คลิปพูดคำตอบตรง ๆ (%s) · %s' % (why, q['o'][q['a']][:44]))
     return bad
+
+
+# คำไวยากรณ์ที่ไม่นับเป็นเนื้อความ เพราะมีอยู่ทุกประโยคอยู่แล้ว
+STOP = {'a', 'an', 'the', 'of', 'to', 'in', 'on', 'at', 'by', 'for', 'and', 'or',
+        'is', 'was', 'were', 'are', 'be', 'been', 'it', 'its', 'that', 'this',
+        'with', 'from', 'as', 'than', 'then', 'they', 'their', 'he', 'she'}
+
+
+def words(s):
+    return re.sub(r'[^a-z0-9 ]', ' ', s.lower().replace(u'’', "'")).split()
+
+
+def echoes(answer, script):
+    u"""ตัวเลือกที่ถูก ไปตรงกับข้อความในบทมากเกินไปหรือเปล่า
+
+    จับสองแบบ
+      พูดเป๊ะทั้งวลี เช่น ตัวเลือก "Three months" กับบท "over three months"
+      พูดครบทุกคำในช่วงสั้น ๆ แม้สลับลำดับ เช่น "It falls to six hundred thousand"
+        กับบท "then it falls to six hundred thousand from year two"
+    คืนเหตุผลเป็นข้อความถ้าซ้ำ คืนค่าว่างถ้าผ่าน
+    """
+    aw = words(answer)
+    sw = words(script)
+    if not aw:
+        return u''
+
+    joined = ' '.join(sw)
+    if ' '.join(aw) in joined:
+        return u'ตรงทั้งวลี'
+
+    # ตัวเลือกคำเดียวที่เป็นคำไวยากรณ์ ไม่ต้องตรวจ เพราะเลี่ยงไม่ได้
+    core = [w for w in aw if w not in STOP]
+    if len(core) < 2:
+        return u''
+
+    # หาหน้าต่างในบทที่ยาวพอ ๆ กับตัวเลือก แล้วดูว่ากินคำเนื้อความไปหมดไหม
+    span = len(aw) + 4
+    need = set(core)
+    for i in range(max(1, len(sw) - span + 1)):
+        if need <= set(sw[i:i + span]):
+            return u'คำเนื้อความครบทุกคำในช่วงเดียว'
+    return u''
 
 
 def check():
