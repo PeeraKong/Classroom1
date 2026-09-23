@@ -239,7 +239,45 @@ def audit_scripts():
                 why = echoes(q['o'][q['a']], script)
                 if why:
                     fail(pid, u'คลิปพูดคำตอบตรง ๆ (%s) · %s' % (why, q['o'][q['a']][:44]))
+
+                # แบบฝึกนี้วัดการฟัง ไม่ได้วัดการคิดเลข
+                # ถ้าคำตอบคือผลลบหรือผลหาร นิสิตที่ฟังเข้าใจครบแต่คิดเลขพลาด
+                # จะเสียคะแนนทั้งที่ทักษะที่ข้อสอบตั้งใจวัดไม่ได้บกพร่องเลย
+                why = arithmetic(q['o'][q['a']], q.get('e', ''))
+                if why:
+                    fail(pid, u'คำถามต้องคิดเลข (%s) · %s' % (why, q['o'][q['a']][:44]))
     return bad
+
+
+# คำบอกจำนวนในภาษาอังกฤษ ใช้ดูว่าคำตอบเป็นตัวเลขล้วนหรือเปล่า
+NUMBER_WORDS = set(u'''
+one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen
+sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety
+hundred thousand million billion percent point half third quarter quarters fifth fifths
+tenth tenths twice double dozen
+'''.split())
+
+# ร่องรอยของการคิดเลขในคำอธิบาย เช่น 310 ลบ 205 เท่ากับ 105
+# เทียบกับตัวเลขข้างหน้าเสมอ ไม่งั้นคำว่า บริหาร จะโดนจับเพราะมี หาร อยู่ข้างใน
+CALC_RE = re.compile(
+    u'\\d[\\d,\\.]*\\s*(?:ลบ|บวก|คูณ|หาร|[-+×÷*/])|เท่ากับ|ผลต่าง|หารด้วย')
+
+
+def arithmetic(answer, why):
+    u"""ข้อนี้บังคับให้คิดเลขหรือเปล่า
+
+    จับสองแบบ
+      คำตอบเป็นตัวเลขล้วน เช่น One thousand eight hundred yen
+        ซึ่งแปลว่าต้องไปหาตัวเลขมาบวกลบเอง เพราะคลิปพูดตรง ๆ ไม่ได้อยู่แล้ว
+      คำอธิบายมีร่องรอยการคำนวณ เช่น 420 ลบที่ดิน 60 เหลือเงินสด 360 ล้าน
+    """
+    core = [w for w in re.findall(r"[a-z']+", answer.lower())
+            if w not in STOP and w not in ('about', 'over', 'under', 'almost', 'nearly')]
+    if core and sum(1 for w in core if w in NUMBER_WORDS) * 2 >= len(core):
+        return u'คำตอบเป็นตัวเลขล้วน'
+    if CALC_RE.search(why):
+        return u'คำอธิบายมีการคำนวณ'
+    return u''
 
 
 # คำไวยากรณ์ที่ไม่นับเป็นเนื้อความ เพราะมีอยู่ทุกประโยคอยู่แล้ว
