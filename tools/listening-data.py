@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""บทฟังสำหรับ Part III · Listening ของวิชาภาษาอังกฤษ
+u"""บทฟังสำหรับ Part III · Listening ของวิชาภาษาอังกฤษ
 
 แต่ละชุดมีสองส่วนตามแนวข้อสอบจริง
   presentation · การนำเสนอกลุ่มเรื่อง international marketing หลายคนพูดสลับกัน
@@ -7,6 +7,17 @@
 
 ทุกบทตั้งใจใส่ศัพท์จาก Unit 2 และ Unit 12 ให้หนาแน่น เพราะข้อสอบวัดการฟังจับรายละเอียด
 ที่ผูกกับศัพท์เหล่านั้นโดยตรง
+
+── เขียนให้เหมาะกับนิสิตบัญชีชั้นปีที่ 3 ──
+ประเภทของบททั้งสองแบบเปลี่ยนไม่ได้ เพราะแนวข้อสอบล็อกไว้ แต่สิ่งที่เปลี่ยนได้คือ
+รายละเอียดที่ถูกถาม จึงย้ายไปเป็นตัวเลขที่นิสิตบัญชีอ่านออกทันที เช่น อัตรากำไรขั้นต้น
+จุดคุ้มทุน ระยะเวลาคืนทุน เงินลงทุน ค่าความนิยม ต้นทุนการรวมกิจการ และวันที่เริ่มนำมารวมงบ
+
+ไม่ใช้ชื่อบริษัทจริงหรือดีลจริงเลย ทุกกิจการสมมติขึ้นใหม่ เพราะข้อสอบฟังควรวัดว่า
+จับรายละเอียดจากเสียงได้ไหม ไม่ใช่วัดว่าเคยอ่านข่าวดีลนั้นมาก่อนหรือเปล่า
+
+ความยาวคุมไว้ราว 300 คำต่อคลิป และพูดด้วยความเร็วปกติ ได้คลิปละราวสองนาที
+ซึ่งเป็นความยาวที่ฟังรวดเดียวได้โดยไม่เสียสมาธิ
 """
 
 # เสียงที่ใช้ · ตั้งชื่อย่อไว้ให้อ้างง่ายในบท
@@ -26,166 +37,154 @@ SETS = [
 
  {'id': 'L1a', 'kind': 'presentation',
   'title': 'Entering the Vietnamese Market',
-  'context': u'ทีมการตลาดสามคนนำเสนอแผนพาแบรนด์อาหารว่างเข้าสู่ตลาดเวียดนาม',
+  'context': u'ทีมสามคนเสนอแผนพาแบรนด์อาหารพร้อมทานเข้าตลาดเวียดนาม พร้อมตัวเลขการลงทุนและจุดคุ้มทุน',
   'turns': [
    ('Mai', 'm', 'f1',
-    "Good morning everyone. I'm Mai, and today my team and I will present our plan for taking Crispbite "
-    "into Vietnam. I'll start with the market research, then Daniel will cover segmentation and "
-    "positioning, and finally Preecha will talk about the marketing mix and the risks."),
+    "Good morning everyone. I'm Mai. Today my team will present our plan for taking Freshline "
+    "ready meals into Vietnam. I'll cover the market research, Daniel will take segmentation and "
+    "positioning, and Preecha will finish with the numbers and the risks."),
    ('Mai', 'm', 'f1',
-    "We carried out market research in four cities over three months. We used two methods: a questionnaire "
-    "completed by two thousand shoppers, and six focus groups. The headline finding is that the snack "
-    "market in Vietnam is growing at about nine percent a year, which is far faster than our domestic "
-    "market. But it is also increasingly competitive. The market leader already holds thirty-one percent "
-    "market share, and two international brands entered last year."),
+    "We carried out market research in four cities over three months. We used two methods: a "
+    "questionnaire completed by two thousand shoppers, and six focus groups. The headline finding "
+    "is that the chilled ready meal market is growing at about nine percent a year. But it is also "
+    "increasingly competitive. The market leader already holds thirty-one percent market share, "
+    "and two international brands entered last year."),
    ('Daniel', 'd', 'm1',
-    "Thanks, Mai. So who exactly are we selling to? Our customer profile is clear: urban office workers "
-    "between twenty-two and thirty-five, who buy snacks at convenience stores rather than supermarkets. "
-    "That segment is small — about twelve percent of all snack buyers — but it spends nearly double the "
-    "average."),
+    "Thanks, Mai. So who are we selling to? Our customer profile is narrow: urban office workers "
+    "between twenty-two and thirty-five who buy from convenience stores rather than supermarkets. "
+    "That segment is only twelve percent of all buyers, but it spends nearly double the average."),
    ('Daniel', 'd', 'm1',
-    "On brand positioning, we are not going to compete on price. The budget end of the market is already "
-    "crowded and the margins are thin. Instead we will position Crispbite as a premium product, roughly "
-    "twenty percent above the average shelf price, and build the brand around quality ingredients."),
+    "On brand positioning, we will not compete on price. The budget end is crowded and the margins "
+    "are thin. We will position Freshline as a premium product at roughly twenty percent above the "
+    "average shelf price, and build brand awareness around ingredient quality."),
    ('Preecha', 'p', 'm2',
-    "Thank you, Daniel. Let me turn to the marketing mix. On product, we need some market adaptation. Our "
-    "original flavour is too sweet for Vietnamese consumers, so the recipe will change. On place, we have "
-    "signed with a national distributor who supplies eight thousand retail outlets."),
+    "Thank you, Daniel. Now the numbers, because this is where the plan lives or dies. Capital "
+    "expenditure is four point five million dollars, almost all of it the chilled distribution "
+    "network. Our gross margin at the premium price is thirty-eight percent, against twenty-two "
+    "percent if we sold at the average price."),
    ('Preecha', 'p', 'm2',
-    "On promotion, the budget is one point two million dollars for the first year. Sixty percent goes to "
-    "digital advertising, and the rest to in-store sampling, because free samples are still the most "
-    "effective way to build brand awareness in this market."),
+    "We break even in month nineteen, and the payback period on the full investment is three years "
+    "and two months. The advertising budget is one point one million dollars in year one, then it "
+    "falls to six hundred thousand from year two onwards."),
    ('Preecha', 'p', 'm2',
-    "Finally, the main risk. Brand loyalty in Vietnamese snacks is low — shoppers switch easily. So "
-    "customer retention, not just customer acquisition, has to be the priority from day one. Thank you. "
-    "We are happy to take questions."),
+    "Three risks. First, the cold chain: any failure destroys both the stock and the brand image. "
+    "Second, the market leader could start a price war, which would cut our margin to about "
+    "twenty-five percent. Third, our distributor handles eight thousand retail outlets, so a single "
+    "contract dispute would stop national distribution overnight. We recommend a pilot in two cities "
+    "first. Thank you. We are happy to take questions."),
   ],
   'questions': [
    {'q': 'How long did the market research take?',
-    'o': ['Three months', 'Three weeks', 'Nine months', 'One year'], 'a': 0,
-    'e': u'Mai บอกว่า "we carried out market research in four cities over three months"'},
+    'o': ['Three months', 'Three weeks', 'Nine months', 'Two years'], 'a': 0,
+    'e': '"market research in four cities over three months"'},
    {'q': 'Which two research methods did the team use?',
-    'o': ['A questionnaire and focus groups', 'Interviews and a survey',
-          'A questionnaire and in-store sampling', 'Focus groups and A/B testing'], 'a': 0,
-    'e': u'"a questionnaire completed by two thousand shoppers, and six focus groups"'},
-   {'q': "What is the market leader's share?",
-    'o': ['Thirty-one percent', 'Thirteen percent', 'Twelve percent', 'Twenty percent'], 'a': 0,
-    'e': u'"The market leader already holds thirty-one percent market share" · ระวังสับสนกับ 12% ซึ่งเป็นขนาดของกลุ่มเป้าหมาย'},
-   {'q': 'Where does the target segment usually buy snacks?',
+    'o': ['A questionnaire and focus groups', 'Interviews and a questionnaire',
+          'Focus groups and in-store trials', 'A questionnaire and shelf audits'], 'a': 0,
+    'e': '"a questionnaire completed by two thousand shoppers, and six focus groups"'},
+   {'q': 'What share does the market leader hold?',
+    'o': ['Thirty-one percent', 'Thirteen percent', 'Twelve percent', 'Twenty-two percent'], 'a': 0,
+    'e': '"The market leader already holds thirty-one percent market share"'},
+   {'q': 'Where does the target segment usually buy?',
     'o': ['At convenience stores', 'At supermarkets', 'Online', 'At wholesale markets'], 'a': 0,
-    'e': u'"who buy snacks at convenience stores rather than supermarkets"'},
-   {'q': 'Why will the company NOT compete on price?',
-    'o': ['The budget end is crowded and margins are thin',
-          'The product is too expensive to make',
-          'Regulations prevent price competition',
-          'The distributor refused a low price'], 'a': 0,
-    'e': u'"The budget end of the market is already crowded and the margins are thin"'},
-   {'q': 'How will Crispbite be positioned?',
-    'o': ['As a premium product about twenty percent above average price',
-          'As a budget product below average price',
-          'At exactly the average shelf price',
-          'As a mid-market product'], 'a': 0,
-    'e': u'"position Crispbite as a premium product, roughly twenty percent above the average shelf price"'},
-   {'q': 'What market adaptation is needed?',
-    'o': ['The recipe is too sweet and must change',
-          'The packaging size must be smaller',
-          'The brand name must be translated',
-          'The product must be made locally'], 'a': 0,
-    'e': u'"Our original flavour is too sweet for Vietnamese consumers, so the recipe will change"'},
-   {'q': 'How many retail outlets does the distributor supply?',
-    'o': ['Eight thousand', 'Eighteen thousand', 'Eight hundred', 'Two thousand'], 'a': 0,
-    'e': u'"a national distributor who supplies eight thousand retail outlets" · 2,000 คือจำนวนคนที่ตอบแบบสอบถาม'},
-   {'q': 'What share of the promotion budget goes to digital advertising?',
-    'o': ['Sixty percent', 'Forty percent', 'Twenty percent', 'One point two percent'], 'a': 0,
-    'e': u'"Sixty percent goes to digital advertising, and the rest to in-store sampling"'},
-   {'q': 'What does Preecha say is the main risk?',
-    'o': ['Low brand loyalty, so customer retention must be a priority',
-          'The distributor may not deliver on time',
-          'The promotion budget is too small',
-          'Competitors will copy the recipe'], 'a': 0,
-    'e': u'"Brand loyalty in Vietnamese snacks is low — shoppers switch easily. So customer retention … has to be the priority"'},
+    'e': '"who buy from convenience stores rather than supermarkets"'},
+   {'q': 'How much is the planned capital expenditure?',
+    'o': ['Four point five million dollars', 'Four point five million a year',
+          'One point one million dollars', 'Six hundred thousand dollars'], 'a': 0,
+    'e': '"Capital expenditure is four point five million dollars"'},
+   {'q': 'What gross margin does the premium price give?',
+    'o': ['Thirty-eight percent', 'Twenty-two percent', 'Twenty-five percent', 'Thirty-one percent'], 'a': 0,
+    'e': '"Our gross margin at the premium price is thirty-eight percent"'},
+   {'q': 'When does the plan break even?',
+    'o': ['In month nineteen', 'In month nine', 'After three years and two months', 'In year two'], 'a': 0,
+    'e': '"We break even in month nineteen" · อย่าสับสนกับระยะคืนทุน'},
+   {'q': 'What happens to the advertising budget after year one?',
+    'o': ['It falls to six hundred thousand', 'It rises to one point one million',
+          'It stays the same', 'It is cut to zero'], 'a': 0,
+    'e': '"then it falls to six hundred thousand from year two onwards"'},
+   {'q': 'What would a price war do to the margin?',
+    'o': ['Cut it to about twenty-five percent', 'Cut it to about twenty-two percent',
+          'Raise it to thirty-eight percent', 'Leave it unchanged'], 'a': 0,
+    'e': '"which would cut our margin to about twenty-five percent"'},
+   {'q': 'What does the team finally recommend?',
+    'o': ['A pilot in two cities first', 'A national launch straight away',
+          'Selling at the average shelf price', 'Changing distributor'], 'a': 0,
+    'e': '"We recommend a pilot in two cities first"'},
   ]},
 
  {'id': 'L1b', 'kind': 'talk',
-  'title': 'The Kraft and Cadbury Takeover',
-  'context': u'วิทยากรเล่ากรณีศึกษาการเข้าซื้อกิจการที่โด่งดังในปี 2009 ถึง 2010',
+  'title': 'A Takeover in Regional Logistics',
+  'context': u'วิทยากรเล่ากรณีซื้อกิจการขนส่งภูมิภาค เน้นสิ่งที่พบตอน due diligence และค่าความนิยม',
   'turns': [
-   ('Speaker', 's', 'm1',
-    "Right, let's look at one of the most talked-about takeovers of the last twenty years: Kraft and "
-    "Cadbury. It's a useful case because almost every term from this unit appears in it."),
-   ('Speaker', 's', 'm1',
-    "In September two thousand and nine, Kraft, the American food group, made a bid for Cadbury, the "
-    "British confectionery company. The first offer valued Cadbury at around ten point two billion "
-    "pounds. Cadbury's board rejected the bid immediately, calling it, and I quote, derisory — meaning "
-    "insultingly low."),
-   ('Speaker', 's', 'm1',
-    "Because the board said no, this became a hostile takeover. Kraft went directly to Cadbury's "
-    "shareholders rather than working through the board. That is the defining feature of a hostile bid: "
-    "you bypass the directors."),
-   ('Speaker', 's', 'm1',
-    "Over the following months Kraft raised its bid twice. The final offer, in January two thousand and "
-    "ten, was worth about eleven point five billion pounds — a premium of roughly fifty percent over "
-    "Cadbury's share price before the approach began. At that level, enough shareholders accepted, and "
-    "the deal went through."),
-   ('Speaker', 's', 'm1',
-    "Now, why did Kraft want Cadbury at all? Two reasons were given publicly. First, synergy: Kraft "
-    "claimed it could save at least six hundred and twenty-five million dollars a year by combining "
-    "operations. Second, distribution — Cadbury was strong in India and Latin America, markets where "
-    "Kraft was weak."),
-   ('Speaker', 's', 'm1',
-    "There was also controversy. During the bid Kraft said it would keep a Cadbury factory near Bristol "
-    "open. One week after the takeover completed, it announced the factory would close. Four hundred "
-    "jobs went. Kraft was criticised heavily, and the UK takeover rules were later tightened as a "
-    "result."),
-   ('Speaker', 's', 'm1',
-    "So, three things to remember from this case. A bid can be raised more than once. A hostile takeover "
-    "means going around the board, not through it. And promises made during a bid are not always kept."),
+   ('Speaker', 's', 'm3',
+    "Good afternoon. Today I want to walk you through a takeover in regional logistics, because it "
+    "shows how much of a deal is decided by the accounting work rather than by the strategy."),
+   ('Speaker', 's', 'm3',
+    "In February, a listed transport group called Northvale made a bid for a family-owned company, "
+    "Harbour Freight. The opening offer was two hundred and forty million pounds. The board of "
+    "Harbour Freight rejected the bid within nine days, saying it undervalued the depot network."),
+   ('Speaker', 's', 'm3',
+    "Northvale then went directly to the shareholders, so a friendly approach became a hostile "
+    "takeover. It raised the offer twice, first to two hundred and seventy million and finally to "
+    "three hundred and ten million pounds. That final price was eleven times earnings."),
+   ('Speaker', 's', 'm3',
+    "Now to due diligence, which took seven weeks. The buyer's accountants found two things. First, "
+    "repair obligations on forty leased vehicles had never been recorded, worth about six million "
+    "pounds. Second, one large customer, who provided twenty-eight percent of revenue, had already "
+    "given notice to leave."),
+   ('Speaker', 's', 'm3',
+    "Those findings did not stop the deal, but they changed it. The price stayed at three hundred "
+    "and ten million, and instead thirty million was held back for eighteen months against any "
+    "further claims."),
+   ('Speaker', 's', 'm3',
+    "The deal completed on the first of July, and Harbour Freight was consolidated from that date. "
+    "The fair value of the net assets acquired was two hundred and five million pounds, so goodwill "
+    "of one hundred and five million was recognised."),
+   ('Speaker', 's', 'm3',
+    "Two lessons. The promised synergies were forty million a year from combining the two depot "
+    "networks; after two years the realised figure was twenty-three million. And integration cost "
+    "eighteen million, which nobody had put in the original model. When you read a takeover story, "
+    "always ask what the synergies actually turned out to be. Thank you."),
   ],
   'questions': [
-   {'q': 'When did Kraft first make a bid for Cadbury?',
-    'o': ['September 2009', 'January 2010', 'September 2010', 'January 2009'], 'a': 0,
-    'e': u'"In September two thousand and nine, Kraft … made a bid for Cadbury"'},
-   {'q': 'How much was the first offer worth?',
-    'o': ['About 10.2 billion pounds', 'About 11.5 billion pounds',
-          'About 625 million dollars', 'About 50 billion pounds'], 'a': 0,
-    'e': u'"The first offer valued Cadbury at around ten point two billion pounds" · 11.5 คือข้อเสนอสุดท้าย'},
-   {'q': "How did Cadbury's board describe the first offer?",
-    'o': ['Derisory, meaning insultingly low', 'Generous but premature',
-          'Acceptable in principle', 'Fair but badly timed'], 'a': 0,
-    'e': u'"calling it, and I quote, derisory — meaning insultingly low"'},
-   {'q': 'What made this a hostile takeover?',
-    'o': ["Kraft went directly to shareholders instead of through the board",
-          'Kraft refused to raise its offer',
-          'The government opposed the deal',
-          'Cadbury looked for a white knight'], 'a': 0,
-    'e': u'"Kraft went directly to Cadbury’s shareholders rather than working through the board"'},
-   {'q': 'How many times did Kraft raise its bid?',
-    'o': ['Twice', 'Once', 'Three times', 'It never raised the bid'], 'a': 0,
-    'e': u'"Over the following months Kraft raised its bid twice"'},
-   {'q': 'What premium did the final offer represent?',
-    'o': ['About fifty percent over the earlier share price',
-          'About fifteen percent', 'About five percent', 'About twenty-five percent'], 'a': 0,
-    'e': u'"a premium of roughly fifty percent over Cadbury’s share price before the approach began"'},
-   {'q': 'How much did Kraft claim it could save each year?',
-    'o': ['At least 625 million dollars', 'At least 625 million pounds',
-          'At least 400 million dollars', 'At least 11.5 million dollars'], 'a': 0,
-    'e': u'"it could save at least six hundred and twenty-five million dollars a year" · เป็นดอลลาร์ ไม่ใช่ปอนด์'},
-   {'q': 'In which markets was Cadbury strong?',
-    'o': ['India and Latin America', 'China and Japan',
-          'Germany and France', 'Australia and New Zealand'], 'a': 0,
-    'e': u'"Cadbury was strong in India and Latin America, markets where Kraft was weak"'},
-   {'q': 'What happened to the factory near Bristol?',
-    'o': ['It closed one week after the takeover completed',
-          'It stayed open as promised',
-          'It was sold to another company',
-          'It was expanded'], 'a': 0,
-    'e': u'"One week after the takeover completed, it announced the factory would close"'},
-   {'q': 'What was one consequence of the controversy?',
-    'o': ['The UK takeover rules were tightened',
-          'Kraft was fined by the government',
-          'The deal was cancelled',
-          'Cadbury shareholders sued Kraft'], 'a': 0,
-    'e': u'"the UK takeover rules were later tightened as a result"'},
+   {'q': 'What was Northvale’s opening offer?',
+    'o': ['Two hundred and forty million pounds', 'Two hundred and seventy million pounds',
+          'Three hundred and ten million pounds', 'Two hundred and five million pounds'], 'a': 0,
+    'e': '"The opening offer was two hundred and forty million pounds"'},
+   {'q': 'Why did the board reject the first offer?',
+    'o': ['It undervalued the depot network', 'The buyer was a competitor',
+          'The shareholders had not been consulted', 'The price was in the wrong currency'], 'a': 0,
+    'e': '"saying it undervalued the depot network"'},
+   {'q': 'What turned the approach into a hostile takeover?',
+    'o': ['Northvale went directly to the shareholders', 'The price was raised twice',
+          'Due diligence was refused', 'A second bidder appeared'], 'a': 0,
+    'e': '"Northvale then went directly to the shareholders"'},
+   {'q': 'What was the final price as a multiple of earnings?',
+    'o': ['Eleven times', 'Nine times', 'Eighteen times', 'Twenty-eight times'], 'a': 0,
+    'e': '"That final price was eleven times earnings"'},
+   {'q': 'How long did due diligence take?',
+    'o': ['Seven weeks', 'Nine days', 'Eighteen months', 'Two years'], 'a': 0,
+    'e': '"due diligence, which took seven weeks"'},
+   {'q': 'What was the first due diligence finding?',
+    'o': ['Unrecorded repair obligations on leased vehicles',
+          'An overstated inventory balance', 'A missing insurance policy',
+          'An unpaid tax assessment'], 'a': 0,
+    'e': '"repair obligations on forty leased vehicles had never been recorded"'},
+   {'q': 'How did the parties deal with the findings?',
+    'o': ['Thirty million was held back for eighteen months', 'The price was cut by six million',
+          'The deal was abandoned', 'The customer contract was renegotiated'], 'a': 0,
+    'e': '"instead thirty million was held back for eighteen months"'},
+   {'q': 'How much goodwill was recognised?',
+    'o': ['One hundred and five million pounds', 'Two hundred and five million pounds',
+          'Thirty million pounds', 'Forty million pounds'], 'a': 0,
+    'e': '310 ลบ 205 เท่ากับ 105 ล้านปอนด์'},
+   {'q': 'What were the realised synergies after two years?',
+    'o': ['Twenty-three million a year', 'Forty million a year',
+          'Eighteen million a year', 'Six million a year'], 'a': 0,
+    'e': '"after two years the realised figure was twenty-three million"'},
+   {'q': 'What cost was missing from the original model?',
+    'o': ['Integration cost of eighteen million', 'Due diligence fees',
+          'The holdback of thirty million', 'Goodwill impairment'], 'a': 0,
+    'e': '"integration cost eighteen million, which nobody had put in the original model"'},
   ]},
 ]},
 
@@ -194,169 +193,157 @@ SETS = [
 
  {'id': 'L2a', 'kind': 'presentation',
   'title': 'Taking a Coffee Brand into Japan',
-  'context': u'สองคนนำเสนอแผนพาแบรนด์กาแฟเข้าญี่ปุ่น เน้นการปรับสินค้าและช่องทางจำหน่าย',
+  'context': u'สองคนเสนอแผนพาแบรนด์กาแฟเข้าญี่ปุ่น เน้นต้นทุนต่อหน่วยและจุดคุ้มทุน',
   'turns': [
-   ('Sarah', 's', 'f2',
-    "Morning. I'm Sarah, and with me is Tom. We've been asked to look at whether Northbrew, our coffee "
-    "brand, should enter Japan. Our answer is yes, but not in the way you might expect. I'll cover the "
-    "market, and Tom will cover the product and the numbers."),
-   ('Sarah', 's', 'f2',
-    "Japan is not a growing market in volume terms — coffee consumption has been flat for six years. So "
-    "why go? Because the premium segment is expanding at about seven percent a year while the mass market "
-    "shrinks. That is a market niche, but a profitable one."),
-   ('Sarah', 's', 'f2',
-    "We did our market research differently this time. Instead of a questionnaire we ran ethnographic "
-    "research — we watched two hundred people actually make and drink coffee at home. What we learned "
-    "surprised us. The purchase decision is made on packaging design far more than on taste."),
-   ('Tom', 't', 'm3',
-    "Thanks Sarah. That finding drives our whole product strategy. We are not changing the coffee itself — "
-    "no market adaptation on flavour. What changes is the pack. Smaller sizes, a matte finish, and Japanese "
-    "text on the front rather than English."),
-   ('Tom', 't', 'm3',
-    "On place, we are deliberately avoiding supermarkets in year one. Our distributor will target department "
-    "store food halls and specialist coffee outlets only. It is a slower route, but it protects our brand "
-    "positioning at the premium end."),
-   ('Tom', 't', 'm3',
-    "On price, we will sit thirty percent above the category average. On promotion, we will spend almost "
-    "nothing on advertising. The budget goes to in-store tasting and to one celebrity endorsement — a "
-    "well-known chef who already uses our beans in his restaurants."),
-   ('Tom', 't', 'm3',
-    "Our target is four percent market share of the premium segment within three years. That sounds modest, "
-    "but the premium segment is worth eight hundred million dollars, so four percent is thirty-two million. "
-    "Thank you."),
+   ('Nadia', 'n', 'f2',
+    "Morning. Nadia here, with Kenji. We are proposing to take Aurelia coffee into Japan. I will "
+    "handle the market and the positioning, and Kenji will take the marketing mix and the "
+    "financials."),
+   ('Nadia', 'n', 'f2',
+    "Japan is the third largest coffee market in the world by value. It is mature, growing at only "
+    "two percent a year, so this is a market penetration problem, not a market creation problem. We "
+    "have to take share from someone."),
+   ('Nadia', 'n', 'f2',
+    "Market segmentation gives us three groups. Convenience store buyers, at fifty-four percent, "
+    "are extremely price sensitive. Speciality cafe customers, at nineteen percent, care about "
+    "origin. Office subscription buyers are only eight percent today but growing at fourteen percent "
+    "a year. That last group is our target market."),
+   ('Kenji', 'k', 'm1',
+    "Thanks, Nadia. On the marketing mix, place matters more than promotion here. We will not fight "
+    "for shelf space in convenience stores. We will sell direct to offices on a monthly "
+    "subscription, which also means we get paid before we deliver."),
+   ('Kenji', 'k', 'm1',
+    "The unit economics. A subscription box sells at four thousand two hundred yen. Direct cost is "
+    "two thousand four hundred, so the contribution is one thousand eight hundred yen per box, or "
+    "about forty-three percent."),
+   ('Kenji', 'k', 'm1',
+    "Fixed costs are ninety million yen a year, mostly the roasting contract and the customer team. "
+    "So we need fifty thousand boxes a year to break even, which is about four thousand two hundred "
+    "subscriptions a month. Our forecast for year one is thirty-one thousand boxes, so year one is a "
+    "planned loss."),
+   ('Kenji', 'k', 'm1',
+    "Two risks worth naming. Customer retention is everything in a subscription model: if monthly "
+    "churn goes above four percent, the break-even point moves out by roughly a year. And the yen "
+    "rate affects our green bean cost, which is eighty percent dollar denominated. Thank you."),
   ],
   'questions': [
-   {'q': 'What has happened to coffee consumption in Japan?',
-    'o': ['It has been flat for six years', 'It has grown for six years',
-          'It has fallen sharply', 'It has grown seven percent a year'], 'a': 0,
-    'e': u'"coffee consumption has been flat for six years" · 7% คืออัตราโตของ premium segment'},
-   {'q': 'Why is the team still recommending entry?',
-    'o': ['The premium segment is expanding about seven percent a year',
-          'The mass market is expanding',
-          'Competition has disappeared',
-          'Production costs are low in Japan'], 'a': 0,
-    'e': u'"the premium segment is expanding at about seven percent a year while the mass market shrinks"'},
-   {'q': 'What research method did they use?',
-    'o': ['Ethnographic research, watching people at home',
-          'A questionnaire', 'Focus groups', 'Telephone interviews'], 'a': 0,
-    'e': u'"Instead of a questionnaire we ran ethnographic research — we watched two hundred people"'},
-   {'q': 'What surprised the team?',
-    'o': ['Packaging design matters more than taste',
-          'Taste matters more than price',
-          'Price matters more than packaging',
-          'Brand name matters more than packaging'], 'a': 0,
-    'e': u'"The purchase decision is made on packaging design far more than on taste"'},
-   {'q': 'Will the coffee itself be changed?',
-    'o': ['No, only the packaging changes', 'Yes, the flavour will be adapted',
-          'Yes, the beans will be sourced locally', 'Only the caffeine level changes'], 'a': 0,
-    'e': u'"We are not changing the coffee itself — no market adaptation on flavour. What changes is the pack"'},
-   {'q': 'Which outlets will the distributor target in year one?',
-    'o': ['Department store food halls and specialist coffee outlets',
-          'Supermarkets and convenience stores',
-          'Online retailers only',
-          'Wholesale markets'], 'a': 0,
-    'e': u'"we are deliberately avoiding supermarkets in year one … department store food halls and specialist coffee outlets only"'},
-   {'q': 'How will Northbrew be priced?',
-    'o': ['Thirty percent above the category average',
-          'Thirty percent below the average',
-          'At the category average',
-          'Seven percent above the average'], 'a': 0,
-    'e': u'"we will sit thirty percent above the category average"'},
-   {'q': 'What will most of the promotion budget be spent on?',
-    'o': ['In-store tasting and a celebrity endorsement',
-          'Television advertising', 'Digital advertising', 'Price discounts'], 'a': 0,
-    'e': u'"we will spend almost nothing on advertising. The budget goes to in-store tasting and to one celebrity endorsement"'},
-   {'q': 'Who is the celebrity?',
-    'o': ['A chef who already uses their beans', 'A famous actor',
-          'A sports star', 'A television presenter'], 'a': 0,
-    'e': u'"a well-known chef who already uses our beans in his restaurants"'},
-   {'q': 'What is the three-year target in money terms?',
-    'o': ['Thirty-two million dollars', 'Eight hundred million dollars',
-          'Four million dollars', 'Three hundred million dollars'], 'a': 0,
-    'e': u'4% ของ premium segment ที่มีมูลค่า 800 ล้าน = 32 ล้าน · ผู้พูดคำนวณให้ในประโยคสุดท้าย'},
+   {'q': 'How fast is the Japanese coffee market growing?',
+    'o': ['Two percent a year', 'Fourteen percent a year',
+          'Nineteen percent a year', 'Fifty-four percent a year'], 'a': 0,
+    'e': '"growing at only two percent a year"'},
+   {'q': 'What kind of problem does Nadia say this is?',
+    'o': ['Market penetration', 'Market creation', 'Market adaptation', 'Market segmentation'], 'a': 0,
+    'e': '"this is a market penetration problem, not a market creation problem"'},
+   {'q': 'Which segment is the target market?',
+    'o': ['Office subscription buyers', 'Convenience store buyers',
+          'Speciality cafe customers', 'Hotel and restaurant buyers'], 'a': 0,
+    'e': '"That last group is our target market" · หมายถึงกลุ่มออฟฟิศ'},
+   {'q': 'How fast is the target segment growing?',
+    'o': ['Fourteen percent a year', 'Eight percent a year',
+          'Two percent a year', 'Four percent a year'], 'a': 0,
+    'e': '"only eight percent today but growing at fourteen percent a year"'},
+   {'q': 'Why does selling direct to offices help cash flow?',
+    'o': ['They get paid before they deliver', 'Offices pay a higher price',
+          'There is no delivery cost', 'It avoids import duty'], 'a': 0,
+    'e': '"which also means we get paid before we deliver"'},
+   {'q': 'What is the contribution per box?',
+    'o': ['One thousand eight hundred yen', 'Two thousand four hundred yen',
+          'Four thousand two hundred yen', 'Ninety million yen'], 'a': 0,
+    'e': '4,200 ลบ 2,400 เท่ากับ 1,800 เยน'},
+   {'q': 'How many boxes a year are needed to break even?',
+    'o': ['Fifty thousand', 'Thirty-one thousand',
+          'Four thousand two hundred', 'Ninety thousand'], 'a': 0,
+    'e': '"we need fifty thousand boxes a year to break even"'},
+   {'q': 'What does the year one forecast imply?',
+    'o': ['A planned loss', 'A small profit', 'Exactly break-even', 'A cash surplus'], 'a': 0,
+    'e': '"forecast for year one is thirty-one thousand boxes, so year one is a planned loss"'},
+   {'q': 'What happens if monthly churn passes four percent?',
+    'o': ['Break-even moves out by about a year', 'Fixed costs fall',
+          'The contribution rises', 'The forecast is unaffected'], 'a': 0,
+    'e': '"the break-even point moves out by roughly a year"'},
+   {'q': 'Why does the exchange rate matter?',
+    'o': ['Green bean cost is mostly dollar denominated', 'Subscriptions are billed in dollars',
+          'The roasting contract is in euros', 'Import duty is charged in dollars'], 'a': 0,
+    'e': '"our green bean cost, which is eighty percent dollar denominated"'},
   ]},
 
  {'id': 'L2b', 'kind': 'talk',
-  'title': 'Disney and Pixar',
-  'context': u'วิทยากรเล่ากรณีการเข้าซื้อที่มักถูกยกเป็นตัวอย่างของดีลที่สำเร็จ',
+  'title': 'A Merger of Two Software Firms',
+  'context': u'วิทยากรเล่ากรณีควบรวมบริษัทซอฟต์แวร์บัญชีสองราย เน้นการประมาณการ synergies ที่พลาด',
   'turns': [
-   ('Speaker', 's', 'f1',
-    "Today I want to give you a contrast to the case we looked at last week. Not every acquisition is "
-    "hostile, and not every acquisition destroys value. Disney and Pixar is the example everyone reaches "
-    "for."),
-   ('Speaker', 's', 'f1',
-    "Some background first. From nineteen ninety-one, Disney and Pixar were not owner and subsidiary. They "
-    "were partners in a distribution agreement — Pixar made the films, Disney distributed them and took "
-    "roughly half the profit. That agreement produced Toy Story, Finding Nemo and several others."),
-   ('Speaker', 's', 'f1',
-    "By two thousand and four the relationship had broken down. Negotiations to renew the agreement failed, "
-    "and the two companies publicly fell out. It looked like the end."),
-   ('Speaker', 's', 'f1',
-    "Then in January two thousand and six, Disney acquired Pixar outright for seven point four billion "
-    "dollars, paid entirely in Disney shares — no cash at all. That detail matters. Because Steve Jobs, "
-    "who held about half of Pixar, became Disney's largest individual shareholder with roughly seven "
-    "percent of the company."),
-   ('Speaker', 's', 'f1',
-    "This was a friendly takeover. Both boards agreed, and the deal was recommended to shareholders. There "
-    "was no bidding war and no second bidder."),
-   ('Speaker', 's', 'f1',
-    "What makes the case interesting is what Disney did afterwards. Normally the buyer imposes its own "
-    "systems on the target. Disney did the opposite. It left Pixar's culture, its offices and its "
-    "management almost untouched, and then put Pixar's leadership in charge of Disney's own animation "
-    "studio as well."),
-   ('Speaker', 's', 'f1',
-    "The result: Disney Animation, which had produced a run of disappointing films, released Tangled, "
-    "Frozen and Zootopia over the following decade. So the synergy here was not cost-cutting. It was "
-    "creative. Remember that — synergy does not always mean closing factories and reducing staff."),
+   ('Speaker', 's', 'm2',
+    "Today's case is a merger between two accounting software companies. I picked it because the "
+    "strategy was sound and the deal still disappointed, and the reason is entirely in the numbers."),
+   ('Speaker', 's', 'm2',
+    "Ledgerworks sold software to small firms. Ravenpoint sold to mid-sized groups. Neither competed "
+    "with the other, and both boards recommended the deal, so this was a friendly takeover rather "
+    "than a hostile one."),
+   ('Speaker', 's', 'm2',
+    "The structure matters. Ledgerworks shareholders received zero point six Ravenpoint shares for "
+    "each share they held. At announcement that valued Ledgerworks at four hundred and eighty "
+    "million euros, which was fourteen times earnings. The market reaction was mild: Ravenpoint "
+    "shares fell two percent on the day."),
+   ('Speaker', 's', 'm2',
+    "The case was built on synergies. Management guided the market to fifty-five million euros a "
+    "year: thirty million from removing duplicated engineering, fifteen million from the shared "
+    "sales force, and ten million from closing one of the two data centres."),
+   ('Speaker', 's', 'm2',
+    "Due diligence took five weeks, and one finding was disclosed. Ledgerworks recognised licence "
+    "revenue over twelve months while Ravenpoint used twenty-four. Aligning the two policies reduced "
+    "reported combined revenue by nine million euros in the first year."),
+   ('Speaker', 's', 'm2',
+    "By year three, the realised synergies were thirty-two million, not fifty-five. The engineering "
+    "saving arrived almost in full. The sales saving did not, because the two customer groups needed "
+    "different sales skills. And the data centre closure was delayed by two years over a contract "
+    "break clause, costing seven million more than planned."),
+   ('Speaker', 's', 'm2',
+    "So the lesson. Cost synergies that come from removing duplicated work are usually real. "
+    "Synergies that depend on customers behaving differently, or on getting out of a contract early, "
+    "are the ones that slip. When you see a synergy number in a press release, ask which of the two "
+    "kinds it is. Thank you."),
   ],
   'questions': [
-   {'q': 'What was the relationship before 2006?',
-    'o': ['A distribution agreement, not ownership',
-          'Pixar was a subsidiary of Disney',
-          'A joint venture', 'They were competitors only'], 'a': 0,
-    'e': u'"they were not owner and subsidiary. They were partners in a distribution agreement"'},
-   {'q': 'Roughly how was profit split under that agreement?',
-    'o': ['Disney took about half', 'Disney took about a quarter',
-          'Pixar took about ninety percent', 'They split it seven to three'], 'a': 0,
-    'e': u'"Disney distributed them and took roughly half the profit"'},
-   {'q': 'What happened by 2004?',
-    'o': ['Negotiations to renew the agreement failed',
-          'Disney made a hostile bid',
-          'Pixar was sold to another studio',
-          'The agreement was extended'], 'a': 0,
-    'e': u'"Negotiations to renew the agreement failed, and the two companies publicly fell out"'},
-   {'q': 'How much did Disney pay for Pixar?',
-    'o': ['7.4 billion dollars', '4.7 billion dollars',
-          '7.4 million dollars', '74 billion dollars'], 'a': 0,
-    'e': u'"Disney acquired Pixar outright for seven point four billion dollars"'},
-   {'q': 'How was the acquisition paid for?',
-    'o': ['Entirely in Disney shares', 'Entirely in cash',
-          'Half shares, half cash', 'With borrowed money'], 'a': 0,
-    'e': u'"paid entirely in Disney shares — no cash at all"'},
-   {'q': 'What stake did Steve Jobs end up with in Disney?',
-    'o': ['About seven percent', 'About fifty percent',
-          'About seventeen percent', 'About one percent'], 'a': 0,
-    'e': u'"became Disney’s largest individual shareholder with roughly seven percent" · 50% คือสัดส่วนที่เขาถือใน Pixar'},
-   {'q': 'What kind of takeover was it?',
-    'o': ['Friendly — both boards agreed', 'Hostile',
-          'A management buyout', 'A reverse takeover'], 'a': 0,
-    'e': u'"This was a friendly takeover. Both boards agreed"'},
-   {'q': 'What did Disney do with Pixar after the deal?',
-    'o': ["It left Pixar's culture and management almost untouched",
-          "It imposed Disney's systems on Pixar",
-          'It merged the two studios into one office',
-          'It replaced Pixar management'], 'a': 0,
-    'e': u'"It left Pixar’s culture, its offices and its management almost untouched"'},
-   {'q': "Who was put in charge of Disney's own animation studio?",
-    'o': ["Pixar's leadership", "Disney's existing team",
-          'An outside consultant', 'Steve Jobs personally'], 'a': 0,
-    'e': u'"put Pixar’s leadership in charge of Disney’s own animation studio as well"'},
-   {'q': 'What is the speaker’s main point about synergy?',
-    'o': ['It does not always mean cost-cutting; here it was creative',
-          'It always means closing factories',
-          'It rarely works in practice',
-          'It only works in friendly deals'], 'a': 0,
-    'e': u'"synergy does not always mean closing factories and reducing staff"'},
+   {'q': 'What kind of takeover was this?',
+    'o': ['Friendly, because both boards recommended it', 'Hostile, because one board refused',
+          'A management buyout', 'A joint venture'], 'a': 0,
+    'e': '"both boards recommended the deal, so this was a friendly takeover"'},
+   {'q': 'What did Ledgerworks shareholders receive?',
+    'o': ['Zero point six Ravenpoint shares per share', 'Cash of four hundred and eighty million',
+          'One Ravenpoint share per share', 'Fourteen euros per share'], 'a': 0,
+    'e': '"received zero point six Ravenpoint shares for each share they held"'},
+   {'q': 'What multiple of earnings did the offer represent?',
+    'o': ['Fourteen times', 'Twelve times', 'Twenty-four times', 'Two times'], 'a': 0,
+    'e': '"which was fourteen times earnings"'},
+   {'q': 'How did Ravenpoint shares react on the day?',
+    'o': ['They fell two percent', 'They rose two percent',
+          'They fell fourteen percent', 'They were unchanged'], 'a': 0,
+    'e': '"Ravenpoint shares fell two percent on the day"'},
+   {'q': 'What total annual synergies did management guide to?',
+    'o': ['Fifty-five million euros', 'Thirty-two million euros',
+          'Thirty million euros', 'Fifteen million euros'], 'a': 0,
+    'e': '"Management guided the market to fifty-five million euros a year"'},
+   {'q': 'Which saving was expected to be the largest?',
+    'o': ['Removing duplicated engineering', 'The shared sales force',
+          'Closing a data centre', 'Renegotiating the licence policy'], 'a': 0,
+    'e': '"thirty million from removing duplicated engineering" · มากที่สุดในสามก้อน'},
+   {'q': 'What did due diligence find?',
+    'o': ['The two firms recognised licence revenue over different periods',
+          'An unrecorded pension liability', 'A disputed patent',
+          'An overstated receivable'], 'a': 0,
+    'e': '"Ledgerworks recognised licence revenue over twelve months while Ravenpoint used twenty-four"'},
+   {'q': 'What effect did aligning the policies have?',
+    'o': ['Combined revenue fell by nine million in year one',
+          'Combined revenue rose by nine million', 'Goodwill rose by nine million',
+          'It had no effect on reported figures'], 'a': 0,
+    'e': '"reduced reported combined revenue by nine million euros in the first year"'},
+   {'q': 'What were the realised synergies by year three?',
+    'o': ['Thirty-two million', 'Fifty-five million', 'Thirty million', 'Seven million'], 'a': 0,
+    'e': '"the realised synergies were thirty-two million, not fifty-five"'},
+   {'q': 'Which type of synergy does the speaker say is usually real?',
+    'o': ['Savings from removing duplicated work',
+          'Savings that depend on customer behaviour',
+          'Savings from exiting a contract early', 'Savings from tax planning'], 'a': 0,
+    'e': '"Cost synergies that come from removing duplicated work are usually real"'},
   ]},
 ]},
 
@@ -365,162 +352,159 @@ SETS = [
 
  {'id': 'L3a', 'kind': 'presentation',
   'title': 'A Skincare Launch in Brazil',
-  'context': u'สามคนนำเสนอแผนเปิดตัวสกินแคร์ในบราซิล เน้นการแบ่งส่วนตลาดและช่องทางออนไลน์',
+  'context': u'ทีมสามคนเสนอแผนเปิดตัวสกินแคร์ในบราซิล เน้นงบโฆษณาและกำไรส่วนเกิน',
   'turns': [
    ('Elena', 'e', 'f3',
-    "Hello everyone. Elena here. Our group looked at whether Lumen, our skincare range, should launch in "
-    "Brazil. Short answer: yes, but through a channel we have never used before. I'll do the market, "
-    "Rafael will do segmentation, and Nok will finish with the numbers."),
+    "Good afternoon. I'm Elena, and with me are Tomas and Rafael. We are proposing a product launch "
+    "for our Calmara skincare line in Brazil, and I'll begin with why this market and not another."),
    ('Elena', 'e', 'f3',
-    "Brazil is the third-largest beauty market in the world. It is a growing market — about six percent a "
-    "year — and unusually, it is not dominated by international brands. Domestic companies hold "
-    "sixty-eight percent of the market between them. That is the first thing to understand: the market "
-    "leader here is local, not global."),
-   ('Rafael', 'r', 'm2',
-    "Thanks. On market segmentation, we split buyers four ways, but only one segment matters for us. We "
-    "call them the informed buyers: women aged twenty-five to forty, who research ingredients online "
-    "before purchasing. They are only nine percent of buyers but they account for twenty-six percent of "
-    "value."),
-   ('Rafael', 'r', 'm2',
-    "Critically, this segment does not trust advertising. In our focus groups, the phrase that came up "
-    "again and again was that they buy on recommendation. So word of mouth, not advertising, is our main "
-    "route to brand awareness."),
-   ('Nok', 'n', 'f1',
-    "Thank you Rafael. That changes the marketing mix completely. On place, we are skipping retailers "
-    "entirely in year one. No wholesaler, no distributor. We sell direct to consumer through our own site "
-    "and one online marketplace."),
-   ('Nok', 'n', 'f1',
-    "On promotion, ninety percent of the budget goes to two hundred micro-influencers — not celebrities, "
-    "but dermatologists and chemists with small but trusted audiences. The remaining ten percent is for "
-    "free samples sent with every order."),
-   ('Nok', 'n', 'f1',
-    "On price we hold our international price, which puts us at the top of the market. No discounting in "
-    "year one, because a discount now would damage the brand positioning we are trying to build. Our "
-    "target is a customer base of forty thousand repeat buyers by the end of year two. Questions?"),
+    "Brazil is the fourth largest beauty market in the world. Our market research covered sixteen "
+    "hundred women in three cities. Two findings stood out. Brand awareness for imported skincare is "
+    "high, at sixty-one percent. But brand loyalty is low: two thirds of buyers had changed brand in "
+    "the past year."),
+   ('Tomas', 't', 'm3',
+    "Thanks, Elena. Low loyalty cuts both ways. It means we can win share quickly, but it also means "
+    "we can lose it just as fast. So our whole plan is built on repeat purchase rather than on a "
+    "single launch spike."),
+   ('Tomas', 't', 'm3',
+    "On market adaptation, one change is essential. The formula we sell in Europe is too heavy for "
+    "the climate in the north of the country. Reformulating costs eight hundred thousand euros and "
+    "adds four months, and we think it is not optional."),
+   ('Rafael', 'r', 'm1',
+    "Now the money. The advertising budget is three point two million euros over eighteen months. "
+    "Seventy percent of it goes to online video, because television reaches the wrong age group for "
+    "us."),
+   ('Rafael', 'r', 'm1',
+    "On unit economics, the retail price is one hundred and forty reais. After retailer margin and "
+    "local tax, we receive seventy-three reais. Our cost is thirty-one, so the contribution is "
+    "forty-two reais, a little under fifty-eight percent."),
+   ('Rafael', 'r', 'm1',
+    "To recover the reformulation and the advertising we need to sell ninety-six thousand units. Our "
+    "base case is one hundred and twelve thousand in the first eighteen months, so there is a margin "
+    "of safety of about seventeen percent. The main risk is the retailer: three chains control "
+    "seventy percent of distribution, and all three review their listings every six months. Thank "
+    "you."),
   ],
   'questions': [
-   {'q': 'Where does Brazil rank as a beauty market?',
-    'o': ['Third-largest in the world', 'Largest in the world',
-          'Sixth-largest in the world', 'Second-largest in the world'], 'a': 0,
-    'e': u'"Brazil is the third-largest beauty market in the world"'},
-   {'q': 'What share do domestic companies hold?',
-    'o': ['Sixty-eight percent', 'Twenty-six percent', 'Nine percent', 'Six percent'], 'a': 0,
-    'e': u'"Domestic companies hold sixty-eight percent of the market between them"'},
-   {'q': 'What is unusual about this market?',
-    'o': ['The market leader is local, not global',
-          'It is shrinking', 'There is no competition', 'Prices are very low'], 'a': 0,
-    'e': u'"the market leader here is local, not global"'},
-   {'q': 'How does the team describe its target segment?',
-    'o': ['Informed buyers who research ingredients online',
-          'Price-sensitive buyers', 'Older buyers aged over fifty', 'Buyers who shop in pharmacies'], 'a': 0,
-    'e': u'"We call them the informed buyers: women aged twenty-five to forty, who research ingredients online"'},
-   {'q': 'What proportion of value does that segment account for?',
-    'o': ['Twenty-six percent', 'Nine percent', 'Sixty-eight percent', 'Forty percent'], 'a': 0,
-    'e': u'"They are only nine percent of buyers but they account for twenty-six percent of value" · 9% คือจำนวนคน'},
-   {'q': 'What does this segment NOT trust?',
-    'o': ['Advertising', 'Dermatologists', 'Online reviews', 'Free samples'], 'a': 0,
-    'e': u'"this segment does not trust advertising … they buy on recommendation"'},
-   {'q': 'What is the main route to brand awareness?',
-    'o': ['Word of mouth', 'Television advertising', 'Billboards', 'Price promotion'], 'a': 0,
-    'e': u'"So word of mouth, not advertising, is our main route to brand awareness"'},
-   {'q': 'How will the product be sold in year one?',
-    'o': ['Direct to consumer, with no retailers or distributors',
-          'Through supermarkets', 'Through a national distributor', 'Through pharmacies only'], 'a': 0,
-    'e': u'"we are skipping retailers entirely in year one. No wholesaler, no distributor"'},
-   {'q': 'Who are the two hundred influencers?',
-    'o': ['Dermatologists and chemists with small trusted audiences',
-          'Famous actors', 'Sports stars', 'Fashion models'], 'a': 0,
-    'e': u'"not celebrities, but dermatologists and chemists with small but trusted audiences"'},
-   {'q': 'Why is there no discounting in year one?',
-    'o': ['It would damage the brand positioning they are building',
-          'Discounts are illegal in Brazil',
-          'The margins are already too thin',
-          'The distributor forbids it'], 'a': 0,
-    'e': u'"a discount now would damage the brand positioning we are trying to build"'},
+   {'q': 'How many women did the market research cover?',
+    'o': ['Sixteen hundred', 'Six hundred', 'Sixty-one hundred', 'Three thousand'], 'a': 0,
+    'e': '"Our market research covered sixteen hundred women in three cities"'},
+   {'q': 'What is brand awareness for imported skincare?',
+    'o': ['Sixty-one percent', 'Seventy percent', 'Fifty-eight percent', 'Two thirds'], 'a': 0,
+    'e': '"Brand awareness for imported skincare is high, at sixty-one percent"'},
+   {'q': 'What does low brand loyalty mean for the plan?',
+    'o': ['Share can be won quickly but lost just as fast',
+          'Advertising is unnecessary', 'Prices can be raised freely',
+          'Distribution is guaranteed'], 'a': 0,
+    'e': '"we can win share quickly, but it also means we can lose it just as fast"'},
+   {'q': 'Why is reformulation needed?',
+    'o': ['The European formula is too heavy for the climate',
+          'The packaging fails local rules', 'The ingredients are banned',
+          'The price is too high'], 'a': 0,
+    'e': '"too heavy for the climate in the north of the country"'},
+   {'q': 'What does reformulation cost?',
+    'o': ['Eight hundred thousand euros and four months',
+          'Three point two million euros', 'Eight hundred thousand reais',
+          'Four hundred thousand euros and eight months'], 'a': 0,
+    'e': '"Reformulating costs eight hundred thousand euros and adds four months"'},
+   {'q': 'Where does most of the advertising budget go?',
+    'o': ['Online video', 'Television', 'In-store promotion', 'Print magazines'], 'a': 0,
+    'e': '"Seventy percent of it goes to online video"'},
+   {'q': 'How much does the company receive per unit after margin and tax?',
+    'o': ['Seventy-three reais', 'One hundred and forty reais',
+          'Forty-two reais', 'Thirty-one reais'], 'a': 0,
+    'e': '"After retailer margin and local tax, we receive seventy-three reais"'},
+   {'q': 'What is the contribution per unit?',
+    'o': ['Forty-two reais', 'Thirty-one reais', 'Seventy-three reais', 'Fifty-eight reais'], 'a': 0,
+    'e': '73 ลบ 31 เท่ากับ 42 เรอัล'},
+   {'q': 'How many units must be sold to recover the costs?',
+    'o': ['Ninety-six thousand', 'One hundred and twelve thousand',
+          'Seventy thousand', 'Seventeen thousand'], 'a': 0,
+    'e': '"we need to sell ninety-six thousand units"'},
+   {'q': 'What is the main risk Rafael names?',
+    'o': ['Three chains control seventy percent of distribution',
+          'The exchange rate', 'The cost of online video',
+          'A competitor launching first'], 'a': 0,
+    'e': '"three chains control seventy percent of distribution"'},
   ]},
 
  {'id': 'L3b', 'kind': 'talk',
   'title': 'A Bid That Failed',
-  'context': u'วิทยากรเล่ากรณีข้อเสนอซื้อที่ล้มเหลว เพื่อให้เห็นว่าดีลไม่ได้สำเร็จเสมอไป',
+  'context': u'วิทยากรเล่ากรณีข้อเสนอซื้อกิจการที่ล้มเหลว เน้นเกณฑ์การตอบรับของผู้ถือหุ้น',
   'turns': [
    ('Speaker', 's', 'm2',
-    "We spend a lot of time on deals that succeeded. Today I want to do the opposite, because roughly one "
-    "in three announced takeovers never completes. Understanding why a bid fails is just as useful."),
+    "Most of the cases you read about are deals that completed. Today I want to do the opposite, and "
+    "look at a bid that failed, because failed bids teach you where the real obstacles are."),
    ('Speaker', 's', 'm2',
-    "Our case is a European pharmaceutical group — I'll call it Company A — which in March last year "
-    "launched a bid for a mid-sized rival, Company B. The opening offer was four point one billion euros, "
-    "a premium of eighteen percent over Company B's share price."),
+    "The target was Kestrel Instruments, a listed maker of measuring equipment. The predator was a "
+    "private equity fund called Braemar Capital. In April, Braemar took a stake of nine point eight "
+    "percent, deliberately just under the ten percent disclosure threshold in that market."),
    ('Speaker', 's', 'm2',
-    "Company B's board rejected it within four days. Their argument was that the offer undervalued their "
-    "drug pipeline — the new medicines still in development. Company A responded by raising the bid to "
-    "four point six billion, a premium of about thirty-two percent."),
+    "In June it made a takeover bid of six pounds twenty a share, valuing Kestrel at eight hundred "
+    "and sixty million pounds. That was a premium of thirty-one percent over the price before the "
+    "stake was announced."),
    ('Speaker', 's', 'm2',
-    "At that point three things went wrong at once. First, a second bidder appeared — an American group "
-    "that had been watching quietly and had already built up a stake of five percent. That turned it into "
-    "a bidding war, which pushes the price up for everyone."),
+    "The board rejected the bid, and its argument was specific. Kestrel had spent four years and one "
+    "hundred and ten million pounds developing a new sensor platform, and the board said the offer "
+    "gave no value at all for work that was not yet in the revenue line."),
    ('Speaker', 's', 'm2',
-    "Second, the competition authority in Brussels announced it would open a full investigation. The two "
-    "companies together would have held over forty percent of one particular treatment market, and "
-    "regulators do not like that."),
+    "Braemar raised the offer once, to six pounds seventy-five, and set an acceptance condition of "
+    "seventy-five percent of shares. Two large institutional shareholders, holding thirty-one "
+    "percent between them, publicly refused. At that point the condition could not be met."),
    ('Speaker', 's', 'm2',
-    "Third, and this is the one people forget: during due diligence Company A discovered a manufacturing "
-    "problem at two of Company B's plants that had not been disclosed. The cost of fixing it was estimated "
-    "at three hundred million euros."),
+    "The bid lapsed in September. Braemar sold its stake over the following four months at a small "
+    "profit, and the Kestrel share price settled about nine percent above where it had started the "
+    "year."),
    ('Speaker', 's', 'm2',
-    "In July, Company A withdrew its bid. Its own share price rose four percent on the announcement — "
-    "shareholders were relieved. Company B is still independent, and its share price fell twenty-two "
-    "percent over the following month."),
-   ('Speaker', 's', 'm2',
-    "So the lesson. Due diligence is not paperwork. It is the last chance to find out what you are "
-    "actually buying, and sometimes the right decision is to walk away."),
+    "Three things to take away. First, an acceptance condition is a real constraint, not a formality. "
+    "Second, valuing development work that has no revenue yet is where target boards and bidders "
+    "disagree most often. Third, notice that the shareholders, not the board, decided the outcome. "
+    "The board can recommend or reject, but it cannot accept on anyone's behalf. Thank you."),
   ],
   'questions': [
-   {'q': 'Roughly how many announced takeovers never complete?',
-    'o': ['About one in three', 'About one in ten', 'About half', 'About one in twenty'], 'a': 0,
-    'e': u'"roughly one in three announced takeovers never completes"'},
-   {'q': 'What was the opening offer worth?',
-    'o': ['4.1 billion euros', '4.6 billion euros', '300 million euros', '41 billion euros'], 'a': 0,
-    'e': u'"The opening offer was four point one billion euros" · 4.6 คือข้อเสนอที่ขึ้นแล้ว'},
-   {'q': "Why did Company B's board reject the first offer?",
-    'o': ['It undervalued their drug pipeline',
-          'The premium was too high',
-          'They preferred a merger',
-          'They had already accepted another bid'], 'a': 0,
-    'e': u'"the offer undervalued their drug pipeline — the new medicines still in development"'},
-   {'q': 'What premium did the raised bid represent?',
-    'o': ['About thirty-two percent', 'About eighteen percent',
-          'About five percent', 'About twenty-two percent'], 'a': 0,
-    'e': u'"raising the bid to four point six billion, a premium of about thirty-two percent" · 18% คือข้อเสนอแรก'},
-   {'q': 'What had the second bidder already done?',
-    'o': ['Built up a stake of five percent', 'Made a formal offer',
-          'Signed a joint venture', 'Bought a subsidiary'], 'a': 0,
-    'e': u'"an American group that had been watching quietly and had already built up a stake of five percent"'},
-   {'q': 'Why does a bidding war matter?',
-    'o': ['It pushes the price up for everyone',
-          'It makes regulators approve faster',
-          'It lowers the premium',
-          'It forces the target to merge'], 'a': 0,
-    'e': u'"That turned it into a bidding war, which pushes the price up for everyone"'},
-   {'q': 'Why did the competition authority get involved?',
-    'o': ['The two companies would have held over forty percent of one treatment market',
-          'The deal was hostile',
-          'A factory was going to close',
-          'The bidder was foreign'], 'a': 0,
-    'e': u'"The two companies together would have held over forty percent of one particular treatment market"'},
-   {'q': 'What did due diligence uncover?',
-    'o': ['An undisclosed manufacturing problem at two plants',
-          'A hidden debt', 'A patent dispute', 'A tax investigation'], 'a': 0,
-    'e': u'"during due diligence Company A discovered a manufacturing problem at two of Company B’s plants"'},
-   {'q': "What happened to Company A's share price when it withdrew?",
-    'o': ['It rose four percent', 'It fell four percent',
-          'It fell twenty-two percent', 'It did not move'], 'a': 0,
-    'e': u'"Its own share price rose four percent on the announcement — shareholders were relieved"'},
-   {'q': "What is the speaker's lesson?",
-    'o': ['Due diligence is the last chance to find out what you are buying',
-          'Always raise your bid twice',
-          'Never bid for a rival',
-          'Regulators always block large deals'], 'a': 0,
-    'e': u'"Due diligence is not paperwork. It is the last chance to find out what you are actually buying"'},
+   {'q': 'What stake did Braemar take in April?',
+    'o': ['Nine point eight percent', 'Ten percent',
+          'Thirty-one percent', 'Seventy-five percent'], 'a': 0,
+    'e': '"Braemar took a stake of nine point eight percent"'},
+   {'q': 'Why did it stop just below ten percent?',
+    'o': ['To stay under the disclosure threshold', 'To reduce stamp duty',
+          'Because it ran out of cash', 'Because the board refused to sell more'], 'a': 0,
+    'e': '"deliberately just under the ten percent disclosure threshold"'},
+   {'q': 'What was the opening offer per share?',
+    'o': ['Six pounds twenty', 'Six pounds seventy-five',
+          'Eight pounds sixty', 'One hundred and ten pounds'], 'a': 0,
+    'e': '"a takeover bid of six pounds twenty a share"'},
+   {'q': 'What premium did the opening offer represent?',
+    'o': ['Thirty-one percent', 'Nine percent', 'Seventy-five percent', 'Ten percent'], 'a': 0,
+    'e': '"a premium of thirty-one percent over the price before the stake was announced"'},
+   {'q': 'What was the board’s specific objection?',
+    'o': ['The offer gave no value for the new sensor platform',
+          'The bidder was foreign', 'The offer was in shares rather than cash',
+          'The timing was wrong'], 'a': 0,
+    'e': '"the offer gave no value at all for work that was not yet in the revenue line"'},
+   {'q': 'How much had Kestrel spent on the sensor platform?',
+    'o': ['One hundred and ten million pounds over four years',
+          'Eight hundred and sixty million pounds', 'Thirty-one million pounds',
+          'Nine million pounds a year'], 'a': 0,
+    'e': '"four years and one hundred and ten million pounds"'},
+   {'q': 'What acceptance condition did Braemar set?',
+    'o': ['Seventy-five percent of shares', 'Fifty percent of shares',
+          'Thirty-one percent of shares', 'Ninety percent of shares'], 'a': 0,
+    'e': '"set an acceptance condition of seventy-five percent of shares"'},
+   {'q': 'Why could the condition not be met?',
+    'o': ['Two shareholders holding thirty-one percent refused',
+          'The regulator blocked the deal', 'Braemar withdrew the offer',
+          'The board bought back shares'], 'a': 0,
+    'e': '"Two large institutional shareholders, holding thirty-one percent between them, publicly refused"'},
+   {'q': 'What happened to Braemar’s stake afterwards?',
+    'o': ['It was sold over four months at a small profit',
+          'It was kept in full', 'It was sold at a loss',
+          'It was transferred to the board'], 'a': 0,
+    'e': '"Braemar sold its stake over the following four months at a small profit"'},
+   {'q': 'Who decided the outcome, according to the speaker?',
+    'o': ['The shareholders', 'The board of directors',
+          'The regulator', 'The bidder’s own investors'], 'a': 0,
+    'e': '"notice that the shareholders, not the board, decided the outcome"'},
   ]},
 ]},
 
@@ -529,164 +513,159 @@ SETS = [
 
  {'id': 'L4a', 'kind': 'presentation',
   'title': 'Repositioning a Budget Airline',
-  'context': u'สองคนนำเสนอแผนเปลี่ยนตำแหน่งแบรนด์สายการบินต้นทุนต่ำในยุโรป',
+  'context': u'สองคนเสนอแผนปรับตำแหน่งสายการบินต้นทุนต่ำ เน้นต้นทุนต่อที่นั่งและอัตราบรรทุก',
   'turns': [
-   ('James', 'j', 'm1',
-    "Good afternoon. I'm James and this is Ploy. Our brief was different from the other groups. We were "
-    "not asked to enter a new market. We were asked whether SkyLite, an existing budget airline, should "
-    "change its brand positioning. Ploy will give you the evidence, then I'll give you the recommendation."),
-   ('Ploy', 'p', 'f1',
-    "Thank you. Three findings from our research. First, SkyLite has excellent brand awareness — "
-    "eighty-one percent of travellers in our survey recognised the name. So awareness is not the problem."),
-   ('Ploy', 'p', 'f1',
-    "Second, brand image is the problem. When we asked people to describe SkyLite in three words, the most "
-    "common words were cheap, crowded and late. Only eleven percent said they would choose SkyLite for a "
-    "business trip, even when the schedule suited them."),
-   ('Ploy', 'p', 'f1',
-    "Third, and this is the commercial point: business travellers are only nineteen percent of passengers "
-    "on our routes, but they generate forty-three percent of revenue, because they book late and pay more."),
-   ('James', 'j', 'm1',
-    "So here is our recommendation, and it is a cautious one. We are not proposing to abandon the budget "
-    "market. That would be reckless — it is still eighty-one percent of our revenue base. What we propose "
-    "is a mid-market repositioning on three routes only, as a trial."),
-   ('James', 'j', 'm1',
-    "On those three routes we would add assigned seating, a free cabin bag, and a guaranteed thirty-minute "
-    "check-in. Fares would rise by about twelve percent. We would not change the aircraft or the crew."),
-   ('James', 'j', 'm1',
-    "If the trial works, we roll it out. If it does not, we have lost one quarter of revenue on three "
-    "routes, which is manageable. What we must avoid is announcing a full repositioning and then reversing "
-    "it, because that damages brand image far more than doing nothing. Thank you."),
+   ('Priya', 'p', 'f1',
+    "Good morning. I'm Priya, and Marcus will join me. Our subject is brand positioning: whether "
+    "Skylark, which has been a pure budget airline for eleven years, should move up the market."),
+   ('Priya', 'p', 'f1',
+    "The problem is visible in one number. Our load factor is eighty-nine percent, which is very "
+    "high, but our average fare has fallen for three years running. We are filling the aircraft by "
+    "cutting the price, and that is not a strategy, it is a habit."),
+   ('Priya', 'p', 'f1',
+    "Our market research found something useful. Forty-four percent of our passengers are now "
+    "travelling on business, up from twenty-six percent five years ago. They choose us on schedule, "
+    "not on price, and they are the least price sensitive segment we have."),
+   ('Marcus', 'm', 'm2',
+    "Thanks, Priya. So the proposal is a partial repositioning. We keep the low cost base, but we "
+    "add a business fare with a guaranteed middle seat free, priority boarding, and a changeable "
+    "ticket."),
+   ('Marcus', 'm', 'm2',
+    "The economics are straightforward. Our cost per available seat kilometre is four point one "
+    "cents, one of the lowest in the region. Selling the middle seat empty raises the cost per "
+    "occupied seat by about fifty percent on those rows, but the business fare is priced at two "
+    "point three times the standard fare."),
+   ('Marcus', 'm', 'm2',
+    "We modelled it on twelve routes. If just eleven percent of seats sell at the business fare, "
+    "revenue per flight rises by nine percent. Below eight percent take-up, we are worse off than "
+    "today."),
+   ('Marcus', 'm', 'm2',
+    "The real risk is brand image, not cost. Eleven years of advertising has told the market that we "
+    "are the cheapest, and a confused brand loses both ends of the market. So we recommend launching "
+    "under a separate fare name on four routes for six months before deciding. Thank you."),
   ],
   'questions': [
-   {'q': 'What was this group asked to look at?',
-    'o': ['Whether an existing airline should change its brand positioning',
-          'Whether to enter a new market',
-          'Whether to merge with a rival',
-          'Whether to buy new aircraft'], 'a': 0,
-    'e': u'"We were asked whether SkyLite, an existing budget airline, should change its brand positioning"'},
-   {'q': 'What percentage recognised the SkyLite name?',
-    'o': ['Eighty-one percent', 'Nineteen percent', 'Forty-three percent', 'Eleven percent'], 'a': 0,
-    'e': u'"eighty-one percent of travellers in our survey recognised the name"'},
-   {'q': 'Which three words did people most often use?',
-    'o': ['Cheap, crowded and late', 'Cheap, fast and friendly',
-          'Safe, cheap and modern', 'Late, expensive and crowded'], 'a': 0,
-    'e': u'"the most common words were cheap, crowded and late"'},
-   {'q': 'What proportion would choose SkyLite for a business trip?',
-    'o': ['Eleven percent', 'Nineteen percent', 'Forty-three percent', 'Eighty-one percent'], 'a': 0,
-    'e': u'"Only eleven percent said they would choose SkyLite for a business trip"'},
-   {'q': 'What share of revenue do business travellers generate?',
-    'o': ['Forty-three percent', 'Nineteen percent', 'Twelve percent', 'Eighty-one percent'], 'a': 0,
-    'e': u'"business travellers are only nineteen percent of passengers … but they generate forty-three percent of revenue" · 19% คือจำนวนผู้โดยสาร'},
-   {'q': 'Why do business travellers pay more?',
-    'o': ['They book late', 'They fly longer routes',
-          'They buy extra baggage', 'They travel in groups'], 'a': 0,
-    'e': u'"because they book late and pay more"'},
-   {'q': 'What is the recommendation?',
-    'o': ['A mid-market repositioning on three routes as a trial',
-          'A full repositioning across all routes',
-          'Abandoning the budget market entirely',
-          'No change at all'], 'a': 0,
-    'e': u'"What we propose is a mid-market repositioning on three routes only, as a trial"'},
-   {'q': 'Which of these is NOT part of the trial?',
-    'o': ['Changing the aircraft and crew', 'Assigned seating',
-          'A free cabin bag', 'A guaranteed thirty-minute check-in'], 'a': 0,
-    'e': u'"We would not change the aircraft or the crew"'},
-   {'q': 'By how much would fares rise?',
-    'o': ['About twelve percent', 'About thirty percent',
-          'About forty-three percent', 'About nineteen percent'], 'a': 0,
-    'e': u'"Fares would rise by about twelve percent"'},
-   {'q': 'What does James say must be avoided?',
-    'o': ['Announcing a full repositioning and then reversing it',
-          'Running a trial on too few routes',
-          'Raising fares at all',
-          'Talking to business travellers'], 'a': 0,
-    'e': u'"What we must avoid is announcing a full repositioning and then reversing it"'},
+   {'q': 'What is Skylark’s load factor?',
+    'o': ['Eighty-nine percent', 'Forty-four percent',
+          'Twenty-six percent', 'Eleven percent'], 'a': 0,
+    'e': '"Our load factor is eighty-nine percent"'},
+   {'q': 'What has happened to the average fare?',
+    'o': ['It has fallen for three years running', 'It has risen for three years',
+          'It has been flat for eleven years', 'It rose then fell'], 'a': 0,
+    'e': '"our average fare has fallen for three years running"'},
+   {'q': 'What proportion of passengers now travel on business?',
+    'o': ['Forty-four percent', 'Twenty-six percent',
+          'Eleven percent', 'Eighty-nine percent'], 'a': 0,
+    'e': '"Forty-four percent of our passengers are now travelling on business"'},
+   {'q': 'What do business passengers choose the airline on?',
+    'o': ['Schedule', 'Price', 'Loyalty points', 'Seat width'], 'a': 0,
+    'e': '"They choose us on schedule, not on price"'},
+   {'q': 'What does the business fare include?',
+    'o': ['A free middle seat, priority boarding and a changeable ticket',
+          'Lounge access and extra baggage', 'A meal and a refundable ticket',
+          'A seat at the front and free wifi'], 'a': 0,
+    'e': '"a guaranteed middle seat free, priority boarding, and a changeable ticket"'},
+   {'q': 'What is the cost per available seat kilometre?',
+    'o': ['Four point one cents', 'Two point three cents',
+          'Eleven cents', 'Nine cents'], 'a': 0,
+    'e': '"Our cost per available seat kilometre is four point one cents"'},
+   {'q': 'How is the business fare priced?',
+    'o': ['At two point three times the standard fare', 'At fifty percent above standard',
+          'At nine percent above standard', 'At double the standard fare'], 'a': 0,
+    'e': '"the business fare is priced at two point three times the standard fare"'},
+   {'q': 'At what take-up does revenue per flight rise by nine percent?',
+    'o': ['Eleven percent of seats', 'Eight percent of seats',
+          'Twelve percent of seats', 'Forty-four percent of seats'], 'a': 0,
+    'e': '"If just eleven percent of seats sell at the business fare, revenue per flight rises by nine percent"'},
+   {'q': 'Below what take-up is the airline worse off?',
+    'o': ['Eight percent', 'Eleven percent', 'Nine percent', 'Four percent'], 'a': 0,
+    'e': '"Below eight percent take-up, we are worse off than today"'},
+   {'q': 'What does Marcus say is the real risk?',
+    'o': ['Brand image', 'Cost per seat', 'Crew scheduling', 'Fuel price'], 'a': 0,
+    'e': '"The real risk is brand image, not cost"'},
   ]},
 
  {'id': 'L4b', 'kind': 'talk',
   'title': 'A Management Buyout',
-  'context': u'วิทยากรเล่ากรณี MBO ของโรงพิมพ์ครอบครัว ให้เห็นว่าต่างจากการถูกซื้อโดยคนนอกอย่างไร',
+  'context': u'วิทยากรเล่ากรณีผู้บริหารซื้อกิจการโรงพิมพ์ เน้นโครงสร้างเงินกู้และเงื่อนไขของธนาคาร',
   'turns': [
-   ('Speaker', 's', 'f2',
-    "So far we have looked at one company buying another. Today the buyer is different — the buyer is the "
-    "management team itself. This is a management buyout, or MBO."),
-   ('Speaker', 's', 'f2',
-    "The company is a family-owned printing firm in northern England, founded in nineteen sixty-two. By "
-    "two thousand and eighteen the founder was seventy-nine and wanted to retire. He had no children in "
-    "the business. So he had three options: sell to a competitor, sell to a private equity fund, or sell "
-    "to his own managers."),
-   ('Speaker', 's', 'f2',
-    "He chose the third. Five directors — the managing director, the finance director, and three others — "
-    "bought the company for eleven million pounds."),
-   ('Speaker', 's', 'f2',
-    "Now, the obvious question. Where do five salaried managers find eleven million pounds? They do not. "
-    "The structure was this: the managers themselves put in one point one million, which was ten percent, "
-    "and most of them remortgaged their houses to do it. A bank lent six million. And the founder himself "
-    "left three point nine million in the business, to be repaid over seven years."),
-   ('Speaker', 's', 'f2',
-    "That last part is common in MBOs and it is called vendor finance — the seller effectively lends the "
-    "buyer part of the purchase price. It signals confidence. If the founder did not believe the managers "
-    "could run it, he would have wanted all his money on day one."),
-   ('Speaker', 's', 'f2',
-    "Why did the founder prefer this route? He told the Financial Times two reasons. He wanted the company "
-    "to stay in the town, and a competitor would almost certainly have closed the site and moved "
-    "production. And he wanted the staff protected — an MBO by people who already work there is far less "
-    "likely to lead to redundancies than asset stripping by an outside buyer."),
-   ('Speaker', 's', 'f2',
-    "Outcome: five years on, the firm employs thirty more people than at the buyout, and the bank loan is "
-    "fully repaid. Not every MBO works this well. But it shows why a seller might accept a lower price "
-    "from managers than from a trade buyer."),
+   ('Speaker', 's', 'm1',
+    "This case is a management buyout, and I want you to pay attention to the funding structure, "
+    "because in a buyout the structure is the story."),
+   ('Speaker', 's', 'm1',
+    "Thornbury Print was a commercial printing group owned by a larger media company. The parent "
+    "decided to divest it, because printing was no longer core. Rather than sell to a competitor, it "
+    "agreed a sale to five of Thornbury's own senior managers."),
+   ('Speaker', 's', 'm1',
+    "The price was seventy-two million pounds. The managers themselves could put in only three "
+    "million, which is a little over four percent. The rest came from two places: forty-four million "
+    "of bank debt, and twenty-five million of equity from a private equity fund, which took "
+    "sixty-eight percent of the shares."),
+   ('Speaker', 's', 'm1',
+    "So look at what that structure does. The managers end up with about twenty-eight percent of a "
+    "company they used to run for a salary. But the business now carries forty-four million of debt "
+    "that was not there before, and the interest is nearly four times the old figure."),
+   ('Speaker', 's', 'm1',
+    "The bank set two covenants. Net debt had to stay below three point five times earnings before "
+    "interest, tax, depreciation and amortisation, and interest cover had to stay above three times. "
+    "Both were tested every quarter."),
+   ('Speaker', 's', 'm1',
+    "In year two, a large customer moved to digital and volume fell eleven percent. Earnings fell "
+    "with it, and the net debt ratio reached three point four. That is still inside the covenant, "
+    "but one bad quarter away from breaching it, and the managers spent that year running the "
+    "balance sheet rather than the business."),
+   ('Speaker', 's', 'm1',
+    "They recovered by selling two sites for nine million and paying down debt. The fund exited in "
+    "year six at a valuation of one hundred and thirty million. So the deal worked. But the point I "
+    "want you to keep is this: in a buyout, the operating risk is unchanged, and all the added risk "
+    "comes from the funding. Thank you."),
   ],
   'questions': [
-   {'q': 'In an MBO, who is the buyer?',
-    'o': ['The management team itself', 'A competitor',
-          'A private equity fund', 'The shareholders'], 'a': 0,
-    'e': u'"the buyer is the management team itself. This is a management buyout, or MBO"'},
-   {'q': 'Why did the founder want to sell?',
-    'o': ['He was seventy-nine and wanted to retire, with no children in the business',
-          'The company was losing money',
-          'A competitor made a hostile bid',
-          'The bank forced a sale'], 'a': 0,
-    'e': u'"the founder was seventy-nine and wanted to retire. He had no children in the business"'},
-   {'q': 'How many directors took part?',
-    'o': ['Five', 'Three', 'Seven', 'Two'], 'a': 0,
-    'e': u'"Five directors — the managing director, the finance director, and three others"'},
-   {'q': 'What was the total purchase price?',
-    'o': ['Eleven million pounds', 'Six million pounds',
-          'One point one million pounds', 'Three point nine million pounds'], 'a': 0,
-    'e': u'"bought the company for eleven million pounds"'},
-   {'q': 'How much did the managers put in themselves?',
-    'o': ['1.1 million, which was ten percent', '6 million',
-          '3.9 million', '11 million'], 'a': 0,
-    'e': u'"the managers themselves put in one point one million, which was ten percent"'},
-   {'q': 'How did most managers raise their share?',
-    'o': ['They remortgaged their houses', 'They sold shares in other companies',
-          'They borrowed from family', 'They used savings only'], 'a': 0,
-    'e': u'"most of them remortgaged their houses to do it"'},
-   {'q': 'What is vendor finance?',
-    'o': ['The seller lends the buyer part of the purchase price',
-          'The bank lends the whole amount',
-          'The buyer pays in shares',
-          'A government loan for buyouts'], 'a': 0,
-    'e': u'"it is called vendor finance — the seller effectively lends the buyer part of the purchase price"'},
-   {'q': 'What does vendor finance signal?',
-    'o': ['Confidence that the managers can run the business',
-          'That the company is in trouble',
-          'That the price was too high',
-          'That the bank refused to lend'], 'a': 0,
-    'e': u'"It signals confidence. If the founder did not believe the managers could run it, he would have wanted all his money on day one"'},
-   {'q': 'Why did the founder avoid selling to a competitor?',
-    'o': ['A competitor would probably have closed the site and moved production',
-          'A competitor offered less money',
-          'A competitor was blocked by regulators',
-          'No competitor was interested'], 'a': 0,
-    'e': u'"a competitor would almost certainly have closed the site and moved production"'},
-   {'q': 'What was the outcome after five years?',
-    'o': ['Thirty more staff and the bank loan fully repaid',
-          'The company was sold again',
-          'Thirty staff were made redundant',
-          'The loan was still outstanding'], 'a': 0,
-    'e': u'"the firm employs thirty more people than at the buyout, and the bank loan is fully repaid"'},
+   {'q': 'Why did the parent company sell Thornbury Print?',
+    'o': ['Printing was no longer core', 'It was making a loss',
+          'A regulator required it', 'The managers threatened to leave'], 'a': 0,
+    'e': '"because printing was no longer core"'},
+   {'q': 'What was the total price?',
+    'o': ['Seventy-two million pounds', 'Forty-four million pounds',
+          'Twenty-five million pounds', 'One hundred and thirty million pounds'], 'a': 0,
+    'e': '"The price was seventy-two million pounds"'},
+   {'q': 'How much did the managers themselves put in?',
+    'o': ['Three million pounds', 'Twenty-five million pounds',
+          'Forty-four million pounds', 'Nine million pounds'], 'a': 0,
+    'e': '"The managers themselves could put in only three million"'},
+   {'q': 'How much bank debt was used?',
+    'o': ['Forty-four million', 'Twenty-five million',
+          'Seventy-two million', 'Three million'], 'a': 0,
+    'e': '"forty-four million of bank debt"'},
+   {'q': 'What percentage of shares did the private equity fund take?',
+    'o': ['Sixty-eight percent', 'Twenty-eight percent',
+          'Four percent', 'Eleven percent'], 'a': 0,
+    'e': '"which took sixty-eight percent of the shares"'},
+   {'q': 'What share did the managers end up with?',
+    'o': ['About twenty-eight percent', 'About four percent',
+          'About sixty-eight percent', 'A half'], 'a': 0,
+    'e': '"The managers end up with about twenty-eight percent"'},
+   {'q': 'What were the two bank covenants?',
+    'o': ['Net debt below three point five times earnings, and interest cover above three times',
+          'Net debt below three times, and interest cover above three point five times',
+          'Net debt below eleven percent, and interest cover above four times',
+          'A minimum cash balance and a dividend ban'], 'a': 0,
+    'e': '"Net debt had to stay below three point five times … interest cover … above three times"'},
+   {'q': 'What happened in year two?',
+    'o': ['A large customer moved to digital and volume fell eleven percent',
+          'The bank withdrew the facility', 'A covenant was breached',
+          'The fund sold its stake'], 'a': 0,
+    'e': '"a large customer moved to digital and volume fell eleven percent"'},
+   {'q': 'How did the company recover?',
+    'o': ['It sold two sites for nine million and paid down debt',
+          'It raised new equity', 'It renegotiated the covenants',
+          'It cut the workforce by a third'], 'a': 0,
+    'e': '"selling two sites for nine million and paying down debt"'},
+   {'q': 'What is the speaker’s main point about buyouts?',
+    'o': ['The operating risk is unchanged; the added risk comes from the funding',
+          'Managers always overpay', 'Bank covenants are rarely enforced',
+          'Private equity funds exit too early'], 'a': 0,
+    'e': '"the operating risk is unchanged, and all the added risk comes from the funding"'},
   ]},
 ]},
 
@@ -695,165 +674,159 @@ SETS = [
 
  {'id': 'L5a', 'kind': 'presentation',
   'title': 'Market Research Findings for Indonesia',
-  'context': u'สามคนรายงานผลวิจัยตลาดอินโดนีเซีย และเสนอว่าควรชะลอการเข้าตลาด',
+  'context': u'สามคนรายงานผลวิจัยตลาดอินโดนีเซียก่อนตัดสินใจลงทุน พร้อมข้อจำกัดของงานวิจัย',
   'turns': [
-   ('Anna', 'a', 'f2',
-    "Good morning. I'm Anna. Unlike the other groups, we are going to recommend that we do not launch — at "
-    "least not yet. I'll explain the research, Kevin will explain what we found, and Siri will explain what "
-    "we think should happen instead."),
-   ('Anna', 'a', 'f2',
-    "We were asked to test demand for a ready-meal range in Indonesia. We used three methods. Secondary "
-    "data from a government statistics office, a questionnaire with fifteen hundred respondents, and "
-    "eight focus groups across three cities."),
-   ('Kevin', 'k', 'm3',
-    "Thanks Anna. On paper this market looks excellent. Two hundred and seventy million people, a growing "
-    "middle class, and ready-meal sales up eleven percent last year. Every board paper we have seen says "
-    "Indonesia is the obvious next step."),
-   ('Kevin', 'k', 'm3',
-    "But our focus groups told a different story. Three things came up repeatedly. One: refrigeration. "
-    "Only about forty percent of households in our sample had a reliable fridge, and our product needs "
-    "chilled storage."),
-   ('Kevin', 'k', 'm3',
-    "Two: halal certification. Without it we cannot reach the mass market, and certification takes between "
-    "nine and fourteen months. Three: price. At our planned price point, a single meal costs about the "
-    "same as three meals from a street vendor, and street food is fresher."),
-   ('Siri', 's', 'f1',
-    "Thank you Kevin. So what do we recommend? Not abandoning Indonesia — the market is real. But we "
-    "recommend delaying entry by eighteen months and changing the product."),
-   ('Siri', 's', 'f1',
-    "Specifically: start halal certification immediately, since that is the longest lead time. Switch from "
-    "chilled to ambient — shelf-stable — packaging, which removes the refrigeration problem entirely. And "
-    "target a market niche first, not the mass market: office workers in Jakarta buying lunch at "
-    "convenience stores."),
-   ('Siri', 's', 'f1',
-    "One final point. Our recommendation is unpopular, and we know it. But launching a chilled product "
-    "into a market where six in ten homes cannot store it is not a marketing problem we can solve with a "
-    "bigger advertising budget. Thank you."),
+   ('Sasha', 's', 'f2',
+    "Good morning. I'm Sasha. This is a research report, not a recommendation. Arun and Laila will "
+    "take the findings; I will start with what we did and what the study cannot tell you."),
+   ('Sasha', 's', 'f2',
+    "We surveyed two thousand four hundred households across five provinces, and we ran eight focus "
+    "groups. The budget was one hundred and ninety thousand dollars and the fieldwork took eleven "
+    "weeks. One limitation matters: the sample is urban only, so nothing here applies to rural "
+    "demand."),
+   ('Arun', 'a', 'm3',
+    "Thanks, Sasha. The headline is that the category is growing at seven percent a year, but the "
+    "growth is concentrated. Two provinces account for sixty-two percent of it. If you plan national "
+    "distribution from day one, you will be paying to reach demand that is not there yet."),
+   ('Arun', 'a', 'm3',
+    "On price, the finding was clearer than we expected. Willingness to pay drops sharply above "
+    "thirty-five thousand rupiah per unit. Below that line, price barely affects choice. Above it, a "
+    "ten percent price rise cuts stated purchase intention by almost a third."),
+   ('Laila', 'l', 'f3',
+    "I will take brand and channel. Brand awareness for the category leader is seventy-eight percent, "
+    "but when we asked which brand people had actually bought last, the leader got only forty-one "
+    "percent. That gap between awareness and purchase is the opening."),
+   ('Laila', 'l', 'f3',
+    "On channel, seventy percent of purchases happen in small independent shops rather than modern "
+    "retail. That changes everything about distribution cost, because you cannot serve those shops "
+    "directly. You need a distributor, and the distributor margin in this market is eighteen percent."),
+   ('Laila', 'l', 'f3',
+    "Two things we could not answer. We did not test packaging, because the samples were not ready "
+    "in time. And we have no data on repeat purchase, since the study was a single wave. If the "
+    "board wants a repeat purchase figure, that is a second study of about four months. Thank you."),
   ],
   'questions': [
-   {'q': 'What is this group recommending?',
-    'o': ['Not launching yet', 'Launching immediately',
-          'Launching in a different country', 'Selling the brand'], 'a': 0,
-    'e': u'"we are going to recommend that we do not launch — at least not yet"'},
-   {'q': 'How many research methods did they use?',
-    'o': ['Three', 'Two', 'Four', 'One'], 'a': 0,
-    'e': u'"We used three methods. Secondary data …, a questionnaire …, and eight focus groups"'},
-   {'q': 'How many people answered the questionnaire?',
-    'o': ['Fifteen hundred', 'Eight hundred', 'Two hundred and seventy', 'Three thousand'], 'a': 0,
-    'e': u'"a questionnaire with fifteen hundred respondents"'},
-   {'q': 'By how much did ready-meal sales grow last year?',
-    'o': ['Eleven percent', 'Forty percent', 'Fourteen percent', 'Seventy percent'], 'a': 0,
-    'e': u'"ready-meal sales up eleven percent last year"'},
-   {'q': 'What proportion of households had a reliable fridge?',
-    'o': ['About forty percent', 'About sixty percent',
-          'About eleven percent', 'About ninety percent'], 'a': 0,
-    'e': u'"Only about forty percent of households in our sample had a reliable fridge"'},
-   {'q': 'How long does halal certification take?',
-    'o': ['Between nine and fourteen months', 'Between three and six months',
-          'Eighteen months exactly', 'About two years'], 'a': 0,
-    'e': u'"certification takes between nine and fourteen months"'},
-   {'q': 'How does the price compare with street food?',
-    'o': ['One meal costs about the same as three street meals',
-          'One meal costs the same as one street meal',
-          'It is cheaper than street food',
-          'Three meals cost the same as one street meal'], 'a': 0,
-    'e': u'"a single meal costs about the same as three meals from a street vendor"'},
-   {'q': 'How long a delay do they recommend?',
-    'o': ['Eighteen months', 'Nine months', 'Fourteen months', 'Six months'], 'a': 0,
-    'e': u'"we recommend delaying entry by eighteen months"'},
-   {'q': 'What packaging change do they propose?',
-    'o': ['From chilled to ambient, shelf-stable packaging',
-          'From ambient to chilled',
-          'Smaller pack sizes only',
-          'Recyclable packaging'], 'a': 0,
-    'e': u'"Switch from chilled to ambient — shelf-stable — packaging, which removes the refrigeration problem"'},
-   {'q': "What is Siri's final point?",
-    'o': ['A bigger advertising budget cannot solve a storage problem',
-          'The advertising budget should be doubled',
-          'The team should research again',
-          'Indonesia should be abandoned permanently'], 'a': 0,
-    'e': u'"launching a chilled product into a market where six in ten homes cannot store it is not a marketing problem we can solve with a bigger advertising budget"'},
+   {'q': 'How many households were surveyed?',
+    'o': ['Two thousand four hundred', 'Two thousand', 'Four hundred', 'Eight hundred'], 'a': 0,
+    'e': '"We surveyed two thousand four hundred households across five provinces"'},
+   {'q': 'What was the research budget?',
+    'o': ['One hundred and ninety thousand dollars', 'One hundred and nineteen thousand dollars',
+          'Nineteen thousand dollars', 'Nine hundred thousand dollars'], 'a': 0,
+    'e': '"The budget was one hundred and ninety thousand dollars"'},
+   {'q': 'What limitation does Sasha flag?',
+    'o': ['The sample is urban only', 'The sample is too small',
+          'The fieldwork was rushed', 'Only one province was covered'], 'a': 0,
+    'e': '"the sample is urban only, so nothing here applies to rural demand"'},
+   {'q': 'How is category growth distributed?',
+    'o': ['Two provinces account for sixty-two percent of it',
+          'It is spread evenly across five provinces',
+          'It is concentrated in rural areas', 'It is falling outside the cities'], 'a': 0,
+    'e': '"Two provinces account for sixty-two percent of it"'},
+   {'q': 'What does Arun warn about national distribution?',
+    'o': ['You pay to reach demand that is not there yet',
+          'It is cheaper than regional distribution',
+          'It is blocked by regulation', 'It requires a joint venture'], 'a': 0,
+    'e': '"you will be paying to reach demand that is not there yet"'},
+   {'q': 'Above what price does willingness to pay drop sharply?',
+    'o': ['Thirty-five thousand rupiah', 'Thirteen thousand rupiah',
+          'Seventy thousand rupiah', 'Eighteen thousand rupiah'], 'a': 0,
+    'e': '"Willingness to pay drops sharply above thirty-five thousand rupiah per unit"'},
+   {'q': 'What is brand awareness for the category leader?',
+    'o': ['Seventy-eight percent', 'Forty-one percent',
+          'Seventy percent', 'Sixty-two percent'], 'a': 0,
+    'e': '"Brand awareness for the category leader is seventy-eight percent"'},
+   {'q': 'What does Laila call the opening for a new entrant?',
+    'o': ['The gap between awareness and actual purchase',
+          'The low price of the leader', 'The weak distribution network',
+          'The lack of advertising'], 'a': 0,
+    'e': '"That gap between awareness and purchase is the opening"'},
+   {'q': 'What is the distributor margin in this market?',
+    'o': ['Eighteen percent', 'Seventy percent', 'Forty-one percent', 'Seven percent'], 'a': 0,
+    'e': '"the distributor margin in this market is eighteen percent"'},
+   {'q': 'Which question could the study not answer?',
+    'o': ['Repeat purchase', 'Price sensitivity', 'Brand awareness', 'Channel share'], 'a': 0,
+    'e': '"we have no data on repeat purchase, since the study was a single wave"'},
   ]},
 
  {'id': 'L5b', 'kind': 'talk',
   'title': 'A Joint Venture in Batteries',
-  'context': u'วิทยากรอธิบายว่าทำไมบางครั้งบริษัทเลือกตั้งกิจการร่วมค้า แทนที่จะซื้อกิจการ',
+  'context': u'วิทยากรเล่ากรณีกิจการร่วมค้าผลิตแบตเตอรี่ เน้นความต่างจากการซื้อกิจการและวิธีบันทึกบัญชี',
   'turns': [
-   ('Speaker', 's', 'm3',
-    "Every case we have studied so far involved one company ending up owning another. Today's case is "
-    "different, because nobody buys anybody. This is a joint venture."),
-   ('Speaker', 's', 'm3',
-    "The two parties are a European car manufacturer and an Asian battery producer. In twenty twenty-one "
-    "they set up a joint venture to build a battery plant in Hungary. Each side took fifty percent — an "
-    "exact split, which as we will see creates its own problems."),
-   ('Speaker', 's', 'm3',
-    "Why a joint venture rather than a takeover? Three reasons. First, cost. The plant needed two point "
-    "one billion euros. Neither company wanted that on its own balance sheet."),
-   ('Speaker', 's', 'm3',
-    "Second, and more interesting: what each side actually wanted. The car maker wanted guaranteed supply "
-    "of cells. The battery producer wanted a guaranteed customer. Neither wanted to own the other's core "
-    "business. The car maker has no interest in running chemical plants, and the battery firm has no "
-    "interest in making cars."),
-   ('Speaker', 's', 'm3',
-    "Third, regulation. A full acquisition of a battery producer by a car manufacturer would have attracted "
-    "serious attention from the competition authority. A fifty-fifty joint venture, with a defined and "
-    "limited purpose, attracted almost none."),
-   ('Speaker', 's', 'm3',
-    "Now the problem I mentioned. With a fifty-fifty split, neither partner has control. In year two the "
-    "two sides disagreed about whether to expand capacity. The car maker wanted to double output; the "
-    "battery producer wanted to wait. There was no mechanism to break the deadlock, and the decision was "
-    "delayed by eleven months."),
-   ('Speaker', 's', 'm3',
-    "They eventually solved it by amending the agreement: an independent chairman now has a casting vote "
-    "on capital spending above one hundred million euros. That is the practical lesson. When you set up a "
-    "joint venture, agree in advance how you will settle disputes — because you will have them."),
+   ('Speaker', 's', 'f2',
+    "The last case is a joint venture, and I have kept it until the end because students routinely "
+    "confuse it with a takeover. They are not the same thing at all, and the accounting is different "
+    "too."),
+   ('Speaker', 's', 'f2',
+    "Two companies were involved. Caldera Motors, a vehicle manufacturer, and Sentinel Chemical, a "
+    "materials producer. Neither acquired the other. They each put capital into a new company, "
+    "Voltrek, which builds battery cells."),
+   ('Speaker', 's', 'f2',
+    "Each side contributed four hundred and twenty million dollars and took exactly fifty percent. "
+    "Caldera also contributed a site, valued at sixty million, which counted towards its share. So "
+    "its cash contribution was three hundred and sixty million."),
+   ('Speaker', 's', 'f2',
+    "Now the point that matters for your accounting. Because neither party controls Voltrek, neither "
+    "one consolidates it. Each reports its interest using the equity method: one line in the balance "
+    "sheet, one line in the income statement. If this had been an acquisition, the whole of Voltrek's "
+    "assets and liabilities would appear."),
+   ('Speaker', 's', 'f2',
+    "Why a joint venture rather than a takeover? Three reasons. The plant costs more than either side "
+    "wanted on its own balance sheet. Each brings something the other lacks, Caldera the demand and "
+    "Sentinel the chemistry. And the technology may not win, so both wanted to limit the loss."),
+   ('Speaker', 's', 'f2',
+    "The weakness is governance. With a fifty-fifty split, a genuine disagreement has no tiebreaker. "
+    "Here the agreement named an independent chairman with a casting vote on operating matters only, "
+    "not on capital spending, which still needs both parties."),
+   ('Speaker', 's', 'f2',
+    "In year three, the two sides did disagree, about whether to double capacity. Sentinel wanted to; "
+    "Caldera did not. Because it was a capital decision, the casting vote did not apply, and the "
+    "expansion was delayed by fourteen months. So when you read a joint venture agreement, look at "
+    "the deadlock clause before you look at the profit forecast. Thank you."),
   ],
   'questions': [
-   {'q': 'What makes this case different from the others?',
-    'o': ['Nobody buys anybody', 'The deal was hostile',
-          'A regulator blocked it', 'The buyer paid in shares'], 'a': 0,
-    'e': u'"Today’s case is different, because nobody buys anybody. This is a joint venture"'},
-   {'q': 'Who are the two parties?',
-    'o': ['A European car maker and an Asian battery producer',
-          'Two European car makers',
-          'Two Asian battery producers',
-          'A car maker and a bank'], 'a': 0,
-    'e': u'"a European car manufacturer and an Asian battery producer"'},
-   {'q': 'Where is the plant?',
-    'o': ['Hungary', 'Germany', 'Poland', 'Korea'], 'a': 0,
-    'e': u'"they set up a joint venture to build a battery plant in Hungary"'},
-   {'q': 'How was ownership split?',
-    'o': ['Fifty-fifty', 'Sixty-forty', 'Seventy-thirty', 'Eighty-twenty'], 'a': 0,
-    'e': u'"Each side took fifty percent — an exact split"'},
-   {'q': 'How much did the plant cost?',
-    'o': ['2.1 billion euros', '100 million euros',
-          '21 billion euros', '1.2 billion euros'], 'a': 0,
-    'e': u'"The plant needed two point one billion euros"'},
-   {'q': 'What did the car maker want?',
-    'o': ['Guaranteed supply of cells', 'A guaranteed customer',
-          'To own a chemical plant', 'To enter the battery market'], 'a': 0,
-    'e': u'"The car maker wanted guaranteed supply of cells" · ส่วนผู้ผลิตแบตเตอรี่ต้องการลูกค้าที่แน่นอน'},
-   {'q': 'Why did regulation favour a joint venture?',
-    'o': ['A full acquisition would have attracted serious attention from the competition authority',
-          'Joint ventures pay less tax',
-          'Acquisitions are illegal in Hungary',
-          'The regulator required a joint venture'], 'a': 0,
-    'e': u'"A full acquisition … would have attracted serious attention from the competition authority"'},
-   {'q': 'What problem did the fifty-fifty split create?',
-    'o': ['Neither partner has control, so a deadlock could not be broken',
-          'One side paid more than the other',
-          'Profits could not be divided',
-          'The plant could not be registered'], 'a': 0,
-    'e': u'"With a fifty-fifty split, neither partner has control"'},
-   {'q': 'How long was the capacity decision delayed?',
-    'o': ['Eleven months', 'Two years', 'Six months', 'Eighteen months'], 'a': 0,
-    'e': u'"the decision was delayed by eleven months"'},
-   {'q': 'How did they solve it?',
-    'o': ['An independent chairman now has a casting vote on large spending',
-          'One side bought out the other',
-          'They dissolved the joint venture',
-          'A regulator decided for them'], 'a': 0,
-    'e': u'"an independent chairman now has a casting vote on capital spending above one hundred million euros"'},
+   {'q': 'What did the two companies do?',
+    'o': ['They each put capital into a new company',
+          'One acquired the other', 'They merged into a single company',
+          'They exchanged shares'], 'a': 0,
+    'e': '"They each put capital into a new company, Voltrek"'},
+   {'q': 'How much did each side contribute?',
+    'o': ['Four hundred and twenty million dollars', 'Three hundred and sixty million dollars',
+          'Sixty million dollars', 'Two hundred and ten million dollars'], 'a': 0,
+    'e': '"Each side contributed four hundred and twenty million dollars"'},
+   {'q': 'What was Caldera’s cash contribution?',
+    'o': ['Three hundred and sixty million', 'Four hundred and twenty million',
+          'Sixty million', 'Four hundred and eighty million'], 'a': 0,
+    'e': '420 ลบที่ดิน 60 เหลือเงินสด 360 ล้าน'},
+   {'q': 'Why does neither party consolidate Voltrek?',
+    'o': ['Because neither one controls it', 'Because it is loss-making',
+          'Because it is in another country', 'Because it is newly formed'], 'a': 0,
+    'e': '"Because neither party controls Voltrek, neither one consolidates it"'},
+   {'q': 'How is the interest reported instead?',
+    'o': ['Using the equity method', 'At cost less impairment',
+          'At fair value through profit or loss', 'As a finance lease'], 'a': 0,
+    'e': '"Each reports its interest using the equity method"'},
+   {'q': 'What would change if this had been an acquisition?',
+    'o': ['All of Voltrek’s assets and liabilities would appear',
+          'Goodwill would be ignored', 'No entries would be needed',
+          'Only the cash paid would be shown'], 'a': 0,
+    'e': '"the whole of Voltrek’s assets and liabilities would appear"'},
+   {'q': 'What does Caldera bring to the venture?',
+    'o': ['The demand', 'The chemistry', 'The site only', 'The financing'], 'a': 0,
+    'e': '"Caldera the demand and Sentinel the chemistry"'},
+   {'q': 'What is the weakness of a fifty-fifty split?',
+    'o': ['A genuine disagreement has no tiebreaker',
+          'Neither side can sell its shares', 'Profits cannot be distributed',
+          'The venture cannot borrow'], 'a': 0,
+    'e': '"With a fifty-fifty split, a genuine disagreement has no tiebreaker"'},
+   {'q': 'What does the independent chairman’s casting vote cover?',
+    'o': ['Operating matters only', 'Capital spending only',
+          'All decisions', 'Only the appointment of directors'], 'a': 0,
+    'e': '"a casting vote on operating matters only, not on capital spending"'},
+   {'q': 'What was the result of the year three disagreement?',
+    'o': ['The expansion was delayed by fourteen months',
+          'Sentinel sold its share', 'The venture was wound up',
+          'Caldera took full control'], 'a': 0,
+    'e': '"the expansion was delayed by fourteen months"'},
   ]},
 ]},
 

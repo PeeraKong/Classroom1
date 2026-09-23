@@ -116,6 +116,54 @@ def write_index(clips):
     print(u'  ปรับ %s/index.html ให้ชี้ไปยังไฟล์เสียงแล้ว' % COURSE)
 
 
+# ข้อสอบฟังไม่ควรวัดว่าเคยอ่านข่าวดีลนั้นมาก่อนไหม ทุกกิจการจึงต้องสมมติขึ้นใหม่
+REAL_CO = re.compile(r'Kraft|Cadbury|Disney|Pixar|Nestl|Toyota|Panasonic|Vodafone|Unilever|Tesco')
+
+
+def audit_scripts():
+    """ตรวจบทและคำถามก่อนเสียเวลาสังเคราะห์เสียง เพราะรอบหนึ่งใช้เวลาหลายนาที"""
+    bad = 0
+
+    def fail(pid, msg):
+        nonlocal bad
+        bad += 1
+        print(u'  %-4s %s' % (pid, msg))
+
+    for st in SETS:
+        for part in st['parts']:
+            pid = part['id']
+            speakers = set(t[0] for t in part['turns'])
+            if part['kind'] == 'presentation' and len(speakers) < 2:
+                fail(pid, u'เป็นการนำเสนอกลุ่ม แต่มีคนพูดคนเดียว')
+            if part['kind'] == 'talk' and len(speakers) != 1:
+                fail(pid, u'เป็นการบรรยายเดี่ยว แต่มีผู้พูด %d คน' % len(speakers))
+
+            script = re.sub(r'\s+', ' ', ' '.join(t[3] for t in part['turns'])).replace(u'’', "'")
+            for t in part['turns']:
+                if t[2] not in VOICES:
+                    fail(pid, u'อ้างเสียง %s ซึ่งไม่มีในรายการ' % t[2])
+                m = REAL_CO.search(t[3])
+                if m:
+                    fail(pid, u'บทมีชื่อกิจการจริง %s' % m.group(0))
+
+            if len(part['questions']) != 10:
+                fail(pid, u'มีคำถาม %d ข้อ ต้องเป็น 10' % len(part['questions']))
+            for q in part['questions']:
+                if len(q['o']) != 4 or len(set(q['o'])) != 4:
+                    fail(pid, u'ตัวเลือกไม่ครบสี่หรือซ้ำกัน · %s' % q['q'][:40])
+                if not (0 <= q['a'] < len(q['o'])):
+                    fail(pid, u'ดัชนีคำตอบอยู่นอกช่วง · %s' % q['q'][:40])
+                if not q.get('e', '').strip():
+                    fail(pid, u'ไม่มีคำอธิบาย · %s' % q['q'][:40])
+                # คำอธิบายที่ยกข้อความจากบทมาอ้าง ต้องอ้างได้จริง
+                for quote in re.findall(r'"([^"]+)"', q.get('e', '')):
+                    quote = quote.replace(u'’', "'").strip()
+                    for piece in [x.strip() for x in quote.split(u'…') if len(x.strip()) > 12]:
+                        if piece not in script:
+                            fail(pid, u'คำอธิบายอ้างข้อความที่ไม่มีในบท · %s' % piece[:50])
+    return bad
+
+
 def check():
     print(u'\nPython ที่ใช้อยู่   %s' % sys.executable)
     try:
@@ -133,6 +181,10 @@ def check():
             old = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1))
         except Exception:
             old = {}
+
+    print(u'\nตรวจบทและคำถาม')
+    problems = audit_scripts()
+    print(u'  พบปัญหา %d จุด' % problems)
 
     todo = words = 0
     print('')
@@ -170,6 +222,10 @@ async def main():
         import edge_tts                                            # noqa: F401
     except ImportError:
         print(_ma.problem_edge_tts())
+        return 1
+
+    if audit_scripts():
+        print(u'\nบทหรือคำถามมีปัญหา ยังไม่สร้างเสียงให้')
         return 1
 
     outdir = os.path.join(ROOT, COURSE, 'listening')

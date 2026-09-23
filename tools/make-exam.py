@@ -60,8 +60,18 @@ def check(sets):
         bad += 1
         print(u'  ผิด · %s' % msg)
 
+    # ข้อสอบภาษาไม่ควรวัดว่าจำกรณีศึกษาจริงได้ไหม ทุกสถานการณ์จึงต้องสมมติขึ้น
+    real = re.compile(r'Kraft|Cadbury|Disney|Pixar|Nestl|Toyota|Panasonic|Vodafone|'
+                      r'Mannesmann|L’Or|Bank of England|Unilever|Tesco')
+
     for s in sets:
         print(u'%s' % s['title'])
+        texts = ([x[0] for x in s['p1a']['items']] + [x[0] for x in s['p1b']['items']] +
+                 [x[0] for x in s['p2a']] + [x[0] for x in s['p2b']])
+        for t in texts:
+            m = real.search(t)
+            if m:
+                fail(u'%s มีชื่อกิจการจริง %s อยู่ในโจทย์ · %s' % (s['id'], m.group(0), t[:50]))
         for key in ('p1a', 'p1b'):
             part = s[key]
             if len(part['box']) < len(part['items']):
