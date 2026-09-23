@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""ย้ายข้อสอบ Part I และ Part II จาก tools/exam-data.py เข้าไปในหน้าเว็บ
+u"""ย้ายข้อสอบ Part I และ Part II จาก tools/exam-data*.py เข้าไปในหน้าเว็บ
 
 เก็บโจทย์ไว้เป็นไฟล์ Python เพราะแก้ง่ายกว่าการไปนั่งแก้ JSON ยาว ๆ ในหน้า HTML
 แล้วให้สคริปต์นี้แปลงเป็นบล็อก JSON id="mx-data" ฝังกลับเข้า oral-eng/index.html
@@ -8,6 +8,11 @@
     python3 tools/make-exam.py
 
 ใช้ --check เพื่อดูว่าข้อมูลครบถ้วนไหม โดยไม่แตะไฟล์
+
+ชุดที่ 1 ถึง 5 อยู่ใน exam-data.py และมี Part III เป็นไฟล์เสียงให้ทำต่อ
+จึงใช้รหัสชุดเดียวกับแท็บฝึกฟัง เพื่อให้ปุ่มข้ามไป Part III ยังชี้ถูกที่
+ชุดที่ 6 เป็นต้นไปอยู่ใน exam-data-2.py เป็นแบบฝึกล้วน ไม่มี Part III
+สคริปต์จึงติดธง p3 ไว้ให้หน้าเว็บรู้ว่าชุดไหนควรมีปุ่มข้ามไปฝึกฟัง
 """
 
 import argparse
@@ -22,31 +27,55 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PAGE = os.path.join(ROOT, 'oral-eng', 'index.html')
 
-_spec = importlib.util.spec_from_file_location('exam_data', os.path.join(HERE, 'exam-data.py'))
-_ed = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_ed)
+SOURCES = ['exam-data.py', 'exam-data-2.py']
 
-_lspec = importlib.util.spec_from_file_location('ldata', os.path.join(HERE, 'listening-data.py'))
-_ld = importlib.util.module_from_spec(_lspec)
-_lspec.loader.exec_module(_ld)
+
+def _load(name):
+    path = os.path.join(HERE, name)
+    spec = importlib.util.spec_from_file_location(name[:-3].replace('-', '_'), path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# ต่อชุดจากทุกไฟล์เข้าด้วยกันตามลำดับ ชุดที่ 1 ถึง 5 มาจากไฟล์แรกเสมอ
+_MODS = [_load(n) for n in SOURCES]
+P1A = [s for m in _MODS for s in m.P1A]
+P1B = [s for m in _MODS for s in m.P1B]
+P2A = [s for m in _MODS for s in m.P2A]
+P2B = [s for m in _MODS for s in m.P2B]
+
+_ld = _load('listening-data.py')
 
 BLOCK_RE = re.compile(r'\n*<script type="application/json" id="mx-data">.*?</script>', re.S)
 ANCHOR = '\n<script type="application/json" id="vc-data">'
 
 
 def build():
-    """รวมสี่ส่วนเข้าเป็นชุดละก้อน ให้ตรงกับชุดของ Part III ที่มีอยู่แล้ว"""
+    """รวมสี่ส่วนเข้าเป็นชุดละก้อน
+
+    ชุดแรก ๆ ยืมรหัสกับชื่อมาจากแท็บฝึกฟัง เพราะเป็นชุดเดียวกันกับ Part III
+    ที่เหลือเป็นแบบฝึกล้วน ตั้งรหัสของตัวเองว่า X6 เป็นต้นไป
+    ให้ไม่ชนกับรหัสของคลิปเสียงไม่ว่าจะเพิ่มคลิปอีกกี่ชุด
+    """
+    n = len(P1A)
+    if not (len(P1B) == len(P2A) == len(P2B) == n):
+        raise SystemExit(u'จำนวนชุดในสี่ส่วนไม่เท่ากัน · P1A %d · P1B %d · P2A %d · P2B %d'
+                         % (n, len(P1B), len(P2A), len(P2B)))
+
     sets = []
-    for i, st in enumerate(_ld.SETS):
+    for i in range(n):
+        st = _ld.SETS[i] if i < len(_ld.SETS) else None
         sets.append({
-            'id': st['id'],
-            'title': st['title'],
-            'p1a': {'box': _ed.P1A[i]['box'],
-                    'items': [list(x) for x in _ed.P1A[i]['items']]},
-            'p1b': {'box': _ed.P1B[i]['box'],
-                    'items': [list(x) for x in _ed.P1B[i]['items']]},
-            'p2a': [list(x) for x in _ed.P2A[i]],
-            'p2b': [[s, list(o), e] for s, o, e in _ed.P2B[i]],
+            'id': st['id'] if st else 'X%d' % (i + 1),
+            'title': st['title'] if st else u'ชุดที่ %d' % (i + 1),
+            'p3': bool(st),
+            'p1a': {'box': P1A[i]['box'],
+                    'items': [list(x) for x in P1A[i]['items']]},
+            'p1b': {'box': P1B[i]['box'],
+                    'items': [list(x) for x in P1B[i]['items']]},
+            'p2a': [list(x) for x in P2A[i]],
+            'p2b': [[s, list(o), e] for s, o, e in P2B[i]],
         })
     return sets
 
@@ -113,17 +142,34 @@ def check(sets):
         if n != 20:
             fail(u'%s รวมได้ %d ข้อ ต้องเป็น 20' % (s['id'], n))
 
+    # รหัสชุดซ้ำจะทำให้ลิงก์ในแถบข้างและ querySelector ชี้ไปผิดชุด
+    ids = [s['id'] for s in sets]
+    if len(set(ids)) != len(ids):
+        fail(u'รหัสชุดซ้ำกัน · %s' % ' '.join(ids))
+
+    # โจทย์ซ้ำข้ามชุดทำให้แบบฝึกชุดหลังไม่ได้วัดอะไรใหม่ ต้องจับตั้งแต่ตอนนี้
+    seen = {}
+    for s in sets:
+        for t in ([x[0] for x in s['p1a']['items']] + [x[0] for x in s['p1b']['items']] +
+                  [x[0] for x in s['p2a']] + [x[0] for x in s['p2b']]):
+            k = t.strip().lower()
+            if k in seen:
+                fail(u'โจทย์ซ้ำระหว่างชุด %s กับ %s · %s' % (seen[k], s['id'], t[:46]))
+            seen[k] = s['id']
+
     # ถ้าทุกชุดมีข้อถูกเท่ากันหมด เดาว่า "เรียงถูกแล้ว" ทุกข้อก็ได้คะแนนฟรีเท่าเดิมทุกชุด
     balance = [sum(1 for x in s['p2a'] if x[1]) for s in sets]
     print(u'\nPart II A · จำนวนข้อที่เรียงถูกในแต่ละชุด %s'
           % ' '.join(str(b) for b in balance))
-    if len(set(balance)) == 1:
-        fail(u'ทุกชุดมีข้อถูกเท่ากันหมด ควรกระจายให้เดาไม่ได้')
+    if len(set(balance)) < 3:
+        fail(u'จำนวนข้อที่เรียงถูกกระจายน้อยเกินไป เดาทางได้ง่าย')
 
+    withp3 = sum(1 for s in sets if s['p3'])
     total = sum(len(s['p1a']['items']) + len(s['p1b']['items']) +
                 len(s['p2a']) + len(s['p2b']) for s in sets)
-    print(u'\nรวม %d ชุด %d ข้อ · ข้อละ 1 คะแนน · ตรวจพบปัญหา %d จุด'
-          % (len(sets), total, bad))
+    print(u'\nรวม %d ชุด %d ข้อ · ข้อละ 1 คะแนน · มี Part III ต่อให้ %d ชุด'
+          % (len(sets), total, withp3))
+    print(u'ตรวจพบปัญหา %d จุด' % bad)
     return bad
 
 
@@ -137,6 +183,34 @@ def write(sets):
     io.open(PAGE, 'w', encoding='utf-8').write(html.rstrip('\n') + '\n')
     print(u'\nฝังบล็อก mx-data ลง oral-eng/index.html แล้ว · %.1f KB'
           % (len(block) / 1024.0))
+    return verify(sets)
+
+
+def verify(sets):
+    u"""อ่านหน้าเว็บกลับมาตรวจว่าตรงกับไฟล์ต้นทางจริง และอยู่ก่อนสคริปต์ที่อ่านมัน
+
+    เคยมีกรณีที่เครื่องมือเขียนกลับไม่ครบแล้วไม่มีอะไรจับได้ หน้าเว็บจึงยังโชว์ของเก่า
+    และถ้าบล็อกไปอยู่หลังสคริปต์ getElementById จะคืนค่าว่าง แท็บจะขึ้นเปล่า
+    """
+    html = io.open(PAGE, encoding='utf-8').read()
+    at_data = html.find('id="mx-data"')
+    at_script = html.find('\n<script>\n')
+    if at_data < 0 or at_script < 0 or at_data > at_script:
+        print(u'  บล็อกข้อสอบอยู่หลังสคริปต์ที่อ่านมัน แท็บจะขึ้นว่างเปล่า')
+        return 1
+    m = BLOCK_RE.search(html)
+    got = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1)) if m else []
+    bad = 0
+    if len(got) != len(sets):
+        print(u'  หน้าเว็บมี %d ชุด แต่ไฟล์ต้นทางมี %d ชุด' % (len(got), len(sets)))
+        bad += 1
+    for a, b in zip(got, sets):
+        if json.dumps(a, sort_keys=True, ensure_ascii=False) != \
+           json.dumps(b, sort_keys=True, ensure_ascii=False):
+            print(u'  ชุด %s ในหน้าเว็บไม่ตรงกับไฟล์ต้นทาง' % b['id'])
+            bad += 1
+    print(u'ตรวจชุดในหน้าเว็บเทียบกับไฟล์ต้นทาง · พบไม่ตรง %d จุด' % bad)
+    return bad
 
 
 def main():
@@ -149,9 +223,9 @@ def main():
     if bad:
         print(u'\nยังไม่ฝังให้ เพราะต้องแก้ข้อมูลก่อน')
         return 1
-    if not a.check:
-        write(sets)
-    return 0
+    if a.check:
+        return 0
+    return 1 if write(sets) else 0
 
 
 if __name__ == '__main__':
