@@ -239,6 +239,24 @@ def write_page(sets, clips):
     io.open(path, 'w', encoding='utf-8').write(html.rstrip('\n') + '\n')
     print(u'  ฝังข้อมูลและดัชนีไฟล์เสียงลง %s/index.html แล้ว' % COURSE)
 
+    # ตรวจซ้ำว่าบทในหน้าเว็บตรงกับไฟล์บทจริง ๆ
+    # เครื่องมือของแบบฝึกฟังชุดเดิมเคยเขียนกลับแค่ดัชนีไฟล์เสียง ทำให้หน้าเว็บ
+    # โชว์บทเก่าคู่กับเสียงใหม่โดยไม่มีอะไรจับได้ จึงตรวจทุกครั้งไม่ให้เกิดซ้ำ
+    _, again = read_page()
+    m = re.search(r'id="ct-data">(.*?)</script>', again, re.S)
+    got = {i['id']: i for st in json.loads(m.group(1)) for i in st['items']} if m else {}
+    bad = 0
+    for st in sets:
+        for it in items_of(st):
+            a = got.get(it['id'])
+            if not a:
+                print(u'  %s ไม่มีในหน้าเว็บ' % it['id']); bad += 1; continue
+            if [t[1] for t in a['turns']] != [t[2] for t in it['turns']]:
+                print(u'  %s บทในหน้าเว็บไม่ตรงกับไฟล์บท' % it['id']); bad += 1
+            if [q['q'] for q in a['qs']] != [q['q'] for q in it['questions']]:
+                print(u'  %s คำถามในหน้าเว็บไม่ตรงกับไฟล์บท' % it['id']); bad += 1
+    print(u'  ตรวจบทในหน้าเว็บเทียบกับไฟล์บท · พบไม่ตรง %d จุด' % bad)
+
 
 def report(sets):
     print('')

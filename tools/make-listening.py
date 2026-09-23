@@ -35,7 +35,14 @@ _ld = importlib.util.module_from_spec(_lspec)
 _lspec.loader.exec_module(_ld)
 SETS, VOICES = _ld.SETS, _ld.VOICES
 
-INDEX_RE = re.compile(r'\n*<script type="application/json" id="ls-audio">.*?</script>', re.S)
+# ต้องเขียนกลับทั้งสองบล็อก บทกับดัชนีไฟล์เสียง
+#
+# เดิมเขียนแค่ ls-audio ส่วน ls-data ซึ่งเป็นบทและคำถามที่หน้าเว็บแสดง
+# ถูกฝังไว้ครั้งเดียวตอนสร้างแท็บ พอแก้ tools/listening-data.py แล้วสร้างเสียงใหม่
+# ไฟล์เสียงจึงเป็นบทใหม่ แต่หน้าเว็บยังโชว์บทเก่าและถามคำถามเก่า
+# ซึ่งไม่มีอะไรจับได้เลยเพราะจำนวนช่วงพูดบังเอิญเท่ากัน
+BLOCK_RE = re.compile(
+    r'\n*<script type="application/json" id="ls-(?:data|audio)">.*?</script>', re.S)
 
 # เว้นจังหวะระหว่างผู้พูด ให้ฟังเหมือนการนำเสนอจริงที่มีการสลับคน
 #
@@ -104,16 +111,56 @@ def read_page():
     return path, io.open(path, encoding='utf-8').read()
 
 
+def page_data():
+    """แปลงบทจาก listening-data.py เป็นรูปแบบที่หน้าเว็บอ่าน"""
+    return [{'id': st['id'], 'title': st['title'],
+             'parts': [{'id': p['id'], 'kind': p['kind'], 'title': p['title'],
+                        'context': p['context'],
+                        'turns': [[t[0], t[3]] for t in p['turns']],
+                        'questions': [{'q': q['q'], 'o': list(q['o']),
+                                       'a': q['a'], 'e': q['e']} for q in p['questions']]}
+                       for p in st['parts']]}
+            for st in SETS]
+
+
 def write_index(clips):
     path, html = read_page()
-    block = ('\n\n<script type="application/json" id="ls-audio">\n' +
+    block = ('\n\n<script type="application/json" id="ls-data">\n' +
+             json.dumps(page_data(), ensure_ascii=False, separators=(',', ':')) + '\n</script>' +
+             '\n<script type="application/json" id="ls-audio">\n' +
              json.dumps(clips, ensure_ascii=False, separators=(',', ':')) + '\n</script>')
-    html = INDEX_RE.sub('', html).rstrip('\n')
+    html = BLOCK_RE.sub('', html).rstrip('\n')
     anchor = '\n<script type="application/json" id="vc-data">'
     at = html.find(anchor)
     html = (html[:at] + block + html[at:]) if at > 0 else (html + block + '\n')
     io.open(path, 'w', encoding='utf-8').write(html.rstrip('\n') + '\n')
-    print(u'  ปรับ %s/index.html ให้ชี้ไปยังไฟล์เสียงแล้ว' % COURSE)
+    print(u'  เขียนบทและดัชนีไฟล์เสียงกลับเข้า %s/index.html แล้ว' % COURSE)
+    verify_page()
+
+
+def verify_page():
+    """ตรวจว่าบทในหน้าเว็บตรงกับไฟล์บทจริง ๆ หลังเขียนเสร็จ
+
+    ข้อนี้เคยพลาดมาแล้ว จึงตรวจทุกครั้งไม่ให้เกิดซ้ำ
+    """
+    _, html = read_page()
+    m = re.search(r'id="ls-data">(.*?)</script>', html, re.S)
+    if not m:
+        print(u'  ตรวจแล้วไม่พบบทในหน้าเว็บ')
+        return 1
+    page = {p['id']: p for st in json.loads(m.group(1)) for p in st['parts']}
+    bad = 0
+    for st in SETS:
+        for p in st['parts']:
+            a = page.get(p['id'])
+            if not a:
+                print(u'  %s ไม่มีในหน้าเว็บ' % p['id']); bad += 1; continue
+            if [t[1] for t in a['turns']] != [t[3] for t in p['turns']]:
+                print(u'  %s บทในหน้าเว็บไม่ตรงกับไฟล์บท' % p['id']); bad += 1
+            if [q['q'] for q in a['questions']] != [q['q'] for q in p['questions']]:
+                print(u'  %s คำถามในหน้าเว็บไม่ตรงกับไฟล์บท' % p['id']); bad += 1
+    print(u'  ตรวจบทในหน้าเว็บเทียบกับไฟล์บท · พบไม่ตรง %d จุด' % bad)
+    return bad
 
 
 # ข้อสอบฟังไม่ควรวัดว่าเคยอ่านข่าวดีลนั้นมาก่อนไหม ทุกกิจการจึงต้องสมมติขึ้นใหม่
@@ -175,10 +222,10 @@ def check():
 
     _, html = read_page()
     old = {}
-    m = INDEX_RE.search(html)
+    m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
     if m:
         try:
-            old = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1))
+            old = json.loads(m.group(1))
         except Exception:
             old = {}
 
@@ -213,10 +260,26 @@ async def main():
     ap = argparse.ArgumentParser(description=u'สร้างไฟล์เสียงสำหรับแบบฝึกฟัง')
     ap.add_argument('--force', action='store_true', help=u'สร้างใหม่แม้บทไม่เปลี่ยน')
     ap.add_argument('--check', action='store_true', help=u'ดูสถานะอย่างเดียว ไม่สร้างจริง')
+    ap.add_argument('--page-only', action='store_true',
+                    help=u'เขียนบทกลับเข้าหน้าเว็บอย่างเดียว ไม่แตะไฟล์เสียง')
     a = ap.parse_args()
 
     if a.check:
         return check()
+
+    # ใช้เมื่อแก้แต่คำถามหรือคำอธิบาย ซึ่งไม่กระทบไฟล์เสียง จึงไม่ต้องสังเคราะห์ใหม่
+    if a.page_only:
+        if audit_scripts():
+            print(u'\nบทหรือคำถามมีปัญหา ยังไม่เขียนให้')
+            return 1
+        _, html = read_page()
+        m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+        try:
+            clips = json.loads(m.group(1)) if m else {}
+        except Exception:
+            clips = {}
+        write_index(clips)
+        return 0
 
     try:
         import edge_tts                                            # noqa: F401
@@ -233,10 +296,10 @@ async def main():
 
     _, html = read_page()
     old = {}
-    m = INDEX_RE.search(html)
+    m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
     if m and not a.force:
         try:
-            old = json.loads(re.search(r'>(.*?)</script>', m.group(0), re.S).group(1))
+            old = json.loads(m.group(1))
         except Exception:
             old = {}
 
