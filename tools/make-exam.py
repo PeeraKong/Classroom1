@@ -50,6 +50,19 @@ _ld = _load('listening-data.py')
 BLOCK_RE = re.compile(r'\n*<script type="application/json" id="mx-data">.*?</script>', re.S)
 ANCHOR = '\n<script type="application/json" id="vc-data">'
 
+# ศัพท์บัญชีเฉพาะทางที่ไม่ควรโผล่ในข้อสอบภาษา
+# วิชานี้วัดภาษาอังกฤษธุรกิจ ไม่ได้วัดความรู้บัญชี ถ้าโจทย์พูดถึงการกระทบยอด
+# หรือค่าความนิยม คนที่ตอบผิดอาจจะแค่ไม่รู้ศัพท์บัญชี ทั้งที่ภาษาแน่นพอแล้ว
+# บริบทจึงควรเป็นธุรกิจทั่วไป แค่ให้เข้ากับคำศัพท์ที่กำลังวัดก็พอ
+ACCOUNTING = re.compile(
+    r'\b(?:accrual|accrued|reconcil\w*|working paper\w*|fieldwork|cut-off|'
+    r'carrying amount|impair\w*|amortis\w*|depreciat\w*|ledger|receivable\w*|'
+    r'payable\w*|balance sheet|income statement|audit\w*|consolidat\w*|goodwill|'
+    r'fair value|net assets|revenue recognition|misstat\w*|going concern|'
+    r'internal control|petty cash|trial balance|journal|capitalis\w*|'
+    r'deferred tax|group accounts|provision\w*|restat\w*|equity method|'
+    r'non-controlling|minority interest|book value)\b', re.I)
+
 
 def build():
     """รวมสี่ส่วนเข้าเป็นชุดละก้อน
@@ -96,11 +109,19 @@ def check(sets):
     for s in sets:
         print(u'%s' % s['title'])
         texts = ([x[0] for x in s['p1a']['items']] + [x[0] for x in s['p1b']['items']] +
-                 [x[0] for x in s['p2a']] + [x[0] for x in s['p2b']])
+                 [x[0] for x in s['p2a']] + [x[0] for x in s['p2b']] +
+                 [x[2] for x in s['p2a'] if x[2]])
         for t in texts:
             m = real.search(t)
             if m:
                 fail(u'%s มีชื่อกิจการจริง %s อยู่ในโจทย์ · %s' % (s['id'], m.group(0), t[:50]))
+            m = ACCOUNTING.search(t)
+            if m:
+                fail(u'%s โจทย์ใช้ศัพท์บัญชีเฉพาะทาง %s · %s' % (s['id'], m.group(0), t[:50]))
+        for b in s['p1a']['box'] + s['p1b']['box']:
+            m = ACCOUNTING.search(b)
+            if m:
+                fail(u'%s กล่องคำมีศัพท์บัญชีเฉพาะทาง %s' % (s['id'], m.group(0)))
         for key in ('p1a', 'p1b'):
             part = s[key]
             if len(part['box']) < len(part['items']):

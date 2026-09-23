@@ -700,19 +700,27 @@ about to · going to · bound to · likely to · **ห้าระดับ cert
 โจทย์ทั้ง 300 ข้อ**ห้ามซ้ำกันข้ามชุด** ซึ่ง `make-exam.py` ตรวจให้ทุกครั้งก่อนฝัง ·
 ตัวเลือกและลำดับในกล่องคำสลับใหม่ทุกครั้งที่กดเริ่มทำใหม่ · เฉลยพร้อมเหตุผลภาษาไทยโผล่ทันทีที่ตอบ
 
-> ### เขียนให้เหมาะกับนิสิตบัญชีชั้นปีที่ 3
+> ### บริบทเป็นธุรกิจทั่วไป ไม่ใช่งานบัญชีเฉพาะทาง
 >
 > ศัพท์และไวยากรณ์ที่วัด**ยังเป็นชุดเดิมตามแนวข้อสอบ** เพราะเปลี่ยนไม่ได้
-> สิ่งที่เปลี่ยนคือ**บริบทของทุกข้อ** ย้ายไปอยู่ในเรื่องที่นิสิตบัญชีใช้จริง
-> คือ งบประมาณ ต้นทุน อัตรากำไร การตีมูลค่า ค่าความนิยม และหนี้สินที่ไม่ได้บันทึก
-> เพื่อให้เดาความหมายจากเนื้อเรื่องได้ ไม่ใช่เดาจากรูปประโยคอย่างเดียว
+> สิ่งที่เปลี่ยนคือ**บริบทของทุกข้อ** · วิชานี้วัดภาษาอังกฤษธุรกิจ **ไม่ได้วัดความรู้บัญชี**
+> ถ้าโจทย์พูดถึงการกระทบยอด ค่าความนิยม หรือการรับรู้รายได้ คนที่ตอบผิดอาจจะแค่ไม่รู้ศัพท์บัญชี
+> ทั้งที่ภาษาแน่นพอแล้ว ซึ่งไม่ใช่สิ่งที่ข้อสอบนี้ตั้งใจวัด
 >
-> | เดิม | ใหม่ |
+> บริบทจึงเป็นเรื่องที่คนทำงานบริษัทเจอทุกวัน คือ การขาย ลูกค้า คู่แข่ง การเปิดตัวสินค้า
+> สัญญา ซัพพลายเออร์ การส่งของ การประชุม และการเจรจาซื้อขายกิจการ แค่ให้เข้ากับคำศัพท์ที่กำลังวัดก็พอ
+>
+> | เดิม บัญชีจ๋า | ใหม่ แนวธุรกิจ |
 > |---|---|
-> | *Shoppers switch brands easily here, so ………… is very low.* | *Buyers here switch supplier over a one percent price difference, so ………… is very low.* |
-> | *In September Kraft ………… for Cadbury worth ten point two billion pounds.* | *During ………… the buyer's accountants found warranty liabilities that had never been recorded.* |
-> | *a customer new relations department* | *a cost new control system* |
-> | *Their plane landed five minutes ago. They ………… arrived yet.* | *The reconciliation was signed off last week, so the balance ………… been agreed.* |
+> | *During ………… the buyer's accountants found warranty liabilities that had never been recorded.* | *During ………… the buyer discovered that the main supply contract was about to expire.* |
+> | *The reconciliation was signed off last week, so the balance ………… been agreed.* | *The contract was signed last week, so the terms ………… been agreed.* |
+> | *a highly aggressive revenue recognition policy* | *a highly aggressive pricing policy* |
+> | *Costs incurred during ………… can only be capitalised once the technical work is proven.* | *Two years of ………… went into the new model before it ever reached a shop.* |
+>
+> `make-exam.py` มี**ตัวตรวจจับศัพท์บัญชีเฉพาะทาง** ราว 35 คำ เช่น reconciliation, goodwill,
+> fair value, provision, audit, consolidation, carrying amount และ revenue recognition
+> ทั้งในโจทย์ ในกล่องคำ และในเฉลยที่แก้ให้ · ถ้าหลุดเข้ามาจะไม่ยอมฝังข้อมูลลงหน้าเว็บเลย
+> (ตอนเพิ่งเพิ่มตัวตรวจนี้ จับได้ 86 จุด)
 >
 > **ไม่ใช้ชื่อบริษัทจริงหรือดีลจริงเลย** เดิมมี 5 ข้อใน Part I กับ Part II และบทฟังอีก 2 ชุด
 > ที่อิงดีลจริง ซึ่งทำให้ข้อสอบวัดว่าเคยอ่านข่าวดีลนั้นมาก่อนไหม แทนที่จะวัดภาษา ·
@@ -723,7 +731,7 @@ about to · going to · bound to · likely to · **ห้าระดับ cert
 เพราะแก้ง่ายกว่าไปนั่งแก้ JSON ยาว ๆ ในหน้า HTML และแยกสองไฟล์เพราะรวมกันแล้วยาวเกินกว่าจะหาที่จะแก้เจอ
 แล้วสั่ง `python3 tools/make-exam.py` เพื่อแปลงเป็นบล็อก `id="mx-data"` ฝังกลับเข้าหน้าเว็บ
 โดยสคริปต์จะตรวจให้ก่อนฝังว่าทุกคำตอบอยู่ในกล่องคำจริง ทุกโจทย์มีช่องว่าง ข้อที่ผิดมีรูปแก้มาด้วย
-ทุกข้อมีคำอธิบาย โจทย์ไม่ซ้ำกันข้ามชุด และรหัสชุดไม่ชนกัน
+ทุกข้อมีคำอธิบาย โจทย์ไม่ซ้ำกันข้ามชุด รหัสชุดไม่ชนกัน และไม่มีศัพท์บัญชีเฉพาะทางหลุดเข้ามา
 จากนั้นจะอ่านหน้าเว็บกลับมาเทียบกับไฟล์ต้นทางอีกรอบว่าเขียนลงไปครบจริงและอยู่ก่อนสคริปต์ที่อ่านมัน
 ใช้ `--check` เพื่อตรวจอย่างเดียวโดยไม่แตะไฟล์
 
