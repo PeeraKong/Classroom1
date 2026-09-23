@@ -63,12 +63,21 @@ jobs:
         if: inputs.task == 'sample'
         run: python tools/sample-voices.py
 
+      # task = listening สร้างทั้งแบบฝึกฟังเดิมและแบบฝึกฟังแนว CU-TEP
+      # รวมไว้ขั้นเดียวเพราะทั้งคู่ข้ามคลิปที่บทไม่เปลี่ยนอยู่แล้ว จึงไม่เสียเวลาซ้ำ
+      # และเพราะ GitHub ตรวจค่า input กับไฟล์บนสาขาหลัก การเพิ่มตัวเลือกใหม่
+      # จะต้องไปแก้สาขาหลักด้วย ซึ่งไม่คุ้มกับการแยกเป็นอีก task
       - name: สร้างไฟล์เสียงแบบฝึกฟัง
         if: inputs.task == 'listening'
+        env:
+          FORCE: ${{ inputs.force }}
         run: |
+          ARGS=""
+          if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
           python tools/make-listening.py --check
           python tools/make-listening.py
-          python tools/make-listening.py --check
+          python tools/make-cutep.py --check
+          python tools/make-cutep.py $ARGS
 
       - name: ดูว่าบทไหนยังขาดไฟล์เสียง
         if: inputs.task == 'audio'
@@ -103,7 +112,7 @@ jobs:
           VOICE: ${{ inputs.voice }}
           EN_VOICE: ${{ inputs.en_voice }}
           BRANCH: ${{ github.ref_name }}
-          SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || inputs.task == 'listening' && 'เพิ่มไฟล์เสียงแบบฝึกฟัง Part III' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
+          SUBJECT: ${{ inputs.task == 'sample' && 'เพิ่มคลิปตัวอย่างไว้เทียบเสียงอ่านภาษาอังกฤษ' || inputs.task == 'listening' && 'เพิ่มไฟล์เสียงแบบฝึกฟัง' || format('เพิ่มไฟล์เสียงบรรยายด้วยเสียง {0}', inputs.voice) }}
         run: |
           # ต้องใช้ status --porcelain ไม่ใช่ diff --quiet
           # เพราะ diff มองเฉพาะไฟล์ที่ git ติดตามอยู่แล้ว ไฟล์ใหม่ทั้งโฟลเดอร์
