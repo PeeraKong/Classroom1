@@ -6712,13 +6712,16 @@ footer p{max-width:70ch; margin-bottom:6px}
   /* ---------- โหมดไฟล์เสียงจริง ----------
      ถ้ามีไฟล์ที่สร้างไว้ด้วย tools/make-audio.py จะเล่นไฟล์นั้นแทนเสียงสังเคราะห์
      เพราะได้เสียงผู้ชายแบบ neural ซึ่งฟังเป็นธรรมชาติกว่ามาก */
-  var audioEl = null, clip = null, clipFailed = null;
+  var audioEl = null, clip = null, clipFailed = null, clipStale = false;
   function clipOf(key){
+    clipStale = false;
     var c = CLIPS[key];
     if (!c || !c.src || !c.cues) return null;
     var n = 0;
     (DATA[key].c || []).forEach(function(q){ n += (q.t || []).length; });
-    return c.cues.length === n ? c : null;   // ไฟล์เสียงต้องตรงกับบทบรรยายรุ่นปัจจุบัน
+    if (c.cues.length === n) return c;       // ไฟล์เสียงต้องตรงกับบทบรรยายรุ่นปัจจุบัน
+    clipStale = true;                        // มีไฟล์อยู่ แต่สร้างจากบทรุ่นก่อน
+    return null;
   }
   function ensureAudio(){
     if (audioEl) return audioEl;
@@ -6769,6 +6772,15 @@ footer p{max-width:70ch; margin-bottom:6px}
           'สาเหตุที่พบบ่อยที่สุดคือเปิดหน้าเว็บแบบ <code>file://</code> ซึ่ง Safari ห้ามโหลดไฟล์เสียงข้างเคียง<br>' +
           'วิธีแก้ ให้กลับไปที่โฟลเดอร์โปรเจกต์แล้ว<b>ดับเบิลคลิกไฟล์ เปิดเว็บ.command</b> ' +
           'มันจะเปิดหน้าเว็บผ่าน <code>http://localhost</code> ให้ แล้วเสียงผู้ชายจะเล่นได้ทันที';
+        hintEl.hidden = false;
+      } else if (clipStale){
+        // บทถูกแก้หลังจากสร้างไฟล์เสียง ไฟล์เดิมจึงพูดคนละเรื่องกับตัวหนังสือที่เห็น
+        // ต้องบอกสาเหตุจริงตรงนี้ ไม่งั้นจะไปโดนข้อความของ loadVoices ที่บอกว่า
+        // เครื่องนี้มีแต่เสียงผู้หญิง ซึ่งไม่ใช่สาเหตุ และทำให้เข้าใจผิดว่าเครื่องมีปัญหา
+        hintEl.innerHTML = '<b>บทบรรยายของบทนี้เพิ่งถูกแก้ ไฟล์เสียงผู้ชายที่มีอยู่จึงยังเป็นบทเก่า</b><br>' +
+          'หน้านี้ตั้งใจไม่เล่นไฟล์เก่าให้ เพราะจะกลายเป็นเสียงพูดคนละเรื่องกับตัวหนังสือ<br>' +
+          'ระหว่างนี้จึงใช้เสียงสังเคราะห์ของเบราว์เซอร์ไปก่อน ซึ่งเครื่องส่วนใหญ่มีแต่เสียงผู้หญิง<br>' +
+          'พอสร้างไฟล์เสียงชุดใหม่เสร็จ เสียงผู้ชาย Niwat จะกลับมาเองและกล่องนี้จะหายไป';
         hintEl.hidden = false;
       }
     }
