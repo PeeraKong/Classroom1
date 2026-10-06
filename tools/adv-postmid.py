@@ -45,21 +45,43 @@ def jsmark(key):
     return (u'/* postmid:%s:start */' % key, u'/* postmid:%s:end */' % key)
 
 
+
+def splice(html, key, block, anchor, comment=True, before=True):
+    u"""วางบล็อกคร่อมคอมเมนต์หัวท้าย ถ้ามีอยู่แล้วให้แทนที่ของเดิม ไม่ใช่ข้ามไป
+
+    ทำแบบนี้เพื่อให้แก้เนื้อหาแล้วรันซ้ำได้ ไม่ต้องย้อนไฟล์กลับก่อนทุกครั้ง
+    """
+    s, e = (mark(key) if comment else jsmark(key))
+    body = s + block + e
+    old = re.search(re.escape(s) + r'.*?' + re.escape(e), html, re.S)
+    if old:
+        if old.group(0) == body:
+            return html, 0
+        return html[:old.start()] + body + html[old.end():], 1
+    if html.count(anchor) != 1:
+        raise SystemExit(u'หาจุดยึดของ %s ไม่เจอ หรือเจอมากกว่าหนึ่งที่' % key)
+    return (html.replace(anchor, body + anchor) if before
+            else html.replace(anchor, anchor + body)), 1
+
+
 # ───────────────────────── ส่วนที่ 1 · CSS ─────────────────────────
 # สองสีใหม่สำหรับบทที่ 7 กับ 8 ของกลุ่มหลังมิดเทอม และเส้นคั่นในแถบแท็บ
 CSS_LIGHT = u"""
 --teal:#1d6a6a; --teal-soft:#d8ebe9;
---clay:#8a5a24; --clay-soft:#f4e8d6;"""
+--clay:#8a5a24; --clay-soft:#f4e8d6;
+--indigo:#3d4a8c; --indigo-soft:#e2e4f3;"""
 
 CSS_DARK = u"""
 --teal:#63c3bd; --teal-soft:#132b2a;
---clay:#d9a765; --clay-soft:#2d2415;"""
+--clay:#d9a765; --clay-soft:#2d2415;
+--indigo:#9aa6e0; --indigo-soft:#1d2038;"""
 
 CSS_RULES = u"""
 .tab[aria-controls="ch5"], #rail-ch5{--accent:var(--green); --accent-soft:var(--green-soft)}
 .tab[aria-controls="ch6"], #rail-ch6{--accent:var(--red); --accent-soft:var(--red-soft)}
 .tab[aria-controls="ch7"], #rail-ch7{--accent:var(--teal); --accent-soft:var(--teal-soft)}
 .tab[aria-controls="ch8"], #rail-ch8{--accent:var(--clay); --accent-soft:var(--clay-soft)}
+.tab[aria-controls="ch9"], #rail-ch9{--accent:var(--indigo); --accent-soft:var(--indigo-soft)}
 /* เส้นคั่นกลางแถบแท็บ บอกว่าจากตรงนี้ไปเป็นเนื้อหาหลังมิดเทอม */
 .tab-div{display:flex; align-items:center; gap:7px; padding:0 12px; white-space:nowrap;
   font-size:.7rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
@@ -75,127 +97,126 @@ CSS_RULES = u"""
 
 
 def patch_css(html):
-    u"""เพิ่มตัวแปรสีสองคู่เข้าไปในทั้งสามบล็อกธีม แล้วต่อกฎของแท็บใหม่"""
-    s, e = mark('css')
-    if s in html:
-        return html, 0
+    u"""เพิ่มตัวแปรสีเข้าไปในทั้งสามบล็อกธีม แล้วต่อกฎของแท็บใหม่
 
-    # บล็อกธีม ตัวแปร --plum-soft เป็นตัวสุดท้ายของชุดสี จึงเกาะไว้ตรงนั้น
+    วิธีคือรื้อของเก่าออกให้หมดก่อนแล้วค่อยวางใหม่ จะได้แก้ชุดสีแล้วรันซ้ำได้
+    ไม่ใช่ข้ามไปเฉย ๆ ซึ่งเคยทำให้เพิ่มสีใหม่แล้วตัวแปรไม่เข้าไปในหน้า
+    และกันไม่ให้ซ้อนกันเองเวลารันหลายรอบ
+    """
+    before = html
+
+    # ขั้นที่ 1 · รื้อบล็อกตัวแปรสีที่เคยวางไว้ออกให้หมด
+    html = re.sub(r'/\* postmid:vars\d+:start \*/.*?/\* postmid:vars\d+:end \*/', '', html, flags=re.S)
+    # ขั้นที่ 2 · รุ่นแรกสุดวางตัวแปรไว้โดยไม่มีคอมเมนต์คร่อม ต้องเก็บกวาดด้วย
+    for legacy in (u'\n--teal:#1d6a6a; --teal-soft:#d8ebe9;\n--clay:#8a5a24; --clay-soft:#f4e8d6;',
+                   u'\n--teal:#63c3bd; --teal-soft:#132b2a;\n--clay:#d9a765; --clay-soft:#2d2415;'):
+        html = html.replace(legacy, u'')
+
+    # ขั้นที่ 3 · วางใหม่ · --plum-soft เป็นตัวสุดท้ายของชุดสีเดิมในแต่ละบล็อกธีม
     hits = [m for m in re.finditer(r'--plum-soft:\s*#[0-9a-fA-F]{3,8};', html)]
     if len(hits) != 3:
         raise SystemExit(u'หาบล็อกธีมไม่ครบสามบล็อก เจอ %d' % len(hits))
     out, last = [], 0
     for i, m in enumerate(hits):
-        add = CSS_LIGHT if i == 0 else CSS_DARK
         out.append(html[last:m.end()])
-        out.append(add)
+        out.append(u'/* postmid:vars%d:start */' % (i + 1) +
+                   (CSS_LIGHT if i == 0 else CSS_DARK) +
+                   u'/* postmid:vars%d:end */' % (i + 1))
         last = m.end()
     out.append(html[last:])
     html = ''.join(out)
 
-    anchor = u'.tab[aria-controls="ch4"], #rail-ch4{--accent:var(--plum); --accent-soft:var(--plum-soft)}'
-    if html.count(anchor) != 1:
-        raise SystemExit(u'หาแถวสีของแท็บบทที่ 4 ไม่เจอ')
-    html = html.replace(anchor, anchor + u'\n' + s + CSS_RULES + u'\n' + e)
-    return html, 1
+    anchor = (u'.tab[aria-controls="ch4"], #rail-ch4'
+              u'{--accent:var(--plum); --accent-soft:var(--plum-soft)}')
+    html, _ = splice(html, 'css', CSS_RULES + u'\n', anchor, before=False)
+    return html, (0 if html == before else 1)
 
 
 # ───────────────────────── ส่วนที่ 2 · แถบแท็บ ─────────────────────────
 TABS = u"""
     <span class="tab-div">หลังมิดเทอม</span>
     <button class="tab" role="tab" id="t-ch5" aria-controls="ch5" aria-selected="false"><span class="tnum">06</span>งบรวม · กรณีขาดทุน</button>
-    <button class="tab" role="tab" id="t-ch6" aria-controls="ch6" aria-selected="false"><span class="tnum">07</span>การด้อยค่าของค่าความนิยม</button>
-    <button class="tab" role="tab" id="t-ch7" aria-controls="ch7" aria-selected="false"><span class="tnum">08</span>กิจการร่วมค้า</button>
-    <button class="tab" role="tab" id="t-ch8" aria-controls="ch8" aria-selected="false"><span class="tnum">09</span>บุคคลที่เกี่ยวข้องกัน</button>"""
+    <button class="tab" role="tab" id="t-ch9" aria-controls="ch9" aria-selected="false"><span class="tnum">07</span>รายการระหว่างบริษัทในเครือ</button>
+    <button class="tab" role="tab" id="t-ch6" aria-controls="ch6" aria-selected="false"><span class="tnum">08</span>การด้อยค่าของค่าความนิยม</button>
+    <button class="tab" role="tab" id="t-ch7" aria-controls="ch7" aria-selected="false"><span class="tnum">09</span>กิจการร่วมค้า</button>
+    <button class="tab" role="tab" id="t-ch8" aria-controls="ch8" aria-selected="false"><span class="tnum">10</span>บุคคลที่เกี่ยวข้องกัน</button>"""
 
 
 def patch_tabs(html):
-    s, e = mark('tabs')
-    if s in html:
-        return html, 0
-    anchor = (u'    <button class="tab" role="tab" id="t-ex" aria-controls="ex" '
-              u'aria-selected="false"><span class="tnum">E</span>แบบฝึกเขียนตอบ</button>')
-    if html.count(anchor) != 1:
-        raise SystemExit(u'หาแท็บแบบฝึกเขียนตอบไม่เจอ')
-    block = u'    ' + s + TABS + u'\n    ' + e + u'\n' + anchor
-    return html.replace(anchor, block), 1
+    return splice(html, 'tabs', u'\n    ' + TABS + u'\n    ',
+                  u'    <button class="tab" role="tab" id="t-ex" aria-controls="ex" '
+                  u'aria-selected="false"><span class="tnum">E</span>แบบฝึกเขียนตอบ</button>')
 
 
 def patch_railjs(html):
     s, e = jsmark('rails')
-    if s in html:
-        return html, 0
-    old = (u"var rails = {ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', ch4:'rail-ch4', "
-           u"c4x:'rail-c4x', ex:'rail-ex', quiz:'rail-quiz'};")
-    if html.count(old) != 1:
+    want = (s + u" ch5:'rail-ch5', ch9:'rail-ch9', ch6:'rail-ch6', "
+            u"ch7:'rail-ch7', ch8:'rail-ch8', " + e)
+    old = re.search(re.escape(s) + r'.*?' + re.escape(e), html, re.S)
+    if old:
+        return (html, 0) if old.group(0) == want else (html[:old.start()] + want + html[old.end():], 1)
+    anchor = u"c4x:'rail-c4x', "
+    if html.count(anchor) != 1:
         raise SystemExit(u'หาตาราง rails ใน JS ไม่เจอ')
-    new = (u"var rails = {ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', ch4:'rail-ch4', "
-           u"c4x:'rail-c4x', " + s +
-           u" ch5:'rail-ch5', ch6:'rail-ch6', ch7:'rail-ch7', ch8:'rail-ch8', " + e +
-           u" ex:'rail-ex', quiz:'rail-quiz'};")
-    return html.replace(old, new), 1
+    return html.replace(anchor, anchor + want + u' '), 1
 
 
 def patch_rails(html, rails_html):
-    s, e = mark('rails')
-    if s in html:
-        return html, 0
-    anchor = u'    <nav id="rail-ex" class="hidden" aria-label="แบบฝึกเขียนตอบ">'
-    if html.count(anchor) != 1:
-        raise SystemExit(u'หาแถบข้างของแบบฝึกเขียนตอบไม่เจอ')
-    return html.replace(anchor, u'    ' + s + u'\n' + rails_html + u'    ' + e + u'\n' + anchor), 1
+    return splice(html, 'rails', u'\n' + rails_html + u'    ',
+                  u'    <nav id="rail-ex" class="hidden" aria-label="แบบฝึกเขียนตอบ">')
 
 
 def patch_panels(html, panels_html):
-    s, e = mark('panels')
-    if s in html:
-        return html, 0
-    anchor = u'  <div id="ex" class="hidden" role="tabpanel" aria-labelledby="t-ex">'
-    if html.count(anchor) != 1:
-        raise SystemExit(u'หาแผงแบบฝึกเขียนตอบไม่เจอ')
-    return html.replace(anchor, u'  ' + s + u'\n' + panels_html + u'  ' + e + u'\n\n' + anchor), 1
+    return splice(html, 'panels', u'\n' + panels_html + u'  ',
+                  u'  <div id="ex" class="hidden" role="tabpanel" aria-labelledby="t-ex">')
 
 
 def patch_quiz(html, quiz_js, total):
+    before = html
     s, e = jsmark('quiz')
-    if s in html:
-        return html, 0
-    i = html.rindex(u'var QS = [')
-    j = html.index(u'\n  ];', i)
-    head = html[:j]
-    # ข้อสุดท้ายของคลังเดิมไม่มีจุลภาคปิดท้าย ต้องเติมก่อน ไม่งั้นสคริปต์ทั้งหน้าพัง
-    if not head.rstrip().endswith(','):
-        head = head.rstrip() + u','
-    html = head + u'\n    ' + s + u'\n' + quiz_js + u'    ' + e + html[j:]
+    body = s + u'\n' + quiz_js + u'    ' + e
+    old = re.search(re.escape(s) + r'.*?' + re.escape(e), html, re.S)
+    if old:
+        html = html if old.group(0) == body else html[:old.start()] + body + html[old.end():]
+    else:
+        i = html.rindex(u'var QS = [')
+        j = html.index(u'\n  ];', i)
+        head = html[:j]
+        # ข้อสุดท้ายของคลังเดิมไม่มีจุลภาคปิดท้าย ต้องเติมก่อน ไม่งั้นสคริปต์ทั้งหน้าพัง
+        if not head.rstrip().endswith(','):
+            head = head.rstrip() + u','
+        html = head + u'\n    ' + body + html[j:]
 
-    # ข้อความบอกจำนวนข้อสองแห่งต้องตามไปด้วย ไม่งั้นตัวเลขไม่ตรงของจริง
-    for old, new in [(u'46 ข้อ ครอบคลุมทั้งสี่บทและตัวอย่างครบวงจร',
-                      u'%d ข้อ ครอบคลุมทั้งแปดบทและตัวอย่างครบวงจร' % total),
-                     (u'0 จาก 46 ข้อ', u'0 จาก %d ข้อ' % total)]:
-        if html.count(old) != 1:
-            raise SystemExit(u'หาข้อความจำนวนข้อสอบไม่เจอ · %s' % old)
-        html = html.replace(old, new)
-    # ตัวนับใน JS ก็ตรึงเลข 46 ไว้เหมือนกัน
-    html = html.replace(u"' จาก 46 ข้อ'", u"' จาก %d ข้อ'" % total)
-    return html, 1
+    # ข้อความบอกจำนวนข้อต้องตามไปด้วย ไม่งั้นตัวเลขไม่ตรงของจริง
+    html = re.sub(u'\\d+ ข้อ ครอบคลุมทั้ง\\S+บทและตัวอย่างครบวงจร',
+                  u'%d ข้อ ครอบคลุมทั้งเก้าบทและตัวอย่างครบวงจร' % total, html)
+    html = re.sub(u'0 จาก \\d+ ข้อ', u'0 จาก %d ข้อ' % total, html)
+    html = re.sub(u"' จาก \\d+ ข้อ'", u"' จาก %d ข้อ'" % total, html)
+    return html, (0 if html == before else 1)
 
 
 MAST_OLD = (u'สื่อประกอบการเรียน 4 บท · บัญชีสำนักงานใหญ่และสาขา · การรวมธุรกิจตาม TFRS 3 · '
             u'งบการเงินรวม ณ วันซื้อหุ้น · งบการเงินรวมภายหลังวันซื้อหุ้น '
             u'พร้อมสมุดรายวันคู่ กระดาษทำการ เครื่องมือคำนวณ และแบบทดสอบ')
-MAST_NEW = (u'สื่อประกอบการเรียน 8 บท · <b>ก่อนมิดเทอม</b> บัญชีสำนักงานใหญ่และสาขา · การรวมธุรกิจตาม TFRS 3 · '
+MAST_NEW = (u'สื่อประกอบการเรียน 9 บท · <b>ก่อนมิดเทอม</b> บัญชีสำนักงานใหญ่และสาขา · การรวมธุรกิจตาม TFRS 3 · '
             u'งบการเงินรวม ณ วันซื้อหุ้นและภายหลังวันซื้อหุ้น · <b>หลังมิดเทอม</b> งบรวมกรณีขาดทุน · '
             u'การด้อยค่าของค่าความนิยมตาม TAS 36 · กิจการร่วมค้าตาม TFRS 11 · '
             u'บุคคลหรือกิจการที่เกี่ยวข้องกันตาม TAS 24 '
             u'พร้อมสมุดรายวันคู่ กระดาษทำการ เครื่องมือคำนวณ และแบบทดสอบ')
 
 
+MAST_PREV = MAST_NEW.replace(u'9 บท', u'8 บท').replace(
+    u'งบรวมกรณีขาดทุน · รายการระหว่างบริษัทในเครือ · ', u'งบรวมกรณีขาดทุน · ')
+
+
 def patch_mast(html):
     if MAST_NEW in html:
         return html, 0
-    if html.count(MAST_OLD) != 1:
+    for old in (MAST_OLD, MAST_PREV):
+        if html.count(old) == 1:
+            return html.replace(old, MAST_NEW), 1
+    if True:
         raise SystemExit(u'หาคำโปรยบนหัวหน้าไม่เจอ')
-    return html.replace(MAST_OLD, MAST_NEW), 1
 
 
 # ───────────────────────── ตรวจหลังแทรก ─────────────────────────
@@ -270,7 +291,7 @@ def main():
     html, n = patch_panels(html, D.PANELS); steps += n
     html, n = patch_quiz(html, D.QUIZ, D.QUIZ_TOTAL); steps += n
 
-    print(u'แทรก %d จาก 7 ชิ้น · %d → %d อักษร' % (steps, before, len(html)))
+    print(u'ปรับ %d จาก 7 ชิ้น · %d → %d อักษร' % (steps, before, len(html)))
     bad = verify(html, D.CHAPTERS)
     if bad:
         print(u'\nตรวจพบปัญหา %d จุด จึงยังไม่เขียนไฟล์' % bad)
