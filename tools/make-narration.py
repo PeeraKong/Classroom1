@@ -13,7 +13,9 @@ u"""วางบทบรรยายชุดใหม่ลงบล็อก 
   ดึงชื่อหัวข้อมาจาก h2 ในหน้า จึงไม่มีทางหลุดจากกัน
 
 รูปแบบไฟล์ข้อมูล
-    NARRATION = {'m1': {'mode': 'replace', 'blocks': [('m1-1', [u'...', ...]), ...]}}
+    NARRATION = {'m1': {'mode': 'replace', 't': u'ชื่อบท', 's': u'ชื่อย่อ',
+                        'blocks': [('m1-1', [u'...', ...]), ...]}}
+  ใส่ t กับ s มาด้วยถ้าเป็นบทที่ยังไม่เคยมีบทบรรยาย ตัวสคริปต์จะสร้างบทให้เอง
   mode replace  ใช้เฉพาะรายการที่ให้มา ทิ้งของเดิมทั้งบท
   mode merge    เอาของใหม่รวมกับของเดิม ของใหม่ทับของเดิมถ้าชี้หัวข้อเดียวกัน
 """
@@ -102,7 +104,10 @@ def main():
     bad = 0
     for ch, spec in sorted(patch.items()):
         if ch not in data:
-            print(u'ไม่มีบท %s ในวิชานี้' % ch); bad += 1; continue
+            # บทใหม่ที่ยังไม่เคยมีบทบรรยาย ต้องมีชื่อมาด้วยจึงจะสร้างให้
+            if not spec.get('t'):
+                print(u'ไม่มีบท %s ในวิชานี้ และไม่ได้ระบุชื่อบทมาด้วย' % ch); bad += 1; continue
+            data[ch] = {'s': spec.get('s') or spec['t'], 't': spec['t'], 'c': []}
         secs = page_sections(html, ch)
         order = {sid: i for i, (sid, _t) in enumerate(secs)}
         titles = dict(secs)
@@ -139,6 +144,12 @@ def main():
         return 1
     if a.check:
         return 0
+
+    # เรียงใหม่ตามลำดับแผงจริงในหน้า เครื่องเล่นไล่บทตามลำดับคีย์ของ JSON
+    order = [m.group(1) for m in
+             re.finditer(r'<div id="([\w-]+)"[^>]*role="tabpanel"', html)]
+    rank = {k: i for i, k in enumerate(order)}
+    data = {k: data[k] for k in sorted(data, key=lambda k: rank.get(k, 10 ** 6))}
 
     out = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
     io.open(path, 'w', encoding='utf-8').write(
