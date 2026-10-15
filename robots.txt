@@ -1,0 +1,5 @@
+# เปิดให้ search engine เก็บไปทำดัชนีได้ทั้งเว็บ
+User-agent: *
+Allow: /
+
+Sitemap: https://peerakong.github.io/Classroom1/sitemap.xml
