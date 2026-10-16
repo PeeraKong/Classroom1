@@ -77,11 +77,13 @@ CSS_DARK = u"""
 --indigo:#9aa6e0; --indigo-soft:#1d2038;"""
 
 CSS_RULES = u"""
-.tab[aria-controls="ch5"], #rail-ch5{--accent:var(--green); --accent-soft:var(--green-soft)}
-.tab[aria-controls="ch6"], #rail-ch6{--accent:var(--red); --accent-soft:var(--red-soft)}
-.tab[aria-controls="ch7"], #rail-ch7{--accent:var(--teal); --accent-soft:var(--teal-soft)}
-.tab[aria-controls="ch8"], #rail-ch8{--accent:var(--clay); --accent-soft:var(--clay-soft)}
 .tab[aria-controls="ch9"], #rail-ch9{--accent:var(--indigo); --accent-soft:var(--indigo-soft)}
+/* สีประจำบทของสี่เรื่องในชีท 4_3 ย้ายมาอยู่ที่หัวกลุ่มและรายการในแถบข้าง
+   เพราะทั้งสี่บทอยู่ในแท็บเดียวกันแล้ว จะผูกสีไว้กับปุ่มแท็บเหมือนเดิมไม่ได้ */
+#rail-s43 .r-ch5{--accent:var(--green); --accent-soft:var(--green-soft)}
+#rail-s43 .r-ch6{--accent:var(--red); --accent-soft:var(--red-soft)}
+#rail-s43 .r-ch7{--accent:var(--teal); --accent-soft:var(--teal-soft)}
+#rail-s43 .r-ch8{--accent:var(--clay); --accent-soft:var(--clay-soft)}
 /* เส้นคั่นกลางแถบแท็บ บอกว่าจากตรงนี้ไปเป็นเนื้อหาหลังมิดเทอม */
 .tab-div{display:flex; align-items:center; gap:7px; padding:0 12px; white-space:nowrap;
   font-size:.7rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
@@ -93,7 +95,20 @@ CSS_RULES = u"""
 .gw-split .gl{display:block; font-size:.72rem; font-weight:700; letter-spacing:.07em;
   text-transform:uppercase; color:var(--ink-3); margin-bottom:5px}
 .gw-split .gv{font-variant-numeric:tabular-nums; font-weight:700; font-size:1.18rem; color:var(--accent)}
-@media (max-width:560px){.gw-split{grid-template-columns:1fr}}"""
+@media (max-width:560px){.gw-split{grid-template-columns:1fr}}
+/* หัวคั่นของแต่ละบทในแท็บรวมของชีท 4_3 */
+.grp + .grp{margin-top:34px}
+.grp-h{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline; padding:14px 18px;
+  border-left:4px solid var(--accent); background:var(--accent-soft);
+  border-radius:0 8px 8px 0; margin:0 0 6px}
+.grp-n{font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--accent); font-weight:700}
+.grp-t{font-family:"Noto Serif Thai",Georgia,serif; font-weight:700; font-size:1.18rem; color:var(--ink)}
+.grp-s{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-3); margin-left:auto}
+.grp > .sec:first-of-type{border-top:0; padding-top:14px}
+@media (max-width:560px){.grp-s{margin-left:0; width:100%}}
+/* หัวกลุ่มที่สองเป็นต้นไปในแถบข้างรวม ต้องมีระยะห่างจากรายการของกลุ่มก่อนหน้า */
+.rail-h2{margin-top:18px; padding-top:14px; border-top:1px solid var(--rule)}"""
 
 
 def patch_css(html):
@@ -133,13 +148,85 @@ def patch_css(html):
 
 
 # ───────────────────────── ส่วนที่ 2 · แถบแท็บ ─────────────────────────
+# ─────────────── สี่เรื่องที่มาจากเอกสาร Ch4_3 รวมอยู่ในแท็บเดียว ───────────────
+# บทที่ 7 รายการระหว่างบริษัทในเครือ มาจากเอกสารคนละชุด จึงแยกเป็นแท็บของตัวเองต่อไป
+SHEET43 = [
+    ('ch5', u'บทที่ 6', u'งบการเงินรวม กรณีขาดทุน', u'TFRS 10 ย่อหน้า ข94 · TAS 28 ย่อหน้า 38-39'),
+    ('ch6', u'บทที่ 8', u'การด้อยค่าของค่าความนิยม', u'TAS 36'),
+    ('ch7', u'บทที่ 9', u'กิจการร่วมค้า', u'TFRS 11 · TAS 28'),
+    ('ch8', u'บทที่ 10', u'บุคคลหรือกิจการที่เกี่ยวข้องกัน', u'TAS 24'),
+]
+
+S43_LEDE = (u'    <p class="lede">สี่เรื่องนี้มาจากเอกสารประกอบการสอน <b>Ch4_3</b> ฉบับเดียวกัน '
+            u'จึงรวมไว้ในแท็บเดียวเพื่อให้อ่านรวดเดียวจบและค้นข้ามเรื่องได้ · '
+            u'แถบข้างทางซ้ายแบ่งหัวข้อตามบทไว้ให้แล้ว · '
+            u'<b>บทที่ 7 รายการระหว่างบริษัทในเครือ ไม่ได้อยู่ในเอกสารฉบับนี้</b> '
+            u'จึงยังแยกเป็นแท็บของตัวเองตามเดิม · '
+            u'ต้องการฉบับย่อที่ค้นได้ทั้งหน้าให้ดู <a href="sheet-4-3.html">สรุปชีท 4_3</a></p>\n')
+
 TABS = u"""
     <span class="tab-div">หลังมิดเทอม</span>
-    <button class="tab" role="tab" id="t-ch5" aria-controls="ch5" aria-selected="false"><span class="tnum">06</span>งบรวม · กรณีขาดทุน</button>
-    <button class="tab" role="tab" id="t-ch9" aria-controls="ch9" aria-selected="false"><span class="tnum">07</span>รายการระหว่างบริษัทในเครือ</button>
-    <button class="tab" role="tab" id="t-ch6" aria-controls="ch6" aria-selected="false"><span class="tnum">08</span>การด้อยค่าของค่าความนิยม</button>
-    <button class="tab" role="tab" id="t-ch7" aria-controls="ch7" aria-selected="false"><span class="tnum">09</span>กิจการร่วมค้า</button>
-    <button class="tab" role="tab" id="t-ch8" aria-controls="ch8" aria-selected="false"><span class="tnum">10</span>บุคคลที่เกี่ยวข้องกัน</button>"""
+    <button class="tab" role="tab" id="t-s43" aria-controls="s43" aria-selected="false" data-nar="ch5"><span class="tnum">ชีท</span>ชีท 4_3 · สี่เรื่องรวม</button>
+    <button class="tab" role="tab" id="t-ch9" aria-controls="ch9" aria-selected="false"><span class="tnum">07</span>รายการระหว่างบริษัทในเครือ</button>"""
+
+
+def strip_panel(block, cid):
+    u"""ตัดเปลือก div ของแผงออก เหลือเฉพาะเนื้อข้างใน
+
+    ใช้ตอนยุบสี่แผงให้เหลือแผงเดียว เนื้อหาและรหัสหัวข้อข้างในไม่ถูกแตะเลย
+    ลิงก์ในแถบข้าง การเลื่อนตามหัวข้อ และบทบรรยายจึงยังชี้ถูกที่เหมือนเดิม
+    """
+    m = re.match(r'\s*<div id="%s"[^>]*>\n(.*)\n  </div>\s*$' % cid, block, re.S)
+    if not m:
+        raise SystemExit(u'รูปแบบของแผง %s ไม่ตรงกับที่คาด' % cid)
+    return m.group(1)
+
+
+def accent_of(block, cid):
+    u"""ดึงชุดสีประจำบทออกมาจากแผงเดิม จะได้คงสีเดิมไว้ตอนยุบรวม"""
+    m = re.search(r'<div id="%s"[^>]*style="([^"]*)"' % cid, block)
+    return m.group(1) if m else u''
+
+
+def build_s43(data):
+    u"""ประกอบสี่เรื่องของชีท 4_3 ให้เป็นแผงเดียว โดยคั่นหัวเรื่องของแต่ละบท"""
+    out = [u'  <div id="s43" class="hidden" role="tabpanel" aria-labelledby="t-s43">\n',
+           S43_LEDE]
+    for cid, num, title, std in SHEET43:
+        block = getattr(data, cid.upper())
+        out.append(u'    <div class="grp" id="grp-%s" style="%s">\n' % (cid, accent_of(block, cid)))
+        out.append(u'      <div class="grp-h"><span class="grp-n">%s</span>'
+                   u'<span class="grp-t">%s</span><span class="grp-s">%s</span></div>\n'
+                   % (num, title, std))
+        out.append(strip_panel(block, cid))
+        out.append(u'\n    </div>\n')
+    out.append(u'  </div>\n\n')
+    return u''.join(out)
+
+
+def rail_of(rails, cid):
+    u"""ดึงรายการหัวข้อของบทหนึ่งออกมาจากก้อนแถบข้างเดิม"""
+    m = re.search(r'<nav id="rail-%s"[^>]*>\s*<div class="rail-h">(.*?)</div>\s*(<ol>.*?</ol>)'
+                  % cid, rails, re.S)
+    if not m:
+        raise SystemExit(u'หาแถบข้างของ %s ไม่เจอ' % cid)
+    return m.group(1).strip(), m.group(2)
+
+
+def build_rails(data):
+    u"""แถบข้างรวมของชีท 4_3 หนึ่งก้อน และแถบข้างของบทที่ 7 แยกไว้ตามเดิม"""
+    out = [u'    <nav id="rail-s43" class="hidden" aria-label="หัวข้อชีท 4_3">\n']
+    for i, (cid, num, title, _) in enumerate(SHEET43):
+        _, items = rail_of(data.RAILS, cid)
+        out.append(u'      <div class="r-%s">\n' % cid)
+        out.append(u'        <div class="rail-h%s">%s · %s</div>\n'
+                   % (u' rail-h2' if i else u'', num, title))
+        out.append(u'        ' + items + u'\n      </div>\n')
+    out.append(u'    </nav>\n')
+    head, items = rail_of(data.RAILS, 'ch9')
+    out.append(u'    <nav id="rail-ch9" class="hidden" aria-label="หัวข้อรายการระหว่างบริษัทในเครือ">\n'
+               u'      <div class="rail-h">%s</div>\n      %s\n    </nav>\n' % (head, items))
+    return u''.join(out)
 
 
 def patch_tabs(html):
@@ -150,8 +237,7 @@ def patch_tabs(html):
 
 def patch_railjs(html):
     s, e = jsmark('rails')
-    want = (s + u" ch5:'rail-ch5', ch9:'rail-ch9', ch6:'rail-ch6', "
-            u"ch7:'rail-ch7', ch8:'rail-ch8', " + e)
+    want = s + u" s43:'rail-s43', ch9:'rail-ch9', " + e
     old = re.search(re.escape(s) + r'.*?' + re.escape(e), html, re.S)
     if old:
         return (html, 0) if old.group(0) == want else (html[:old.start()] + want + html[old.end():], 1)
@@ -159,6 +245,25 @@ def patch_railjs(html):
     if html.count(anchor) != 1:
         raise SystemExit(u'หาตาราง rails ใน JS ไม่เจอ')
     return html.replace(anchor, anchor + want + u' '), 1
+
+
+# เครื่องเล่นเสียงจับคู่แท็บกับบทบรรยายด้วย aria-controls ซึ่งแท็บรวมไม่มีบทของตัวเอง
+# จึงให้แท็บบอกเองได้ว่าจะให้เครื่องเล่นเปิดบทไหน ผ่าน data-nar
+OLD_SYNC = u"""      var k = t.getAttribute('aria-controls');
+      if (playing || !DATA[k] || k === cur) return;"""
+
+NEW_SYNC = u"""      var k = t.getAttribute('data-nar') || t.getAttribute('aria-controls');
+      if (playing || !DATA[k] || k === cur) return;"""
+
+
+def patch_narsync(html):
+    before = html
+    if NEW_SYNC in html:
+        return html, 0
+    if html.count(OLD_SYNC) != 1:
+        raise SystemExit(u'โค้ดจับคู่แท็บกับเครื่องเล่นไม่ตรงกับที่คาด')
+    html = html.replace(OLD_SYNC, NEW_SYNC)
+    return html, (0 if html == before else 1)
 
 
 def patch_rails(html, rails_html):
@@ -238,26 +343,57 @@ def check_js(html):
     return bad
 
 
+PANEL_RE = (r'<div id="%s"[^>]*role="tabpanel".*?'
+            r'(?=\n  <div id="[\w-]+"[^>]*role="tabpanel"|\n  </main>)')
+
+# แท็บไหนเป็นที่อยู่ของบทไหน หลังยุบสี่เรื่องของชีท 4_3 เข้าแท็บเดียว
+HOME = dict([(cid, 's43') for cid, _, _, _ in SHEET43] + [('ch9', 'ch9')])
+
+
 def verify(html, chapters):
     bad = 0
+    panels = {}
+    for pid in sorted(set(HOME.values())):
+        m = re.search(PANEL_RE % pid, html, re.S)
+        if not m:
+            print(u'  หาแผง %s ในหน้าไม่เจอ' % pid); bad += 1
+        panels[pid] = m.group(0) if m else u''
+
     for ch, title, secs in chapters:
-        panel = re.search(r'<div id="%s"[^>]*role="tabpanel".*?(?=\n  <div id="[\w-]+"[^>]*role="tabpanel"|\n  </main>)'
-                          % ch, html, re.S)
-        if not panel:
-            print(u'  %-4s หาแผงในหน้าไม่เจอ' % ch); bad += 1; continue
-        got = re.findall(r'<section class="sec" id="(%s-\d+)">' % ch, panel.group(0))
+        pid = HOME[ch]
+        panel = panels.get(pid, u'')
+        got = re.findall(r'<section class="sec" id="(%s-\d+)">' % ch, panel)
         want = [u'%s-%d' % (ch, i + 1) for i in range(len(secs))]
         if got != want:
-            print(u'  %-4s หัวข้อไม่ตรง · มี %s' % (ch, ' '.join(got))); bad += 1
+            print(u'  %-4s หัวข้อไม่ตรง หรือไม่ได้อยู่ในแผง %s · มี %s'
+                  % (ch, pid, ' '.join(got))); bad += 1
         for sid in want:
             if ('href="#%s"' % sid) not in html:
                 print(u'  %-4s แถบข้างไม่มีลิงก์ไป %s' % (ch, sid)); bad += 1
-        if ('id="rail-%s"' % ch) not in html:
-            print(u'  %-4s ไม่มีแถบข้าง' % ch); bad += 1
-        if ('id="t-%s"' % ch) not in html:
-            print(u'  %-4s ไม่มีปุ่มแท็บ' % ch); bad += 1
-        n = len(re.findall(r'<section class="sec"', panel.group(0)))
-        print(u'  %-4s %-38s %2d หัวข้อ' % (ch, title, n))
+        print(u'  %-4s %-38s %2d หัวข้อ · อยู่ในแท็บ %s' % (ch, title, len(got), pid))
+
+    # แท็บและแถบข้างต้องมีครบเท่าที่ใช้จริง และบทที่ยุบรวมต้องไม่เหลือของเดิมค้าง
+    for pid in sorted(set(HOME.values())):
+        for need in (u'id="t-%s"' % pid, u'id="rail-%s"' % pid, u"%s:'rail-%s'" % (pid, pid)):
+            if need not in html:
+                print(u'  ขาด %s' % need); bad += 1
+    for cid, _, _, _ in SHEET43:
+        for stale in (u'id="t-%s"' % cid, u'id="rail-%s"' % cid, u'aria-controls="%s"' % cid):
+            if stale in html:
+                print(u'  ยังมีของเดิมของ %s ค้างอยู่ · %s' % (cid, stale)); bad += 1
+    if 'data-nar="ch5"' not in html:
+        print(u'  แท็บรวมไม่ได้บอกเครื่องเล่นว่าให้เปิดบทไหน'); bad += 1
+    if "t.getAttribute('data-nar')" not in html:
+        print(u'  เครื่องเล่นยังไม่รู้จัก data-nar'); bad += 1
+
+    # บทบรรยายยังต้องมีครบห้าบท เพราะไฟล์เสียงผูกกับรหัสบท ไม่ได้ผูกกับแท็บ
+    m = re.search(r'id="cn-data">\n(.*?)\n</script>', html, re.S)
+    if m:
+        import json
+        data = json.loads(m.group(1))
+        for ch, _, _ in chapters:
+            if ch not in data:
+                print(u'  บทบรรยายของ %s หายไป' % ch); bad += 1
 
     for tag in ['section', 'figure']:
         o = len(re.findall(r'<%s[\s>]' % tag, html))
@@ -282,14 +418,15 @@ def main():
     html = io.open(PAGE, encoding='utf-8').read()
     before = len(html)
     steps = 0
-    for fn in (patch_css, patch_tabs, patch_railjs, patch_mast):
+    for fn in (patch_css, patch_tabs, patch_railjs, patch_mast, patch_narsync):
         html, n = fn(html)
         steps += n
-    html, n = patch_rails(html, D.RAILS); steps += n
-    html, n = patch_panels(html, D.PANELS); steps += n
+    html, n = patch_rails(html, build_rails(D)); steps += n
+    # สี่เรื่องของชีท 4_3 ยุบเป็นแผงเดียว ส่วนบทที่ 7 ซึ่งมาจากเอกสารคนละชุดยังแยกอยู่
+    html, n = patch_panels(html, build_s43(D) + D.CH9); steps += n
     html, n = patch_quiz(html, D.QUIZ, D.QUIZ_TOTAL); steps += n
 
-    print(u'ปรับ %d จาก 7 ชิ้น · %d → %d อักษร' % (steps, before, len(html)))
+    print(u'ปรับ %d ชิ้น · %d → %d อักษร' % (steps, before, len(html)))
     bad = verify(html, D.CHAPTERS)
     if bad:
         print(u'\nตรวจพบปัญหา %d จุด จึงยังไม่เขียนไฟล์' % bad)
