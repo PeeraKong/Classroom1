@@ -388,7 +388,11 @@ def verify(html, chapters, total, q2_total):
             print(u'  หา%sไม่เจอ' % name); bad += 1; continue
         # จุลภาคสองตัวติดกันทำให้เกิดช่องว่างในอาร์เรย์ ซึ่ง forEach ข้ามให้เงียบ ๆ
         # หน้าเว็บจึงแสดงจำนวนข้อเกินจริงโดยไม่มีอะไรพัง ต้องดักตรงนี้
-        if re.search(r',(?:\s|/\*.*?\*/)*,', m.group(1), flags=re.S):
+        # ต้องตัดคอมเมนต์ออกก่อนแล้วจึงหา ,, · ใช้ (?:\s|/\*.*?\*/)*, ตรง ๆ ไม่ได้
+        # เพราะ .*? แบบ DOTALL ขยายข้าม */ ตัวแรกได้เวลาถอยกลับ แล้วจับข้าม
+        # คอมเมนต์หลายก้อนจนรายงานผิดว่ามีช่องว่างทั้งที่ไม่มี
+        bare = re.sub(r'/\*(?:(?!\*/)[\s\S])*\*/', u' ', m.group(1))
+        if re.search(r',\s*,', bare):
             print(u'  %s มีจุลภาคซ้ำจนเกิดช่องว่างในอาร์เรย์' % name); bad += 1
         n = m.group(1).count(u'{ch:')
         if n != want:
@@ -412,12 +416,22 @@ def verify(html, chapters, total, q2_total):
 def main():
     ap = argparse.ArgumentParser(description=u'แทรกเนื้อหาหลังมิดเทอมของหลักการตลาด')
     ap.add_argument('--check', action='store_true', help=u'ตรวจอย่างเดียว ไม่เขียนไฟล์')
+    ap.add_argument('--alone', action='store_true',
+                    help=u'ยอมรันทับของบทที่ 9 ถึง 11 (ต้องรัน mk-ch911.py ต่อทันที)')
     a = ap.parse_args()
 
     import mkpostmid_data as D
     import mkquiz2_data as Q2
 
     html = io.open(PAGE, encoding='utf-8').read()
+
+    # บทที่ 9 ถึง 11 ต่อยอดจากของที่สคริปต์นี้วางไว้ และข้อสอบของบทเหล่านั้น
+    # อยู่ในคลังที่สคริปต์นี้เขียนทับทั้งก้อน ถ้ารันตัวเดียวจะทำให้ของหายไป
+    # จึงให้ไปรันผ่าน build-marketing.py ที่เรียกทั้งสองตัวตามลำดับที่ถูกต้อง
+    if u'<!-- ch911:tabs:start -->' in html and not a.alone:
+        raise SystemExit(
+            u'หน้านี้มีบทที่ 9 ถึง 11 อยู่แล้ว การรันสคริปต์นี้ตัวเดียวจะลบของนั้นทิ้ง\n'
+            u'ให้ใช้  python3 tools/build-marketing.py  ซึ่งเรียกทั้งสองตัวตามลำดับ')
     before = len(html)
     steps = 0
     for fn in (patch_css, patch_tabs, patch_railjs, patch_builder, patch_mast):
