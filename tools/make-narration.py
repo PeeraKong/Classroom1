@@ -44,14 +44,20 @@ def load(path):
 
 
 def page_sections(html, ch):
-    u"""รหัสหัวข้อกับชื่อหัวข้อตามลำดับที่ปรากฏจริงในหน้า"""
+    u"""รหัสหัวข้อกับชื่อหัวข้อตามลำดับที่ปรากฏจริงในหน้า
+
+    ปกติหัวข้อของบทหนึ่งจะอยู่ในแผงที่มีรหัสเดียวกับบท จึงตัดเอาเฉพาะแผงนั้นมาหา
+    แต่บางบท<ไม่มีแผงเป็นของตัวเอง> เพราะถูกยุบไปรวมกับบทอื่นในแท็บเดียวกัน
+    กรณีนั้นหาแผงไม่เจอ ถ้าคืนลิสต์ว่างจะกลายเป็นว่าทุกหัวข้อของบทนั้น
+    ไม่มีอยู่ในหน้า แล้วแก้บทบรรยายของบทนั้นไม่ได้อีกเลย
+    จึงถอยไปไล่หาทั้งไฟล์แทน ซึ่งปลอดภัยเพราะรหัสหัวข้อขึ้นต้นด้วยรหัสบทอยู่แล้ว
+    """
     panel = re.search(r'<div id="%s"[^>]*role="tabpanel".*?(?=\n  <div id="\w+"[^>]*role="tabpanel"|\n  </main>)'
-                      % ch, html, re.S)
-    if not panel:
-        return []
+                      % re.escape(ch), html, re.S)
+    scope = panel.group(0) if panel else html
     out = []
-    for m in re.finditer(r'<section class="sec" id="(%s-\d+)">.*?<h2>(.*?)</h2>' % ch,
-                         panel.group(0), re.S):
+    for m in re.finditer(r'<section class="sec" id="(%s-\d+)">.*?<h2>(.*?)</h2>'
+                         % re.escape(ch), scope, re.S):
         out.append((m.group(1), re.sub(r'<[^>]+>', '', m.group(2)).strip()))
     return out
 
@@ -145,11 +151,21 @@ def main():
     if a.check:
         return 0
 
-    # เรียงใหม่ตามลำดับแผงจริงในหน้า เครื่องเล่นไล่บทตามลำดับคีย์ของ JSON
-    order = [m.group(1) for m in
-             re.finditer(r'<div id="([\w-]+)"[^>]*role="tabpanel"', html)]
-    rank = {k: i for i, k in enumerate(order)}
-    data = {k: data[k] for k in sorted(data, key=lambda k: rank.get(k, 10 ** 6))}
+    # เรียงใหม่ตามลำดับที่หัวข้อของแต่ละบทปรากฏจริงในหน้า
+    # เครื่องเล่นไล่บทตามลำดับคีย์ของ JSON จึงต้องเรียงให้ตรงกับที่ตาเห็น
+    #
+    # ห้ามจัดลำดับด้วยรหัสของแผง เพราะบางบทไม่มีแผงเป็นของตัวเอง
+    # เช่นสี่บทที่ถูกยุบรวมไว้ในแท็บเดียวกัน บทเหล่านั้นจะหารหัสแผงไม่เจอ
+    # แล้วถูกผลักไปท้ายสุดทั้งก้อน ทำให้ลำดับบทในเครื่องเล่นสลับกับที่แสดงในหน้า
+    # จึงจัดลำดับจาก<ตำแหน่งของหัวข้อแรกของบทนั้น>ในไฟล์แทน ซึ่งใช้ได้ทั้งสองแบบ
+    def first_at(ch):
+        m2 = re.search(r'id="%s-\d+"' % re.escape(ch), html)
+        if m2:
+            return m2.start()
+        m2 = re.search(r'<div id="%s"[^>]*role="tabpanel"' % re.escape(ch), html)
+        return m2.start() if m2 else len(html) + 1
+
+    data = {k: data[k] for k in sorted(data, key=first_at)}
 
     out = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
     io.open(path, 'w', encoding='utf-8').write(
