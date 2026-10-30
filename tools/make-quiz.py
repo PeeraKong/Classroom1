@@ -23,9 +23,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PAGE = os.path.join(ROOT, 'audit', 'index.html')
-WANT = 120
+WANT = 149
 
-SOURCES = ['audit-quiz-1.py', 'audit-quiz-2.py']
+SOURCES = ['audit-quiz-1.py', 'audit-quiz-2.py', 'audit-quiz-3.py']
 
 # ชื่อหมวดที่ใช้เป็นปุ่มกรองในหน้าเว็บ เรียงตามลำดับที่อยากให้แสดง
 CATS = [
@@ -43,6 +43,10 @@ CATS = [
     ('ai', u'งานให้ความเชื่อมั่น'),
     ('et', u'จรรยาบรรณ'),
     ('sa', u'การเลือกตัวอย่าง'),
+    # หลังมิดเทอม
+    ('cy', u'วงจรรายการค้า'),
+    ('rv', u'วงจรรายได้'),
+    ('ex', u'วงจรรายจ่าย'),
 ]
 
 # เลขมาตรฐานมักมาในรูปตัวย่อพิมพ์ใหญ่ตามด้วยตัวเลข หรือคำว่ากฎหรือภาคผนวกตามด้วยเลขข้อ
@@ -145,8 +149,34 @@ def write(rows):
         return 1
     at += len(ANCHOR)
     html = html[:at] + block.lstrip('\n') + '\n' + html[at:]
+    html, n = retally(html, len(rows))
     io.open(PAGE, 'w', encoding='utf-8').write(html.rstrip('\n') + '\n')
     print(u'\nฝังบล็อก qz-data ลง audit/index.html แล้ว · %.1f KB' % (len(block) / 1024.0))
+    print(u'ปรับจำนวนข้อที่เขียนไว้ในหน้า %d จุด · %d ข้อ %d หมวด' % (n, len(rows), len(CATS)))
+
+
+# จำนวนข้อและจำนวนหมวดถูกเขียนเป็นตัวเลขไว้ในหน้าหลายจุด
+# ถ้าปล่อยให้แก้มือ พอเพิ่มข้อสอบทีไรตัวเลขพวกนี้จะค้างอยู่ที่ของเดิมทุกที
+# จึงให้ตัวที่รู้จำนวนจริงอยู่แล้วเป็นคนเขียนทับให้ ทุกครั้งที่ฝังคลังข้อสอบ
+#
+# แต่ละแบบเขียน {n} แทนจำนวนข้อ และ {c} แทนจำนวนหมวด
+TALLY = [
+    (r'<i>Q</i>\d+ ข้อ · \d+ หมวด</a>', u'<i>Q</i>{n} ข้อ · {c} หมวด</a>'),
+    (r'<p class="lede"><b>\d+ ข้อ</b>', u'<p class="lede"><b>{n} ข้อ</b>'),
+    (r'<span class="sv" id="sc-of">0 จาก \d+ ข้อ</span>',
+     u'<span class="sv" id="sc-of">0 จาก {n} ข้อ</span>'),
+    (r'\n     แบบทดสอบ \d+ ข้อ\n', u'\n     แบบทดสอบ {n} ข้อ\n'),
+]
+
+
+def retally(html, n):
+    hit = 0
+    for pat, tpl in TALLY:
+        html, k = re.subn(pat, tpl.format(n=n, c=len(CATS)).replace('\\', '\\\\'), html)
+        if not k:
+            print(u'เตือน · หาที่เขียนจำนวนข้อไม่เจอ · %s' % pat)
+        hit += k
+    return html, hit
 
 
 def main():
