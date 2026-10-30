@@ -23,9 +23,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PAGE = os.path.join(ROOT, 'audit', 'index.html')
-WANT = 149
+WANT = 174
 
-SOURCES = ['audit-quiz-1.py', 'audit-quiz-2.py', 'audit-quiz-3.py']
+SOURCES = ['audit-quiz-1.py', 'audit-quiz-2.py', 'audit-quiz-3.py',
+           'audit-quiz-4.py']
 
 # ชื่อหมวดที่ใช้เป็นปุ่มกรองในหน้าเว็บ เรียงตามลำดับที่อยากให้แสดง
 CATS = [
@@ -47,6 +48,10 @@ CATS = [
     ('cy', u'วงจรรายการค้า'),
     ('rv', u'วงจรรายได้'),
     ('ex', u'วงจรรายจ่าย'),
+    ('mf', u'วงจรการผลิต'),
+    ('pa', u'วงจรค่าจ้างแรงงาน'),
+    ('fi', u'วงจรการจัดหาเงิน'),
+    ('iv', u'วงจรการลงทุน'),
 ]
 
 # เลขมาตรฐานมักมาในรูปตัวย่อพิมพ์ใหญ่ตามด้วยตัวเลข หรือคำว่ากฎหรือภาคผนวกตามด้วยเลขข้อ

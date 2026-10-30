@@ -38,6 +38,8 @@ PAGE = os.path.join(ROOT, 'audit', 'index.html')
 UNITS = [
     {'mod': 'audit_tc_data', 'id': 'tc', 'num': u'TC', 'label': u'วงจรการค้า',
      'aria': u'หัวข้อวงจรการค้า'},
+    {'mod': 'audit_oc_data', 'id': 'oc', 'num': u'OC', 'label': u'วงจรอื่น',
+     'aria': u'หัวข้อการตรวจสอบวงจรอื่น'},
 ]
 
 DIV_LABEL = u'หลังมิดเทอม'
@@ -67,15 +69,21 @@ CSS = u"""
    td.k คือช่องหัวแถว ส่วน td.m คือช่องรหัสสั้น ๆ เช่นตัวย่อข้อกำหนด
    ผูกไว้กับ table.tbl เพื่อไม่ให้ไปชนกับ .sm-rule .k ที่มีอยู่เดิม */
 table.tbl td.k{font-weight:600; color:var(--ink)}
-table.tbl td.m{font-family:"IBM Plex Mono",monospace; font-size:.79rem;
+
+/* ตัวย่อข้อกำหนดอย่าง E, C, R/O ที่แทรกกลางประโยคหรือวางไว้ทั้งช่อง
+   ต้องมีกฎที่ไม่ผูกกับตาราง ไม่งั้นที่แทรกกลางประโยคจะไม่ได้หน้าตาอะไรเลย */
+.m{font-family:"IBM Plex Mono",monospace; font-size:.85em;
   color:var(--accent); white-space:nowrap}
+table.tbl td.m{font-size:.79rem}
 """
 
 # ข้อความหัวหน้าเว็บ ปรับให้บอกว่ามีเนื้อหาหลังมิดเทอมแล้ว
 EYEBROW_OLD = u'Auditing &amp; Assurance Services · Chapters 1, 3, 4'
 EYEBROW_NEW = u'Auditing &amp; Assurance Services · Chapters 1, 3, 4 · วงจรรายการค้า'
-SUB_TAIL = u' · วงจรรายการค้า ทั้งวงจรรายได้และวงจรรายจ่าย'
-META_TAIL = u' และวงจรรายการค้าทั้งวงจรรายได้และวงจรรายจ่าย'
+SUB_TAIL = (u' · วงจรรายการค้าครบทั้งห้าวงจร ตั้งแต่วงจรรายได้และวงจรรายจ่าย'
+            u' จนถึงวงจรการผลิต ค่าจ้างแรงงาน การจัดหาเงิน และการลงทุน')
+META_TAIL = (u' และวงจรรายการค้าครบทั้งห้าวงจร ทั้งวงจรรายได้ วงจรรายจ่าย'
+             u' วงจรการผลิต วงจรค่าจ้างแรงงาน วงจรการจัดหาเงิน และวงจรการลงทุน')
 
 # คำบอกขอบเขตของแบบทดสอบ ส่วนจำนวนข้อ tools/make-quiz.py เป็นคนเขียนให้
 QZ_OLD = u'ครอบคลุมทั้งสี่บท สองโมดูล และงานให้ความเชื่อมั่น'
