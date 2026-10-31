@@ -1,0 +1,50 @@
+name: สร้างไฟล์ ScreenTimeGuard.exe
+
+# สร้างไฟล์ .exe ใหม่ทุกครั้งที่แก้โปรแกรม หรือกดรันเองจากหน้าเว็บ GitHub
+# ถ้าเป็น branch main จะอัปโหลดไว้ที่หน้า Releases ให้ดาวน์โหลดได้เลย
+on:
+  push:
+    paths:
+      - 'screen_time_guard/**'
+      - '.github/workflows/build-screen-time-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: ทดสอบการติดตั้งและถอนการติดตั้งบน Windows จริง
+        shell: pwsh
+        run: |
+          python -c "import sys; sys.path.insert(0, 'screen_time_guard'); import screen_time_guard as g; print('idle', g.idle_seconds(), 'screen', g.virtual_screen(None), 'admin', g.is_admin_account()); g.install_files(); assert g.is_installed(), 'task not registered'; g.uninstall_files(); assert not g.is_installed(), 'task not removed'; print('install/uninstall ok')"
+
+      - name: สร้างไฟล์ .exe
+        run: |
+          pip install pyinstaller==6.11.1
+          pyinstaller --onefile --noconsole --name ScreenTimeGuard screen_time_guard/screen_time_guard.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ScreenTimeGuard
+          path: dist/ScreenTimeGuard.exe
+
+      - name: อัปโหลดไว้ที่หน้า Releases
+        if: github.ref_name == github.event.repository.default_branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete screen-time-guard --yes --cleanup-tag || true
+          gh release create screen-time-guard dist/ScreenTimeGuard.exe \
+            --title "ScreenTimeGuard (ล่าสุด)" \
+            --notes "ดาวน์โหลด ScreenTimeGuard.exe ไปดับเบิลคลิกบนคอมของลูก แล้วทำตามหน้าจอ"

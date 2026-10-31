@@ -10,6 +10,12 @@
 - สั่งงานจากมือถือผ่าน Telegram ได้: ดูสถานะ ให้เวลาเพิ่ม ล็อก/ปลดล็อกเครื่อง และรับแจ้งเตือน
 
 วิธีเปิดหน้าตั้งค่า: ดับเบิลคลิกที่นาฬิกามุมจอ แล้วใส่รหัสผู้ปกครอง
+
+โหมดการรัน
+  (ไม่ใส่อะไร)   ถ้าเป็นไฟล์ .exe ที่ยังไม่ได้ติดตั้ง = เปิดหน้าติดตั้ง, นอกนั้น = เริ่มจำกัดเวลา
+  --install       เปิดหน้าติดตั้ง (จะขอสิทธิ์ Administrator เอง)
+  --run           เริ่มจำกัดเวลา (Task Scheduler เรียกแบบนี้)
+  --setup         เปิดหน้าตั้งค่าอย่างเดียว
 """
 
 import ctypes
@@ -20,10 +26,12 @@ import json
 import os
 import queue
 import secrets
+import shutil
 import socket
 import subprocess
 import sys
 import threading
+import base64
 import time
 import urllib.request
 import tkinter as tk
@@ -59,6 +67,7 @@ DEFAULT_CONFIG = {
     "password_hash": "",
     "telegram_token": "",
     "telegram_chat_ids": [],
+    "limit_admins": False,
 }
 
 
@@ -242,6 +251,113 @@ def acquire_single_instance():
         return False
 
 
+def is_admin_account():
+    """บัญชีนี้เป็น Administrator หรือไม่ (นับด้วยแม้ตอนนี้ UAC ยังไม่ได้ยกสิทธิ์)
+    ปกติไม่จำกัดเวลาบัญชีผู้ดูแล จะได้ไม่ไปล็อกเครื่องตอนพ่อแม่ใช้"""
+    if not IS_WINDOWS:
+        return False
+    try:
+        out = subprocess.run(["whoami", "/groups"], capture_output=True, text=True,
+                             creationflags=0x08000000).stdout
+    except OSError:
+        return False
+    return "S-1-5-32-544" in out
+
+
+def is_elevated():
+    return IS_WINDOWS and bool(ctypes.windll.shell32.IsUserAnAdmin())
+
+
+def relaunch_elevated(args):
+    """เปิดตัวเองใหม่ด้วยสิทธิ์ Administrator (Windows จะถามยืนยันผ่าน UAC)"""
+    if getattr(sys, "frozen", False):
+        params = args
+    else:
+        params = f'"{os.path.abspath(__file__)}" {args}'
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+
+
+# ---------------------------------------------------------------- ติดตั้ง / ถอนการติดตั้ง
+
+INSTALL_DIR = os.path.join(os.environ.get("ProgramFiles", r"C:\Program Files"), APP_NAME)
+EXE_NAME = f"{APP_NAME}.exe"
+
+
+def run_powershell(script):
+    encoded = base64.b64encode(script.encode("utf-16-le")).decode("ascii")
+    return subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded],
+                          capture_output=True, text=True, creationflags=0x08000000)
+
+
+def ps_quote(text):
+    return "'" + str(text).replace("'", "''") + "'"
+
+
+def is_installed():
+    return IS_WINDOWS and run_powershell(
+        f"if (Get-ScheduledTask -TaskName {ps_quote(APP_NAME)} -ErrorAction SilentlyContinue) {{ 'yes' }}"
+    ).stdout.strip() == "yes"
+
+
+def stop_running_copies():
+    run_powershell(
+        "Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne $PID -and $_.ProcessId -ne "
+        f"{os.getpid()} -and ($_.ExecutablePath -like {ps_quote(os.path.join(INSTALL_DIR, '*'))} -or "
+        "$_.CommandLine -like '*screen_time_guard.py*--run*') } | "
+        "ForEach-Object { Stop-Process -Id $_.ProcessId -Force }")
+
+
+def install_files():
+    """คัดลอกโปรแกรมไป Program Files, ตั้งสิทธิ์โฟลเดอร์ข้อมูล และตั้ง Task Scheduler (ต้องเป็น Administrator)"""
+    stop_running_copies()
+    os.makedirs(INSTALL_DIR, exist_ok=True)
+    if getattr(sys, "frozen", False):
+        target = os.path.join(INSTALL_DIR, EXE_NAME)
+        if os.path.normcase(os.path.abspath(sys.executable)) != os.path.normcase(target):
+            shutil.copy2(sys.executable, target)
+        execute, argument = target, "--run"
+    else:
+        target = os.path.join(INSTALL_DIR, "screen_time_guard.py")
+        shutil.copy2(os.path.abspath(__file__), target)
+        execute = os.path.join(os.path.dirname(sys.executable), "pythonw.exe")
+        argument = f'"{target}" --run'
+
+    for path in (CONFIG_PATH, USAGE_PATH):
+        if not os.path.exists(path):
+            write_json(path, {})
+    # ผู้ใช้ทั่วไป (Users) อ่าน/เขียนไฟล์ได้ แต่ลบไม่ได้, Administrators และ SYSTEM ทำได้ทุกอย่าง
+    subprocess.run(["icacls", DATA_DIR, "/inheritance:r", "/grant:r", "*S-1-5-32-544:(OI)(CI)F",
+                    "*S-1-5-18:(OI)(CI)F", "*S-1-5-32-545:(OI)(CI)(RX,W)", "/T"],
+                   capture_output=True, creationflags=0x08000000)
+
+    # เปิดเองตอนล็อกอิน และเปิดซ้ำทุก 1 นาทีถ้าโดนปิด
+    result = run_powershell(f"""
+$ErrorActionPreference = 'Stop'
+$action = New-ScheduledTaskAction -Execute {ps_quote(execute)} -Argument {ps_quote(argument)}
+$atLogon = New-ScheduledTaskTrigger -AtLogOn
+$repeat = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1) -RepetitionDuration (New-TimeSpan -Days 3650)
+$principal = New-ScheduledTaskPrincipal -GroupId 'S-1-5-32-545' -RunLevel Limited
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Seconds 0) -MultipleInstances IgnoreNew -StartWhenAvailable
+Register-ScheduledTask -TaskName {ps_quote(APP_NAME)} -Action $action -Trigger $atLogon, $repeat -Principal $principal -Settings $settings -Force | Out-Null
+""")
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or "ตั้ง Task Scheduler ไม่สำเร็จ")
+
+
+def start_installed():
+    run_powershell(f"Start-ScheduledTask -TaskName {ps_quote(APP_NAME)}")
+
+
+def uninstall_files():
+    run_powershell(f"Unregister-ScheduledTask -TaskName {ps_quote(APP_NAME)} -Confirm:$false -ErrorAction SilentlyContinue")
+    stop_running_copies()
+    shutil.rmtree(DATA_DIR, ignore_errors=True)
+    shutil.rmtree(INSTALL_DIR, ignore_errors=True)
+    if os.path.exists(INSTALL_DIR):  # ลบไฟล์ที่กำลังเปิดอยู่ไม่ได้ ให้ลบตามหลังตอนปิดโปรแกรมแล้ว
+        subprocess.Popen(f'cmd /c ping -n 4 127.0.0.1 >nul & rmdir /s /q "{INSTALL_DIR}"',
+                         creationflags=0x08000000)
+
+
 # ---------------------------------------------------------------- Telegram
 
 PC_NAME = f"{os.environ.get('USERNAME') or os.environ.get('USER', '?')}@{socket.gethostname()}"
@@ -253,10 +369,11 @@ BUTTONS = {
     "🔒 ล็อกเลย": "/lock",
     "🔓 ปลดล็อก": "/unlock",
     "♾️ ไม่จำกัดวันนี้": "/unlimited",
+    "⚙️ ตั้งค่า": "/settings",
     "❓ วิธีใช้": "/help",
 }
 KEYBOARD = {"keyboard": [[{"text": t} for t in row] for row in (
-    list(BUTTONS)[0:1], list(BUTTONS)[1:4], list(BUTTONS)[4:6], list(BUTTONS)[6:8])],
+    list(BUTTONS)[0:1], list(BUTTONS)[1:4], list(BUTTONS)[4:6], list(BUTTONS)[6:9])],
     "resize_keyboard": True, "is_persistent": True}
 HELP_TEXT = (
     "คำสั่งที่ใช้ได้\n"
@@ -266,8 +383,26 @@ HELP_TEXT = (
     "/unlock – ยกเลิกการล็อกที่สั่งไว้\n"
     "/unlimited – ไม่จำกัดเวลาเฉพาะวันนี้\n"
     "/reset – รีเซ็ตเวลาที่ใช้ไปของวันนี้\n"
+    "\n"
+    "ตั้งค่า\n"
+    "/settings – ดูการตั้งค่าทั้งหมด\n"
+    "/limit all 60 – ทุกวันเล่นได้ 60 นาที\n"
+    "/limit weekday 60 – วันจันทร์-ศุกร์\n"
+    "/limit weekend 180 – วันเสาร์-อาทิตย์\n"
+    "/limit sat 120 – เฉพาะวัน (mon tue wed thu fri sat sun)\n"
+    "/hours 07:00 21:00 – ช่วงเวลาที่ใช้เครื่องได้ (/hours off = ทั้งวัน)\n"
+    "/action lock – หมดเวลาแล้ว lock=ล็อกจอ, logoff=ออกจากระบบ, shutdown=ปิดเครื่อง\n"
+    "/idle 10 – ไม่นับเวลาถ้าไม่แตะเครื่องเกิน 10 นาที (0 = นับตลอด)\n"
+    "/password 1234 – ตั้งรหัสปลดล็อกที่หน้าจอคอม\n"
+    "\n"
     "หรือกดปุ่มด้านล่างได้เลย"
 )
+DAY_ALIASES = {
+    "all": DAYS, "ทุกวัน": DAYS,
+    "weekday": DAYS[:5], "weekdays": DAYS[:5], "วันธรรมดา": DAYS[:5],
+    "weekend": DAYS[5:], "weekends": DAYS[5:], "เสาร์อาทิตย์": DAYS[5:],
+    **{d: [d] for d in DAYS}, **{name: [d] for d, name in zip(DAYS, DAY_TH)},
+}
 
 
 class TelegramRemote:
@@ -278,6 +413,8 @@ class TelegramRemote:
         self.cfg = cfg
         self.incoming = queue.Queue()
         self.outgoing = queue.Queue()
+        self.offset = None
+        self.stopped = False
         threading.Thread(target=self._poll_loop, daemon=True).start()
         threading.Thread(target=self._send_loop, daemon=True).start()
 
@@ -288,40 +425,62 @@ class TelegramRemote:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             return json.loads(resp.read().decode("utf-8"))
 
+    def get_me(self):
+        """ตรวจ token และคืนชื่อบอท (@username) หรือ None ถ้า token ใช้ไม่ได้"""
+        try:
+            data = self._call("getMe", {}, timeout=15)
+        except Exception:
+            return None
+        return data.get("result", {}).get("username") if data.get("ok") else None
+
+    def ack(self):
+        """บอก Telegram ว่าอ่านข้อความที่ได้มาแล้ว (จะได้ไม่ส่งซ้ำให้โปรแกรมตัวถัดไป)"""
+        if self.offset is not None:
+            try:
+                self._call("getUpdates", {"offset": self.offset, "timeout": 0}, timeout=15)
+            except Exception:
+                pass
+
     def _poll_loop(self):
-        offset, token = None, None
-        while True:
+        token = None
+        while not self.stopped:
             if not self.cfg.get("telegram_token"):
                 time.sleep(5)
                 continue
             if token != self.cfg["telegram_token"]:
-                offset, token = None, self.cfg["telegram_token"]
+                self.offset, token = None, self.cfg["telegram_token"]
             try:
-                data = self._call("getUpdates", {"offset": offset, "timeout": 25,
+                data = self._call("getUpdates", {"offset": self.offset, "timeout": 25,
                                                  "allowed_updates": ["message"]}, timeout=35)
             except Exception:
                 time.sleep(10)  # ไม่มีเน็ต หรือ token ผิด ลองใหม่ทีหลัง
                 continue
             for update in data.get("result", []):
-                offset = update["update_id"] + 1
+                self.offset = update["update_id"] + 1
                 msg = update.get("message") or {}
                 # ไม่ทำตามคำสั่งเก่าที่ค้างไว้นานตอนเครื่องปิดอยู่
-                if msg.get("text") and time.time() - msg.get("date", 0) < 600:
-                    self.incoming.put((msg["chat"]["id"], msg["text"]))
+                if msg.get("text") and time.time() - msg.get("date", 0) < 600 and not self.stopped:
+                    self.incoming.put((msg["chat"]["id"], msg["message_id"], msg["text"]))
 
     def _send_loop(self):
         while True:
-            chat_id, text = self.outgoing.get()
+            method, payload = self.outgoing.get()
             for _ in range(3):
                 try:
-                    self._call("sendMessage", {"chat_id": chat_id, "text": text, "reply_markup": KEYBOARD})
+                    self._call(method, payload)
                     break
                 except Exception:
+                    if method == "deleteMessage":
+                        break
                     time.sleep(5)
 
     def send(self, chat_id, text):
         if self.cfg.get("telegram_token"):
-            self.outgoing.put((chat_id, text))
+            self.outgoing.put(("sendMessage", {"chat_id": chat_id, "text": text, "reply_markup": KEYBOARD}))
+
+    def delete(self, chat_id, message_id):
+        if self.cfg.get("telegram_token"):
+            self.outgoing.put(("deleteMessage", {"chat_id": chat_id, "message_id": message_id}))
 
     def notify(self, text):
         for chat_id in self.cfg.get("telegram_chat_ids", []):
@@ -372,7 +531,8 @@ class App:
         self.settings_win = None
         self.pair_code, self.pair_expires = None, 0
 
-        if setup_only or not self.cfg["password_hash"]:
+        configured = self.cfg["password_hash"] or self.cfg["telegram_chat_ids"]
+        if setup_only or not configured:
             self.open_settings(first_run=not self.cfg["password_hash"])
             self.root.wait_window(self.settings_win)
             if setup_only or not self.cfg["password_hash"]:
@@ -457,9 +617,11 @@ class App:
     def process_remote(self):
         while True:
             try:
-                chat_id, text = self.remote.incoming.get_nowait()
+                chat_id, message_id, text = self.remote.incoming.get_nowait()
             except queue.Empty:
                 return
+            if text.strip().lower().startswith("/password"):
+                self.remote.delete(chat_id, message_id)  # ไม่ให้รหัสค้างอยู่ในแชต
             reply = self.handle_remote(chat_id, text)
             if reply:
                 self.remote.send(chat_id, reply)
@@ -510,7 +672,68 @@ class App:
         if cmd == "/reset":
             self.reset_today()
             return "🔄 รีเซ็ตเวลาของวันนี้แล้ว\n\n" + self.status_text()
+
+        reply = self.handle_setting(cmd, arg.split())
+        if reply:
+            self.warned.clear()
+            write_json(CONFIG_PATH, self.cfg)
+            return reply
         return "ไม่รู้จักคำสั่งนี้\n\n" + HELP_TEXT
+
+    def settings_text(self):
+        cfg = self.cfg
+        days = "\n".join(f"  {name}: {cfg['daily_minutes'][d]} นาที" for d, name in zip(DAYS, DAY_TH))
+        start, end = cfg["allowed_start"], cfg["allowed_end"]
+        idle = f"เกิน {cfg['idle_minutes']} นาที" if cfg["idle_minutes"] else "ไม่หยุด (นับตลอด)"
+        return (f"⚙️ การตั้งค่า\nเวลาเล่นต่อวัน\n{days}\n"
+                f"ช่วงเวลาที่ใช้ได้: {'ทั้งวัน' if start == end else f'{start} - {end} น.'}\n"
+                f"เมื่อหมดเวลา: {ACTIONS.get(cfg['action'], cfg['action'])}\n"
+                f"หยุดนับเมื่อไม่แตะเครื่อง: {idle}\n"
+                f"รหัสปลดล็อกที่หน้าจอ: {'ตั้งแล้ว' if cfg['password_hash'] else 'ยังไม่ได้ตั้ง (/password 1234)'}")
+
+    def handle_setting(self, cmd, args):
+        """คำสั่งตั้งค่าจาก Telegram คืนข้อความตอบกลับ หรือ None ถ้าไม่ใช่คำสั่งตั้งค่า"""
+        cfg = self.cfg
+        if cmd == "/settings":
+            return self.settings_text()
+        if cmd == "/limit":
+            try:
+                days = DAY_ALIASES[args[0].lower()] if len(args) == 2 else DAYS
+                minutes = int(args[-1])
+                if not 0 <= minutes <= 1440:
+                    raise ValueError
+            except (KeyError, IndexError, ValueError):
+                return "ใช้แบบนี้: /limit all 60 หรือ /limit weekend 180 หรือ /limit sat 120 (0-1440 นาที)"
+            for d in days:
+                cfg["daily_minutes"][d] = minutes
+            return "✅ บันทึกแล้ว\n\n" + self.settings_text()
+        if cmd == "/hours":
+            if args and args[0].lower() in ("off", "ปิด"):
+                args = ["00:00", "00:00"]
+            try:
+                parse_hm(args[0])
+                parse_hm(args[1])
+            except (IndexError, ValueError):
+                return "ใช้แบบนี้: /hours 07:00 21:00 หรือ /hours off"
+            cfg["allowed_start"], cfg["allowed_end"] = args[0], args[1]
+            return "✅ บันทึกแล้ว\n\n" + self.settings_text()
+        if cmd == "/action":
+            if not args or args[0].lower() not in ACTIONS:
+                return "ใช้แบบนี้: /action lock หรือ /action logoff หรือ /action shutdown"
+            cfg["action"] = args[0].lower()
+            return "✅ บันทึกแล้ว\n\n" + self.settings_text()
+        if cmd == "/idle":
+            try:
+                cfg["idle_minutes"] = max(0, int(args[0]))
+            except (IndexError, ValueError):
+                return "ใช้แบบนี้: /idle 10 (0 = นับเวลาตลอด)"
+            return "✅ บันทึกแล้ว\n\n" + self.settings_text()
+        if cmd == "/password":
+            if len(args) != 1 or len(args[0]) < 4:
+                return "ใช้แบบนี้: /password 1234 (อย่างน้อย 4 ตัว ห้ามมีช่องว่าง)"
+            set_password(cfg, args[0])
+            return "✅ ตั้งรหัสปลดล็อกที่หน้าจอคอมแล้ว (ลบข้อความที่มีรหัสออกจากแชตให้แล้ว)"
+        return None
 
     # ---------- วงรอบหลัก
 
@@ -642,7 +865,9 @@ class App:
         self.lock_countdown = tk.Label(box, text="", font=(FONT, 14), bg=bg, fg="#e67e22", justify="center")
         self.lock_countdown.pack(pady=(0, 20))
 
-        tk.Label(box, text="สำหรับผู้ปกครอง: ใส่รหัสผ่านแล้วเลือกเวลาที่จะให้เล่นต่อ",
+        hint = ("สำหรับผู้ปกครอง: ใส่รหัสผ่านแล้วเลือกเวลาที่จะให้เล่นต่อ" if self.cfg["password_hash"]
+                else "ผู้ปกครองปลดล็อกได้ทาง Telegram (หรือตั้งรหัสปลดล็อกที่หน้าจอด้วย /password)")
+        tk.Label(box, text=hint,
                  font=(FONT, 12), bg=bg, fg="#95a5a6").pack()
         self.lock_entry = tk.Entry(box, show="•", font=(FONT, 16), width=20, justify="center")
         self.lock_entry.pack(pady=8)
@@ -701,6 +926,9 @@ class App:
 
     def ask_settings(self):
         if self.settings_win or self.lock_win:
+            return
+        if not self.cfg["password_hash"]:
+            self.toast("ตั้งค่าผ่าน Telegram ได้เลย\nหรือตั้งรหัสด้วยคำสั่ง /password")
             return
         dialog = PasswordDialog(self.root)
         self.root.wait_window(dialog.win)
@@ -859,15 +1087,144 @@ class App:
         w.focus_force()
 
 
+class Installer:
+    """หน้าติดตั้ง: ผู้ปกครองวาง token ของบอท กดติดตั้ง แล้วกด Start ในแชตบอท เท่านี้ก็เสร็จ"""
+
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title(f"ติดตั้ง {APP_NAME}")
+        self.root.resizable(False, False)
+        self.cfg = load_config()
+        self.remote = None
+
+        f = self.frame = ttk.Frame(self.root, padding=20)
+        f.pack()
+        ttk.Label(f, text="⏰ ScreenTimeGuard", font=(FONT, 16, "bold")).pack(anchor="w")
+        ttk.Label(f, text="จำกัดเวลาเล่นคอมของลูก และสั่งงานจากมือถือผ่าน Telegram",
+                  font=(FONT, 10)).pack(anchor="w", pady=(0, 12))
+        ttk.Label(f, text="1. ใน Telegram ทักหา @BotFather ส่ง /newbot แล้วตั้งชื่อบอท\n"
+                          "2. คัดลอก token ที่ได้ (หน้าตาแบบ 123456789:AAF...) มาวางช่องนี้",
+                  font=(FONT, 10), justify="left").pack(anchor="w")
+        self.token_var = tk.StringVar(value=self.cfg["telegram_token"])
+        ttk.Entry(f, textvariable=self.token_var, width=55).pack(fill="x", pady=8)
+        self.admins_var = tk.BooleanVar(value=self.cfg.get("limit_admins", True) if os.path.exists(CONFIG_PATH) else True)
+        ttk.Checkbutton(f, variable=self.admins_var,
+                        text="จำกัดเวลาบัญชีที่เป็น Administrator ด้วย\n"
+                             "(ติ๊กไว้ถ้าบัญชีของลูกเป็น Administrator · เอาติ๊กออกถ้าพ่อแม่ใช้เครื่องนี้ด้วยบัญชีผู้ดูแลแยกต่างหาก)"
+                        ).pack(anchor="w", pady=(0, 6))
+        self.status = ttk.Label(f, text="", font=(FONT, 11), justify="left", wraplength=460)
+        self.status.pack(anchor="w", pady=(4, 8))
+        self.buttons = ttk.Frame(f)
+        self.buttons.pack(anchor="w")
+        ttk.Button(self.buttons, text="ติดตั้ง", command=self.install).pack(side="left", padx=(0, 6))
+        ttk.Button(self.buttons, text="ติดตั้งแบบไม่ใช้ Telegram", command=self.install_offline).pack(side="left", padx=6)
+        if is_installed():
+            ttk.Button(self.buttons, text="ถอนการติดตั้ง", command=self.uninstall).pack(side="left", padx=6)
+            self.say("ติดตั้งไว้แล้ว กดติดตั้งอีกครั้งเพื่ออัปเดต (การตั้งค่าเดิมยังอยู่)")
+
+    def say(self, text):
+        self.status.config(text=text)
+        self.root.update()
+
+    def install(self):
+        token = self.token_var.get().strip()
+        self.cfg["telegram_token"] = token
+        self.remote = TelegramRemote(self.cfg)
+        self.say("กำลังตรวจสอบ token...")
+        bot = self.remote.get_me()
+        if not bot:
+            self.remote.stopped = True
+            self.say("❌ token ใช้ไม่ได้ หรือเครื่องยังไม่ได้ต่ออินเทอร์เน็ต ลองตรวจดูอีกครั้ง")
+            return
+        if not self.do_install():
+            return
+        for child in self.buttons.winfo_children():
+            child.config(state="disabled")
+        if self.cfg["telegram_chat_ids"]:
+            self.finish("✅ อัปเดตเรียบร้อย มือถือที่จับคู่ไว้ยังใช้งานได้เหมือนเดิม")
+            return
+        self.say(f"3. เปิด Telegram ไปที่บอท @{bot} แล้วกด Start (หรือส่ง /start)\n\nกำลังรอ...")
+        self.root.after(500, self.wait_for_parent)
+
+    def wait_for_parent(self):
+        try:
+            chat_id, _, _ = self.remote.incoming.get_nowait()
+        except queue.Empty:
+            self.root.after(500, self.wait_for_parent)
+            return
+        # คนแรกที่ทักบอทระหว่างติดตั้ง = ผู้ปกครอง
+        self.cfg["telegram_chat_ids"] = [chat_id]
+        write_json(CONFIG_PATH, self.cfg)
+        self.remote.stopped = True
+        self.remote.send(chat_id, f"✅ เชื่อมต่อกับคอม {socket.gethostname()} เรียบร้อย!\n"
+                                  "ตอนนี้เริ่มจำกัดเวลาแล้ว ตั้งค่าทั้งหมดผ่านแชตนี้ได้เลย\n\n"
+                                  "แนะนำ: ตั้งรหัสสำหรับปลดล็อกที่หน้าจอคอมด้วย /password 1234\n\n" + HELP_TEXT)
+        self.remote.ack()
+        self.finish("✅ ติดตั้งเสร็จแล้ว! ดูข้อความต้อนรับในแชตบอทได้เลย")
+
+    def install_offline(self):
+        if not self.do_install():
+            return
+        self.say("ตั้งรหัสผ่านผู้ปกครองในหน้าต่างที่ขึ้นมา...")
+        args = ["--setup"] if getattr(sys, "frozen", False) else [os.path.abspath(__file__), "--setup"]
+        subprocess.run([sys.executable, *args])
+        self.cfg = load_config()
+        if not self.cfg["password_hash"]:
+            self.say("ยังไม่ได้ตั้งรหัสผ่าน กด 'ติดตั้งแบบไม่ใช้ Telegram' อีกครั้ง")
+            return
+        self.finish("✅ ติดตั้งเสร็จแล้ว!")
+
+    def do_install(self):
+        self.say("กำลังติดตั้ง...")
+        self.cfg["limit_admins"] = self.admins_var.get()
+        try:
+            write_json(CONFIG_PATH, self.cfg)
+            install_files()
+            write_json(CONFIG_PATH, self.cfg)
+        except Exception as exc:
+            self.say(f"❌ ติดตั้งไม่สำเร็จ: {exc}")
+            return False
+        return True
+
+    def finish(self, text):
+        start_installed()
+        self.say(text + "\nหน้าต่างนี้จะปิดเองใน 5 วินาที")
+        self.root.after(5000, self.root.destroy)
+
+    def uninstall(self):
+        self.say("กำลังถอนการติดตั้ง...")
+        if self.cfg["telegram_chat_ids"] and self.cfg["telegram_token"]:
+            remote = TelegramRemote(self.cfg)
+            remote.stopped = True
+            remote.notify("🗑️ ถอนการติดตั้ง ScreenTimeGuard ออกจากเครื่องนี้แล้ว")
+            time.sleep(2)
+        uninstall_files()
+        self.say("ถอนการติดตั้งเรียบร้อย")
+        self.root.after(3000, self.root.destroy)
+
+
 def main():
     if IS_WINDOWS:
         try:
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
         except (AttributeError, OSError):
             pass
-    setup_only = "--setup" in sys.argv
-    if not setup_only and not acquire_single_instance():
+    args = sys.argv[1:]
+    frozen = getattr(sys, "frozen", False)
+    installed_copy = os.path.normcase(os.path.dirname(os.path.abspath(sys.executable))) == os.path.normcase(INSTALL_DIR)
+    if "--install" in args or (frozen and not args and not installed_copy):
+        if IS_WINDOWS and not is_elevated():
+            relaunch_elevated("--install")
+            return
+        Installer().root.mainloop()
         return
+
+    setup_only = "--setup" in args
+    if not setup_only:
+        if not acquire_single_instance():
+            return
+        if is_admin_account() and not load_config().get("limit_admins"):
+            return  # ไม่จำกัดเวลาบัญชีผู้ดูแล (ผู้ปกครอง)
     try:
         app = App(setup_only=setup_only)
     except SystemExit:
