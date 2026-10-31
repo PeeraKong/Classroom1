@@ -7,6 +7,7 @@
 - หมดเวลาแล้วขึ้นหน้าจอล็อกเต็มจอ ปิดไม่ได้ ต้องใช้รหัสผู้ปกครองถึงจะเล่นต่อได้
 - เลือกได้ว่าหมดเวลาแล้วจะ ล็อกจออย่างเดียว / ออกจากระบบ / ปิดเครื่อง
 - การตั้งค่าทั้งหมดต้องใช้รหัสผ่านผู้ปกครอง
+- สั่งงานจากมือถือผ่าน Telegram ได้: ดูสถานะ ให้เวลาเพิ่ม ล็อก/ปลดล็อกเครื่อง และรับแจ้งเตือน
 
 วิธีเปิดหน้าตั้งค่า: ดับเบิลคลิกที่นาฬิกามุมจอ แล้วใส่รหัสผู้ปกครอง
 """
@@ -17,11 +18,14 @@ import hashlib
 import hmac
 import json
 import os
+import queue
 import secrets
 import socket
 import subprocess
 import sys
+import threading
 import time
+import urllib.request
 import tkinter as tk
 from tkinter import ttk
 
@@ -53,6 +57,8 @@ DEFAULT_CONFIG = {
     "idle_minutes": 0,
     "salt": "",
     "password_hash": "",
+    "telegram_token": "",
+    "telegram_chat_ids": [],
 }
 
 
@@ -129,7 +135,8 @@ def check_password(cfg, password):
 
 
 def new_usage(date):
-    return {"date": date, "used": 0.0, "bonus": 0.0, "unlimited": False, "override_until": 0.0}
+    return {"date": date, "used": 0.0, "bonus": 0.0, "unlimited": False, "override_until": 0.0,
+            "forced_lock": False, "last_seen": 0.0}
 
 
 def load_usage(today):
@@ -235,6 +242,92 @@ def acquire_single_instance():
         return False
 
 
+# ---------------------------------------------------------------- Telegram
+
+PC_NAME = f"{os.environ.get('USERNAME') or os.environ.get('USER', '?')}@{socket.gethostname()}"
+BUTTONS = {
+    "📊 สถานะ": "/status",
+    "➕ 15 นาที": "/add 15",
+    "➕ 30 นาที": "/add 30",
+    "➕ 60 นาที": "/add 60",
+    "🔒 ล็อกเลย": "/lock",
+    "🔓 ปลดล็อก": "/unlock",
+    "♾️ ไม่จำกัดวันนี้": "/unlimited",
+    "❓ วิธีใช้": "/help",
+}
+KEYBOARD = {"keyboard": [[{"text": t} for t in row] for row in (
+    list(BUTTONS)[0:1], list(BUTTONS)[1:4], list(BUTTONS)[4:6], list(BUTTONS)[6:8])],
+    "resize_keyboard": True, "is_persistent": True}
+HELP_TEXT = (
+    "คำสั่งที่ใช้ได้\n"
+    "/status – ดูเวลาที่ใช้ไปและเวลาที่เหลือ\n"
+    "/add 30 – ให้เล่นต่ออีก 30 นาที (ใส่ตัวเลขกี่นาทีก็ได้)\n"
+    "/lock – ล็อกเครื่องทันทีจนกว่าจะสั่ง /unlock\n"
+    "/unlock – ยกเลิกการล็อกที่สั่งไว้\n"
+    "/unlimited – ไม่จำกัดเวลาเฉพาะวันนี้\n"
+    "/reset – รีเซ็ตเวลาที่ใช้ไปของวันนี้\n"
+    "หรือกดปุ่มด้านล่างได้เลย"
+)
+
+
+class TelegramRemote:
+    """คุยกับ Telegram Bot API ในเธรดแยก ข้อความที่เข้ามาจะถูกส่งต่อให้เธรดหลักผ่าน incoming
+    (เธรดนี้ไม่แตะหน้าต่าง tkinter เลย)"""
+
+    def __init__(self, cfg):
+        self.cfg = cfg
+        self.incoming = queue.Queue()
+        self.outgoing = queue.Queue()
+        threading.Thread(target=self._poll_loop, daemon=True).start()
+        threading.Thread(target=self._send_loop, daemon=True).start()
+
+    def _call(self, method, payload, timeout=15):
+        url = f"https://api.telegram.org/bot{self.cfg['telegram_token']}/{method}"
+        req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"),
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+
+    def _poll_loop(self):
+        offset, token = None, None
+        while True:
+            if not self.cfg.get("telegram_token"):
+                time.sleep(5)
+                continue
+            if token != self.cfg["telegram_token"]:
+                offset, token = None, self.cfg["telegram_token"]
+            try:
+                data = self._call("getUpdates", {"offset": offset, "timeout": 25,
+                                                 "allowed_updates": ["message"]}, timeout=35)
+            except Exception:
+                time.sleep(10)  # ไม่มีเน็ต หรือ token ผิด ลองใหม่ทีหลัง
+                continue
+            for update in data.get("result", []):
+                offset = update["update_id"] + 1
+                msg = update.get("message") or {}
+                # ไม่ทำตามคำสั่งเก่าที่ค้างไว้นานตอนเครื่องปิดอยู่
+                if msg.get("text") and time.time() - msg.get("date", 0) < 600:
+                    self.incoming.put((msg["chat"]["id"], msg["text"]))
+
+    def _send_loop(self):
+        while True:
+            chat_id, text = self.outgoing.get()
+            for _ in range(3):
+                try:
+                    self._call("sendMessage", {"chat_id": chat_id, "text": text, "reply_markup": KEYBOARD})
+                    break
+                except Exception:
+                    time.sleep(5)
+
+    def send(self, chat_id, text):
+        if self.cfg.get("telegram_token"):
+            self.outgoing.put((chat_id, text))
+
+    def notify(self, text):
+        for chat_id in self.cfg.get("telegram_chat_ids", []):
+            self.send(chat_id, f"[{PC_NAME}]\n{text}")
+
+
 # ---------------------------------------------------------------- หน้าต่าง
 
 class PasswordDialog:
@@ -277,6 +370,7 @@ class App:
         self.warned = set()
         self.lock_win = None
         self.settings_win = None
+        self.pair_code, self.pair_expires = None, 0
 
         if setup_only or not self.cfg["password_hash"]:
             self.open_settings(first_run=not self.cfg["password_hash"])
@@ -287,6 +381,11 @@ class App:
 
         self.last_tick = time.monotonic()
         self.last_save = self.last_tick
+        self.remote = TelegramRemote(self.cfg)
+        if time.time() - self.usage["last_seen"] < 180:
+            self.remote.notify("⚠️ โปรแกรมถูกปิดแล้วเปิดขึ้นมาใหม่ (อาจมีคนพยายามปิดโปรแกรม)")
+        else:
+            self.remote.notify("💻 มีการเข้าใช้งานคอมพิวเตอร์\n" + self.status_text())
         self.build_timer()
         self.root.after(TICK_MS, self.tick)
         self.root.after(500, self.keep_lock_on_top)
@@ -306,6 +405,8 @@ class App:
 
     def status(self):
         """คืนค่า (วินาทีที่เหลือ, เหตุผลที่ต้องล็อก หรือ None)"""
+        if self.usage["forced_lock"]:
+            return 0, "parent"
         if self.usage["unlimited"]:
             return INF, None
         window = self.window_left()
@@ -329,16 +430,99 @@ class App:
         self.warned.clear()
         save_usage(self.usage)
 
+    def reset_today(self):
+        forced = self.usage["forced_lock"]
+        self.usage = new_usage(dt.date.today().isoformat())
+        self.usage["forced_lock"] = forced
+        self.warned.clear()
+        save_usage(self.usage)
+
+    def status_text(self):
+        left, reason = self.status()
+        weekday = dt.date.today().weekday()
+        state = {
+            None: "🟢 กำลังใช้งานได้",
+            "timeup": "🔴 ล็อกอยู่ (หมดเวลาของวันนี้)",
+            "outside": "🔴 ล็อกอยู่ (นอกช่วงเวลาที่อนุญาต)",
+            "parent": "🔴 ล็อกอยู่ (ผู้ปกครองสั่งล็อก)",
+        }[reason]
+        return (f"{state}\n"
+                f"ใช้ไปแล้ววันนี้: {format_seconds(self.usage['used'])}\n"
+                f"เหลือเวลา: {format_seconds(left)}\n"
+                f"โควตาวัน{DAY_TH[weekday]}: {self.cfg['daily_minutes'][DAYS[weekday]]} นาที\n"
+                f"ช่วงเวลาที่ใช้ได้: {self.cfg['allowed_start']} - {self.cfg['allowed_end']} น.")
+
+    # ---------- สั่งงานจาก Telegram
+
+    def process_remote(self):
+        while True:
+            try:
+                chat_id, text = self.remote.incoming.get_nowait()
+            except queue.Empty:
+                return
+            reply = self.handle_remote(chat_id, text)
+            if reply:
+                self.remote.send(chat_id, reply)
+
+    def handle_remote(self, chat_id, text):
+        text = BUTTONS.get(text.strip(), text.strip())
+        cmd, _, arg = text.partition(" ")
+        cmd, arg = cmd.split("@")[0].lower(), arg.strip()
+
+        if cmd == "/pair":
+            if self.pair_code and time.time() < self.pair_expires and hmac.compare_digest(arg.encode(), self.pair_code.encode()):
+                if chat_id not in self.cfg["telegram_chat_ids"]:
+                    self.cfg["telegram_chat_ids"].append(chat_id)
+                    write_json(CONFIG_PATH, self.cfg)
+                self.pair_code = None
+                return f"✅ จับคู่กับเครื่อง {PC_NAME} เรียบร้อย\n\n{HELP_TEXT}"
+            return "❌ รหัสจับคู่ไม่ถูกต้องหรือหมดอายุ\nสร้างรหัสใหม่ได้ที่หน้าตั้งค่าของโปรแกรมบนคอม"
+        if chat_id not in self.cfg["telegram_chat_ids"]:
+            return ("ยังไม่ได้จับคู่กับเครื่องนี้\n"
+                    "ที่คอม: ดับเบิลคลิกนาฬิกา → ตั้งค่า → สร้างรหัสจับคู่ แล้วส่ง /pair ตามด้วยรหัสมาที่นี่")
+
+        if cmd in ("/start", "/help"):
+            return HELP_TEXT
+        if cmd == "/status":
+            return self.status_text()
+        if cmd == "/add":
+            try:
+                minutes = int(arg or 30)
+                if not 1 <= minutes <= 1440:
+                    raise ValueError
+            except ValueError:
+                return "ใส่จำนวนนาทีเป็นตัวเลข 1-1440 เช่น /add 30"
+            self.grant(minutes)
+            note = "\n(ยังล็อกอยู่เพราะผู้ปกครองสั่งล็อก ส่ง /unlock เพื่อปลดล็อก)" if self.usage["forced_lock"] else ""
+            return f"✅ ให้เล่นต่ออีก {minutes} นาทีแล้ว{note}\n\n{self.status_text()}"
+        if cmd == "/lock":
+            self.usage["forced_lock"] = True
+            save_usage(self.usage)
+            return "🔒 ล็อกเครื่องแล้ว ส่ง /unlock เมื่อต้องการปลดล็อก"
+        if cmd == "/unlock":
+            self.usage["forced_lock"] = False
+            save_usage(self.usage)
+            return "🔓 ยกเลิกการล็อกแล้ว\n\n" + self.status_text()
+        if cmd == "/unlimited":
+            self.usage["unlimited"] = True
+            save_usage(self.usage)
+            return "♾️ ไม่จำกัดเวลาเฉพาะวันนี้แล้ว"
+        if cmd == "/reset":
+            self.reset_today()
+            return "🔄 รีเซ็ตเวลาของวันนี้แล้ว\n\n" + self.status_text()
+        return "ไม่รู้จักคำสั่งนี้\n\n" + HELP_TEXT
+
     # ---------- วงรอบหลัก
 
     def tick(self):
         now = time.monotonic()
         delta, self.last_tick = now - self.last_tick, now
 
+        self.process_remote()
+
         today = dt.date.today().isoformat()
         if today > self.usage["date"]:
-            self.usage = new_usage(today)
-            self.warned.clear()
+            self.reset_today()
 
         left, reason = self.status()
         if reason:
@@ -355,6 +539,7 @@ class App:
                         self.toast(f"เหลือเวลาเล่นอีก {mark // 60} นาที\nเก็บงานให้เรียบร้อยนะ")
 
         if now - self.last_save >= SAVE_EVERY:
+            self.usage["last_seen"] = time.time()
             save_usage(self.usage)
             self.last_save = now
 
@@ -410,6 +595,8 @@ class App:
         if reason == "outside":
             text = (f"ตอนนี้อยู่นอกเวลาที่อนุญาตให้ใช้คอมพิวเตอร์\n"
                     f"(ใช้ได้ {self.cfg['allowed_start']} - {self.cfg['allowed_end']} น.)")
+        elif reason == "parent":
+            text = "ผู้ปกครองสั่งล็อกเครื่องไว้\nพักก่อนนะ!"
         else:
             text = "หมดเวลาเล่นคอมพิวเตอร์ของวันนี้แล้ว\nไปพักสายตา ออกไปวิ่งเล่นกันเถอะ!"
 
@@ -421,6 +608,10 @@ class App:
             self.lock_started = time.monotonic()
             self.action_done = False
             save_usage(self.usage)
+            if reason != "parent":
+                self.remote.notify(f"🔒 ล็อกเครื่องแล้ว: {text.splitlines()[0]}\n"
+                                   f"ใช้ไปวันนี้ {format_seconds(self.usage['used'])}\n"
+                                   "ส่ง /add 30 ถ้าจะให้เล่นต่อ")
 
         action = self.cfg.get("action", "lock")
         if action != "lock" and not self.action_done:
@@ -482,6 +673,7 @@ class App:
             self.lock_entry.delete(0, "end")
             self.lock_error.config(text="รหัสผ่านไม่ถูกต้อง")
             return
+        self.usage["forced_lock"] = False
         if minutes is None:
             self.usage["unlimited"] = True
             save_usage(self.usage)
@@ -573,8 +765,37 @@ class App:
         ttk.Label(pw, text="ยืนยันรหัส").grid(row=1, column=0, sticky="w", **pad)
         ttk.Entry(pw, textvariable=pw2, show="•", width=22).grid(row=1, column=1, **pad)
 
+        tg = ttk.LabelFrame(frame, text="สั่งงานจากมือถือผ่าน Telegram (ไม่บังคับ)", padding=8)
+        tg.grid(row=4, column=0, columnspan=2, sticky="ew", pady=5)
+        token_var = tk.StringVar(value=cfg["telegram_token"])
+        ttk.Label(tg, text="Bot token").grid(row=0, column=0, sticky="w", **pad)
+        ttk.Entry(tg, textvariable=token_var, width=40, show="•").grid(row=0, column=1, columnspan=2, **pad)
+        pair_label = ttk.Label(tg, text=f"จับคู่กับมือถือแล้ว {len(cfg['telegram_chat_ids'])} เครื่อง", justify="left")
+        pair_label.grid(row=2, column=0, columnspan=3, sticky="w", **pad)
+        if first_run:
+            ttk.Label(tg, text="จับคู่มือถือได้หลังติดตั้งเสร็จ: ดับเบิลคลิกนาฬิกามุมจอ → ตั้งค่า",
+                      foreground="#7f8c8d").grid(row=1, column=0, columnspan=3, sticky="w", **pad)
+        else:
+            def make_pair_code():
+                cfg["telegram_token"] = token_var.get().strip()
+                if not cfg["telegram_token"]:
+                    pair_label.config(text="กรุณาใส่ Bot token ก่อน")
+                    return
+                write_json(CONFIG_PATH, cfg)
+                self.pair_code = f"{secrets.randbelow(10 ** 6):06d}"
+                self.pair_expires = time.time() + 600
+                pair_label.config(text=f"ส่งข้อความนี้ไปที่บอทใน Telegram ภายใน 10 นาที:\n/pair {self.pair_code}")
+
+            def unpair_all():
+                cfg["telegram_chat_ids"] = []
+                write_json(CONFIG_PATH, cfg)
+                pair_label.config(text="ยกเลิกการจับคู่ทั้งหมดแล้ว")
+
+            ttk.Button(tg, text="สร้างรหัสจับคู่", command=make_pair_code).grid(row=1, column=1, sticky="w", **pad)
+            ttk.Button(tg, text="ยกเลิกการจับคู่ทั้งหมด", command=unpair_all).grid(row=1, column=2, sticky="w", **pad)
+
         error = ttk.Label(frame, text="", foreground="#c0392b")
-        error.grid(row=4, column=0, columnspan=2)
+        error.grid(row=5, column=0, columnspan=2)
 
         def save():
             try:
@@ -605,6 +826,7 @@ class App:
             cfg["action"] = next(k for k, v in ACTIONS.items() if v == action_var.get())
             cfg["action_delay_seconds"] = delay
             cfg["idle_minutes"] = idle
+            cfg["telegram_token"] = token_var.get().strip()
             write_json(CONFIG_PATH, cfg)
             self.warned.clear()
             close()
@@ -614,23 +836,24 @@ class App:
             self.settings_win = None
 
         buttons = ttk.Frame(frame)
-        buttons.grid(row=5, column=0, columnspan=2, pady=(10, 0))
+        buttons.grid(row=6, column=0, columnspan=2, pady=(10, 0))
         ttk.Button(buttons, text="บันทึก", command=save).pack(side="left", padx=4)
         if not first_run:
             def reset_today():
-                self.usage = new_usage(dt.date.today().isoformat())
-                self.warned.clear()
-                save_usage(self.usage)
+                self.reset_today()
                 used_label.config(text="วันนี้ใช้ไปแล้ว 0:00:00")
 
             def quit_app():
+                self.remote.notify("⏸️ ผู้ปกครองปิดโปรแกรมชั่วคราวจากหน้าตั้งค่า (จะเปิดกลับมาเองใน 1 นาที)")
+                self.usage["last_seen"] = 0
                 save_usage(self.usage)
-                self.root.destroy()
+                w.withdraw()
+                self.root.after(3000, self.root.destroy)  # รอส่งข้อความแจ้งเตือนให้เสร็จก่อน
 
             ttk.Button(buttons, text="รีเซ็ตเวลาวันนี้", command=reset_today).pack(side="left", padx=4)
             ttk.Button(buttons, text="ปิดโปรแกรมชั่วคราว", command=quit_app).pack(side="left", padx=4)
             used_label = ttk.Label(frame, text=f"วันนี้ใช้ไปแล้ว {format_seconds(self.usage['used'])}")
-            used_label.grid(row=6, column=0, columnspan=2, pady=(8, 0))
+            used_label.grid(row=7, column=0, columnspan=2, pady=(8, 0))
         ttk.Button(buttons, text="ยกเลิก", command=close).pack(side="left", padx=4)
         w.protocol("WM_DELETE_WINDOW", close)
         w.focus_force()
