@@ -3,13 +3,13 @@
 <meta charset="utf-8">
 <!-- meta:start -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="สื่อประกอบการเรียนระบบวางแผนทรัพยากรองค์กร ERP และ SAP ครอบคลุมแนวคิด ERP สถาปัตยกรรมและผังโมดูล และการใช้งาน SAP สรุปเป็นภาษาไทยพร้อมภาพหน้าจอจริงและแบบทดสอบ">
+<meta name="description" content="สื่อประกอบการเรียนระบบวางแผนทรัพยากรองค์กร ERP และ SAP ครอบคลุมแนวคิด ERP สถาปัตยกรรมและผังโมดูล และการใช้งาน SAP สรุปเป็นภาษาไทยพร้อมภาพหน้าจอจริงและแบบทดสอบ รวมถึงฐานข้อมูลของระบบ SAP ทั้ง AnyDB และ SAP HANA และ SAP S/4HANA">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://peerakong.github.io/Classroom1/erp/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="th_TH">
 <meta property="og:title" content="ERP · ระบบวางแผนทรัพยากรองค์กร">
-<meta property="og:description" content="สื่อประกอบการเรียนระบบวางแผนทรัพยากรองค์กร ERP และ SAP ครอบคลุมแนวคิด ERP สถาปัตยกรรมและผังโมดูล และการใช้งาน SAP สรุปเป็นภาษาไทยพร้อมภาพหน้าจอจริงและแบบทดสอบ">
+<meta property="og:description" content="สื่อประกอบการเรียนระบบวางแผนทรัพยากรองค์กร ERP และ SAP ครอบคลุมแนวคิด ERP สถาปัตยกรรมและผังโมดูล และการใช้งาน SAP สรุปเป็นภาษาไทยพร้อมภาพหน้าจอจริงและแบบทดสอบ รวมถึงฐานข้อมูลของระบบ SAP ทั้ง AnyDB และ SAP HANA และ SAP S/4HANA">
 <meta property="og:url" content="https://peerakong.github.io/Classroom1/erp/">
 <!-- meta:end -->
 <title>ERP · ระบบวางแผนทรัพยากรองค์กร</title>
@@ -239,7 +239,7 @@ footer p{max-width:70ch; margin-bottom:6px}
     <div>
       <div class="eyebrow">Enterprise Resource Planning · SAP</div>
       <h1>ระบบวางแผนทรัพยากรองค์กร</h1>
-      <p class="mast-sub">จากระบบแยกตามหน้าที่สู่ระบบบูรณาการ · โมดูลและสถาปัตยกรรมของ SAP · การใช้งาน SAP GUI และ Transaction Code · การนำระบบมาใช้ด้วยวิธี ASAP</p>
+      <p class="mast-sub">จากระบบแยกตามหน้าที่สู่ระบบบูรณาการ · โมดูลและสถาปัตยกรรมของ SAP · การใช้งาน SAP GUI และ Transaction Code · การนำระบบมาใช้ด้วยวิธี ASAP · ฐานข้อมูลของระบบ SAP ตั้งแต่ AnyDB จนถึง SAP HANA และ SAP S/4HANA รุ่นที่สี่ของ Business Suite</p>
     </div>
     <div class="mast-meta">
       <b>เอกสารประกอบการสอน 3 ชุด</b><br>
@@ -254,7 +254,10 @@ footer p{max-width:70ch; margin-bottom:6px}
     <button class="tab" role="tab" id="t-ch1" aria-controls="ch1" aria-selected="true"><span class="tnum">01</span>ERP และ SAP</button>
     <button class="tab" role="tab" id="t-ch2" aria-controls="ch2" aria-selected="false"><span class="tnum">02</span>การใช้งาน SAP</button>
     <button class="tab" role="tab" id="t-ch3" aria-controls="ch3" aria-selected="false"><span class="tnum">03</span>การนำระบบมาใช้</button>
-    <button class="tab" role="tab" id="t-tcode" aria-controls="tcode" aria-selected="false"><span class="tnum">T</span>รวม T-Code</button>
+<!-- hn:tabs:start -->
+    <button class="tab" role="tab" id="t-db" aria-controls="db" aria-selected="false"><span class="tnum">04</span>ฐานข้อมูลของ SAP</button>
+    <button class="tab" role="tab" id="t-hana" aria-controls="hana" aria-selected="false"><span class="tnum">05</span>HANA และ S/4HANA</button>
+<!-- hn:tabs:end -->    <button class="tab" role="tab" id="t-tcode" aria-controls="tcode" aria-selected="false"><span class="tnum">T</span>รวม T-Code</button>
     <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false"><span class="tnum">Q</span>แบบทดสอบ</button>
   </div>
 </div>
@@ -315,7 +318,44 @@ footer p{max-width:70ch; margin-bottom:6px}
         <li><a href="#c9"><i>9</i>กรณีศึกษา Exotic Food</a></li>
       </ol>
     </nav>
-    <nav id="rail-tcode" class="hidden" aria-label="รวม T-Code">
+<!-- hn:rail:start -->
+    <nav id="rail-db" class="hidden" aria-label="หัวข้อฐานข้อมูลของ SAP">
+      <div class="rail-h">ฐานข้อมูลของ SAP</div>
+      <ol>
+        <li><a href="#db-1"><i>1</i>สถาปัตยกรรมสามชั้น</a></li>
+        <li><a href="#db-2"><i>2</i>ฐานข้อมูลทำหน้าที่อะไร</a></li>
+        <li><a href="#db-3"><i>3</i>AnyDB คืออะไร</a></li>
+        <li><a href="#db-4"><i>4</i>สิทธิ์ใช้ Oracle ผ่าน SAP</a></li>
+        <li><a href="#db-5"><i>5</i>เส้นตายของ AnyDB</a></li>
+        <li><a href="#db-6"><i>6</i>SAP Business Suite</a></li>
+        <li><a href="#db-7"><i>7</i>ห้าองค์ประกอบของ Suite 7</a></li>
+        <li><a href="#db-8"><i>8</i>SAP ECC</a></li>
+        <li><a href="#db-9"><i>9</i>วงจรชีวิตของ Suite 7</a></li>
+      </ol>
+    </nav>
+    <nav id="rail-hana" class="hidden" aria-label="หัวข้อ HANA และ S/4HANA">
+      <div class="rail-h">HANA และ S/4HANA</div>
+      <ol>
+        <li><a href="#hana-1"><i>1</i>ฐานข้อมูลในหน่วยความจำ</a></li>
+        <li><a href="#hana-2"><i>2</i>ที่มาของ HANA</a></li>
+        <li><a href="#hana-3"><i>3</i>HANA คืออะไร</a></li>
+        <li><a href="#hana-4"><i>4</i>Appliance เทียบกับ TDI</a></li>
+        <li><a href="#hana-5"><i>5</i>เก็บเป็นแถวหรือเป็นคอลัมน์</a></li>
+        <li><a href="#hana-6"><i>6</i>การบีบอัดข้อมูล</a></li>
+        <li><a href="#hana-7"><i>7</i>HANA Platform สามชั้น</a></li>
+        <li><a href="#hana-8"><i>8</i>Database Services</a></li>
+        <li><a href="#hana-9"><i>9</i>Application และ Integration</a></li>
+        <li><a href="#hana-10"><i>10</i>วิเคราะห์เชิงทำนายและ PAL</a></li>
+        <li><a href="#hana-11"><i>11</i>IoT และ Smart Data Streaming</a></li>
+        <li><a href="#hana-12"><i>12</i>จาก R/1 ถึง S/4HANA</a></li>
+        <li><a href="#hana-13"><i>13</i>S/4HANA คืออะไร</a></li>
+        <li><a href="#hana-14"><i>14</i>S/4HANA เทียบกับ ECC</a></li>
+        <li><a href="#hana-15"><i>15</i>Fiori และ Embedded Analytics</a></li>
+        <li><a href="#hana-16"><i>16</i>รอบการออกรุ่น</a></li>
+        <li><a href="#hana-17"><i>17</i>สรุปและจุดที่สับสน</a></li>
+      </ol>
+    </nav>
+<!-- hn:rail:end -->    <nav id="rail-tcode" class="hidden" aria-label="รวม T-Code">
       <div class="rail-h">รวม T-Code</div>
       <ol><li><a href="#tcode-top"><i>T</i>ตารางค้นหา</a></li></ol>
     </nav>
@@ -1495,7 +1535,929 @@ footer p{max-width:70ch; margin-bottom:6px}
     </section>
   </div>
 
-  <div id="tcode" class="hidden" role="tabpanel" aria-labelledby="t-tcode">
+<!-- hn:panel:start -->
+  <div id="db" class="hidden" role="tabpanel" aria-labelledby="t-db">
+    <p class="lede">สามบทแรกเราดูว่า <b>SAP ทำอะไรได้บ้าง</b> · แท็บนี้ลงไปอีกชั้นหนึ่ง คือ<b>ข้อมูลทั้งหมดนั้นไปเก็บอยู่ที่ไหน</b> · คำตอบเดิมคือ<b>ฐานข้อมูลของใครก็ได้</b> ซึ่ง SAP เรียกว่า <b>AnyDB</b> · และคำตอบนั้นกำลังจะหมดอายุ ซึ่งเป็นเหตุผลทั้งหมดที่ทำให้เกิด HANA ในแท็บถัดไป</p>
+
+    <div class="note key">
+      <span class="nh">เส้นเรื่องของแท็บนี้ในสามบรรทัด</span>
+      <b>หนึ่ง</b> SAP ออกแบบระบบให้แยกชั้นฐานข้อมูลออกมา จึงเปลี่ยนยี่ห้อฐานข้อมูลได้<br>
+      <b>สอง</b> ความยืดหยุ่นนั้นแลกมาด้วยการที่ SAP ไม่ได้เป็นเจ้าของชั้นที่สำคัญที่สุดของระบบตัวเอง<br>
+      <b>สาม</b> SAP จึงเดินออกจาก AnyDB ด้วยการสร้างฐานข้อมูลของตัวเอง แล้วกำหนดเส้นตายให้ลูกค้าย้ายตาม
+    </div>
+
+    <section class="sec" id="db-1">
+      <div class="sec-h"><span class="sec-n">1</span><h2>สถาปัตยกรรมสามชั้นของ SAP</h2></div>
+      <div class="body">
+        <p>บทที่ 1 เคยพูดถึงสถาปัตยกรรมสามชั้นไปแล้วตอนเล่าเรื่อง <b>R/3</b> · ตรงนี้เรากลับมาดูอีกครั้งโดยเน้น<b>ชั้นล่างสุด</b> เป็นหลัก</p>
+        <div class="flow">
+          <div class="fstep"><span class="fn">1</span><div><div class="ft">Client Tier <span class="en">ชั้นนำเสนอ</span></div><div class="fd">คือ <b>SAP Front End</b> ที่ผู้ใช้เห็น ได้แก่ SAP GUI หรือเบราว์เซอร์ · ทำหน้าที่รับคำสั่งและแสดงผลเท่านั้น ไม่ได้คิดอะไรเอง</div></div></div>
+          <div class="fstep"><span class="fn">2</span><div><div class="ft">Application Tier <span class="en">ชั้นประมวลผล</span></div><div class="fd">คือ <b>Application Server</b> ซึ่งรันโปรแกรมที่เขียนด้วย <b>ABAP</b> · ตรรกะทางธุรกิจทั้งหมดอยู่ชั้นนี้</div></div></div>
+          <div class="fstep"><span class="fn">3</span><div><div class="ft">Database Tier <span class="en">ชั้นฐานข้อมูล</span></div><div class="fd">คือ <b>Database Server</b> ซึ่งเก็บข้อมูลจริงทั้งหมด · ชั้นนี้เองที่เป็นได้หลายยี่ห้อ</div></div></div>
+        </div>
+        <div class="note key">
+          <span class="nh">ตัวเชื่อมระหว่างชั้นที่สองกับชั้นที่สามคือ Open SQL</span>
+          โปรแกรม <b>ABAP</b> ไม่ได้คุยกับฐานข้อมูลด้วยภาษาเฉพาะของยี่ห้อนั้น ๆ แต่คุยผ่าน <b>Open SQL</b> ซึ่งเป็นภาษากลาง<br>
+          ตัวกลางนี้คือเหตุผลทั้งหมดที่ทำให้ <b>เปลี่ยนยี่ห้อฐานข้อมูลได้โดยไม่ต้องเขียนโปรแกรมใหม่</b>
+        </div>
+        <p>ขอให้เห็นภาพว่านี่คือ<b>การออกแบบที่ตั้งใจ</b> ไม่ใช่เรื่องบังเอิญนะครับ · SAP จงใจไม่ผูกตัวเองกับฐานข้อมูลยี่ห้อใดยี่ห้อหนึ่ง เพื่อให้ขายระบบเข้าไปในองค์กรที่ใช้ฐานข้อมูลอะไรอยู่ก็ได้</p>
+      </div>
+    </section>
+
+    <section class="sec" id="db-2">
+      <div class="sec-h"><span class="sec-n">2</span><h2>ฐานข้อมูลในระบบ SAP ทำหน้าที่อะไร</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามที่สไลด์ให้ไว้</span>
+          ฐานข้อมูลคือ <b>กลุ่มข้อมูลที่จัดระเบียบไว้และถือเป็นหน่วยเดียวกัน</b> <span class="en">Organized collection of data treated as an unit</span><br>
+          วัตถุประสงค์คือ <b>จัดเก็บและเรียกคืนข้อมูลที่เกี่ยวข้องกัน</b> <span class="en">To store and retrieve related information</span>
+        </div>
+        <p>คำว่า<b>ถือเป็นหน่วยเดียวกัน</b>สำคัญกว่าที่ดูนะครับ · มันหมายความว่าข้อมูลใบสั่งซื้อ ข้อมูลลูกค้า และข้อมูลสินค้าคงคลัง ไม่ได้อยู่กันคนละแฟ้มแยกขาด แต่อยู่ในที่เดียวกันและอ้างถึงกันได้ · นั่นคือหัวใจของคำว่า<b>บูรณาการ</b>ที่เราพูดถึงตั้งแต่บทที่ 1</p>
+        <h3>งานที่ฐานข้อมูลของ SAP ต้องรับ</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ลักษณะงาน</th><th>ความหมาย</th><th>สิ่งที่ฐานข้อมูลต้องเก่ง</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">OLTP</td><td>งานประมวลผลรายการประจำวัน เช่น สร้างใบสั่งขาย รับของเข้าคลัง ตั้งหนี้</td><td><b>เขียนเร็วและถูกต้อง</b> รองรับผู้ใช้จำนวนมากพร้อมกัน และต้องไม่ทำข้อมูลเสียหายเมื่อระบบล่ม</td></tr>
+            <tr><td class="pc">OLAP</td><td>งานวิเคราะห์ เช่น สรุปยอดขายรายภูมิภาค เทียบกับงบประมาณ</td><td><b>อ่านและรวมยอดเร็ว</b> จากข้อมูลจำนวนมหาศาล</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">สองงานนี้ขัดกันเอง และนั่นคือปัญหาที่ค้างมาหลายสิบปี</span>
+          ฐานข้อมูลที่ออกแบบมาให้<b>เขียนเร็ว</b>จะเก็บข้อมูลเรียงเป็น<b>แถว</b> เพราะหนึ่งรายการคือหนึ่งแถว เขียนทีเดียวจบ<br>
+          แต่ฐานข้อมูลที่ออกแบบมาให้<b>รวมยอดเร็ว</b>อยากได้ข้อมูลเรียงเป็น<b>คอลัมน์</b> เพราะการรวมยอดขายคือการอ่านคอลัมน์เดียวทั้งคอลัมน์<br>
+          ทางออกเดิมคือ<b>ทำสองระบบ</b> คือระบบ ERP ไว้เขียน แล้วคัดลอกข้อมูลไปไว้อีกระบบหนึ่งเพื่อวิเคราะห์ · ซึ่งแปลว่า<b>ข้อมูลที่เอาไปวิเคราะห์ไม่ใช่ข้อมูลล่าสุดเสมอ</b><br>
+          จำปัญหานี้ไว้ให้ดีนะครับ เพราะแท็บถัดไปทั้งแท็บคือคำตอบของปัญหานี้
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-3">
+      <div class="sec-h"><span class="sec-n">3</span><h2>AnyDB · ฐานข้อมูลที่ SAP รองรับ</h2></div>
+      <div class="body">
+        <p><b>AnyDB</b> เป็นคำที่ SAP ใช้เรียก<b>ฐานข้อมูลยี่ห้อใดก็ได้ที่ไม่ใช่ HANA</b> ซึ่ง SAP รับรองให้ใช้กับระบบของตน</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ฐานข้อมูล</th><th>ผู้ผลิต</th><th>หมายเหตุ</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Oracle Database</td><td>Oracle</td><td>ฐานข้อมูลที่ลูกค้า SAP ใช้มากที่สุด · สไลด์เรียกว่า <b>World's #1 Database</b></td></tr>
+            <tr><td class="pc">DB2</td><td>IBM</td><td>พบมากในองค์กรที่ใช้เมนเฟรมของ IBM อยู่แล้ว</td></tr>
+            <tr><td class="pc">SQL Server</td><td>Microsoft</td><td>พบมากในองค์กรที่ใช้ระบบฝั่ง Windows เป็นหลัก</td></tr>
+            <tr><td class="pc">Sybase ASE</td><td>Sybase</td><td>SAP ซื้อ Sybase มาในปี 2010 ฐานข้อมูลตัวนี้จึงกลายเป็นของ SAP เอง</td></tr>
+            <tr><td class="pc">MaxDB</td><td>เดิมคู่กับ MySQL</td><td>ฐานข้อมูลที่ SAP ดูแลเอง มักใช้กับระบบขนาดเล็กและระบบทดสอบ</td></tr>
+            <tr><td class="pc">SAP HANA</td><td>SAP</td><td>ไม่ใช่ AnyDB · เป็นฐานข้อมูลของ SAP เองที่จะมาแทนทั้งหมด ดูแท็บถัดไป</td></tr>
+          </tbody>
+        </table></div>
+        <h3>ส่วนแบ่งตลาดฐานข้อมูลตามที่สไลด์แสดง</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ผู้ผลิต</th><th>ส่วนแบ่ง</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Oracle</td><td>45.6 เปอร์เซ็นต์</td></tr>
+            <tr><td class="pc">Microsoft</td><td>19.1 เปอร์เซ็นต์</td></tr>
+            <tr><td class="pc">IBM</td><td>15.7 เปอร์เซ็นต์</td></tr>
+            <tr><td class="pc">SAP</td><td>9.6 เปอร์เซ็นต์</td></tr>
+            <tr><td class="pc">Teradata</td><td>3.2 เปอร์เซ็นต์</td></tr>
+            <tr><td class="pc">อื่น ๆ</td><td>6.8 เปอร์เซ็นต์</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">ตัวเลขชุดนี้คือเหตุผลที่สไลด์ใส่เครื่องหมายคำถามไว้ข้าง SAP</span>
+          SAP เป็น<b>เจ้าตลาดซอฟต์แวร์ ERP</b> แต่มีส่วนแบ่งตลาด<b>ฐานข้อมูล</b>แค่ไม่ถึงสิบเปอร์เซ็นต์<br>
+          แปลว่าทุกครั้งที่ SAP ขายระบบได้หนึ่งระบบ <b>เงินค่าฐานข้อมูลส่วนใหญ่ไหลไปหาคู่แข่ง</b> โดยเฉพาะ Oracle<br>
+          นี่คือแรงจูงใจทางธุรกิจที่อยู่เบื้องหลังเรื่องทั้งหมดในแท็บนี้และแท็บถัดไป
+        </div>
+        <div class="note src">
+          <span class="nh">ข้อสังเกตเรื่องสไลด์ชุดนี้</span>
+          สไลด์มีหน้าที่<b>หัวเรื่องกับโลโก้ไม่ตรงกันสามหน้า</b> คือหน้าที่ขึ้นหัวว่า Oracle แต่โชว์โลโก้ Sybase · หน้าที่ขึ้นหัวว่า DBII แต่โชว์ MaxDB · และหน้าที่ขึ้นหัวว่า MaxDB แต่โชว์ Oracle<br>
+          น่าจะเป็นความคลาดเคลื่อนตอนจัดหน้า หน้านี้จึงเล่าเป็น<b>รายชื่อฐานข้อมูลที่รองรับ</b>แทนการไล่ทีละหน้า · เนื้อหาที่ต้องจำคือ<b>รายชื่อ</b> ไม่ใช่ลำดับของสไลด์
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-4">
+      <div class="sec-h"><span class="sec-n">4</span><h2>การให้สิทธิ์ใช้ Oracle ผ่าน SAP</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">สิทธิ์ที่ SAP ขายให้ไม่ใช่สิทธิ์ Oracle เต็มรูปแบบ</span>
+          สิทธิ์ Oracle ที่ซื้อผ่าน SAP เป็นแบบ <b>Application Specific Full Use</b> หรือ <b>ASFU</b><br>
+          เรียกอีกอย่างว่า <b>Oracle runtime license</b> หรือ <b>OEM license</b>
+        </div>
+        <ul class="list">
+          <li>สิทธิ์นี้อนุญาตให้<b>เชื่อมต่อฐานข้อมูล Oracle ได้เฉพาะจากซอฟต์แวร์ของ SAP เท่านั้น</b></li>
+          <li>ข้อยกเว้นมีอย่างเดียว คือ<b>เครื่องมือดูแลฐานข้อมูลของผู้ผลิตรายอื่น</b> <span class="en">3rd party database admin tools</span></li>
+        </ul>
+        <div class="note">
+          <span class="nh">แปลเป็นภาษาคนว่าอย่างไร</span>
+          ถ้ากิจการซื้อ Oracle ผ่าน SAP แล้วอยากเอาฐานข้อมูลก้อนเดียวกันนั้น<b>ไปใช้กับโปรแกรมอื่นที่ไม่ใช่ SAP</b> เช่นเขียนระบบของตัวเองมาต่อตรง · <b>ทำไม่ได้</b> ต้องไปซื้อสิทธิ์เต็มจาก Oracle แยกต่างหาก<br>
+          ข้อนี้เป็นเรื่องที่ผู้ตรวจสอบสัญญาซอฟต์แวร์จับได้บ่อย และค่าปรับไม่ใช่เงินน้อย
+        </div>
+        <h3>แผนการรับรองรุ่นของ Oracle ตามที่สไลด์อ้าง</h3>
+        <ul class="list">
+          <li><b>Oracle Database 19c</b> ได้รับการรับรองให้ใช้กับ SAP ตั้งแต่<b>เดือนธันวาคม 2019</b> และเป็นรุ่นที่ SAP แนะนำสำหรับลูกค้า Oracle ทุกราย</li>
+          <li>การสนับสนุนหลัก <span class="en">Primary Support</span> สิ้นสุด<b>วันที่ 31 มีนาคม 2023</b></li>
+          <li>การสนับสนุนส่วนขยาย <span class="en">Extended Support</span> สิ้นสุด<b>วันที่ 31 มีนาคม 2026</b></li>
+          <li>SAP จะทดสอบรับรอง Oracle รุ่นใหม่เมื่อซอฟต์แวร์รุ่นนั้นพร้อมใช้งานบน<b>ทุกแพลตฟอร์มแบบติดตั้งในองค์กร</b> <span class="en">on-premise</span> แล้ว</li>
+        </ul>
+        <div class="note src">
+          <span class="nh">วันที่ในหัวข้อนี้มาจากสไลด์ซึ่งทำไว้ก่อนหน้านี้</span>
+          วันสิ้นสุดการสนับสนุนของผู้ผลิตฐานข้อมูล<b>เลื่อนได้</b> และเลื่อนมาแล้วหลายครั้ง · เวลาต้องใช้ตัวเลขจริงในการทำงาน ให้ดูประกาศฉบับล่าสุดของ Oracle และ SAP โดยตรง<br>
+          สิ่งที่ข้อสอบมักถามคือ<b>หลักการ</b> คือสิทธิ์แบบ ASFU ใช้ได้เฉพาะกับซอฟต์แวร์ SAP ไม่ใช่ตัวเลขวันที่
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-5">
+      <div class="sec-h"><span class="sec-n">5</span><h2>เส้นตายของ AnyDB</h2></div>
+      <div class="body">
+        <p>หัวข้อนี้คือ<b>จุดหักเห</b>ของทั้งแท็บครับ</p>
+        <div class="note">
+          <span class="nh">ข่าวเดือนธันวาคม 2019 ที่สไลด์ยกมา</span>
+          สัญญาฐานข้อมูลระหว่าง SAP กับ <b>IBM</b> <b>Microsoft</b> และ <b>Oracle</b> จะสิ้นสุดลงในปี <b>2025</b> โดย<b>SAP เป็นฝ่ายบอกเลิกสัญญาไปแล้ว</b><br>
+          การทำสัญญาใหม่หรือต่ออายุสัญญาที่บอกเลิกไปแล้ว <b>ดูจะเป็นเรื่องยากและแทบเป็นไปไม่ได้</b><br>
+          กระนั้นกลุ่มผู้ใช้ SAP ที่พูดภาษาเยอรมัน หรือ <b>DSAG</b> ก็ยังต้องการหารือเรื่อง AnyDB กับ SAP ต่อไป
+        </div>
+        <p>อ่านข่าวนี้ให้ออกนะครับ · ประเด็นไม่ใช่ว่าฐานข้อมูลพวกนั้นจะใช้ไม่ได้ แต่คือ<b>SAP จะไม่ขายและไม่รับผิดชอบมันให้อีกต่อไป</b> · ลูกค้าที่ยังใช้อยู่จะกลายเป็นคนที่ต้องไปตกลงกับผู้ผลิตฐานข้อมูลเอง</p>
+        <h3>แล้วเส้นตายก็เลื่อน</h3>
+        <div class="note key">
+          <span class="nh">ข่าวเดือนกุมภาพันธ์ 2020</span>
+          SAP <b>เลื่อนวันสิ้นสุดการสนับสนุน Business Suite 7 จากปี 2025 ไปเป็นปี 2027</b> พร้อมการสนับสนุนส่วนขยายต่อไปจนถึงปี <b>2030</b><br>
+          แต่ประกาศนั้น<b>ไม่ได้พูดถึง NetWeaver 7.2 หรือ AnyDB เลย</b> · จึงเกิดคำถามว่าข้อเสนอนี้ครอบคลุมเฉพาะ <b>Suite on HANA</b> หรือเปล่า
+        </div>
+        <div class="note">
+          <span class="nh">สิ่งที่ต้องจับจากหัวข้อนี้</span>
+          <b>เส้นตายเลื่อนได้</b> และเลื่อนมาแล้วจริง ๆ จาก 2025 เป็น 2027 · อย่าท่องตัวเลขอย่างเดียว<br>
+          แต่<b>ทิศทางไม่เคยเปลี่ยน</b> คือ SAP ต้องการให้ลูกค้าย้ายจากฐานข้อมูลของคนอื่น มาอยู่บนฐานข้อมูลของตัวเอง<br>
+          ถ้าข้อสอบถามว่าทำไม SAP ถึงสร้าง HANA คำตอบที่ลึกที่สุดอยู่ตรงนี้ ไม่ได้อยู่ที่เรื่องความเร็วอย่างเดียว
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-6">
+      <div class="sec-h"><span class="sec-n">6</span><h2>SAP Business Suite คืออะไร</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามที่ต้องจำ</span>
+          <b>SAP Business Suite</b> คือ<b>ผลิตภัณฑ์หลักของ SAP</b> ซึ่งประกอบด้วยโซลูชันหลายตัว<br>
+          และจุดที่สไลด์ขีดเส้นใต้ไว้คือ <b>ซื้อหรือขอสิทธิ์ใช้งานแยกทีละตัวก็ได้ หรือจะเอาทั้งชุดก็ได้</b>
+        </div>
+        <p>ประโยคที่ขีดเส้นใต้นั่นสำคัญในทางปฏิบัติมากครับ · มันแปลว่าองค์กรไม่จำเป็นต้องซื้อทุกอย่างพร้อมกัน · เริ่มจาก ERP ตัวเดียวก่อน แล้วค่อยเติม CRM หรือ SCM ทีหลังเมื่อพร้อมก็ได้</p>
+        <div class="note key">
+          <span class="nh">นิยามของ Business Suite 7</span>
+          เป็น<b>ชุดโปรแกรมทางธุรกิจ</b>ที่ให้<b>การบูรณาการของข้อมูลและกระบวนการ การทำงานร่วมกัน ความสามารถเฉพาะอุตสาหกรรม และความสามารถในการขยายตัว</b><br>
+          และเป็น<b>กลุ่มโปรแกรมที่บูรณาการกันอย่างสมบูรณ์</b> ได้แก่ <b>CRM</b> <b>ERP</b> <b>PLM</b> <b>SRM</b> และ <b>SCM</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-7">
+      <div class="sec-h"><span class="sec-n">7</span><h2>ห้าองค์ประกอบของ Business Suite 7</h2></div>
+      <div class="body">
+        <p>ภาพในสไลด์วาง <b>SAP ERP</b> ไว้ตรงกลาง แล้วล้อมด้วยอีกสี่ตัว โดยมี <b>SAP NetWeaver</b> เป็นฐานรองรับทั้งหมด · โครงนี้ต้องวาดได้จากความจำครับ</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ตัวย่อ</th><th>ชื่อเต็ม</th><th>ทำอะไร</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">ERP</td><td>Enterprise Resource Planning</td><td><b>อยู่ตรงกลาง</b> ครอบคลุม Analytics · Financials · Human Resources · Corporate Services · Operations</td></tr>
+            <tr><td class="pc">CRM</td><td>Customer Relationship Management</td><td>ดูแลความสัมพันธ์กับ<b>ลูกค้า</b> ตั้งแต่การขาย บริการ การตลาด การค้า และการวางบิล</td></tr>
+            <tr><td class="pc">SRM</td><td>Supplier Relationship Management</td><td>ดูแลความสัมพันธ์กับ<b>ผู้ขาย</b> ครอบคลุมวงจรจัดซื้อจนถึงจ่ายเงินทั้งวงจร</td></tr>
+            <tr><td class="pc">SCM</td><td>Supply Chain Management</td><td>ดูแล<b>ห่วงโซ่อุปทาน</b> ทั้งเครือข่าย การวางแผน การประสานงาน และการปฏิบัติการ</td></tr>
+            <tr><td class="pc">PLM</td><td>Product Lifecycle Management</td><td>ดูแล<b>วงจรชีวิตผลิตภัณฑ์</b> ตั้งแต่ความคิดแรก ผ่านการผลิต จนถึงการบริการหลังการขาย</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">วิธีจำห้าตัวนี้โดยไม่ต้องท่อง</span>
+          มองจาก<b>ทิศทางของสิ่งที่ไหลเข้าออกกิจการ</b> ครับ<br>
+          <b>SRM</b> คือฝั่งที่ของไหล<b>เข้า</b> · <b>CRM</b> คือฝั่งที่ของไหล<b>ออก</b> · <b>SCM</b> คือเส้นทางที่ของเดิน · <b>PLM</b> คือตัวสินค้าเองตั้งแต่เกิดจนตาย · และ <b>ERP</b> คือบัญชีและทรัพยากรที่อยู่ตรงกลางรับรู้ทุกอย่าง
+        </div>
+        <h3>รายละเอียดที่สไลด์ให้เพิ่มของแต่ละตัว</h3>
+        <div class="grid g2">
+          <div class="card">
+            <span class="cn">CRM</span>
+            <div class="ct">การซื้อ Hybris ในปี 2013</div>
+            <div class="cs">หลังซื้อ <b>Hybris</b> SAP ค่อย ๆ ปรับกลยุทธ์ฝั่ง CRM เพื่อสู้กับผู้นำตลาดคือ <b>SalesForce.com</b> ซึ่งเป็นโซลูชันบนคลาวด์ · ปัจจุบันรวมโซลูชัน CRM ไว้ใต้แบรนด์ Hybris โดยแบ่งเป็น <b>Sales · Service · Marketing · Commerce · Billing</b></div>
+          </div>
+          <div class="card">
+            <span class="cn">SCM</span>
+            <div class="ct">กลุ่มโปรแกรมย่อย</div>
+            <div class="cs">ครอบคลุม supply chain networking · planning · coordination และ <b>SCE</b> คือ Supply Chain Execution · โปรแกรมหลักได้แก่ <b>SNC</b> <b>EWM</b> <b>APO</b> <b>FRE</b> <b>TM</b> และ <b>IBP</b></div>
+          </div>
+          <div class="card">
+            <span class="cn">SRM</span>
+            <div class="ct">วงจรจัดซื้อจนถึงจ่ายเงิน</div>
+            <div class="cs">ทำให้กระบวนการ <b>procure-to-pay</b> ง่ายขึ้น เป็นอัตโนมัติ และรวมศูนย์ · ดูแลตั้งแต่การหาแหล่งซื้อ การซื้อ การจ่ายเงิน จนถึงการประเมินผลงานผู้ขาย พร้อมเครื่องมือจัดการแค็ตตาล็อกและสัญญาแบบรวมศูนย์</div>
+          </div>
+          <div class="card">
+            <span class="cn">PLM</span>
+            <div class="ct">การสนับสนุนแบบรอบด้าน</div>
+            <div class="cs">ช่วยวางแผน ออกแบบ สร้าง และบริหารการผลิตโดย<b>มองเห็นและควบคุมได้มากขึ้น</b> · ให้การสนับสนุน <b>360 องศา</b> สำหรับทุกกระบวนการที่เกี่ยวกับผลิตภัณฑ์</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-8">
+      <div class="sec-h"><span class="sec-n">8</span><h2>SAP ECC · หัวใจของ Business Suite</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">ECC ย่อมาจากอะไร</span>
+          <b>SAP ERP Central Component</b> หรือ <b>ECC</b> คือ<b>สินทรัพย์ที่คนรู้จักมากที่สุดชิ้นหนึ่งของ SAP</b><br>
+          เป็นซอฟต์แวร์ ERP ที่ประกอบด้วย<b>โมดูลหลายโมดูล</b> ซึ่งให้องค์กรควบคุมกระบวนการทางธุรกิจที่สำคัญได้
+        </div>
+        <p>ขอให้เห็นความสัมพันธ์ของชื่อให้ชัดนะครับ · ในภาพของ Business Suite กล่องสีเหลืองตรงกลางที่เขียนว่า <b>SAP ERP</b> กับที่เขียนว่า <b>SAP ERP Central Component</b> คือ<b>ตัวเดียวกัน</b> · ECC คือชื่อทางเทคนิคของแกนกลางนั้น</p>
+        <h3>โมดูลของ ECC ตามภาพในสไลด์</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ตัวย่อ</th><th>ชื่อเต็ม</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">FI</td><td>Financial Accounting · การบัญชีการเงิน</td></tr>
+            <tr><td class="pc">CO</td><td>Controlling · การบัญชีบริหาร</td></tr>
+            <tr><td class="pc">AM</td><td>Fixed Assets Management · การจัดการสินทรัพย์ถาวร</td></tr>
+            <tr><td class="pc">SD</td><td>Sales and Distribution · การขายและการกระจายสินค้า</td></tr>
+            <tr><td class="pc">MM</td><td>Materials Management · การจัดการวัสดุ</td></tr>
+            <tr><td class="pc">PP</td><td>Production Planning · การวางแผนการผลิต</td></tr>
+            <tr><td class="pc">QM</td><td>Quality Management · การจัดการคุณภาพ</td></tr>
+            <tr><td class="pc">PM</td><td>Plant Maintenance · การบำรุงรักษาโรงงาน</td></tr>
+            <tr><td class="pc">HR</td><td>Human Resources · ทรัพยากรบุคคล</td></tr>
+            <tr><td class="pc">PS</td><td>Project System · ระบบโครงการ</td></tr>
+            <tr><td class="pc">WF</td><td>Workflow · ผังการไหลของงาน</td></tr>
+            <tr><td class="pc">IS</td><td>Industry Solutions · โซลูชันเฉพาะอุตสาหกรรม</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">เส้นทางของชื่อ</span>
+          <b>SAP R/3</b> กลายเป็น <b>SAP ECC</b> · รุ่นล่าสุดของ SAP ERP ออกในปี <b>2006</b> และ <b>enhancement package 8 สำหรับ SAP ERP 6.0</b> ออกในปี <b>2016</b><br>
+          ขอให้สังเกตว่าหลังปี 2016 ก็ไม่มีรุ่นใหม่ของ ECC อีกเลย · เพราะความสนใจทั้งหมดย้ายไปที่ S/4HANA แล้ว
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="db-9">
+      <div class="sec-h"><span class="sec-n">9</span><h2>วงจรชีวิตของ Business Suite 7</h2></div>
+      <div class="body">
+        <p>หัวข้อสุดท้ายของแท็บนี้คือ<b>ตารางเวลา</b>ที่เป็นแรงผลักให้ทั้งอุตสาหกรรมต้องขยับ</p>
+        <ol class="tl">
+          <li><span class="ty">สิ้นปี 2027</span><div class="tt">สิ้นสุดการบำรุงรักษาหลัก</div><div class="td">โปรแกรมแกนของ <b>SAP Business Suite 7</b> สิ้นสุด <b>mainstream maintenance</b> · นี่คือวันที่เลื่อนมาจากเดิมคือปี 2025</div></li>
+          <li><span class="ty">ต้นปี 2028</span><div class="tt">เริ่มการบำรุงรักษาส่วนขยาย</div><div class="td">เข้าสู่ช่วง <b>extended maintenance</b> ซึ่งโดยทั่วไปมีค่าใช้จ่ายเพิ่มและได้รับเฉพาะการแก้ปัญหาที่จำเป็น ไม่ได้ฟีเจอร์ใหม่</div></li>
+          <li><span class="ty">สิ้นปี 2030</span><div class="tt">เส้นตายการย้ายไป S/4HANA</div><div class="td">สิ้นสุดการบำรุงรักษาส่วนขยาย · หลังจากนี้ลูกค้าที่ยังอยู่บน Business Suite 7 จะไม่ได้รับการสนับสนุนตามปกติอีก</div></li>
+          <li><span class="ty">ปี 2040</span><div class="tt">สิ้นสุดการสนับสนุนการย้ายระบบ</div><div class="td">การสนับสนุนการย้ายไป <b>SAP S/4HANA</b> สิ้นสุดลง ซึ่งสไลด์เรียกว่าเป็น<b>คำมั่นระยะยาว</b>ของ SAP</div></li>
+        </ol>
+        <div class="note">
+          <span class="nh">ทำไมเรื่องนี้ถึงเป็นเรื่องใหญ่สำหรับนิสิตบัญชี</span>
+          เพราะการย้ายจาก ECC ไป S/4HANA <b>ไม่ใช่การอัปเดตโปรแกรม</b> แต่เป็น<b>โครงการที่กินเวลาเป็นปีและเปลี่ยนผังบัญชีกับวิธีทำงานจริง</b><br>
+          องค์กรที่ยังไม่ย้ายภายในกรอบเวลานี้ จะต้องรันระบบบัญชีหลักของตัวเองโดยไม่มีผู้ผลิตรองรับ ซึ่งเป็น<b>ประเด็นความเสี่ยงที่ผู้สอบบัญชีต้องพิจารณา</b>ด้วย<br>
+          ตารางเวลาชุดนี้จึงเป็นเหตุผลที่โครงการ S/4HANA เต็มไปหมดในตลาดงานตอนนี้
+        </div>
+        <div class="note key">
+          <span class="nh">สรุปแท็บนี้ในสามประโยค</span>
+          <b>หนึ่ง</b> SAP แยกชั้นฐานข้อมูลออกมาตั้งแต่ยุค R/3 จึงใช้ฐานข้อมูลยี่ห้อใดก็ได้ ซึ่งเรียกรวมว่า <b>AnyDB</b><br>
+          <b>สอง</b> ความยืดหยุ่นนั้นทำให้ SAP ได้ส่วนแบ่งตลาดฐานข้อมูลแค่ไม่ถึงสิบเปอร์เซ็นต์ ทั้งที่เป็นเจ้าตลาด ERP<br>
+          <b>สาม</b> SAP จึงบอกเลิกสัญญากับผู้ผลิตฐานข้อมูลรายอื่น และกำหนดวันสิ้นสุดการสนับสนุน Business Suite 7 เพื่อผลักลูกค้าไปที่ <b>S/4HANA บน HANA</b> ซึ่งคือเนื้อหาของแท็บถัดไป
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="hana" class="hidden" role="tabpanel" aria-labelledby="t-hana">
+    <p class="lede">แท็บที่แล้วจบลงที่คำถามว่า <b>SAP จะออกจาก AnyDB อย่างไร</b> · คำตอบคือสร้างฐานข้อมูลของตัวเองชื่อ <b>SAP HANA</b> แล้วเขียน ERP ขึ้นใหม่ทั้งตัวให้รันบนมันอย่างเดียว ซึ่งก็คือ <b>SAP S/4HANA</b> · แท็บนี้เล่าทั้งสองเรื่องต่อกัน</p>
+
+    <div class="note key">
+      <span class="nh">สามคำที่ห้ามสับสนกันตลอดทั้งแท็บ</span>
+      <b>SAP HANA</b> คือ<b>ฐานข้อมูล</b> · <b>SAP S/4HANA</b> คือ<b>ระบบ ERP ที่รันอยู่บนฐานข้อมูลนั้น</b> · <b>SAP ECC</b> คือ<b>ระบบ ERP รุ่นก่อนหน้า</b> ซึ่งรันบนฐานข้อมูลยี่ห้อใดก็ได้<br>
+      ข้อสอบชอบสลับสามคำนี้ · ถ้าจับได้ว่าตัวไหนเป็นฐานข้อมูลและตัวไหนเป็นโปรแกรม จะไม่พลาดเลย
+    </div>
+
+    <section class="sec" id="hana-1">
+      <div class="sec-h"><span class="sec-n">1</span><h2>ฐานข้อมูลในหน่วยความจำ</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามของ In-Memory Database</span>
+          <b>IMDB</b> คือ<b>ระบบจัดการฐานข้อมูลที่อาศัยหน่วยความจำหลักเป็นที่เก็บข้อมูลเป็นหลัก</b><br>
+          ตรงข้ามกับระบบจัดการฐานข้อมูลที่ใช้กลไก<b>การเก็บบนดิสก์</b>
+        </div>
+        <h3>ทำไมถึงเร็วกว่า · สไลด์ให้เหตุผลไว้สามข้อ</h3>
+        <ul class="list">
+          <li><b>การเข้าถึงดิสก์ช้ากว่าการเข้าถึงหน่วยความจำ</b></li>
+          <li><b>อัลกอริทึมที่ใช้ปรับแต่งภายในเรียบง่ายกว่า</b></li>
+          <li><b>ใช้คำสั่งซีพียูน้อยกว่า</b></li>
+        </ul>
+        <p>และข้อที่สี่ซึ่งสไลด์เขียนไว้ต่อท้าย คือ<b>การอ่านข้อมูลในหน่วยความจำตัดเวลาค้นหาตำแหน่งทิ้งไปเลย</b> <span class="en">eliminates seek time</span> จึงได้ประสิทธิภาพที่<b>เร็วกว่าและคาดเดาได้แน่นอนกว่า</b>ดิสก์</p>
+        <div class="note">
+          <span class="nh">คำว่าคาดเดาได้แน่นอนกว่า สำคัญไม่แพ้คำว่าเร็วกว่า</span>
+          ดิสก์แบบจานหมุนต้องขยับหัวอ่านไปยังตำแหน่งที่ต้องการก่อน · เวลาที่ใช้จึง<b>ขึ้นกับว่าข้อมูลอยู่ตรงไหนของจาน</b> คำสั่งเดียวกันอาจเร็วหรือช้าต่างกันหลายเท่า<br>
+          หน่วยความจำไม่มีการขยับอะไรทั้งสิ้น เวลาเข้าถึงทุกตำแหน่ง<b>เท่ากันหมด</b> · สำหรับระบบที่ต้องตอบในเวลาที่กำหนด ความแน่นอนนี้มีค่ามาก
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-2">
+      <div class="sec-h"><span class="sec-n">2</span><h2>ที่มาของ SAP HANA</h2></div>
+      <div class="body">
+        <ol class="tl">
+          <li><span class="ty">2002</span><div class="tt">ก่อตั้ง Transact In Memory, Inc.</div><div class="td"><b>P*TIME</b> ก่อตั้งบริษัทนี้ขึ้นที่ซิลิคอนวัลเลย์ เพื่อระดมทุนพัฒนา<b>ระบบจัดการฐานข้อมูลในหน่วยความจำรุ่นถัดไป</b> · บริษัทลูกที่ถือหุ้นทั้งหมดชื่อ <b>TIM System</b> ตั้งขึ้นที่เกาหลีตั้งแต่ปี 2000 · ชื่อ P*TIME ย่อมาจาก <b>Parallel Transact-In-Memory Engine</b></div></li>
+          <li><span class="ty">1 พ.ย. 2005</span><div class="tt">SAP ซื้อเทคโนโลยีจาก ดร. Cha</div><div class="td">SAP ซื้อเทคโนโลยีที่เป็นฐานของ HANA จาก <b>ดร. Sang Kyun Cha</b> ซึ่งเป็นผู้บุกเบิกเทคโนโลยีฐานข้อมูลในหน่วยความจำ · SAP แปลง TIM System เป็น <b>SAP Labs Korea</b> และประกาศอย่างเป็นทางการในเดือน<b>มีนาคม 2008</b></div></li>
+          <li><span class="ty">1 ต.ค. 2006</span><div class="tt">Hasso Plattner มอบโจทย์ให้นักศึกษาปริญญาเอก</div><div class="td"><b>Hasso Plattner</b> ระบุว่า HANA เริ่มต้นจากการเป็น<b>หัวข้อวิจัยของนักศึกษาปริญญาเอก</b>ที่ <b>Hasso Plattner Institute</b> · แนวคิดตั้งต้นคือ<b>ฐานข้อมูลที่ตอบสนองในเวลาเป็นศูนย์</b> <span class="en">zero response time database</span></div></li>
+          <li><span class="ty">2008</span><div class="tt">พัฒนาร่วมกับ HPI และ Stanford</div><div class="td">ผลิตภัณฑ์ถูกพัฒนาขึ้นโดยความร่วมมือระหว่าง <b>Hasso Plattner Institute</b> กับ <b>มหาวิทยาลัยสแตนฟอร์ด</b> · เป้าหมายคือ<b>การวิเคราะห์ข้อมูลจำนวนมากแบบทันเวลา</b></div></li>
+          <li><span class="ty">2010</span><div class="tt">SAP ซื้อ Sybase</div><div class="td">SAP ซื้อ <b>Sybase</b> ด้วยเงิน <b>5.8 พันล้านดอลลาร์</b> · แต่แม้จะซื้อแล้ว ระบบ SAP จำนวนมากก็ยังคงใช้ <b>Oracle</b> <b>DB2</b> และฐานข้อมูลอื่นอยู่ดี</div></li>
+        </ol>
+        <div class="note key">
+          <span class="nh">เหตุผลเชิงเทคนิคที่ Plattner ยกมา และเป็นหัวใจของเรื่องทั้งหมด</span>
+          <b>เทคโนโลยีแรมพัฒนาขึ้นอย่างมหาศาลในช่วงสองทศวรรษ ดีขึ้นเป็นพันเท่า</b><br>
+          ในขณะที่<b>เทคโนโลยีดิสก์ ซึ่งฐานข้อมูลส่วนใหญ่พึ่งพาอยู่ ดีขึ้นเพียงสิบเท่า</b><br>
+          ช่องว่างที่ถ่างออกเรื่อย ๆ นี้ทำให้สถาปัตยกรรมที่ออกแบบไว้สำหรับยุคที่แรมแพงมาก<b>กลายเป็นตัวถ่วงประสิทธิภาพของทั้งระบบ</b>
+        </div>
+        <p>และคำพูดของ Plattner ที่สไลด์ยกมา ผมคิดว่าน่าอ่านมากครับ · เขาบอกว่าแนวคิดอย่าง<b>ฐานข้อมูลที่ตอบสนองในเวลาเป็นศูนย์</b> จะไม่มีวันได้รับการยอมรับในบริษัทอย่าง SAP · แต่<b>ในมหาวิทยาลัยคุณฝันได้</b> ตราบใดที่ผลิตงานวิจัยที่มีความหมายออกมา</p>
+        <div class="note">
+          <span class="nh">HANA เป็นแค่ฐานข้อมูลหรือเปล่า</span>
+          สไลด์ตอบไว้ตรง ๆ ว่า <b>ไม่ใช่</b><br>
+          ตอน SAP สร้าง HANA เขามองเห็นว่าโปรแกรมทางธุรกิจรุ่นถัดไปต้องการ<b>แนวทางที่บูรณาการมากกว่าเดิมมาก</b><br>
+          HANA จึงมี<b>ชิ้นส่วนสำหรับสร้างโปรแกรมระดับองค์กรมาให้ในตัว</b> ทั้งฐานข้อมูลรายการ ฐานข้อมูลรายงาน ชั้นบูรณาการ การค้นหา การทำนาย และเว็บ · ทั้งหมดนี้ทำงานได้จากการติดตั้งครั้งเดียว
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-3">
+      <div class="sec-h"><span class="sec-n">3</span><h2>SAP HANA คืออะไร</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามที่ต้องจำให้ได้ทั้งประโยค</span>
+          <b>SAP HANA</b> คือ<b>ระบบจัดการฐานข้อมูลเชิงสัมพันธ์ แบบในหน่วยความจำ และจัดเก็บแบบคอลัมน์</b><br>
+          <span class="en">In-Memory, Column-Oriented, Relational Database Management System</span><br>
+          หน้าที่หลักในฐานะเซิร์ฟเวอร์ฐานข้อมูลคือ<b>จัดเก็บและเรียกคืนข้อมูลตามที่โปรแกรมร้องขอ</b>
+        </div>
+        <div class="note key">
+          <span class="nh">ชื่อย่อ</span>
+          <b>HANA</b> มาจาก <b>H</b>igh performance <b>AN</b>alytics <b>A</b>ppliance<br>
+          ภาษาไทยคือ <b>เครื่องสำเร็จรูปสำหรับการวิเคราะห์สมรรถนะสูง</b>
+        </div>
+        <p>สไลด์ให้ตัวเลขไว้ว่า HANA <b>เร็วกว่าฐานข้อมูลทั่วไปอย่าง Oracle บนฮาร์ดแวร์ชุดเดียวกัน 10 ถึง 1000 เท่า</b> สำหรับงานหลายประเภท</p>
+        <h3>ผลที่ตามมาจากความเร็วนั้น</h3>
+        <ul class="list">
+          <li><b>ทำให้การออกแบบและการดำเนินงานง่ายลง</b> เพราะไม่ต้องสร้างทางลัดไว้เยอะ ๆ เพื่อเลี่ยงความช้า</li>
+          <li><b>ทำโปรแกรมทางธุรกิจที่ทำงานทันเวลาได้</b></li>
+          <li><b>ลดความซับซ้อนของระบบไอที</b> เพราะไม่ต้องมี Application Server หลายตัว ไม่ต้องมี Operational Data Store ไม่ต้องมี Datamart และไม่ต้องติดตั้งเครื่องมือ BI ที่ซับซ้อนแยกต่างหาก</li>
+        </ul>
+        <div class="note">
+          <span class="nh">ข้อที่สามคือข้อที่มีมูลค่าทางธุรกิจสูงที่สุด</span>
+          ระบบเดิมต้อง<b>คัดลอกข้อมูลออกไปอีกหลายที่</b>เพื่อให้รายงานเร็วพอใช้งาน · ทุกชุดที่คัดลอกคือ<b>ข้อมูลที่ล้าสมัยไปแล้วหนึ่งรอบ</b> และเป็นค่าใช้จ่ายที่ต้องดูแลตลอดไป<br>
+          ถ้าฐานข้อมูลเร็วพอที่จะทำรายงานจากข้อมูลจริงได้เลย <b>สำเนาทั้งหมดนั้นก็ไม่จำเป็นอีกต่อไป</b> · นี่คือเหตุผลที่สไลด์พูดถึงการเอาระบบหลายตัวออก ไม่ใช่แค่พูดถึงความเร็ว
+        </div>
+        <div class="note key">
+          <span class="nh">HANA รองรับ SQL หรือไม่</span>
+          รองรับครับ · สไลด์เขียนไว้ว่า <b>ฐานข้อมูลเชิงสัมพันธ์ส่วนใหญ่ใช้ SQL เป็นภาษาของฐานข้อมูล และ SAP HANA ก็รองรับ SQL ด้วย</b><br>
+          ข้อนี้สำคัญ เพราะแปลว่าความรู้ SQL ที่มีอยู่<b>ใช้กับ HANA ได้ทันที</b> ไม่ต้องเรียนภาษาใหม่ทั้งหมด
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-4">
+      <div class="sec-h"><span class="sec-n">4</span><h2>Appliance เทียบกับ Tailored Data Center Integration</h2></div>
+      <div class="body">
+        <p>คำว่า <b>Appliance</b> ใน HANA ไม่ได้เป็นแค่ตัวอักษรในชื่อย่อ แต่เป็น<b>วิธีส่งมอบ</b>จริง ๆ ครับ</p>
+        <div class="grid g2">
+          <div class="card">
+            <span class="cn">แบบที่ 1</span>
+            <div class="ct">Appliance</div>
+            <div class="cs">SAP เริ่มส่งมอบ HANA ในรูป<b>เครื่องสำเร็จรูปที่เป็นมาตรฐานและปรับแต่งมาอย่างดี</b> โดยเลือกได้จากพันธมิตรฮาร์ดแวร์หลายราย · สร้างตาม<b>ข้อกำหนดฮาร์ดแวร์ที่นิยามไว้ชัดเจน</b> เพื่อให้ได้สมรรถนะตามที่เทคโนโลยีในหน่วยความจำต้องการ<br>ทุกอย่างมาในกล่องเดียว ตั้งแต่ Application Server · Database · ระบบปฏิบัติการ · Virtualization · เซิร์ฟเวอร์ · เครือข่าย · จนถึงที่เก็บข้อมูล</div>
+          </div>
+          <div class="card">
+            <span class="cn">แบบที่ 2</span>
+            <div class="ct">Tailored Data Center Integration</div>
+            <div class="cs">ภายหลัง SAP เพิ่มทางเลือกนี้ขึ้นมา เรียกย่อว่า <b>TDI</b><br>แนวคิดคือ<b>ใช้ฮาร์ดแวร์ที่องค์กรมีอยู่แล้วและถนัดอยู่แล้ว</b> · ให้<b>ความยืดหยุ่นมากกว่า</b>ในการเลือกองค์ประกอบฮาร์ดแวร์ที่ใช้รัน HANA โดยเฉพาะเครือข่ายและที่เก็บข้อมูลขององค์กรเอง</div>
+          </div>
+        </div>
+        <div class="note key">
+          <span class="nh">เลือกแบบไหน</span>
+          สไลด์ตอบไว้ว่า ถ้าต้องการ<b>ฮาร์ดแวร์ที่ตั้งค่ามาแล้วพร้อมซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า</b> ซึ่งพันธมิตรฮาร์ดแวร์ติดตั้งให้ได้อย่างรวดเร็ว · <b>Appliance คือรูปแบบที่เหมาะ</b> และได้รับการสนับสนุนเต็มรูปแบบทั้งจากพันธมิตรฮาร์ดแวร์และจาก SAP<br>
+          พูดอีกอย่างคือ <b>Appliance แลกความยืดหยุ่นกับความเร็วในการติดตั้งและความชัดเจนเรื่องผู้รับผิดชอบ</b> ส่วน <b>TDI แลกกลับกัน</b>
+        </div>
+        <h3>ทะเบียนฮาร์ดแวร์ที่ผ่านการรับรอง</h3>
+        <p>SAP มี <b>SAP HANA Certified Hardware Directory</b> ซึ่งรวบรวม<b>ฮาร์ดแวร์ทุกตัวที่ผ่านการรับรองในโครงการรับรองฮาร์ดแวร์ของ HANA</b> หรือที่รองรับสำหรับ HANA รุ่น SPS และสถาปัตยกรรมซีพียูที่กำหนด</p>
+        <ul class="list">
+          <li>ฮาร์ดแวร์ถูก<b>ทดสอบโดยพันธมิตรฮาร์ดแวร์ร่วมกับ SAP LinuxLab</b></li>
+          <li>ระบบปฏิบัติการที่รองรับคือ <b>SUSE</b> และ <b>Red Hat</b> ซึ่งทั้งคู่เป็นลินุกซ์</li>
+          <li>สถาปัตยกรรมที่รองรับคือ <b>Intel</b> และ <b>IBM Power Systems</b></li>
+          <li>จำนวนโซลูชันในทะเบียน<b>เพิ่มขึ้นตลอดเวลา</b> · สไลด์แสดงตัวเลขไว้สองจุด คือ <b>419 โซลูชัน</b> ในภาพเก่า และ <b>1016 โซลูชัน</b> ณ วันที่ 30 มีนาคม 2026</li>
+        </ul>
+        <div class="note">
+          <span class="nh">ข้อที่คนมักมองข้าม</span>
+          HANA <b>รันบนลินุกซ์เท่านั้น</b> ไม่มีรุ่นสำหรับ Windows · องค์กรที่ใช้ SQL Server บน Windows มาตลอดจึงต้องเปลี่ยนทั้งฐานข้อมูลและระบบปฏิบัติการพร้อมกัน<br>
+          นี่เป็นต้นทุนแฝงของการย้ายไป S/4HANA ที่มักไม่ได้อยู่ในใบเสนอราคาตั้งต้น
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-5">
+      <div class="sec-h"><span class="sec-n">5</span><h2>เก็บเป็นแถวหรือเก็บเป็นคอลัมน์</h2></div>
+      <div class="body">
+        <p>หัวข้อนี้คือ<b>กลไกที่ทำให้ HANA เร็ว</b> ครับ และผมอยากให้เข้าใจมันจริง ๆ ไม่ใช่ท่องว่าคอลัมน์ดีกว่า</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>เรื่อง</th><th>Row store · เก็บเป็นแถว</th><th>Column store · เก็บเป็นคอลัมน์</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">วิธีเก็บ</td><td>เรียง<b>แนวนอน</b> คือหนึ่งรายการอยู่ติดกันทั้งแถว</td><td>เรียง<b>แนวตั้ง</b> คือข้อมูลชนิดเดียวกันมาอยู่ด้วยกัน</td></tr>
+            <tr><td class="pc">ข้อดี</td><td><b>เพิ่มหรือแก้รายการได้ง่าย</b> เพราะเขียนที่เดียวจบ</td><td><b>อ่านเฉพาะข้อมูลที่ต้องใช้</b> ไม่ต้องลากทั้งแถวมา</td></tr>
+            <tr><td class="pc">ข้อเสีย</td><td><b>อาจอ่านข้อมูลที่ไม่จำเป็นติดมาด้วย</b></td><td><b>การเขียนหนึ่งรายการต้องเข้าถึงหลายที่</b></td></tr>
+            <tr><td class="pc">เหมาะกับ</td><td>งานรายการประจำวัน คือ <b>OLTP</b></td><td>งานวิเคราะห์และรวมยอด คือ <b>OLAP</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">สิ่งที่ HANA ทำ และเป็นคำตอบของข้อสอบ</span>
+          <b>SAP HANA เก็บข้อมูลได้ทั้งแบบแถวและแบบคอลัมน์</b> <span class="en">Row and Column store</span><br>
+          ไม่ได้เลือกอย่างใดอย่างหนึ่ง · ตารางไหนควรเป็นแบบไหนก็ตั้งค่าให้เป็นแบบนั้น<br>
+          นี่คือวิธีที่ HANA แก้ปัญหา OLTP กับ OLAP ขัดกันเอง ซึ่งเราทิ้งไว้ในแท็บที่แล้ว
+        </div>
+        <h3>ประโยชน์ของการเก็บแบบคอลัมน์ตามที่สไลด์ระบุ</h3>
+        <ul class="list">
+          <li><b>การบีบอัดข้อมูล</b></li>
+          <li><b>อ่านและเขียนตารางได้เร็วกว่า</b>การเก็บแบบแถวทั่วไป</li>
+          <li><b>ความยืดหยุ่นและการประมวลผลแบบขนาน</b></li>
+          <li><b>รวมยอดและคำนวณได้ด้วยความเร็วที่สูงกว่า</b></li>
+        </ul>
+        <div class="note">
+          <span class="nh">ทำไมเก็บเป็นคอลัมน์แล้วบีบอัดได้ดีกว่า</span>
+          เพราะข้อมูลในคอลัมน์เดียวกัน<b>เป็นชนิดเดียวกันและซ้ำกันเยอะ</b> · คอลัมน์ประเทศของใบสั่งขายหนึ่งล้านใบ อาจมีค่าต่างกันแค่ไม่กี่สิบค่า<br>
+          เก็บเรียงต่อกันแบบนั้น วิธีบีบอัดอย่างง่ายก็ลดขนาดลงได้มหาศาล · ส่วนการเก็บเป็นแถว ข้อมูลข้าง ๆ กันเป็นคนละชนิด จึงหาแบบแผนมาบีบอัดได้ยากกว่ามาก
+        </div>
+        <div class="note key">
+          <span class="nh">ตัวอย่างที่สไลด์ใช้</span>
+          คำสั่งอย่าง <b>รวมยอดขายของสินค้าข้าวโพด แยกตามประเทศ</b> ต้องการแค่สามคอลัมน์ คือประเทศ สินค้า และยอดขาย<br>
+          ฐานข้อมูลแบบแถวต้อง<b>ลากทั้งแถวขึ้นมาทุกแถว</b>แล้วค่อยทิ้งคอลัมน์ที่ไม่ใช้<br>
+          ฐานข้อมูลแบบคอลัมน์<b>หยิบมาแค่สามคอลัมน์</b> · ยิ่งตารางมีคอลัมน์เยอะ ส่วนต่างยิ่งมหาศาล และตารางของ SAP มีคอลัมน์เป็นร้อย
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-6">
+      <div class="sec-h"><span class="sec-n">6</span><h2>การบีบอัดข้อมูล</h2></div>
+      <div class="body">
+        <p>ถ้าข้อมูลต้องอยู่ในหน่วยความจำทั้งหมด คำถามแรกที่ทุกคนถามคือ <b>แล้วแรมจะพอเหรอ</b> · การบีบอัดคือคำตอบครับ</p>
+        <div class="note key">
+          <span class="nh">วิธีบีบอัดหลักคือ Dictionary Compression</span>
+          แทนที่จะเก็บคำว่า <b>Miller</b> ซ้ำ ๆ ทุกแถว ระบบจะทำ<b>พจนานุกรม</b>ขึ้นมาหนึ่งชุด แล้วเก็บเป็น<b>เลขรหัสที่ชี้ไปยังพจนานุกรม</b>แทน<br>
+          ลำดับของรหัสในคอลัมน์บอกเองว่าแถวไหนเป็นค่าอะไร จึงไม่ต้องเก็บเลขแถวเพิ่ม<br>
+          วิธีบีบอัดอื่นที่สไลด์เอ่ยถึงได้แก่ <b>run length</b> · <b>cluster</b> · และ <b>prefix</b>
+        </div>
+        <h3>ตัวเลขที่สไลด์ให้ไว้</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ตัวชี้วัด</th><th>ค่า</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">อัตราบีบอัด</td><td><b>5 ถึง 30 เท่า</b></td></tr>
+            <tr><td class="pc">การลดขนาดเมื่อย้ายไป S/4HANA</td><td>สไลด์แสดงกราฟที่ลดลง <b>25 เท่า</b> ไล่จาก ERP 6.0 บน Oracle · Suite on HANA · S/4HANA บนที่เก็บข้อมูลแบบดั้งเดิม · จนถึง S/4HANA บน Pure Storage</td></tr>
+            <tr><td class="pc">ตัวอย่างขนาดจริง</td><td><b>7.1 เทระไบต์</b> เมื่ออยู่บน AnyDB · เหลือ <b>1.8 เทระไบต์</b> เมื่อย้ายมาบน HANA ด้วยการจัดบ้านและบีบอัด · และเหลือ <b>0.8 เทระไบต์</b> หลังทำให้ง่ายขึ้นด้วยการจัดชั้นอายุข้อมูลและตัดความซ้ำซ้อนออก</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">สูตรประมาณแรมที่ต้องใช้</span>
+          สไลด์แสดงสูตรไว้ว่า แรมเท่ากับ <b>ขนาดตารางแบบคอลัมน์หารสี่ บวกกับขนาดตารางแบบแถวหารหนึ่งจุดห้า แล้วคูณด้วยตัวประกอบบีบอัดของฐานข้อมูลต้นทาง จากนั้นบวกเพิ่มอีกห้าสิบกิกะไบต์</b><br>
+          ความหมายของค่าคงที่แต่ละตัวคือ <b>หารสี่</b> เป็นตัวประกอบบีบอัดเฉลี่ยของตารางแบบคอลัมน์ · <b>หารหนึ่งจุดห้า</b> เป็นของตารางแบบแถว · ตัวคูณคือ<b>ตัวประกอบบีบอัดของฐานข้อมูลต้นทาง</b> · และ<b>ห้าสิบกิกะไบต์</b>ที่บวกเพิ่มคือเผื่อไว้สำหรับแคชของ HANA และบริการเสริมอื่น ๆ<br>
+          ยังมีส่วนเผื่อสำหรับ<b>วัตถุที่สร้างตอนทำงาน</b> <span class="en">runtime objects</span> รวมอยู่ในสูตรด้วย
+        </div>
+        <div class="note">
+          <span class="nh">สังเกตว่าตารางแบบแถวบีบอัดได้น้อยกว่ามาก</span>
+          หารสี่เทียบกับหารหนึ่งจุดห้า คือ<b>ต่างกันเกือบสามเท่า</b><br>
+          นี่เป็นอีกหลักฐานหนึ่งว่าทำไม HANA ถึงใช้การเก็บแบบคอลัมน์เป็นค่าตั้งต้น และเก็บแบบแถวไว้เฉพาะตารางที่จำเป็นจริง ๆ
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-7">
+      <div class="sec-h"><span class="sec-n">7</span><h2>SAP HANA Platform · สามชั้นบริการ</h2></div>
+      <div class="body">
+        <p>ถึงตรงนี้ขอเปลี่ยนมุมมองนะครับ · จากที่มอง HANA เป็นฐานข้อมูล เรามามองมันเป็น<b>แพลตฟอร์ม</b> ซึ่งเป็นวิธีที่ SAP อยากให้มอง</p>
+        <div class="flow">
+          <div class="fstep"><span class="fn">1</span><div><div class="ft">Database Services</div><div class="fd">บริการฐานข้อมูล · เป็นชั้นล่างสุดและเป็นรากฐานของทุกอย่าง</div></div></div>
+          <div class="fstep"><span class="fn">2</span><div><div class="ft">Application Services</div><div class="fd">บริการสำหรับสร้างโปรแกรม · ทำให้ HANA สร้างเว็บแอปได้เองโดยไม่ต้องมีเซิร์ฟเวอร์แยก</div></div></div>
+          <div class="fstep"><span class="fn">3</span><div><div class="ft">Integration Services</div><div class="fd">บริการเชื่อมต่อ · ดึงข้อมูลจากระบบอื่นเข้ามาหรือเข้าถึงโดยไม่ต้องย้าย</div></div></div>
+        </div>
+        <div class="note key">
+          <span class="nh">ช่องทางที่โปรแกรมภายนอกเข้ามาคุยกับ HANA</span>
+          <b>SQL</b> · <b>JSON</b> · <b>ADO.NET</b> · <b>JDBC และ ODBC</b> · <b>OData</b> · <b>HTML5</b> · <b>MDX</b> · <b>XML/A</b><br>
+          รายการนี้ยาวโดยตั้งใจ · มันบอกว่า HANA ไม่ได้ออกแบบมาให้คุยกับ SAP อย่างเดียว แต่ให้โปรแกรมอะไรก็ได้มาต่อ
+        </div>
+        <p>และสไลด์ระบุว่าแพลตฟอร์มนี้ใช้ได้ทั้งแบบ <b>ติดตั้งในองค์กร</b> <span class="en">On-Premise</span> · <b>บนคลาวด์</b> <span class="en">Cloud</span> · และ<b>แบบผสม</b> <span class="en">Hybrid</span></p>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-8">
+      <div class="sec-h"><span class="sec-n">8</span><h2>Database Services</h2></div>
+      <div class="body">
+        <p>ชั้นนี้สไลด์แบ่งเป็นสองส่วน คือ<b>รากฐาน</b>กับ<b>ความสามารถในการประมวลผล</b></p>
+        <h3>ส่วนที่หนึ่ง · รากฐาน</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ความสามารถ</th><th>ความหมาย</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">In-Memory ACID Columnar</td><td>เก็บในหน่วยความจำ แบบคอลัมน์ และยัง<b>รักษาคุณสมบัติ ACID</b> ของฐานข้อมูลรายการไว้ครบ</td></tr>
+            <tr><td class="pc">Multi-Core / Parallelization</td><td>ใช้<b>ซีพียูหลายแกนพร้อมกัน</b> · การเก็บแบบคอลัมน์ทำให้แบ่งงานไปคนละแกนได้ง่าย</td></tr>
+            <tr><td class="pc">Advanced Compression</td><td><b>การบีบอัดขั้นสูง</b> ตามที่เล่าไว้ในหัวข้อที่ 6</td></tr>
+            <tr><td class="pc">Multitenant Database Containers</td><td><b>แยกฐานข้อมูลหลายชุดในเครื่องเดียว</b> โดยแต่ละชุดไม่เห็นข้อมูลของกันและกัน</td></tr>
+            <tr><td class="pc">Dynamic Tiering</td><td><b>การจัดชั้นข้อมูลแบบพลวัต</b> · ดูคำอธิบายในกล่องถัดไป</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">Dynamic Tiering คืออะไร และเป็นข้อที่ออกสอบบ่อย</span>
+          ตัวเลือกนี้ช่วยให้ผู้ใช้เลือกได้ว่าจะใช้<b>หน่วยความจำสำหรับข้อมูลร้อน</b> และ<b>ดิสก์สำหรับข้อมูลอุ่น</b><br>
+          คือเก็บ<b>ข้อมูลที่ใช้บ่อย</b> ซึ่งเรียกว่า <b>hot</b> ไว้ในหน่วยความจำ และเก็บ<b>ข้อมูลที่ใช้ไม่บ่อย</b> ซึ่งเรียกว่า <b>warm</b> ไว้บนดิสก์<br>
+          ข้อนี้สำคัญเพราะมันบอกว่า <b>HANA ไม่ได้เอาทุกอย่างยัดลงแรมแบบไม่คิด</b> · แรมยังแพงกว่าดิสก์มาก จึงต้องเลือกว่าอะไรคุ้มที่จะอยู่ในแรม
+        </div>
+        <h3>ส่วนที่สอง · ความสามารถในการประมวลผล</h3>
+        <p>สไลด์บอกว่านอกเหนือจากความสามารถรากฐานแล้ว แพลตฟอร์มยังมีความสามารถที่<b>เปิดทางให้ทำการวิเคราะห์ขั้นสูงกับข้อมูลหลากหลายชนิด</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ความสามารถ</th><th>ใช้ทำอะไร</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Spatial</td><td>ข้อมูล<b>เชิงพื้นที่</b> เช่น พิกัดและแผนที่</td></tr>
+            <tr><td class="pc">Predictive</td><td>การ<b>ทำนาย</b> · ดูหัวข้อที่ 10</td></tr>
+            <tr><td class="pc">Search</td><td>การ<b>ค้นหา</b></td></tr>
+            <tr><td class="pc">Text Analytics</td><td>การ<b>วิเคราะห์ข้อความ</b></td></tr>
+            <tr><td class="pc">Text Mining</td><td>การ<b>ขุดค้นข้อความ</b></td></tr>
+            <tr><td class="pc">Graph</td><td>ข้อมูลแบบ<b>กราฟ</b> คือความสัมพันธ์ระหว่างสิ่งต่าง ๆ</td></tr>
+            <tr><td class="pc">Data Quality</td><td><b>คุณภาพข้อมูล</b></td></tr>
+            <tr><td class="pc">Series Data</td><td>ข้อมูล<b>อนุกรม</b> เช่น ค่าที่วัดตามเวลา</td></tr>
+            <tr><td class="pc">Function Libraries</td><td><b>คลังฟังก์ชัน</b>สำเร็จรูปที่เรียกใช้ได้เลย</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">ประเด็นที่ต้องเข้าใจ ไม่ใช่ท่องรายชื่อ</span>
+          ความสามารถทั้งเก้าข้อนี้ถ้าเป็นระบบเดิมคือ<b>ซอฟต์แวร์คนละตัว</b>ที่ต้องซื้อแยก ติดตั้งแยก และย้ายข้อมูลไปมา<br>
+          การที่มันอยู่<b>ในฐานข้อมูลเดียวกับข้อมูล</b> แปลว่า<b>ไม่ต้องย้ายข้อมูลออกไปวิเคราะห์</b> ซึ่งทั้งเร็วกว่าและไม่มีปัญหาข้อมูลไม่ตรงกัน
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-9">
+      <div class="sec-h"><span class="sec-n">9</span><h2>Application Services และ Integration Services</h2></div>
+      <div class="body">
+        <h3>Application Services</h3>
+        <p>แพลตฟอร์มมีบริการสำหรับ<b>สร้างโปรแกรมบนเว็บ</b> และรองรับ<b>มาตรฐานการพัฒนาแบบเปิด</b> เช่น SQL · HTML5 · JavaScript · JDBC · ODBC · JSON และ OData</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>องค์ประกอบ</th><th>หน้าที่</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Web Server</td><td><b>เว็บเซิร์ฟเวอร์</b>ในตัว จึงให้บริการหน้าเว็บได้โดยไม่ต้องมีเครื่องแยก</td></tr>
+            <tr><td class="pc">SAP Fiori UX</td><td><b>หน้าตาผู้ใช้แบบ Fiori</b> ซึ่งเป็นรูปแบบหน้าจอใหม่ของ SAP · ดูหัวข้อที่ 15</td></tr>
+            <tr><td class="pc">Application Lifecycle Management</td><td><b>การจัดการวงจรชีวิตของโปรแกรม</b> ตั้งแต่พัฒนา ทดสอบ จนขึ้นใช้งานจริง</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Integration Services</h3>
+        <p>สไลด์เปิดด้วยข้อเท็จจริงว่า <b>องค์กรสร้างและเก็บข้อมูลไว้ในหลายระบบ</b> · เพื่อให้เห็นภาพรวมขององค์กรได้ครบ แพลตฟอร์มจึงมีบริการเชื่อมต่อที่รับมือกับ<b>กลยุทธ์การเชื่อมต่อหลายแบบจากแหล่งข้อมูลที่หลากหลาย</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>บริการ</th><th>รูปแบบ</th><th>แหล่งข้อมูลที่สไลด์ยกตัวอย่าง</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Smart Data Access</td><td><b>Federation</b> คือเข้าถึงข้อมูลที่อยู่ที่เดิมโดยไม่ย้าย</td><td>IBM DB2 · Netezza · Oracle · MS SQL Server · Teradata · SAP HANA · SAP ASE · SAP IQ · HIVE</td></tr>
+            <tr><td class="pc">Smart Data Integration</td><td><b>Loading</b> คือดึงข้อมูลเข้ามาเก็บจริง</td><td>IBM DB2 · Oracle · MS SQL Server · Twitter · HIVE · OData · อะแดปเตอร์ที่เขียนเอง</td></tr>
+            <tr><td class="pc">Smart Data Streaming</td><td><b>Streaming</b> คือรับข้อมูลที่ไหลเข้ามาต่อเนื่อง · เรียกอีกชื่อว่า <b>CEP</b></td><td>อุปกรณ์เคลื่อนที่ · หุ่นยนต์ · เซนเซอร์ · มาตรวัด · รถบรรทุก</td></tr>
+            <tr><td class="pc">Remote Data Sync</td><td><b>Synchronize</b> คือทำให้ข้อมูลสองฝั่งตรงกัน</td><td>อุปกรณ์ปลายทางที่มีฐานข้อมูลของตัวเอง เช่น รถยนต์ อาคาร และแท่นขุดเจาะ</td></tr>
+            <tr><td class="pc">Hadoop Integration</td><td>เชื่อมกับระบบ<b>ข้อมูลขนาดใหญ่</b></td><td>Spark · Hive · Hadoop</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">ความต่างระหว่างสองตัวแรก คือจุดที่ข้อสอบชอบถาม</span>
+          <b>Smart Data Access</b> คือ<b>เห็นข้อมูลโดยไม่ย้าย</b> · ข้อมูลยังอยู่ที่ระบบต้นทาง HANA แค่มองทะลุเข้าไป เหมาะเมื่อข้อมูลใหญ่มากหรือต้องการค่าล่าสุดเสมอ<br>
+          <b>Smart Data Integration</b> คือ<b>ย้ายข้อมูลเข้ามาเก็บจริง</b> · เหมาะเมื่อต้องการประมวลผลหนัก ๆ หรือระบบต้นทางรับภาระไม่ไหว
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-10">
+      <div class="sec-h"><span class="sec-n">10</span><h2>การวิเคราะห์เชิงทำนายและ PAL</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามของ Predictive Analytics</span>
+          คือ<b>การใช้ข้อมูล อัลกอริทึมทางสถิติ และเทคนิคการเรียนรู้ของเครื่อง เพื่อระบุความน่าจะเป็นของผลลัพธ์ในอนาคตจากข้อมูลในอดีต</b><br>
+          เป้าหมายคือ<b>ก้าวข้ามจากการรู้ว่าเกิดอะไรขึ้น ไปสู่การประเมินให้ดีที่สุดว่าอะไรจะเกิดขึ้นในอนาคต</b>
+        </div>
+        <h3>บันไดสี่ขั้นของการวิเคราะห์</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ขั้น</th><th>ชื่อ</th><th>ตอบคำถามว่า</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">1</td><td>Descriptive Analytics</td><td><b>เกิดอะไรขึ้น</b></td></tr>
+            <tr><td class="pc">2</td><td>Diagnostic Analytics</td><td><b>ทำไมถึงเกิดขึ้น</b></td></tr>
+            <tr><td class="pc">3</td><td>Predictive Analytics</td><td><b>อะไรจะเกิดขึ้น</b></td></tr>
+            <tr><td class="pc">4</td><td>Prescriptive Analytics</td><td><b>เราจะทำให้มันเกิดขึ้นได้อย่างไร</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>บันไดนี้จำง่ายและใช้ได้ทั้งชีวิตครับ · รายงานบัญชีทั่วไปอยู่ขั้นที่หนึ่ง · การวิเคราะห์ผลต่างอยู่ขั้นที่สอง · การพยากรณ์ยอดขายอยู่ขั้นที่สาม · และการที่ระบบเสนอว่าควรลดราคาเท่าไรจึงจะได้กำไรสูงสุดอยู่ขั้นที่สี่</p>
+        <div class="note key">
+          <span class="nh">KXEN · บริษัทที่ SAP ซื้อมาเพื่อความสามารถนี้</span>
+          <b>KXEN</b> ก่อตั้งเมื่อ<b>เดือนมิถุนายน 1998</b> โดย <b>Roger Haddad</b> และ <b>Michel Bera</b> จากแนวคิดตั้งต้นของ <b>Léon Bottou</b> ซึ่งอาศัย<b>ทฤษฎีการลดความเสี่ยงเชิงโครงสร้างของ Vladimir Vapnik</b><br>
+          KXEN ทำตลาด<b>ซอฟต์แวร์วิเคราะห์เชิงทำนาย</b>เป็นหลัก<br>
+          <b>วันที่ 10 กันยายน 2013</b> SAP ประกาศแผนเข้าซื้อ KXEN และ<b>วันที่ 1 ตุลาคม 2013</b> การเข้าซื้อก็เสร็จสมบูรณ์
+        </div>
+        <h3>PAL · คลังฟังก์ชันวิเคราะห์เชิงทำนาย</h3>
+        <p><b>PAL</b> เป็นหนึ่งในองค์ประกอบของ <b>AFL</b> หรือ <b>Application Function Library</b> ใน SAP HANA · สามารถนิยามฟังก์ชันที่<b>เรียกได้จากในโพรซีเยอร์ SQL Script</b> เพื่อทำ<b>อัลกอริทึมวิเคราะห์ขั้นสูง</b> · อัลกอริทึมของ PAL แบ่งเป็น <b>10 หมวด</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>หมวด</th><th>ตัวอย่างอัลกอริทึมที่สไลด์ระบุ</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Classification</td><td>CART · C4.5 · CHAID · K Nearest Neighbour · Logistic Regression Elastic Net · Back-Propagation Neural Network · Naïve Bayes · Support Vector Machine · Confusion Matrix · AUC</td></tr>
+            <tr><td class="pc">Cluster</td><td>ABC Classification · DBSCAN · <b>K-Means</b> · K-Medoid · K-Medians · Kohonen Self Organized Maps · Agglomerate Hierarchical · Affinity Propagation · LDA · GMM</td></tr>
+            <tr><td class="pc">Association</td><td><b>Apriori</b> · Apriori Lite · FP-Growth · KORD</td></tr>
+            <tr><td class="pc">Regression</td><td>Multiple Linear Regression Elastic Net · Polynomial · Exponential · Bi-Variate Geometric · Bi-Variate Logarithmic</td></tr>
+            <tr><td class="pc">Time Series</td><td>Single, Double, Triple Exponential Smoothing · ARIMA และ Seasonal ARIMA · Brown Exponential Smoothing · Croston · Forecast Accuracy Measure</td></tr>
+            <tr><td class="pc">Probability Distribution</td><td>Distribution Fit หรือ Weibull analysis · Cumulative Distribution Function · Quantile Function · Kaplan-Meier Survival Analysis</td></tr>
+            <tr><td class="pc">Outlier Detection</td><td>Inter-Quartile Range Test หรือ Tukey's Test · Variance Test · Anomaly Detection · Grubbs Outlier Test</td></tr>
+            <tr><td class="pc">Link Prediction</td><td>Common Neighbors · Jaccard's Coefficient · Adamic/Adar · Katz</td></tr>
+            <tr><td class="pc">Statistic Functions</td><td>ค่าเฉลี่ย มัธยฐาน ความแปรปรวน ส่วนเบี่ยงเบนมาตรฐาน ความโด่ง ความเบ้ · Covariance Matrix · Pearson Correlations Matrix · Chi-squared Tests · F-test</td></tr>
+            <tr><td class="pc">Data Preparation</td><td>Sampling · Binning · Scaling · Partitioning · Principal Component Analysis</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">ไม่ต้องท่องรายชื่อนี้นะครับ</span>
+          สิ่งที่ต้องจำคือ<b>มีสิบหมวด</b> และ<b>เรียกใช้ได้จาก SQL Script โดยตรง</b><br>
+          ประเด็นที่ลึกกว่านั้นคือ การที่อัลกอริทึมเหล่านี้<b>รันอยู่ในฐานข้อมูล</b> แปลว่าไม่ต้องดึงข้อมูลออกมาที่เครื่องนักวิเคราะห์ก่อน · ซึ่งทั้งเร็วกว่าและปลอดภัยกว่าในแง่การควบคุมข้อมูล
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-11">
+      <div class="sec-h"><span class="sec-n">11</span><h2>IoT และ Smart Data Streaming</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">นิยามของ Internet of Things</span>
+          <b>IoT</b> อธิบายถึง<b>เครือข่ายของวัตถุทางกายภาพ ซึ่งฝังเซนเซอร์ ซอฟต์แวร์ และเทคโนโลยีอื่น ๆ ไว้ เพื่อเชื่อมต่อและแลกเปลี่ยนข้อมูลกับอุปกรณ์และระบบอื่นผ่านอินเทอร์เน็ต</b>
+        </div>
+        <p>โครงสร้างที่สไลด์วาดไว้มีสามส่วน คือ <b>เซนเซอร์และอุปกรณ์</b> · <b>เซิร์ฟเวอร์บนคลาวด์</b> · และ<b>โปรแกรมที่เอาข้อมูลไปใช้</b> โดยมี<b>เครือข่าย</b>เชื่อมทั้งสองช่วง และข้อมูลวิ่งได้<b>สองทาง</b></p>
+        <h3>Smart Data Streaming</h3>
+        <div class="note key">
+          <span class="nh">อะไรบ้างที่เป็นแหล่งของกระแสเหตุการณ์</span>
+          สไลด์ตอบกว้างมาก คือ <b>อุปกรณ์หรือโปรแกรมใดก็ตามที่ผลิตข้อมูลออกมาเมื่อมีอะไรเกิดขึ้น หรือรายงานสถานะเป็นประจำ ล้วนเป็นแหล่งของกระแสเหตุการณ์ได้ทั้งสิ้น</b><br>
+          ตัวอย่างที่ยกไว้ ได้แก่ <b>เซนเซอร์</b> · <b>กระแสการคลิก</b> · <b>สื่อสังคมออนไลน์</b> · <b>รายการค้า</b> · และ<b>ราคาตลาด</b>
+        </div>
+        <p><b>SAP HANA Smart Data Streaming</b> เป็น<b>ส่วนขยายที่เลือกติดตั้งได้</b>ของแพลตฟอร์ม ออกแบบมาเพื่อ<b>รับ ประมวลผล และตอบสนองต่อกระแสข้อมูลเหตุการณ์ที่ไหลเข้ามาอย่างต่อเนื่องแบบทันเวลา</b> · ทำให้โปรแกรมรับข้อมูลความเร็วสูงเข้ามาได้ เช่น<b>ค่าจากเซนเซอร์ IoT</b> <b>ราคาซื้อขายทางการเงิน</b> และ<b>บันทึกของระบบ</b> <b>ก่อนที่ข้อมูลนั้นจะถูกเขียนลงฐานข้อมูลแบบดั้งเดิม</b></p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ความสามารถที่สไลด์ระบุ</th></tr></thead>
+          <tbody>
+            <tr><td><b>รับ กรอง วิเคราะห์ และตอบสนองต่อเหตุการณ์หลายล้านรายการต่อวินาทีแบบทันเวลา</b></td></tr>
+            <tr><td><b>เก็บข้อมูลที่มีคุณค่าสูงไว้ใน SAP HANA</b> และส่งข้อมูลอื่นเข้า Hadoop ผ่านอะแดปเตอร์สำหรับ HDFS หรืองาน MapReduce เข้า Hive</td></tr>
+            <tr><td><b>ส่งข้อมูลสดไปยังแดชบอร์ดการปฏิบัติงาน</b></td></tr>
+            <tr><td><b>ทำคำสั่งค้นหาต่อเนื่อง</b>ด้วยภาษาเชิงประกาศ <b>CCL</b> หรือวิธีที่ขับเคลื่อนด้วยแบบจำลอง</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Machine Learning</h3>
+        <div class="note key">
+          <span class="nh">นิยามและความสัมพันธ์กับ AI</span>
+          <b>Machine Learning</b> คือ<b>การศึกษาอัลกอริทึมคอมพิวเตอร์ที่พัฒนาตัวเองได้โดยอัตโนมัติผ่านประสบการณ์และการใช้ข้อมูล</b> · ถือเป็น<b>ส่วนหนึ่งของปัญญาประดิษฐ์</b><br>
+          ความสัมพันธ์ของสามคำคือ <b>Artificial Intelligence</b> ครอบ <b>Machine Learning</b> และ <b>Machine Learning</b> ครอบ <b>Deep Learning</b> อีกที
+        </div>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ด้าน</th><th>สิ่งที่สไลด์ระบุ</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">ข้อมูลเข้า</td><td>ข้อมูลที่<b>มีโครงสร้างและไม่มีโครงสร้าง</b> ได้แก่ <b>ตาราง</b> · <b>ข้อความ</b> · <b>ภาพ เสียง และวีดิทัศน์</b> · <b>ข้อมูลอนุกรมเวลาและข้อมูลภูมิสารสนเทศ</b></td></tr>
+            <tr><td class="pc">กระบวนการ</td><td><b>เตรียมข้อมูล</b> แล้ว<b>ฝึกแบบจำลอง</b> แล้ว<b>นำแบบจำลองไปใช้</b> แล้ว<b>เก็บผลป้อนกลับ</b> แล้ววนกลับไปฝึกใหม่</td></tr>
+            <tr><td class="pc">ผลลัพธ์</td><td><b>เปลี่ยนข้อมูลขนาดใหญ่ให้เป็นข้อมูลที่ฉลาด</b> ได้แก่ <b>การทำนาย</b> · <b>การจำแนกและการจัดกลุ่ม</b> · <b>การแนะนำ</b> · และ<b>การทำงานอัตโนมัติ</b></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-12">
+      <div class="sec-h"><span class="sec-n">12</span><h2>จาก R/1 ถึง S/4HANA</h2></div>
+      <div class="body">
+        <p>ครึ่งหลังของแท็บนี้เป็นเรื่อง <b>S/4HANA</b> ครับ · เริ่มจากเส้นเวลาซึ่งต่อจากบทที่ 1 โดยตรง</p>
+        <ol class="tl">
+          <li><span class="ty">1973</span><div class="tt">SAP R/1</div><div class="td">พัฒนาต่อจากระบบบัญชี <b>RF</b> · รันบนเซิร์ฟเวอร์ IBM และระบบปฏิบัติการ DOS · มีลูกค้า <b>40 ราย</b> ภายในปี 1978</div></li>
+          <li><span class="ty">1979</span><div class="tt">SAP R/2 · ยุคเมนเฟรม</div><div class="td">ประมวลผลข้อมูลแบบ<b>ทันเวลาบนเมนเฟรม</b> ครอบคลุมบัญชี การผลิต โลจิสติกส์ และทรัพยากรบุคคล · ปี 1991 มีลูกค้า <b>2200 ราย</b> ใน <b>31 ประเทศ</b> · รายได้ <b>5.1 ล้านยูโร</b> พนักงาน <b>60 คน</b> ในปีเริ่มต้น</div></li>
+          <li><span class="ty">1992</span><div class="tt">SAP R/3 · สถาปัตยกรรมสามชั้น</div><div class="td">เป็นโค้ดชุดใหม่ <span class="en">new codeline</span> · สถาปัตยกรรมแบบ <b>Client/Server</b> ทำให้องค์กรทั่วไปใช้ SAP ได้ · เริ่มด้วยลูกค้าใหม่ <b>1089 ราย</b> และการติดตั้งกว่า <b>9000 แห่ง</b> · รายได้ <b>424 ล้านยูโร</b> พนักงาน <b>3200 คน</b> ลูกค้า <b>2800 ราย</b> ใน <b>35 ประเทศ</b></div></li>
+          <li><span class="ty">1999</span><div class="tt">mySAP.com</div><div class="td">ยุค <b>One-Step-Business</b> · รายได้ <b>6.3 พันล้านยูโร</b> พนักงาน <b>25000 คน</b> ลูกค้า <b>15000 ราย</b> ใน <b>120 ประเทศ</b></div></li>
+          <li><span class="ty">2003</span><div class="tt">SAP Business Suite และ NetWeaver</div><div class="td">สถาปัตยกรรมแบบ <b>Enterprise Services</b> · รายได้ <b>7.0 พันล้านยูโร</b> พนักงาน <b>29610 คน</b> ลูกค้า <b>20500 ราย</b> ใน <b>120 ประเทศขึ้นไป</b></div></li>
+          <li><span class="ty">2015</span><div class="tt">SAP S/4HANA</div><div class="td">เป็น<b>โค้ดชุดใหม่อีกครั้ง</b> ซึ่งเกิดขึ้นเพียงสองครั้งในประวัติศาสตร์ของ SAP คือตอน R/3 และตอนนี้ · รายได้ <b>16.8 พันล้านยูโร</b> พนักงาน <b>68000 คน</b> ลูกค้า <b>251000 ราย</b> ใน <b>120 ประเทศขึ้นไป</b> · เทคโนโลยีฝั่งพัฒนาคือ <b>ABAP RAP</b> และ <b>SAPUI5</b></div></li>
+        </ol>
+        <div class="note key">
+          <span class="nh">คำว่า New Codeline คือคำสำคัญของเส้นเวลานี้</span>
+          เส้นสีแดงในภาพสไลด์ขีดไว้<b>สองจุดเท่านั้น</b> คือก่อน <b>R/3</b> และก่อน <b>S/4HANA</b><br>
+          แปลว่าทุกอย่างระหว่าง R/3 กับ Business Suite คือ<b>การต่อยอดจากฐานโค้ดเดิม</b> · ส่วน S/4HANA คือ<b>การเขียนขึ้นใหม่</b><br>
+          นี่คือเหตุผลที่การย้ายจาก ECC ไป S/4HANA ยากกว่าการอัปเกรดรุ่นปกติมาก
+        </div>
+        <h3>ประวัติเลขรุ่นที่ควรรู้</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ตระกูล</th><th>รุ่นและปี</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">SAP R/3</td><td>1.0 ปี 1992 · 2.0 ปี 1993 · <b>3.0 ปี 1995</b> · 4.0 ปี 1998 · 4.5 ปี 1999 · 4.6 ปี 2001 · 4.7 ปี 2003</td></tr>
+            <tr><td class="pc">SAP ECC</td><td>ECC 5.0 ปี 2004 · <b>ECC 6.0 ปี 2005</b></td></tr>
+            <tr><td class="pc">SAP ERP</td><td>ERP 6.0 EHP1 ปี 2006 · <b>EHP6 ปี 2011</b> · <b>EHP7 ปี 2013</b> · <b>EHP8 ปี 2016</b></td></tr>
+            <tr><td class="pc">SAP S/4HANA</td><td>1511 · 1610 · ไปจนถึง 2020 และ <b>2023</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="note key">
+          <span class="nh">Unified General Ledger · จุดที่คนบัญชีต้องรู้</span>
+          ใน <b>SAP S/4HANA Finance 1503</b> มีการนำ<b>บัญชีแยกประเภททั่วไปแบบรวม</b> <span class="en">Unified General Ledger หรือ U-GL</span> มาใช้<br>
+          มันรวมองค์ประกอบที่เคยแยกกันคือ <b>Financial Accounting</b> หรือ <b>FI</b> กับ <b>Controlling</b> หรือ <b>CO</b> <b>เข้ามาเป็นแหล่งข้อมูลทางธุรกิจแหล่งเดียวกัน</b><br>
+          สำหรับคนบัญชี นี่คือการเปลี่ยนแปลงที่สัมผัสได้ชัดที่สุดของ S/4HANA · การกระทบยอดระหว่าง FI กับ CO ที่เคยเป็นงานประจำทุกสิ้นเดือน <b>หายไปเพราะมันเป็นตารางเดียวกันแล้ว</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-13">
+      <div class="sec-h"><span class="sec-n">13</span><h2>SAP S/4HANA คืออะไร</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">ชื่อย่อ</span>
+          <b>SAP S/4HANA</b> ย่อมาจาก <b>SAP Business Suite 4 SAP HANA</b><br>
+          <b>S</b> คือ <b>SAP Business Suite</b> · <b>4</b> คือ<b>รุ่นที่สี่ของซอฟต์แวร์ระดับองค์กรของ SAP</b> · และ <b>HANA</b> คือ<b>ฐานข้อมูลที่มันรันอยู่</b><br>
+          อ่านเต็ม ๆ คือ <b>SAP Business Suite 4 (generation) for SAP High-performance ANalytic Appliance</b>
+        </div>
+        <p>ในฐานะ<b>รุ่นที่สี่ของ SAP Business Suite</b> มันเป็นผลิตภัณฑ์ล่าสุดจาก SAP และ<b>รันได้บนฐานข้อมูล HANA เท่านั้น</b></p>
+        <div class="note">
+          <span class="nh">ข้อแลกเปลี่ยนที่สไลด์พูดตรง ๆ ว่าเป็นทั้งข้อดีและข้อเสีย</span>
+          SAP <b>เขียน SAP ECC ขึ้นใหม่ทั้งหมดตั้งแต่ฐานรากในปี 2015</b> เพื่อใช้ประโยชน์จากสมรรถนะและความสามารถด้านการวิเคราะห์ของ HANA<br>
+          <b>ข้อดี</b> คือได้ความเร็วและความสามารถใหม่เต็มที่<br>
+          <b>ข้อเสีย</b> คือ <b>S/4HANA รันได้บน HANA อย่างเดียว</b> ในขณะที่ <b>ECC รันบนฐานข้อมูลของผู้ผลิตรายอื่นได้</b> ซึ่งก็คือ AnyDB<br>
+          ประโยคนี้คือหัวใจของทั้งแท็บ และเป็นคำตอบของคำถามว่า ECC ต่างจาก S/4HANA อย่างไร
+        </div>
+        <h3>นิยามอื่นที่สไลด์ให้ไว้</h3>
+        <ul class="list">
+          <li>เป็น<b>โซลูชัน ERP ใหม่จาก SAP</b> ที่มี<b>ข้อมูลที่เรียบง่ายขึ้น</b> · <b>การออกแบบเครื่องมือที่เรียบง่าย</b> · <b>คล่องตัว</b> · <b>ใช้ง่ายขึ้น</b> · <b>คำนวณสิ่งที่ซับซ้อนได้</b> · และ<b>รองรับข้อมูลปริมาณมากขึ้น</b></li>
+          <li>ติดตั้งได้ทั้งแบบ<b>ในองค์กร</b> · <b>บนคลาวด์</b> · หรือ<b>แบบผสม</b></li>
+          <li>เป็นชุดโปรแกรมที่เปิดตัวในฐานะโซลูชัน ERP ที่แข็งแรง ซึ่งมี<b>ทั้งความสามารถ ERP และ BI</b> โดยใช้พลังการประมวลผลในหน่วยความจำของ HANA</li>
+          <li>ออกแบบมาเพื่อ<b>แก้ปัญหาที่ซับซ้อนและจัดการข้อมูลปริมาณมากกว่า ECC และ R/3</b> · ให้<b>ประสบการณ์ผู้ใช้ที่ดีกว่าด้วย SAP Fiori</b> · และ<b>เปลี่ยนจากระบบที่บันทึกรายการ ไปเป็นข้อมูลทันเวลาจากทั้งแหล่งภายในและภายนอก</b></li>
+        </ul>
+        <div class="note key">
+          <span class="nh">OLTP กับ OLAP รวมกันได้แล้ว</span>
+          สไลด์เขียนไว้ว่า ด้วย S/4HANA <b>OLTP และ OLAP ถูกรวมเข้าด้วยกันบนแพลตฟอร์มในหน่วยความจำเดียว</b><br>
+          แปลว่า<b>ไม่ต้องย้ายข้อมูลไปมา ไม่ต้องสร้างสำเนาหลายชุด และไม่มีความล่าช้าในการดูข้อมูลผลการดำเนินงานอีกต่อไป</b><br>
+          นี่คือปัญหาที่เราตั้งไว้ตั้งแต่หัวข้อที่ 2 ของแท็บที่แล้ว และนี่คือคำตอบของมัน
+        </div>
+        <h3>ข้อเท็จจริงสำคัญของ S/4HANA</h3>
+        <ul class="list">
+          <li><b>วิเคราะห์และออกรายงานได้เร็วขึ้น</b></li>
+          <li><b>ขั้นตอนในกระบวนการน้อยลง</b></li>
+          <li><b>SAP Fiori UX ใช้ได้กับทุกอุปกรณ์</b></li>
+          <li><b>ERP CRM SRM SCM และ PLM ติดตั้งอยู่ร่วมกัน</b> <span class="en">co-deployed</span></li>
+          <li><b>รองรับข้อมูลทุกชนิด</b> ทั้งสื่อสังคม ข้อความ ภูมิศาสตร์ กราฟ และการประมวลผล</li>
+          <li><b>ข้อมูลปัจจุบัน 25 เปอร์เซ็นต์ และข้อมูลย้อนหลัง 75 เปอร์เซ็นต์</b></li>
+          <li><b>ขนาดข้อมูลรวมเล็กลง</b></li>
+        </ul>
+        <div class="note">
+          <span class="nh">ข้อที่สี่คือการเปลี่ยนแปลงเชิงโครงสร้างที่ใหญ่ที่สุด</span>
+          ใน Business Suite 7 นั้น <b>CRM SRM SCM และ PLM เป็นระบบแยกที่ต้องเชื่อมต่อกัน</b> · แต่ละตัวมีฐานข้อมูลของตัวเองและต้องส่งข้อมูลหากัน<br>
+          ใน S/4HANA ทั้งหมด<b>ติดตั้งอยู่บนระบบเดียวกัน</b> · ข้อมูลลูกค้ารายเดียวกันจึงเป็น<b>แถวเดียวกัน</b> ไม่ใช่สำเนาที่ต้องกระทบยอดกัน
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-14">
+      <div class="sec-h"><span class="sec-n">14</span><h2>S/4HANA เทียบกับ SAP ERP 6.0</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">สไลด์บอกว่าต่างกันในสี่ด้าน</span>
+          <b>หนึ่ง แบบจำลองข้อมูล</b> <span class="en">Data model</span><br>
+          <b>สอง ความสามารถของระบบ</b> <span class="en">Functionalities</span><br>
+          <b>สาม ส่วนติดต่อผู้ใช้</b> <span class="en">User interface</span><br>
+          <b>สี่ การออกรายงาน</b> ซึ่งทำให้ทำรายงานทันเวลาและวิเคราะห์เชิงทำนายได้<br>
+          และแต่ละโมดูลหรือ LoB คือ FI CO MM SD PP PM QM ล้วนมีนวัตกรรมและการทำให้เรียบง่ายขึ้นในทั้งสี่ด้านนี้
+        </div>
+        <h3>แบบจำลองข้อมูลใหม่</h3>
+        <p>นี่คือด้านที่เปลี่ยนแรงที่สุดครับ · สไลด์เปรียบเทียบจำนวนตารางก่อนและหลัง</p>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>ขอบเขต</th><th>ใน Business Suite เดิม</th><th>ใน S/4HANA</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Sales and Distribution</td><td>ตารางเอกสารหลัก ตารางดัชนี ตารางสถานะ ตารางส่งออกนำเข้า ตาราง LIS ตารางดัชนีส่วนลด และตารางจัดการเอกสารออก</td><td>เหลือ <b>VBAK · LIKP · VBRK · VBAP · LIPS · VBRP · VBFA</b></td></tr>
+            <tr><td class="pc">Inventory Management</td><td>ตารางยอดรวมและตารางประวัติจำนวนมาก</td><td>เหลือตารางเดียวคือ <b>MATDOC</b></td></tr>
+            <tr><td class="pc">Material Ledger</td><td>ตารางยอดรวม ตารางเอกสาร และตารางดัชนีหลายชุด</td><td>เหลือ <b>Material Prices</b></td></tr>
+            <tr><td class="pc">Accounting</td><td>ตารางยอดรวม ตารางดัชนี และตารางเอกสารจำนวนมาก เช่น BSIS BSAS BSIK BSAK GLPCT FAGLFLEXT</td><td>เหลือ <b>BKPF</b> และ <b>ACDOCA</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>หลักการ</th><th>ความหมาย</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">Simple Data Model</td><td><b>เหลือเฉพาะตารางหลัก ไม่มีความซ้ำซ้อน</b> · <b>แยกข้อมูลหลักออกจากข้อมูลรายการอย่างชัดเจน</b> · <b>ลดขนาดหน่วยความจำที่ใช้</b></td></tr>
+            <tr><td class="pc">Principle of One</td><td><b>มีวิธีตีราคาเพียงวิธีเดียว</b> คือ Material Ledger แทนที่จะมีสองวิธีคือ IM และ ML · และมี<b>การจัดการส่วนลดที่ยืดหยุ่น</b>แทนความซ้ำซ้อนที่ยุ่งยากและมีราคาแพง</td></tr>
+            <tr><td class="pc">Throughput Increase</td><td><b>ลงบัญชีด้วยการเพิ่มแถวอย่างเดียวในระดับฐานข้อมูล</b> · <b>ไม่มีการล็อกสำหรับการตีราคาด้วยราคามาตรฐาน</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">ทำไมตารางถึงหายไปได้เยอะขนาดนั้น</span>
+          ตารางที่หายไปส่วนใหญ่เป็น<b>ตารางยอดรวม</b> <span class="en">totals tables</span> และ<b>ตารางดัชนี</b> <span class="en">index tables</span><br>
+          ตารางพวกนี้มีอยู่เพราะ<b>ฐานข้อมูลเดิมรวมยอดสดไม่ทัน</b> จึงต้องรวมไว้ล่วงหน้าแล้วเก็บไว้<br>
+          เมื่อ HANA รวมยอดจากรายการดิบได้ทันที <b>ตารางยอดรวมก็ไม่จำเป็นอีก</b> · และการตัดมันออกยังแก้ปัญหาที่ยอดรวมกับรายการไม่ตรงกันไปในตัว
+        </div>
+        <h3>การลดขนาดข้อมูล</h3>
+        <ul class="list">
+          <li>ตารางใน HANA ถูก<b>บีบอัดโดยอัตโนมัติ</b> จึงเก็บข้อมูลจำนวนมากในพื้นที่เล็กได้</li>
+          <li>ลดขนาดเพิ่มอีกด้วยการ<b>ตัดตารางและดัชนีที่ไม่จำเป็นออก</b> ซึ่งในฐานข้อมูลแบบเดิมต้องมีไว้เพื่อให้ตอบสนองทันเวลา</li>
+          <li>ใน <b>SAP Simple Finance</b> จำนวนตารางฐานข้อมูล<b>ลดจาก 15 ตารางเหลือเพียง 4 ตาราง</b></li>
+          <li>ขั้นสุดท้ายคือ<b>กลยุทธ์การจัดชั้นอายุข้อมูล</b> <span class="en">data ageing</span> โดยแบ่งข้อมูลเป็นชั้น<b>ร้อน</b>ที่อยู่ในหน่วยความจำ และชั้น<b>อุ่น</b>ที่อยู่บนดิสก์ · <b>ผู้พัฒนาไม่จำเป็นต้องรู้ว่าข้อมูลอยู่ที่ไหน</b> เพราะ HANA จัดการเอง และข้อมูลนั้น<b>ยังเรียกใช้ได้เสมอเมื่อต้องการ</b></li>
+          <li>ตัวเลขตัวอย่างที่สไลด์แสดงไล่จาก <b>593 กิกะไบต์</b> บนฐานข้อมูลเดิม เหลือ <b>118.6 กิกะไบต์</b> เมื่ออยู่บน HANA เหลือ <b>42.4 กิกะไบต์</b> เมื่อเป็น S/4HANA และเหลือ <b>8.4 กิกะไบต์</b> เมื่อนับเฉพาะข้อมูลปัจจุบัน</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-15">
+      <div class="sec-h"><span class="sec-n">15</span><h2>SAP Fiori และ Embedded Analytics</h2></div>
+      <div class="body">
+        <h3>สองหน้าตาที่มีให้เลือก</h3>
+        <p>ในระบบ S/4HANA มี<b>ส่วนติดต่อผู้ใช้สองแบบ</b> คือ<b>แบบคลาสสิกที่อยู่ใน SAP GUI</b> ซึ่งผู้ใช้ ECC 6.0 ทุกคนคุ้นเคยอยู่แล้ว และ<b>แบบใหม่คือ SAP Fiori</b> ซึ่งสร้างบนเทคโนโลยีเว็บแบบเปิด</p>
+        <div class="note key">
+          <span class="nh">ทำไม Fiori ถึงสร้างบนเทคโนโลยีเว็บ</span>
+          เพราะต้องตอบความต้องการของ<b>เศรษฐกิจดิจิทัล</b> คือ<b>เข้าถึงระบบ ERP ได้จากอุปกรณ์ใดก็ได้ที่ต่ออินเทอร์เน็ต โดยเฉพาะอุปกรณ์เคลื่อนที่</b><br>
+          เทคโนโลยีที่ใช้ได้แก่ <b>HTML5</b> · <b>JavaScript</b> · และโพรโทคอลแลกเปลี่ยนข้อมูล <b>OData</b><br>
+          โปรแกรม Fiori สร้างด้วยเทคโนโลยีอย่าง <b>SAPUI5</b> ออกแบบมาให้<b>ไม่ขึ้นกับแพลตฟอร์มและเข้าถึงได้จากอุปกรณ์หลากหลาย</b>
+        </div>
+        <div class="note key">
+          <span class="nh">ประสบการณ์ผู้ใช้ตามบทบาท · Role-Based User Experience</span>
+          <b>SAP Fiori แตกรายการขนาดใหญ่ออกเป็นแอปย่อยหลายตัวที่เหมาะกับบทบาทของผู้ใช้</b><br>
+          แอปทุกตัวเชื่อมถึงกัน งานทุกอย่างของรายการนั้นจึงยังทำได้ครบ แต่<b>จะทำก็ต่อเมื่อผู้ใช้ต้องการจะทำจริง ๆ</b><br>
+          <b>SAP Fiori launchpad</b> ทำหน้าที่เป็น<b>จุดเข้าใช้งานกลางของแอปทั้งหมดของผู้ใช้คนนั้น</b><br>
+          ส่วนหน้าจอคลาสสิกแบบ Transaction มัก<b>ยัดรายการที่ซับซ้อนรายการเดียวไว้ให้ผู้ใช้หลายบทบาทใช้ร่วมกัน</b> · งานของผู้ใช้คนเดียวจึงต้องเปิดหลายรายการหรือหลายโปรแกรม
+        </div>
+        <div class="note">
+          <span class="nh">SAP GUI จะหายไปไหม</span>
+          สไลด์พูดทั้งสองด้าน และต้องจับให้ครบทั้งคู่<br>
+          <b>ด้านที่บอกว่ายังอยู่</b> คือ SAP GUI <b>ยังได้รับการสนับสนุนสำหรับ S/4HANA รุ่นติดตั้งในองค์กร</b> และ<b>ใช้ควบคู่ไปกับแอป Fiori ได้</b> · ช่วยให้ลูกค้าเดิมปรับตัวง่ายขึ้น และยัง<b>มีหลายรายการที่ยังไม่ได้แปลงเป็นแอป Fiori</b> จึงยังต้องใช้ GUI อยู่<br>
+          <b>ด้านที่บอกว่าจะหายไป</b> คือ <b>SAP GUI กำลังถูกแทนที่ด้วย Fiori และสักวันหนึ่งจะไม่ได้รับการดูแลอีก</b> · และ<b>การพัฒนาและนวัตกรรมทั้งหมดของ SAP มุ่งไปที่ Fiori แล้ว</b> ความสามารถบางอย่างจึง<b>มีเฉพาะใน Fiori และไม่มีใน GUI</b>
+        </div>
+        <h3>Embedded Analytics</h3>
+        <div class="note key">
+          <span class="nh">ทำไมถึงเรียกว่าฝังอยู่ในระบบ</span>
+          เพราะ<b>ในอดีต การวิเคราะห์กับการประมวลผลรายการถือเป็นงานคนละอย่าง และมักมีระบบของตัวเองแยกกัน</b><br>
+          รายงานเหล่านี้ใน S/4HANA <b>ไม่ต้องใช้ระบบ BW แยกต่างหาก</b> และ<b>แสดงผลจากข้อมูลทันเวลา</b>
+        </div>
+        <p>สไลด์ยกสถานการณ์ตัวอย่างไว้ และผมคิดว่าเล่าได้ดีมาก ขอเล่าตามนะครับ</p>
+        <ol class="tl">
+          <li><span class="ty">วันแรก</span><div class="tt">ผู้ใช้สร้างใบสั่งขายให้ลูกค้าใหม่</div><div class="td">ระหว่างทำรายการ ต้องตัดสินใจว่าจะให้ส่วนลดเท่าไร โดยดูจาก<b>ความน่าจะเป็นที่ลูกค้าจะกลับมาซื้ออีก</b> · ตัดสินใจไม่ได้ จึง<b>บันทึกรายการที่ยังไม่สมบูรณ์เอาไว้</b></div></li>
+          <li><span class="ty">วันแรก ตอนเย็น</span><div class="tt">ฝ่ายวิเคราะห์ทำรายงาน</div><div class="td">มีการวิเคราะห์และออกรายงาน<b>จัดระดับมูลค่าตลอดช่วงชีวิตของลูกค้า</b> พร้อมเสนอช่วงส่วนลดที่ให้ได้</div></li>
+          <li><span class="ty">วันถัดมา</span><div class="tt">กลับมาเปิดใบสั่งขายอีกครั้ง</div><div class="td">ใส่ส่วนลดที่เหมาะสมแล้วโทรหาลูกค้าเพื่อยืนยันคำสั่งซื้อ</div></li>
+          <li><span class="ty">สายไปแล้ว</span><div class="tt">ลูกค้าชอบส่วนลดมาก แต่สั่งกับคนอื่นไปแล้ว</div><div class="td">ลูกค้า<b>สั่งซื้อกับผู้ขายที่ตอบสนองเร็วกว่าไปเรียบร้อย</b> · <b>คำสั่งซื้อนั้นหายไป</b></div></li>
+        </ol>
+        <div class="note key">
+          <span class="nh">บทสรุปของเรื่องนี้</span>
+          <b>ภายในหนึ่งรายการ ผู้ใช้ควรถูกล้อมด้วยข้อมูลเชิงลึกที่เกี่ยวข้องกับบริบทนั้น</b><br>
+          แปลว่า<b>ข้อมูลสำคัญควรปรากฏอยู่ข้างในรายการ ตรงจุดที่ต้องใช้มัน</b> ไม่ใช่อยู่ในรายงานที่ต้องไปเปิดอีกระบบหนึ่ง<br>
+          ตัวอย่างที่สไลด์ยกอีกอันหนึ่งคือ ผู้ใช้กำลังสร้างใบขอซื้อและต้องเลือกผู้ขาย · มีผู้ขายหลายรายที่ขายของชิ้นนั้นได้ · การวิเคราะห์ที่ฝังอยู่ในโปรแกรมให้ข้อมูลประกอบการตัดสินใจทันที <b>โดยไม่ต้องออกจากโปรแกรม</b> · ผู้ใช้จึง<b>เลือกผู้ขายที่มีผลงานการส่งมอบดีที่สุด</b>ได้เลย
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-16">
+      <div class="sec-h"><span class="sec-n">16</span><h2>รอบการออกรุ่นของ S/4HANA</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">วิธีอ่านเลขรุ่น</span>
+          เลขรุ่นของทั้งสองรุ่นย่อยใช้รูปแบบ <b>YYMM</b> คือ<b>ปีสองหลักตามด้วยเดือนสองหลัก</b><br>
+          เช่น <b>1909</b> หมายถึง<b>เดือนกันยายน ปี 2019</b> · และ <b>1511</b> หมายถึง<b>เดือนพฤศจิกายน ปี 2015</b>
+        </div>
+        <h3>ยุคที่หนึ่ง · ปีละรุ่น</h3>
+        <ul class="list">
+          <li>S/4HANA เปิดตัวสำหรับตลาดแบบติดตั้งในองค์กรเมื่อ<b>ต้นปี 2015</b> และรุ่น <b>1511</b> ที่ออกเดือนพฤศจิกายนนำนวัตกรรมและการทำให้เรียบง่ายมาสู่งานจัดซื้อ การผลิต ห่วงโซ่อุปทาน และอื่น ๆ</li>
+          <li>สำหรับรุ่นติดตั้งในองค์กร SAP ส่ง<b>รุ่นหลักใหม่ปีละหนึ่งรุ่น</b> และ<b>Feature Pack Stacks หรือ FPS สามชุดต่อเนื่องกันทุกไตรมาส</b></li>
+          <li>รายการรุ่นที่สไลด์ระบุ ได้แก่ <b>1511</b> เดือนพฤศจิกายน 2015 · <b>2020</b> เดือนตุลาคม 2020 · <b>2021</b> เดือนตุลาคม 2021 · <b>2022</b> เดือนตุลาคม 2022 · และ <b>2023</b> เดือนตุลาคม</li>
+        </ul>
+        <h3>ยุคที่สอง · สองปีต่อรุ่น</h3>
+        <div class="note key">
+          <span class="nh">การเปลี่ยนแปลงหลังรุ่นปี 2023</span>
+          หลังรุ่นประจำปี <b>2023</b> นั้น S/4HANA <b>เปลี่ยนไปใช้รอบการออกรุ่นทุกสองปี</b> พร้อมกับ<b>ขยายช่วงการบำรุงรักษาหลักจาก 5 ปีเป็น 7 ปี</b><br>
+          แปลว่ามี<b>รุ่นฐานหนึ่งรุ่นทุกสองปี</b> และแต่ละรุ่นฐานจะ<b>พ้นจากการบำรุงรักษาหลักเมื่อครบ 7 ปี</b><br>
+          เมื่อมีรุ่นฐานใหม่ออกมา <b>FPS จะออกทุก 6 เดือน</b> พร้อมฟีเจอร์ใหม่ที่ไม่สร้างความปั่นป่วน จนกว่ารุ่นฐานถัดไปจะออก
+        </div>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>สถานการณ์</th><th>สิ่งที่เกิดขึ้น</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">รอบใหม่</td><td>รุ่นฐานออกใน<b>ปี 2023 · 2025 · 2027</b> ไล่ไปเรื่อย ๆ · ตัวอย่างชื่อคือ S/4HANA 2025 FPS01 · FPS02 · FPS03 · FPS04</td></tr>
+            <tr><td class="pc">ติดตั้งรุ่นฐานถัดไปแล้ว</td><td><b>เริ่มนับ FPS01 ถึง FPS04 ใหม่</b>สำหรับรุ่นล่าสุด</td></tr>
+            <tr><td class="pc">ยังไม่ติดตั้งรุ่นฐานถัดไป</td><td>เข้าสู่<b>การบำรุงรักษาหลักด้วย Support Pack Stacks หรือ SPS ทุก 6 เดือน</b> เช่น SPS05 และ SPS06 ไปจนสิ้นสุดการบำรุงรักษาหลักที่ 7 ปี</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">ความต่างระหว่าง FPS กับ SPS คือจุดที่ข้อสอบชอบถาม</span>
+          <b>FPS</b> คือ <b>Feature Pack Stack</b> ซึ่ง<b>มีฟีเจอร์ใหม่มาด้วย</b> · ออกในช่วงที่รุ่นนั้นยังเป็นรุ่นล่าสุดอยู่<br>
+          <b>SPS</b> คือ <b>Support Pack Stack</b> ซึ่ง<b>มีแต่การแก้ไขและการดูแล ไม่มีฟีเจอร์ใหม่</b> · ออกหลังจากมีรุ่นฐานใหม่มาแทนที่แล้ว<br>
+          จำง่าย ๆ ว่า <b>F คือ Feature ได้ของใหม่</b> ส่วน <b>S คือ Support ได้แค่ของซ่อม</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="hana-17">
+      <div class="sec-h"><span class="sec-n">17</span><h2>สรุปและจุดที่สับสนบ่อย</h2></div>
+      <div class="body">
+        <div class="note key">
+          <span class="nh">ข้อสรุปของ S/4HANA ตามที่สไลด์ให้ไว้</span>
+          เป็น<b>ระบบ ERP รุ่นถัดไปของ SAP</b><br>
+          <b>สร้างบนฐานข้อมูลในหน่วยความจำ SAP HANA</b> จึงใช้ความสามารถทั้งหมดของแพลตฟอร์มในหน่วยความจำได้ รวมถึง<b>การขุดค้นข้อความอย่างชาญฉลาด การวิเคราะห์พยากรณ์ การจำลองสถานการณ์ และการสนับสนุนการตัดสินใจแบบทันเวลาโดยเข้าถึงข้อมูลการปฏิบัติงานทั้งหมดได้ทันที</b><br>
+          ผู้ใช้ได้<b>ส่วนติดต่อผู้ใช้ใหม่คือ SAP Fiori</b> ซึ่งให้ประสบการณ์ใหม่บนทุกอุปกรณ์<br>
+          และ<b>มีการพัฒนาโค้ดขึ้นใหม่ทั้งหมด พร้อมปรับโครงสร้างแบบจำลองข้อมูลใหม่</b>ตามโค้ดชุดใหม่นั้น
+        </div>
+        <h3>ตารางเทียบสามคำที่ต้องแยกให้ออก</h3>
+        <div class="tw"><table class="tbl">
+          <thead><tr><th>เรื่อง</th><th>SAP HANA</th><th>SAP ECC</th><th>SAP S/4HANA</th></tr></thead>
+          <tbody>
+            <tr><td class="pc">เป็นอะไร</td><td><b>ฐานข้อมูล</b>และแพลตฟอร์ม</td><td><b>ระบบ ERP</b> รุ่นก่อน</td><td><b>ระบบ ERP</b> รุ่นที่สี่</td></tr>
+            <tr><td class="pc">รันบนฐานข้อมูลอะไร</td><td>ตัวมันเองคือฐานข้อมูล</td><td><b>AnyDB</b> หรือ HANA ก็ได้</td><td><b>HANA เท่านั้น</b></td></tr>
+            <tr><td class="pc">หน้าตาผู้ใช้</td><td>ไม่มีหน้าตาผู้ใช้สำหรับงานธุรกิจโดยตรง</td><td><b>SAP GUI</b> เป็นหลัก</td><td><b>SAP Fiori</b> เป็นหลัก และยังใช้ GUI ได้</td></tr>
+            <tr><td class="pc">ปีที่เกิด</td><td>ประกาศปี <b>2008</b> หลังซื้อเทคโนโลยีมาตั้งแต่ปี 2005</td><td><b>2004</b> สำหรับ ECC 5.0</td><td><b>2015</b></td></tr>
+            <tr><td class="pc">เลิกสนับสนุนเมื่อไร</td><td>ยังเป็นผลิตภัณฑ์หลักของ SAP</td><td>บำรุงรักษาหลักถึง<b>สิ้นปี 2027</b> ส่วนขยายถึง<b>สิ้นปี 2030</b></td><td>รอบรุ่นทุกสองปี บำรุงรักษาหลัก<b>รุ่นละ 7 ปี</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="nh">สี่กับดักที่เจอบ่อยที่สุด</span>
+          <b>หนึ่ง</b> คิดว่า S/4HANA คือฐานข้อมูล · ไม่ใช่ครับ มันคือโปรแกรม ERP · ฐานข้อมูลคือ HANA<br>
+          <b>สอง</b> คิดว่า HANA เร็วเพราะอยู่ในแรมอย่างเดียว · ที่จริงมีสามอย่างประกอบกัน คือ<b>อยู่ในหน่วยความจำ</b> <b>เก็บแบบคอลัมน์</b> และ<b>บีบอัด</b><br>
+          <b>สาม</b> คิดว่า HANA เก็บแบบคอลัมน์อย่างเดียว · ที่จริง<b>เก็บได้ทั้งแถวและคอลัมน์</b><br>
+          <b>สี่</b> คิดว่า ECC รันบน HANA ไม่ได้ · ที่จริง<b>รันได้</b> ซึ่งเรียกว่า <b>Suite on HANA</b> · สิ่งที่รันบน AnyDB ไม่ได้คือ <b>S/4HANA</b> ต่างหาก
+        </div>
+        <div class="note key">
+          <span class="nh">เส้นเรื่องของสองแท็บนี้ในห้าบรรทัด</span>
+          <b>หนึ่ง</b> SAP แยกชั้นฐานข้อมูลออกมาตั้งแต่ R/3 จึงใช้ฐานข้อมูลยี่ห้อใดก็ได้ เรียกว่า AnyDB<br>
+          <b>สอง</b> แต่ฐานข้อมูลแบบดิสก์แยกงานบันทึกกับงานวิเคราะห์ออกจากกัน องค์กรจึงต้องมีระบบซ้ำซ้อนและข้อมูลไม่เคยสด<br>
+          <b>สาม</b> แรมถูกลงเป็นพันเท่าในขณะที่ดิสก์ดีขึ้นแค่สิบเท่า SAP จึงสร้าง HANA ซึ่งเก็บทุกอย่างในหน่วยความจำ แบบคอลัมน์ และบีบอัด<br>
+          <b>สี่</b> เมื่อฐานข้อมูลเร็วพอ ตารางยอดรวมและสำเนาข้อมูลทั้งหมดก็ไม่จำเป็น SAP จึงเขียน ERP ขึ้นใหม่ทั้งตัวเป็น S/4HANA<br>
+          <b>ห้า</b> และกำหนดวันสิ้นสุดการสนับสนุน Business Suite 7 เพื่อให้ลูกค้าทั้งโลกย้ายตาม ซึ่งเป็นเหตุผลที่ตลาดงานเต็มไปด้วยโครงการย้ายระบบในตอนนี้
+        </div>
+      </div>
+    </section>
+  </div>
+<!-- hn:panel:end -->  <div id="tcode" class="hidden" role="tabpanel" aria-labelledby="t-tcode">
     <div id="tcode-top"></div>
     <p class="lede">รวม <b>Transaction Code</b> ทุกตัวที่ปรากฏในเอกสารทั้งสามชุด · พิมพ์ค้นหาได้ทั้งรหัส ชื่อภาษาอังกฤษ และคำไทย เช่น พิมพ์ <b>บัญชี</b> หรือ <b>report</b> หรือ <b>SU</b></p>
     <div class="switch" role="group" aria-label="กรองตามกลุ่มงาน">
@@ -1541,9 +2503,9 @@ footer p{max-width:70ch; margin-bottom:6px}
 
   <div id="quiz" class="hidden" role="tabpanel" aria-labelledby="t-quiz">
     <div id="quiz-top"></div>
-    <p class="lede">32 ข้อ ครอบคลุมทั้งสามบท เน้นจุดที่สับสนกันบ่อยและตัวย่อที่ต้องจำ · <b>ลำดับตัวเลือกสลับใหม่ทุกครั้งที่เริ่มทำ</b> จึงจำตำแหน่งเฉลยไม่ได้ ต้องเข้าใจเนื้อหาจริง</p>
+    <p class="lede">67 ข้อ ครอบคลุมทั้งสามบท เน้นจุดที่สับสนกันบ่อยและตัวย่อที่ต้องจำ · <b>ลำดับตัวเลือกสลับใหม่ทุกครั้งที่เริ่มทำ</b> จึงจำตำแหน่งเฉลยไม่ได้ ต้องเข้าใจเนื้อหาจริง</p>
     <div class="score">
-      <span>ตอบถูก <span class="sv" id="sc-val">0</span> ข้อ · ตอบแล้ว <span class="sv" id="sc-of">0 จาก 32 ข้อ</span></span>
+      <span>ตอบถูก <span class="sv" id="sc-val">0</span> ข้อ · ตอบแล้ว <span class="sv" id="sc-of">0 จาก 67 ข้อ</span></span>
       <button type="button" id="sc-reset">เริ่มใหม่</button>
     </div>
     <div id="quiz-list"></div>
@@ -1553,7 +2515,7 @@ footer p{max-width:70ch; margin-bottom:6px}
 
 <footer>
   <div class="shell">
-    <p><b>ERP · ระบบวางแผนทรัพยากรองค์กร</b> — สรุปจากเอกสารประกอบการสอน 3 ชุด คือ <i>ERP and SAP</i> (69 หน้า) · <i>SAP Navigation</i> (67 หน้า) · <i>SAP ERP Implementation Project</i> (24 หน้า)</p>
+    <p><b>ERP · ระบบวางแผนทรัพยากรองค์กร</b> — สรุปจากเอกสารประกอบการสอน 3 ชุด คือ <i>ERP and SAP</i> (69 หน้า) · <i>SAP Navigation</i> (67 หน้า) · <i>SAP ERP Implementation Project</i> (24 หน้า) · <i>Traditional RDBMS in SAP System AnyDB</i> (12 หน้า) · <i>SAP Business Suite 7</i> (13 หน้า) · <i>SAP HANA Overview</i> (32 หน้า) · <i>SAP S/4HANA Overview</i> (39 หน้า)</p>
     <p>ภาพประกอบทั้งหมดเป็นภาพต้นฉบับจากสไลด์ ฝังไว้ในหน้าเว็บโดยตรงจึงเปิดดูได้แม้ไม่มีอินเทอร์เน็ต · ค่า Client, User และ Password ที่แสดงในบทที่ 2 เป็นค่าตัวอย่างของระบบฝึกปฏิบัติ AC4 ตามที่ระบุในเอกสาร</p>
   </div>
 </footer>
@@ -1562,7 +2524,7 @@ footer p{max-width:70ch; margin-bottom:6px}
 (function(){
   "use strict";
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var rails = {ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', tcode:'rail-tcode', quiz:'rail-quiz'};
+  var rails = {/* hn:railjs:start */db:'rail-db', hana:'rail-hana', /* hn:railjs:end */ch1:'rail-ch1', ch2:'rail-ch2', ch3:'rail-ch3', tcode:'rail-tcode', quiz:'rail-quiz'};
   tabs.forEach(function(t){
     t.addEventListener('click', function(){
       var id = t.getAttribute('aria-controls');
@@ -1734,7 +2696,147 @@ footer p{max-width:70ch; margin-bottom:6px}
 
     {q:'สิ่งแรกที่ Exotic Food ระบุว่าบริษัทต้องทำก่อนเลือกระบบ ERP คืออะไร',
      o:['ลิสต์ปัญหาที่มีอยู่ให้ครบถ้วนก่อน แล้วค่อยเลือกระบบที่ครอบคลุมที่สุด','เลือกยี่ห้อ ERP ที่ดังที่สุดในตลาดก่อน','จ้างที่ปรึกษาเข้ามาสำรวจก่อนเป็นอันดับแรก','ตั้งงบประมาณให้ชัดเจนก่อนทุกอย่าง'], a:0,
-     e:'ลำดับที่บริษัททำคือ ลิสต์ปัญหาให้ครบ → เลือก ERP ที่ครอบคลุมการทำงานได้มากที่สุดและปรับแต่งได้ → จนมาเจอโซลูชันของ SAP ที่ตอบโจทย์มากที่สุด'}
+     e:'ลำดับที่บริษัททำคือ ลิสต์ปัญหาให้ครบ → เลือก ERP ที่ครอบคลุมการทำงานได้มากที่สุดและปรับแต่งได้ → จนมาเจอโซลูชันของ SAP ที่ตอบโจทย์มากที่สุด'}/* hn:quiz:start */,
+    {q:'ชั้นใดของสถาปัตยกรรมสามชั้นของ SAP ที่รันโปรแกรม ABAP',
+     o:['Application Tier','Client Tier','Database Tier','Presentation Tier'], a:0,
+     e:'ตรรกะทางธุรกิจทั้งหมดอยู่ที่ Application Server ซึ่งรันโปรแกรม ABAP ส่วน Client Tier ทำหน้าที่รับคำสั่งและแสดงผลเท่านั้น และ Database Tier เก็บข้อมูล'},
+
+    {q:'อะไรคือตัวกลางที่ทำให้เปลี่ยนยี่ห้อฐานข้อมูลใต้ระบบ SAP ได้โดยไม่ต้องเขียนโปรแกรมใหม่',
+     o:['Open SQL','ABAP Workbench','NetWeaver Portal','SAP GUI'], a:0,
+     e:'โปรแกรม ABAP ไม่ได้คุยกับฐานข้อมูลด้วยภาษาเฉพาะของยี่ห้อนั้น แต่คุยผ่าน Open SQL ซึ่งเป็นภาษากลาง ตัวกลางนี้คือเหตุผลทั้งหมดที่ทำให้สลับฐานข้อมูลได้'},
+
+    {q:'คำว่า <b>AnyDB</b> ในบริบทของ SAP หมายถึงอะไร',
+     o:['ฐานข้อมูลยี่ห้อใดก็ได้ที่ไม่ใช่ HANA ซึ่ง SAP รับรองให้ใช้กับระบบของตน','ฐานข้อมูลที่ SAP พัฒนาขึ้นเองทั้งหมด','โหมดที่ให้ SAP เลือกฐานข้อมูลอัตโนมัติตามปริมาณงาน','ฐานข้อมูลที่ติดตั้งบนคลาวด์เท่านั้น'], a:0,
+     e:'AnyDB เป็นคำที่ SAP ใช้เรียกฐานข้อมูลของผู้ผลิตรายอื่นที่รับรองให้ใช้ได้ ได้แก่ Oracle DB2 SQL Server Sybase ASE และ MaxDB ส่วน HANA เป็นของ SAP เองจึงไม่นับเป็น AnyDB'},
+
+    {q:'สิทธิ์ใช้งาน Oracle ที่ซื้อผ่าน SAP เป็นสิทธิ์แบบใด และมีข้อจำกัดอย่างไร',
+     o:['แบบ ASFU ซึ่งให้เชื่อมต่อฐานข้อมูลได้เฉพาะจากซอฟต์แวร์ของ SAP เท่านั้น','แบบเต็มรูปแบบ ใช้กับโปรแกรมใดก็ได้ไม่จำกัด','แบบทดลองใช้ มีอายุสามปีแล้วต้องต่ออายุ','แบบเฉพาะผู้ใช้ นับตามจำนวนคนที่ล็อกอิน'], a:0,
+     e:'ASFU ย่อมาจาก Application Specific Full Use เรียกอีกอย่างว่า Oracle runtime หรือ OEM license ข้อยกเว้นเดียวคือเครื่องมือดูแลฐานข้อมูลของผู้ผลิตรายอื่น ถ้าจะเอาฐานข้อมูลก้อนนั้นไปต่อกับโปรแกรมอื่นต้องซื้อสิทธิ์เต็มแยกต่างหาก'},
+
+    {q:'เหตุใด SAP จึงมีแรงจูงใจทางธุรกิจที่จะสร้างฐานข้อมูลของตัวเอง',
+     o:['เพราะเป็นเจ้าตลาด ERP แต่มีส่วนแบ่งตลาดฐานข้อมูลไม่ถึงสิบเปอร์เซ็นต์ เงินค่าฐานข้อมูลจึงไหลไปหาคู่แข่ง','เพราะฐานข้อมูลของผู้ผลิตรายอื่นใช้กับ ABAP ไม่ได้','เพราะกฎหมายยุโรปกำหนดให้ผู้ผลิต ERP ต้องมีฐานข้อมูลของตนเอง','เพราะลูกค้าร้องขอให้มีฐานข้อมูลที่เก็บข้อมูลบนดิสก์เท่านั้น'], a:0,
+     e:'ส่วนแบ่งตลาดฐานข้อมูลที่สไลด์แสดงคือ Oracle 45.6 Microsoft 19.1 IBM 15.7 และ SAP เพียง 9.6 เปอร์เซ็นต์ ทุกครั้งที่ SAP ขายระบบได้ เงินค่าฐานข้อมูลส่วนใหญ่จึงไปอยู่กับคู่แข่งโดยเฉพาะ Oracle'},
+
+    {q:'วันสิ้นสุดการบำรุงรักษาหลักของ SAP Business Suite 7 ถูกเลื่อนจากปีใดไปเป็นปีใด',
+     o:['จากปี 2025 ไปเป็นปี 2027','จากปี 2020 ไปเป็นปี 2025','จากปี 2027 ไปเป็นปี 2030','จากปี 2030 ไปเป็นปี 2040'], a:0,
+     e:'เดิมกำหนดไว้ที่ปี 2025 แล้วเลื่อนเป็นสิ้นปี 2027 โดยมีการบำรุงรักษาส่วนขยายต่อไปจนถึงสิ้นปี 2030 ส่วนปี 2040 คือปีที่การสนับสนุนการย้ายระบบไป S/4HANA สิ้นสุดลง'},
+
+    {q:'องค์ประกอบทั้งห้าของ SAP Business Suite 7 คือข้อใด',
+     o:['ERP · CRM · SRM · SCM · PLM','ERP · CRM · BI · BW · HANA','FI · CO · MM · SD · PP','ECC · Fiori · NetWeaver · HANA · Leonardo'], a:0,
+     e:'ภาพในสไลด์วาง SAP ERP ไว้ตรงกลาง ล้อมด้วย PLM ด้านบน SCM ด้านล่าง SRM ด้านซ้าย และ CRM ด้านขวา โดยมี SAP NetWeaver เป็นฐานรองรับทั้งหมด ส่วน FI CO MM SD PP เป็นโมดูลภายใน ECC ไม่ใช่องค์ประกอบของ Suite'},
+
+    {q:'<b>ECC</b> ย่อมาจากอะไร',
+     o:['ERP Central Component','Enterprise Core Computing','Enterprise Cloud Controller','ERP Consolidated Components'], a:0,
+     e:'SAP ERP Central Component คือชื่อทางเทคนิคของแกนกลางของ Business Suite ในภาพของ Business Suite กล่องตรงกลางที่เขียนว่า SAP ERP กับที่เขียนว่า ECC คือตัวเดียวกัน'},
+
+    {q:'SAP ซื้อบริษัท Sybase ในปีใด และด้วยเงินเท่าใด',
+     o:['ปี 2010 ด้วยเงิน 5.8 พันล้านดอลลาร์','ปี 2005 ด้วยเงิน 2.3 พันล้านดอลลาร์','ปี 2013 ด้วยเงิน 8.0 พันล้านดอลลาร์','ปี 2015 ด้วยเงิน 4.5 พันล้านดอลลาร์'], a:0,
+     e:'SAP ซื้อ Sybase ในปี 2010 แต่แม้ซื้อแล้ว ระบบ SAP จำนวนมากก็ยังใช้ Oracle และ DB2 อยู่ดี ซึ่งเป็นส่วนหนึ่งของเหตุผลที่ต้องเดินหน้าสร้าง HANA ต่อไป'},
+
+    {q:'ข้อใดไม่ใช่เหตุผลที่สไลด์ยกมาว่าทำให้ฐานข้อมูลในหน่วยความจำเร็วกว่าฐานข้อมูลบนดิสก์',
+     o:['หน่วยความจำมีความจุมากกว่าดิสก์','การเข้าถึงดิสก์ช้ากว่าการเข้าถึงหน่วยความจำ','อัลกอริทึมที่ใช้ปรับแต่งภายในเรียบง่ายกว่า','ใช้คำสั่งซีพียูน้อยกว่า'], a:0,
+     e:'ความจุของหน่วยความจำน้อยกว่าดิสก์มาก และแพงกว่าด้วย ซึ่งเป็นข้อจำกัดไม่ใช่ข้อได้เปรียบ เหตุผลที่สไลด์ให้ไว้มีสามข้อคือ ดิสก์ช้ากว่า อัลกอริทึมเรียบง่ายกว่า และใช้คำสั่งซีพียูน้อยกว่า'},
+
+    {q:'<b>HANA</b> ย่อมาจากอะไร',
+     o:['High performance ANalytics Appliance','Hasso And Next Architecture','Hybrid ANalytical Access','High Availability Native Application'], a:0,
+     e:'ชื่อนี้มีคำว่า Appliance อยู่ด้วย ซึ่งไม่ได้เป็นแค่ตัวอักษรในชื่อย่อ แต่สะท้อนวิธีส่งมอบจริง คือ SAP เริ่มส่งมอบ HANA ในรูปเครื่องสำเร็จรูปที่ปรับแต่งมาแล้ว'},
+
+    {q:'นิยามที่ถูกต้องที่สุดของ SAP HANA คือข้อใด',
+     o:['ระบบจัดการฐานข้อมูลเชิงสัมพันธ์ แบบในหน่วยความจำ และจัดเก็บแบบคอลัมน์','ระบบ ERP รุ่นที่สี่ของ SAP','ส่วนติดต่อผู้ใช้แบบใหม่ที่ทำงานบนเบราว์เซอร์','ชุดเครื่องมือวิเคราะห์ข้อมูลที่ติดตั้งแยกจากฐานข้อมูล'], a:0,
+     e:'HANA คือฐานข้อมูล ส่วนระบบ ERP รุ่นที่สี่คือ S/4HANA และส่วนติดต่อผู้ใช้แบบใหม่คือ SAP Fiori ข้อสอบชอบสลับสามคำนี้กัน'},
+
+    {q:'SAP HANA จัดเก็บข้อมูลแบบใด',
+     o:['เก็บได้ทั้งแบบแถวและแบบคอลัมน์','เก็บแบบคอลัมน์อย่างเดียวเท่านั้น','เก็บแบบแถวอย่างเดียวเท่านั้น','เก็บเป็นเอกสารแบบไม่มีโครงสร้าง'], a:0,
+     e:'HANA เก็บได้ทั้งสองแบบ จึงรองรับทั้งงานรายการประจำวันซึ่งเหมาะกับการเก็บแบบแถว และงานวิเคราะห์ซึ่งเหมาะกับการเก็บแบบคอลัมน์ นี่คือวิธีที่ HANA แก้ปัญหา OLTP กับ OLAP ที่ขัดกันเอง'},
+
+    {q:'เหตุใดการจัดเก็บแบบคอลัมน์จึงบีบอัดข้อมูลได้ดีกว่าการจัดเก็บแบบแถว',
+     o:['เพราะข้อมูลในคอลัมน์เดียวกันเป็นชนิดเดียวกันและมีค่าซ้ำกันมาก จึงหาแบบแผนมาบีบอัดได้ง่าย','เพราะคอลัมน์ใช้พื้นที่น้อยกว่าแถวโดยธรรมชาติ','เพราะการเก็บแบบคอลัมน์ไม่ต้องเก็บชื่อฟิลด์','เพราะข้อมูลแบบคอลัมน์ถูกเข้ารหัสด้วยวิธีที่ซับซ้อนกว่า'], a:0,
+     e:'คอลัมน์ประเทศของใบสั่งขายหนึ่งล้านใบอาจมีค่าต่างกันแค่ไม่กี่สิบค่า เก็บเรียงต่อกันแล้วใช้พจนานุกรมบีบอัดจึงลดขนาดได้มหาศาล ส่วนการเก็บแบบแถวมีข้อมูลคนละชนิดอยู่ข้างกัน จึงหาแบบแผนได้ยากกว่ามาก'},
+
+    {q:'วิธีบีบอัดหลักที่ SAP HANA ใช้เรียกว่าอะไร และทำงานอย่างไร',
+     o:['Dictionary compression คือทำพจนานุกรมของค่าที่ไม่ซ้ำ แล้วเก็บเป็นเลขรหัสที่ชี้ไปยังพจนานุกรมแทน','Image compression คือแปลงข้อมูลเป็นภาพแล้วย่อขนาด','Lossy compression คือทิ้งข้อมูลที่ไม่สำคัญออกบางส่วน','Archive compression คือย้ายข้อมูลเก่าไปเก็บนอกระบบ'], a:0,
+     e:'ลำดับของรหัสในคอลัมน์บอกเองว่าแถวไหนเป็นค่าอะไร จึงไม่ต้องเก็บเลขแถวเพิ่ม วิธีบีบอัดอื่นที่สไลด์เอ่ยถึงได้แก่ run length cluster และ prefix ส่วนการบีบอัดของฐานข้อมูลจะไม่ทิ้งข้อมูลใดเลย'},
+
+    {q:'ความต่างระหว่างการส่งมอบ HANA แบบ Appliance กับแบบ TDI คือข้อใด',
+     o:['Appliance คือฮาร์ดแวร์ที่ตั้งค่ามาแล้วทั้งชุด ส่วน TDI ให้ใช้ฮาร์ดแวร์ที่องค์กรมีอยู่แล้วได้ยืดหยุ่นกว่า','Appliance ติดตั้งบนคลาวด์ ส่วน TDI ติดตั้งในองค์กร','Appliance ใช้กับ S/4HANA ส่วน TDI ใช้กับ ECC','Appliance ใช้ลินุกซ์ ส่วน TDI ใช้วินโดวส์'], a:0,
+     e:'TDI ย่อมาจาก Tailored Data Center Integration พูดอีกอย่างคือ Appliance แลกความยืดหยุ่นกับความเร็วในการติดตั้งและความชัดเจนเรื่องผู้รับผิดชอบ ส่วน TDI แลกกลับกัน และทั้งสองแบบใช้ได้ทั้งในองค์กรและบนคลาวด์'},
+
+    {q:'ความสามารถ <b>Dynamic Tiering</b> ของ HANA ทำอะไร',
+     o:['เก็บข้อมูลที่ใช้บ่อยซึ่งเรียกว่าข้อมูลร้อนไว้ในหน่วยความจำ และเก็บข้อมูลที่ใช้ไม่บ่อยซึ่งเรียกว่าข้อมูลอุ่นไว้บนดิสก์','แบ่งผู้ใช้เป็นระดับตามสิทธิ์การเข้าถึงข้อมูล','ปรับจำนวนเซิร์ฟเวอร์ขึ้นลงอัตโนมัติตามปริมาณงาน','จัดลำดับความสำคัญของคำสั่งค้นหาที่เข้ามาพร้อมกัน'], a:0,
+     e:'ข้อนี้สำคัญเพราะบอกว่า HANA ไม่ได้เอาทุกอย่างยัดลงแรมแบบไม่คิด แรมยังแพงกว่าดิสก์มาก จึงต้องเลือกว่าข้อมูลอะไรคุ้มที่จะอยู่ในแรม'},
+
+    {q:'บริการใดของ HANA ที่ทำให้เข้าถึงข้อมูลในระบบอื่นได้โดยไม่ต้องย้ายข้อมูลเข้ามา',
+     o:['Smart Data Access','Smart Data Integration','Smart Data Streaming','Remote Data Sync'], a:0,
+     e:'Smart Data Access ใช้รูปแบบ federation คือข้อมูลยังอยู่ที่ระบบต้นทางแล้ว HANA มองทะลุเข้าไป ส่วน Smart Data Integration ใช้รูปแบบ loading คือย้ายข้อมูลเข้ามาเก็บจริง'},
+
+    {q:'บันไดสี่ขั้นของการวิเคราะห์ ขั้นที่ตอบคำถามว่าอะไรจะเกิดขึ้นในอนาคต คือขั้นใด',
+     o:['Predictive Analytics','Descriptive Analytics','Diagnostic Analytics','Prescriptive Analytics'], a:0,
+     e:'Descriptive ตอบว่าเกิดอะไรขึ้น Diagnostic ตอบว่าทำไมถึงเกิด Predictive ตอบว่าอะไรจะเกิดขึ้น และ Prescriptive ตอบว่าเราจะทำให้มันเกิดขึ้นได้อย่างไร'},
+
+    {q:'SAP ซื้อบริษัทใดในปี 2013 เพื่อเสริมความสามารถด้านการวิเคราะห์เชิงทำนาย',
+     o:['KXEN','Hybris','Sybase','Business Objects'], a:0,
+     e:'SAP ประกาศแผนเข้าซื้อ KXEN เมื่อวันที่ 10 กันยายน 2013 และปิดดีลวันที่ 1 ตุลาคม 2013 ส่วน Hybris ถูกซื้อในปีเดียวกันแต่เป็นเรื่องของ CRM และ Sybase ถูกซื้อในปี 2010'},
+
+    {q:'<b>PAL</b> ใน SAP HANA คืออะไร',
+     o:['คลังฟังก์ชันวิเคราะห์เชิงทำนาย ซึ่งเรียกใช้ได้จากในโพรซีเยอร์ SQL Script','ภาษาโปรแกรมใหม่ที่ใช้แทน ABAP','โพรโทคอลสำหรับเชื่อมต่อกับอุปกรณ์ IoT','ระบบจัดการสิทธิ์ผู้ใช้ของ HANA'], a:0,
+     e:'PAL ย่อมาจาก Predictive Analytics Library เป็นหนึ่งในองค์ประกอบของ Application Function Library หรือ AFL อัลกอริทึมของ PAL แบ่งเป็นสิบหมวด และการที่มันรันอยู่ในฐานข้อมูลแปลว่าไม่ต้องดึงข้อมูลออกมาวิเคราะห์ข้างนอก'},
+
+    {q:'<b>S/4HANA</b> ย่อมาจากอะไร',
+     o:['SAP Business Suite 4 SAP HANA','SAP Solution 4 High Availability','Simplified 4th Architecture','SAP Suite for ABAP 4 HANA'], a:0,
+     e:'S คือ SAP Business Suite เลข 4 คือรุ่นที่สี่ของซอฟต์แวร์ระดับองค์กรของ SAP และ HANA คือฐานข้อมูลที่มันรันอยู่'},
+
+    {q:'ความต่างที่สำคัญที่สุดระหว่าง SAP ECC กับ SAP S/4HANA ในแง่ฐานข้อมูลคือข้อใด',
+     o:['ECC รันบนฐานข้อมูลยี่ห้อใดก็ได้ ส่วน S/4HANA รันบน HANA เท่านั้น','ECC รันบน HANA เท่านั้น ส่วน S/4HANA รันบนยี่ห้อใดก็ได้','ทั้งคู่รันบน HANA เท่านั้น','ทั้งคู่รันบนฐานข้อมูลยี่ห้อใดก็ได้'], a:0,
+     e:'SAP เขียน ECC ขึ้นใหม่ทั้งหมดตั้งแต่ฐานรากในปี 2015 เพื่อใช้ประโยชน์จาก HANA เต็มที่ สไลด์เรียกสิ่งนี้ว่าเป็นทั้งข้อดีและข้อเสีย คือได้ความสามารถเต็มที่แต่ผูกติดกับฐานข้อมูลเดียว ส่วน ECC ที่รันบน HANA ก็มี เรียกว่า Suite on HANA'},
+
+    {q:'ในประวัติของ SAP มีการเขียนโค้ดขึ้นใหม่ทั้งชุดหรือ new codeline กี่ครั้ง และตอนไหนบ้าง',
+     o:['สองครั้ง คือตอน R/3 ในปี 1992 และตอน S/4HANA ในปี 2015','สามครั้ง คือตอน R/2 R/3 และ S/4HANA','ครั้งเดียว คือตอน S/4HANA','ทุกครั้งที่ออกรุ่นใหม่ถือเป็น new codeline ทั้งหมด'], a:0,
+     e:'เส้นแบ่ง new codeline ในเส้นเวลาของสไลด์ขีดไว้สองจุดเท่านั้น ทุกอย่างระหว่าง R/3 กับ Business Suite คือการต่อยอดจากฐานโค้ดเดิม นี่คือเหตุผลที่การย้ายจาก ECC ไป S/4HANA ยากกว่าการอัปเกรดรุ่นปกติมาก'},
+
+    {q:'<b>Unified General Ledger</b> ที่นำมาใช้ใน S/4HANA Finance 1503 ทำอะไร',
+     o:['รวมองค์ประกอบที่เคยแยกกันคือ FI กับ CO เข้ามาเป็นแหล่งข้อมูลเดียวกัน','รวมบัญชีของทุกบริษัทในเครือเข้าเป็นชุดเดียว','รวมสกุลเงินทุกสกุลให้แสดงเป็นสกุลเดียว','รวมงบการเงินของทุกงวดเข้าเป็นรายงานเดียว'], a:0,
+     e:'สำหรับคนบัญชีนี่คือการเปลี่ยนแปลงที่สัมผัสได้ชัดที่สุดของ S/4HANA การกระทบยอดระหว่าง FI กับ CO ที่เคยเป็นงานประจำทุกสิ้นเดือน หายไปเพราะมันกลายเป็นตารางเดียวกันแล้ว'},
+
+    {q:'ใน S/4HANA บัญชีแยกประเภทของงานบัญชีถูกยุบเหลือตารางหลักกี่ตาราง และชื่ออะไร',
+     o:['สองตาราง คือ BKPF และ ACDOCA','ตารางเดียว คือ MATDOC','สี่ตาราง คือ BSIS BSAS BSIK และ BSAK','สามตาราง คือ BKPF BSEG และ GLT0'], a:0,
+     e:'ตารางที่หายไปส่วนใหญ่เป็นตารางยอดรวมและตารางดัชนี ซึ่งมีอยู่เพราะฐานข้อมูลเดิมรวมยอดสดไม่ทัน เมื่อ HANA รวมยอดจากรายการดิบได้ทันที ตารางพวกนั้นก็ไม่จำเป็นอีก ส่วน MATDOC คือตารางเดียวที่เหลือของงาน Inventory Management'},
+
+    {q:'หลักการ <b>Principle of One</b> ใน S/4HANA หมายถึงอะไร',
+     o:['มีวิธีตีราคาเพียงวิธีเดียวคือ Material Ledger แทนที่จะมีสองวิธี','มีผู้ใช้ได้เพียงคนเดียวต่อหนึ่งรายการ','มีฐานข้อมูลได้เพียงหนึ่งชุดต่อหนึ่งองค์กร','มีรุ่นของซอฟต์แวร์ได้เพียงรุ่นเดียวต่อหนึ่งปี'], a:0,
+     e:'เดิมมีสองวิธีคือ IM และ ML นอกจากนี้ยังมีการจัดการส่วนลดที่ยืดหยุ่นแทนความซ้ำซ้อนที่ยุ่งยากและมีราคาแพง หลักการนี้เป็นหนึ่งในสามหลักการของแบบจำลองข้อมูลใหม่ คู่กับ Simple Data Model และ Throughput Increase'},
+
+    {q:'เทคโนโลยีใดที่ SAP Fiori สร้างขึ้นบนพื้นฐานนั้น',
+     o:['HTML5 · JavaScript และโพรโทคอล OData','ABAP และ Dynpro','Java Swing และ JDBC','Flash และ ActionScript'], a:0,
+     e:'เหตุผลที่ต้องใช้เทคโนโลยีเว็บแบบเปิดคือเพื่อให้เข้าถึงระบบ ERP ได้จากอุปกรณ์ใดก็ได้ที่ต่ออินเทอร์เน็ต โดยเฉพาะอุปกรณ์เคลื่อนที่ และโปรแกรม Fiori สร้างด้วยเทคโนโลยีอย่าง SAPUI5'},
+
+    {q:'แนวคิด Role-Based User Experience ของ SAP Fiori ต่างจากหน้าจอแบบ Transaction เดิมอย่างไร',
+     o:['Fiori แตกรายการขนาดใหญ่ออกเป็นแอปย่อยหลายตัวที่เหมาะกับบทบาทของผู้ใช้ ส่วนแบบเดิมยัดรายการที่ซับซ้อนรายการเดียวไว้ให้ผู้ใช้หลายบทบาทใช้ร่วมกัน','Fiori ให้ผู้ใช้หนึ่งคนทำได้เพียงหนึ่งหน้าที่เท่านั้น','Fiori ตัดความสามารถบางอย่างออกเพื่อให้หน้าจอเรียบง่าย','Fiori ใช้ได้เฉพาะผู้บริหารระดับสูง'], a:0,
+     e:'แอปทุกตัวเชื่อมถึงกัน งานทุกอย่างของรายการนั้นจึงยังทำได้ครบ แต่จะทำก็ต่อเมื่อผู้ใช้ต้องการจริง และ Fiori launchpad ทำหน้าที่เป็นจุดเข้าใช้งานกลางของแอปทั้งหมดของผู้ใช้คนนั้น'},
+
+    {q:'ข้อใดกล่าวถูกต้องเกี่ยวกับ SAP GUI ใน S/4HANA',
+     o:['ยังได้รับการสนับสนุนและใช้ควบคู่กับ Fiori ได้ แต่กำลังถูกแทนที่และความสามารถใหม่บางอย่างมีเฉพาะใน Fiori','ถูกยกเลิกไปแล้วตั้งแต่ S/4HANA รุ่นแรก','เป็นส่วนติดต่อผู้ใช้เพียงแบบเดียวที่ S/4HANA รองรับ','ใช้ได้เฉพาะกับรุ่นที่ติดตั้งบนคลาวด์'], a:0,
+     e:'สไลด์พูดทั้งสองด้าน ด้านที่บอกว่ายังอยู่คือ GUI ยังถูกสนับสนุนสำหรับรุ่นติดตั้งในองค์กร และยังมีหลายรายการที่ยังไม่ได้แปลงเป็นแอป Fiori ด้านที่บอกว่าจะหายไปคือการพัฒนาและนวัตกรรมทั้งหมดของ SAP มุ่งไปที่ Fiori แล้ว'},
+
+    {q:'เหตุใดรายงานใน S/4HANA จึงเรียกว่า Embedded Analytics',
+     o:['เพราะการวิเคราะห์ฝังอยู่ในระบบเดียวกับรายการ ไม่ต้องใช้ระบบ BW แยกต่างหาก และแสดงผลจากข้อมูลทันเวลา','เพราะต้องฝังโค้ดวิเคราะห์ลงในโปรแกรมเอง','เพราะรายงานถูกฝังเป็นภาพในเอกสาร','เพราะใช้ได้เฉพาะเมื่อฝังอุปกรณ์เสริมเข้ากับเซิร์ฟเวอร์'], a:0,
+     e:'ในอดีตการวิเคราะห์กับการประมวลผลรายการถือเป็นงานคนละอย่างและมักมีระบบของตัวเองแยกกัน แนวคิดของ Embedded Analytics คือภายในหนึ่งรายการ ผู้ใช้ควรถูกล้อมด้วยข้อมูลเชิงลึกที่เกี่ยวข้องกับบริบทนั้น'},
+
+    {q:'ความต่างระหว่าง <b>FPS</b> กับ <b>SPS</b> ของ S/4HANA คือข้อใด',
+     o:['FPS มีฟีเจอร์ใหม่มาด้วย ส่วน SPS มีแต่การแก้ไขและการดูแล ไม่มีฟีเจอร์ใหม่','FPS ใช้กับรุ่นคลาวด์ ส่วน SPS ใช้กับรุ่นติดตั้งในองค์กร','FPS ออกทุกปี ส่วน SPS ออกทุกเดือน','FPS เป็นรุ่นทดลอง ส่วน SPS เป็นรุ่นใช้งานจริง'], a:0,
+     e:'FPS ย่อมาจาก Feature Pack Stack ออกในช่วงที่รุ่นนั้นยังเป็นรุ่นล่าสุด ส่วน SPS ย่อมาจาก Support Pack Stack ออกหลังจากมีรุ่นฐานใหม่มาแทนที่แล้ว จำง่าย ๆ ว่า F คือ Feature ได้ของใหม่ ส่วน S คือ Support ได้แค่ของซ่อม'},
+
+    {q:'เลขรุ่นของ S/4HANA ใช้รูปแบบใด และ 1909 หมายถึงอะไร',
+     o:['รูปแบบ YYMM คือปีสองหลักตามด้วยเดือนสองหลัก 1909 จึงหมายถึงเดือนกันยายน ปี 2019','รูปแบบรุ่นหลักจุดรุ่นย่อย 1909 จึงหมายถึงรุ่น 19 ย่อย 09','รูปแบบลำดับที่ออก 1909 จึงหมายถึงรุ่นที่ 1909','รูปแบบ MMYY คือเดือนสองหลักตามด้วยปีสองหลัก 1909 จึงหมายถึงเดือนตุลาคม ปี 1909'], a:0,
+     e:'ตัวอย่างอื่นคือ 1511 หมายถึงเดือนพฤศจิกายน ปี 2015 ซึ่งเป็นรุ่นแรกของ S/4HANA สำหรับตลาดแบบติดตั้งในองค์กร'},
+
+    {q:'หลังรุ่นประจำปี 2023 รอบการออกรุ่นของ S/4HANA เปลี่ยนไปอย่างไร',
+     o:['เปลี่ยนเป็นออกรุ่นฐานทุกสองปี และขยายการบำรุงรักษาหลักจาก 5 ปีเป็น 7 ปี','เปลี่ยนเป็นออกรุ่นทุกหกเดือน','เลิกออกรุ่นใหม่ และให้ใช้เฉพาะรุ่นบนคลาวด์','เปลี่ยนเป็นออกรุ่นทุกสามปี และลดการบำรุงรักษาเหลือ 3 ปี'], a:0,
+     e:'รุ่นฐานจึงออกในปี 2023 2025 2027 ไล่ไปเรื่อย ๆ และเมื่อมีรุ่นฐานใหม่ออกมา FPS จะออกทุกหกเดือนพร้อมฟีเจอร์ใหม่ที่ไม่สร้างความปั่นป่วน จนกว่ารุ่นฐานถัดไปจะออก'},
+
+    {q:'ข้อใดเป็นความเข้าใจผิดเกี่ยวกับ SAP HANA',
+     o:['HANA เร็วเพราะเก็บข้อมูลไว้ในหน่วยความจำเพียงอย่างเดียว','HANA รองรับคำสั่ง SQL','HANA รันได้บนระบบปฏิบัติการลินุกซ์','HANA เก็บข้อมูลได้ทั้งแบบแถวและแบบคอลัมน์'], a:0,
+     e:'ความเร็วของ HANA มาจากสามอย่างประกอบกัน คือเก็บในหน่วยความจำ เก็บแบบคอลัมน์ และบีบอัด ไม่ใช่เรื่องหน่วยความจำอย่างเดียว ส่วนอีกสามข้อถูกต้องทั้งหมด'},
+/* hn:quiz:end */
   ];
 
   var listEl = document.getElementById('quiz-list');
@@ -2819,7 +3921,7 @@ footer p{max-width:70ch; margin-bottom:6px}
 </script>
 
 <script type="application/json" id="cn-data">
-{"ch1":{"s":"ERP และ SAP","t":"บทที่ 1 · ERP และ SAP","c":[{"h":"เปิดบท","s":"a1","t":["สวัสดีครับทุกคน ยินดีต้อนรับสู่วิชาระบบวางแผนทรัพยากรองค์กรนะครับ","บทแรกนี้เราจะตอบสามคำถาม ERP คืออะไร ทำไมองค์กรถึงต้องการมัน และ SAP เข้ามาเกี่ยวข้องยังไง","ก่อนอื่น ตลาด ERP ทุกวันนี้ถูกครองโดยผู้เล่นไม่กี่ราย โดยมี SAP เป็นเบอร์หนึ่ง ตามด้วย Oracle และ Microsoft Dynamics","ทีนี้หลายคนอาจสงสัยว่าทำไมวิชานี้เลือกสอน SAP","เหตุผลตรงไปตรงมาเลยครับ เพราะองค์กรใหญ่ทั่วโลกใช้ตัวนี้มากที่สุด และเป็นทักษะที่ตลาดแรงงานต้องการจริง ๆ จบไปแล้วใช้ได้"]},{"h":"ชีวิตก่อนมี ERP","s":"a2","t":["ทีนี้ผมอยากให้ลองนึกภาพองค์กรสมัยก่อนที่ยังไม่มี ERP นะครับ","ฝ่ายขายมีระบบของตัวเอง ฝ่ายผลิตมีของตัวเอง บัญชีก็มีอีกระบบหนึ่ง ต่างคนต่างอยู่","ปัญหาที่ตามมามีสองอย่างใหญ่ ๆ","อย่างแรก ต้องสร้างสะพานเชื่อมข้อมูลระหว่างระบบ ที่เรียกว่า interface และยิ่งมีระบบเยอะ จำนวนสะพานยิ่งพุ่งขึ้นแบบทวีคูณ","อย่างที่สอง ข้อมูลชุดเดียวกันถูกเก็บไว้หลายที่ แล้วมันไม่ตรงกัน สุดท้ายก็ต้องเสียเวลามานั่งกระทบยอดกันทุกเดือน","ในสไลด์มีกรณีศึกษาที่เห็นภาพชัดมาก งานเดียวกันเป๊ะ ระบบแยกส่วนใช้เวลา 2 นาที ระบบบูรณาการเสร็จใน 5 วินาที ต่างกัน 24 เท่าครับ"]},{"h":"มองงานเป็นกระบวนการ ไม่ใช่แผนก","s":"a4","t":["ทีนี้มาถึงแนวคิดที่ผมว่าสำคัญที่สุดของบทนี้ คือความต่างระหว่าง business function กับ business process","Business function คือการมองแนวตั้ง มองตามแผนก ใครอยู่แผนกไหนก็ทำงานของแผนกนั้น","ส่วน business process คือการมองแนวนอน มองตามเส้นทางของงานที่มันไหลข้ามแผนกไปจนจบ เช่น ตั้งแต่รับคำสั่งซื้อจนถึงเก็บเงินได้","ERP ถูกออกแบบมาตามมุมมองที่สองครับ","ลองคิดตามนะ ลูกค้าที่สั่งของเรา เขาไม่ได้สนใจหรอกว่าบริษัทเราแบ่งแผนกยังไง เขาสนใจแค่ว่าของจะมาถึงเมื่อไร","เพราะฉะนั้นระบบก็ควรมองแบบเดียวกับที่ลูกค้ามอง"]},{"h":"ERP คืออะไร","s":"a5","t":["ERP ย่อมาจาก Enterprise Resource Planning แปลตรงตัวว่าระบบวางแผนทรัพยากรองค์กร","คำนี้พัฒนามาจาก MRP ซึ่งเดิมใช้วางแผนความต้องการวัสดุในโรงงานเท่านั้น แล้วค่อย ๆ ขยายจนครอบคลุมทั้งองค์กร","แต่ถ้าให้สรุปเป็นประโยคเดียว ERP คือระบบเดียวที่ทุกคนใช้ฐานข้อมูลกลางร่วมกัน","ทุกฝ่ายเห็นข้อมูลชุดเดียวกัน ณ เวลาเดียวกัน ไม่มีใครมีเวอร์ชันของตัวเองอีกแล้ว"]},{"h":"ห้าคุณลักษณะ และดาบสองคม","s":"a6","t":["ระบบ ERP มีคุณลักษณะห้าข้อ","หนึ่ง บูรณาการทุกหน้าที่งานไว้ในระบบเดียว สอง ใช้ฐานข้อมูลกลาง ไม่ซ้ำซ้อน","สาม ทำงานแบบเรียลไทม์ บันทึกที่หนึ่ง เห็นผลทันทีทุกที่ สี่ รองรับการทำงานข้ามหน่วยงานและข้ามประเทศ","ห้า วางอยู่บนแนวปฏิบัติที่ดีที่สุดของอุตสาหกรรม หรือ best practice","ทีนี้ผมอยากให้สังเกตอย่างหนึ่งนะครับ ห้าข้อนี้อธิบายทั้งข้อดีและข้อเสียของ ERP พร้อมกันเลย","ข้อดีคือข้อมูลตรงกันหมดทั้งบริษัท ข้อเสียคือถ้ามีคนบันทึกผิดที่จุดเดียว มันก็ผิดทั้งระบบทันทีเหมือนกัน เป็นดาบสองคมครับ"]},{"h":"โมดูลของ ERP","s":"a8","t":["ระบบ ERP แบ่งเป็นโมดูล ซึ่งก็คือกลุ่มงานตามหน้าที่นั่นแหละครับ","เช่น การเงินและบัญชี การจัดซื้อ การผลิต การขาย และทรัพยากรบุคคล","แต่ละโมดูลทำงานได้ด้วยตัวเอง และในขณะเดียวกันก็คุยกับโมดูลอื่นผ่านฐานข้อมูลกลาง","องค์กรไม่จำเป็นต้องซื้อทุกโมดูลพร้อมกันนะครับ ส่วนใหญ่เริ่มจากโมดูลหลักที่จำเป็นก่อน แล้วค่อยขยายทีหลัง"]},{"h":"SAP มาจากไหน","s":"a9","t":["ทีนี้มาทำความรู้จัก SAP กันครับ","SAP เป็นบริษัทเยอรมัน ก่อตั้งปี 1972 โดยอดีตวิศวกรของ IBM ห้าคน ที่ออกมาทำเองเพราะเจ้านายไม่เอาไอเดียของเขา","วิวัฒนาการของผลิตภัณฑ์ไล่จาก R/1 ซึ่งเป็นระบบชั้นเดียว มาเป็น R/2 ที่ทำงานบนเมนเฟรม แล้วก็ R/3 ที่เป็นสถาปัตยกรรมสามชั้น","ตัว R ย่อมาจาก real time นะครับ ซึ่งเป็นจุดขายของเขามาตั้งแต่วันแรกเลย"]},{"h":"สถาปัตยกรรมสามชั้น","s":"a11","t":["สถาปัตยกรรมสามชั้นของ R/3 ประกอบด้วยชั้นการนำเสนอ ซึ่งก็คือหน้าจอที่เราเห็น ชั้นแอปพลิเคชัน ซึ่งเป็นที่ประมวลผลตรรกะทางธุรกิจ และชั้นฐานข้อมูล","ทำไมต้องแยกเป็นสามชั้นด้วยครับ","เพราะมันขยายง่ายไงครับ ถ้าคนใช้เพิ่มขึ้น ก็แค่เพิ่มเครื่องในชั้นแอปพลิเคชัน โดยไม่ต้องไปแตะฐานข้อมูลเลย","และถ้าอยากเปลี่ยนหน้าจอให้สวยขึ้น ตรรกะทางธุรกิจข้างในก็ไม่กระทบ แยกกันชัดเจน"]},{"h":"โมดูลของ SAP ที่ต้องจำ","s":"a12","t":["ทีนี้ตัวย่อของโมดูล อันนี้ต้องจำให้ได้นะครับ เพราะจะเจอตลอดทั้งวิชา","FI คือ Financial Accounting การบัญชีการเงิน CO คือ Controlling การบัญชีบริหาร","MM คือ Materials Management การจัดการวัสดุ SD คือ Sales and Distribution การขายและกระจายสินค้า","PP คือ Production Planning การวางแผนการผลิต และ HR คือ Human Resources","เวลาทำข้อสอบ ให้จับคำในโจทย์นะครับ ถ้าพูดถึงการออกใบแจ้งหนี้ให้ลูกค้า นึกถึง SD ถ้าพูดถึงการรับของเข้าคลัง นึกถึง MM","ถ้าพูดถึงการคิดต้นทุนต่อหน่วยหรือศูนย์ต้นทุน นึกถึง CO ครับ"]},{"h":"ปรับระบบ หรือ ปรับตัวเอง","s":"a13","t":["ทีนี้มาถึงคำถามเชิงปรัชญาที่สำคัญที่สุดของวิชานี้ครับ","เวลาองค์กรเอา ERP มาใช้ ควรแก้ระบบให้เข้ากับวิธีทำงานเดิมของเรา หรือควรเปลี่ยนวิธีทำงานให้เข้ากับระบบ","SAP เขาออกแบบมาบนฐานของ best practice ซึ่งกลั่นมาจากองค์กรชั้นนำเป็นพัน ๆ แห่งทั่วโลก","คำแนะนำโดยทั่วไปคือ ให้องค์กรปรับตัวเข้าหาระบบครับ","เพราะการแก้โปรแกรม หรือที่เรียกว่า customization มันทำให้ต้นทุนพุ่ง และที่แย่กว่านั้นคือพอจะอัปเกรดในอนาคต ของที่แก้ไว้จะกลายเป็นภาระทันที","ยกเว้นกรณีเดียวครับ คือถ้ากระบวนการนั้นเป็นความได้เปรียบในการแข่งขันของเราจริง ๆ อันนั้นค่อยพิจารณาแก้ระบบ"]},{"h":"รุ่นเฉพาะอุตสาหกรรม","s":"a14","t":["SAP มีรุ่นเฉพาะอุตสาหกรรมด้วยนะครับ เรียกว่า Industry Solution","เพราะแต่ละอุตสาหกรรมกระบวนการต่างกันมาก ธนาคารกับโรงพยาบาลกับค้าปลีก ใช้ระบบเหมือนกันไม่ได้","ส่วนธุรกิจขนาดกลางและเล็ก เขาก็มีผลิตภัณฑ์แยกออกมา ติดตั้งเร็วกว่าและราคาถูกกว่า","จบบทที่ 1 ครับ บทหน้าเราจะได้ลงมือใช้ SAP จริงกันแล้ว"]}]},"ch2":{"s":"การใช้งาน SAP","t":"บทที่ 2 · การใช้งาน SAP","c":[{"h":"เปิดบทและการเข้าระบบ","s":"b1","t":["บทนี้เป็นภาคปฏิบัติแล้วนะครับ เตรียมเปิดเครื่องตามไปด้วยได้เลย","โปรแกรมที่ใช้เข้าระบบเรียกว่า SAP GUI ส่วนตัวจัดการรายการเซิร์ฟเวอร์เรียกว่า SAP Logon","หน้าจอเข้าระบบมีสี่ช่อง Client, User, Password และ Language","ช่องที่คนมองข้ามที่สุดคือช่อง Client ครับ","เพราะ Client เป็นตัวบอกว่าเราจะเข้าไปในชุดข้อมูลไหน ระบบเดียวกันแต่คนละ Client นี่คนละโลกกันเลยนะครับ","เคยมีคนบันทึกรายการลงผิด Client แล้วหาไม่เจอทั้งวัน เพราะฉะนั้นดูช่องนี้ให้ดีก่อนกด Enter"]},{"h":"หน้าจอ SAP Easy Access","s":"b3","t":["พอเข้าระบบได้ เราจะเจอหน้าจอตั้งต้นชื่อ SAP Easy Access ซึ่งแสดงเมนูแบบต้นไม้ของทุกงานที่เรามีสิทธิ์เข้าถึง","โครงสร้างหน้าจอ SAP มีหกส่วนที่ต้องเรียกชื่อได้นะครับ","แถบเมนู แถบเครื่องมือมาตรฐาน แถบชื่อเรื่อง แถบเครื่องมือของแอปพลิเคชัน พื้นที่ทำงาน และแถบสถานะ","ข้อสอบชอบเอาภาพหน้าจอมาชี้ที่ส่วนใดส่วนหนึ่ง แล้วถามว่าตรงนี้เรียกว่าอะไร","เพราะฉะนั้นเปิดหน้าจอจริงแล้วชี้ตามไปทีละส่วนนะครับ จำได้เร็วกว่าท่องเยอะ"]},{"h":"Transaction Code ทางลัดที่ต้องใช้ให้เป็น","s":"b6","t":["ทีนี้มาถึงพระเอกของบทนี้ครับ Transaction Code หรือที่เรียกกันสั้น ๆ ว่า T-Code","มันคือรหัสทางลัดที่พาเราไปหน้าจอไหนก็ได้โดยตรง ไม่ต้องไล่เมนูทีละชั้น","เช่น พิมพ์ VA01 ก็ไปหน้าสร้างคำสั่งขายทันที พิมพ์ SE16 ก็ไปดูข้อมูลในตารางได้เลย","คนที่ทำงาน SAP จริง ๆ แทบไม่แตะเมนูเลยนะครับ เขาพิมพ์ T-Code กันหมด เพราะเร็วกว่ามาก","ในหน้าเว็บมีตารางรวม T-Code ที่ค้นหาและกรองตามหมวดได้ ผมแนะนำให้เปิดคู่กันไว้ตอนทบทวนนะครับ"]},{"h":"อยากรู้ T-Code ของหน้าที่เปิดอยู่","s":"b7","t":["สมมติเราอยู่ในหน้าจอหนึ่งแล้วอยากรู้ว่า T-Code ของหน้านี้คืออะไร ทำได้สองวิธี","วิธีแรก ดูที่แถบสถานะด้านล่าง กดเปิดส่วนแสดงข้อมูลระบบ แล้วจะเห็นชื่อ transaction โผล่มา","วิธีที่สอง ไปที่เมนู System แล้วเลือก Status ซึ่งจะให้รายละเอียดครบกว่า ทั้ง T-Code ทั้งเวอร์ชันของระบบ","ทริกนี้ใช้บ่อยมากเวลาทำงานจริงครับ เพราะเราจะได้จดไว้แล้วครั้งหน้าพิมพ์เข้าไปตรง ๆ เลย"]},{"h":"คำสั่งที่ขึ้นต้นด้วยทับ","s":"b8","t":["ช่องคำสั่งมุมซ้ายบนไม่ได้รับแค่ T-Code นะครับ มันรับคำสั่งพิเศษที่ขึ้นต้นด้วยเครื่องหมายทับด้วย","ทับ n ตามด้วย T-Code แปลว่าปิดงานที่ทำอยู่ แล้วไปงานใหม่ในหน้าต่างเดิม","ทับ o ตามด้วย T-Code แปลว่าเปิดงานใหม่ในหน้าต่างใหม่ โดยงานเดิมยังค้างอยู่","ทับ n เฉย ๆ คือจบงานปัจจุบัน ส่วนทับ i คือปิดหน้าต่างนี้ทิ้ง","สองตัวแรกใช้บ่อยที่สุดครับ ให้จำ n คือ new แทนที่ของเดิม และ o คือ open เปิดเพิ่มอีกบาน"]},{"h":"Session และเรื่องล็อก","s":"b9","t":["Session ก็คือหน้าต่างทำงานหนึ่งบาน SAP เปิดได้หลายบานพร้อมกัน โดยทั่วไปสูงสุดหกบาน","ประโยชน์คือทำงานคู่ขนานได้ เช่น เปิดรายงานไว้บานหนึ่ง แล้วบันทึกข้อมูลอีกบานหนึ่ง","แต่มีเรื่องที่ต้องระวังนะครับ แต่ละบานมันล็อกข้อมูลของตัวเอง","ถ้าเราเปิดเอกสารตัวเดียวกันสองบาน เราจะติดล็อกของตัวเองแล้วงงว่าทำไมแก้ไม่ได้ เจอกันบ่อยมากตอนเริ่มใช้ใหม่ ๆ"]},{"h":"สองปุ่มที่ช่วยชีวิต","s":"b10","t":["ถ้าจะจำอะไรจากบทนี้แค่อย่างเดียว ให้จำสองปุ่มนี้ครับ F1 กับ F4","F1 คือความช่วยเหลือ กดที่ช่องไหนก็อธิบายให้ว่าช่องนั้นคืออะไร และที่เจ๋งกว่านั้นคือมันบอกชื่อฟิลด์ทางเทคนิคกับตารางที่เก็บข้อมูลด้วย","ตรงนี้มีประโยชน์มากเวลาต้องไปดึงรายงานเอง","F4 คือรายการค่าที่เลือกได้ กดแล้วระบบจะแสดงค่าที่ถูกต้องมาให้เลือก แทนที่เราจะนั่งเดาว่าต้องพิมพ์อะไร","สองปุ่มนี้ประหยัดเวลาให้ผมไปหลายร้อยชั่วโมงในชีวิตแล้วครับ"]},{"h":"เรื่องเล็กที่ทำให้ผิดพลาดใหญ่","s":"b11","t":["ทีนี้เรื่องรูปแบบตัวเลขและวันที่ ฟังดูเป็นเรื่องจิ๊บจ๊อย แต่ทำคนพลาดมาเยอะแล้วครับ","SAP ให้ตั้งรูปแบบพวกนี้แยกตามผู้ใช้แต่ละคน","บางรูปแบบใช้จุดคั่นหลักพัน บางรูปแบบใช้จุลภาค ถ้าตั้งไม่ตรงกับที่เราเข้าใจ ตัวเลขหนึ่งพันอาจกลายเป็นหนึ่งจุดศูนย์ได้เลย","ตั้งค่าได้ที่เมนู System เลือก User Profile แล้วเลือก Own Data","ผมแนะนำให้ไปเช็กตั้งแต่วันแรกที่ได้รหัสเลยนะครับ อย่ารอให้พลาดก่อน"]},{"h":"Parameter ID และการรันรายงาน","s":"b12","t":["Parameter ID คือการตั้งค่าเริ่มต้นให้ระบบเติมค่าที่เราใช้ประจำให้อัตโนมัติ","เช่น ถ้าเราทำงานกับบริษัทรหัส 1000 อยู่ทุกวัน ก็ตั้งไว้เลย ระบบจะเติมให้ทุกครั้ง ไม่ต้องพิมพ์ซ้ำ","ส่วนการรันรายงาน ABAP มีสองแบบครับ","แบบ foreground คือรันแล้วนั่งรอผลบนหน้าจอ เหมาะกับรายงานเล็ก ๆ","แบบ background คือส่งเข้าคิวให้ระบบทำเบื้องหลัง เหมาะกับรายงานใหญ่ที่ใช้เวลานาน","ข้อดีของแบบหลังคือเราไปทำอย่างอื่นได้ และไม่ไปแย่งทรัพยากรจนคนอื่นใช้ระบบช้าครับ"]},{"h":"Favorites และปิดบท","s":"b14","t":["สุดท้าย Favorites หรือรายการโปรด เก็บ T-Code ที่ใช้บ่อยไว้ในเมนูของเราเอง","อันนี้เป็นวิธีทำงานให้เร็วขึ้นที่ง่ายที่สุดและคนใช้น้อยที่สุดครับ ใช้เวลาตั้งห้านาที ประหยัดไปทั้งปี","จบบทที่ 2 ครับ บทหน้าเราจะขยับจากเรื่องการใช้งาน ไปเรื่องการเอาระบบมาใช้ในองค์กรจริง ซึ่งเป็นเรื่องคนมากกว่าเรื่องเทคนิค"]}]},"ch3":{"s":"การนำระบบมาใช้","t":"บทที่ 3 · การนำระบบ ERP มาใช้","c":[{"h":"เปิดบท","s":"c1","t":["บทสุดท้ายแล้วนะครับ บทนี้ว่าด้วยการเอาระบบมาใช้จริงในองค์กร","ผมอยากบอกไว้ตั้งแต่ต้นเลยว่า บทนี้เป็นเรื่องการบริหารโครงการมากกว่าเรื่องเทคนิค","ASAP ย่อมาจาก Accelerated SAP เป็นระเบียบวิธีที่ SAP วางไว้ให้โครงการเดินตาม","ทีนี้ทำไมต้องมีระเบียบวิธีด้วยล่ะครับ","เพราะโครงการ ERP ล้มเหลวกันเยอะมาก และที่น่าสนใจคือ สาเหตุส่วนใหญ่ไม่ใช่เรื่องเทคโนโลยีเลย แต่เป็นเรื่องคนกับกระบวนการ"]},{"h":"ห้าเฟสของโครงการ","s":"c2","t":["โครงการแบ่งเป็นห้าเฟสนะครับ","เฟสหนึ่ง Project Preparation เตรียมโครงการ ตั้งทีม กำหนดขอบเขตกับแผนงาน","เฟสสอง Business Blueprint เก็บความต้องการและออกแบบว่ากระบวนการในระบบใหม่จะเป็นยังไง เอกสารเฟสนี้คือพิมพ์เขียวของทั้งโครงการเลย","เฟสสาม Realization ลงมือตั้งค่าระบบตามพิมพ์เขียว แล้วทดสอบ","เฟสสี่ Final Preparation เตรียมพร้อมก่อนใช้จริง ทั้งอบรมคนและย้ายข้อมูล","เฟสห้า Go-Live and Support เปิดใช้จริงและดูแลต่อ","ถ้าเฟสสองทำไม่ดี เฟสที่เหลือพังหมดนะครับ เพราะเราจะสร้างของผิดตั้งแต่แบบแล้ว"]},{"h":"คนในโครงการ ใครสำคัญที่สุด","s":"c3","t":["ทีมโครงการมีหลายบทบาท ที่ต้องแยกให้ออกมีสี่กลุ่มครับ","ผู้สนับสนุนโครงการ หรือ project sponsor เป็นผู้บริหารระดับสูงที่ให้งบและตัดสินใจเรื่องใหญ่","ผู้จัดการโครงการ ดูแลแผนงานและทรัพยากรประจำวัน","ที่ปรึกษา เป็นผู้เชี่ยวชาญระบบจากภายนอก","และกลุ่มสุดท้าย key user หรือผู้ใช้หลัก ซึ่งเป็นพนักงานขององค์กรเองที่รู้กระบวนการงานจริง","ผมอยากบอกว่ากลุ่มสุดท้ายนี่แหละครับที่ชี้ขาดว่าโครงการจะสำเร็จหรือไม่","เพราะที่ปรึกษารู้ระบบ แต่ไม่รู้ว่างานจริงในบริษัทเราทำยังไง คนที่รู้คือ key user และถ้าองค์กรไม่ยอมปล่อยคนเก่งมาทำโครงการ โครงการก็จบเห่ตั้งแต่ต้น"]},{"h":"Configuration กับ Customization","s":"c4","t":["IMG ย่อมาจาก Implementation Guide คือคู่มือการตั้งค่าระบบ เป็นที่ที่ที่ปรึกษาเข้าไปกำหนดว่าองค์กรเราจะใช้ระบบยังไง","ทีนี้มีสองคำที่ต้องแยกให้ออกให้ได้ครับ","Configuration คือการตั้งค่าที่ SAP เตรียมทางเลือกไว้ให้แล้ว เราแค่เลือก ไม่ต้องเขียนโปรแกรม","ส่วน Customization คือการเขียนโปรแกรมเพิ่ม เพื่อทำสิ่งที่ระบบไม่มีให้","ตัวหลังนี่แหละครับที่เป็นตัวกินงบและสร้างปัญหาระยะยาว ควรหลีกเลี่ยงถ้าทำได้","เวลาที่ปรึกษาบอกว่าทำได้ ให้ถามต่อเสมอว่า ทำด้วย configuration หรือ customization ครับ"]},{"h":"สองงานที่พลาดไม่ได้ก่อนเปิดใช้","s":"c6","t":["ก่อนวัน Go-Live มีสองงานที่พลาดไม่ได้เด็ดขาด","งานแรก การย้ายข้อมูล หรือ data migration","สิ่งที่ต้องทำก่อนย้ายคือทำความสะอาดข้อมูลเดิม เพราะถ้าเราย้ายข้อมูลขยะเข้าไป ระบบใหม่ราคาหลายสิบล้านก็จะกลายเป็นระบบที่มีข้อมูลขยะ","งานที่สอง การอบรมผู้ใช้","และงานนี้แหละครับที่ถูกตัดงบเป็นอันดับแรกเสมอเวลาโครงการล่าช้า","ซึ่งมันก็คือสาเหตุความล้มเหลวที่พบบ่อยที่สุดพอดี ระบบดีแค่ไหน ถ้าคนใช้ไม่เป็นก็จบครับ"]},{"h":"Go-Live และการส่งมอบ","s":"c7","t":["วัน Go-Live คือวันที่ระบบเก่าหยุด และระบบใหม่เริ่มทำงานจริง","ช่วงหลังจากนั้นเรียกว่า hypercare คือช่วงที่ทีมโครงการยังอยู่ใกล้ ๆ คอยแก้ปัญหาเร่งด่วน","พอผ่านช่วงนั้นแล้วจึงส่งมอบให้ทีมสนับสนุนภายในองค์กรดูแลต่อ","และการส่งมอบต้องมีเอกสารกับการถ่ายทอดความรู้ที่ครบถ้วนนะครับ ไม่ใช่ที่ปรึกษาเดินออกไปเฉย ๆ ไม่งั้นพอมีปัญหาก็ไม่มีใครแก้เป็น"]},{"h":"ต้นทุนที่มองไม่เห็น","s":"c8","t":["ทีนี้มาถึงตัวเลขที่ผมอยากให้จำติดตัวไปเลยครับ อัตราส่วนหนึ่งต่อสองต่อสี่","หมายความว่า ถ้าค่าลิขสิทธิ์ซอฟต์แวร์เป็นหนึ่งส่วน ค่าฮาร์ดแวร์และโครงสร้างพื้นฐานจะประมาณสองส่วน และค่าที่ปรึกษากับการนำระบบมาใช้จะประมาณสี่ส่วน","พูดง่าย ๆ คือ ค่าซอฟต์แวร์เป็นแค่หนึ่งในเจ็ดของต้นทุนจริงเท่านั้น","บทเรียนคือ ราคาที่เห็นในใบเสนอราคาซอฟต์แวร์นั่นแค่ยอดภูเขาน้ำแข็งครับ","องค์กรไหนที่วางงบโดยดูแค่ค่าลิขสิทธิ์ เจอปัญหาทุกราย ไม่มีข้อยกเว้น"]},{"h":"สรุปทั้งวิชา","s":"c9","t":["กรณีศึกษาปิดท้ายคือ Exotic Food Thailand ซึ่งเป็นตัวอย่างที่ดีว่าองค์กรขนาดกลางของไทยก็เอา SAP มาใช้ได้ และได้ประโยชน์จริงทั้งเรื่องความเร็วของข้อมูลและการควบคุมต้นทุน","เอาล่ะครับ สรุปทั้งวิชา ผมอยากให้ติดตัวไปสามเรื่อง","หนึ่ง ERP คือระบบเดียวที่ทุกคนใช้ฐานข้อมูลกลางร่วมกัน","สอง SAP ทำงานผ่าน T-Code และโมดูลที่เชื่อมถึงกันหมด","สาม และข้อนี้สำคัญที่สุด ความสำเร็จของโครงการ ERP อยู่ที่คนและกระบวนการ ไม่ใช่ที่ตัวซอฟต์แวร์","จบบทที่ 3 และจบวิชานี้ครับ ขอบคุณทุกคนนะครับ"]}]}}
+{"ch1":{"s":"ERP และ SAP","t":"บทที่ 1 · ERP และ SAP","c":[{"h":"เปิดบท","s":"a1","t":["สวัสดีครับทุกคน ยินดีต้อนรับสู่วิชาระบบวางแผนทรัพยากรองค์กรนะครับ","บทแรกนี้เราจะตอบสามคำถาม ERP คืออะไร ทำไมองค์กรถึงต้องการมัน และ SAP เข้ามาเกี่ยวข้องยังไง","ก่อนอื่น ตลาด ERP ทุกวันนี้ถูกครองโดยผู้เล่นไม่กี่ราย โดยมี SAP เป็นเบอร์หนึ่ง ตามด้วย Oracle และ Microsoft Dynamics","ทีนี้หลายคนอาจสงสัยว่าทำไมวิชานี้เลือกสอน SAP","เหตุผลตรงไปตรงมาเลยครับ เพราะองค์กรใหญ่ทั่วโลกใช้ตัวนี้มากที่สุด และเป็นทักษะที่ตลาดแรงงานต้องการจริง ๆ จบไปแล้วใช้ได้"]},{"h":"ชีวิตก่อนมี ERP","s":"a2","t":["ทีนี้ผมอยากให้ลองนึกภาพองค์กรสมัยก่อนที่ยังไม่มี ERP นะครับ","ฝ่ายขายมีระบบของตัวเอง ฝ่ายผลิตมีของตัวเอง บัญชีก็มีอีกระบบหนึ่ง ต่างคนต่างอยู่","ปัญหาที่ตามมามีสองอย่างใหญ่ ๆ","อย่างแรก ต้องสร้างสะพานเชื่อมข้อมูลระหว่างระบบ ที่เรียกว่า interface และยิ่งมีระบบเยอะ จำนวนสะพานยิ่งพุ่งขึ้นแบบทวีคูณ","อย่างที่สอง ข้อมูลชุดเดียวกันถูกเก็บไว้หลายที่ แล้วมันไม่ตรงกัน สุดท้ายก็ต้องเสียเวลามานั่งกระทบยอดกันทุกเดือน","ในสไลด์มีกรณีศึกษาที่เห็นภาพชัดมาก งานเดียวกันเป๊ะ ระบบแยกส่วนใช้เวลา 2 นาที ระบบบูรณาการเสร็จใน 5 วินาที ต่างกัน 24 เท่าครับ"]},{"h":"มองงานเป็นกระบวนการ ไม่ใช่แผนก","s":"a4","t":["ทีนี้มาถึงแนวคิดที่ผมว่าสำคัญที่สุดของบทนี้ คือความต่างระหว่าง business function กับ business process","Business function คือการมองแนวตั้ง มองตามแผนก ใครอยู่แผนกไหนก็ทำงานของแผนกนั้น","ส่วน business process คือการมองแนวนอน มองตามเส้นทางของงานที่มันไหลข้ามแผนกไปจนจบ เช่น ตั้งแต่รับคำสั่งซื้อจนถึงเก็บเงินได้","ERP ถูกออกแบบมาตามมุมมองที่สองครับ","ลองคิดตามนะ ลูกค้าที่สั่งของเรา เขาไม่ได้สนใจหรอกว่าบริษัทเราแบ่งแผนกยังไง เขาสนใจแค่ว่าของจะมาถึงเมื่อไร","เพราะฉะนั้นระบบก็ควรมองแบบเดียวกับที่ลูกค้ามอง"]},{"h":"ERP คืออะไร","s":"a5","t":["ERP ย่อมาจาก Enterprise Resource Planning แปลตรงตัวว่าระบบวางแผนทรัพยากรองค์กร","คำนี้พัฒนามาจาก MRP ซึ่งเดิมใช้วางแผนความต้องการวัสดุในโรงงานเท่านั้น แล้วค่อย ๆ ขยายจนครอบคลุมทั้งองค์กร","แต่ถ้าให้สรุปเป็นประโยคเดียว ERP คือระบบเดียวที่ทุกคนใช้ฐานข้อมูลกลางร่วมกัน","ทุกฝ่ายเห็นข้อมูลชุดเดียวกัน ณ เวลาเดียวกัน ไม่มีใครมีเวอร์ชันของตัวเองอีกแล้ว"]},{"h":"ห้าคุณลักษณะ และดาบสองคม","s":"a6","t":["ระบบ ERP มีคุณลักษณะห้าข้อ","หนึ่ง บูรณาการทุกหน้าที่งานไว้ในระบบเดียว สอง ใช้ฐานข้อมูลกลาง ไม่ซ้ำซ้อน","สาม ทำงานแบบเรียลไทม์ บันทึกที่หนึ่ง เห็นผลทันทีทุกที่ สี่ รองรับการทำงานข้ามหน่วยงานและข้ามประเทศ","ห้า วางอยู่บนแนวปฏิบัติที่ดีที่สุดของอุตสาหกรรม หรือ best practice","ทีนี้ผมอยากให้สังเกตอย่างหนึ่งนะครับ ห้าข้อนี้อธิบายทั้งข้อดีและข้อเสียของ ERP พร้อมกันเลย","ข้อดีคือข้อมูลตรงกันหมดทั้งบริษัท ข้อเสียคือถ้ามีคนบันทึกผิดที่จุดเดียว มันก็ผิดทั้งระบบทันทีเหมือนกัน เป็นดาบสองคมครับ"]},{"h":"โมดูลของ ERP","s":"a8","t":["ระบบ ERP แบ่งเป็นโมดูล ซึ่งก็คือกลุ่มงานตามหน้าที่นั่นแหละครับ","เช่น การเงินและบัญชี การจัดซื้อ การผลิต การขาย และทรัพยากรบุคคล","แต่ละโมดูลทำงานได้ด้วยตัวเอง และในขณะเดียวกันก็คุยกับโมดูลอื่นผ่านฐานข้อมูลกลาง","องค์กรไม่จำเป็นต้องซื้อทุกโมดูลพร้อมกันนะครับ ส่วนใหญ่เริ่มจากโมดูลหลักที่จำเป็นก่อน แล้วค่อยขยายทีหลัง"]},{"h":"SAP มาจากไหน","s":"a9","t":["ทีนี้มาทำความรู้จัก SAP กันครับ","SAP เป็นบริษัทเยอรมัน ก่อตั้งปี 1972 โดยอดีตวิศวกรของ IBM ห้าคน ที่ออกมาทำเองเพราะเจ้านายไม่เอาไอเดียของเขา","วิวัฒนาการของผลิตภัณฑ์ไล่จาก R/1 ซึ่งเป็นระบบชั้นเดียว มาเป็น R/2 ที่ทำงานบนเมนเฟรม แล้วก็ R/3 ที่เป็นสถาปัตยกรรมสามชั้น","ตัว R ย่อมาจาก real time นะครับ ซึ่งเป็นจุดขายของเขามาตั้งแต่วันแรกเลย"]},{"h":"สถาปัตยกรรมสามชั้น","s":"a11","t":["สถาปัตยกรรมสามชั้นของ R/3 ประกอบด้วยชั้นการนำเสนอ ซึ่งก็คือหน้าจอที่เราเห็น ชั้นแอปพลิเคชัน ซึ่งเป็นที่ประมวลผลตรรกะทางธุรกิจ และชั้นฐานข้อมูล","ทำไมต้องแยกเป็นสามชั้นด้วยครับ","เพราะมันขยายง่ายไงครับ ถ้าคนใช้เพิ่มขึ้น ก็แค่เพิ่มเครื่องในชั้นแอปพลิเคชัน โดยไม่ต้องไปแตะฐานข้อมูลเลย","และถ้าอยากเปลี่ยนหน้าจอให้สวยขึ้น ตรรกะทางธุรกิจข้างในก็ไม่กระทบ แยกกันชัดเจน"]},{"h":"โมดูลของ SAP ที่ต้องจำ","s":"a12","t":["ทีนี้ตัวย่อของโมดูล อันนี้ต้องจำให้ได้นะครับ เพราะจะเจอตลอดทั้งวิชา","FI คือ Financial Accounting การบัญชีการเงิน CO คือ Controlling การบัญชีบริหาร","MM คือ Materials Management การจัดการวัสดุ SD คือ Sales and Distribution การขายและกระจายสินค้า","PP คือ Production Planning การวางแผนการผลิต และ HR คือ Human Resources","เวลาทำข้อสอบ ให้จับคำในโจทย์นะครับ ถ้าพูดถึงการออกใบแจ้งหนี้ให้ลูกค้า นึกถึง SD ถ้าพูดถึงการรับของเข้าคลัง นึกถึง MM","ถ้าพูดถึงการคิดต้นทุนต่อหน่วยหรือศูนย์ต้นทุน นึกถึง CO ครับ"]},{"h":"ปรับระบบ หรือ ปรับตัวเอง","s":"a13","t":["ทีนี้มาถึงคำถามเชิงปรัชญาที่สำคัญที่สุดของวิชานี้ครับ","เวลาองค์กรเอา ERP มาใช้ ควรแก้ระบบให้เข้ากับวิธีทำงานเดิมของเรา หรือควรเปลี่ยนวิธีทำงานให้เข้ากับระบบ","SAP เขาออกแบบมาบนฐานของ best practice ซึ่งกลั่นมาจากองค์กรชั้นนำเป็นพัน ๆ แห่งทั่วโลก","คำแนะนำโดยทั่วไปคือ ให้องค์กรปรับตัวเข้าหาระบบครับ","เพราะการแก้โปรแกรม หรือที่เรียกว่า customization มันทำให้ต้นทุนพุ่ง และที่แย่กว่านั้นคือพอจะอัปเกรดในอนาคต ของที่แก้ไว้จะกลายเป็นภาระทันที","ยกเว้นกรณีเดียวครับ คือถ้ากระบวนการนั้นเป็นความได้เปรียบในการแข่งขันของเราจริง ๆ อันนั้นค่อยพิจารณาแก้ระบบ"]},{"h":"รุ่นเฉพาะอุตสาหกรรม","s":"a14","t":["SAP มีรุ่นเฉพาะอุตสาหกรรมด้วยนะครับ เรียกว่า Industry Solution","เพราะแต่ละอุตสาหกรรมกระบวนการต่างกันมาก ธนาคารกับโรงพยาบาลกับค้าปลีก ใช้ระบบเหมือนกันไม่ได้","ส่วนธุรกิจขนาดกลางและเล็ก เขาก็มีผลิตภัณฑ์แยกออกมา ติดตั้งเร็วกว่าและราคาถูกกว่า","จบบทที่ 1 ครับ บทหน้าเราจะได้ลงมือใช้ SAP จริงกันแล้ว"]}]},"ch2":{"s":"การใช้งาน SAP","t":"บทที่ 2 · การใช้งาน SAP","c":[{"h":"เปิดบทและการเข้าระบบ","s":"b1","t":["บทนี้เป็นภาคปฏิบัติแล้วนะครับ เตรียมเปิดเครื่องตามไปด้วยได้เลย","โปรแกรมที่ใช้เข้าระบบเรียกว่า SAP GUI ส่วนตัวจัดการรายการเซิร์ฟเวอร์เรียกว่า SAP Logon","หน้าจอเข้าระบบมีสี่ช่อง Client, User, Password และ Language","ช่องที่คนมองข้ามที่สุดคือช่อง Client ครับ","เพราะ Client เป็นตัวบอกว่าเราจะเข้าไปในชุดข้อมูลไหน ระบบเดียวกันแต่คนละ Client นี่คนละโลกกันเลยนะครับ","เคยมีคนบันทึกรายการลงผิด Client แล้วหาไม่เจอทั้งวัน เพราะฉะนั้นดูช่องนี้ให้ดีก่อนกด Enter"]},{"h":"หน้าจอ SAP Easy Access","s":"b3","t":["พอเข้าระบบได้ เราจะเจอหน้าจอตั้งต้นชื่อ SAP Easy Access ซึ่งแสดงเมนูแบบต้นไม้ของทุกงานที่เรามีสิทธิ์เข้าถึง","โครงสร้างหน้าจอ SAP มีหกส่วนที่ต้องเรียกชื่อได้นะครับ","แถบเมนู แถบเครื่องมือมาตรฐาน แถบชื่อเรื่อง แถบเครื่องมือของแอปพลิเคชัน พื้นที่ทำงาน และแถบสถานะ","ข้อสอบชอบเอาภาพหน้าจอมาชี้ที่ส่วนใดส่วนหนึ่ง แล้วถามว่าตรงนี้เรียกว่าอะไร","เพราะฉะนั้นเปิดหน้าจอจริงแล้วชี้ตามไปทีละส่วนนะครับ จำได้เร็วกว่าท่องเยอะ"]},{"h":"Transaction Code ทางลัดที่ต้องใช้ให้เป็น","s":"b6","t":["ทีนี้มาถึงพระเอกของบทนี้ครับ Transaction Code หรือที่เรียกกันสั้น ๆ ว่า T-Code","มันคือรหัสทางลัดที่พาเราไปหน้าจอไหนก็ได้โดยตรง ไม่ต้องไล่เมนูทีละชั้น","เช่น พิมพ์ VA01 ก็ไปหน้าสร้างคำสั่งขายทันที พิมพ์ SE16 ก็ไปดูข้อมูลในตารางได้เลย","คนที่ทำงาน SAP จริง ๆ แทบไม่แตะเมนูเลยนะครับ เขาพิมพ์ T-Code กันหมด เพราะเร็วกว่ามาก","ในหน้าเว็บมีตารางรวม T-Code ที่ค้นหาและกรองตามหมวดได้ ผมแนะนำให้เปิดคู่กันไว้ตอนทบทวนนะครับ"]},{"h":"อยากรู้ T-Code ของหน้าที่เปิดอยู่","s":"b7","t":["สมมติเราอยู่ในหน้าจอหนึ่งแล้วอยากรู้ว่า T-Code ของหน้านี้คืออะไร ทำได้สองวิธี","วิธีแรก ดูที่แถบสถานะด้านล่าง กดเปิดส่วนแสดงข้อมูลระบบ แล้วจะเห็นชื่อ transaction โผล่มา","วิธีที่สอง ไปที่เมนู System แล้วเลือก Status ซึ่งจะให้รายละเอียดครบกว่า ทั้ง T-Code ทั้งเวอร์ชันของระบบ","ทริกนี้ใช้บ่อยมากเวลาทำงานจริงครับ เพราะเราจะได้จดไว้แล้วครั้งหน้าพิมพ์เข้าไปตรง ๆ เลย"]},{"h":"คำสั่งที่ขึ้นต้นด้วยทับ","s":"b8","t":["ช่องคำสั่งมุมซ้ายบนไม่ได้รับแค่ T-Code นะครับ มันรับคำสั่งพิเศษที่ขึ้นต้นด้วยเครื่องหมายทับด้วย","ทับ n ตามด้วย T-Code แปลว่าปิดงานที่ทำอยู่ แล้วไปงานใหม่ในหน้าต่างเดิม","ทับ o ตามด้วย T-Code แปลว่าเปิดงานใหม่ในหน้าต่างใหม่ โดยงานเดิมยังค้างอยู่","ทับ n เฉย ๆ คือจบงานปัจจุบัน ส่วนทับ i คือปิดหน้าต่างนี้ทิ้ง","สองตัวแรกใช้บ่อยที่สุดครับ ให้จำ n คือ new แทนที่ของเดิม และ o คือ open เปิดเพิ่มอีกบาน"]},{"h":"Session และเรื่องล็อก","s":"b9","t":["Session ก็คือหน้าต่างทำงานหนึ่งบาน SAP เปิดได้หลายบานพร้อมกัน โดยทั่วไปสูงสุดหกบาน","ประโยชน์คือทำงานคู่ขนานได้ เช่น เปิดรายงานไว้บานหนึ่ง แล้วบันทึกข้อมูลอีกบานหนึ่ง","แต่มีเรื่องที่ต้องระวังนะครับ แต่ละบานมันล็อกข้อมูลของตัวเอง","ถ้าเราเปิดเอกสารตัวเดียวกันสองบาน เราจะติดล็อกของตัวเองแล้วงงว่าทำไมแก้ไม่ได้ เจอกันบ่อยมากตอนเริ่มใช้ใหม่ ๆ"]},{"h":"สองปุ่มที่ช่วยชีวิต","s":"b10","t":["ถ้าจะจำอะไรจากบทนี้แค่อย่างเดียว ให้จำสองปุ่มนี้ครับ F1 กับ F4","F1 คือความช่วยเหลือ กดที่ช่องไหนก็อธิบายให้ว่าช่องนั้นคืออะไร และที่เจ๋งกว่านั้นคือมันบอกชื่อฟิลด์ทางเทคนิคกับตารางที่เก็บข้อมูลด้วย","ตรงนี้มีประโยชน์มากเวลาต้องไปดึงรายงานเอง","F4 คือรายการค่าที่เลือกได้ กดแล้วระบบจะแสดงค่าที่ถูกต้องมาให้เลือก แทนที่เราจะนั่งเดาว่าต้องพิมพ์อะไร","สองปุ่มนี้ประหยัดเวลาให้ผมไปหลายร้อยชั่วโมงในชีวิตแล้วครับ"]},{"h":"เรื่องเล็กที่ทำให้ผิดพลาดใหญ่","s":"b11","t":["ทีนี้เรื่องรูปแบบตัวเลขและวันที่ ฟังดูเป็นเรื่องจิ๊บจ๊อย แต่ทำคนพลาดมาเยอะแล้วครับ","SAP ให้ตั้งรูปแบบพวกนี้แยกตามผู้ใช้แต่ละคน","บางรูปแบบใช้จุดคั่นหลักพัน บางรูปแบบใช้จุลภาค ถ้าตั้งไม่ตรงกับที่เราเข้าใจ ตัวเลขหนึ่งพันอาจกลายเป็นหนึ่งจุดศูนย์ได้เลย","ตั้งค่าได้ที่เมนู System เลือก User Profile แล้วเลือก Own Data","ผมแนะนำให้ไปเช็กตั้งแต่วันแรกที่ได้รหัสเลยนะครับ อย่ารอให้พลาดก่อน"]},{"h":"Parameter ID และการรันรายงาน","s":"b12","t":["Parameter ID คือการตั้งค่าเริ่มต้นให้ระบบเติมค่าที่เราใช้ประจำให้อัตโนมัติ","เช่น ถ้าเราทำงานกับบริษัทรหัส 1000 อยู่ทุกวัน ก็ตั้งไว้เลย ระบบจะเติมให้ทุกครั้ง ไม่ต้องพิมพ์ซ้ำ","ส่วนการรันรายงาน ABAP มีสองแบบครับ","แบบ foreground คือรันแล้วนั่งรอผลบนหน้าจอ เหมาะกับรายงานเล็ก ๆ","แบบ background คือส่งเข้าคิวให้ระบบทำเบื้องหลัง เหมาะกับรายงานใหญ่ที่ใช้เวลานาน","ข้อดีของแบบหลังคือเราไปทำอย่างอื่นได้ และไม่ไปแย่งทรัพยากรจนคนอื่นใช้ระบบช้าครับ"]},{"h":"Favorites และปิดบท","s":"b14","t":["สุดท้าย Favorites หรือรายการโปรด เก็บ T-Code ที่ใช้บ่อยไว้ในเมนูของเราเอง","อันนี้เป็นวิธีทำงานให้เร็วขึ้นที่ง่ายที่สุดและคนใช้น้อยที่สุดครับ ใช้เวลาตั้งห้านาที ประหยัดไปทั้งปี","จบบทที่ 2 ครับ บทหน้าเราจะขยับจากเรื่องการใช้งาน ไปเรื่องการเอาระบบมาใช้ในองค์กรจริง ซึ่งเป็นเรื่องคนมากกว่าเรื่องเทคนิค"]}]},"ch3":{"s":"การนำระบบมาใช้","t":"บทที่ 3 · การนำระบบ ERP มาใช้","c":[{"h":"เปิดบท","s":"c1","t":["บทสุดท้ายแล้วนะครับ บทนี้ว่าด้วยการเอาระบบมาใช้จริงในองค์กร","ผมอยากบอกไว้ตั้งแต่ต้นเลยว่า บทนี้เป็นเรื่องการบริหารโครงการมากกว่าเรื่องเทคนิค","ASAP ย่อมาจาก Accelerated SAP เป็นระเบียบวิธีที่ SAP วางไว้ให้โครงการเดินตาม","ทีนี้ทำไมต้องมีระเบียบวิธีด้วยล่ะครับ","เพราะโครงการ ERP ล้มเหลวกันเยอะมาก และที่น่าสนใจคือ สาเหตุส่วนใหญ่ไม่ใช่เรื่องเทคโนโลยีเลย แต่เป็นเรื่องคนกับกระบวนการ"]},{"h":"ห้าเฟสของโครงการ","s":"c2","t":["โครงการแบ่งเป็นห้าเฟสนะครับ","เฟสหนึ่ง Project Preparation เตรียมโครงการ ตั้งทีม กำหนดขอบเขตกับแผนงาน","เฟสสอง Business Blueprint เก็บความต้องการและออกแบบว่ากระบวนการในระบบใหม่จะเป็นยังไง เอกสารเฟสนี้คือพิมพ์เขียวของทั้งโครงการเลย","เฟสสาม Realization ลงมือตั้งค่าระบบตามพิมพ์เขียว แล้วทดสอบ","เฟสสี่ Final Preparation เตรียมพร้อมก่อนใช้จริง ทั้งอบรมคนและย้ายข้อมูล","เฟสห้า Go-Live and Support เปิดใช้จริงและดูแลต่อ","ถ้าเฟสสองทำไม่ดี เฟสที่เหลือพังหมดนะครับ เพราะเราจะสร้างของผิดตั้งแต่แบบแล้ว"]},{"h":"คนในโครงการ ใครสำคัญที่สุด","s":"c3","t":["ทีมโครงการมีหลายบทบาท ที่ต้องแยกให้ออกมีสี่กลุ่มครับ","ผู้สนับสนุนโครงการ หรือ project sponsor เป็นผู้บริหารระดับสูงที่ให้งบและตัดสินใจเรื่องใหญ่","ผู้จัดการโครงการ ดูแลแผนงานและทรัพยากรประจำวัน","ที่ปรึกษา เป็นผู้เชี่ยวชาญระบบจากภายนอก","และกลุ่มสุดท้าย key user หรือผู้ใช้หลัก ซึ่งเป็นพนักงานขององค์กรเองที่รู้กระบวนการงานจริง","ผมอยากบอกว่ากลุ่มสุดท้ายนี่แหละครับที่ชี้ขาดว่าโครงการจะสำเร็จหรือไม่","เพราะที่ปรึกษารู้ระบบ แต่ไม่รู้ว่างานจริงในบริษัทเราทำยังไง คนที่รู้คือ key user และถ้าองค์กรไม่ยอมปล่อยคนเก่งมาทำโครงการ โครงการก็จบเห่ตั้งแต่ต้น"]},{"h":"Configuration กับ Customization","s":"c4","t":["IMG ย่อมาจาก Implementation Guide คือคู่มือการตั้งค่าระบบ เป็นที่ที่ที่ปรึกษาเข้าไปกำหนดว่าองค์กรเราจะใช้ระบบยังไง","ทีนี้มีสองคำที่ต้องแยกให้ออกให้ได้ครับ","Configuration คือการตั้งค่าที่ SAP เตรียมทางเลือกไว้ให้แล้ว เราแค่เลือก ไม่ต้องเขียนโปรแกรม","ส่วน Customization คือการเขียนโปรแกรมเพิ่ม เพื่อทำสิ่งที่ระบบไม่มีให้","ตัวหลังนี่แหละครับที่เป็นตัวกินงบและสร้างปัญหาระยะยาว ควรหลีกเลี่ยงถ้าทำได้","เวลาที่ปรึกษาบอกว่าทำได้ ให้ถามต่อเสมอว่า ทำด้วย configuration หรือ customization ครับ"]},{"h":"สองงานที่พลาดไม่ได้ก่อนเปิดใช้","s":"c6","t":["ก่อนวัน Go-Live มีสองงานที่พลาดไม่ได้เด็ดขาด","งานแรก การย้ายข้อมูล หรือ data migration","สิ่งที่ต้องทำก่อนย้ายคือทำความสะอาดข้อมูลเดิม เพราะถ้าเราย้ายข้อมูลขยะเข้าไป ระบบใหม่ราคาหลายสิบล้านก็จะกลายเป็นระบบที่มีข้อมูลขยะ","งานที่สอง การอบรมผู้ใช้","และงานนี้แหละครับที่ถูกตัดงบเป็นอันดับแรกเสมอเวลาโครงการล่าช้า","ซึ่งมันก็คือสาเหตุความล้มเหลวที่พบบ่อยที่สุดพอดี ระบบดีแค่ไหน ถ้าคนใช้ไม่เป็นก็จบครับ"]},{"h":"Go-Live และการส่งมอบ","s":"c7","t":["วัน Go-Live คือวันที่ระบบเก่าหยุด และระบบใหม่เริ่มทำงานจริง","ช่วงหลังจากนั้นเรียกว่า hypercare คือช่วงที่ทีมโครงการยังอยู่ใกล้ ๆ คอยแก้ปัญหาเร่งด่วน","พอผ่านช่วงนั้นแล้วจึงส่งมอบให้ทีมสนับสนุนภายในองค์กรดูแลต่อ","และการส่งมอบต้องมีเอกสารกับการถ่ายทอดความรู้ที่ครบถ้วนนะครับ ไม่ใช่ที่ปรึกษาเดินออกไปเฉย ๆ ไม่งั้นพอมีปัญหาก็ไม่มีใครแก้เป็น"]},{"h":"ต้นทุนที่มองไม่เห็น","s":"c8","t":["ทีนี้มาถึงตัวเลขที่ผมอยากให้จำติดตัวไปเลยครับ อัตราส่วนหนึ่งต่อสองต่อสี่","หมายความว่า ถ้าค่าลิขสิทธิ์ซอฟต์แวร์เป็นหนึ่งส่วน ค่าฮาร์ดแวร์และโครงสร้างพื้นฐานจะประมาณสองส่วน และค่าที่ปรึกษากับการนำระบบมาใช้จะประมาณสี่ส่วน","พูดง่าย ๆ คือ ค่าซอฟต์แวร์เป็นแค่หนึ่งในเจ็ดของต้นทุนจริงเท่านั้น","บทเรียนคือ ราคาที่เห็นในใบเสนอราคาซอฟต์แวร์นั่นแค่ยอดภูเขาน้ำแข็งครับ","องค์กรไหนที่วางงบโดยดูแค่ค่าลิขสิทธิ์ เจอปัญหาทุกราย ไม่มีข้อยกเว้น"]},{"h":"สรุปทั้งวิชา","s":"c9","t":["กรณีศึกษาปิดท้ายคือ Exotic Food Thailand ซึ่งเป็นตัวอย่างที่ดีว่าองค์กรขนาดกลางของไทยก็เอา SAP มาใช้ได้ และได้ประโยชน์จริงทั้งเรื่องความเร็วของข้อมูลและการควบคุมต้นทุน","เอาล่ะครับ สรุปทั้งวิชา ผมอยากให้ติดตัวไปสามเรื่อง","หนึ่ง ERP คือระบบเดียวที่ทุกคนใช้ฐานข้อมูลกลางร่วมกัน","สอง SAP ทำงานผ่าน T-Code และโมดูลที่เชื่อมถึงกันหมด","สาม และข้อนี้สำคัญที่สุด ความสำเร็จของโครงการ ERP อยู่ที่คนและกระบวนการ ไม่ใช่ที่ตัวซอฟต์แวร์","จบบทที่ 3 และจบวิชานี้ครับ ขอบคุณทุกคนนะครับ"]}]},"db":{"s":"ฐานข้อมูลของ SAP","t":"ฐานข้อมูลของระบบ SAP · AnyDB และ Business Suite 7","c":[{"h":"สถาปัตยกรรมสามชั้นของ SAP","s":"db-1","t":["สามบทแรกเราดูว่า SAP ทำอะไรได้บ้างนะครับ","แท็บนี้เราจะลงไปอีกชั้นหนึ่ง คือข้อมูลทั้งหมดนั้นไปเก็บอยู่ที่ไหน","คำตอบเดิมคือฐานข้อมูลของใครก็ได้ ซึ่ง SAP เรียกว่า แอนนี่ดีบี","และคำตอบนั้นกำลังจะหมดอายุ ซึ่งเป็นเหตุผลทั้งหมดที่ทำให้เกิดฮานาในแท็บถัดไป","ผมขอวางเส้นเรื่องของแท็บนี้ไว้สามบรรทัดก่อนนะครับ","หนึ่ง SAP ออกแบบระบบให้แยกชั้นฐานข้อมูลออกมา จึงเปลี่ยนยี่ห้อฐานข้อมูลได้","สอง ความยืดหยุ่นนั้นแลกมาด้วยการที่ SAP ไม่ได้เป็นเจ้าของชั้นที่สำคัญที่สุดของระบบตัวเอง","สาม SAP จึงเดินออกจากแอนนี่ดีบี ด้วยการสร้างฐานข้อมูลของตัวเอง แล้วกำหนดเส้นตายให้ลูกค้าย้ายตาม","เริ่มที่สถาปัตยกรรมสามชั้นกันก่อน ซึ่งบทที่ 1 เคยพูดถึงไปแล้วตอนเล่าเรื่อง อาร์สาม แต่คราวนี้เราจะเน้นชั้นล่างสุด","ชั้นที่หนึ่ง ไคลเอนต์เทียร์ หรือชั้นนำเสนอ คือหน้าจอที่ผู้ใช้เห็น ได้แก่ SAP GUI หรือเบราว์เซอร์ ทำหน้าที่รับคำสั่งและแสดงผลเท่านั้น ไม่ได้คิดอะไรเอง","ชั้นที่สอง แอปพลิเคชันเทียร์ หรือชั้นประมวลผล คือแอปพลิเคชันเซิร์ฟเวอร์ ซึ่งรันโปรแกรมที่เขียนด้วยภาษาเอบัพ ตรรกะทางธุรกิจทั้งหมดอยู่ชั้นนี้","ชั้นที่สาม ดาต้าเบสเทียร์ หรือชั้นฐานข้อมูล คือดาต้าเบสเซิร์ฟเวอร์ ซึ่งเก็บข้อมูลจริงทั้งหมด และชั้นนี้เองที่เป็นได้หลายยี่ห้อ","ทีนี้ตัวเชื่อมระหว่างชั้นที่สองกับชั้นที่สามสำคัญมากครับ มันชื่อ โอเพนเอสคิวแอล","โปรแกรมเอบัพไม่ได้คุยกับฐานข้อมูลด้วยภาษาเฉพาะของยี่ห้อนั้น แต่คุยผ่านโอเพนเอสคิวแอล ซึ่งเป็นภาษากลาง","ตัวกลางนี้คือเหตุผลทั้งหมดที่ทำให้เปลี่ยนยี่ห้อฐานข้อมูลได้โดยไม่ต้องเขียนโปรแกรมใหม่","ขอให้เห็นภาพว่านี่คือการออกแบบที่ตั้งใจ ไม่ใช่เรื่องบังเอิญนะครับ","SAP จงใจไม่ผูกตัวเองกับฐานข้อมูลยี่ห้อใดยี่ห้อหนึ่ง เพื่อให้ขายระบบเข้าไปในองค์กรที่ใช้ฐานข้อมูลอะไรอยู่ก็ได้"]},{"h":"ฐานข้อมูลในระบบ SAP ทำหน้าที่อะไร","s":"db-2","t":["นิยามของฐานข้อมูลที่สไลด์ให้ไว้สั้นมากครับ","ฐานข้อมูลคือกลุ่มข้อมูลที่จัดระเบียบไว้และถือเป็นหน่วยเดียวกัน","วัตถุประสงค์คือจัดเก็บและเรียกคืนข้อมูลที่เกี่ยวข้องกัน","คำว่าถือเป็นหน่วยเดียวกัน สำคัญกว่าที่ดูนะครับ","มันหมายความว่าข้อมูลใบสั่งซื้อ ข้อมูลลูกค้า และข้อมูลสินค้าคงคลัง ไม่ได้อยู่กันคนละแฟ้มแยกขาด แต่อยู่ในที่เดียวกันและอ้างถึงกันได้","นั่นคือหัวใจของคำว่าบูรณาการ ที่เราพูดถึงกันมาตั้งแต่บทที่ 1","ทีนี้งานที่ฐานข้อมูลของ SAP ต้องรับ มีสองแบบที่ต่างกันมาก","แบบแรกเรียกว่า โอแอลทีพี คืองานประมวลผลรายการประจำวัน เช่นสร้างใบสั่งขาย รับของเข้าคลัง ตั้งหนี้","งานแบบนี้ต้องการฐานข้อมูลที่เขียนเร็วและถูกต้อง รองรับผู้ใช้จำนวนมากพร้อมกัน และต้องไม่ทำข้อมูลเสียหายเมื่อระบบล่ม","แบบที่สองเรียกว่า โอแอลเอพี คืองานวิเคราะห์ เช่นสรุปยอดขายรายภูมิภาคเทียบกับงบประมาณ","งานแบบนี้ต้องการฐานข้อมูลที่อ่านและรวมยอดเร็ว จากข้อมูลจำนวนมหาศาล","และนี่คือจุดสำคัญครับ สองงานนี้ขัดกันเอง","ฐานข้อมูลที่ออกแบบมาให้เขียนเร็ว จะเก็บข้อมูลเรียงเป็นแถว เพราะหนึ่งรายการคือหนึ่งแถว เขียนทีเดียวจบ","แต่ฐานข้อมูลที่ออกแบบมาให้รวมยอดเร็ว อยากได้ข้อมูลเรียงเป็นคอลัมน์ เพราะการรวมยอดขายคือการอ่านคอลัมน์เดียวทั้งคอลัมน์","ทางออกเดิมคือทำสองระบบ คือระบบ ERP ไว้เขียน แล้วคัดลอกข้อมูลไปไว้อีกระบบหนึ่งเพื่อวิเคราะห์","ซึ่งแปลว่าข้อมูลที่เอาไปวิเคราะห์ ไม่ใช่ข้อมูลล่าสุดเสมอ","จำปัญหานี้ไว้ให้ดีนะครับ เพราะแท็บถัดไปทั้งแท็บคือคำตอบของปัญหานี้"]},{"h":"AnyDB · ฐานข้อมูลที่ SAP รองรับ","s":"db-3","t":["แอนนี่ดีบี เป็นคำที่ SAP ใช้เรียกฐานข้อมูลยี่ห้อใดก็ได้ที่ไม่ใช่ฮานา ซึ่ง SAP รับรองให้ใช้กับระบบของตน","รายชื่อที่ต้องจำมีห้ายี่ห้อครับ","หนึ่ง ออราเคิลดาต้าเบส ซึ่งเป็นฐานข้อมูลที่ลูกค้า SAP ใช้มากที่สุด สไลด์เรียกว่าฐานข้อมูลอันดับหนึ่งของโลก","สอง ดีบีทู ของไอบีเอ็ม พบมากในองค์กรที่ใช้เมนเฟรมของไอบีเอ็มอยู่แล้ว","สาม เอสคิวแอลเซิร์ฟเวอร์ ของไมโครซอฟท์ พบมากในองค์กรที่ใช้ระบบฝั่งวินโดวส์เป็นหลัก","สี่ ไซเบสเอเอสอี ซึ่ง SAP ซื้อมาในปี 2010 ฐานข้อมูลตัวนี้จึงกลายเป็นของ SAP เอง","ห้า แม็กซ์ดีบี ซึ่ง SAP ดูแลเอง มักใช้กับระบบขนาดเล็กและระบบทดสอบ","ส่วนฮานานั้นไม่นับเป็นแอนนี่ดีบีนะครับ เพราะเป็นฐานข้อมูลของ SAP เองที่จะมาแทนทั้งหมด","ทีนี้มาดูตัวเลขส่วนแบ่งตลาดฐานข้อมูลที่สไลด์แสดงไว้","ออราเคิล สี่สิบห้าจุดหกเปอร์เซ็นต์ ไมโครซอฟท์ สิบเก้าจุดหนึ่งเปอร์เซ็นต์ ไอบีเอ็ม สิบห้าจุดเจ็ดเปอร์เซ็นต์","SAP เก้าจุดหกเปอร์เซ็นต์ เทราดาต้า สามจุดสองเปอร์เซ็นต์ และอื่น ๆ หกจุดแปดเปอร์เซ็นต์","ตัวเลขชุดนี้คือเหตุผลที่สไลด์ใส่เครื่องหมายคำถามไว้ข้างชื่อ SAP ครับ","SAP เป็นเจ้าตลาดซอฟต์แวร์ ERP แต่มีส่วนแบ่งตลาดฐานข้อมูลแค่ไม่ถึงสิบเปอร์เซ็นต์","แปลว่าทุกครั้งที่ SAP ขายระบบได้หนึ่งระบบ เงินค่าฐานข้อมูลส่วนใหญ่ไหลไปหาคู่แข่ง โดยเฉพาะออราเคิล","นี่คือแรงจูงใจทางธุรกิจที่อยู่เบื้องหลังเรื่องทั้งหมดในแท็บนี้และแท็บถัดไป","มีข้อสังเกตเรื่องสไลด์ชุดนี้ที่ผมอยากบอกไว้ด้วยนะครับ","สไลด์มีหน้าที่หัวเรื่องกับโลโก้ไม่ตรงกันสามหน้า คือหน้าที่ขึ้นหัวว่าออราเคิลแต่โชว์โลโก้ไซเบส หน้าที่ขึ้นหัวว่าดีบีทูแต่โชว์แม็กซ์ดีบี และหน้าที่ขึ้นหัวว่าแม็กซ์ดีบีแต่โชว์ออราเคิล","น่าจะเป็นความคลาดเคลื่อนตอนจัดหน้า หน้าเว็บจึงเล่าเป็นรายชื่อฐานข้อมูลที่รองรับแทนการไล่ทีละหน้า","เนื้อหาที่ต้องจำคือรายชื่อ ไม่ใช่ลำดับของสไลด์ครับ"]},{"h":"การให้สิทธิ์ใช้ Oracle ผ่าน SAP","s":"db-4","t":["หัวข้อนี้เป็นเรื่องสัญญาอนุญาตให้ใช้ซอฟต์แวร์ ซึ่งฟังดูน่าเบื่อแต่มีผลทางการเงินจริง","สิทธิ์ออราเคิลที่ซื้อผ่าน SAP เป็นแบบ แอปพลิเคชันสเปซิฟิกฟูลยูส หรือเรียกย่อว่า เอเอสเอฟยู","เรียกอีกอย่างว่าออราเคิลรันไทม์ไลเซนส์ หรือโออีเอ็มไลเซนส์","สิทธิ์นี้อนุญาตให้เชื่อมต่อฐานข้อมูลออราเคิลได้เฉพาะจากซอฟต์แวร์ของ SAP เท่านั้น","ข้อยกเว้นมีอย่างเดียว คือเครื่องมือดูแลฐานข้อมูลของผู้ผลิตรายอื่น","แปลเป็นภาษาคนว่าอย่างไร","ถ้ากิจการซื้อออราเคิลผ่าน SAP แล้วอยากเอาฐานข้อมูลก้อนเดียวกันนั้นไปใช้กับโปรแกรมอื่นที่ไม่ใช่ SAP เช่นเขียนระบบของตัวเองมาต่อตรง ทำไม่ได้ครับ","ต้องไปซื้อสิทธิ์เต็มจากออราเคิลแยกต่างหาก","ข้อนี้เป็นเรื่องที่ผู้ตรวจสอบสัญญาซอฟต์แวร์จับได้บ่อย และค่าปรับไม่ใช่เงินน้อย","ส่วนแผนการรับรองรุ่นของออราเคิลที่สไลด์อ้าง มีสี่ข้อ","ออราเคิลดาต้าเบส สิบเก้าซี ได้รับการรับรองให้ใช้กับ SAP ตั้งแต่เดือนธันวาคม 2019 และเป็นรุ่นที่ SAP แนะนำสำหรับลูกค้าออราเคิลทุกราย","การสนับสนุนหลักสิ้นสุดวันที่ 31 มีนาคม 2023","การสนับสนุนส่วนขยายสิ้นสุดวันที่ 31 มีนาคม 2026","และ SAP จะทดสอบรับรองออราเคิลรุ่นใหม่ เมื่อซอฟต์แวร์รุ่นนั้นพร้อมใช้งานบนทุกแพลตฟอร์มแบบติดตั้งในองค์กรแล้ว","ขอเตือนเรื่องวันที่ไว้หน่อยนะครับ","วันสิ้นสุดการสนับสนุนของผู้ผลิตฐานข้อมูลเลื่อนได้ และเลื่อนมาแล้วหลายครั้ง เวลาต้องใช้ตัวเลขจริงในการทำงาน ให้ดูประกาศฉบับล่าสุดของออราเคิลและ SAP โดยตรง","สิ่งที่ข้อสอบมักถามคือหลักการ คือสิทธิ์แบบเอเอสเอฟยูใช้ได้เฉพาะกับซอฟต์แวร์ SAP ไม่ใช่ตัวเลขวันที่"]},{"h":"เส้นตายของ AnyDB","s":"db-5","t":["หัวข้อนี้คือจุดหักเหของทั้งแท็บครับ","ข่าวเดือนธันวาคม 2019 ที่สไลด์ยกมา บอกว่า","สัญญาฐานข้อมูลระหว่าง SAP กับไอบีเอ็ม ไมโครซอฟท์ และออราเคิล จะสิ้นสุดลงในปี 2025 โดย SAP เป็นฝ่ายบอกเลิกสัญญาไปแล้ว","การทำสัญญาใหม่หรือต่ออายุสัญญาที่บอกเลิกไปแล้ว ดูจะเป็นเรื่องยากและแทบเป็นไปไม่ได้","กระนั้นกลุ่มผู้ใช้ SAP ที่พูดภาษาเยอรมัน หรือ ดีแซค ก็ยังต้องการหารือเรื่องแอนนี่ดีบีกับ SAP ต่อไป","อ่านข่าวนี้ให้ออกนะครับ","ประเด็นไม่ใช่ว่าฐานข้อมูลพวกนั้นจะใช้ไม่ได้ แต่คือ SAP จะไม่ขายและไม่รับผิดชอบมันให้อีกต่อไป","ลูกค้าที่ยังใช้อยู่จะกลายเป็นคนที่ต้องไปตกลงกับผู้ผลิตฐานข้อมูลเอง","แล้วเส้นตายก็เลื่อนครับ","ข่าวเดือนกุมภาพันธ์ 2020 บอกว่า SAP เลื่อนวันสิ้นสุดการสนับสนุนบิสซิเนสสวีทเจ็ด จากปี 2025 ไปเป็นปี 2027 พร้อมการสนับสนุนส่วนขยายต่อไปจนถึงปี 2030","แต่ประกาศนั้นไม่ได้พูดถึงเน็ตวีฟเวอร์ เจ็ดจุดสอง หรือแอนนี่ดีบีเลย","จึงเกิดคำถามว่าข้อเสนอนี้ครอบคลุมเฉพาะ สวีทออนฮานา หรือเปล่า","สิ่งที่ต้องจับจากหัวข้อนี้มีสองอย่างครับ","อย่างแรก เส้นตายเลื่อนได้ และเลื่อนมาแล้วจริง ๆ จาก 2025 เป็น 2027 อย่าท่องตัวเลขอย่างเดียว","อย่างที่สอง ทิศทางไม่เคยเปลี่ยน คือ SAP ต้องการให้ลูกค้าย้ายจากฐานข้อมูลของคนอื่น มาอยู่บนฐานข้อมูลของตัวเอง","ถ้าข้อสอบถามว่าทำไม SAP ถึงสร้างฮานา คำตอบที่ลึกที่สุดอยู่ตรงนี้ ไม่ได้อยู่ที่เรื่องความเร็วอย่างเดียว"]},{"h":"SAP Business Suite คืออะไร","s":"db-6","t":["ครึ่งหลังของแท็บนี้เป็นเรื่องบิสซิเนสสวีทครับ","นิยามที่ต้องจำคือ SAP บิสซิเนสสวีท คือผลิตภัณฑ์หลักของ SAP ซึ่งประกอบด้วยโซลูชันหลายตัว","และจุดที่สไลด์ขีดเส้นใต้ไว้คือ ซื้อหรือขอสิทธิ์ใช้งานแยกทีละตัวก็ได้ หรือจะเอาทั้งชุดก็ได้","ประโยคที่ขีดเส้นใต้นั่นสำคัญในทางปฏิบัติมากครับ","มันแปลว่าองค์กรไม่จำเป็นต้องซื้อทุกอย่างพร้อมกัน เริ่มจากอีอาร์พีตัวเดียวก่อน แล้วค่อยเติมซีอาร์เอ็มหรือเอสซีเอ็มทีหลังเมื่อพร้อมก็ได้","ส่วนนิยามของบิสซิเนสสวีทเจ็ดโดยเฉพาะ สไลด์เขียนไว้สองชั้น","ชั้นแรก เป็นชุดโปรแกรมทางธุรกิจที่ให้การบูรณาการของข้อมูลและกระบวนการ การทำงานร่วมกัน ความสามารถเฉพาะอุตสาหกรรม และความสามารถในการขยายตัว","ชั้นที่สอง เป็นกลุ่มโปรแกรมที่บูรณาการกันอย่างสมบูรณ์ ได้แก่ ซีอาร์เอ็ม อีอาร์พี พีแอลเอ็ม เอสอาร์เอ็ม และเอสซีเอ็ม"]},{"h":"ห้าองค์ประกอบของ Business Suite 7","s":"db-7","t":["ภาพในสไลด์วาง SAP อีอาร์พี ไว้ตรงกลาง แล้วล้อมด้วยอีกสี่ตัว โดยมี SAP เน็ตวีฟเวอร์ เป็นฐานรองรับทั้งหมด","โครงนี้ต้องวาดได้จากความจำครับ","อีอาร์พี ย่อมาจาก เอ็นเทอร์ไพรส์รีซอร์สแพลนนิง อยู่ตรงกลาง ครอบคลุมงานวิเคราะห์ การเงิน ทรัพยากรบุคคล บริการองค์กร และการปฏิบัติการ","ซีอาร์เอ็ม ย่อมาจาก คัสตอมเมอร์รีเลชันชิปแมเนจเมนต์ ดูแลความสัมพันธ์กับลูกค้า ตั้งแต่การขาย บริการ การตลาด การค้า และการวางบิล","เอสอาร์เอ็ม ย่อมาจาก ซัพพลายเออร์รีเลชันชิปแมเนจเมนต์ ดูแลความสัมพันธ์กับผู้ขาย ครอบคลุมวงจรจัดซื้อจนถึงจ่ายเงินทั้งวงจร","เอสซีเอ็ม ย่อมาจาก ซัพพลายเชนแมเนจเมนต์ ดูแลห่วงโซ่อุปทาน ทั้งเครือข่าย การวางแผน การประสานงาน และการปฏิบัติการ","พีแอลเอ็ม ย่อมาจาก โปรดักต์ไลฟ์ไซเคิลแมเนจเมนต์ ดูแลวงจรชีวิตผลิตภัณฑ์ ตั้งแต่ความคิดแรก ผ่านการผลิต จนถึงการบริการหลังการขาย","ผมมีวิธีจำห้าตัวนี้โดยไม่ต้องท่องครับ","ให้มองจากทิศทางของสิ่งที่ไหลเข้าออกกิจการ","เอสอาร์เอ็ม คือฝั่งที่ของไหลเข้า ซีอาร์เอ็ม คือฝั่งที่ของไหลออก เอสซีเอ็ม คือเส้นทางที่ของเดิน","พีแอลเอ็ม คือตัวสินค้าเองตั้งแต่เกิดจนตาย และอีอาร์พี คือบัญชีและทรัพยากรที่อยู่ตรงกลางรับรู้ทุกอย่าง","สไลด์ยังให้รายละเอียดเพิ่มของแต่ละตัวไว้ด้วย ผมขอเล่าที่น่าสนใจนะครับ","เรื่องซีอาร์เอ็ม หลังซื้อบริษัทไฮบริสในปี 2013 SAP ค่อย ๆ ปรับกลยุทธ์ฝั่งซีอาร์เอ็ม เพื่อสู้กับผู้นำตลาดคือเซลส์ฟอร์ซดอตคอม ซึ่งเป็นโซลูชันบนคลาวด์","ปัจจุบันรวมโซลูชันซีอาร์เอ็มไว้ใต้แบรนด์ไฮบริส โดยแบ่งเป็นห้ากลุ่มคือ เซลส์ เซอร์วิส มาร์เก็ตติง คอมเมิร์ซ และบิลลิง","เรื่องเอสซีเอ็ม ครอบคลุมทั้งการสร้างเครือข่ายห่วงโซ่อุปทาน การวางแผน การประสานงาน และการปฏิบัติการ โดยมีโปรแกรมย่อยหลายตัว เช่น เอสเอ็นซี อีดับเบิลยูเอ็ม เอพีโอ เอฟอาร์อี ทีเอ็ม และไอบีพี","เรื่องเอสอาร์เอ็ม ทำให้กระบวนการจัดซื้อจนถึงจ่ายเงินง่ายขึ้น เป็นอัตโนมัติ และรวมศูนย์ พร้อมเครื่องมือจัดการแค็ตตาล็อกและสัญญาแบบรวมศูนย์","และเรื่องพีแอลเอ็ม ช่วยวางแผน ออกแบบ สร้าง และบริหารการผลิตโดยมองเห็นและควบคุมได้มากขึ้น ให้การสนับสนุนแบบสามร้อยหกสิบองศาสำหรับทุกกระบวนการที่เกี่ยวกับผลิตภัณฑ์"]},{"h":"SAP ECC · หัวใจของ Business Suite","s":"db-8","t":["อีซีซี ย่อมาจาก SAP อีอาร์พี เซ็นทรัลคอมโพเนนต์","สไลด์บอกว่ามันคือสินทรัพย์ที่คนรู้จักมากที่สุดชิ้นหนึ่งของ SAP เป็นซอฟต์แวร์ อีอาร์พี ที่ประกอบด้วยโมดูลหลายโมดูล ซึ่งให้องค์กรควบคุมกระบวนการทางธุรกิจที่สำคัญได้","ขอให้เห็นความสัมพันธ์ของชื่อให้ชัดนะครับ","ในภาพของบิสซิเนสสวีท กล่องสีเหลืองตรงกลางที่เขียนว่า SAP อีอาร์พี กับที่เขียนว่า SAP อีอาร์พี เซ็นทรัลคอมโพเนนต์ คือตัวเดียวกัน","อีซีซีคือชื่อทางเทคนิคของแกนกลางนั้น","โมดูลของอีซีซีตามภาพในสไลด์มีสิบสองโมดูลครับ","เอฟไอ คือการบัญชีการเงิน ซีโอ คือการบัญชีบริหาร เอเอ็ม คือการจัดการสินทรัพย์ถาวร","เอสดี คือการขายและการกระจายสินค้า เอ็มเอ็ม คือการจัดการวัสดุ พีพี คือการวางแผนการผลิต","คิวเอ็ม คือการจัดการคุณภาพ พีเอ็ม คือการบำรุงรักษาโรงงาน เอชอาร์ คือทรัพยากรบุคคล","พีเอส คือระบบโครงการ ดับเบิลยูเอฟ คือผังการไหลของงาน และไอเอส คือโซลูชันเฉพาะอุตสาหกรรม","ส่วนเส้นทางของชื่อเป็นแบบนี้ครับ","SAP อาร์สาม กลายเป็น SAP อีซีซี รุ่นล่าสุดของ SAP อีอาร์พี ออกในปี 2006 และ เอนแฮนซ์เมนต์แพ็กเกจแปด สำหรับ SAP อีอาร์พี หกจุดศูนย์ ออกในปี 2016","ขอให้สังเกตว่าหลังปี 2016 ก็ไม่มีรุ่นใหม่ของอีซีซีอีกเลย เพราะความสนใจทั้งหมดย้ายไปที่ เอสโฟร์ฮานา แล้ว"]},{"h":"วงจรชีวิตของ Business Suite 7","s":"db-9","t":["หัวข้อสุดท้ายของแท็บนี้คือตารางเวลา ที่เป็นแรงผลักให้ทั้งอุตสาหกรรมต้องขยับครับ","หมุดที่หนึ่ง สิ้นปี 2027 โปรแกรมแกนของ SAP บิสซิเนสสวีทเจ็ด สิ้นสุดการบำรุงรักษาหลัก นี่คือวันที่เลื่อนมาจากเดิมคือปี 2025","หมุดที่สอง ต้นปี 2028 เข้าสู่ช่วงการบำรุงรักษาส่วนขยาย ซึ่งโดยทั่วไปมีค่าใช้จ่ายเพิ่ม และได้รับเฉพาะการแก้ปัญหาที่จำเป็น ไม่ได้ฟีเจอร์ใหม่","หมุดที่สาม สิ้นปี 2030 สิ้นสุดการบำรุงรักษาส่วนขยาย หลังจากนี้ลูกค้าที่ยังอยู่บนบิสซิเนสสวีทเจ็ด จะไม่ได้รับการสนับสนุนตามปกติอีก","หมุดที่สี่ ปี 2040 การสนับสนุนการย้ายไป เอสโฟร์ฮานา สิ้นสุดลง ซึ่งสไลด์เรียกว่าเป็นคำมั่นระยะยาวของ SAP","ทำไมเรื่องนี้ถึงเป็นเรื่องใหญ่สำหรับนิสิตบัญชีด้วย","เพราะการย้ายจากอีซีซีไป เอสโฟร์ฮานา ไม่ใช่การอัปเดตโปรแกรม แต่เป็นโครงการที่กินเวลาเป็นปี และเปลี่ยนผังบัญชีกับวิธีทำงานจริง","องค์กรที่ยังไม่ย้ายภายในกรอบเวลานี้ จะต้องรันระบบบัญชีหลักของตัวเองโดยไม่มีผู้ผลิตรองรับ ซึ่งเป็นประเด็นความเสี่ยงที่ผู้สอบบัญชีต้องพิจารณาด้วย","ตารางเวลาชุดนี้จึงเป็นเหตุผลที่โครงการ เอสโฟร์ฮานา เต็มไปหมดในตลาดงานตอนนี้","ขอสรุปแท็บนี้ในสามประโยคนะครับ","หนึ่ง SAP แยกชั้นฐานข้อมูลออกมาตั้งแต่ยุคอาร์สาม จึงใช้ฐานข้อมูลยี่ห้อใดก็ได้ ซึ่งเรียกรวมว่าแอนนี่ดีบี","สอง ความยืดหยุ่นนั้นทำให้ SAP ได้ส่วนแบ่งตลาดฐานข้อมูลแค่ไม่ถึงสิบเปอร์เซ็นต์ ทั้งที่เป็นเจ้าตลาด อีอาร์พี","สาม SAP จึงบอกเลิกสัญญากับผู้ผลิตฐานข้อมูลรายอื่น และกำหนดวันสิ้นสุดการสนับสนุนบิสซิเนสสวีทเจ็ด เพื่อผลักลูกค้าไปที่ เอสโฟร์ฮานา บนฮานา ซึ่งคือเนื้อหาของแท็บถัดไป"]}]},"hana":{"s":"HANA และ S/4HANA","t":"SAP HANA และ SAP S/4HANA","c":[{"h":"ฐานข้อมูลในหน่วยความจำ","s":"hana-1","t":["แท็บที่แล้วจบลงที่คำถามว่า SAP จะออกจากแอนนี่ดีบีอย่างไร","คำตอบคือสร้างฐานข้อมูลของตัวเองชื่อ SAP ฮานา แล้วเขียน อีอาร์พี ขึ้นใหม่ทั้งตัวให้รันบนมันอย่างเดียว ซึ่งก็คือ SAP เอสโฟร์ฮานา","ก่อนเริ่ม ขอวางสามคำที่ห้ามสับสนกันตลอดทั้งแท็บไว้ก่อนนะครับ","SAP ฮานา คือฐานข้อมูล","SAP เอสโฟร์ฮานา คือระบบ อีอาร์พี ที่รันอยู่บนฐานข้อมูลนั้น","SAP อีซีซี คือระบบ อีอาร์พี รุ่นก่อนหน้า ซึ่งรันบนฐานข้อมูลยี่ห้อใดก็ได้","ข้อสอบชอบสลับสามคำนี้ ถ้าจับได้ว่าตัวไหนเป็นฐานข้อมูลและตัวไหนเป็นโปรแกรม จะไม่พลาดเลยครับ","ทีนี้มาที่นิยามของฐานข้อมูลในหน่วยความจำ หรือ อินเมมโมรีดาต้าเบส","คือระบบจัดการฐานข้อมูลที่อาศัยหน่วยความจำหลักเป็นที่เก็บข้อมูลเป็นหลัก ตรงข้ามกับระบบที่ใช้กลไกการเก็บบนดิสก์","ทำไมถึงเร็วกว่า สไลด์ให้เหตุผลไว้สามข้อ","หนึ่ง การเข้าถึงดิสก์ช้ากว่าการเข้าถึงหน่วยความจำ","สอง อัลกอริทึมที่ใช้ปรับแต่งภายในเรียบง่ายกว่า","สาม ใช้คำสั่งซีพียูน้อยกว่า","และข้อที่สี่ซึ่งสไลด์เขียนต่อท้าย คือการอ่านข้อมูลในหน่วยความจำตัดเวลาค้นหาตำแหน่งทิ้งไปเลย จึงได้ประสิทธิภาพที่เร็วกว่าและคาดเดาได้แน่นอนกว่าดิสก์","คำว่าคาดเดาได้แน่นอนกว่า สำคัญไม่แพ้คำว่าเร็วกว่านะครับ","ดิสก์แบบจานหมุนต้องขยับหัวอ่านไปยังตำแหน่งที่ต้องการก่อน เวลาที่ใช้จึงขึ้นกับว่าข้อมูลอยู่ตรงไหนของจาน คำสั่งเดียวกันอาจเร็วหรือช้าต่างกันหลายเท่า","หน่วยความจำไม่มีการขยับอะไรทั้งสิ้น เวลาเข้าถึงทุกตำแหน่งเท่ากันหมด สำหรับระบบที่ต้องตอบในเวลาที่กำหนด ความแน่นอนนี้มีค่ามาก"]},{"h":"ที่มาของ SAP HANA","s":"hana-2","t":["ที่มาของฮานามีหมุดสำคัญห้าหมุดครับ","ปี 2002 พีสตาร์ไทม์ ก่อตั้งบริษัท ทรานแซคต์อินเมมโมรี ที่ซิลิคอนวัลเลย์ เพื่อระดมทุนพัฒนาระบบจัดการฐานข้อมูลในหน่วยความจำรุ่นถัดไป","บริษัทลูกที่ถือหุ้นทั้งหมดชื่อ ทิมซิสเต็ม ตั้งขึ้นที่เกาหลีตั้งแต่ปี 2000 ส่วนชื่อ พีสตาร์ไทม์ ย่อมาจาก พาราเรลทรานแซคต์อินเมมโมรีเอนจิน","วันที่ 1 พฤศจิกายน 2005 SAP ซื้อเทคโนโลยีที่เป็นฐานของฮานา จาก ดอกเตอร์ซังคยุนชา ซึ่งเป็นผู้บุกเบิกเทคโนโลยีฐานข้อมูลในหน่วยความจำ","SAP แปลงทิมซิสเต็มเป็น SAP แล็บส์เกาหลี และประกาศอย่างเป็นทางการในเดือนมีนาคม 2008","วันที่ 1 ตุลาคม 2006 ฮัสโซ แพลตต์เนอร์ ระบุว่าฮานาเริ่มต้นจากการเป็นหัวข้อวิจัยของนักศึกษาปริญญาเอกที่สถาบันฮัสโซแพลตต์เนอร์","แนวคิดตั้งต้นคือฐานข้อมูลที่ตอบสนองในเวลาเป็นศูนย์","ปี 2008 ผลิตภัณฑ์ถูกพัฒนาขึ้นโดยความร่วมมือระหว่างสถาบันฮัสโซแพลตต์เนอร์ กับมหาวิทยาลัยสแตนฟอร์ด เป้าหมายคือการวิเคราะห์ข้อมูลจำนวนมากแบบทันเวลา","ปี 2010 SAP ซื้อไซเบสด้วยเงินห้าจุดแปดพันล้านดอลลาร์ แต่แม้จะซื้อแล้ว ระบบ SAP จำนวนมากก็ยังคงใช้ออราเคิล ดีบีทู และฐานข้อมูลอื่นอยู่ดี","ทีนี้เหตุผลเชิงเทคนิคที่แพลตต์เนอร์ยกมา เป็นหัวใจของเรื่องทั้งหมดครับ","เทคโนโลยีแรมพัฒนาขึ้นอย่างมหาศาลในช่วงสองทศวรรษ ดีขึ้นเป็นพันเท่า","ในขณะที่เทคโนโลยีดิสก์ ซึ่งฐานข้อมูลส่วนใหญ่พึ่งพาอยู่ ดีขึ้นเพียงสิบเท่า","ช่องว่างที่ถ่างออกเรื่อย ๆ นี้ ทำให้สถาปัตยกรรมที่ออกแบบไว้สำหรับยุคที่แรมแพงมาก กลายเป็นตัวถ่วงประสิทธิภาพของทั้งระบบ","และคำพูดของแพลตต์เนอร์ที่สไลด์ยกมา ผมคิดว่าน่าอ่านมากครับ","เขาบอกว่าแนวคิดอย่างฐานข้อมูลที่ตอบสนองในเวลาเป็นศูนย์ จะไม่มีวันได้รับการยอมรับในบริษัทอย่าง SAP","แต่ในมหาวิทยาลัยคุณฝันได้ ตราบใดที่ผลิตงานวิจัยที่มีความหมายออกมา","ปิดท้ายหัวข้อนี้ด้วยคำถามว่า ฮานาเป็นแค่ฐานข้อมูลหรือเปล่า","สไลด์ตอบไว้ตรง ๆ ว่าไม่ใช่","ตอน SAP สร้างฮานา เขามองเห็นว่าโปรแกรมทางธุรกิจรุ่นถัดไปต้องการแนวทางที่บูรณาการมากกว่าเดิมมาก","ฮานาจึงมีชิ้นส่วนสำหรับสร้างโปรแกรมระดับองค์กรมาให้ในตัว ทั้งฐานข้อมูลรายการ ฐานข้อมูลรายงาน ชั้นบูรณาการ การค้นหา การทำนาย และเว็บ ทั้งหมดนี้ทำงานได้จากการติดตั้งครั้งเดียว"]},{"h":"SAP HANA คืออะไร","s":"hana-3","t":["นิยามของฮานา ต้องจำให้ได้ทั้งประโยคครับ","SAP ฮานา คือระบบจัดการฐานข้อมูลเชิงสัมพันธ์ แบบในหน่วยความจำ และจัดเก็บแบบคอลัมน์","หน้าที่หลักในฐานะเซิร์ฟเวอร์ฐานข้อมูล คือจัดเก็บและเรียกคืนข้อมูลตามที่โปรแกรมร้องขอ","ส่วนชื่อย่อ ฮานา มาจาก ไฮเพอร์ฟอร์แมนซ์ อนาลิติกส์ แอปพลายแอนซ์","ภาษาไทยคือ เครื่องสำเร็จรูปสำหรับการวิเคราะห์สมรรถนะสูง","สไลด์ให้ตัวเลขไว้ว่า ฮานาเร็วกว่าฐานข้อมูลทั่วไปอย่างออราเคิลบนฮาร์ดแวร์ชุดเดียวกัน สิบถึงหนึ่งพันเท่า สำหรับงานหลายประเภท","ผลที่ตามมาจากความเร็วนั้นมีสามข้อ","หนึ่ง ทำให้การออกแบบและการดำเนินงานง่ายลง เพราะไม่ต้องสร้างทางลัดไว้เยอะ ๆ เพื่อเลี่ยงความช้า","สอง ทำโปรแกรมทางธุรกิจที่ทำงานทันเวลาได้","สาม ลดความซับซ้อนของระบบไอที เพราะไม่ต้องมีแอปพลิเคชันเซิร์ฟเวอร์หลายตัว ไม่ต้องมีโอเปอเรชันแนลดาต้าสโตร์ ไม่ต้องมีดาต้ามาร์ต และไม่ต้องติดตั้งเครื่องมือบีไอที่ซับซ้อนแยกต่างหาก","ข้อที่สามคือข้อที่มีมูลค่าทางธุรกิจสูงที่สุดนะครับ","ระบบเดิมต้องคัดลอกข้อมูลออกไปอีกหลายที่ เพื่อให้รายงานเร็วพอใช้งาน ทุกชุดที่คัดลอกคือข้อมูลที่ล้าสมัยไปแล้วหนึ่งรอบ และเป็นค่าใช้จ่ายที่ต้องดูแลตลอดไป","ถ้าฐานข้อมูลเร็วพอที่จะทำรายงานจากข้อมูลจริงได้เลย สำเนาทั้งหมดนั้นก็ไม่จำเป็นอีกต่อไป","นี่คือเหตุผลที่สไลด์พูดถึงการเอาระบบหลายตัวออก ไม่ใช่แค่พูดถึงความเร็ว","อีกเรื่องที่ควรรู้คือ ฮานารองรับเอสคิวแอลครับ","สไลด์เขียนไว้ว่า ฐานข้อมูลเชิงสัมพันธ์ส่วนใหญ่ใช้เอสคิวแอลเป็นภาษาของฐานข้อมูล และ SAP ฮานา ก็รองรับเอสคิวแอลด้วย","ข้อนี้สำคัญ เพราะแปลว่าความรู้เอสคิวแอลที่มีอยู่ใช้กับฮานาได้ทันที ไม่ต้องเรียนภาษาใหม่ทั้งหมด"]},{"h":"Appliance เทียบกับ Tailored Data Center Integration","s":"hana-4","t":["คำว่าแอปพลายแอนซ์ในชื่อฮานา ไม่ได้เป็นแค่ตัวอักษรในชื่อย่อ แต่เป็นวิธีส่งมอบจริง ๆ ครับ","แบบที่หนึ่งคือแอปพลายแอนซ์","SAP เริ่มส่งมอบฮานาในรูปเครื่องสำเร็จรูปที่เป็นมาตรฐานและปรับแต่งมาอย่างดี โดยเลือกได้จากพันธมิตรฮาร์ดแวร์หลายราย","สร้างตามข้อกำหนดฮาร์ดแวร์ที่นิยามไว้ชัดเจน เพื่อให้ได้สมรรถนะตามที่เทคโนโลยีในหน่วยความจำต้องการ","ทุกอย่างมาในกล่องเดียว ตั้งแต่แอปพลิเคชันเซิร์ฟเวอร์ ฐานข้อมูล ระบบปฏิบัติการ เวอร์ชวลไลเซชัน เซิร์ฟเวอร์ เครือข่าย จนถึงที่เก็บข้อมูล","แบบที่สองคือ เทเลอร์ดาต้าเซ็นเตอร์อินทิเกรชัน เรียกย่อว่า ทีดีไอ","แนวคิดคือใช้ฮาร์ดแวร์ที่องค์กรมีอยู่แล้วและถนัดอยู่แล้ว ให้ความยืดหยุ่นมากกว่าในการเลือกองค์ประกอบฮาร์ดแวร์ที่ใช้รันฮานา โดยเฉพาะเครือข่ายและที่เก็บข้อมูลขององค์กรเอง","แล้วควรเลือกแบบไหน","สไลด์ตอบไว้ว่า ถ้าต้องการฮาร์ดแวร์ที่ตั้งค่ามาแล้วพร้อมซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า ซึ่งพันธมิตรฮาร์ดแวร์ติดตั้งให้ได้อย่างรวดเร็ว แอปพลายแอนซ์คือรูปแบบที่เหมาะ และได้รับการสนับสนุนเต็มรูปแบบทั้งจากพันธมิตรฮาร์ดแวร์และจาก SAP","พูดอีกอย่างคือ แอปพลายแอนซ์แลกความยืดหยุ่นกับความเร็วในการติดตั้งและความชัดเจนเรื่องผู้รับผิดชอบ ส่วนทีดีไอแลกกลับกัน","ทีนี้ SAP มีทะเบียนฮาร์ดแวร์ที่ผ่านการรับรองด้วยครับ","ทะเบียนนี้รวบรวมฮาร์ดแวร์ทุกตัวที่ผ่านการรับรองในโครงการรับรองฮาร์ดแวร์ของฮานา หรือที่รองรับสำหรับฮานารุ่นเอสพีเอส และสถาปัตยกรรมซีพียูที่กำหนด","ฮาร์ดแวร์ถูกทดสอบโดยพันธมิตรฮาร์ดแวร์ร่วมกับ SAP ลินุกซ์แล็บ","ระบบปฏิบัติการที่รองรับคือ ซูเซ่ และ เรดแฮท ซึ่งทั้งคู่เป็นลินุกซ์","สถาปัตยกรรมที่รองรับคือ อินเทล และ ไอบีเอ็มพาวเวอร์ซิสเต็มส์","จำนวนโซลูชันในทะเบียนเพิ่มขึ้นตลอดเวลา สไลด์แสดงตัวเลขไว้สองจุด คือสี่ร้อยสิบเก้าโซลูชันในภาพเก่า และหนึ่งพันสิบหกโซลูชัน ณ วันที่ 30 มีนาคม 2026","มีข้อที่คนมักมองข้ามครับ","ฮานารันบนลินุกซ์เท่านั้น ไม่มีรุ่นสำหรับวินโดวส์","องค์กรที่ใช้เอสคิวแอลเซิร์ฟเวอร์บนวินโดวส์มาตลอด จึงต้องเปลี่ยนทั้งฐานข้อมูลและระบบปฏิบัติการพร้อมกัน","นี่เป็นต้นทุนแฝงของการย้ายไป เอสโฟร์ฮานา ที่มักไม่ได้อยู่ในใบเสนอราคาตั้งต้น"]},{"h":"เก็บเป็นแถวหรือเก็บเป็นคอลัมน์","s":"hana-5","t":["หัวข้อนี้คือกลไกที่ทำให้ฮานาเร็วครับ และผมอยากให้เข้าใจมันจริง ๆ ไม่ใช่ท่องว่าคอลัมน์ดีกว่า","การเก็บแบบแถว เรียงข้อมูลแนวนอน คือหนึ่งรายการอยู่ติดกันทั้งแถว","ข้อดีคือเพิ่มหรือแก้รายการได้ง่าย เพราะเขียนที่เดียวจบ ข้อเสียคืออาจอ่านข้อมูลที่ไม่จำเป็นติดมาด้วย เหมาะกับงานรายการประจำวันคือโอแอลทีพี","การเก็บแบบคอลัมน์ เรียงข้อมูลแนวตั้ง คือข้อมูลชนิดเดียวกันมาอยู่ด้วยกัน","ข้อดีคืออ่านเฉพาะข้อมูลที่ต้องใช้ ไม่ต้องลากทั้งแถวมา ข้อเสียคือการเขียนหนึ่งรายการต้องเข้าถึงหลายที่ เหมาะกับงานวิเคราะห์และรวมยอดคือโอแอลเอพี","ทีนี้สิ่งที่ฮานาทำ และเป็นคำตอบของข้อสอบคือ","SAP ฮานา เก็บข้อมูลได้ทั้งแบบแถวและแบบคอลัมน์","ไม่ได้เลือกอย่างใดอย่างหนึ่งนะครับ ตารางไหนควรเป็นแบบไหนก็ตั้งค่าให้เป็นแบบนั้น","นี่คือวิธีที่ฮานาแก้ปัญหา โอแอลทีพี กับ โอแอลเอพี ขัดกันเอง ซึ่งเราทิ้งไว้ในแท็บที่แล้ว","ประโยชน์ของการเก็บแบบคอลัมน์ตามที่สไลด์ระบุมีสี่ข้อ","การบีบอัดข้อมูล อ่านและเขียนตารางได้เร็วกว่าการเก็บแบบแถวทั่วไป ความยืดหยุ่นและการประมวลผลแบบขนาน และรวมยอดกับคำนวณได้ด้วยความเร็วที่สูงกว่า","ทำไมเก็บเป็นคอลัมน์แล้วบีบอัดได้ดีกว่า","เพราะข้อมูลในคอลัมน์เดียวกันเป็นชนิดเดียวกันและซ้ำกันเยอะครับ","คอลัมน์ประเทศของใบสั่งขายหนึ่งล้านใบ อาจมีค่าต่างกันแค่ไม่กี่สิบค่า เก็บเรียงต่อกันแบบนั้น วิธีบีบอัดอย่างง่ายก็ลดขนาดลงได้มหาศาล","ส่วนการเก็บเป็นแถว ข้อมูลข้าง ๆ กันเป็นคนละชนิด จึงหาแบบแผนมาบีบอัดได้ยากกว่ามาก","ตัวอย่างที่สไลด์ใช้ก็ชัดเจนครับ","คำสั่งอย่าง รวมยอดขายของสินค้าข้าวโพด แยกตามประเทศ ต้องการแค่สามคอลัมน์ คือประเทศ สินค้า และยอดขาย","ฐานข้อมูลแบบแถวต้องลากทั้งแถวขึ้นมาทุกแถว แล้วค่อยทิ้งคอลัมน์ที่ไม่ใช้","ฐานข้อมูลแบบคอลัมน์หยิบมาแค่สามคอลัมน์","ยิ่งตารางมีคอลัมน์เยอะ ส่วนต่างยิ่งมหาศาล และตารางของ SAP มีคอลัมน์เป็นร้อยครับ"]},{"h":"การบีบอัดข้อมูล","s":"hana-6","t":["ถ้าข้อมูลต้องอยู่ในหน่วยความจำทั้งหมด คำถามแรกที่ทุกคนถามคือ แล้วแรมจะพอเหรอ","การบีบอัดคือคำตอบครับ","วิธีบีบอัดหลักเรียกว่า ดิกชันนารีคอมเพรสชัน","แทนที่จะเก็บคำว่า มิลเลอร์ ซ้ำ ๆ ทุกแถว ระบบจะทำพจนานุกรมขึ้นมาหนึ่งชุด แล้วเก็บเป็นเลขรหัสที่ชี้ไปยังพจนานุกรมแทน","ลำดับของรหัสในคอลัมน์บอกเองว่าแถวไหนเป็นค่าอะไร จึงไม่ต้องเก็บเลขแถวเพิ่ม","วิธีบีบอัดอื่นที่สไลด์เอ่ยถึงได้แก่ รันเลงท์ คลัสเตอร์ และพรีฟิกซ์","ตัวเลขที่สไลด์ให้ไว้มีสามชุดครับ","ชุดแรก อัตราบีบอัดอยู่ที่ห้าถึงสามสิบเท่า","ชุดที่สอง การลดขนาดเมื่อย้ายไป เอสโฟร์ฮานา สไลด์แสดงกราฟที่ลดลงยี่สิบห้าเท่า ไล่จาก อีอาร์พี หกจุดศูนย์ บนออราเคิล มาเป็น สวีทออนฮานา แล้วเป็น เอสโฟร์ฮานา บนที่เก็บข้อมูลแบบดั้งเดิม จนถึง เอสโฟร์ฮานา บนเพียวสตอเรจ","ชุดที่สาม ตัวอย่างขนาดจริง เจ็ดจุดหนึ่งเทระไบต์เมื่ออยู่บนแอนนี่ดีบี เหลือหนึ่งจุดแปดเทระไบต์เมื่อย้ายมาบนฮานาด้วยการจัดบ้านและบีบอัด และเหลือศูนย์จุดแปดเทระไบต์หลังทำให้ง่ายขึ้นด้วยการจัดชั้นอายุข้อมูลและตัดความซ้ำซ้อนออก","สไลด์ยังแสดงสูตรประมาณแรมที่ต้องใช้ไว้ด้วยครับ","แรมเท่ากับ ขนาดตารางแบบคอลัมน์หารสี่ บวกกับขนาดตารางแบบแถวหารหนึ่งจุดห้า แล้วคูณด้วยตัวประกอบบีบอัดของฐานข้อมูลต้นทาง จากนั้นบวกเพิ่มอีกห้าสิบกิกะไบต์","ความหมายของค่าคงที่แต่ละตัวคือ หารสี่เป็นตัวประกอบบีบอัดเฉลี่ยของตารางแบบคอลัมน์ หารหนึ่งจุดห้าเป็นของตารางแบบแถว","ตัวคูณคือตัวประกอบบีบอัดของฐานข้อมูลต้นทาง และห้าสิบกิกะไบต์ที่บวกเพิ่มคือเผื่อไว้สำหรับแคชของฮานาและบริการเสริมอื่น ๆ","ยังมีส่วนเผื่อสำหรับวัตถุที่สร้างตอนทำงาน รวมอยู่ในสูตรด้วย","ขอให้สังเกตว่าตารางแบบแถวบีบอัดได้น้อยกว่ามากนะครับ","หารสี่เทียบกับหารหนึ่งจุดห้า คือต่างกันเกือบสามเท่า","นี่เป็นอีกหลักฐานหนึ่งว่าทำไมฮานาถึงใช้การเก็บแบบคอลัมน์เป็นค่าตั้งต้น และเก็บแบบแถวไว้เฉพาะตารางที่จำเป็นจริง ๆ"]},{"h":"SAP HANA Platform · สามชั้นบริการ","s":"hana-7","t":["ถึงตรงนี้ขอเปลี่ยนมุมมองนะครับ","จากที่มองฮานาเป็นฐานข้อมูล เรามามองมันเป็นแพลตฟอร์ม ซึ่งเป็นวิธีที่ SAP อยากให้มอง","แพลตฟอร์มนี้มีสามชั้นบริการ","ชั้นที่หนึ่ง ดาต้าเบสเซอร์วิส คือบริการฐานข้อมูล เป็นชั้นล่างสุดและเป็นรากฐานของทุกอย่าง","ชั้นที่สอง แอปพลิเคชันเซอร์วิส คือบริการสำหรับสร้างโปรแกรม ทำให้ฮานาสร้างเว็บแอปได้เองโดยไม่ต้องมีเซิร์ฟเวอร์แยก","ชั้นที่สาม อินทิเกรชันเซอร์วิส คือบริการเชื่อมต่อ ดึงข้อมูลจากระบบอื่นเข้ามาหรือเข้าถึงโดยไม่ต้องย้าย","ส่วนช่องทางที่โปรแกรมภายนอกเข้ามาคุยกับฮานา มีหลายทางมากครับ","ได้แก่ เอสคิวแอล เจสัน เอดีโอดอตเน็ต เจดีบีซีและโอดีบีซี โอเดต้า เอชทีเอ็มแอลห้า เอ็มดีเอกซ์ และเอกซ์เอ็มแอลเอ","รายการนี้ยาวโดยตั้งใจนะครับ มันบอกว่าฮานาไม่ได้ออกแบบมาให้คุยกับ SAP อย่างเดียว แต่ให้โปรแกรมอะไรก็ได้มาต่อ","และสไลด์ระบุว่าแพลตฟอร์มนี้ใช้ได้ทั้งแบบติดตั้งในองค์กร บนคลาวด์ และแบบผสม"]},{"h":"Database Services","s":"hana-8","t":["ชั้นบริการฐานข้อมูล สไลด์แบ่งเป็นสองส่วน คือรากฐานกับความสามารถในการประมวลผล","ส่วนที่หนึ่ง รากฐาน มีห้าความสามารถ","หนึ่ง อินเมมโมรีเอซิดคอลัมนาร์ คือเก็บในหน่วยความจำ แบบคอลัมน์ และยังรักษาคุณสมบัติเอซิดของฐานข้อมูลรายการไว้ครบ","สอง มัลติคอร์และพาราเรลไลเซชัน คือใช้ซีพียูหลายแกนพร้อมกัน การเก็บแบบคอลัมน์ทำให้แบ่งงานไปคนละแกนได้ง่าย","สาม แอดวานซ์คอมเพรสชัน คือการบีบอัดขั้นสูง ตามที่เล่าไว้ในหัวข้อที่หก","สี่ มัลติเทแนนต์ดาต้าเบสคอนเทนเนอร์ คือแยกฐานข้อมูลหลายชุดในเครื่องเดียว โดยแต่ละชุดไม่เห็นข้อมูลของกันและกัน","ห้า ไดนามิกเทียริง หรือการจัดชั้นข้อมูลแบบพลวัต ซึ่งข้อนี้ออกสอบบ่อย ขออธิบายเพิ่ม","ตัวเลือกนี้ช่วยให้ผู้ใช้เลือกได้ว่าจะใช้หน่วยความจำสำหรับข้อมูลร้อน และดิสก์สำหรับข้อมูลอุ่น","คือเก็บข้อมูลที่ใช้บ่อยซึ่งเรียกว่าฮอต ไว้ในหน่วยความจำ และเก็บข้อมูลที่ใช้ไม่บ่อยซึ่งเรียกว่าวอร์ม ไว้บนดิสก์","ข้อนี้สำคัญเพราะมันบอกว่า ฮานาไม่ได้เอาทุกอย่างยัดลงแรมแบบไม่คิด แรมยังแพงกว่าดิสก์มาก จึงต้องเลือกว่าอะไรคุ้มที่จะอยู่ในแรม","ส่วนที่สอง ความสามารถในการประมวลผล สไลด์บอกว่านอกเหนือจากความสามารถรากฐานแล้ว แพลตฟอร์มยังมีความสามารถที่เปิดทางให้ทำการวิเคราะห์ขั้นสูงกับข้อมูลหลากหลายชนิด","มีเก้าข้อครับ","สเปเชียล สำหรับข้อมูลเชิงพื้นที่ เช่นพิกัดและแผนที่","พรีดิกทีฟ สำหรับการทำนาย เสิร์ช สำหรับการค้นหา","เทกซ์อนาลิติกส์ สำหรับการวิเคราะห์ข้อความ เทกซ์ไมนิง สำหรับการขุดค้นข้อความ","กราฟ สำหรับข้อมูลแบบกราฟ คือความสัมพันธ์ระหว่างสิ่งต่าง ๆ","ดาต้าควอลิตี สำหรับคุณภาพข้อมูล ซีรีส์ดาต้า สำหรับข้อมูลอนุกรม เช่นค่าที่วัดตามเวลา","และฟังก์ชันไลบรารี คือคลังฟังก์ชันสำเร็จรูปที่เรียกใช้ได้เลย","ประเด็นที่ต้องเข้าใจ ไม่ใช่ท่องรายชื่อนะครับ","ความสามารถทั้งเก้าข้อนี้ ถ้าเป็นระบบเดิมคือซอฟต์แวร์คนละตัวที่ต้องซื้อแยก ติดตั้งแยก และย้ายข้อมูลไปมา","การที่มันอยู่ในฐานข้อมูลเดียวกับข้อมูล แปลว่าไม่ต้องย้ายข้อมูลออกไปวิเคราะห์ ซึ่งทั้งเร็วกว่าและไม่มีปัญหาข้อมูลไม่ตรงกัน"]},{"h":"Application Services และ Integration Services","s":"hana-9","t":["สองชั้นบริการที่เหลือครับ","ชั้นแอปพลิเคชันเซอร์วิส มีบริการสำหรับสร้างโปรแกรมบนเว็บ และรองรับมาตรฐานการพัฒนาแบบเปิด เช่นเอสคิวแอล เอชทีเอ็มแอลห้า จาวาสคริปต์ เจดีบีซี โอดีบีซี เจสัน และโอเดต้า","องค์ประกอบมีสามอย่าง","เว็บเซิร์ฟเวอร์ในตัว จึงให้บริการหน้าเว็บได้โดยไม่ต้องมีเครื่องแยก","SAP ฟิออริยูเอกซ์ คือหน้าตาผู้ใช้แบบฟิออริ ซึ่งเป็นรูปแบบหน้าจอใหม่ของ SAP","และแอปพลิเคชันไลฟ์ไซเคิลแมเนจเมนต์ คือการจัดการวงจรชีวิตของโปรแกรม ตั้งแต่พัฒนา ทดสอบ จนขึ้นใช้งานจริง","ชั้นอินทิเกรชันเซอร์วิส สไลด์เปิดด้วยข้อเท็จจริงว่า องค์กรสร้างและเก็บข้อมูลไว้ในหลายระบบ","เพื่อให้เห็นภาพรวมขององค์กรได้ครบ แพลตฟอร์มจึงมีบริการเชื่อมต่อที่รับมือกับกลยุทธ์การเชื่อมต่อหลายแบบจากแหล่งข้อมูลที่หลากหลาย","มีห้าบริการครับ","สมาร์ตดาต้าแอกเซส ใช้รูปแบบเฟเดอเรชัน คือเข้าถึงข้อมูลที่อยู่ที่เดิมโดยไม่ย้าย แหล่งข้อมูลที่รองรับได้แก่ ไอบีเอ็มดีบีทู เน็ตทีซซ่า ออราเคิล เอ็มเอสเอสคิวแอลเซิร์ฟเวอร์ เทราดาต้า SAP ฮานา SAP เอเอสอี SAP ไอคิว และไฮฟ์","สมาร์ตดาต้าอินทิเกรชัน ใช้รูปแบบโหลดดิง คือดึงข้อมูลเข้ามาเก็บจริง แหล่งข้อมูลได้แก่ ไอบีเอ็มดีบีทู ออราเคิล เอ็มเอสเอสคิวแอลเซิร์ฟเวอร์ ทวิตเตอร์ ไฮฟ์ โอเดต้า และอะแดปเตอร์ที่เขียนเอง","สมาร์ตดาต้าสตรีมมิง ใช้รูปแบบสตรีมมิง คือรับข้อมูลที่ไหลเข้ามาต่อเนื่อง เรียกอีกชื่อว่าซีอีพี แหล่งข้อมูลได้แก่อุปกรณ์เคลื่อนที่ หุ่นยนต์ เซนเซอร์ มาตรวัด และรถบรรทุก","รีโมตดาต้าซิงค์ ใช้รูปแบบซิงโครไนซ์ คือทำให้ข้อมูลสองฝั่งตรงกัน กับอุปกรณ์ปลายทางที่มีฐานข้อมูลของตัวเอง เช่นรถยนต์ อาคาร และแท่นขุดเจาะ","และฮาดูปอินทิเกรชัน คือเชื่อมกับระบบข้อมูลขนาดใหญ่ ได้แก่สปาร์ก ไฮฟ์ และฮาดูป","ความต่างระหว่างสองตัวแรก คือจุดที่ข้อสอบชอบถามครับ","สมาร์ตดาต้าแอกเซส คือเห็นข้อมูลโดยไม่ย้าย ข้อมูลยังอยู่ที่ระบบต้นทาง ฮานาแค่มองทะลุเข้าไป เหมาะเมื่อข้อมูลใหญ่มากหรือต้องการค่าล่าสุดเสมอ","สมาร์ตดาต้าอินทิเกรชัน คือย้ายข้อมูลเข้ามาเก็บจริง เหมาะเมื่อต้องการประมวลผลหนัก ๆ หรือระบบต้นทางรับภาระไม่ไหว"]},{"h":"การวิเคราะห์เชิงทำนายและ PAL","s":"hana-10","t":["นิยามของการวิเคราะห์เชิงทำนาย หรือพรีดิกทีฟอนาลิติกส์","คือการใช้ข้อมูล อัลกอริทึมทางสถิติ และเทคนิคการเรียนรู้ของเครื่อง เพื่อระบุความน่าจะเป็นของผลลัพธ์ในอนาคตจากข้อมูลในอดีต","เป้าหมายคือก้าวข้ามจากการรู้ว่าเกิดอะไรขึ้น ไปสู่การประเมินให้ดีที่สุดว่าอะไรจะเกิดขึ้นในอนาคต","มีบันไดสี่ขั้นของการวิเคราะห์ที่ควรจำครับ","ขั้นที่หนึ่ง ดีสคริปทีฟอนาลิติกส์ ตอบคำถามว่าเกิดอะไรขึ้น","ขั้นที่สอง ไดแอกโนสติกอนาลิติกส์ ตอบคำถามว่าทำไมถึงเกิดขึ้น","ขั้นที่สาม พรีดิกทีฟอนาลิติกส์ ตอบคำถามว่าอะไรจะเกิดขึ้น","ขั้นที่สี่ พรีสคริปทีฟอนาลิติกส์ ตอบคำถามว่าเราจะทำให้มันเกิดขึ้นได้อย่างไร","บันไดนี้จำง่ายและใช้ได้ทั้งชีวิตครับ","รายงานบัญชีทั่วไปอยู่ขั้นที่หนึ่ง การวิเคราะห์ผลต่างอยู่ขั้นที่สอง การพยากรณ์ยอดขายอยู่ขั้นที่สาม และการที่ระบบเสนอว่าควรลดราคาเท่าไรจึงจะได้กำไรสูงสุดอยู่ขั้นที่สี่","ทีนี้ SAP ได้ความสามารถนี้มาจากการซื้อบริษัทชื่อ เคเอกซ์อีเอ็น ครับ","เคเอกซ์อีเอ็นก่อตั้งเมื่อเดือนมิถุนายน 1998 โดยโรเจอร์ แฮดแดด และมิเชล เบรา จากแนวคิดตั้งต้นของเลออง บอตตู ซึ่งอาศัยทฤษฎีการลดความเสี่ยงเชิงโครงสร้างของวลาดิเมียร์ แวปนิก","บริษัทนี้ทำตลาดซอฟต์แวร์วิเคราะห์เชิงทำนายเป็นหลัก","วันที่ 10 กันยายน 2013 SAP ประกาศแผนเข้าซื้อ และวันที่ 1 ตุลาคม 2013 การเข้าซื้อก็เสร็จสมบูรณ์","ส่วนคลังฟังก์ชันวิเคราะห์เชิงทำนาย หรือพีเอแอล เป็นหนึ่งในองค์ประกอบของแอปพลิเคชันฟังก์ชันไลบรารี หรือเอเอฟแอล ใน SAP ฮานา","สามารถนิยามฟังก์ชันที่เรียกได้จากในโพรซีเยอร์เอสคิวแอลสคริปต์ เพื่อทำอัลกอริทึมวิเคราะห์ขั้นสูง และอัลกอริทึมของพีเอแอลแบ่งเป็นสิบหมวด","สิบหมวดนั้นได้แก่ การจำแนกประเภท การจัดกลุ่ม การวิเคราะห์ความสัมพันธ์ การถดถอย การวิเคราะห์อนุกรมเวลา การแจกแจงความน่าจะเป็น การตรวจจับค่าผิดปกติ การทำนายความเชื่อมโยง ฟังก์ชันทางสถิติ และการเตรียมข้อมูล","ไม่ต้องท่องรายชื่ออัลกอริทึมทั้งหมดนะครับ","สิ่งที่ต้องจำคือมีสิบหมวด และเรียกใช้ได้จากเอสคิวแอลสคริปต์โดยตรง","ประเด็นที่ลึกกว่านั้นคือ การที่อัลกอริทึมเหล่านี้รันอยู่ในฐานข้อมูล แปลว่าไม่ต้องดึงข้อมูลออกมาที่เครื่องนักวิเคราะห์ก่อน ซึ่งทั้งเร็วกว่าและปลอดภัยกว่าในแง่การควบคุมข้อมูล"]},{"h":"IoT และ Smart Data Streaming","s":"hana-11","t":["นิยามของอินเทอร์เน็ตออฟธิงส์ หรือไอโอที","คือเครือข่ายของวัตถุทางกายภาพ ซึ่งฝังเซนเซอร์ ซอฟต์แวร์ และเทคโนโลยีอื่น ๆ ไว้ เพื่อเชื่อมต่อและแลกเปลี่ยนข้อมูลกับอุปกรณ์และระบบอื่นผ่านอินเทอร์เน็ต","โครงสร้างที่สไลด์วาดไว้มีสามส่วน คือเซนเซอร์และอุปกรณ์ เซิร์ฟเวอร์บนคลาวด์ และโปรแกรมที่เอาข้อมูลไปใช้ โดยมีเครือข่ายเชื่อมทั้งสองช่วง และข้อมูลวิ่งได้สองทาง","ทีนี้มาที่สมาร์ตดาต้าสตรีมมิงครับ","คำถามว่าอะไรบ้างที่เป็นแหล่งของกระแสเหตุการณ์ สไลด์ตอบกว้างมาก","คืออุปกรณ์หรือโปรแกรมใดก็ตามที่ผลิตข้อมูลออกมาเมื่อมีอะไรเกิดขึ้น หรือรายงานสถานะเป็นประจำ ล้วนเป็นแหล่งของกระแสเหตุการณ์ได้ทั้งสิ้น","ตัวอย่างที่ยกไว้ได้แก่ เซนเซอร์ กระแสการคลิก สื่อสังคมออนไลน์ รายการค้า และราคาตลาด","SAP ฮานา สมาร์ตดาต้าสตรีมมิง เป็นส่วนขยายที่เลือกติดตั้งได้ของแพลตฟอร์ม ออกแบบมาเพื่อรับ ประมวลผล และตอบสนองต่อกระแสข้อมูลเหตุการณ์ที่ไหลเข้ามาอย่างต่อเนื่องแบบทันเวลา","ทำให้โปรแกรมรับข้อมูลความเร็วสูงเข้ามาได้ เช่นค่าจากเซนเซอร์ไอโอที ราคาซื้อขายทางการเงิน และบันทึกของระบบ ก่อนที่ข้อมูลนั้นจะถูกเขียนลงฐานข้อมูลแบบดั้งเดิม","ความสามารถที่สไลด์ระบุมีสี่ข้อ","รับ กรอง วิเคราะห์ และตอบสนองต่อเหตุการณ์หลายล้านรายการต่อวินาทีแบบทันเวลา","เก็บข้อมูลที่มีคุณค่าสูงไว้ใน SAP ฮานา และส่งข้อมูลอื่นเข้าฮาดูป","ส่งข้อมูลสดไปยังแดชบอร์ดการปฏิบัติงาน","และทำคำสั่งค้นหาต่อเนื่องด้วยภาษาเชิงประกาศซีซีแอล หรือวิธีที่ขับเคลื่อนด้วยแบบจำลอง","ปิดท้ายหัวข้อนี้ด้วยเรื่องแมชชีนเลิร์นนิงครับ","แมชชีนเลิร์นนิง คือการศึกษาอัลกอริทึมคอมพิวเตอร์ที่พัฒนาตัวเองได้โดยอัตโนมัติผ่านประสบการณ์และการใช้ข้อมูล ถือเป็นส่วนหนึ่งของปัญญาประดิษฐ์","ความสัมพันธ์ของสามคำคือ ปัญญาประดิษฐ์ครอบแมชชีนเลิร์นนิง และแมชชีนเลิร์นนิงครอบดีปเลิร์นนิงอีกที","ข้อมูลเข้าที่ใช้ได้มีทั้งแบบมีโครงสร้างและไม่มีโครงสร้าง ได้แก่ตาราง ข้อความ ภาพ เสียงและวีดิทัศน์ และข้อมูลอนุกรมเวลากับข้อมูลภูมิสารสนเทศ","กระบวนการคือ เตรียมข้อมูล แล้วฝึกแบบจำลอง แล้วนำแบบจำลองไปใช้ แล้วเก็บผลป้อนกลับ แล้ววนกลับไปฝึกใหม่","ส่วนผลลัพธ์คือ เปลี่ยนข้อมูลขนาดใหญ่ให้เป็นข้อมูลที่ฉลาด ได้แก่การทำนาย การจำแนกและการจัดกลุ่ม การแนะนำ และการทำงานอัตโนมัติ"]},{"h":"จาก R/1 ถึง S/4HANA","s":"hana-12","t":["ครึ่งหลังของแท็บนี้เป็นเรื่อง เอสโฟร์ฮานา ครับ เริ่มจากเส้นเวลาซึ่งต่อจากบทที่ 1 โดยตรง","ปี 1973 SAP อาร์หนึ่ง พัฒนาต่อจากระบบบัญชีอาร์เอฟ รันบนเซิร์ฟเวอร์ไอบีเอ็มและระบบปฏิบัติการดอส มีลูกค้าสี่สิบรายภายในปี 1978","ปี 1979 SAP อาร์สอง ยุคเมนเฟรม ประมวลผลข้อมูลแบบทันเวลาบนเมนเฟรม ครอบคลุมบัญชี การผลิต โลจิสติกส์ และทรัพยากรบุคคล","ปี 1991 มีลูกค้าสองพันสองร้อยรายในสามสิบเอ็ดประเทศ ส่วนปีเริ่มต้นมีรายได้ห้าจุดหนึ่งล้านยูโร และพนักงานหกสิบคน","ปี 1992 SAP อาร์สาม สถาปัตยกรรมสามชั้น เป็นโค้ดชุดใหม่ สถาปัตยกรรมแบบไคลเอนต์เซิร์ฟเวอร์ทำให้องค์กรทั่วไปใช้ SAP ได้","เริ่มด้วยลูกค้าใหม่หนึ่งพันแปดสิบเก้าราย และการติดตั้งกว่าเก้าพันแห่ง รายได้สี่ร้อยยี่สิบสี่ล้านยูโร พนักงานสามพันสองร้อยคน ลูกค้าสองพันแปดร้อยรายในสามสิบห้าประเทศ","ปี 1999 มายแซปดอตคอม ยุควันสเต็ปบิสซิเนส รายได้หกจุดสามพันล้านยูโร พนักงานสองหมื่นห้าพันคน ลูกค้าหนึ่งหมื่นห้าพันรายในหนึ่งร้อยยี่สิบประเทศ","ปี 2003 SAP บิสซิเนสสวีท และเน็ตวีฟเวอร์ สถาปัตยกรรมแบบเอ็นเทอร์ไพรส์เซอร์วิส รายได้เจ็ดพันล้านยูโร พนักงานสองหมื่นเก้าพันหกร้อยสิบคน ลูกค้าสองหมื่นห้าร้อยรายในกว่าหนึ่งร้อยยี่สิบประเทศ","ปี 2015 SAP เอสโฟร์ฮานา เป็นโค้ดชุดใหม่อีกครั้ง ซึ่งเกิดขึ้นเพียงสองครั้งในประวัติศาสตร์ของ SAP คือตอนอาร์สามและตอนนี้","รายได้สิบหกจุดแปดพันล้านยูโร พนักงานหกหมื่นแปดพันคน ลูกค้าสองแสนห้าหมื่นหนึ่งพันรายในกว่าหนึ่งร้อยยี่สิบประเทศ เทคโนโลยีฝั่งพัฒนาคือเอบัพแร็ป และ เอสเอพียูไอห้า","คำว่านิวโค้ดไลน์ คือคำสำคัญของเส้นเวลานี้นะครับ","เส้นสีแดงในภาพสไลด์ขีดไว้สองจุดเท่านั้น คือก่อนอาร์สาม และก่อนเอสโฟร์ฮานา","แปลว่าทุกอย่างระหว่างอาร์สามกับบิสซิเนสสวีท คือการต่อยอดจากฐานโค้ดเดิม ส่วนเอสโฟร์ฮานาคือการเขียนขึ้นใหม่","นี่คือเหตุผลที่การย้ายจากอีซีซีไปเอสโฟร์ฮานา ยากกว่าการอัปเกรดรุ่นปกติมาก","ส่วนประวัติเลขรุ่นที่ควรรู้ ขอไล่สั้น ๆ ครับ","ตระกูลอาร์สาม มีรุ่นหนึ่งจุดศูนย์ปี 1992 สองจุดศูนย์ปี 1993 สามจุดศูนย์ปี 1995 สี่จุดศูนย์ปี 1998 สี่จุดห้าปี 1999 สี่จุดหกปี 2001 และสี่จุดเจ็ดปี 2003","ตระกูลอีซีซี มีห้าจุดศูนย์ปี 2004 และหกจุดศูนย์ปี 2005","ตระกูล อีอาร์พี หกจุดศูนย์ มีเอนแฮนซ์เมนต์แพ็กหนึ่งปี 2006 แพ็กหกปี 2011 แพ็กเจ็ดปี 2013 และแพ็กแปดปี 2016","ส่วนตระกูลเอสโฟร์ฮานา เริ่มที่หนึ่งห้าหนึ่งหนึ่ง แล้วหนึ่งหกหนึ่งศูนย์ ไปจนถึงรุ่นปี 2020 และปี 2023","มีอีกเรื่องที่คนบัญชีต้องรู้ครับ คือยูนิไฟด์เจเนอรัลเลดเจอร์","ใน SAP เอสโฟร์ฮานา ไฟแนนซ์ หนึ่งห้าศูนย์สาม มีการนำบัญชีแยกประเภททั่วไปแบบรวมมาใช้","มันรวมองค์ประกอบที่เคยแยกกันคือ ไฟแนนเชียลแอคเคาน์ติง หรือเอฟไอ กับคอนโทรลลิง หรือซีโอ เข้ามาเป็นแหล่งข้อมูลทางธุรกิจแหล่งเดียวกัน","สำหรับคนบัญชี นี่คือการเปลี่ยนแปลงที่สัมผัสได้ชัดที่สุดของเอสโฟร์ฮานา","การกระทบยอดระหว่างเอฟไอกับซีโอ ที่เคยเป็นงานประจำทุกสิ้นเดือน หายไปเพราะมันเป็นตารางเดียวกันแล้ว"]},{"h":"SAP S/4HANA คืออะไร","s":"hana-13","t":["เอสโฟร์ฮานา ย่อมาจาก SAP บิสซิเนสสวีทโฟร์ SAP ฮานา","ตัวเอส คือ SAP บิสซิเนสสวีท เลขสี่ คือรุ่นที่สี่ของซอฟต์แวร์ระดับองค์กรของ SAP และฮานา คือฐานข้อมูลที่มันรันอยู่","อ่านเต็ม ๆ คือ SAP บิสซิเนสสวีทรุ่นที่สี่ สำหรับ SAP ไฮเพอร์ฟอร์แมนซ์อนาลิติกแอปพลายแอนซ์","ในฐานะรุ่นที่สี่ของ SAP บิสซิเนสสวีท มันเป็นผลิตภัณฑ์ล่าสุดจาก SAP และรันได้บนฐานข้อมูลฮานาเท่านั้น","สไลด์พูดข้อแลกเปลี่ยนนี้ตรง ๆ ว่าเป็นทั้งข้อดีและข้อเสียครับ","SAP เขียน SAP อีซีซี ขึ้นใหม่ทั้งหมดตั้งแต่ฐานรากในปี 2015 เพื่อใช้ประโยชน์จากสมรรถนะและความสามารถด้านการวิเคราะห์ของฮานา","ข้อดีคือได้ความเร็วและความสามารถใหม่เต็มที่","ข้อเสียคือ เอสโฟร์ฮานา รันได้บนฮานาอย่างเดียว ในขณะที่อีซีซีรันบนฐานข้อมูลของผู้ผลิตรายอื่นได้ ซึ่งก็คือแอนนี่ดีบี","ประโยคนี้คือหัวใจของทั้งแท็บ และเป็นคำตอบของคำถามว่าอีซีซีต่างจากเอสโฟร์ฮานาอย่างไร","นิยามอื่นที่สไลด์ให้ไว้มีอีกสี่ข้อ","เป็นโซลูชัน อีอาร์พี ใหม่จาก SAP ที่มีข้อมูลที่เรียบง่ายขึ้น การออกแบบเครื่องมือที่เรียบง่าย คล่องตัว ใช้ง่ายขึ้น คำนวณสิ่งที่ซับซ้อนได้ และรองรับข้อมูลปริมาณมากขึ้น","ติดตั้งได้ทั้งแบบในองค์กร บนคลาวด์ หรือแบบผสม","เป็นชุดโปรแกรมที่เปิดตัวในฐานะโซลูชัน อีอาร์พี ที่แข็งแรง ซึ่งมีทั้งความสามารถ อีอาร์พี และบีไอ โดยใช้พลังการประมวลผลในหน่วยความจำของฮานา","และออกแบบมาเพื่อแก้ปัญหาที่ซับซ้อนและจัดการข้อมูลปริมาณมากกว่าอีซีซีและอาร์สาม ให้ประสบการณ์ผู้ใช้ที่ดีกว่าด้วย SAP ฟิออริ และเปลี่ยนจากระบบที่บันทึกรายการ ไปเป็นข้อมูลทันเวลาจากทั้งแหล่งภายในและภายนอก","มีประโยคหนึ่งที่สำคัญมากครับ","ด้วยเอสโฟร์ฮานา โอแอลทีพีและโอแอลเอพี ถูกรวมเข้าด้วยกันบนแพลตฟอร์มในหน่วยความจำเดียว","แปลว่าไม่ต้องย้ายข้อมูลไปมา ไม่ต้องสร้างสำเนาหลายชุด และไม่มีความล่าช้าในการดูข้อมูลผลการดำเนินงานอีกต่อไป","นี่คือปัญหาที่เราตั้งไว้ตั้งแต่หัวข้อที่สองของแท็บที่แล้ว และนี่คือคำตอบของมัน","ข้อเท็จจริงสำคัญของเอสโฟร์ฮานามีเจ็ดข้อครับ","วิเคราะห์และออกรายงานได้เร็วขึ้น ขั้นตอนในกระบวนการน้อยลง ฟิออริยูเอกซ์ใช้ได้กับทุกอุปกรณ์","อีอาร์พี ซีอาร์เอ็ม เอสอาร์เอ็ม เอสซีเอ็ม และพีแอลเอ็ม ติดตั้งอยู่ร่วมกัน","รองรับข้อมูลทุกชนิด ทั้งสื่อสังคม ข้อความ ภูมิศาสตร์ กราฟ และการประมวลผล","ข้อมูลปัจจุบันยี่สิบห้าเปอร์เซ็นต์ และข้อมูลย้อนหลังเจ็ดสิบห้าเปอร์เซ็นต์","และขนาดข้อมูลรวมเล็กลง","ข้อที่สี่คือการเปลี่ยนแปลงเชิงโครงสร้างที่ใหญ่ที่สุดนะครับ","ในบิสซิเนสสวีทเจ็ดนั้น ซีอาร์เอ็ม เอสอาร์เอ็ม เอสซีเอ็ม และพีแอลเอ็ม เป็นระบบแยกที่ต้องเชื่อมต่อกัน แต่ละตัวมีฐานข้อมูลของตัวเองและต้องส่งข้อมูลหากัน","ในเอสโฟร์ฮานา ทั้งหมดติดตั้งอยู่บนระบบเดียวกัน ข้อมูลลูกค้ารายเดียวกันจึงเป็นแถวเดียวกัน ไม่ใช่สำเนาที่ต้องกระทบยอดกัน"]},{"h":"S/4HANA เทียบกับ SAP ERP 6.0","s":"hana-14","t":["สไลด์บอกว่า เอสโฟร์ฮานา ต่างจาก SAP อีอาร์พี หกจุดศูนย์ ในสี่ด้าน","หนึ่ง แบบจำลองข้อมูล สอง ความสามารถของระบบ สาม ส่วนติดต่อผู้ใช้ และสี่ การออกรายงาน ซึ่งทำให้ทำรายงานทันเวลาและวิเคราะห์เชิงทำนายได้","และแต่ละโมดูลหรือแอลโอบี คือเอฟไอ ซีโอ เอ็มเอ็ม เอสดี พีพี พีเอ็ม คิวเอ็ม ล้วนมีนวัตกรรมและการทำให้เรียบง่ายขึ้นในทั้งสี่ด้านนี้","ด้านที่เปลี่ยนแรงที่สุดคือแบบจำลองข้อมูลครับ","ในงานขายและการกระจายสินค้า เดิมมีตารางเอกสารหลัก ตารางดัชนี ตารางสถานะ ตารางส่งออกนำเข้า ตารางแอลไอเอส ตารางดัชนีส่วนลด และตารางจัดการเอกสารออก","ในเอสโฟร์ฮานา เหลือเพียงเจ็ดตาราง คือ วีบีเอเค แอลไอเคพี วีบีอาร์เค วีบีเอพี แอลไอพีเอส วีบีอาร์พี และวีบีเอฟเอ","ในงานจัดการสินค้าคงคลัง เดิมมีตารางยอดรวมและตารางประวัติจำนวนมาก ในเอสโฟร์ฮานาเหลือตารางเดียวคือ แมทดอก","ในแมททีเรียลเลดเจอร์ เดิมมีตารางยอดรวม ตารางเอกสาร และตารางดัชนีหลายชุด เหลือเพียงแมททีเรียลไพรซ์","และในงานบัญชี เดิมมีตารางยอดรวม ตารางดัชนี และตารางเอกสารจำนวนมาก เช่น บีเอสไอเอส บีเอสเอเอส บีเอสไอเค บีเอสเอเค จีแอลพีซีที และ เอฟเอจีแอลเฟล็กซ์ที","ในเอสโฟร์ฮานา เหลือสองตาราง คือ บีเคพีเอฟ และ เอซีดอกเอ","มีสามหลักการที่อยู่เบื้องหลังครับ","หลักการแรก ซิมเพิลดาต้าโมเดล คือเหลือเฉพาะตารางหลัก ไม่มีความซ้ำซ้อน แยกข้อมูลหลักออกจากข้อมูลรายการอย่างชัดเจน และลดขนาดหน่วยความจำที่ใช้","หลักการที่สอง พรินซิเพิลออฟวัน คือมีวิธีตีราคาเพียงวิธีเดียวคือแมททีเรียลเลดเจอร์ แทนที่จะมีสองวิธีคือไอเอ็มและเอ็มแอล และมีการจัดการส่วนลดที่ยืดหยุ่นแทนความซ้ำซ้อนที่ยุ่งยากและมีราคาแพง","หลักการที่สาม ทรูพุตอินครีส คือลงบัญชีด้วยการเพิ่มแถวอย่างเดียวในระดับฐานข้อมูล และไม่มีการล็อกสำหรับการตีราคาด้วยราคามาตรฐาน","ทำไมตารางถึงหายไปได้เยอะขนาดนั้น","เพราะตารางที่หายไปส่วนใหญ่เป็นตารางยอดรวมและตารางดัชนีครับ","ตารางพวกนี้มีอยู่เพราะฐานข้อมูลเดิมรวมยอดสดไม่ทัน จึงต้องรวมไว้ล่วงหน้าแล้วเก็บไว้","เมื่อฮานารวมยอดจากรายการดิบได้ทันที ตารางยอดรวมก็ไม่จำเป็นอีก และการตัดมันออกยังแก้ปัญหาที่ยอดรวมกับรายการไม่ตรงกันไปในตัว","ส่วนเรื่องการลดขนาดข้อมูล มีห้าข้อครับ","ตารางในฮานาถูกบีบอัดโดยอัตโนมัติ จึงเก็บข้อมูลจำนวนมากในพื้นที่เล็กได้","ลดขนาดเพิ่มอีกด้วยการตัดตารางและดัชนีที่ไม่จำเป็นออก ซึ่งในฐานข้อมูลแบบเดิมต้องมีไว้เพื่อให้ตอบสนองทันเวลา","ใน SAP ซิมเพิลไฟแนนซ์ จำนวนตารางฐานข้อมูลลดจากสิบห้าตารางเหลือเพียงสี่ตาราง","ขั้นสุดท้ายคือกลยุทธ์การจัดชั้นอายุข้อมูล โดยแบ่งข้อมูลเป็นชั้นร้อนที่อยู่ในหน่วยความจำ และชั้นอุ่นที่อยู่บนดิสก์ ผู้พัฒนาไม่จำเป็นต้องรู้ว่าข้อมูลอยู่ที่ไหน เพราะฮานาจัดการเอง และข้อมูลนั้นยังเรียกใช้ได้เสมอเมื่อต้องการ","ตัวเลขตัวอย่างที่สไลด์แสดง ไล่จากห้าร้อยเก้าสิบสามกิกะไบต์บนฐานข้อมูลเดิม เหลือหนึ่งร้อยสิบแปดจุดหกกิกะไบต์เมื่ออยู่บนฮานา เหลือสี่สิบสองจุดสี่กิกะไบต์เมื่อเป็นเอสโฟร์ฮานา และเหลือแปดจุดสี่กิกะไบต์เมื่อนับเฉพาะข้อมูลปัจจุบัน"]},{"h":"SAP Fiori และ Embedded Analytics","s":"hana-15","t":["ในระบบเอสโฟร์ฮานา มีส่วนติดต่อผู้ใช้สองแบบครับ","แบบคลาสสิกที่อยู่ใน SAP จียูไอ ซึ่งผู้ใช้อีซีซี หกจุดศูนย์ ทุกคนคุ้นเคยอยู่แล้ว และแบบใหม่คือ SAP ฟิออริ ซึ่งสร้างบนเทคโนโลยีเว็บแบบเปิด","ทำไมฟิออริถึงสร้างบนเทคโนโลยีเว็บ","เพราะต้องตอบความต้องการของเศรษฐกิจดิจิทัล คือเข้าถึงระบบ อีอาร์พี ได้จากอุปกรณ์ใดก็ได้ที่ต่ออินเทอร์เน็ต โดยเฉพาะอุปกรณ์เคลื่อนที่","เทคโนโลยีที่ใช้ได้แก่ เอชทีเอ็มแอลห้า จาวาสคริปต์ และโพรโทคอลแลกเปลี่ยนข้อมูลโอเดต้า","โปรแกรมฟิออริสร้างด้วยเทคโนโลยีอย่าง เอสเอพียูไอห้า ออกแบบมาให้ไม่ขึ้นกับแพลตฟอร์มและเข้าถึงได้จากอุปกรณ์หลากหลาย","ทีนี้แนวคิดประสบการณ์ผู้ใช้ตามบทบาท หรือ โรลเบสด์ยูสเซอร์เอกซ์พีเรียนซ์ สำคัญมากครับ","SAP ฟิออริ แตกรายการขนาดใหญ่ออกเป็นแอปย่อยหลายตัวที่เหมาะกับบทบาทของผู้ใช้","แอปทุกตัวเชื่อมถึงกัน งานทุกอย่างของรายการนั้นจึงยังทำได้ครบ แต่จะทำก็ต่อเมื่อผู้ใช้ต้องการจะทำจริง ๆ","SAP ฟิออริลอนช์แพด ทำหน้าที่เป็นจุดเข้าใช้งานกลางของแอปทั้งหมดของผู้ใช้คนนั้น","ส่วนหน้าจอคลาสสิกแบบทรานแซกชัน มักยัดรายการที่ซับซ้อนรายการเดียวไว้ให้ผู้ใช้หลายบทบาทใช้ร่วมกัน งานของผู้ใช้คนเดียวจึงต้องเปิดหลายรายการหรือหลายโปรแกรม","แล้ว SAP จียูไอ จะหายไปไหม","สไลด์พูดทั้งสองด้าน และต้องจับให้ครบทั้งคู่ครับ","ด้านที่บอกว่ายังอยู่ คือ จียูไอยังได้รับการสนับสนุนสำหรับเอสโฟร์ฮานารุ่นติดตั้งในองค์กร และใช้ควบคู่ไปกับแอปฟิออริได้ ช่วยให้ลูกค้าเดิมปรับตัวง่ายขึ้น และยังมีหลายรายการที่ยังไม่ได้แปลงเป็นแอปฟิออริ จึงยังต้องใช้จียูไออยู่","ด้านที่บอกว่าจะหายไป คือ จียูไอกำลังถูกแทนที่ด้วยฟิออริ และสักวันหนึ่งจะไม่ได้รับการดูแลอีก และการพัฒนาและนวัตกรรมทั้งหมดของ SAP มุ่งไปที่ฟิออริแล้ว ความสามารถบางอย่างจึงมีเฉพาะในฟิออริและไม่มีในจียูไอ","ต่อไปเป็นเรื่องเอ็มเบดเดดอนาลิติกส์ครับ","ทำไมถึงเรียกว่าฝังอยู่ในระบบ","เพราะในอดีต การวิเคราะห์กับการประมวลผลรายการถือเป็นงานคนละอย่าง และมักมีระบบของตัวเองแยกกัน","รายงานเหล่านี้ในเอสโฟร์ฮานา ไม่ต้องใช้ระบบบีดับเบิลยูแยกต่างหาก และแสดงผลจากข้อมูลทันเวลา","สไลด์ยกสถานการณ์ตัวอย่างไว้ และผมคิดว่าเล่าได้ดีมาก ขอเล่าตามนะครับ","วันแรก ผู้ใช้สร้างใบสั่งขายให้ลูกค้าใหม่ ระหว่างทำรายการ ต้องตัดสินใจว่าจะให้ส่วนลดเท่าไร โดยดูจากความน่าจะเป็นที่ลูกค้าจะกลับมาซื้ออีก ตัดสินใจไม่ได้ จึงบันทึกรายการที่ยังไม่สมบูรณ์เอาไว้","วันแรกตอนเย็น มีการวิเคราะห์และออกรายงานจัดระดับมูลค่าตลอดช่วงชีวิตของลูกค้า พร้อมเสนอช่วงส่วนลดที่ให้ได้","วันถัดมา กลับมาเปิดใบสั่งขายอีกครั้ง ใส่ส่วนลดที่เหมาะสมแล้วโทรหาลูกค้าเพื่อยืนยันคำสั่งซื้อ","แต่สายไปแล้วครับ ลูกค้าชอบส่วนลดมาก แต่สั่งซื้อกับผู้ขายที่ตอบสนองเร็วกว่าไปเรียบร้อย คำสั่งซื้อนั้นหายไป","บทสรุปของเรื่องนี้คือ ภายในหนึ่งรายการ ผู้ใช้ควรถูกล้อมด้วยข้อมูลเชิงลึกที่เกี่ยวข้องกับบริบทนั้น","แปลว่าข้อมูลสำคัญควรปรากฏอยู่ข้างในรายการ ตรงจุดที่ต้องใช้มัน ไม่ใช่อยู่ในรายงานที่ต้องไปเปิดอีกระบบหนึ่ง","ตัวอย่างที่สไลด์ยกอีกอันหนึ่งคือ ผู้ใช้กำลังสร้างใบขอซื้อและต้องเลือกผู้ขาย มีผู้ขายหลายรายที่ขายของชิ้นนั้นได้","การวิเคราะห์ที่ฝังอยู่ในโปรแกรมให้ข้อมูลประกอบการตัดสินใจทันที โดยไม่ต้องออกจากโปรแกรม ผู้ใช้จึงเลือกผู้ขายที่มีผลงานการส่งมอบดีที่สุดได้เลย"]},{"h":"รอบการออกรุ่นของ S/4HANA","s":"hana-16","t":["เรื่องรอบการออกรุ่นครับ เริ่มจากวิธีอ่านเลขรุ่นก่อน","เลขรุ่นของทั้งสองรุ่นย่อยใช้รูปแบบ วายวายเอ็มเอ็ม คือปีสองหลักตามด้วยเดือนสองหลัก","เช่นหนึ่งเก้าศูนย์เก้า หมายถึงเดือนกันยายน ปี 2019 และหนึ่งห้าหนึ่งหนึ่ง หมายถึงเดือนพฤศจิกายน ปี 2015","ยุคที่หนึ่งคือปีละรุ่นครับ","เอสโฟร์ฮานาเปิดตัวสำหรับตลาดแบบติดตั้งในองค์กรเมื่อต้นปี 2015 และรุ่นหนึ่งห้าหนึ่งหนึ่งที่ออกเดือนพฤศจิกายน นำนวัตกรรมและการทำให้เรียบง่ายมาสู่งานจัดซื้อ การผลิต ห่วงโซ่อุปทาน และอื่น ๆ","สำหรับรุ่นติดตั้งในองค์กร SAP ส่งรุ่นหลักใหม่ปีละหนึ่งรุ่น และฟีเจอร์แพ็กสแต็ก หรือเอฟพีเอส สามชุดต่อเนื่องกันทุกไตรมาส","รายการรุ่นที่สไลด์ระบุได้แก่ หนึ่งห้าหนึ่งหนึ่ง เดือนพฤศจิกายน 2015 รุ่นปี 2020 เดือนตุลาคม รุ่นปี 2021 เดือนตุลาคม รุ่นปี 2022 เดือนตุลาคม และรุ่นปี 2023 เดือนตุลาคม","ยุคที่สองคือสองปีต่อรุ่น","หลังรุ่นประจำปี 2023 นั้น เอสโฟร์ฮานาเปลี่ยนไปใช้รอบการออกรุ่นทุกสองปี พร้อมกับขยายช่วงการบำรุงรักษาหลักจากห้าปีเป็นเจ็ดปี","แปลว่ามีรุ่นฐานหนึ่งรุ่นทุกสองปี และแต่ละรุ่นฐานจะพ้นจากการบำรุงรักษาหลักเมื่อครบเจ็ดปี","เมื่อมีรุ่นฐานใหม่ออกมา เอฟพีเอสจะออกทุกหกเดือน พร้อมฟีเจอร์ใหม่ที่ไม่สร้างความปั่นป่วน จนกว่ารุ่นฐานถัดไปจะออก","รุ่นฐานจึงออกในปี 2023 ปี 2025 ปี 2027 ไล่ไปเรื่อย ๆ ตัวอย่างชื่อคือ เอสโฟร์ฮานา ปี 2025 เอฟพีเอสศูนย์หนึ่ง ศูนย์สอง ศูนย์สาม และศูนย์สี่","ถ้าติดตั้งรุ่นฐานถัดไปแล้ว ก็เริ่มนับเอฟพีเอสศูนย์หนึ่งถึงศูนย์สี่ใหม่สำหรับรุ่นล่าสุด","แต่ถ้ายังไม่ติดตั้งรุ่นฐานถัดไป ก็เข้าสู่การบำรุงรักษาหลักด้วยซัพพอร์ตแพ็กสแต็ก หรือเอสพีเอส ทุกหกเดือน เช่นเอสพีเอสศูนย์ห้า และเอสพีเอสศูนย์หก ไปจนสิ้นสุดการบำรุงรักษาหลักที่เจ็ดปี","ความต่างระหว่างเอฟพีเอสกับเอสพีเอส คือจุดที่ข้อสอบชอบถามครับ","เอฟพีเอส ย่อมาจากฟีเจอร์แพ็กสแต็ก ซึ่งมีฟีเจอร์ใหม่มาด้วย ออกในช่วงที่รุ่นนั้นยังเป็นรุ่นล่าสุดอยู่","เอสพีเอส ย่อมาจากซัพพอร์ตแพ็กสแต็ก ซึ่งมีแต่การแก้ไขและการดูแล ไม่มีฟีเจอร์ใหม่ ออกหลังจากมีรุ่นฐานใหม่มาแทนที่แล้ว","จำง่าย ๆ ว่า เอฟ คือฟีเจอร์ ได้ของใหม่ ส่วน เอส คือซัพพอร์ต ได้แค่ของซ่อม"]},{"h":"สรุปและจุดที่สับสนบ่อย","s":"hana-17","t":["หัวข้อสุดท้ายแล้วครับ ขอสรุปและเตือนจุดที่สับสนบ่อย","ข้อสรุปของเอสโฟร์ฮานาตามที่สไลด์ให้ไว้มีสี่ข้อ","หนึ่ง เป็นระบบ อีอาร์พี รุ่นถัดไปของ SAP","สอง สร้างบนฐานข้อมูลในหน่วยความจำ SAP ฮานา จึงใช้ความสามารถทั้งหมดของแพลตฟอร์มในหน่วยความจำได้ รวมถึงการขุดค้นข้อความอย่างชาญฉลาด การวิเคราะห์พยากรณ์ การจำลองสถานการณ์ และการสนับสนุนการตัดสินใจแบบทันเวลาโดยเข้าถึงข้อมูลการปฏิบัติงานทั้งหมดได้ทันที","สาม ผู้ใช้ได้ส่วนติดต่อผู้ใช้ใหม่คือ SAP ฟิออริ ซึ่งให้ประสบการณ์ใหม่บนทุกอุปกรณ์","สี่ มีการพัฒนาโค้ดขึ้นใหม่ทั้งหมด พร้อมปรับโครงสร้างแบบจำลองข้อมูลใหม่ตามโค้ดชุดใหม่นั้น","ทีนี้ขอเทียบสามคำที่ต้องแยกให้ออกครับ","SAP ฮานา เป็นฐานข้อมูลและแพลตฟอร์ม ตัวมันเองคือฐานข้อมูล ไม่มีหน้าตาผู้ใช้สำหรับงานธุรกิจโดยตรง ประกาศปี 2008 หลังซื้อเทคโนโลยีมาตั้งแต่ปี 2005 และยังเป็นผลิตภัณฑ์หลักของ SAP","SAP อีซีซี เป็นระบบ อีอาร์พี รุ่นก่อน รันบนแอนนี่ดีบีหรือฮานาก็ได้ ใช้ SAP จียูไอ เป็นหลัก เกิดปี 2004 สำหรับรุ่นห้าจุดศูนย์ และบำรุงรักษาหลักถึงสิ้นปี 2027 ส่วนขยายถึงสิ้นปี 2030","SAP เอสโฟร์ฮานา เป็นระบบ อีอาร์พี รุ่นที่สี่ รันบนฮานาเท่านั้น ใช้ SAP ฟิออริ เป็นหลักและยังใช้จียูไอได้ เกิดปี 2015 และมีรอบรุ่นทุกสองปี บำรุงรักษาหลักรุ่นละเจ็ดปี","สี่กับดักที่เจอบ่อยที่สุด ขอเตือนไว้ตรงนี้ครับ","หนึ่ง คิดว่าเอสโฟร์ฮานาคือฐานข้อมูล ไม่ใช่ครับ มันคือโปรแกรม อีอาร์พี ส่วนฐานข้อมูลคือฮานา","สอง คิดว่าฮานาเร็วเพราะอยู่ในแรมอย่างเดียว ที่จริงมีสามอย่างประกอบกัน คืออยู่ในหน่วยความจำ เก็บแบบคอลัมน์ และบีบอัด","สาม คิดว่าฮานาเก็บแบบคอลัมน์อย่างเดียว ที่จริงเก็บได้ทั้งแถวและคอลัมน์","สี่ คิดว่าอีซีซีรันบนฮานาไม่ได้ ที่จริงรันได้ ซึ่งเรียกว่าสวีทออนฮานา สิ่งที่รันบนแอนนี่ดีบีไม่ได้คือเอสโฟร์ฮานาต่างหาก","ปิดท้ายด้วยเส้นเรื่องของสองแท็บนี้ในห้าบรรทัดนะครับ","หนึ่ง SAP แยกชั้นฐานข้อมูลออกมาตั้งแต่อาร์สาม จึงใช้ฐานข้อมูลยี่ห้อใดก็ได้ เรียกว่าแอนนี่ดีบี","สอง แต่ฐานข้อมูลแบบดิสก์แยกงานบันทึกกับงานวิเคราะห์ออกจากกัน องค์กรจึงต้องมีระบบซ้ำซ้อนและข้อมูลไม่เคยสด","สาม แรมถูกลงเป็นพันเท่าในขณะที่ดิสก์ดีขึ้นแค่สิบเท่า SAP จึงสร้างฮานา ซึ่งเก็บทุกอย่างในหน่วยความจำ แบบคอลัมน์ และบีบอัด","สี่ เมื่อฐานข้อมูลเร็วพอ ตารางยอดรวมและสำเนาข้อมูลทั้งหมดก็ไม่จำเป็น SAP จึงเขียน อีอาร์พี ขึ้นใหม่ทั้งตัวเป็นเอสโฟร์ฮานา","ห้า และกำหนดวันสิ้นสุดการสนับสนุนบิสซิเนสสวีทเจ็ด เพื่อให้ลูกค้าทั้งโลกย้ายตาม ซึ่งเป็นเหตุผลที่ตลาดงานเต็มไปด้วยโครงการย้ายระบบในตอนนี้"]}]}}
 </script>
 
 <script type="application/json" id="cn-audio">
