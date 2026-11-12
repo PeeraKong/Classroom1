@@ -79,6 +79,27 @@ jobs:
           python tools/make-cutep.py --check
           python tools/make-cutep.py $ARGS
 
+      # บทยาว ๆ อย่างรายงานของผู้สอบบัญชีมีเจ็ดร้อยกว่าย่อหน้า ใช้เวลาอ่านเกินชั่วโมง
+      # บริการอ่านออกเสียงสะดุดเป็นช่วง ๆ เสมอ ถ้าไม่พักเสียงรายย่อหน้าไว้
+      # หลุดทีเดียวตอนท้ายบทก็ต้องเริ่มอ่านใหม่ตั้งแต่ย่อหน้าแรก
+      # ต้องใช้ restore กับ save แยกกัน ไม่ใช่ actions/cache ตัวเดียว
+      # เพราะตัวเดียวจะไม่บันทึกเมื่องานล้มเหลว ซึ่งเป็นกรณีเดียวที่เราต้องการให้บันทึก
+      # ต้องมีโฟลเดอร์อยู่จริงก่อน ไม่งั้นขั้นบันทึกที่พักจะฟ้องว่าหาพาธไม่เจอ
+      # ในกรณีที่ขั้นสร้างเสียงล้มก่อนจะได้เขียนอะไรลงไปสักไฟล์
+      - name: เตรียมโฟลเดอร์ที่พักเสียง
+        if: inputs.task == 'audio'
+        run: mkdir -p .audio-cache
+
+      - name: เอาเสียงที่พักไว้รอบก่อนกลับมา
+        if: inputs.task == 'audio'
+        uses: actions/cache/restore@v4
+        with:
+          path: .audio-cache
+          key: audio-tts-${{ github.ref_name }}-${{ github.run_id }}
+          restore-keys: |
+            audio-tts-${{ github.ref_name }}-
+            audio-tts-
+
       - name: ดูว่าบทไหนยังขาดไฟล์เสียง
         if: inputs.task == 'audio'
         # ส่งค่าที่ผู้ใช้กรอกผ่าน env ไม่แทรกลงคำสั่งตรง ๆ กันการแทรกคำสั่งเชลล์
@@ -99,6 +120,15 @@ jobs:
           ARGS=""
           if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
           python tools/make-audio.py $COURSES --voice "$VOICE" --en-voice "$EN_VOICE" $ARGS
+
+      # ต้องเป็น always เพราะกรณีที่คุ้มที่สุดคือตอนขั้นบนล้มกลางบท
+      # เก็บไว้แล้วรันใหม่จะไปต่อจากย่อหน้าที่ค้าง แทนที่จะอ่านใหม่ทั้งบท
+      - name: พักเสียงที่อ่านได้แล้วไว้ใช้รอบหน้า
+        if: always() && inputs.task == 'audio'
+        uses: actions/cache/save@v4
+        with:
+          path: .audio-cache
+          key: audio-tts-${{ github.ref_name }}-${{ github.run_id }}
 
       - name: ตรวจซ้ำว่าครบแล้ว
         if: inputs.task == 'audio'

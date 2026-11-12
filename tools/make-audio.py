@@ -30,6 +30,15 @@ from langsplit import split_lang
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSES = ['adv-acctg-1', 'audit', 'erp', 'marketing', 'oral-eng']
 
+# ที่พักเสียงรายย่อหน้า ไม่เข้า git เพราะสร้างใหม่ได้เสมอและใหญ่พอ ๆ กับไฟล์เสียงจริง
+# มีไว้เพราะบทยาว ๆ อย่างรายงานของผู้สอบบัญชีมีเจ็ดร้อยกว่าย่อหน้า ใช้เวลาอ่านเกินชั่วโมง
+# ถ้าบริการอ่านออกเสียงสะดุดตอนย่อหน้าท้าย ๆ แล้วไม่มีที่พัก ต้องเริ่มอ่านใหม่ทั้งบท
+CACHE_DIR = os.environ.get('AUDIO_CACHE_DIR') or os.path.join(ROOT, '.audio-cache')
+
+# ตารางเวลารอก่อนลองใหม่ หน่วยเป็นวินาที จำนวนครั้งที่ลองคือจำนวนช่องบวกหนึ่ง
+# เดิมรอแค่ 1.5 กับ 3 วินาที ซึ่งสั้นกว่าช่วงที่บริการสะดุดจริง จึงแพ้ทั้งที่ข้อความไม่ผิด
+RETRY_WAITS = [2, 5, 12, 25, 45, 60, 60]
+
 # เสียงไทยที่บริการนี้มีให้ ตัวแรกเป็นผู้ชาย
 VOICES = {
     'male':   'th-TH-NiwatNeural',
@@ -128,7 +137,43 @@ async def synth(text, voice, rate, pitch):
     return bytes(buf)
 
 
-async def build_chapter(lines, voice, rate, pitch, label, en_voice=None):
+def cache_path(text, voice, rate, pitch):
+    """ตั้งชื่อไฟล์พักตามเนื้อหา ไม่ใช่ตามลำดับย่อหน้า
+
+    ตั้งชื่อตามเนื้อหาแปลว่าแก้ย่อหน้าเดียวกลางบทแล้วย่อหน้าอื่นยังใช้ของเดิมได้หมด
+    ถ้าตั้งชื่อตามลำดับที่ ย่อหน้าหลังจุดที่แทรกจะเลื่อนหมายเลขกันทั้งแถวแล้วต้องอ่านใหม่ทั้งบท
+    """
+    key = u'\x00'.join([text, voice, rate or u'', pitch or u''])
+    h = hashlib.sha1(key.encode('utf-8')).hexdigest()
+    return os.path.join(CACHE_DIR, h[:2], h + '.mp3')
+
+
+async def synth_cached(text, voice, rate, pitch, use_cache=True):
+    if not use_cache:
+        return await synth(text, voice, rate, pitch)
+    path = cache_path(text, voice, rate, pitch)
+    try:
+        if os.path.getsize(path) > 0:
+            with open(path, 'rb') as f:
+                return f.read()
+    except OSError:
+        pass
+    data = await synth(text, voice, rate, pitch)
+    if data:
+        try:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            # เขียนลงไฟล์ชั่วคราวก่อนแล้วค่อยเปลี่ยนชื่อ กันไฟล์ครึ่งเดียวค้างไว้
+            # ถ้ากระบวนการถูกฆ่ากลางคัน ซึ่งจะกลายเป็นเสียงขาดที่หาสาเหตุยากมาก
+            tmp = '%s.%d.tmp' % (path, os.getpid())
+            with open(tmp, 'wb') as f:
+                f.write(data)
+            os.replace(tmp, path)
+        except OSError:
+            pass          # พักไม่ได้ก็ไม่เป็นไร เสียแค่เวลา ไม่ได้เสียความถูกต้อง
+    return data
+
+
+async def build_chapter(lines, voice, rate, pitch, label, en_voice=None, use_cache=True):
     """สร้างทีละย่อหน้าแล้วต่อกัน เพื่อให้รู้เวลาเริ่มของแต่ละย่อหน้าอย่างแม่นยำ
 
     ถ้าระบุ en_voice มาด้วย จะแยกช่วงภาษาในแต่ละย่อหน้าออกจากกัน
@@ -145,18 +190,30 @@ async def build_chapter(lines, voice, rate, pitch, label, en_voice=None):
 
         cues.append(round(at, 3))
         for seg_voice, seg_text in segs:
-            for attempt in range(3):
+            for attempt in range(len(RETRY_WAITS) + 1):
                 try:
-                    data = await synth(seg_text, seg_voice, rate, pitch)
+                    data = await synth_cached(seg_text, seg_voice, rate, pitch, use_cache)
                     break
                 except Exception as exc:                  # เครือข่ายสะดุดเป็นเรื่องปกติ ลองใหม่
-                    if attempt == 2:
+                    if attempt == len(RETRY_WAITS):
                         raise RuntimeError(
-                            u'เรียกบริการอ่านออกเสียงไม่สำเร็จ สาเหตุที่พบบ่อยคือเน็ตหลุด '
-                            u'หรือเครือข่ายที่ใช้อยู่บล็อกปลายทาง speech.platform.bing.com '
-                            u'ลองเปลี่ยนเครือข่ายหรือปิด VPN แล้วรันใหม่ '
-                            u'สคริปต์จะทำต่อจากบทที่ค้างไว้ให้เอง\n  ข้อความจากระบบ %s' % exc)
-                    await asyncio.sleep(1.5 * (attempt + 1))
+                            u'เรียกบริการอ่านออกเสียงไม่สำเร็จ แม้ลองแล้ว %d ครั้ง '
+                            u'รวมเวลารอ %d วินาที\n'
+                            u'  สาเหตุที่พบบ่อยคือเน็ตหลุด หรือเครือข่ายที่ใช้อยู่'
+                            u'บล็อกปลายทาง speech.platform.bing.com '
+                            u'ลองเปลี่ยนเครือข่ายหรือปิด VPN แล้วรันใหม่\n'
+                            u'  ย่อหน้าที่อ่านไปแล้วเก็บไว้ที่ %s การรันใหม่จะใช้ของเดิม '
+                            u'แล้วไปต่อจากย่อหน้าที่ค้าง ไม่ได้เริ่มอ่านใหม่ทั้งบท\n'
+                            u'  ย่อหน้าที่ %d จาก %d  ข้อความจากระบบ %s'
+                            % (len(RETRY_WAITS) + 1, sum(RETRY_WAITS),
+                               os.path.relpath(CACHE_DIR, ROOT), i + 1, len(lines), exc))
+                    wait = RETRY_WAITS[attempt]
+                    # ขึ้นบรรทัดใหม่ก่อน เพราะแถบความคืบหน้าใช้ \r ทับบรรทัดเดิมอยู่
+                    sys.stdout.write(u'\n  บริการอ่านออกเสียงไม่ตอบที่ย่อหน้าที่ %d '
+                                     u'รอ %d วินาทีแล้วลองใหม่ ครั้งที่ %d\n'
+                                     % (i + 1, wait, attempt + 1))
+                    sys.stdout.flush()
+                    await asyncio.sleep(wait)
             at += mp3_duration(data)
             parts.append(data)
         sys.stdout.write('\r  %s  %d/%d ย่อหน้า · %d:%02d' %
@@ -262,6 +319,8 @@ async def main():
                     help='เสียงที่ใช้อ่านช่วงภาษาอังกฤษ · %s · off คือใช้เสียงไทยอ่านทั้งหมดแบบเดิม'
                          % ' '.join(k for k in EN_VOICES if k != 'off'))
     ap.add_argument('--force', action='store_true', help='สร้างใหม่แม้บทบรรยายไม่เปลี่ยน')
+    ap.add_argument('--no-cache', action='store_true',
+                    help='ไม่ใช้เสียงที่พักไว้รายย่อหน้า สั่งอ่านใหม่ทุกย่อหน้าจริง ๆ')
     ap.add_argument('--check', action='store_true', help='ตรวจว่าพร้อมสร้างไหม แล้วรายงานสถานะ ไม่สร้างจริง')
     a = ap.parse_args()
 
@@ -333,7 +392,7 @@ async def main():
 
             audio, cues, dur = await build_chapter(lines, voice, a.rate, a.pitch,
                                                    key + ' ' + (chapter.get('s') or ''),
-                                                   en_voice or None)
+                                                   en_voice or None, not a.no_cache)
             with open(mp3, 'wb') as f:
                 f.write(audio)
             clips[key] = {
