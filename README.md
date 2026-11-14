@@ -1103,6 +1103,12 @@ Amazon Go · การค้าปลีกยั่งยืนกับ Imperf
 
 ### ภาษาอังกฤษเพื่อการสื่อสาร (`oral-eng/`)
 
+**ข้อสอบเสมือนจริงปลายภาค** (`oral-eng/final.html` มีปุ่มลิงก์อยู่ที่หัวหน้าวิชา) ตาม Exam Blueprint ปลายภาค 40 คะแนน
+คือ Part 1 Vocabulary 10 ข้อ (Book 2 Individual Presentations) · Part 2 Language Points 10 ข้อ (Book 3 BIQs และ Book 4 CIQs) ·
+Part 3 Listening 20 ข้อ แบ่งเป็น Listening 1 การนำเสนอเสนอซื้อกิจการ startup และ Listening 2 การสัมภาษณ์งาน
+(Three S's · SAR+L · PREP) · ตรวจคำตอบพร้อมเฉลยภาษาไทยและ transcript ·
+เสียงในส่วน Listening ใช้เสียงอ่านของเบราว์เซอร์ (Web Speech) ยังไม่มีไฟล์ mp3 · ใช้ชื่อกิจการสมมติทั้งหมด
+
 **Noun compounds และ noun phrases** (Unit 2 Language review)
 compound noun คืออะไรและย่อมาจากวลีแบบไหน · **head noun อยู่ท้ายเสมอ พร้อมวิธีอ่านจากขวาไปซ้าย** ·
 สูตรลำดับคำ ADVERB → ADJECTIVE → NOUN → HEAD NOUN · กฎว่า adverb ขยาย adjective เท่านั้น
