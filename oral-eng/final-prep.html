@@ -123,6 +123,10 @@ body.hide-th .vi{cursor:pointer}
 .items select{max-width:100%}
 .ans{margin-top:4px}
 .exp{font-size:14px;background:var(--hl);border-radius:8px;padding:8px 12px;margin-top:4px;line-height:1.6}
+.gtext{line-height:2.2}
+.key{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.key .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline}
+.key .row .n{font-family:var(--f-mono);color:var(--accent)}
 footer{font-size:13px;color:var(--muted)}
 </style>
 <div class="wrap">
@@ -130,13 +134,20 @@ footer{font-size:13px;color:var(--muted)}
   <header class="top">
     <span class="eyebrow">5500313 Bus Eng Oral Comm · Book 2–4 · Final</span>
     <h1>แบบฝึกและคำศัพท์ปลายภาค</h1>
-    <p class="muted">คลังคำศัพท์และสำนวนจาก Book 2 Individual Presentations, Book 3 Behavioral Interview Questions และ Book 4 Common Interview Questions พร้อมแบบฝึก 12 ชุดที่ตรวจคำตอบได้ทันทีและมีคำอธิบายภาษาไทย ทำเสร็จแล้วไปลอง<a href="final.html">ข้อสอบเสมือนจริงปลายภาค</a>ต่อได้</p>
+    <p class="muted">คลังคำศัพท์และสำนวนจาก Book 2 Individual Presentations, Book 3 Behavioral Interview Questions และ Book 4 Common Interview Questions พร้อมแบบฝึกตามรูปแบบข้อสอบ Part 1–2 อีก 8 ชุด และแบบฝึกเสริม 12 ชุด ตรวจคำตอบได้ทันทีและมีคำอธิบายภาษาไทย ทำเสร็จแล้วไปลอง<a href="final.html">ข้อสอบเสมือนจริงปลายภาค</a>ต่อได้</p>
   </header>
 
   <nav class="switch" aria-label="เลือกส่วน">
+    <a href="#exam-format">ฝึกตามรูปแบบข้อสอบ Part 1–2</a>
     <a href="#vocab" id="nav-vocab">คำศัพท์ทั้งหมด <span id="vcount"></span></a>
-    <a href="#practice" id="nav-practice">แบบฝึก 12 ชุด</a>
+    <a href="#practice" id="nav-practice">แบบฝึกเสริม 12 ชุด</a>
   </nav>
+
+  <section class="part" id="exam-format">
+    <div class="part-head"><h2>ฝึกตามรูปแบบข้อสอบ: Part 1 และ Part 2</h2><span class="pts">8 ชุด · ชุดละ 10 ข้อ</span></div>
+    <p class="muted">ทำตาม instruction ของข้อสอบจริง: <b>Part 1 Vocabulary</b> เลือกคำจากกล่องเติมบทพรีเซนต์ (Book 2) · <b>Part 2 Language Points</b> เลือกคำจากกล่องเติมคำตอบสัมภาษณ์งาน โดยเลือกรูปคำ verb / noun / adjective ให้ถูก (Book 3–4) · คำในกล่องที่ใช้แล้วจะถูกขีดฆ่า</p>
+    <div id="gapsets"></div>
+  </section>
 
   <!-- VOCAB -->
   <section class="part" id="vocab">
@@ -151,7 +162,7 @@ footer{font-size:13px;color:var(--muted)}
 
   <!-- PRACTICE -->
   <section class="part" id="practice">
-    <div class="part-head"><h2>แบบฝึก</h2><span class="pts" id="ptotal">ทำแล้ว 0 ชุด</span></div>
+    <div class="part-head"><h2>แบบฝึกเสริม</h2><span class="pts" id="ptotal">ทำแล้ว 0 ชุด</span></div>
     <p class="instr">เลือกคำตอบในแต่ละข้อ แล้วกด <b>ตรวจชุดนี้</b> ข้อที่ผิดจะมีคำอธิบายบอกเหตุผล กด <b>ทำใหม่</b> เพื่อล้างคำตอบของชุดนั้น</p>
     <div id="sets"></div>
   </section>
@@ -615,6 +626,83 @@ $("#sets").addEventListener("click",e=>{
   if(r){const si=+r.dataset.rst;SETS[si].items.forEach((it,i)=>{const el=$(`#s${si}-${i}`);el.value="";el.classList.remove("ok","bad");el.closest("li").querySelector(".exp").hidden=true;});
     $(`#sc${si}`).textContent="";done.delete(si);$("#ptotal").textContent=`ทำแล้ว ${done.size} ชุด`;}
 });
+/* ===== EXAM-FORMAT SETS (word box + passage, 10 blanks each) ===== */
+const GAP = [
+ {part:1, t:"Part 1 · ชุด A: Opening (WISEOWL)", ctx:"Presentation excerpt — proposing FarmLink, an agritech startup from Vietnam",
+  box:["delighted","responsible","subject","familiar","focus","First","After","cover","brochure","pass","interrupt","deal","overview"],
+  text:"Good afternoon, ladies and gentlemen. I'm [[1]] that so many of you could make it today. As you probably know, I'm a business development analyst here at AGE, and I'm [[2]] for researching new acquisition targets. The [[3]] of my presentation is FarmLink, an agritech startup from Vietnam. By the end of this talk, you will be [[4]] with the reasons why FarmLink is the right choice for us. In my presentation, I'll [[5]] on two main areas. [[6]] of all, I'll be looking at its technology. [[7]] that, I'll move on to its customer base. It should take about four minutes to [[8]] these points. Does everybody have a [[9]]? Please take one and [[10]] them on.",
+  ans:{1:"delighted",2:"responsible",3:"subject",4:"familiar",5:"focus",6:"First",7:"After",8:"cover",9:"brochure",10:"pass"},
+  exp:{1:"W: I'm delighted that so many of you could make it today.",2:"I: I'm responsible for … (บอกหน้าที่)",3:"S: The subject of my presentation is …",4:"E: By the end of this talk, you will be familiar with …",5:"O: I'll focus on two main areas.",6:"W: First of all, I'll be looking at …",7:"W: After that, I'll move on to …",8:"L (timing): It should take about four minutes to cover these points.",9:"L (handouts): Does everybody have a handout/brochure/report?",10:"L (handouts): Please take one and pass them on."}},
+ {part:1, t:"Part 1 · ชุด B: Body (Pyramid Principle)", ctx:"Presentation excerpt — the Body",
+  box:["main","smart","innovative","point","specifically","because","base","example","funding","means","granular","advantage","overlapping"],
+  text:"Now, let's move on to the [[1]] part of my presentation. I believe acquiring FarmLink would be a [[2]] move for AGE, and there are two main reasons. The first reason is its [[3]] technology. One key [[4]] is that its app helps farmers predict crop prices. More [[5]], farmers who use the app have increased their income by 25%. This is important [[6]] it gives AGE a strong position in the agriculture market. Another important reason is its large customer [[7]]. For [[8]], it already serves over 300,000 farmers in Vietnam and Cambodia. It has also raised ten million dollars in [[9]] from international investors. For AGE, this [[10]] we can expand quickly into a new region.",
+  ans:{1:"main",2:"smart",3:"innovative",4:"point",5:"specifically",6:"because",7:"base",8:"example",9:"funding",10:"means"},
+  exp:{1:"Transition: Now, let's move on to the main part of my presentation.",2:"Main idea: … would be a smart move for AGE.",3:"Reason 1: innovative technology/products",4:"Support: One key point is …",5:"Support: More specifically, …",6:"This is important because …",7:"customer base = ฐานลูกค้า",8:"Support: For example, …",9:"raise money in funding = ระดมทุน",10:"For AGE, this means …"}},
+ {part:1, t:"Part 1 · ชุด C: Presentation Techniques", ctx:"Presentation excerpt — using the three techniques",
+  box:["tripled","do","wrong","affordable","reduce","question","up","opportunity","waiting","soon","flopped","wasted","retain"],
+  text:"We've [[1]] our revenues in Asia over the last three years. So, how did we [[2]] it? Through smart acquisitions. But our growth in Africa has been slow. So, where did we go [[3]]? We didn't have the right local partner. FarmLink can be that partner. Its platform is simple, [[4]], and reliable. It helps farmers [[5]] costs, increase sales, and reach new customers. It's not a question of price. It's a [[6]] of trust, and farmers trust FarmLink. Its user numbers are up … [[7]] by 80% this year. The whole of East Africa is one big golden [[8]]. So, what are we [[9]] for? Of course, some of you may ask: how [[10]] can we expect to see the results?",
+  ans:{1:"tripled",2:"do",3:"wrong",4:"affordable",5:"reduce",6:"question",7:"up",8:"opportunity",9:"waiting",10:"soon"},
+  exp:{1:"We've tripled revenues … (ตามด้วย So, how did we do it?)",2:"Common RQ: So, how did we do it?",3:"Common RQ: So, where did we go wrong?",4:"Making points in three: simple, affordable, and reliable (adjective ขนานกัน)",5:"Making points in three: reduce costs, increase sales, and reach new customers",6:"Keyword repetition: It's not a question of … It's a question of …",7:"Pause-and-repeat: up … up by 80%",8:"one big golden opportunity",9:"Common RQ: So, what are we waiting for?",10:"Common RQ: So, how soon can we expect to see the results?"}},
+ {part:1, t:"Part 1 · ชุด D: Closing", ctx:"Presentation excerpt — end of the Body and the Closing",
+  box:["reach","come","Before","briefly","Firstly","Secondly","end","said","value","listening","turn","attention","signal"],
+  text:"… For AGE, this means we could [[1]] new customers across Southeast Asia. Well, I've now [[2]] to the end of my presentation. [[3]] I finish, let me [[4]] go over the two reasons why we should acquire FarmLink again. [[5]], it offers innovative technology. [[6]], it has a large and growing customer base. I'd like to [[7]] my presentation with a quote from a well-known investor. As Warren Buffett once [[8]], “Price is what you pay. Value is what you get.” FarmLink offers us real [[9]]. Thank you all for [[10]].",
+  ans:{1:"reach",2:"come",3:"Before",4:"briefly",5:"Firstly",6:"Secondly",7:"end",8:"said",9:"value",10:"listening"},
+  exp:{1:"reach new customers = เข้าถึงลูกค้าใหม่",2:"Signal the end: I've now come to the end of my presentation.",3:"Summarize: Before I finish, let me …",4:"let me briefly go over … again",5:"Firstly, … (เหตุผลที่ 1)",6:"Secondly, … (เหตุผลที่ 2)",7:"Final statement (quote): I'd like to end my presentation with a quote …",8:"As [name] once said, “…”",9:"โยงคำพูดที่ยกมา (value) กลับมาที่บริษัท",10:"Thank you all for listening. (for your attention ต้องมี your)"}},
+ {part:2, t:"Part 2 · ชุด A: Tell me something about yourself", ctx:"Job interview answer — Three S's Formula (Corporate Banking Trainee)",
+  box:["important","earned","awarded","interned","prepare","accuracy","improved","skills","knowledge","contribute","importance","accurate","knowledgeable","contribution"],
+  text:"I've been interested in finance since my second year, when I took a course in Corporate Finance. It really opened my eyes to how [[1]] financial planning is for businesses. I [[2]] an A in that course and was [[3]] a scholarship for my final year. Last summer, I [[4]] at a local bank, where I helped [[5]] monthly reports for twelve corporate clients. My manager praised my [[6]] and attention to detail. Outside university, I volunteer as a math tutor for children, which has [[7]] my communication [[8]]. So, with my financial [[9]] and practical experience, I believe I can [[10]] to your Corporate Banking team.",
+  ans:{1:"important",2:"earned",3:"awarded",4:"interned",5:"prepare",6:"accuracy",7:"improved",8:"skills",9:"knowledge",10:"contribute"},
+  exp:{1:"<b>adj.</b> how + adjective + subject + is → important (importance เป็น noun)",2:"<b>v.</b> earned an A = ได้เกรด A",3:"<b>v. (passive)</b> was awarded a scholarship",4:"<b>v.</b> interned at = ฝึกงานที่",5:"<b>v.</b> helped + V (base form) → prepare",6:"<b>n.</b> my + noun → accuracy (accurate เป็น adj.)",7:"<b>v.</b> has + V3 → improved",8:"<b>n.</b> communication skills",9:"<b>n.</b> financial knowledge (knowledgeable เป็น adj.)",10:"<b>v.</b> can + V → contribute (contribution เป็น noun)"}},
+ {part:2, t:"Part 2 · ชุด B: What are your strengths?", ctx:"Job interview answer — PREP Method (Project Coordinator)",
+  box:["strength","organized","responsible","created","delegated","success","confident","valuable","meet","deadlines","strong","organization","responsibility","confidence"],
+  text:"I think my greatest [[1]] is that I'm very [[2]]. This is important for a project coordinator because you have to manage many tasks at the same time. For example, in my third year, I was [[3]] for organizing a business conference for 300 students. I [[4]] a detailed timeline, [[5]] tasks to ten volunteers, and checked our progress every week. As a result, the event was a great [[6]], and we finished 5% under budget. So, I'm [[7]] that my organizational skills would be [[8]] in this position and help me [[9]] tight [[10]].",
+  ans:{1:"strength",2:"organized",3:"responsible",4:"created",5:"delegated",6:"success",7:"confident",8:"valuable",9:"meet",10:"deadlines"},
+  exp:{1:"<b>n.</b> my greatest + noun → strength (strong เป็น adj.)",2:"<b>adj.</b> very + adjective → organized",3:"<b>adj.</b> be responsible for (responsibility เป็น noun)",4:"<b>v.</b> I created a timeline",5:"<b>v.</b> delegated tasks to = มอบหมายงานให้",6:"<b>n.</b> a great + noun → success",7:"<b>adj.</b> I'm confident that … (confidence เป็น noun)",8:"<b>adj.</b> would be + adjective → valuable",9:"<b>v.</b> help me + V → meet",10:"<b>n.</b> meet tight deadlines"}},
+ {part:2, t:"Part 2 · ชุด C: What do you know about our company?", ctx:"Job interview answer — Logistics Analyst at NovaShip",
+  box:["research","operate","strong","investment","attracted","fulfilling","difference","feel","learned","organization","invest","attractive","strength","different"],
+  text:"Before applying for this position, I did a lot of [[1]] into the logistics industry. I had a look at your website and could see that you [[2]] in twelve countries across Asia. You also have a really [[3]] reputation for on-time delivery. Your [[4]] in electric delivery vans is really something that [[5]] me to your company. I think working for you would be very [[6]] because your work makes a real [[7]] for both customers and the environment. I definitely [[8]], from everything I've [[9]] about NovaShip, that this is the type of [[10]] I'd like to work for.",
+  ans:{1:"research",2:"operate",3:"strong",4:"investment",5:"attracted",6:"fulfilling",7:"difference",8:"feel",9:"learned",10:"organization"},
+  exp:{1:"<b>n.</b> did a lot of research into",2:"<b>v.</b> you operate in twelve countries",3:"<b>adj.</b> a really strong reputation (strength เป็น noun)",4:"<b>n.</b> Your + noun → investment (invest เป็น verb)",5:"<b>v.</b> something that attracted me to (attractive เป็น adj.)",6:"<b>adj.</b> would be very fulfilling",7:"<b>n.</b> make a difference (different เป็น adj.)",8:"<b>v.</b> I definitely feel, from everything I've learned …",9:"<b>v.</b> I've + V3 → learned",10:"<b>n.</b> the type of organization (organize เป็น verb)"}},
+ {part:2, t:"Part 2 · ชุด D: Behavioral question (SAR+L)", ctx:"Job interview answer — “Tell me about a project where the requirements changed midstream.”",
+  box:["situation","changed","frustrated","suggested","interviewed","needs","submitted","satisfied","importance","flexible","frustration","satisfaction","important","flexibility"],
+  text:"There was one [[1]] when our team had to prepare a marketing plan for a local café. Two weeks before the deadline, the owner [[2]] the target customers from students to office workers. Some of my teammates were [[3]] and wanted to ask for more time. I [[4]] that we divide the new research into smaller tasks. I also [[5]] fifteen office workers near the café to understand their [[6]]. As a result, we [[7]] the plan on time, and the owner was very [[8]] with our ideas. This experience taught me the [[9]] of staying [[10]] when requirements change.",
+  ans:{1:"situation",2:"changed",3:"frustrated",4:"suggested",5:"interviewed",6:"needs",7:"submitted",8:"satisfied",9:"importance",10:"flexible"},
+  exp:{1:"<b>n.</b> There was one situation when … (Situation)",2:"<b>v.</b> the owner changed … (past tense)",3:"<b>adj.</b> were + adjective → frustrated (frustration เป็น noun)",4:"<b>v.</b> I suggested that … (Action)",5:"<b>v.</b> I also interviewed …",6:"<b>n.</b> their needs",7:"<b>v.</b> we submitted the plan on time (Result)",8:"<b>adj.</b> very satisfied with (satisfaction เป็น noun)",9:"<b>n.</b> the importance of (Lesson)",10:"<b>adj.</b> stay + adjective → flexible (flexibility เป็น noun)"}}
+];
+function renderGapSets(){
+  const root=document.querySelector("#gapsets");
+  root.innerHTML=GAP.map((g,gi)=>{
+    const opts=['<option value="">—</option>'].concat([...g.box].sort((a,b)=>a.localeCompare(b,"en",{sensitivity:"base"})).map(w=>`<option>${w}</option>`)).join("");
+    const extra=g.box.length-10;
+    const inst=g.part===1
+      ?`Choose the most appropriate words/phrases from the box to complete the presentation excerpt. Use each word/phrase only once. There are <b>${extra}</b> extra words that you do not need.`
+      :`Choose the most appropriate words/phrases from the box to complete the job interview answer. Pay attention to the word form (verb, noun, or adjective). Use each word only once. There are <b>${extra}</b> extra words that you do not need.`;
+    return `<article class="set gset" id="g${gi}">
+      <div class="set-h"><div><h3>${g.t}</h3><p class="muted small">${g.ctx}</p></div><span class="sc" id="gsc${gi}"></span></div>
+      <p class="instr">${inst}</p>
+      <div class="box">${g.box.map(w=>`<span class="chip" data-w="${w}">${w}</span>`).join("")}</div>
+      <p class="gtext">${g.text.replace(/\[\[(\d+)\]\]/g,(m,n)=>`<span class="blank"><span class="n">(${n})</span><select id="g${gi}-${n}" aria-label="Blank ${n}">${opts}</select></span>`)}</p>
+      <div class="key" hidden></div>
+      <div class="btns"><button type="button" data-gchk="${gi}">ตรวจชุดนี้</button><button type="button" class="ghost" data-grst="${gi}">ทำใหม่</button></div>
+    </article>`;}).join("");
+  root.addEventListener("change",e=>{const a=e.target.closest(".gset");if(!a)return;
+    const used=new Set([...a.querySelectorAll("select")].map(s=>s.value).filter(Boolean));
+    a.querySelectorAll(".chip").forEach(c=>c.classList.toggle("used",used.has(c.dataset.w)));});
+  root.addEventListener("click",e=>{
+    const c=e.target.closest("[data-gchk]"),r=e.target.closest("[data-grst]");
+    if(c){const gi=+c.dataset.gchk,g=GAP[gi];let n=0;const rows=[];
+      for(let k=1;k<=10;k++){const s=document.querySelector(`#g${gi}-${k}`),ok=s.value===g.ans[k];if(ok)n++;
+        s.classList.toggle("ok",ok);s.classList.toggle("bad",!ok);
+        rows.push(`<div class="row"><span class="n">(${k})</span><span>${ok?"✓":"✗"} <b>${g.ans[k]}</b>${!ok&&s.value?` <span class="muted">(คุณตอบ: ${s.value})</span>`:""} — ${g.exp[k]}</span></div>`);}
+      const key=document.querySelector(`#g${gi} .key`);key.innerHTML="<h3>เฉลย</h3>"+rows.join("");key.hidden=false;
+      document.querySelector(`#gsc${gi}`).textContent=`${n}/10`;}
+    if(r){const gi=+r.dataset.grst;const a=document.querySelector(`#g${gi}`);
+      a.querySelectorAll("select").forEach(s=>{s.value="";s.classList.remove("ok","bad")});
+      a.querySelectorAll(".chip").forEach(x=>x.classList.remove("used"));
+      a.querySelector(".key").hidden=true;document.querySelector(`#gsc${gi}`).textContent="";}
+  });
+}
+renderGapSets();
 </script>
 
 </html>

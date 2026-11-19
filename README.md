@@ -1142,7 +1142,7 @@ Part 3 Listening 20 ข้อ แบ่งเป็น Listening 1 การน�
 (Three S's · SAR+L · PREP) · ตรวจคำตอบพร้อมเฉลยภาษาไทยและ transcript ·
 เสียงในส่วน Listening ใช้เสียงอ่านของเบราว์เซอร์ (Web Speech) ยังไม่มีไฟล์ mp3 · ใช้ชื่อกิจการสมมติทั้งหมด
 
-**แบบฝึกและคำศัพท์ปลายภาค** (`oral-eng/final-prep.html`) คลังคำศัพท์และสำนวนจาก Book 2–4 แบ่ง 7 หมวด
+**แบบฝึกและคำศัพท์ปลายภาค** (`oral-eng/final-prep.html`) มี**แบบฝึกตามรูปแบบข้อสอบ Part 1 และ Part 2 อย่างละ 4 ชุด** (กล่องคำ + เติมบทพรีเซนต์ / เติมคำตอบสัมภาษณ์ ชุดละ 10 ข้อ ตาม instruction ของข้อสอบจริง) · คลังคำศัพท์และสำนวนจาก Book 2–4 แบ่ง 7 หมวด
 พร้อมชนิดคำ คำแปลไทย และตัวอย่างประโยค ค้นหาได้และมีโหมดซ่อนคำแปลไว้ท่อง ·
 แบบฝึก 12 ชุด (WISEOWL · prepositions · Pyramid · presentation techniques · rhetorical questions · closing ·
 interview types และ BIQ skills · SAR+L · four phases · Three S's และ PREP · word forms · สำนวนสัมภาษณ์) ตรวจได้รายชุดพร้อมเหตุผล
