@@ -44,6 +44,8 @@ UNITS = [
      'aria': u'หัวข้อการตรวจสอบที่สำคัญและการเสร็จสิ้นการตรวจสอบ'},
     {'mod': 'audit_rp_data', 'id': 'rp', 'num': u'RP', 'label': u'รายงานของผู้สอบบัญชี',
      'aria': u'หัวข้อรายงานของผู้สอบบัญชี'},
+    {'mod': 'audit_wr_data', 'id': 'wr', 'num': u'WR', 'label': u'ข้อเขียน · หาจุดผิด',
+     'aria': u'ข้อเขียนหาจุดผิดในรายงาน'},
 ]
 
 DIV_LABEL = u'หลังมิดเทอม'
@@ -79,6 +81,26 @@ table.tbl td.k{font-weight:600; color:var(--ink)}
 .m{font-family:"IBM Plex Mono",monospace; font-size:.85em;
   color:var(--accent); white-space:nowrap}
 table.tbl td.m{font-size:.79rem}
+
+/* ---- ร่างรายงานของผู้สอบบัญชี ใช้ในหน่วยข้อเขียน ----
+   ต้องดูเหมือนกระดาษที่ยื่นมาให้ตรวจ ไม่ใช่ดูเหมือนกล่องเน้นข้อความ
+   จึงใช้พื้นผิวเรียบ ขอบบาง และเว้นบรรทัดกว้างกว่าเนื้อหาทั่วไป
+   ตั้งใจ<ไม่>ทำเครื่องหมายจุดผิดไว้ในร่าง เพราะถ้าทำก็ไม่เหลืออะไรให้หา */
+.rep{border:1px solid var(--rule); border-radius:4px; background:var(--surface);
+  padding:16px clamp(14px,3vw,20px); margin:14px 0 18px; font-size:.87rem; line-height:1.85}
+.rep .ttl{text-align:center; font-weight:700; color:var(--ink); margin-bottom:10px}
+.rep .to{margin-bottom:14px; color:var(--ink-2)}
+.rep .hd{font-weight:600; color:var(--ink); margin-bottom:8px}
+.rep h4{margin:16px 0 6px; font-size:.88rem; font-weight:700; color:var(--ink)}
+.rep h4:first-child{margin-top:0}
+.rep p{margin:0 0 9px; color:var(--ink-2)}
+.rep p:last-child{margin-bottom:0}
+.rep b{color:var(--ink)}
+
+/* ฉบับที่แก้แล้ว ใช้สีเดียวกับกล่องคำตอบที่ถูกต้องในหน้านี้
+   ส่วนที่แก้ไขเขียนเป็น <b> ไว้ จึงเข้มกว่าข้อความเดิมโดยอัตโนมัติ */
+.rep.ok{border-left:3px solid var(--teal); background:var(--teal-soft)}
+.rep.ok b{color:var(--ink)}
 """
 
 # ข้อความหัวหน้าเว็บ ปรับให้บอกว่ามีเนื้อหาหลังมิดเทอมแล้ว
