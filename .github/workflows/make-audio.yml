@@ -63,7 +63,7 @@ jobs:
         if: inputs.task == 'sample'
         run: python tools/sample-voices.py
 
-      # task = listening สร้างทั้งแบบฝึกฟังเดิมและแบบฝึกฟังแนว CU-TEP
+      # task = listening สร้างแบบฝึกฟังชุดกลางภาค ชุดปลายภาค และแนว CU-TEP
       # รวมไว้ขั้นเดียวเพราะทั้งคู่ข้ามคลิปที่บทไม่เปลี่ยนอยู่แล้ว จึงไม่เสียเวลาซ้ำ
       # และเพราะ GitHub ตรวจค่า input กับไฟล์บนสาขาหลัก การเพิ่มตัวเลือกใหม่
       # จะต้องไปแก้สาขาหลักด้วย ซึ่งไม่คุ้มกับการแยกเป็นอีก task
@@ -76,6 +76,8 @@ jobs:
           if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
           python tools/make-listening.py --check
           python tools/make-listening.py
+          python tools/make-listening.py --exam final --check
+          python tools/make-listening.py --exam final
           python tools/make-cutep.py --check
           python tools/make-cutep.py $ARGS
 

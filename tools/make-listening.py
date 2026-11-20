@@ -30,10 +30,36 @@ _ma = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_ma)
 synth, mp3_duration = _ma.synth, _ma.mp3_duration
 
-_lspec = importlib.util.spec_from_file_location('ldata', os.path.join(HERE, 'listening-data.py'))
-_ld = importlib.util.module_from_spec(_lspec)
-_lspec.loader.exec_module(_ld)
-SETS, VOICES = _ld.SETS, _ld.VOICES
+def _load(name):
+    spec = importlib.util.spec_from_file_location(
+        re.sub(r'\W', '_', name), os.path.join(HERE, name))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# รายการเสียงอยู่ที่ไฟล์บทชุดกลางภาคที่เดียว ทั้งสองชุดใช้ร่วมกัน
+# ไม่งั้นรายการเสียงจะแตกเป็นสองชุดที่ค่อย ๆ ต่างกันโดยไม่มีใครรู้
+_ld = _load('listening-data.py')
+VOICES = _ld.VOICES
+
+# ชุดกลางภาคกับชุดปลายภาคใช้เครื่องมือตัวนี้ร่วมกัน
+# ต่างกันแค่สี่อย่าง ไฟล์บท หน้าเว็บที่เขียนกลับ โฟลเดอร์ไฟล์เสียง
+# และรหัสบล็อก JSON ที่ฝังในหน้า จึงรวบไว้เป็นตารางที่เดียวตรงนี้
+#
+# anchor คือจุดที่จะแทรกบล็อกเข้าไปข้างหน้า ถ้าไม่มีก็ต่อท้ายไฟล์
+EXAMS = {
+    'midterm': {'data': 'listening-data.py', 'page': 'index.html',
+                'dir': 'listening', 'pre': 'ls',
+                'anchor': '\n<script type="application/json" id="vc-data">'},
+    # หน้าชุดปลายภาคมีหมุดไว้ให้แล้ว เพราะสคริปต์ของหน้าต้องอ่านบล็อกนี้
+    # ถ้าต่อท้ายไฟล์เฉย ๆ บล็อกจะไปอยู่หลังสคริปต์ แล้ว Part 3 จะว่าง
+    'final': {'data': 'final-listening-data.py', 'page': 'final-sets.html',
+              'dir': 'listening-final', 'pre': 'fl', 'anchor': '\n<!-- fl:blocks -->'},
+}
+
+EXAM = EXAMS['midterm']
+SETS = _ld.SETS
 
 # ต้องเขียนกลับทั้งสองบล็อก บทกับดัชนีไฟล์เสียง
 #
@@ -43,6 +69,21 @@ SETS, VOICES = _ld.SETS, _ld.VOICES
 # ซึ่งไม่มีอะไรจับได้เลยเพราะจำนวนช่วงพูดบังเอิญเท่ากัน
 BLOCK_RE = re.compile(
     r'\n*<script type="application/json" id="ls-(?:data|audio)">.*?</script>', re.S)
+
+
+def select(exam):
+    u"""เลือกว่ารอบนี้ทำชุดไหน แล้วตั้งค่าทั้งหมดให้ตรงกับชุดนั้น"""
+    global EXAM, SETS, BLOCK_RE
+    EXAM = EXAMS[exam]
+    SETS = _ld.SETS if exam == 'midterm' else _load(EXAM['data']).SETS
+    BLOCK_RE = re.compile(
+        r'\n*<script type="application/json" id="%s-(?:data|audio)">.*?</script>'
+        % EXAM['pre'], re.S)
+
+
+def aid(what):
+    u"""รหัสบล็อก JSON ของชุดที่กำลังทำ เช่น ls-data หรือ fl-audio"""
+    return '%s-%s' % (EXAM['pre'], what)
 
 # เว้นจังหวะระหว่างผู้พูด ให้ฟังเหมือนการนำเสนอจริงที่มีการสลับคน
 #
@@ -107,7 +148,11 @@ def sig_of(part):
 
 
 def read_page():
-    path = os.path.join(ROOT, COURSE, 'index.html')
+    path = os.path.join(ROOT, COURSE, EXAM['page'])
+    # ตอนเริ่มทำชุดใหม่ ยังไม่มีหน้าเว็บ แต่อยากตรวจบทกับคำถามก่อนแล้ว
+    # จึงยอมให้ยังไม่มีไฟล์ เพื่อให้ --check ใช้ได้ตั้งแต่ยังไม่มีหน้า
+    if not os.path.exists(path):
+        return path, u''
     return path, io.open(path, encoding='utf-8').read()
 
 
@@ -127,16 +172,15 @@ def page_data():
 
 def write_index(clips):
     path, html = read_page()
-    block = ('\n\n<script type="application/json" id="ls-data">\n' +
+    block = ('\n\n<script type="application/json" id="%s">\n' % aid('data') +
              json.dumps(page_data(), ensure_ascii=False, separators=(',', ':')) + '\n</script>' +
-             '\n<script type="application/json" id="ls-audio">\n' +
+             '\n<script type="application/json" id="%s">\n' % aid('audio') +
              json.dumps(clips, ensure_ascii=False, separators=(',', ':')) + '\n</script>')
     html = BLOCK_RE.sub('', html).rstrip('\n')
-    anchor = '\n<script type="application/json" id="vc-data">'
-    at = html.find(anchor)
+    at = html.find(EXAM['anchor']) if EXAM['anchor'] else -1
     html = (html[:at] + block + html[at:]) if at > 0 else (html + block + '\n')
     io.open(path, 'w', encoding='utf-8').write(html.rstrip('\n') + '\n')
-    print(u'  เขียนบทและดัชนีไฟล์เสียงกลับเข้า %s/index.html แล้ว' % COURSE)
+    print(u'  เขียนบทและดัชนีไฟล์เสียงกลับเข้า %s/%s แล้ว' % (COURSE, EXAM['page']))
     verify_page()
 
 
@@ -146,7 +190,7 @@ def verify_page():
     ข้อนี้เคยพลาดมาแล้ว จึงตรวจทุกครั้งไม่ให้เกิดซ้ำ
     """
     _, html = read_page()
-    m = re.search(r'id="ls-data">(.*?)</script>', html, re.S)
+    m = re.search(r'id="%s">(.*?)</script>' % aid('data'), html, re.S)
     if not m:
         print(u'  ตรวจแล้วไม่พบบทในหน้าเว็บ')
         return 1
@@ -167,7 +211,7 @@ def verify_page():
     # นับจำนวนช่วงเสียงอย่างเดียวไม่พอ เพราะแก้ข้อความโดยไม่เพิ่มลดจำนวนช่วง
     # จะผ่านการตรวจแบบนั้นไปได้ทั้งที่คลิปยังพูดของเก่า ซึ่งเคยเกิดขึ้นมาแล้วจริง
     old = {}
-    ma = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+    ma = re.search(r'id="%s">(.*?)</script>' % aid('audio'), html, re.S)
     if ma:
         try:
             old = json.loads(ma.group(1)) or {}
@@ -207,6 +251,12 @@ def audit_scripts():
                 fail(pid, u'เป็นการนำเสนอกลุ่ม แต่มีคนพูดคนเดียว')
             if part['kind'] == 'talk' and len(speakers) != 1:
                 fail(pid, u'เป็นการบรรยายเดี่ยว แต่มีผู้พูด %d คน' % len(speakers))
+            # การสัมภาษณ์งานมีสองฝ่ายพอดี ผู้สัมภาษณ์กับผู้สมัคร
+            # ถ้าเหลือคนเดียวก็ไม่ใช่การสัมภาษณ์ ถ้าเกินสองก็ไม่ใช่แนวข้อสอบนี้
+            if part['kind'] == 'interview' and len(speakers) != 2:
+                fail(pid, u'เป็นการสัมภาษณ์งาน แต่มีผู้พูด %d คน ต้องเป็น 2' % len(speakers))
+            if part['kind'] not in ('presentation', 'talk', 'interview'):
+                fail(pid, u'ไม่รู้จักชนิดบท %s' % part['kind'])
 
             script = re.sub(r'\s+', ' ', ' '.join(t[3] for t in part['turns'])).replace(u'’', "'")
             for t in part['turns']:
@@ -333,7 +383,7 @@ def check():
 
     _, html = read_page()
     old = {}
-    m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+    m = re.search(r'id="%s">(.*?)</script>' % aid('audio'), html, re.S)
     if m:
         try:
             old = json.loads(m.group(1))
@@ -349,7 +399,7 @@ def check():
     for st in SETS:
         print(u'%s' % st['title'])
         for part in st['parts']:
-            mp3 = os.path.join(ROOT, COURSE, 'listening', part['id'] + '.mp3')
+            mp3 = os.path.join(ROOT, COURSE, EXAM['dir'], part['id'] + '.mp3')
             prev = old.get(part['id'])
             w = sum(len(t[3].split()) for t in part['turns'])
             if prev and prev.get('sig') == sig_of(part) and os.path.exists(mp3):
@@ -373,7 +423,10 @@ async def main():
     ap.add_argument('--check', action='store_true', help=u'ดูสถานะอย่างเดียว ไม่สร้างจริง')
     ap.add_argument('--page-only', action='store_true',
                     help=u'เขียนบทกลับเข้าหน้าเว็บอย่างเดียว ไม่แตะไฟล์เสียง')
+    ap.add_argument('--exam', choices=sorted(EXAMS), default='midterm',
+                    help=u'ทำชุดกลางภาคหรือชุดปลายภาค ค่าตั้งต้นคือ midterm')
     a = ap.parse_args()
+    select(a.exam)
 
     if a.check:
         return check()
@@ -384,7 +437,7 @@ async def main():
             print(u'\nบทหรือคำถามมีปัญหา ยังไม่เขียนให้')
             return 1
         _, html = read_page()
-        m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+        m = re.search(r'id="%s">(.*?)</script>' % aid('audio'), html, re.S)
         try:
             clips = json.loads(m.group(1)) if m else {}
         except Exception:
@@ -402,12 +455,12 @@ async def main():
         print(u'\nบทหรือคำถามมีปัญหา ยังไม่สร้างเสียงให้')
         return 1
 
-    outdir = os.path.join(ROOT, COURSE, 'listening')
+    outdir = os.path.join(ROOT, COURSE, EXAM['dir'])
     os.makedirs(outdir, exist_ok=True)
 
     _, html = read_page()
     old = {}
-    m = re.search(r'id="ls-audio">(.*?)</script>', html, re.S)
+    m = re.search(r'id="%s">(.*?)</script>' % aid('audio'), html, re.S)
     if m and not a.force:
         try:
             old = json.loads(m.group(1))
@@ -431,7 +484,7 @@ async def main():
             with open(mp3, 'wb') as f:
                 f.write(audio)
             clips[part['id']] = {
-                'src': 'listening/' + part['id'] + '.mp3',
+                'src': EXAM['dir'] + '/' + part['id'] + '.mp3',
                 'dur': dur,
                 'sig': sig,
                 'cues': cues,
