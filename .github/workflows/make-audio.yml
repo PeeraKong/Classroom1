@@ -74,12 +74,19 @@ jobs:
         run: |
           ARGS=""
           if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
+          # เก็บสถานะไว้แล้วค่อยสรุปตอนท้าย ไม่ปล่อยให้ชุดแรกที่ไม่ผ่าน
+          # ทำให้ชุดที่เหลือไม่ได้ทำงานเลย เพราะแต่ละชุดไม่เกี่ยวกัน
+          rc=0
           python tools/make-listening.py --check
-          python tools/make-listening.py
+          python tools/make-listening.py || rc=1
           python tools/make-listening.py --exam final --check
-          python tools/make-listening.py --exam final
+          python tools/make-listening.py --exam final || rc=1
           python tools/make-cutep.py --check
-          python tools/make-cutep.py $ARGS
+          python tools/make-cutep.py $ARGS || rc=1
+          echo "---- สถานะหลังสร้างเสร็จ ----"
+          python tools/make-listening.py --check
+          python tools/make-listening.py --exam final --check
+          exit $rc
 
       # บทยาว ๆ อย่างรายงานของผู้สอบบัญชีมีเจ็ดร้อยกว่าย่อหน้า ใช้เวลาอ่านเกินชั่วโมง
       # บริการอ่านออกเสียงสะดุดเป็นช่วง ๆ เสมอ ถ้าไม่พักเสียงรายย่อหน้าไว้
@@ -139,7 +146,12 @@ jobs:
           EN_VOICE: ${{ inputs.en_voice }}
         run: python tools/make-audio.py $COURSES --en-voice "$EN_VOICE" --check
 
+      # ต้องเก็บแม้ขั้นก่อนหน้าล้ม เพราะการสร้างเสียงสิบแปดคลิปรวดอาจล้มกลางทาง
+      # ถ้าข้ามขั้นนี้ไป คลิปที่สร้างเสร็จแล้วจะหายไปพร้อมเครื่อง แล้วต้องเริ่มใหม่หมด
+      # ตัวสร้างเขียนดัชนีด้วยเท่าที่ทำได้อยู่แล้ว สั่งซ้ำรอบหน้าจึงทำต่อเฉพาะที่ยังขาด
+      # งานยังขึ้นเป็นสีแดงตามเดิม เพราะขั้นที่ล้มยังคงล้ม
       - name: เก็บไฟล์เสียงเข้า git
+        if: ${{ !cancelled() }}
         env:
           VOICE: ${{ inputs.voice }}
           EN_VOICE: ${{ inputs.en_voice }}

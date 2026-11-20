@@ -120,16 +120,23 @@ async def build_part(part):
             parts.append(gap)
         prev_speaker = name
 
-        for attempt in range(3):
+        # บริการอ่านออกเสียงตอบ NoAudioReceived เป็นช่วง ๆ เมื่อเรียกติด ๆ กันนาน
+        # รอบที่ทำสิบแปดคลิปรวดเคยล้มกลางทางมาแล้วทั้งที่ลองซ้ำสามครั้ง
+        # จึงเพิ่มจำนวนครั้งและยืดเวลารอแบบทวีคูณ ให้ข้ามช่วงที่บริการไม่รับไปได้
+        waits = (2, 5, 12, 25)
+        for attempt in range(len(waits) + 1):
             try:
                 data = await synth(text, voice, '', '')
                 break
             except Exception as exc:
-                if attempt == 2:
+                if attempt == len(waits):
                     raise RuntimeError(
-                        u'เรียกบริการอ่านออกเสียงไม่สำเร็จ · %s\n  ข้อความจากระบบ %s'
-                        % (part['id'], exc))
-                await asyncio.sleep(1.5 * (attempt + 1))
+                        u'เรียกบริการอ่านออกเสียงไม่สำเร็จ · %s ช่วงที่ %d\n  ข้อความจากระบบ %s'
+                        % (part['id'], i + 1, exc))
+                sys.stdout.write(u'\n  %s ช่วงที่ %d ไม่ผ่าน จะลองใหม่ในอีก %d วินาที · %s\n'
+                                 % (part['id'], i + 1, waits[attempt], exc))
+                sys.stdout.flush()
+                await asyncio.sleep(waits[attempt])
 
         cues.append(round(at, 3))
         at += mp3_duration(data)
@@ -467,7 +474,7 @@ async def main():
         except Exception:
             old = {}
 
-    clips, made, skipped = {}, 0, 0
+    clips, made, skipped, failed = {}, 0, 0, []
     for st in SETS:
         print(u'\n%s' % st['title'])
         for part in st['parts']:
@@ -480,7 +487,16 @@ async def main():
                 print(u'  ข้าม %s เพราะยังเหมือนเดิม' % part['id'])
                 continue
 
-            audio, cues, dur = await build_part(part)
+            # คลิปเดียวล้มต้องไม่ทิ้งคลิปที่ทำเสร็จไปแล้วทั้งหมด
+            # เดิมปล่อยให้ข้อผิดพลาดลอยขึ้นไป ทั้งรอบจึงจบลงโดยไม่ได้เขียนดัชนี
+            # ไฟล์ mp3 ที่สร้างเสร็จแล้วก็เลยไม่ถูก commit และต้องเริ่มใหม่หมด
+            try:
+                audio, cues, dur = await build_part(part)
+            except Exception as exc:
+                failed.append(part['id'])
+                print(u'  ข้าม %s เพราะสร้างไม่สำเร็จ · %s' % (part['id'], exc))
+                continue
+
             with open(mp3, 'wb') as f:
                 f.write(audio)
             clips[part['id']] = {
@@ -495,8 +511,14 @@ async def main():
                   % (os.path.relpath(mp3, ROOT), len(audio) / 1048576.0,
                      int(dur // 60), int(dur % 60)))
 
+    # เขียนดัชนีด้วยเท่าที่ทำได้เสมอ แม้มีคลิปที่ล้ม
+    # หน้าเว็บรองรับคลิปที่ยังไม่มีไฟล์เสียงอยู่แล้ว คือขึ้นว่ายังไม่มีและเปิดบทอ่านแทน
     write_index(clips)
     print(u'\nเสร็จแล้ว สร้างใหม่ %d คลิป · ข้าม %d คลิป' % (made, skipped))
+    if failed:
+        print(u'สร้างไม่สำเร็จ %d คลิป · %s' % (len(failed), ' '.join(failed)))
+        print(u'สั่งซ้ำได้เลย คลิปที่เสร็จแล้วจะถูกข้าม เพราะเทียบจากลายเซ็นของบท')
+        return 1
     return 0
 
 
